@@ -1,0 +1,61 @@
+name: Feature Template
+description: 기능 추가 시에 쓰는 템플릿
+title: "[Feature] Title"
+labels: []
+assignees: heydoy
+
+body:
+  - type: textarea
+    id: feature-contents
+    attributes:
+      label: Feature 설명
+      description: Feature에 대해 자세히 적기
+      placeholder: e.g. 임시저장 기능 만들기
+    validations:
+      required: true
+  - type: input
+    id: preceded-issue
+    attributes:
+      label: Preceded issue(Optional)
+      description: 선행되어야 하는 내용이 있을 경우 적기
+      placeholder: "ex. #101"
+    validations:
+      required: false
+  - type: textarea
+    id: related-view
+    attributes:
+      label: Related View(Optional)
+      description: 작업내용에 영향받는 뷰
+      value: |
+        - e.g. SignupView
+    validations:
+      required: false
+      
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 우선 순위
+      description: Backlog에서의 중요도
+      options:
+        - P1🔥
+        - P2
+        - P3
+        - P4
+        - P5
+    validations:
+      required: true
+      
+  - type: input
+    id: expected-period
+    attributes:
+      label: 예상 마감일 + 소요시간
+      placeholder: ~ MM/dd(E) + h
+    validations:
+      required: true
+  - type: input
+    id: real-period
+    attributes:
+      label: 실제 마감일 + 소요시간
+      placeholder: ~ MM/dd(E) + h
+    validations:
+      required: false
