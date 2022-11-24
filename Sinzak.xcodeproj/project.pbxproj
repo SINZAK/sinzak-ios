@@ -21,6 +21,7 @@
 		A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A23415BC2927D778007DADE7 /* LaunchScreen.storyboard */; };
 		A23415C62927D7A9007DADE7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A23415C52927D7A9007DADE7 /* .gitignore */; };
 		A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A2806120292F50FA005AE0B3 /* .swiftlint.yml */; };
+		A2806129292F585E005AE0B3 /* setColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2806128292F585E005AE0B3 /* setColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		A23415BF2927D778007DADE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A23415C52927D7A9007DADE7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A2806120292F50FA005AE0B3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A2806128292F585E005AE0B3 /* setColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				A2806122292F5462005AE0B3 /* App */,
 				A2806123292F5495005AE0B3 /* Global */,
 				A2806124292F54A2005AE0B3 /* Scene */,
+				A2806127292F5848005AE0B3 /* Util */,
 				A23415BF2927D778007DADE7 /* Info.plist */,
 			);
 			path = Sinzak;
@@ -145,6 +148,14 @@
 				A23415BA2927D778007DADE7 /* Assets.xcassets */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		A2806127292F5848005AE0B3 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A2806128292F585E005AE0B3 /* setColor.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
