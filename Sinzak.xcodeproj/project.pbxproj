@@ -20,6 +20,7 @@
 		A23415BB2927D778007DADE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A23415BA2927D778007DADE7 /* Assets.xcassets */; };
 		A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A23415BC2927D778007DADE7 /* LaunchScreen.storyboard */; };
 		A23415C62927D7A9007DADE7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A23415C52927D7A9007DADE7 /* .gitignore */; };
+		A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A2806120292F50FA005AE0B3 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		A23415BD2927D778007DADE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A23415BF2927D778007DADE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A23415C52927D7A9007DADE7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A2806120292F50FA005AE0B3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 		A23415A52927D776007DADE7 = {
 			isa = PBXGroup;
 			children = (
+				A2806120292F50FA005AE0B3 /* .swiftlint.yml */,
 				A23415C52927D7A9007DADE7 /* .gitignore */,
 				A23415B02927D776007DADE7 /* Sinzak */,
 				A23415AF2927D776007DADE7 /* Products */,
@@ -177,6 +180,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */,
 				A23415C62927D7A9007DADE7 /* .gitignore in Resources */,
 				A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */,
 				A23415BB2927D778007DADE7 /* Assets.xcassets in Resources */,
