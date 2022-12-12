@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		70220DD51C5772784980F559 /* Pods_Sinzak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2700FF81BC95B6E59A53DC75 /* Pods_Sinzak.framework */; };
+		A20CBD58294786550012FF32 /* SpoqaHanSansNeo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */; };
+		A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */; };
+		A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */; };
+		A20CBD5C294787C10012FF32 /* setFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CBD5B294787C10012FF32 /* setFont.swift */; };
 		A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD4E292F4D5300F86A08 /* SnapKit */; };
 		A210CD52292F4D6B00F86A08 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD51292F4D6B00F86A08 /* Then */; };
 		A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD54292F4D8800F86A08 /* RxCocoa */; };
@@ -21,12 +25,17 @@
 		A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A23415BC2927D778007DADE7 /* LaunchScreen.storyboard */; };
 		A23415C62927D7A9007DADE7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A23415C52927D7A9007DADE7 /* .gitignore */; };
 		A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A2806120292F50FA005AE0B3 /* .swiftlint.yml */; };
+		A2806129292F585E005AE0B3 /* setColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2806128292F585E005AE0B3 /* setColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2700FF81BC95B6E59A53DC75 /* Pods_Sinzak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DB488BBBBBFF96BBEF7A346 /* Pods-Sinzak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.release.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.release.xcconfig"; sourceTree = "<group>"; };
 		4C1051FDB08E63609D13B62C /* Pods-Sinzak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.debug.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.debug.xcconfig"; sourceTree = "<group>"; };
+		A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.ttf"; sourceTree = "<group>"; };
+		A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.ttf"; sourceTree = "<group>"; };
+		A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.ttf"; sourceTree = "<group>"; };
+		A20CBD5B294787C10012FF32 /* setFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setFont.swift; sourceTree = "<group>"; };
 		A23415AE2927D776007DADE7 /* Sinzak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinzak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23415B12927D776007DADE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A23415B32927D776007DADE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +46,7 @@
 		A23415BF2927D778007DADE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A23415C52927D7A9007DADE7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A2806120292F50FA005AE0B3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A2806128292F585E005AE0B3 /* setColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +83,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A20CBD54294786350012FF32 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */,
+				A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */,
+				A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		A23415A52927D776007DADE7 = {
 			isa = PBXGroup;
 			children = (
@@ -96,15 +116,66 @@
 		A23415B02927D776007DADE7 /* Sinzak */ = {
 			isa = PBXGroup;
 			children = (
-				A23415B12927D776007DADE7 /* AppDelegate.swift */,
-				A23415B32927D776007DADE7 /* SceneDelegate.swift */,
-				A23415B52927D776007DADE7 /* ViewController.swift */,
-				A23415B72927D776007DADE7 /* Main.storyboard */,
-				A23415BA2927D778007DADE7 /* Assets.xcassets */,
-				A23415BC2927D778007DADE7 /* LaunchScreen.storyboard */,
+				A2806122292F5462005AE0B3 /* App */,
+				A2806123292F5495005AE0B3 /* Global */,
+				A2806124292F54A2005AE0B3 /* Scene */,
+				A2806127292F5848005AE0B3 /* Util */,
 				A23415BF2927D778007DADE7 /* Info.plist */,
 			);
 			path = Sinzak;
+			sourceTree = "<group>";
+		};
+		A2806122292F5462005AE0B3 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A23415B12927D776007DADE7 /* AppDelegate.swift */,
+				A23415B32927D776007DADE7 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A2806123292F5495005AE0B3 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				A2806126292F54FE005AE0B3 /* Resource */,
+				A2806125292F54F3005AE0B3 /* Support */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		A2806124292F54A2005AE0B3 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				A23415B52927D776007DADE7 /* ViewController.swift */,
+				A23415B72927D776007DADE7 /* Main.storyboard */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		A2806125292F54F3005AE0B3 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A23415BC2927D778007DADE7 /* LaunchScreen.storyboard */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		A2806126292F54FE005AE0B3 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A20CBD54294786350012FF32 /* Fonts */,
+				A23415BA2927D778007DADE7 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		A2806127292F5848005AE0B3 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A2806128292F585E005AE0B3 /* setColor.swift */,
+				A20CBD5B294787C10012FF32 /* setFont.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,8 +251,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A20CBD58294786550012FF32 /* SpoqaHanSansNeo-Medium.ttf in Resources */,
+				A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */,
 				A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */,
 				A23415C62927D7A9007DADE7 /* .gitignore in Resources */,
+				A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */,
 				A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */,
 				A23415BB2927D778007DADE7 /* Assets.xcassets in Resources */,
 				A23415B92927D776007DADE7 /* Main.storyboard in Resources */,
@@ -237,7 +311,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
+				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 			);
