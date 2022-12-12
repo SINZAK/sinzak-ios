@@ -12,6 +12,10 @@
 		A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */; };
 		A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */; };
 		A20CBD5C294787C10012FF32 /* setFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CBD5B294787C10012FF32 /* setFont.swift */; };
+		A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CBD6429478B130012FF32 /* I18NStrings.swift */; };
+		A20CBD6629478B4A0012FF32 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD6829478B4A0012FF32 /* InfoPlist.strings */; };
+		A20CBD6A29478B540012FF32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD6C29478B540012FF32 /* Localizable.strings */; };
+		A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CBD6F29478BCF0012FF32 /* String+Extension.swift */; };
 		A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD4E292F4D5300F86A08 /* SnapKit */; };
 		A210CD52292F4D6B00F86A08 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD51292F4D6B00F86A08 /* Then */; };
 		A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD54292F4D8800F86A08 /* RxCocoa */; };
@@ -36,6 +40,14 @@
 		A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.ttf"; sourceTree = "<group>"; };
 		A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.ttf"; sourceTree = "<group>"; };
 		A20CBD5B294787C10012FF32 /* setFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setFont.swift; sourceTree = "<group>"; };
+		A20CBD5D29478A800012FF32 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		A20CBD5E29478A800012FF32 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
+		A20CBD6429478B130012FF32 /* I18NStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18NStrings.swift; sourceTree = "<group>"; };
+		A20CBD6729478B4A0012FF32 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A20CBD6929478B4D0012FF32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A20CBD6B29478B540012FF32 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A20CBD6D29478B560012FF32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A20CBD6F29478BCF0012FF32 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		A23415AE2927D776007DADE7 /* Sinzak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinzak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23415B12927D776007DADE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A23415B32927D776007DADE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +105,24 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		A20CBD5F29478AD30012FF32 /* Literal */ = {
+			isa = PBXGroup;
+			children = (
+				A20CBD6C29478B540012FF32 /* Localizable.strings */,
+				A20CBD6829478B4A0012FF32 /* InfoPlist.strings */,
+				A20CBD6429478B130012FF32 /* I18NStrings.swift */,
+			);
+			path = Literal;
+			sourceTree = "<group>";
+		};
+		A20CBD6E29478BB90012FF32 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A20CBD6F29478BCF0012FF32 /* String+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		A23415A52927D776007DADE7 = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +167,8 @@
 		A2806123292F5495005AE0B3 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				A20CBD6E29478BB90012FF32 /* Extension */,
+				A20CBD5F29478AD30012FF32 /* Literal */,
 				A2806126292F54FE005AE0B3 /* Resource */,
 				A2806125292F54F3005AE0B3 /* Support */,
 			);
@@ -229,6 +261,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = A23415A52927D776007DADE7;
 			packageReferences = (
@@ -255,10 +288,12 @@
 				A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */,
 				A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */,
 				A23415C62927D7A9007DADE7 /* .gitignore in Resources */,
+				A20CBD6A29478B540012FF32 /* Localizable.strings in Resources */,
 				A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */,
 				A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */,
 				A23415BB2927D778007DADE7 /* Assets.xcassets in Resources */,
 				A23415B92927D776007DADE7 /* Main.storyboard in Resources */,
+				A20CBD6629478B4A0012FF32 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +347,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
+				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
+				A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
@@ -322,10 +359,29 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		A20CBD6829478B4A0012FF32 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A20CBD6729478B4A0012FF32 /* ko */,
+				A20CBD6929478B4D0012FF32 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A20CBD6C29478B540012FF32 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A20CBD6B29478B540012FF32 /* ko */,
+				A20CBD6D29478B560012FF32 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		A23415B72927D776007DADE7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A23415B82927D776007DADE7 /* Base */,
+				A20CBD5E29478A800012FF32 /* ko */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -334,6 +390,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A23415BD2927D778007DADE7 /* Base */,
+				A20CBD5D29478A800012FF32 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -345,6 +402,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -405,6 +463,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
