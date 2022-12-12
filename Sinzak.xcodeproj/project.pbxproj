@@ -11,6 +11,7 @@
 		A20CBD58294786550012FF32 /* SpoqaHanSansNeo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */; };
 		A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */; };
 		A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */; };
+		A20CBD5C294787C10012FF32 /* setFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CBD5B294787C10012FF32 /* setFont.swift */; };
 		A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD4E292F4D5300F86A08 /* SnapKit */; };
 		A210CD52292F4D6B00F86A08 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD51292F4D6B00F86A08 /* Then */; };
 		A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD54292F4D8800F86A08 /* RxCocoa */; };
@@ -34,6 +35,7 @@
 		A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.ttf"; sourceTree = "<group>"; };
 		A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.ttf"; sourceTree = "<group>"; };
 		A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.ttf"; sourceTree = "<group>"; };
+		A20CBD5B294787C10012FF32 /* setFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setFont.swift; sourceTree = "<group>"; };
 		A23415AE2927D776007DADE7 /* Sinzak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinzak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23415B12927D776007DADE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A23415B32927D776007DADE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				A2806128292F585E005AE0B3 /* setColor.swift */,
+				A20CBD5B294787C10012FF32 /* setFont.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			files = (
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
+				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 			);
