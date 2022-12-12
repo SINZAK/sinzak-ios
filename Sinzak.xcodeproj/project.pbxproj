@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		70220DD51C5772784980F559 /* Pods_Sinzak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2700FF81BC95B6E59A53DC75 /* Pods_Sinzak.framework */; };
+		A20CBD58294786550012FF32 /* SpoqaHanSansNeo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */; };
+		A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */; };
+		A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */; };
 		A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD4E292F4D5300F86A08 /* SnapKit */; };
 		A210CD52292F4D6B00F86A08 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD51292F4D6B00F86A08 /* Then */; };
 		A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD54292F4D8800F86A08 /* RxCocoa */; };
@@ -28,6 +31,9 @@
 		2700FF81BC95B6E59A53DC75 /* Pods_Sinzak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DB488BBBBBFF96BBEF7A346 /* Pods-Sinzak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.release.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.release.xcconfig"; sourceTree = "<group>"; };
 		4C1051FDB08E63609D13B62C /* Pods-Sinzak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.debug.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.debug.xcconfig"; sourceTree = "<group>"; };
+		A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.ttf"; sourceTree = "<group>"; };
+		A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.ttf"; sourceTree = "<group>"; };
+		A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.ttf"; sourceTree = "<group>"; };
 		A23415AE2927D776007DADE7 /* Sinzak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinzak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23415B12927D776007DADE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A23415B32927D776007DADE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +79,16 @@
 				3DB488BBBBBFF96BBEF7A346 /* Pods-Sinzak.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A20CBD54294786350012FF32 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */,
+				A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */,
+				A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		A23415A52927D776007DADE7 = {
@@ -145,6 +161,7 @@
 		A2806126292F54FE005AE0B3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				A20CBD54294786350012FF32 /* Fonts */,
 				A23415BA2927D778007DADE7 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -231,8 +248,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A20CBD58294786550012FF32 /* SpoqaHanSansNeo-Medium.ttf in Resources */,
+				A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */,
 				A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */,
 				A23415C62927D7A9007DADE7 /* .gitignore in Resources */,
+				A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */,
 				A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */,
 				A23415BB2927D778007DADE7 /* Assets.xcassets in Resources */,
 				A23415B92927D776007DADE7 /* Main.storyboard in Resources */,
