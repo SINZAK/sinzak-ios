@@ -16,7 +16,6 @@ enum SpoqaHanSansStyle: String {
 extension UIFont {
     // Title
     static var subtitle_B: UIFont { customFont(SpoqaHanSansStyle.bold.rawValue, size: 16)}
-    
     // Body
     static var body_B: UIFont  {
         customFont(SpoqaHanSansStyle.bold.rawValue, size: 16) }
