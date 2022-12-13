@@ -30,6 +30,8 @@
 		A23415C62927D7A9007DADE7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A23415C52927D7A9007DADE7 /* .gitignore */; };
 		A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AA92948BE05001CB2AA /* ConciergeView.swift */; };
 		A26F0AAC2948BE23001CB2AA /* ConciergeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AAB2948BE23001CB2AA /* ConciergeVC.swift */; };
+		A26F0AB12948C818001CB2AA /* SZView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AB02948C818001CB2AA /* SZView.swift */; };
+		A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AB22948C843001CB2AA /* SZVC.swift */; };
 		A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A2806120292F50FA005AE0B3 /* .swiftlint.yml */; };
 		A2806129292F585E005AE0B3 /* setColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2806128292F585E005AE0B3 /* setColor.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,8 @@
 		A23415C52927D7A9007DADE7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A26F0AA92948BE05001CB2AA /* ConciergeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConciergeView.swift; sourceTree = "<group>"; };
 		A26F0AAB2948BE23001CB2AA /* ConciergeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConciergeVC.swift; sourceTree = "<group>"; };
+		A26F0AB02948C818001CB2AA /* SZView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZView.swift; sourceTree = "<group>"; };
+		A26F0AB22948C843001CB2AA /* SZVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZVC.swift; sourceTree = "<group>"; };
 		A2806120292F50FA005AE0B3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A2806128292F585E005AE0B3 /* setColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,6 +188,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A26F0AAF2948C7FB001CB2AA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A26F0AB02948C818001CB2AA /* SZView.swift */,
+				A26F0AB22948C843001CB2AA /* SZVC.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		A2806122292F5462005AE0B3 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +209,7 @@
 		A2806123292F5495005AE0B3 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				A26F0AAF2948C7FB001CB2AA /* Base */,
 				A20CBD6E29478BB90012FF32 /* Extension */,
 				A20CBD5F29478AD30012FF32 /* Literal */,
 				A2806126292F54FE005AE0B3 /* Resource */,
@@ -377,12 +391,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */,
+				A26F0AB12948C818001CB2AA /* SZView.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
 				A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A26F0AAC2948BE23001CB2AA /* ConciergeVC.swift in Sources */,
+				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 			);
