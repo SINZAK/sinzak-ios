@@ -1,6 +1,7 @@
 # Swift Lint Rule Customize 
 disabled_rules:
   - unused_optional_binding
+  - identifier_name
 opt_in_rules:
 
 included:
@@ -9,11 +10,6 @@ excluded:
   - Pods
   
 # rules
-identifier_name:
-  min_length: # only min_length
-    warning: 2
-    error: 1
-
 line_length:
   warning: 200
   error: 300
