@@ -37,6 +37,16 @@
 		A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3855F2959A4BB00E5EB7C /* LoginView.swift */; };
 		A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B385612959A4C500E5EB7C /* LoginVC.swift */; };
 		A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */; };
+		A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3856B295D888800E5EB7C /* AgreementView.swift */; };
+		A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3856D295D889400E5EB7C /* AgreementVC.swift */; };
+		A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3856F295D88B600E5EB7C /* SignupNameView.swift */; };
+		A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38571295D88C000E5EB7C /* SignupNameVC.swift */; };
+		A2B38574295D88D400E5EB7C /* SignupGenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38573295D88D400E5EB7C /* SignupGenreView.swift */; };
+		A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38575295D88DC00E5EB7C /* SignupGenreVC.swift */; };
+		A2B3857A295D893300E5EB7C /* UniversityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38579295D893300E5EB7C /* UniversityInfoView.swift */; };
+		A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857B295D893A00E5EB7C /* UniversityInfoVC.swift */; };
+		A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */; };
+		A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +83,16 @@
 		A2B3855F2959A4BB00E5EB7C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A2B385612959A4C500E5EB7C /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		A2B3856B295D888800E5EB7C /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
+		A2B3856D295D889400E5EB7C /* AgreementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVC.swift; sourceTree = "<group>"; };
+		A2B3856F295D88B600E5EB7C /* SignupNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameView.swift; sourceTree = "<group>"; };
+		A2B38571295D88C000E5EB7C /* SignupNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameVC.swift; sourceTree = "<group>"; };
+		A2B38573295D88D400E5EB7C /* SignupGenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreView.swift; sourceTree = "<group>"; };
+		A2B38575295D88DC00E5EB7C /* SignupGenreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVC.swift; sourceTree = "<group>"; };
+		A2B38579295D893300E5EB7C /* UniversityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoView.swift; sourceTree = "<group>"; };
+		A2B3857B295D893A00E5EB7C /* UniversityInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoVC.swift; sourceTree = "<group>"; };
+		A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthView.swift; sourceTree = "<group>"; };
+		A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +248,8 @@
 		A2806124292F54A2005AE0B3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				A2B38568295D884400E5EB7C /* SchoolAuth */,
+				A2B38567295D883B00E5EB7C /* Signup */,
 				A2B3855E2959A4AE00E5EB7C /* Login */,
 				A26F0AA82948BDF0001CB2AA /* Concierge */,
 				A23415B52927D776007DADE7 /* ViewController.swift */,
@@ -283,6 +305,62 @@
 			isa = PBXGroup;
 			children = (
 				A2B385612959A4C500E5EB7C /* LoginVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A2B38567295D883B00E5EB7C /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				A2B38569295D886300E5EB7C /* View */,
+				A2B3856A295D886900E5EB7C /* VC */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		A2B38568295D884400E5EB7C /* SchoolAuth */ = {
+			isa = PBXGroup;
+			children = (
+				A2B38577295D88FE00E5EB7C /* View */,
+				A2B38578295D890300E5EB7C /* VC */,
+			);
+			path = SchoolAuth;
+			sourceTree = "<group>";
+		};
+		A2B38569295D886300E5EB7C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2B3856B295D888800E5EB7C /* AgreementView.swift */,
+				A2B3856F295D88B600E5EB7C /* SignupNameView.swift */,
+				A2B38573295D88D400E5EB7C /* SignupGenreView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2B3856A295D886900E5EB7C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2B3856D295D889400E5EB7C /* AgreementVC.swift */,
+				A2B38571295D88C000E5EB7C /* SignupNameVC.swift */,
+				A2B38575295D88DC00E5EB7C /* SignupGenreVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A2B38577295D88FE00E5EB7C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2B38579295D893300E5EB7C /* UniversityInfoView.swift */,
+				A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2B38578295D890300E5EB7C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2B3857B295D893A00E5EB7C /* UniversityInfoVC.swift */,
+				A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -426,17 +504,27 @@
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */,
 				A26F0AB12948C818001CB2AA /* SZView.swift in Sources */,
+				A2B3857A295D893300E5EB7C /* UniversityInfoView.swift in Sources */,
+				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
+				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
+				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
 				A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */,
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
+				A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */,
+				A2B38574295D88D400E5EB7C /* SignupGenreView.swift in Sources */,
 				A26F0AAC2948BE23001CB2AA /* ConciergeVC.swift in Sources */,
+				A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
+				A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */,
 				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
+				A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
+				A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
