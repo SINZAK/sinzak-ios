@@ -265,10 +265,26 @@
 		A2B3855E2959A4AE00E5EB7C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				A2B3855F2959A4BB00E5EB7C /* LoginView.swift */,
-				A2B385612959A4C500E5EB7C /* LoginVC.swift */,
+				A2B38565295D87FC00E5EB7C /* View */,
+				A2B38566295D880500E5EB7C /* VC */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		A2B38565295D87FC00E5EB7C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2B3855F2959A4BB00E5EB7C /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2B38566295D880500E5EB7C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2B385612959A4C500E5EB7C /* LoginVC.swift */,
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
