@@ -20,6 +20,15 @@ final class LoginVC: SZVC {
     }
     
     // MARK: - Actions
+    @objc
+    func kakaoButtonTapped(_ sender: UIButton) {
+        // 로그인 / 회원가입 분기
+        let vc = AgreementVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     // MARK: - Helpers
+    override func configure() {
+        mainView.kakaoButton.addTarget(self, action: #selector(kakaoButtonTapped), for: .touchUpInside)
+    }
 }
