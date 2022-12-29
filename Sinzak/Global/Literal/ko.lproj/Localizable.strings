@@ -6,6 +6,46 @@
   
 */
 
-// 로그인 화면
+// - 공통
+"confirm" = "확인";
+"next" = "다음";
+
+// - 로그인 화면
 "logoText" = "신세대의 작품을 만나다";
 "startWithSnsLogin" = "SNS계정으로 간편하게 시작하기";
+
+// - 회원가입 화면
+// 서비스 이용동의
+"consentToUseOfService" = "서비스 이용 동의";
+"fullAgree" = "약관 전체동의";
+"olderThanfourteenYears" = "만 14세 이상입니다.";
+"requiredTermsOfService" = "(필수) 서비스 이용약관";
+"requiredPrivacyPolicy" = "(필수) 개인정보 처리방침";
+"optionalMarketingInformation" = "(선택) 마케팅 정보 수신동의";
+
+// 이름 입력
+"pleaseEnterName" = "신작에서 사용할\n이름을 입력해주세요.";
+"nameValidationDescription" = "이름은 공백없이 12자 이하,\n기호는 - _ . 만 사용 가능합니다.";
+
+// 관심장르 선택
+"pleaseSelectGenreOfInterest" = "관심있는 장르를 선택해주세요.";
+"upToThreeCanBeSelected" = "최대 3개까지 선택 가능합니다.";
+
+// 대학교 선택
+"pleaseSelectUniversity" = "소속 대학교를 알려주세요.";
+"yearOfAdmission" = "입학년도";
+"selectYearStudentNumber" = "연도 선택 (학번)";
+"selectAcademicStatus" = "학적 선택";
+"enrolled" = "재학생";
+"graduated" = "졸업생";
+"universityName" = "학교 이름";
+"searchBySchoolName" = "학교 이름을 검색하세요.";
+
+// 대학교 인증
+"enrolledStudentAuth" = "재학생 인증";
+"graduatedStudentAuth" = "졸업생 인증";
+"schoolWebMailAuth" = "학교 웹메일 인증";
+"emailAuthDescription" = "이메일을 입력하면 인증 메일을 보내드립니다.\n이메일 수신 후 본문에 포함된 링크를 클릭하면 인증이 완료됩니다. ";
+"pleaseEnterSchoolEmail" = "학교메일을 입력하세요.";
+"doNextTime" = "다음에 하기";
+"sendMail" = "메일 전송";
