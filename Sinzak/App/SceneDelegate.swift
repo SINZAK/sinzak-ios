@@ -18,9 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         // 루트 뷰 변경
         let vc = ConciergeVC()
-//        let rootViewController = UINavigationController(rootViewController: vc)
+        let rootViewController = UINavigationController(rootViewController: vc)
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = vc
+        window.rootViewController = rootViewController
         self.window = window
         window.makeKeyAndVisible()
     }

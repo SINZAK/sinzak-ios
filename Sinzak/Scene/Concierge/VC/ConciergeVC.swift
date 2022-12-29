@@ -18,5 +18,7 @@ final class ConciergeVC: UIViewController {
     }
     func concierge() {
         // 네트워크 상태와 자동로그인 여부 확인하여 분기
+        let vc = LoginVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
