@@ -14,3 +14,4 @@ final class SignupGenreView: SZView {
     // MARK: - Properties
     
     // MARK: - Design Helpers}
+}
