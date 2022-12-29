@@ -29,22 +29,19 @@ final class LoginView: SZView {
     private let stackView = UIStackView().then {
         $0.spacing = 16
     }
-    private let kakaoImage = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "kakao_logo")
+    let kakaoButton = UIButton().then {
+        $0.setImage(UIImage(named: "kakao_logo"), for: .normal)
     }
-    private let naverImage = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "naver_logo")
+    let naverButton = UIButton().then {
+        $0.setImage(UIImage(named: "naver_logo"), for: .normal)
     }
-    private let appleImage = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "apple_logo")
+    let appleButton = UIButton().then {
+        $0.setImage(UIImage(named: "apple_logo"), for: .normal)
     }
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(logotypeImage, logoLabel, startLabel, stackView)
-        stackView.addArangedSubviews(kakaoImage, naverImage, appleImage)
+        stackView.addArangedSubviews(kakaoButton, naverButton, appleButton)
     }
     override func setLayout() {
         logotypeImage.snp.makeConstraints { make in
@@ -62,17 +59,17 @@ final class LoginView: SZView {
             make.bottom.equalToSuperview().inset(146)
             make.height.equalTo(56)
         }
-        kakaoImage.snp.makeConstraints { make in
+        kakaoButton.snp.makeConstraints { make in
             make.height.equalToSuperview()
-            make.width.equalTo(kakaoImage.snp.height)
+            make.width.equalTo(kakaoButton.snp.height)
         }
-        naverImage.snp.makeConstraints { make in
+        naverButton.snp.makeConstraints { make in
             make.height.equalToSuperview()
-            make.width.equalTo(naverImage.snp.height)
+            make.width.equalTo(naverButton.snp.height)
         }
-        appleImage.snp.makeConstraints { make in
+        appleButton.snp.makeConstraints { make in
             make.height.equalToSuperview()
-            make.width.equalTo(appleImage.snp.height)
+            make.width.equalTo(appleButton.snp.height)
         }
         startLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
