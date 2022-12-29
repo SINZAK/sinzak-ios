@@ -5,3 +5,7 @@
   Created by Doy Kim on 2022/12/13.
   
 */
+
+// 로그인 화면
+"logoText" = "신세대의 작품을 만나다";
+"startWithSnsLogin" = "SNS계정으로 간편하게 시작하기";

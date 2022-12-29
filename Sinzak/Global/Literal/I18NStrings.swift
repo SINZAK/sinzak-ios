@@ -8,5 +8,7 @@
 import Foundation
 
 struct I18NStrings {
-    
+    // 로그인 화면
+    static let logoText = "logoText".localized
+    static let startWithSnsLogin = "startWithSnsLogin".localized
 }
