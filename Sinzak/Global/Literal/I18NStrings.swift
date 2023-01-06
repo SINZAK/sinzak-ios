@@ -32,6 +32,24 @@ struct I18NStrings {
     // 관심장르 선택
     static let pleaseSelectGenreOfInterest = "pleaseSelectGenreOfInterest".localized
     static let upToThreeCanBeSelected = "upToThreeCanBeSelected".localized
+    // 관심장르 종류
+    // > 순수 예술
+    static let fineart = "fineart".localized
+    static let painting = "painting".localized // 회화일반
+    static let orientalPainting = "orientalPainting".localized // 동양화
+    static let sculpture = "sculpture".localized // 조소
+    static let print = "print".localized // 판화
+    static let craft = "craft".localized // 공예
+    static let portrait = "portrait".localized // 초상화
+    static let etc = "etc".localized // 기타
+    // > 디자인
+    static let design = "design".localized
+    static let illust = "illust".localized // 일러스트
+    static let packageLabel = "packageLabel".localized // 패키지/라벨
+    static let printDesign = "printDesign".localized // 인쇄물
+    static let posterBannerSign = "posterBannerSign".localized // 포스터/배너/간판
+    static let logoBranding = "logoBranding".localized // 로고/브랜딩
+    static let appWebDesign = "appWebDesign".localized// 앱/웹 디자인
     
     // 대학교 선택
     static let pleaseSelectUniversity = "pleaseSelectUniversity".localized

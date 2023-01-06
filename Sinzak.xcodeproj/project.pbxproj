@@ -34,6 +34,9 @@
 		A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AB22948C843001CB2AA /* SZVC.swift */; };
 		A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A2806120292F50FA005AE0B3 /* .swiftlint.yml */; };
 		A2806129292F585E005AE0B3 /* setColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2806128292F585E005AE0B3 /* setColor.swift */; };
+		A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CA2967B13C004A63C1 /* Genre.swift */; };
+		A2AA89CE2967C33A004A63C1 /* InterestedGenreCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CD2967C33A004A63C1 /* InterestedGenreCVC.swift */; };
+		A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */; };
 		A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3855F2959A4BB00E5EB7C /* LoginView.swift */; };
 		A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B385612959A4C500E5EB7C /* LoginVC.swift */; };
 		A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */; };
@@ -81,6 +84,9 @@
 		A26F0AB22948C843001CB2AA /* SZVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZVC.swift; sourceTree = "<group>"; };
 		A2806120292F50FA005AE0B3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A2806128292F585E005AE0B3 /* setColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setColor.swift; sourceTree = "<group>"; };
+		A2AA89CA2967B13C004A63C1 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		A2AA89CD2967C33A004A63C1 /* InterestedGenreCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedGenreCVC.swift; sourceTree = "<group>"; };
+		A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedGenreHeader.swift; sourceTree = "<group>"; };
 		A2B3855F2959A4BB00E5EB7C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A2B385612959A4C500E5EB7C /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+UIStackView+Extension.swift"; sourceTree = "<group>"; };
@@ -287,6 +293,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		A2AA89C92967B11A004A63C1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A2AA89CA2967B13C004A63C1 /* Genre.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A2B3855E2959A4AE00E5EB7C /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +329,7 @@
 		A2B38567295D883B00E5EB7C /* Signup */ = {
 			isa = PBXGroup;
 			children = (
+				A2AA89C92967B11A004A63C1 /* Model */,
 				A2B38569295D886300E5EB7C /* View */,
 				A2B3856A295D886900E5EB7C /* VC */,
 			);
@@ -336,6 +351,8 @@
 				A2B3856B295D888800E5EB7C /* AgreementView.swift */,
 				A2B3856F295D88B600E5EB7C /* SignupNameView.swift */,
 				A2B38573295D88D400E5EB7C /* SignupGenreView.swift */,
+				A2AA89CD2967C33A004A63C1 /* InterestedGenreCVC.swift */,
+				A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -511,11 +528,14 @@
 				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,
 				A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
+				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
+				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
 				A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */,
+				A2AA89CE2967C33A004A63C1 /* InterestedGenreCVC.swift in Sources */,
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */,

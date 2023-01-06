@@ -30,7 +30,24 @@
 // 관심장르 선택
 "pleaseSelectGenreOfInterest" = "관심있는 장르를 선택해주세요.";
 "upToThreeCanBeSelected" = "최대 3개까지 선택 가능합니다.";
-
+// 관심장르 종류
+// > 순수 예술
+"fineart" = "순수 예술";
+"painting" = "회화일반";
+"orientalPainting" = "동양화";
+"sculpture" = "조소";
+"print" = "판화";
+"craft" = "공예";
+"portrait" = "초상화";
+"etc" = "기타";
+// > 디자인
+"design" = "디자인";
+"illust" = "일러스트";
+"packageLabel" = "패키지/라벨";
+"printDesign" = "인쇄물";
+"posterBannerSign" = "포스터/배너/간판";
+"logoBranding" = "로고/브랜딩";
+"appWebDesign" = "앱/웹 디자인";
 // 대학교 선택
 "pleaseSelectUniversity" = "소속 대학교를 알려주세요.";
 "yearOfAdmission" = "입학년도";
