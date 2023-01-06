@@ -47,6 +47,7 @@
 		A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857B295D893A00E5EB7C /* UniversityInfoVC.swift */; };
 		A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */; };
 		A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */; };
+		A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38581295ED7AA00E5EB7C /* SZTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		A2B3857B295D893A00E5EB7C /* UniversityInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoVC.swift; sourceTree = "<group>"; };
 		A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthView.swift; sourceTree = "<group>"; };
 		A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthVC.swift; sourceTree = "<group>"; };
+		A2B38581295ED7AA00E5EB7C /* SZTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +222,7 @@
 			children = (
 				A26F0AB02948C818001CB2AA /* SZView.swift */,
 				A26F0AB22948C843001CB2AA /* SZVC.swift */,
+				A2B38581295ED7AA00E5EB7C /* SZTextField.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				A26F0AB12948C818001CB2AA /* SZView.swift in Sources */,
 				A2B3857A295D893300E5EB7C /* UniversityInfoView.swift in Sources */,
 				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,
+				A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
