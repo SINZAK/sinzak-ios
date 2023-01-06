@@ -10,7 +10,6 @@ import UIKit
 final class AgreementVC: SZVC {
     // MARK: - Properties
     let mainView = AgreementView()
-    
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
@@ -18,8 +17,15 @@ final class AgreementVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
     // MARK: - Actions
-    
+    @objc
+    func confirmButtonTapped(_ sender: UIButton) {
+        let vc = SignupNameVC()
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(vc, animated: true)
+    }
     // MARK: - Helpers
+    override func configure() {
+        mainView.confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
+    }
 }

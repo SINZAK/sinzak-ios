@@ -85,7 +85,7 @@ final class AgreementView: SZView {
         $0.setImage(UIImage(named: "right-chevron"), for: .normal)
     }
     // 확인 버튼
-    private let confirmButton = UIButton().then {
+    let confirmButton = UIButton().then {
         $0.setTitle(I18NStrings.confirm, for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.gray10
