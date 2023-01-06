@@ -87,6 +87,7 @@
 		A2AA89CA2967B13C004A63C1 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		A2AA89CD2967C33A004A63C1 /* InterestedGenreCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedGenreCVC.swift; sourceTree = "<group>"; };
 		A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedGenreHeader.swift; sourceTree = "<group>"; };
+		A2AA89D22967DAF8004A63C1 /* Sinzak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sinzak.entitlements; sourceTree = "<group>"; };
 		A2B3855F2959A4BB00E5EB7C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A2B385612959A4C500E5EB7C /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+UIStackView+Extension.swift"; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 		A23415B02927D776007DADE7 /* Sinzak */ = {
 			isa = PBXGroup;
 			children = (
+				A2AA89D22967DAF8004A63C1 /* Sinzak.entitlements */,
 				A2806122292F5462005AE0B3 /* App */,
 				A2806123292F5495005AE0B3 /* Global */,
 				A2806124292F54A2005AE0B3 /* Scene */,
@@ -716,6 +718,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Sinzak/Sinzak.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F7B353LPM3;
@@ -747,6 +750,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Sinzak/Sinzak.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F7B353LPM3;
