@@ -21,6 +21,10 @@
 		A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD54292F4D8800F86A08 /* RxCocoa */; };
 		A210CD57292F4D8800F86A08 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD56292F4D8800F86A08 /* RxSwift */; };
 		A210CD5A292F4DDA00F86A08 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD59292F4DDA00F86A08 /* ReactorKit */; };
+		A22BE58D296AE95B00D9815C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58C296AE95B00D9815C /* User.swift */; };
+		A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58F296AEA4F00D9815C /* AuthManager.swift */; };
+		A22BE593296AEB0300D9815C /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE592296AEB0300D9815C /* Moya */; };
+		A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE594296AEB4300D9815C /* AuthAPI.swift */; };
 		A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B12927D776007DADE7 /* AppDelegate.swift */; };
 		A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B32927D776007DADE7 /* SceneDelegate.swift */; };
 		A23415B62927D776007DADE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B52927D776007DADE7 /* ViewController.swift */; };
@@ -69,6 +73,9 @@
 		A20CBD6B29478B540012FF32 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A20CBD6D29478B560012FF32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A20CBD6F29478BCF0012FF32 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		A22BE58C296AE95B00D9815C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A22BE58F296AEA4F00D9815C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		A22BE594296AEB4300D9815C /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		A23415AE2927D776007DADE7 /* Sinzak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinzak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23415B12927D776007DADE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A23415B32927D776007DADE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +121,7 @@
 				A210CD57292F4D8800F86A08 /* RxSwift in Frameworks */,
 				A210CD5A292F4DDA00F86A08 /* ReactorKit in Frameworks */,
 				A210CD52292F4D6B00F86A08 /* Then in Frameworks */,
+				A22BE593296AEB0300D9815C /* Moya in Frameworks */,
 				70220DD51C5772784980F559 /* Pods_Sinzak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,6 +175,32 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		A22BE58A296AE88600D9815C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A22BE58E296AEA4100D9815C /* Network */,
+				A22BE58B296AE88F00D9815C /* Model */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		A22BE58B296AE88F00D9815C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A22BE58C296AE95B00D9815C /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A22BE58E296AEA4100D9815C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A22BE58F296AEA4F00D9815C /* AuthManager.swift */,
+				A22BE594296AEB4300D9815C /* AuthAPI.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		A23415A52927D776007DADE7 = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +227,7 @@
 				A2AA89D22967DAF8004A63C1 /* Sinzak.entitlements */,
 				A2806122292F5462005AE0B3 /* App */,
 				A2806123292F5495005AE0B3 /* Global */,
+				A22BE58A296AE88600D9815C /* Data */,
 				A2806124292F54A2005AE0B3 /* Scene */,
 				A2806127292F5848005AE0B3 /* Util */,
 				A23415BF2927D778007DADE7 /* Info.plist */,
@@ -411,6 +446,7 @@
 				A210CD54292F4D8800F86A08 /* RxCocoa */,
 				A210CD56292F4D8800F86A08 /* RxSwift */,
 				A210CD59292F4DDA00F86A08 /* ReactorKit */,
+				A22BE592296AEB0300D9815C /* Moya */,
 			);
 			productName = Sinzak;
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
@@ -446,6 +482,7 @@
 				A210CD50292F4D6B00F86A08 /* XCRemoteSwiftPackageReference "Then" */,
 				A210CD53292F4D8800F86A08 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				A210CD58292F4DDA00F86A08 /* XCRemoteSwiftPackageReference "ReactorKit" */,
+				A22BE591296AEB0300D9815C /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
 			projectDirPath = "";
@@ -525,12 +562,14 @@
 			files = (
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */,
+				A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */,
 				A26F0AB12948C818001CB2AA /* SZView.swift in Sources */,
 				A2B3857A295D893300E5EB7C /* UniversityInfoView.swift in Sources */,
 				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,
 				A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
+				A22BE58D296AE95B00D9815C /* User.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
 				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,
@@ -541,6 +580,7 @@
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */,
+				A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */,
 				A2B38574295D88D400E5EB7C /* SignupGenreView.swift in Sources */,
 				A26F0AAC2948BE23001CB2AA /* ConciergeVC.swift in Sources */,
 				A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */,
@@ -832,6 +872,14 @@
 				minimumVersion = 3.2.0;
 			};
 		};
+		A22BE591296AEB0300D9815C /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = exactVersion;
+				version = 15.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -859,6 +907,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A210CD58292F4DDA00F86A08 /* XCRemoteSwiftPackageReference "ReactorKit" */;
 			productName = ReactorKit;
+		};
+		A22BE592296AEB0300D9815C /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A22BE591296AEB0300D9815C /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
