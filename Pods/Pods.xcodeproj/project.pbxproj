@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		3516E9D4735D155BC036A4DB393966FC /* naveridlogin-sdk-ios */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 75CE31157FEFB4EACB18011E2D25C61C /* Build configuration list for PBXAggregateTarget "naveridlogin-sdk-ios" */;
+			buildPhases = (
+				5E05BCF0D92F31389F4CCB961DA341B4 /* [CP] Copy XCFrameworks */,
+			);
+			dependencies = (
+			);
+			name = "naveridlogin-sdk-ios";
+		};
 		52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = AE7B4FB01588B9E6DF09CB79FC7CE7BD /* Build configuration list for PBXAggregateTarget "SwiftLint" */;
@@ -19,13 +29,20 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1EA51CC3AD45050061F8A5D03A189735 /* Pods-Sinzak-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8F3BBFA03EED26444BAE924BF951DF /* Pods-Sinzak-dummy.m */; };
-		20625B7663FE97847AAAF459AD339ACD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		722D8F63569E5C1EF9E1FB13CDBDC944 /* Pods-Sinzak-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B4008CD0BF6D4AFA454DB7550FB01BA9 /* Pods-Sinzak-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F3259BB2968076FC6A4BFB1FBDFDCEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		6566C806A6F6EA4E9B8DBB96A15DE165 /* Pods-Sinzak-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E007F6FAED69DD6E291A9FCE98A2B52D /* Pods-Sinzak-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DEADA2DFF986135A426CE1022E28CA93 /* Pods-Sinzak-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C29DDC9A0AC261C428B546229937DC /* Pods-Sinzak-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1C761E913DBA9EE0A679FD8EC5220B21 /* PBXContainerItemProxy */ = {
+		1A13BAAF3B1D5D433A8F68A7FB18419D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3516E9D4735D155BC036A4DB393966FC;
+			remoteInfo = "naveridlogin-sdk-ios";
+		};
+		441FC06DC0BD1ACFD1BE49E058811ED9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -35,39 +52,64 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01C4CAC0997EC033F25534491B19561C /* Pods-Sinzak-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Sinzak-acknowledgements.plist"; sourceTree = "<group>"; };
-		0B8F3BBFA03EED26444BAE924BF951DF /* Pods-Sinzak-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Sinzak-dummy.m"; sourceTree = "<group>"; };
-		3EC0124719FE8EF5FDDD72C26F8A2F57 /* SwiftLint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.debug.xcconfig; sourceTree = "<group>"; };
-		4DE3B40B042B0ED3194915B4A99C9FB1 /* Pods-Sinzak-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Sinzak-Info.plist"; sourceTree = "<group>"; };
+		007C805F3CA94DF3DE5B925168C695BE /* Pods-Sinzak-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Sinzak-frameworks.sh"; sourceTree = "<group>"; };
+		2208FB486817967D85BA5D94DBA964F9 /* Pods-Sinzak.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Sinzak.modulemap"; sourceTree = "<group>"; };
+		4841F849ADA8B30BCDA625842D9E1642 /* SwiftLint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.debug.xcconfig; sourceTree = "<group>"; };
+		4B8AE25285B6B0ACF49C14DCCEAAA63C /* naveridlogin-sdk-ios-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "naveridlogin-sdk-ios-xcframeworks.sh"; sourceTree = "<group>"; };
+		68C29DDC9A0AC261C428B546229937DC /* Pods-Sinzak-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Sinzak-dummy.m"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7EAB1DA481EDDC005A251D3A5E6BE4CD /* SwiftLint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.release.xcconfig; sourceTree = "<group>"; };
-		91172A0A75351F4C034D67437408F21B /* Pods-Sinzak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Sinzak.release.xcconfig"; sourceTree = "<group>"; };
-		981599D4CFEDE09D04B8CEC47D38624B /* Pods-Sinzak-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Sinzak-acknowledgements.markdown"; sourceTree = "<group>"; };
+		85C9C3C39E988BC614B2B042FFE5EEF7 /* Pods-Sinzak-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Sinzak-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9A96A0BC3961B06F2CDD0FE46CD02256 /* SwiftLint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.release.xcconfig; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A331D86CD32B056D60A307F90571E953 /* Pods-Sinzak.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Sinzak.modulemap"; sourceTree = "<group>"; };
-		B4008CD0BF6D4AFA454DB7550FB01BA9 /* Pods-Sinzak-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Sinzak-umbrella.h"; sourceTree = "<group>"; };
-		BDBD853FC41CDB617753A1EC34D23779 /* Pods-Sinzak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Sinzak.debug.xcconfig"; sourceTree = "<group>"; };
+		A317AB6C4677CF5F65EFD18E7B088A0C /* Pods-Sinzak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Sinzak.debug.xcconfig"; sourceTree = "<group>"; };
+		A728CB95CA486F86BE1D917B78B34569 /* Pods-Sinzak-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Sinzak-acknowledgements.plist"; sourceTree = "<group>"; };
+		BA5478CE72BD86D64B472A884F7667ED /* Pods-Sinzak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Sinzak.release.xcconfig"; sourceTree = "<group>"; };
+		C02284BC89CF7F7F5E20A8F5C5998627 /* NaverThirdPartyLogin.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; path = NaverThirdPartyLogin.xcframework; sourceTree = "<group>"; };
+		C2CB167B191BBEF86C3A1E90302B7F52 /* Pods-Sinzak-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Sinzak-Info.plist"; sourceTree = "<group>"; };
+		D6CC07236C58816A0522F3674C8DD5C5 /* naveridlogin-sdk-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "naveridlogin-sdk-ios.release.xcconfig"; sourceTree = "<group>"; };
 		DA3147730A105F4F0DF7161125C38CC8 /* Pods-Sinzak */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Sinzak"; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E007F6FAED69DD6E291A9FCE98A2B52D /* Pods-Sinzak-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Sinzak-umbrella.h"; sourceTree = "<group>"; };
+		E8ED01C0E996FFAC2AA1AE180B816548 /* naveridlogin-sdk-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "naveridlogin-sdk-ios.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8F2F8767EA38562843EF326D61E67F54 /* Frameworks */ = {
+		386FD2662BD57E76273DB666FBBBDFD0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20625B7663FE97847AAAF459AD339ACD /* Foundation.framework in Frameworks */,
+				3F3259BB2968076FC6A4BFB1FBDFDCEC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		082DEAD3ED6B0403536EDAFF042879B9 /* Targets Support Files */ = {
+		08DC46CE8273A3F7CF391E3EE6A0338D /* SwiftLint */ = {
 			isa = PBXGroup;
 			children = (
-				749BEAB353452A82B49254EEA381DEA3 /* Pods-Sinzak */,
+				46CE2DF93DE883DF0F90DCC93F9F64CB /* Support Files */,
 			);
-			name = "Targets Support Files";
+			name = SwiftLint;
+			path = SwiftLint;
+			sourceTree = "<group>";
+		};
+		160A5704491D4456E6ABCF478694C7B8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CBD9734C4D362FD99B08248E3B8DFDF7 /* naveridlogin-sdk-ios */,
+				08DC46CE8273A3F7CF391E3EE6A0338D /* SwiftLint */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		46CE2DF93DE883DF0F90DCC93F9F64CB /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4841F849ADA8B30BCDA625842D9E1642 /* SwiftLint.debug.xcconfig */,
+				9A96A0BC3961B06F2CDD0FE46CD02256 /* SwiftLint.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftLint";
 			sourceTree = "<group>";
 		};
 		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
@@ -78,38 +120,47 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		749BEAB353452A82B49254EEA381DEA3 /* Pods-Sinzak */ = {
+		89E7A84F12740E926492C33D0A71D258 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A331D86CD32B056D60A307F90571E953 /* Pods-Sinzak.modulemap */,
-				981599D4CFEDE09D04B8CEC47D38624B /* Pods-Sinzak-acknowledgements.markdown */,
-				01C4CAC0997EC033F25534491B19561C /* Pods-Sinzak-acknowledgements.plist */,
-				0B8F3BBFA03EED26444BAE924BF951DF /* Pods-Sinzak-dummy.m */,
-				4DE3B40B042B0ED3194915B4A99C9FB1 /* Pods-Sinzak-Info.plist */,
-				B4008CD0BF6D4AFA454DB7550FB01BA9 /* Pods-Sinzak-umbrella.h */,
-				BDBD853FC41CDB617753A1EC34D23779 /* Pods-Sinzak.debug.xcconfig */,
-				91172A0A75351F4C034D67437408F21B /* Pods-Sinzak.release.xcconfig */,
+				C02284BC89CF7F7F5E20A8F5C5998627 /* NaverThirdPartyLogin.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C45D7531E523513D991BCB3AF3410D19 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C8DBC400565AAE136844673BDD724645 /* Pods-Sinzak */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		C8DBC400565AAE136844673BDD724645 /* Pods-Sinzak */ = {
+			isa = PBXGroup;
+			children = (
+				2208FB486817967D85BA5D94DBA964F9 /* Pods-Sinzak.modulemap */,
+				85C9C3C39E988BC614B2B042FFE5EEF7 /* Pods-Sinzak-acknowledgements.markdown */,
+				A728CB95CA486F86BE1D917B78B34569 /* Pods-Sinzak-acknowledgements.plist */,
+				68C29DDC9A0AC261C428B546229937DC /* Pods-Sinzak-dummy.m */,
+				007C805F3CA94DF3DE5B925168C695BE /* Pods-Sinzak-frameworks.sh */,
+				C2CB167B191BBEF86C3A1E90302B7F52 /* Pods-Sinzak-Info.plist */,
+				E007F6FAED69DD6E291A9FCE98A2B52D /* Pods-Sinzak-umbrella.h */,
+				A317AB6C4677CF5F65EFD18E7B088A0C /* Pods-Sinzak.debug.xcconfig */,
+				BA5478CE72BD86D64B472A884F7667ED /* Pods-Sinzak.release.xcconfig */,
 			);
 			name = "Pods-Sinzak";
 			path = "Target Support Files/Pods-Sinzak";
 			sourceTree = "<group>";
 		};
-		7FDA596DBE0337ACDFE55A210D54EF26 /* Support Files */ = {
+		CBD9734C4D362FD99B08248E3B8DFDF7 /* naveridlogin-sdk-ios */ = {
 			isa = PBXGroup;
 			children = (
-				3EC0124719FE8EF5FDDD72C26F8A2F57 /* SwiftLint.debug.xcconfig */,
-				7EAB1DA481EDDC005A251D3A5E6BE4CD /* SwiftLint.release.xcconfig */,
+				89E7A84F12740E926492C33D0A71D258 /* Frameworks */,
+				ED515EDDA36A29AD6C20E5EFCE936F4A /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftLint";
-			sourceTree = "<group>";
-		};
-		965877409E01FB3D85D85E90E6B30185 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D96179D43A67C5D5323B0682D32C133C /* SwiftLint */,
-			);
-			name = Pods;
+			name = "naveridlogin-sdk-ios";
+			path = "naveridlogin-sdk-ios";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -117,9 +168,9 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				965877409E01FB3D85D85E90E6B30185 /* Pods */,
+				160A5704491D4456E6ABCF478694C7B8 /* Pods */,
 				DFAA1FFE083312A51D2989A1E8A08A1B /* Products */,
-				082DEAD3ED6B0403536EDAFF042879B9 /* Targets Support Files */,
+				C45D7531E523513D991BCB3AF3410D19 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,15 +182,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D96179D43A67C5D5323B0682D32C133C /* SwiftLint */ = {
-			isa = PBXGroup;
-			children = (
-				7FDA596DBE0337ACDFE55A210D54EF26 /* Support Files */,
-			);
-			name = SwiftLint;
-			path = SwiftLint;
-			sourceTree = "<group>";
-		};
 		DFAA1FFE083312A51D2989A1E8A08A1B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,14 +190,25 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		ED515EDDA36A29AD6C20E5EFCE936F4A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4B8AE25285B6B0ACF49C14DCCEAAA63C /* naveridlogin-sdk-ios-xcframeworks.sh */,
+				E8ED01C0E996FFAC2AA1AE180B816548 /* naveridlogin-sdk-ios.debug.xcconfig */,
+				D6CC07236C58816A0522F3674C8DD5C5 /* naveridlogin-sdk-ios.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/naveridlogin-sdk-ios";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		10CCAFFCE257E2FDDF84E1DC138EBEDD /* Headers */ = {
+		076B2E15A9D44C799A8FF64A373908F7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				722D8F63569E5C1EF9E1FB13CDBDC944 /* Pods-Sinzak-umbrella.h in Headers */,
+				6566C806A6F6EA4E9B8DBB96A15DE165 /* Pods-Sinzak-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,17 +217,18 @@
 /* Begin PBXNativeTarget section */
 		96FE3A458CB27C5E7F8A9AFC67CB46E4 /* Pods-Sinzak */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 874ED55F16CD2FC58EF9D13B903BC014 /* Build configuration list for PBXNativeTarget "Pods-Sinzak" */;
+			buildConfigurationList = CB611342D856E7D511F570F9F4D1D12F /* Build configuration list for PBXNativeTarget "Pods-Sinzak" */;
 			buildPhases = (
-				10CCAFFCE257E2FDDF84E1DC138EBEDD /* Headers */,
-				235AC18D4309A19DFBD2C6321358FE1A /* Sources */,
-				8F2F8767EA38562843EF326D61E67F54 /* Frameworks */,
-				02B5B3C749140D3BF84497FC9DCA6FFB /* Resources */,
+				076B2E15A9D44C799A8FF64A373908F7 /* Headers */,
+				71247B0E677D2C6CDA54276C5A21C729 /* Sources */,
+				386FD2662BD57E76273DB666FBBBDFD0 /* Frameworks */,
+				BFD4470FAAF5352700653F51C9F6EB43 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4DAC15C8C8E6B55D2D690DBD90742A40 /* PBXTargetDependency */,
+				35C04FBC0413B4FA8D710910E7F513C7 /* PBXTargetDependency */,
+				6B24DE152EA8342165EF3D9005A915DE /* PBXTargetDependency */,
 			);
 			name = "Pods-Sinzak";
 			productName = Pods_Sinzak;
@@ -203,6 +257,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				3516E9D4735D155BC036A4DB393966FC /* naveridlogin-sdk-ios */,
 				96FE3A458CB27C5E7F8A9AFC67CB46E4 /* Pods-Sinzak */,
 				52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */,
 			);
@@ -210,7 +265,7 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		02B5B3C749140D3BF84497FC9DCA6FFB /* Resources */ = {
+		BFD4470FAAF5352700653F51C9F6EB43 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -219,30 +274,72 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5E05BCF0D92F31389F4CCB961DA341B4 /* [CP] Copy XCFrameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/naveridlogin-sdk-ios/naveridlogin-sdk-ios-xcframeworks-input-files.xcfilelist",
+			);
+			name = "[CP] Copy XCFrameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/naveridlogin-sdk-ios/naveridlogin-sdk-ios-xcframeworks-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/naveridlogin-sdk-ios/naveridlogin-sdk-ios-xcframeworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		235AC18D4309A19DFBD2C6321358FE1A /* Sources */ = {
+		71247B0E677D2C6CDA54276C5A21C729 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EA51CC3AD45050061F8A5D03A189735 /* Pods-Sinzak-dummy.m in Sources */,
+				DEADA2DFF986135A426CE1022E28CA93 /* Pods-Sinzak-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4DAC15C8C8E6B55D2D690DBD90742A40 /* PBXTargetDependency */ = {
+		35C04FBC0413B4FA8D710910E7F513C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftLint;
 			target = 52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */;
-			targetProxy = 1C761E913DBA9EE0A679FD8EC5220B21 /* PBXContainerItemProxy */;
+			targetProxy = 441FC06DC0BD1ACFD1BE49E058811ED9 /* PBXContainerItemProxy */;
+		};
+		6B24DE152EA8342165EF3D9005A915DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "naveridlogin-sdk-ios";
+			target = 3516E9D4735D155BC036A4DB393966FC /* naveridlogin-sdk-ios */;
+			targetProxy = 1A13BAAF3B1D5D433A8F68A7FB18419D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		18C61090CB095FDBC67A88AC9B621D90 /* Release */ = {
+		35613D0A5F350911AE6E907FDFC836E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91172A0A75351F4C034D67437408F21B /* Pods-Sinzak.release.xcconfig */;
+			baseConfigurationReference = E8ED01C0E996FFAC2AA1AE180B816548 /* naveridlogin-sdk-ios.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		528492A5C24664FE832FABA341062181 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA5478CE72BD86D64B472A884F7667ED /* Pods-Sinzak.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -278,42 +375,22 @@
 			};
 			name = Release;
 		};
-		5485BACF79D0E5AF0CF56F731757A454 /* Debug */ = {
+		768846D27ACEFD82711658787FCAC0B6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDBD853FC41CDB617753A1EC34D23779 /* Pods-Sinzak.debug.xcconfig */;
+			baseConfigurationReference = D6CC07236C58816A0522F3674C8DD5C5 /* naveridlogin-sdk-ios.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Sinzak/Pods-Sinzak-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Sinzak/Pods-Sinzak.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				VALIDATE_PRODUCT = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
 		90D4D09BCB6A4660E43ACBE9ECB6FE9A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -445,7 +522,7 @@
 		};
 		AD81E62ACCB0B7A923FC8AA288F9921E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EAB1DA481EDDC005A251D3A5E6BE4CD /* SwiftLint.release.xcconfig */;
+			baseConfigurationReference = 9A96A0BC3961B06F2CDD0FE46CD02256 /* SwiftLint.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -460,9 +537,46 @@
 			};
 			name = Release;
 		};
+		D5AFA45E65FEBB85D2B5E3923FFBC6A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A317AB6C4677CF5F65EFD18E7B088A0C /* Pods-Sinzak.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Sinzak/Pods-Sinzak-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Sinzak/Pods-Sinzak.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		EADD1F50ABC8096A0D6CB18822BB4EE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3EC0124719FE8EF5FDDD72C26F8A2F57 /* SwiftLint.debug.xcconfig */;
+			baseConfigurationReference = 4841F849ADA8B30BCDA625842D9E1642 /* SwiftLint.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -488,11 +602,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		874ED55F16CD2FC58EF9D13B903BC014 /* Build configuration list for PBXNativeTarget "Pods-Sinzak" */ = {
+		75CE31157FEFB4EACB18011E2D25C61C /* Build configuration list for PBXAggregateTarget "naveridlogin-sdk-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5485BACF79D0E5AF0CF56F731757A454 /* Debug */,
-				18C61090CB095FDBC67A88AC9B621D90 /* Release */,
+				35613D0A5F350911AE6E907FDFC836E1 /* Debug */,
+				768846D27ACEFD82711658787FCAC0B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -502,6 +616,15 @@
 			buildConfigurations = (
 				EADD1F50ABC8096A0D6CB18822BB4EE4 /* Debug */,
 				AD81E62ACCB0B7A923FC8AA288F9921E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CB611342D856E7D511F570F9F4D1D12F /* Build configuration list for PBXNativeTarget "Pods-Sinzak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5AFA45E65FEBB85D2B5E3923FFBC6A2 /* Debug */,
+				528492A5C24664FE832FABA341062181 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
