@@ -8,10 +8,14 @@
 import UIKit
 import AuthenticationServices
 import KakaoSDKUser
+import NaverThirdPartyLogin
+import Alamofire
 
 final class LoginVC: SZVC {
     // MARK: - Properties
     let mainView = LoginView()
+    // 네이버로그인 인스턴스
+    let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
     // MARK: - Lifecycle
     override func loadView() {
@@ -48,6 +52,8 @@ final class LoginVC: SZVC {
     }
     /// 네이버 버튼 눌렀을 때
     @objc func naverButtonTapped(_ sender: UIButton) {
+        naverLoginInstance?.requestThirdPartyLogin()
+        
         goSignup()
     }
     /// 로그인이 안될 경우 / 이메일 중복이 아닐 경우
@@ -135,6 +141,76 @@ extension LoginVC {
                 }
                 else {
                     print("사용자의 추가 동의가 필요하지 않습니다.")
+                }
+            }
+        }
+    }
+}
+// 네이버로그인 관련
+extension LoginVC: NaverThirdPartyLoginConnectionDelegate {
+    func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
+        print("네이버 로그인 성공")
+        self.naverLoginPaser()
+    }
+    
+    func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
+        print("네이버 토큰\(naverLoginInstance?.accessToken)")
+    }
+    
+    func oauth20ConnectionDidFinishDeleteToken() {
+        print("네이버 로그아웃")
+    }
+    
+    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
+        print("에러 = \(error.localizedDescription)")
+    }
+    func naverLoginPaser() {
+        guard let accessToken = naverLoginInstance?.isValidAccessTokenExpireTimeNow() else { return }
+        
+        if !accessToken {
+            return
+        }
+        
+        guard let tokenType = naverLoginInstance?.tokenType else { return }
+        guard let accessToken = naverLoginInstance?.accessToken else { return }
+        
+        let requestUrl = "https://openapi.naver.com/v1/nid/me"
+        let url = URL(string: requestUrl)!
+        
+        let authorization = "\(tokenType) \(accessToken)"
+        
+        let req = AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
+        
+        req.responseJSON { response in
+            
+            guard let body = response.value as? [String: Any] else { return }
+            
+            if let resultCode = body["message"] as? String{
+                if resultCode.trimmingCharacters(in: .whitespaces) == "success"{
+                    let resultJson = body["response"] as! [String: Any]
+                    
+                    let name = resultJson["name"] as? String ?? ""
+                    let id = resultJson["id"] as? String ?? ""
+                    let phone = resultJson["mobile"] as! String
+                    let gender = resultJson["gender"] as? String ?? ""
+                    let birthyear = resultJson["birthyear"] as? String ?? ""
+                    let birthday = resultJson["birthday"] as? String ?? ""
+                    let profile = resultJson["profile_image"] as? String ?? ""
+                    let email = resultJson["email"] as? String ?? ""
+                    let nickName = resultJson["nickname"] as? String ?? ""
+                    
+                    print("네이버 로그인 이름 ",name)
+                    print("네이버 로그인 아이디 ",id)
+                    print("네이버 로그인 핸드폰 ",phone)
+                    print("네이버 로그인 성별 ",gender)
+                    print("네이버 로그인 생년 ",birthyear)
+                    print("네이버 로그인 생일 ",birthday)
+                    print("네이버 로그인 프로필사진 ",profile)
+                    print("네이버 로그인 이메일 ",email)
+                    print("네이버 로그인 닉네임 ",nickName)
+                }
+                else{
+                    //실패
                 }
             }
         }
