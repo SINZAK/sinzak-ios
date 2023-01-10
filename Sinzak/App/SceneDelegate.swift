@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         // 루트 뷰 변경
         let vc = TabBarVC()
-        let rootViewController = UINavigationController(rootViewController: vc)
+        let rootViewController = vc
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = rootViewController
         self.window = window
