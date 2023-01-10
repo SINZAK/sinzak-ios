@@ -21,6 +21,8 @@
 		A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD54292F4D8800F86A08 /* RxCocoa */; };
 		A210CD57292F4D8800F86A08 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD56292F4D8800F86A08 /* RxSwift */; };
 		A210CD5A292F4DDA00F86A08 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD59292F4DDA00F86A08 /* ReactorKit */; };
+		A2265372296D7E5600605697 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265371296D7E5600605697 /* HomeView.swift */; };
+		A2265374296D7E5E00605697 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265373296D7E5E00605697 /* HomeVC.swift */; };
 		A22BE58D296AE95B00D9815C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58C296AE95B00D9815C /* User.swift */; };
 		A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58F296AEA4F00D9815C /* AuthManager.swift */; };
 		A22BE593296AEB0300D9815C /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE592296AEB0300D9815C /* Moya */; };
@@ -78,6 +80,8 @@
 		A20CBD6B29478B540012FF32 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A20CBD6D29478B560012FF32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A20CBD6F29478BCF0012FF32 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		A2265371296D7E5600605697 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A2265373296D7E5E00605697 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		A22BE58C296AE95B00D9815C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A22BE58F296AEA4F00D9815C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		A22BE594296AEB4300D9815C /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
@@ -183,6 +187,31 @@
 				A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		A2265370296D7E4600605697 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A2265375296D7E6300605697 /* View */,
+				A2265376296D7E6C00605697 /* VC */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		A2265375296D7E6300605697 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2265371296D7E5600605697 /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2265376296D7E6C00605697 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2265373296D7E5E00605697 /* HomeVC.swift */,
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 		A22BE58A296AE88600D9815C /* Data */ = {
@@ -305,6 +334,7 @@
 		A2806124292F54A2005AE0B3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				A2265370296D7E4600605697 /* Home */,
 				A2B38568295D884400E5EB7C /* SchoolAuth */,
 				A2B38567295D883B00E5EB7C /* Signup */,
 				A2B3855E2959A4AE00E5EB7C /* Login */,
@@ -599,6 +629,7 @@
 				A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */,
 				A26F0AB12948C818001CB2AA /* SZView.swift in Sources */,
 				A2B3857A295D893300E5EB7C /* UniversityInfoView.swift in Sources */,
+				A2265374296D7E5E00605697 /* HomeVC.swift in Sources */,
 				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,
 				A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
@@ -621,6 +652,7 @@
 				A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
 				A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */,
+				A2265372296D7E5600605697 /* HomeView.swift in Sources */,
 				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
 				A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
