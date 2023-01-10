@@ -18,10 +18,18 @@ final class HomeVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
     // MARK: - Helpers
     override func setNavigationBar() {
-        
+        let logotype = UIBarButtonItem(image: UIImage(named: "logotype-right"),
+                                       style: .plain,
+                                       target: self,
+                                       action: nil)
+        let notification = UIBarButtonItem(image: UIImage(named: "notification"),
+                                           style: .plain,
+                                           target: self,
+                                           action: nil )
+        navigationItem.leftBarButtonItem = logotype
+        navigationItem.rightBarButtonItem = notification
     }
     
     override func configure() {
