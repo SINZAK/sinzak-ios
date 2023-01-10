@@ -69,4 +69,11 @@ struct I18NStrings {
     static let pleaseEnterSchoolEmail = "pleaseEnterSchoolEmail".localized
     static let doNextTime = "doNextTime".localized
     static let sendMail = "sendMail".localized
+    
+    // 탭바 메뉴
+    static let Home = "Home".localized
+    static let Market = "Market".localized
+    static let Outsourcing = "Outsourcing".localized
+    static let Chat = "Chat".localized
+    static let Profile = "Profile".localized
 }
