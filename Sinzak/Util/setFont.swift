@@ -17,16 +17,17 @@ extension UIFont {
     // Title
     static var subtitle_B: UIFont { customFont(SpoqaHanSansStyle.bold.rawValue, size: 20)}
     // Body
-    static var body_B: UIFont  {
+    static var body_B: UIFont {
         customFont(SpoqaHanSansStyle.bold.rawValue, size: 16) }
-    static var body_M: UIFont  { customFont(SpoqaHanSansStyle.medium.rawValue, size: 16) }
-    static var body_R: UIFont  { customFont(SpoqaHanSansStyle.regular.rawValue, size: 16) }
-    
+    static var body_M: UIFont { customFont(SpoqaHanSansStyle.medium.rawValue, size: 16) }
+    static var body_R: UIFont { customFont(SpoqaHanSansStyle.regular.rawValue, size: 16) }
     // Caption
-    static var caption_B: UIFont  { customFont(SpoqaHanSansStyle.bold.rawValue, size: 13) }
-    static var caption_M: UIFont  { customFont(SpoqaHanSansStyle.medium.rawValue, size: 13) }
-    static var caption_R: UIFont  { customFont(SpoqaHanSansStyle.regular.rawValue, size: 13) }
-    
+    static var caption_B: UIFont { customFont(SpoqaHanSansStyle.bold.rawValue, size: 13) }
+    static var caption_M: UIFont { customFont(SpoqaHanSansStyle.medium.rawValue, size: 13) }
+    static var caption_R: UIFont { customFont(SpoqaHanSansStyle.regular.rawValue, size: 13) }
+    // Button Title
+    static var buttonText_R: UIFont { customFont(SpoqaHanSansStyle.medium.rawValue, size: 10) }
+
     /// 커스텀 폰트를 설정하는 메서드
     private static func customFont(
         _ name: String, size: CGFloat,
@@ -36,7 +37,6 @@ extension UIFont {
                 print("Warning: Font '\(name)' not found.")
                 return UIFont.systemFont(ofSize: size, weight: .regular)
             }
-            
             if scaled, let style = style {
                 let metrics = UIFontMetrics(forTextStyle: style)
                 return metrics.scaledFont(for: font)
