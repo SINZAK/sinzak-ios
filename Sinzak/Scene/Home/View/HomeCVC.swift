@@ -16,25 +16,31 @@ final class HomeCVC: UICollectionViewCell {
         $0.layer.cornerRadius = 12
         $0.contentMode = .scaleAspectFill
     }
-    let favoriteButton = UIButton().then {
+    private let favoriteBackground = UIView().then {
+        $0.backgroundColor = CustomColor.gray80!.withAlphaComponent(0.4)
         $0.layer.cornerRadius = 16
-        $0.backgroundColor = CustomColor.gray80
-        // font = buttonText_R
-        // fontColor = CustomColor.white
-        // image = 하트
+    }
+    let favoriteCountLabel = UILabel().then {
+        $0.text = "1.3K"
+        $0.font = .buttonText_R
+        $0.textAlignment = .center
+        $0.textColor = CustomColor.white
+    }
+    let favoriteButton = UIButton().then {
+        $0.setImage(UIImage(named: "favorite"), for: .normal) // 눌리면 "favorite-fill"
     }
     let titleLabel = UILabel().then {
         $0.textColor = CustomColor.black
         $0.font = .body_M
     }
     let labelStack = UIStackView().then {
-        $0.spacing = 0
+        $0.spacing = 2
         $0.axis = .horizontal
     }
     let isDealing = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.isHidden = false
-        $0.image = UIImage(named: "")
+        $0.image = UIImage(named: "isDealing")
     }
     let priceLabel = UILabel().then {
         $0.textColor = CustomColor.black
@@ -63,11 +69,15 @@ final class HomeCVC: UICollectionViewCell {
     func setupUI() {
         contentView.backgroundColor = .clear
         contentView.addSubviews(
-            imageView, favoriteButton, titleLabel, labelStack,
+            imageView, favoriteBackground,
+            titleLabel, labelStack,
             authorLabel, uploadTimeLabel
         )
         labelStack.addArangedSubviews(
             isDealing, priceLabel
+        )
+        favoriteBackground.addSubviews(
+            favoriteButton, favoriteCountLabel
         )
     }
     func setConstraints() {
@@ -75,9 +85,18 @@ final class HomeCVC: UICollectionViewCell {
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(imageView.snp.width)
         }
-        favoriteButton.snp.makeConstraints { make in
+        favoriteBackground.snp.makeConstraints { make in
             make.trailing.bottom.equalTo(imageView).inset(10)
             make.width.height.equalTo(32)
+        }
+        favoriteButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().inset(1)
+            make.width.height.equalTo(16)
+        }
+        favoriteCountLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(favoriteButton.snp.bottom).offset(1)
         }
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(7)
@@ -91,7 +110,7 @@ final class HomeCVC: UICollectionViewCell {
         }
         isDealing.snp.makeConstraints { make in
             make.width.equalTo(35)
-            make.height.equalTo(13)
+            make.height.equalTo(18)
             make.centerY.equalToSuperview()
         }
         authorLabel.snp.makeConstraints { make in
