@@ -24,6 +24,9 @@
 		A2265372296D7E5600605697 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265371296D7E5600605697 /* HomeView.swift */; };
 		A2265374296D7E5E00605697 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265373296D7E5E00605697 /* HomeVC.swift */; };
 		A2265379296D80DC00605697 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265378296D80DC00605697 /* TabBarVC.swift */; };
+		A226537B29705A4400605697 /* HomeCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537A29705A4400605697 /* HomeCVC.swift */; };
+		A226537D29705F8100605697 /* HomeBannerCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537C29705F8100605697 /* HomeBannerCVC.swift */; };
+		A226537F297062A000605697 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537E297062A000605697 /* HomeHeader.swift */; };
 		A22BE58D296AE95B00D9815C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58C296AE95B00D9815C /* User.swift */; };
 		A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58F296AEA4F00D9815C /* AuthManager.swift */; };
 		A22BE593296AEB0300D9815C /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE592296AEB0300D9815C /* Moya */; };
@@ -84,6 +87,9 @@
 		A2265371296D7E5600605697 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A2265373296D7E5E00605697 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		A2265378296D80DC00605697 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		A226537A29705A4400605697 /* HomeCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCVC.swift; sourceTree = "<group>"; };
+		A226537C29705F8100605697 /* HomeBannerCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerCVC.swift; sourceTree = "<group>"; };
+		A226537E297062A000605697 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
 		A22BE58C296AE95B00D9815C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A22BE58F296AEA4F00D9815C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		A22BE594296AEB4300D9815C /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
@@ -204,6 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				A2265371296D7E5600605697 /* HomeView.swift */,
+				A226537A29705A4400605697 /* HomeCVC.swift */,
+				A226537E297062A000605697 /* HomeHeader.swift */,
+				A226537C29705F8100605697 /* HomeBannerCVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -222,6 +231,13 @@
 				A2265378296D80DC00605697 /* TabBarVC.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		A22653802970664300605697 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		A22BE58A296AE88600D9815C /* Data */ = {
@@ -344,6 +360,7 @@
 		A2806124292F54A2005AE0B3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				A22653802970664300605697 /* Notification */,
 				A2265377296D80C700605697 /* TabBar */,
 				A2265370296D7E4600605697 /* Home */,
 				A2B38568295D884400E5EB7C /* SchoolAuth */,
@@ -656,8 +673,11 @@
 				A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */,
 				A2AA89CE2967C33A004A63C1 /* InterestedGenreCVC.swift in Sources */,
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
+				A226537B29705A4400605697 /* HomeCVC.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
+				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
 				A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */,
+				A226537D29705F8100605697 /* HomeBannerCVC.swift in Sources */,
 				A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */,
 				A2B38574295D88D400E5EB7C /* SignupGenreView.swift in Sources */,
 				A26F0AAC2948BE23001CB2AA /* ConciergeVC.swift in Sources */,
