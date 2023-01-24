@@ -41,16 +41,16 @@ final class ChatView: SZView {
     }
     let isNotNegotiableButton = UIButton().then {
         $0.setTitle("가격제안불가", for: .normal)
-        $0.tintColor = CustomColor.gray60!
+        $0.setTitleColor(CustomColor.gray60, for: .normal)
         $0.titleLabel?.font = .caption_R
         $0.isUserInteractionEnabled = false
         $0.isHidden = false
     }
     let isNegotiableButton = UIButton().then {
         $0.setTitle("가격제안하기", for: .normal)
-        $0.tintColor = CustomColor.purple!
         $0.titleLabel?.font = .caption_M
-        $0.isHidden = false
+        $0.isHidden = true
+        $0.setTitleColor(CustomColor.purple, for: .normal)
     }
     // 하단 채팅레이블쪽
     let chatActionView = UIView().then {
