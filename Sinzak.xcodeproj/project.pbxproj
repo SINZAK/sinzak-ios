@@ -64,6 +64,8 @@
 		A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AB22948C843001CB2AA /* SZVC.swift */; };
 		A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A2806120292F50FA005AE0B3 /* .swiftlint.yml */; };
 		A2806129292F585E005AE0B3 /* setColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2806128292F585E005AE0B3 /* setColor.swift */; };
+		A2947A2A298017A200EE2A96 /* MyChatBubbleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2947A29298017A200EE2A96 /* MyChatBubbleCVC.swift */; };
+		A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2947A2B298017B100EE2A96 /* OtherChatBubbleCVC.swift */; };
 		A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CA2967B13C004A63C1 /* Genre.swift */; };
 		A2AA89CE2967C33A004A63C1 /* InterestedGenreCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CD2967C33A004A63C1 /* InterestedGenreCVC.swift */; };
 		A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */; };
@@ -138,6 +140,8 @@
 		A26F0AB22948C843001CB2AA /* SZVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZVC.swift; sourceTree = "<group>"; };
 		A2806120292F50FA005AE0B3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A2806128292F585E005AE0B3 /* setColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setColor.swift; sourceTree = "<group>"; };
+		A2947A29298017A200EE2A96 /* MyChatBubbleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatBubbleCVC.swift; sourceTree = "<group>"; };
+		A2947A2B298017B100EE2A96 /* OtherChatBubbleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChatBubbleCVC.swift; sourceTree = "<group>"; };
 		A2AA89CA2967B13C004A63C1 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		A2AA89CD2967C33A004A63C1 /* InterestedGenreCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedGenreCVC.swift; sourceTree = "<group>"; };
 		A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedGenreHeader.swift; sourceTree = "<group>"; };
@@ -320,6 +324,8 @@
 			isa = PBXGroup;
 			children = (
 				A216BD5B297FE020008964BC /* ChatView.swift */,
+				A2947A29298017A200EE2A96 /* MyChatBubbleCVC.swift */,
+				A2947A2B298017B100EE2A96 /* OtherChatBubbleCVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -811,6 +817,7 @@
 				A22BE597296AEC2A00D9815C /* Endpoint.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
+				A2947A2A298017A200EE2A96 /* MyChatBubbleCVC.swift in Sources */,
 				A216BD56297FD61D008964BC /* ChatListVC.swift in Sources */,
 				A216BD4C297FCBD1008964BC /* FollowNotiVC.swift in Sources */,
 				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,
@@ -834,6 +841,7 @@
 				A26F0AAC2948BE23001CB2AA /* ConciergeVC.swift in Sources */,
 				A216BD37297FA384008964BC /* HomeDetailView.swift in Sources */,
 				A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */,
+				A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */,
 				A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
 				A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */,
