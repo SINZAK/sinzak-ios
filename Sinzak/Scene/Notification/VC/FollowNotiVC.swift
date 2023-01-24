@@ -37,24 +37,7 @@ extension FollowNotiVC: UICollectionViewDelegate, UICollectionViewDataSource {
 // 컴포지셔널 레이아웃
 extension FollowNotiVC {
     /// 컴포지셔널 레이아웃 세팅
-    func setLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
-            let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(1.0))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets.leading = 16
-            item.contentInsets.trailing = 16
-            let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(240))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-            let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets.top = 32
-            section.interGroupSpacing = 20
-            return section
-        }
-    }
+    /// - 테이블뷰와 비슷한 형태이므로 list configuration 적용
     private func createLayout() -> UICollectionViewLayout {
         var config = UICollectionLayoutListConfiguration(appearance: .plain)
         config.separatorConfiguration.color = .clear
