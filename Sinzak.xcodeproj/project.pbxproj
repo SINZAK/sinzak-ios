@@ -33,6 +33,8 @@
 		A216BD53297FD60E008964BC /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD52297FD60E008964BC /* ChatListView.swift */; };
 		A216BD56297FD61D008964BC /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD55297FD61D008964BC /* ChatListVC.swift */; };
 		A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD57297FD850008964BC /* ChatListCVC.swift */; };
+		A216BD5C297FE020008964BC /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD5B297FE020008964BC /* ChatView.swift */; };
+		A216BD5F297FE02D008964BC /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD5E297FE02D008964BC /* ChatVC.swift */; };
 		A2265372296D7E5600605697 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265371296D7E5600605697 /* HomeView.swift */; };
 		A2265374296D7E5E00605697 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265373296D7E5E00605697 /* HomeVC.swift */; };
 		A2265379296D80DC00605697 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265378296D80DC00605697 /* TabBarVC.swift */; };
@@ -108,6 +110,8 @@
 		A216BD52297FD60E008964BC /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		A216BD55297FD61D008964BC /* ChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
 		A216BD57297FD850008964BC /* ChatListCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCVC.swift; sourceTree = "<group>"; };
+		A216BD5B297FE020008964BC /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		A216BD5E297FE02D008964BC /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		A2265371296D7E5600605697 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A2265373296D7E5E00605697 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		A2265378296D80DC00605697 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 		A216BD4F297FD5E1008964BC /* Chatting */ = {
 			isa = PBXGroup;
 			children = (
+				A216BD59297FDF00008964BC /* Chat */,
 				A216BD50297FD5EA008964BC /* ChatList */,
 			);
 			path = Chatting;
@@ -298,6 +303,31 @@
 			isa = PBXGroup;
 			children = (
 				A216BD55297FD61D008964BC /* ChatListVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A216BD59297FDF00008964BC /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A216BD5A297FE011008964BC /* View */,
+				A216BD5D297FE023008964BC /* VC */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		A216BD5A297FE011008964BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A216BD5B297FE020008964BC /* ChatView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A216BD5D297FE023008964BC /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A216BD5E297FE02D008964BC /* ChatVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -788,6 +818,7 @@
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A216BD4A297FCBC1008964BC /* ActivityNotiVC.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
+				A216BD5F297FE02D008964BC /* ChatVC.swift in Sources */,
 				A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */,
 				A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */,
 				A2AA89CE2967C33A004A63C1 /* InterestedGenreCVC.swift in Sources */,
@@ -810,6 +841,7 @@
 				A2265372296D7E5600605697 /* HomeView.swift in Sources */,
 				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
 				A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */,
+				A216BD5C297FE020008964BC /* ChatView.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,
