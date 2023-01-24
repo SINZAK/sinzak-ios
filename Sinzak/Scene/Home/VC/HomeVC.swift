@@ -7,10 +7,14 @@
 
 import UIKit
 
+enum HomeType: Int {
+    case banner = 0
+    case arts
+}
+
 final class HomeVC: SZVC {
     // MARK: - Properties
     let mainView = HomeView()
-    
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
@@ -31,8 +35,100 @@ final class HomeVC: SZVC {
         navigationItem.leftBarButtonItem = logotype
         navigationItem.rightBarButtonItem = notification
     }
-    
     override func configure() {
-        
+        mainView.homeCollectionView.delegate = self
+        mainView.homeCollectionView.dataSource = self
+        mainView.homeCollectionView.collectionViewLayout = setLayout()
+        mainView.homeCollectionView.register(HomeBannerCVC.self, forCellWithReuseIdentifier: String(describing: HomeBannerCVC.self))
+        mainView.homeCollectionView.register(HomeCVC.self, forCellWithReuseIdentifier: String(describing: HomeCVC.self))
+        mainView.homeCollectionView.register(HomeHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: HomeHeader.self))
+    }
+}
+// 콜렉션 뷰 세팅
+extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource  {
+    // 섹션 개수
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3 // 배너섹션 : 섹션갯수
+    }
+    // 섹션 내 아이템 개수
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    // 콜렉션 뷰 셀
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == HomeType.banner.rawValue {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HomeBannerCVC.self), for: indexPath) as? HomeBannerCVC else { return UICollectionViewCell()}
+            cell.imageView.image = UIImage(named: "banner1")
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HomeCVC.self), for: indexPath) as? HomeCVC else { return UICollectionViewCell()}
+            cell.imageView.image = UIImage(named: "art")
+            cell.titleLabel.text = "Flower Garden"
+            cell.priceLabel.text = "33,000원"
+            return cell
+        }
+    }
+    // 헤더
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if indexPath.section != HomeType.banner.rawValue {
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: HomeHeader.self), for: indexPath) as? HomeHeader else { return UICollectionReusableView() }
+            header.titleLabel.text = "맞춤 거래"
+            return header
+        } else {
+            return UICollectionReusableView()
+        }
+    }
+}
+// 컴포지셔널 레이아웃
+extension HomeVC {
+    /// 컴포지셔널 레이아웃 세팅
+    func setLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
+        // 배너일 경우
+            if sectionNumber == HomeType.banner.rawValue {
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets.leading = 16
+                item.contentInsets.trailing = 16
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(160))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets.top = 24
+                section.contentInsets.bottom = 32
+                section.orthogonalScrollingBehavior = .paging
+                return section
+            } else { // 배너가 아닐 경우
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .fractionalHeight(1.0)
+                )
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets.leading = 14
+                item.contentInsets.trailing = 21
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .estimated(205),
+                    heightDimension: .estimated(240)
+                )
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets.leading = 26
+                section.contentInsets.bottom = 40
+                let headerItemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(40))
+                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
+                section.boundarySupplementaryItems = [headerItem]
+                section.orthogonalScrollingBehavior = .continuous
+                //            let layout = UICollectionViewCompositionalLayout(section: section)
+                //            let config = UICollectionViewCompositionalLayoutConfiguration()
+                //            config.interSectionSpacing = 19
+                //            layout.configuration = config
+                return section
+            }
+        }
     }
 }
