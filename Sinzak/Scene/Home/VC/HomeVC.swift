@@ -22,6 +22,10 @@ final class HomeVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
     // MARK: - Actions
     @objc func didNotificitionButtonTapped(_ sender: UIBarButtonItem) {
         let vc = NotificationVC()
