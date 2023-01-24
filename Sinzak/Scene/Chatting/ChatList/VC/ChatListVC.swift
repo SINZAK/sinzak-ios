@@ -21,6 +21,8 @@ final class ChatListVC: SZVC {
     override func configure() {
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
+        mainView.collectionView.register(ChatListCVC.self, forCellWithReuseIdentifier: String(describing: ChatListCVC.self))
+        mainView.collectionView.collectionViewLayout = createLayout()
     }
 }
 extension ChatListVC: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -28,7 +30,10 @@ extension ChatListVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return 5
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ChatListCVC.self), for: indexPath) as? ChatListCVC else { return UICollectionViewCell() }
+        cell.verifiedBadge.isHidden = indexPath.item % 3 < 1 ? true : false
+        cell.chatCountBackground.isHidden = indexPath.item % 3 > 0 ? true : false
+        return cell
     }
 }
 // 컴포지셔널 레이아웃
