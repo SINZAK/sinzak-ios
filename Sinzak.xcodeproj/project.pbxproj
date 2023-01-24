@@ -69,6 +69,8 @@
 		A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CA2967B13C004A63C1 /* Genre.swift */; };
 		A2AA89CE2967C33A004A63C1 /* InterestedGenreCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CD2967C33A004A63C1 /* InterestedGenreCVC.swift */; };
 		A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */; };
+		A2B0F60E2980231A00EC5C78 /* MarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B0F60D2980231A00EC5C78 /* MarketView.swift */; };
+		A2B0F6112980233900EC5C78 /* MarketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B0F6102980233900EC5C78 /* MarketVC.swift */; };
 		A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3855F2959A4BB00E5EB7C /* LoginView.swift */; };
 		A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B385612959A4C500E5EB7C /* LoginVC.swift */; };
 		A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */; };
@@ -146,6 +148,8 @@
 		A2AA89CD2967C33A004A63C1 /* InterestedGenreCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedGenreCVC.swift; sourceTree = "<group>"; };
 		A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedGenreHeader.swift; sourceTree = "<group>"; };
 		A2AA89D22967DAF8004A63C1 /* Sinzak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sinzak.entitlements; sourceTree = "<group>"; };
+		A2B0F60D2980231A00EC5C78 /* MarketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketView.swift; sourceTree = "<group>"; };
+		A2B0F6102980233900EC5C78 /* MarketVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVC.swift; sourceTree = "<group>"; };
 		A2B3855F2959A4BB00E5EB7C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A2B385612959A4C500E5EB7C /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+UIStackView+Extension.swift"; sourceTree = "<group>"; };
@@ -504,6 +508,7 @@
 		A2806124292F54A2005AE0B3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				A2B0F60B2980230800EC5C78 /* Market */,
 				A216BD4F297FD5E1008964BC /* Chatting */,
 				A22653802970664300605697 /* Notification */,
 				A2265377296D80C700605697 /* TabBar */,
@@ -551,6 +556,31 @@
 				A2AA89CA2967B13C004A63C1 /* Genre.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A2B0F60B2980230800EC5C78 /* Market */ = {
+			isa = PBXGroup;
+			children = (
+				A2B0F60F2980233100EC5C78 /* VC */,
+				A2B0F60C2980231100EC5C78 /* View */,
+			);
+			path = Market;
+			sourceTree = "<group>";
+		};
+		A2B0F60C2980231100EC5C78 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2B0F60D2980231A00EC5C78 /* MarketView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2B0F60F2980233100EC5C78 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2B0F6102980233900EC5C78 /* MarketVC.swift */,
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 		A2B3855E2959A4AE00E5EB7C /* Login */ = {
@@ -806,11 +836,13 @@
 				A26F0AB12948C818001CB2AA /* SZView.swift in Sources */,
 				A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */,
 				A216BD53297FD60E008964BC /* ChatListView.swift in Sources */,
+				A2B0F6112980233900EC5C78 /* MarketVC.swift in Sources */,
 				A2B3857A295D893300E5EB7C /* UniversityInfoView.swift in Sources */,
 				A2265374296D7E5E00605697 /* HomeVC.swift in Sources */,
 				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,
 				A2265379296D80DC00605697 /* TabBarVC.swift in Sources */,
 				A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */,
+				A2B0F60E2980231A00EC5C78 /* MarketView.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
 				A22BE58D296AE95B00D9815C /* User.swift in Sources */,
