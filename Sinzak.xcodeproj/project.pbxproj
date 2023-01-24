@@ -24,6 +24,8 @@
 		A216BD37297FA384008964BC /* HomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD36297FA384008964BC /* HomeDetailView.swift */; };
 		A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3A297FA3B4008964BC /* HomeDetailVC.swift */; };
 		A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */; };
+		A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD40297FAFCA008964BC /* NotificationVC.swift */; };
+		A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD44297FB289008964BC /* NotificationCVC.swift */; };
 		A2265372296D7E5600605697 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265371296D7E5600605697 /* HomeView.swift */; };
 		A2265374296D7E5E00605697 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265373296D7E5E00605697 /* HomeVC.swift */; };
 		A2265379296D80DC00605697 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265378296D80DC00605697 /* TabBarVC.swift */; };
@@ -91,6 +93,8 @@
 		A216BD36297FA384008964BC /* HomeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailView.swift; sourceTree = "<group>"; };
 		A216BD3A297FA3B4008964BC /* HomeDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailVC.swift; sourceTree = "<group>"; };
 		A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFullWidthCVC.swift; sourceTree = "<group>"; };
+		A216BD40297FAFCA008964BC /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
+		A216BD44297FB289008964BC /* NotificationCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCVC.swift; sourceTree = "<group>"; };
 		A2265371296D7E5600605697 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A2265373296D7E5E00605697 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		A2265378296D80DC00605697 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
@@ -231,6 +235,22 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		A216BD42297FB269008964BC /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A216BD40297FAFCA008964BC /* NotificationVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A216BD43297FB275008964BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A216BD44297FB289008964BC /* NotificationCVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		A2265370296D7E4600605697 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +291,8 @@
 		A22653802970664300605697 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				A216BD43297FB275008964BC /* View */,
+				A216BD42297FB269008964BC /* VC */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -704,12 +726,14 @@
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
 				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,
+				A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */,
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
 				A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */,
 				A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */,
 				A2AA89CE2967C33A004A63C1 /* InterestedGenreCVC.swift in Sources */,
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
+				A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */,
 				A226537B29705A4400605697 /* ArtCVC.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
