@@ -27,15 +27,15 @@ final class HomeBannerCVC: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Design Helper
-    func setupUI(){
+    func setupUI() {
         contentView.backgroundColor = .clear
-        contentView.addSubviews(
-            imageView
-        )
+        contentView.addSubview(imageView)
     }
-    func setConstraints(){
+    func setConstraints() {
         imageView.snp.makeConstraints { make in
-            make.width.height.equalToSuperview()
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(imageView.snp.width).multipliedBy(0.39)
         }
     }
 }
