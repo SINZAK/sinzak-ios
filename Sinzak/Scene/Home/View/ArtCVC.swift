@@ -1,5 +1,5 @@
 //
-//  HomeCVC.swift
+//  ArtCVC.swift
 //  Sinzak
 //
 //  Created by Doy Kim on 2023/01/13.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class HomeCVC: UICollectionViewCell {
+final class ArtCVC: UICollectionViewCell {
     // MARK: - Properties
     let imageView = UIImageView().then {
         $0.clipsToBounds = true

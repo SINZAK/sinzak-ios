@@ -40,7 +40,7 @@ final class HomeVC: SZVC {
         mainView.homeCollectionView.dataSource = self
         mainView.homeCollectionView.collectionViewLayout = setLayout()
         mainView.homeCollectionView.register(HomeBannerCVC.self, forCellWithReuseIdentifier: String(describing: HomeBannerCVC.self))
-        mainView.homeCollectionView.register(HomeCVC.self, forCellWithReuseIdentifier: String(describing: HomeCVC.self))
+        mainView.homeCollectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
         mainView.homeCollectionView.register(HomeHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: HomeHeader.self))
     }
 }
@@ -61,7 +61,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource  {
             cell.imageView.image = UIImage(named: "banner1")
             return cell
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HomeCVC.self), for: indexPath) as? HomeCVC else { return UICollectionViewCell()}
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell()}
             cell.imageView.image = UIImage(named: "art")
             cell.titleLabel.text = "Flower Garden"
             cell.priceLabel.text = "33,000원"
