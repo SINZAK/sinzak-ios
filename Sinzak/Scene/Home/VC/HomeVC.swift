@@ -64,9 +64,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
         } else {
             if indexPath.item < 3 {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell()}
-                cell.imageView.image = UIImage(named: "art")
-                cell.titleLabel.text = "Flower Garden"
-                cell.priceLabel.text = "33,000원"
+                //cell.configure(data: Art) 로 데이터 세팅
                 return cell
             } else if indexPath.item == 3 { // 마지막 셀일 경우
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SeeMoreCVC.self), for: indexPath) as? SeeMoreCVC else { return UICollectionViewCell()  }
@@ -74,6 +72,16 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
             } else {
                 return UICollectionViewCell()
             }
+        }
+    }
+    // 셀 클릭 시
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // 그냥 셀일 때
+        // 더보기셀(=마지막)일 때
+        if indexPath.item == 3 {
+            let vc = HomeDetailVC()
+            vc.navigationItem.title = "팔로잉" // 섹션헤더 정보
+            navigationController?.pushViewController(vc, animated: false)
         }
     }
     // 헤더
