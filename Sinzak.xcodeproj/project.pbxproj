@@ -26,6 +26,7 @@
 		A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */; };
 		A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD40297FAFCA008964BC /* NotificationVC.swift */; };
 		A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD44297FB289008964BC /* NotificationCVC.swift */; };
+		A216BD48297FB6B5008964BC /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = A216BD47297FB6B5008964BC /* Tabman */; };
 		A2265372296D7E5600605697 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265371296D7E5600605697 /* HomeView.swift */; };
 		A2265374296D7E5E00605697 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265373296D7E5E00605697 /* HomeVC.swift */; };
 		A2265379296D80DC00605697 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265378296D80DC00605697 /* TabBarVC.swift */; };
@@ -151,6 +152,7 @@
 				A22BE5A3296B001B00D9815C /* KakaoSDK in Frameworks */,
 				A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */,
 				A210CD57292F4D8800F86A08 /* RxSwift in Frameworks */,
+				A216BD48297FB6B5008964BC /* Tabman in Frameworks */,
 				A210CD5A292F4DDA00F86A08 /* ReactorKit in Frameworks */,
 				A210CD52292F4D6B00F86A08 /* Then in Frameworks */,
 				A22BE593296AEB0300D9815C /* Moya in Frameworks */,
@@ -579,6 +581,7 @@
 				A22BE5A4296B001B00D9815C /* KakaoSDKAuth */,
 				A22BE5A6296B001B00D9815C /* KakaoSDKCommon */,
 				A22BE5A8296B001B00D9815C /* KakaoSDKUser */,
+				A216BD47297FB6B5008964BC /* Tabman */,
 			);
 			productName = Sinzak;
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
@@ -616,6 +619,7 @@
 				A210CD58292F4DDA00F86A08 /* XCRemoteSwiftPackageReference "ReactorKit" */,
 				A22BE591296AEB0300D9815C /* XCRemoteSwiftPackageReference "Moya" */,
 				A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
 			projectDirPath = "";
@@ -1035,6 +1039,14 @@
 				minimumVersion = 3.2.0;
 			};
 		};
+		A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		A22BE591296AEB0300D9815C /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
@@ -1078,6 +1090,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A210CD58292F4DDA00F86A08 /* XCRemoteSwiftPackageReference "ReactorKit" */;
 			productName = ReactorKit;
+		};
+		A216BD47297FB6B5008964BC /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
 		};
 		A22BE592296AEB0300D9815C /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
