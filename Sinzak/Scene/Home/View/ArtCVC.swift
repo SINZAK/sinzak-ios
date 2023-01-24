@@ -15,6 +15,7 @@ final class ArtCVC: UICollectionViewCell {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
         $0.contentMode = .scaleAspectFill
+        $0.image = UIImage(named: "emptySquare")
     }
     private let favoriteBackground = UIView().then {
         $0.backgroundColor = CustomColor.gray80!.withAlphaComponent(0.4)
@@ -32,6 +33,7 @@ final class ArtCVC: UICollectionViewCell {
     let titleLabel = UILabel().then {
         $0.textColor = CustomColor.black
         $0.font = .body_M
+        $0.text = "Flower Garden"
     }
     let labelStack = UIStackView().then {
         $0.spacing = 2
@@ -45,16 +47,22 @@ final class ArtCVC: UICollectionViewCell {
     let priceLabel = UILabel().then {
         $0.textColor = CustomColor.black
         $0.font = .body_B
+        $0.text = "33,000원"
     }
     let authorLabel = UILabel().then {
         $0.textColor = CustomColor.black
         $0.font = .caption_R
-        $0.text = "홍길동 작가"
+        $0.text = "신작 작가"
+    }
+    private let middlePointLabel = UILabel().then {
+        $0.textColor = CustomColor.gray60
+        $0.font = .caption_M
+        $0.text = "· "
     }
     let uploadTimeLabel = UILabel().then {
         $0.textColor = CustomColor.gray60
         $0.font = .caption_M
-        $0.text = "· 10시간 전"
+        $0.text = "10시간 전"
     }
     // MARK: - Init
     override init(frame: CGRect) {
@@ -71,7 +79,7 @@ final class ArtCVC: UICollectionViewCell {
         contentView.addSubviews(
             imageView, favoriteBackground,
             titleLabel, labelStack,
-            authorLabel, uploadTimeLabel
+            authorLabel, middlePointLabel, uploadTimeLabel
         )
         labelStack.addArangedSubviews(
             isDealing, priceLabel
@@ -117,9 +125,13 @@ final class ArtCVC: UICollectionViewCell {
             make.leading.equalTo(titleLabel)
             make.top.equalTo(labelStack.snp.bottom).offset(5)
         }
-        uploadTimeLabel.snp.makeConstraints { make in
+        middlePointLabel.snp.makeConstraints { make in
             make.centerY.equalTo(authorLabel)
             make.leading.equalTo(authorLabel.snp.trailing)
+        }
+        uploadTimeLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(middlePointLabel)
+            make.leading.equalTo(middlePointLabel.snp.trailing)
             make.trailing.lessThanOrEqualToSuperview().inset(7)
         }
     }
