@@ -90,7 +90,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
         if indexPath.item == 3 {
             let vc = HomeDetailVC()
             vc.navigationItem.title = "팔로잉" // 섹션헤더 정보
-            navigationController?.pushViewController(vc, animated: false)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     // 헤더
