@@ -41,18 +41,19 @@ final class HomeVC: SZVC {
         mainView.homeCollectionView.collectionViewLayout = setLayout()
         mainView.homeCollectionView.register(BannerCVC.self, forCellWithReuseIdentifier: String(describing: BannerCVC.self))
         mainView.homeCollectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
+        mainView.homeCollectionView.register(SeeMoreCVC.self, forCellWithReuseIdentifier: String(describing: SeeMoreCVC.self))
         mainView.homeCollectionView.register(HomeHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: HomeHeader.self))
     }
 }
 // 콜렉션 뷰 세팅
-extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource  {
+extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
     // 섹션 개수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3 // 배너섹션 : 섹션갯수
     }
     // 섹션 내 아이템 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == HomeType.banner.rawValue ? 3 : 3 // 배너일 경우, 아닐 경우
+        return section == HomeType.banner.rawValue ? 3 : 4 // 배너일 경우, 아닐 경우
     }
     // 콜렉션 뷰 셀
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -61,11 +62,18 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource  {
             cell.imageView.image = UIImage(named: "banner1")
             return cell
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell()}
-            cell.imageView.image = UIImage(named: "art")
-            cell.titleLabel.text = "Flower Garden"
-            cell.priceLabel.text = "33,000원"
-            return cell
+            if indexPath.item < 3 {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell()}
+                cell.imageView.image = UIImage(named: "art")
+                cell.titleLabel.text = "Flower Garden"
+                cell.priceLabel.text = "33,000원"
+                return cell
+            } else if indexPath.item == 3 { // 마지막 셀일 경우
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SeeMoreCVC.self), for: indexPath) as? SeeMoreCVC else { return UICollectionViewCell()  }
+                return cell
+            } else {
+                return UICollectionViewCell()
+            }
         }
     }
     // 헤더
@@ -106,27 +114,24 @@ extension HomeVC {
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .fractionalHeight(1.0)
                 )
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets.leading = 14
-                item.contentInsets.trailing = 21
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .estimated(205),
+                    widthDimension: .estimated(165),
                     heightDimension: .estimated(240)
                 )
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                group.interItemSpacing = .fixed(28)
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.leading = 26
+                section.contentInsets.leading = 40
                 section.contentInsets.bottom = 40
+                section.interGroupSpacing = 28
+                // 헤더 설정
                 let headerItemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .estimated(40))
                 let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
                 section.boundarySupplementaryItems = [headerItem]
                 section.orthogonalScrollingBehavior = .continuous
-                //            let layout = UICollectionViewCompositionalLayout(section: section)
-                //            let config = UICollectionViewCompositionalLayoutConfiguration()
-                //            config.interSectionSpacing = 19
-                //            layout.configuration = config
                 return section
             }
         }
