@@ -27,6 +27,9 @@
 		A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD40297FAFCA008964BC /* NotificationVC.swift */; };
 		A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD44297FB289008964BC /* NotificationCVC.swift */; };
 		A216BD48297FB6B5008964BC /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = A216BD47297FB6B5008964BC /* Tabman */; };
+		A216BD4A297FCBC1008964BC /* ActivityNotiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD49297FCBC1008964BC /* ActivityNotiVC.swift */; };
+		A216BD4C297FCBD1008964BC /* FollowNotiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD4B297FCBD1008964BC /* FollowNotiVC.swift */; };
+		A216BD4E297FCC02008964BC /* NotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD4D297FCC02008964BC /* NotiView.swift */; };
 		A2265372296D7E5600605697 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265371296D7E5600605697 /* HomeView.swift */; };
 		A2265374296D7E5E00605697 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265373296D7E5E00605697 /* HomeVC.swift */; };
 		A2265379296D80DC00605697 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265378296D80DC00605697 /* TabBarVC.swift */; };
@@ -96,6 +99,9 @@
 		A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFullWidthCVC.swift; sourceTree = "<group>"; };
 		A216BD40297FAFCA008964BC /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
 		A216BD44297FB289008964BC /* NotificationCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCVC.swift; sourceTree = "<group>"; };
+		A216BD49297FCBC1008964BC /* ActivityNotiVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityNotiVC.swift; sourceTree = "<group>"; };
+		A216BD4B297FCBD1008964BC /* FollowNotiVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowNotiVC.swift; sourceTree = "<group>"; };
+		A216BD4D297FCC02008964BC /* NotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiView.swift; sourceTree = "<group>"; };
 		A2265371296D7E5600605697 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A2265373296D7E5E00605697 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		A2265378296D80DC00605697 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
@@ -241,6 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				A216BD40297FAFCA008964BC /* NotificationVC.swift */,
+				A216BD49297FCBC1008964BC /* ActivityNotiVC.swift */,
+				A216BD4B297FCBD1008964BC /* FollowNotiVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -249,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				A216BD44297FB289008964BC /* NotificationCVC.swift */,
+				A216BD4D297FCC02008964BC /* NotiView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -729,9 +738,11 @@
 				A22BE597296AEC2A00D9815C /* Endpoint.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
+				A216BD4C297FCBD1008964BC /* FollowNotiVC.swift in Sources */,
 				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,
 				A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */,
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
+				A216BD4A297FCBC1008964BC /* ActivityNotiVC.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
 				A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */,
 				A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */,
@@ -751,6 +762,7 @@
 				A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
 				A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */,
+				A216BD4E297FCC02008964BC /* NotiView.swift in Sources */,
 				A2265372296D7E5600605697 /* HomeView.swift in Sources */,
 				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
 				A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */,
