@@ -22,6 +22,11 @@ final class HomeVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    // MARK: - Actions
+    @objc func didNotificitionButtonTapped(_ sender: UIBarButtonItem) {
+        let vc = NotificationVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     // MARK: - Helpers
     override func setNavigationBar() {
         let logotype = UIBarButtonItem(image: UIImage(named: "logotype-right"),
@@ -31,7 +36,7 @@ final class HomeVC: SZVC {
         let notification = UIBarButtonItem(image: UIImage(named: "notification"),
                                            style: .plain,
                                            target: self,
-                                           action: nil )
+                                           action: #selector(didNotificitionButtonTapped) )
         navigationItem.leftBarButtonItem = logotype
         navigationItem.rightBarButtonItem = notification
     }
