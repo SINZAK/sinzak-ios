@@ -105,7 +105,7 @@ final class HomeCVC: UICollectionViewCell {
         }
         labelStack.snp.makeConstraints { make in
             make.leading.equalTo(titleLabel)
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom).offset(3)
             make.trailing.lessThanOrEqualToSuperview().inset(7)
         }
         isDealing.snp.makeConstraints { make in
