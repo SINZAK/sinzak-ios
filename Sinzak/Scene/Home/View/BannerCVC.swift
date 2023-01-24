@@ -1,5 +1,5 @@
 //
-//  HomeBannerCVC.swift
+//  BannerCVC.swift
 //  Sinzak
 //
 //  Created by Doy Kim on 2023/01/13.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class HomeBannerCVC: UICollectionViewCell {
+final class BannerCVC: UICollectionViewCell {
     // MARK: - Properties
     let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill

@@ -39,7 +39,7 @@ final class HomeVC: SZVC {
         mainView.homeCollectionView.delegate = self
         mainView.homeCollectionView.dataSource = self
         mainView.homeCollectionView.collectionViewLayout = setLayout()
-        mainView.homeCollectionView.register(HomeBannerCVC.self, forCellWithReuseIdentifier: String(describing: HomeBannerCVC.self))
+        mainView.homeCollectionView.register(BannerCVC.self, forCellWithReuseIdentifier: String(describing: BannerCVC.self))
         mainView.homeCollectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
         mainView.homeCollectionView.register(HomeHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: HomeHeader.self))
     }
@@ -52,12 +52,12 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource  {
     }
     // 섹션 내 아이템 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return section == HomeType.banner.rawValue ? 3 : 3 // 배너일 경우, 아닐 경우
     }
     // 콜렉션 뷰 셀
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == HomeType.banner.rawValue {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HomeBannerCVC.self), for: indexPath) as? HomeBannerCVC else { return UICollectionViewCell()}
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: BannerCVC.self), for: indexPath) as? BannerCVC else { return UICollectionViewCell()}
             cell.imageView.image = UIImage(named: "banner1")
             return cell
         } else {
