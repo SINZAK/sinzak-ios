@@ -309,7 +309,6 @@
 			children = (
 				A216BD52297FD60E008964BC /* ChatListView.swift */,
 				A216BD57297FD850008964BC /* ChatListCVC.swift */,
-				A2100F6729865B2500C85ADF /* MarketHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -588,6 +587,7 @@
 			children = (
 				A2B0F60D2980231A00EC5C78 /* MarketView.swift */,
 				A222F07B29837AFF007806D0 /* CategoryTagCVC.swift */,
+				A2100F6729865B2500C85ADF /* MarketHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
