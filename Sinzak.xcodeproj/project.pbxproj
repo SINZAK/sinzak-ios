@@ -21,6 +21,7 @@
 		A2100F712986937A00C85ADF /* WorksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2100F702986937A00C85ADF /* WorksView.swift */; };
 		A2100F742986939A00C85ADF /* WorksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2100F732986939A00C85ADF /* WorksVC.swift */; };
 		A2100F77298695A100C85ADF /* WorksCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2100F76298695A100C85ADF /* WorksCategory.swift */; };
+		A2100F79298696D800C85ADF /* WorksHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2100F78298696D800C85ADF /* WorksHeader.swift */; };
 		A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD4E292F4D5300F86A08 /* SnapKit */; };
 		A210CD52292F4D6B00F86A08 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD51292F4D6B00F86A08 /* Then */; };
 		A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD54292F4D8800F86A08 /* RxCocoa */; };
@@ -115,6 +116,7 @@
 		A2100F702986937A00C85ADF /* WorksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksView.swift; sourceTree = "<group>"; };
 		A2100F732986939A00C85ADF /* WorksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksVC.swift; sourceTree = "<group>"; };
 		A2100F76298695A100C85ADF /* WorksCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksCategory.swift; sourceTree = "<group>"; };
+		A2100F78298696D800C85ADF /* WorksHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksHeader.swift; sourceTree = "<group>"; };
 		A216BD36297FA384008964BC /* HomeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailView.swift; sourceTree = "<group>"; };
 		A216BD3A297FA3B4008964BC /* HomeDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailVC.swift; sourceTree = "<group>"; };
 		A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFullWidthCVC.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				A2100F702986937A00C85ADF /* WorksView.swift */,
+				A2100F78298696D800C85ADF /* WorksHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -902,6 +905,7 @@
 				A2265374296D7E5E00605697 /* HomeVC.swift in Sources */,
 				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,
 				A2265379296D80DC00605697 /* TabBarVC.swift in Sources */,
+				A2100F79298696D800C85ADF /* WorksHeader.swift in Sources */,
 				A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */,
 				A2100F6829865B2500C85ADF /* MarketHeader.swift in Sources */,
 				A2B0F60E2980231A00EC5C78 /* MarketView.swift in Sources */,
