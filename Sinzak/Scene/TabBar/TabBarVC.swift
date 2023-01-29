@@ -33,8 +33,8 @@ final class TabBarVC: UITabBarController {
                                          image: UIImage(named: "market"),
                                          selectedImage: UIImage(named: "market-selected"))
         // 의뢰
-        let outsourcingVC = SZVC()
-        outsourcingVC.tabBarItem = UITabBarItem(title: I18NStrings.Outsourcing,
+        let worksVC = UINavigationController(rootViewController: WorksVC())
+        worksVC.tabBarItem = UITabBarItem(title: I18NStrings.Outsourcing,
                                          image: UIImage(named: "outsourcing"),
                                          selectedImage: UIImage(named: "outsourcing-selected"))
         // 채팅
@@ -48,6 +48,6 @@ final class TabBarVC: UITabBarController {
                                          image: UIImage(named: "profile"),
                                          selectedImage: UIImage(named: "profile-selected"))
         // 탭 구성
-        setViewControllers([homeVC, marketVC, outsourcingVC, chatVC, profileVC], animated: true)
+        setViewControllers([homeVC, marketVC, worksVC, chatVC, profileVC], animated: true)
     }
 }
