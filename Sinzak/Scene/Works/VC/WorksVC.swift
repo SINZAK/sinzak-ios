@@ -17,4 +17,21 @@ final class WorksVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    // MARK: - Actions
+    /// 검색화면으로 이동
+    @objc func searchButtonTapped(_ sender: UIBarButtonItem) {
+        let vc = SZVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    // MARK: - Helpers
+    override func setNavigationBar() {
+        super.setNavigationBar()
+        navigationItem.title = "외주"
+        let search = UIBarButtonItem(
+            image: UIImage(named: "search"),
+            style: .plain,
+            target: self,
+            action: #selector(searchButtonTapped))
+        navigationItem.rightBarButtonItem = search
+    }
 }
