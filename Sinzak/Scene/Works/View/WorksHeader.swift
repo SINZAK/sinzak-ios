@@ -47,21 +47,24 @@ class WorksHeader: UICollectionReusableView {
     func setConstraints() {
         requestTabButton.snp.makeConstraints { make in
             make.leading.top.equalToSuperview()
+            make.width.equalTo(72)
             make.height.equalTo(42)
         }
         WorkTabButton.snp.makeConstraints { make in
-            make.leading.equalTo(requestTabButton.snp.trailing)
+            make.leading.equalTo(requestTabButton.snp.trailing).offset(4)
+            make.width.equalTo(72)
             make.centerY.equalTo(requestTabButton)
             make.height.equalTo(42)
         }
         selectBar.snp.makeConstraints { make in
-            make.top.width.equalTo(requestTabButton.snp.bottom)
+            make.top.equalTo(requestTabButton.snp.bottom)
+            make.leading.trailing.equalTo(requestTabButton)
             make.height.equalTo(2)
+            make.bottom.equalToSuperview()
         }
         alignButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
+            make.trailing.centerY.equalToSuperview()
             make.height.equalTo(22)
-            make.centerY.equalToSuperview()
         }
     }
 
