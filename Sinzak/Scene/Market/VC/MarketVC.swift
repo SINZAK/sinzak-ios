@@ -46,6 +46,7 @@ final class MarketVC: SZVC {
         mainView.collectionView.dataSource = self
         mainView.collectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
         mainView.collectionView.register(CategoryTagCVC.self, forCellWithReuseIdentifier: String(describing: CategoryTagCVC.self))
+        mainView.collectionView.register(MarketHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: MarketHeader.self))
         mainView.collectionView.collectionViewLayout = setLayout()
     }
 }
@@ -69,13 +70,22 @@ extension MarketVC: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         }
     }
+    // 헤더
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if indexPath.section != SectionKind.category.rawValue {
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: MarketHeader.self), for: indexPath) as? MarketHeader else { return UICollectionReusableView() }
+            return header
+        } else {
+            return UICollectionReusableView()
+        }
+    }
 }
 // 컴포지셔널 레이아웃
 extension MarketVC {
     /// 컴포지셔널 레이아웃 세팅
     func setLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
-        // 카테고리 경우
+            // 카테고리 경우
             if sectionNumber == SectionKind.category.rawValue {
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .estimated(70),
@@ -95,29 +105,32 @@ extension MarketVC {
                 return section
             } else { // 카테고리가 아닐 경우
                 let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(0.47),
+                    widthDimension: .fractionalWidth(0.5),
                     heightDimension: .fractionalHeight(1.0)
                 )
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(240)
+                    heightDimension: .estimated(256)
                 )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets.leading = 8
+                item.contentInsets.trailing = 8
+                item.contentInsets.bottom = 16
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                group.interItemSpacing = .fixed(16)
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.leading = 16
-                section.contentInsets.trailing = 16
+                section.contentInsets.top = 10
+                section.contentInsets.leading = 8
+                section.contentInsets.trailing = 8
                 section.contentInsets.bottom = 72
-                // section.interGroupSpacing = 16
                 // 헤더 설정
-                // let headerItemSize = NSCollectionLayoutSize(
-                // widthDimension: .fractionalWidth(1.0),
-                // heightDimension: .estimated(40))
-                // let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
-                // section.boundarySupplementaryItems = [headerItem]
-                // section.orthogonalScrollingBehavior = .continuous
-                 return section
+                let headerItemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(24))
+                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
+                headerItem.contentInsets.leading = 16
+                headerItem.contentInsets.trailing = 16
+                section.boundarySupplementaryItems = [headerItem]
+                return section
             }
         }
     }
