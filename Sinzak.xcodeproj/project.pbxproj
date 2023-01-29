@@ -50,6 +50,7 @@
 		A226537D29705F8100605697 /* BannerCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537C29705F8100605697 /* BannerCVC.swift */; };
 		A226537F297062A000605697 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537E297062A000605697 /* HomeHeader.swift */; };
 		A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2289D4A2986A03E0017969C /* ViewModelType.swift */; };
+		A2289D4E2986A3910017969C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A2289D4D2986A3910017969C /* Kingfisher */; };
 		A22BE58D296AE95B00D9815C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58C296AE95B00D9815C /* User.swift */; };
 		A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58F296AEA4F00D9815C /* AuthManager.swift */; };
 		A22BE593296AEB0300D9815C /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE592296AEB0300D9815C /* Moya */; };
@@ -197,6 +198,7 @@
 				A216BD48297FB6B5008964BC /* Tabman in Frameworks */,
 				A210CD5A292F4DDA00F86A08 /* ReactorKit in Frameworks */,
 				A210CD52292F4D6B00F86A08 /* Then in Frameworks */,
+				A2289D4E2986A3910017969C /* Kingfisher in Frameworks */,
 				A22BE593296AEB0300D9815C /* Moya in Frameworks */,
 				70220DD51C5772784980F559 /* Pods_Sinzak.framework in Frameworks */,
 				A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */,
@@ -773,6 +775,7 @@
 				A22BE5A6296B001B00D9815C /* KakaoSDKCommon */,
 				A22BE5A8296B001B00D9815C /* KakaoSDKUser */,
 				A216BD47297FB6B5008964BC /* Tabman */,
+				A2289D4D2986A3910017969C /* Kingfisher */,
 			);
 			productName = Sinzak;
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
@@ -811,6 +814,7 @@
 				A22BE591296AEB0300D9815C /* XCRemoteSwiftPackageReference "Moya" */,
 				A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */,
+				A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
 			projectDirPath = "";
@@ -1259,6 +1263,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 7.5.0;
+			};
+		};
 		A22BE591296AEB0300D9815C /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
@@ -1307,6 +1319,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */;
 			productName = Tabman;
+		};
+		A2289D4D2986A3910017969C /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		A22BE592296AEB0300D9815C /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
