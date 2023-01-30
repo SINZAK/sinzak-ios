@@ -8,6 +8,7 @@
 import Foundation
 
 class HomeViewModel: ViewModelType {
+    let networkManager = HomeManager.shared
     struct Input {
         
     }
