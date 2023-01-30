@@ -9,7 +9,7 @@ import Foundation
 
 // 배너 목록
 struct BannerList: Codable {
-    let bannerList: [Banner]
+    let data: [Banner]
     let success: Bool
 }
 
@@ -19,4 +19,3 @@ struct Banner: Codable {
     let title, content: String
     let imageUrl: String
 }
-
