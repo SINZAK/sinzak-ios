@@ -95,6 +95,7 @@
 		A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */; };
 		A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */; };
 		A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38581295ED7AA00E5EB7C /* SZTextField.swift */; };
+		A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EADD298773EB00DE754F /* BannerModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -183,6 +184,7 @@
 		A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthView.swift; sourceTree = "<group>"; };
 		A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthVC.swift; sourceTree = "<group>"; };
 		A2B38581295ED7AA00E5EB7C /* SZTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZTextField.swift; sourceTree = "<group>"; };
+		A2F6EADD298773EB00DE754F /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -409,6 +411,7 @@
 		A2265370296D7E4600605697 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				A2F6EADC298773DA00DE754F /* Model */,
 				A2265375296D7E6300605697 /* View */,
 				A2265376296D7E6C00605697 /* VC */,
 			);
@@ -744,6 +747,14 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		A2F6EADC298773DA00DE754F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A2F6EADD298773EB00DE754F /* BannerModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -960,6 +971,7 @@
 				A2B38574295D88D400E5EB7C /* SignupGenreView.swift in Sources */,
 				A26F0AAC2948BE23001CB2AA /* ConciergeVC.swift in Sources */,
 				A216BD37297FA384008964BC /* HomeDetailView.swift in Sources */,
+				A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */,
 				A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */,
 				A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */,
 				A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */,
