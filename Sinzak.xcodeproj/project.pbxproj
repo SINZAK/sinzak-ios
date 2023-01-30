@@ -97,6 +97,7 @@
 		A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38581295ED7AA00E5EB7C /* SZTextField.swift */; };
 		A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EADD298773EB00DE754F /* BannerModel.swift */; };
 		A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */; };
+		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +188,7 @@
 		A2B38581295ED7AA00E5EB7C /* SZTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZTextField.swift; sourceTree = "<group>"; };
 		A2F6EADD298773EB00DE754F /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		A2F6EAE22987758C00DE754F /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -488,6 +490,7 @@
 			children = (
 				A22BE58F296AEA4F00D9815C /* AuthManager.swift */,
 				A22BE594296AEB4300D9815C /* AuthAPI.swift */,
+				A2F6EAE22987758C00DE754F /* HomeAPI.swift */,
 				A22BE596296AEC2A00D9815C /* Endpoint.swift */,
 			);
 			path = Network;
@@ -934,6 +937,7 @@
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */,
 				A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */,
+				A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */,
 				A26F0AB12948C818001CB2AA /* SZView.swift in Sources */,
 				A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */,
 				A216BD53297FD60E008964BC /* ChatListView.swift in Sources */,
