@@ -15,12 +15,21 @@ enum HomeType: Int {
 final class HomeVC: SZVC {
     // MARK: - Properties
     let mainView = HomeView()
+    let shared = HomeManager.shared
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        shared.getBannerInfo { result in
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let failure):
+                print(failure)
+            }
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
