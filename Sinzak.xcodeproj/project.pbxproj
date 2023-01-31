@@ -100,6 +100,7 @@
 		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
 		A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE4298776F300DE754F /* HomeManager.swift */; };
 		A2F90537298968DA00AC588C /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = A2F90536298968DA00AC588C /* SocketIO */; };
+		A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9053B29896A5200AC588C /* SocketIOManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +193,7 @@
 		A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A2F6EAE22987758C00DE754F /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		A2F6EAE4298776F300DE754F /* HomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeManager.swift; sourceTree = "<group>"; };
+		A2F9053B29896A5200AC588C /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,6 +494,7 @@
 		A22BE58E296AEA4100D9815C /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				A2F9053A29896A3E00AC588C /* Socket */,
 				A2F90539298969F500AC588C /* APIManager */,
 				A2F90538298969E100AC588C /* API */,
 			);
@@ -790,6 +793,14 @@
 			path = APIManager;
 			sourceTree = "<group>";
 		};
+		A2F9053A29896A3E00AC588C /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				A2F9053B29896A5200AC588C /* SocketIOManager.swift */,
+			);
+			path = Socket;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1023,6 +1034,7 @@
 				A216BD5C297FE020008964BC /* ChatView.swift in Sources */,
 				A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
+				A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,
 				A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */,
