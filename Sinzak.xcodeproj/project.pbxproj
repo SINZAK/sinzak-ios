@@ -99,6 +99,7 @@
 		A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */; };
 		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
 		A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE4298776F300DE754F /* HomeManager.swift */; };
+		A2F90537298968DA00AC588C /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = A2F90536298968DA00AC588C /* SocketIO */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +208,7 @@
 				A210CD5A292F4DDA00F86A08 /* ReactorKit in Frameworks */,
 				A210CD52292F4D6B00F86A08 /* Then in Frameworks */,
 				A2289D4E2986A3910017969C /* Kingfisher in Frameworks */,
+				A2F90537298968DA00AC588C /* SocketIO in Frameworks */,
 				A22BE593296AEB0300D9815C /* Moya in Frameworks */,
 				70220DD51C5772784980F559 /* Pods_Sinzak.framework in Frameworks */,
 				A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */,
@@ -490,11 +492,8 @@
 		A22BE58E296AEA4100D9815C /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				A22BE58F296AEA4F00D9815C /* AuthManager.swift */,
-				A22BE594296AEB4300D9815C /* AuthAPI.swift */,
-				A2F6EAE4298776F300DE754F /* HomeManager.swift */,
-				A2F6EAE22987758C00DE754F /* HomeAPI.swift */,
-				A22BE596296AEC2A00D9815C /* Endpoint.swift */,
+				A2F90539298969F500AC588C /* APIManager */,
+				A2F90538298969E100AC588C /* API */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -772,6 +771,25 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		A2F90538298969E100AC588C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				A22BE596296AEC2A00D9815C /* Endpoint.swift */,
+				A22BE594296AEB4300D9815C /* AuthAPI.swift */,
+				A2F6EAE22987758C00DE754F /* HomeAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		A2F90539298969F500AC588C /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				A22BE58F296AEA4F00D9815C /* AuthManager.swift */,
+				A2F6EAE4298776F300DE754F /* HomeManager.swift */,
+			);
+			path = APIManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -804,6 +822,7 @@
 				A22BE5A8296B001B00D9815C /* KakaoSDKUser */,
 				A216BD47297FB6B5008964BC /* Tabman */,
 				A2289D4D2986A3910017969C /* Kingfisher */,
+				A2F90536298968DA00AC588C /* SocketIO */,
 			);
 			productName = Sinzak;
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
@@ -843,6 +862,7 @@
 				A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */,
 				A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
 			projectDirPath = "";
@@ -1319,6 +1339,14 @@
 				version = 2.13.1;
 			};
 		};
+		A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 16.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1381,6 +1409,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
+		};
+		A2F90536298968DA00AC588C /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
