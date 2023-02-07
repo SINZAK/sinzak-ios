@@ -68,6 +68,7 @@
 		A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A23415BC2927D778007DADE7 /* LaunchScreen.storyboard */; };
 		A23415C62927D7A9007DADE7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A23415C52927D7A9007DADE7 /* .gitignore */; };
 		A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A257C36A297F99B100266E74 /* SeeMoreCVC.swift */; };
+		A2646BEB2991FB210004F4CE /* HomeAPIProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */; };
 		A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AA92948BE05001CB2AA /* ConciergeView.swift */; };
 		A26F0AAC2948BE23001CB2AA /* ConciergeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AAB2948BE23001CB2AA /* ConciergeVC.swift */; };
 		A26F0AB12948C818001CB2AA /* SZView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AB02948C818001CB2AA /* SZView.swift */; };
@@ -95,7 +96,6 @@
 		A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */; };
 		A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */; };
 		A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38581295ED7AA00E5EB7C /* SZTextField.swift */; };
-		A2F07849298AB0A7004A2B3F /* SinzakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F07848298AB0A7004A2B3F /* SinzakTests.swift */; };
 		A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EADD298773EB00DE754F /* BannerModel.swift */; };
 		A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */; };
 		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
@@ -172,6 +172,7 @@
 		A23415BF2927D778007DADE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A23415C52927D7A9007DADE7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A257C36A297F99B100266E74 /* SeeMoreCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCVC.swift; sourceTree = "<group>"; };
+		A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIProviderTests.swift; sourceTree = "<group>"; };
 		A26F0AA92948BE05001CB2AA /* ConciergeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConciergeView.swift; sourceTree = "<group>"; };
 		A26F0AAB2948BE23001CB2AA /* ConciergeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConciergeVC.swift; sourceTree = "<group>"; };
 		A26F0AB02948C818001CB2AA /* SZView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZView.swift; sourceTree = "<group>"; };
@@ -201,7 +202,6 @@
 		A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthVC.swift; sourceTree = "<group>"; };
 		A2B38581295ED7AA00E5EB7C /* SZTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZTextField.swift; sourceTree = "<group>"; };
 		A2F07846298AB0A7004A2B3F /* SinzakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinzakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2F07848298AB0A7004A2B3F /* SinzakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinzakTests.swift; sourceTree = "<group>"; };
 		A2F6EADD298773EB00DE754F /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A2F6EAE22987758C00DE754F /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
@@ -783,7 +783,7 @@
 		A2F07847298AB0A7004A2B3F /* SinzakTests */ = {
 			isa = PBXGroup;
 			children = (
-				A2F07848298AB0A7004A2B3F /* SinzakTests.swift */,
+				A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */,
 			);
 			path = SinzakTests;
 			sourceTree = "<group>";
@@ -1105,7 +1105,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2F07849298AB0A7004A2B3F /* SinzakTests.swift in Sources */,
+				A2646BEB2991FB210004F4CE /* HomeAPIProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1348,7 +1348,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F7B353LPM3;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimdee.SinzakTests;
@@ -1371,7 +1371,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F7B353LPM3;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimdee.SinzakTests;
