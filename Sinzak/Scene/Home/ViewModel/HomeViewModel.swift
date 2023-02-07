@@ -6,19 +6,17 @@
 //
 
 import Foundation
+import RxSwift
 
 class HomeViewModel: ViewModelType {
+    var disposeBag = DisposeBag()
     let networkManager = HomeManager.shared
     struct Input {
-        
     }
-    
     struct Output {
-        
     }
-    
+
     func transform(input: Input) -> Output {
         return Output()
     }
-    
 }
