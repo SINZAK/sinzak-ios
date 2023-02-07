@@ -68,6 +68,7 @@
 		A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A23415BC2927D778007DADE7 /* LaunchScreen.storyboard */; };
 		A23415C62927D7A9007DADE7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A23415C52927D7A9007DADE7 /* .gitignore */; };
 		A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A257C36A297F99B100266E74 /* SeeMoreCVC.swift */; };
+		A2646BEB2991FB210004F4CE /* HomeAPIProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */; };
 		A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AA92948BE05001CB2AA /* ConciergeView.swift */; };
 		A26F0AAC2948BE23001CB2AA /* ConciergeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AAB2948BE23001CB2AA /* ConciergeVC.swift */; };
 		A26F0AB12948C818001CB2AA /* SZView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AB02948C818001CB2AA /* SZView.swift */; };
@@ -102,6 +103,16 @@
 		A2F90537298968DA00AC588C /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = A2F90536298968DA00AC588C /* SocketIO */; };
 		A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9053B29896A5200AC588C /* SocketIOManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A2F0784A298AB0A7004A2B3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A23415A62927D776007DADE7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A23415AD2927D776007DADE7;
+			remoteInfo = Sinzak;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2700FF81BC95B6E59A53DC75 /* Pods_Sinzak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +172,7 @@
 		A23415BF2927D778007DADE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A23415C52927D7A9007DADE7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A257C36A297F99B100266E74 /* SeeMoreCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCVC.swift; sourceTree = "<group>"; };
+		A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIProviderTests.swift; sourceTree = "<group>"; };
 		A26F0AA92948BE05001CB2AA /* ConciergeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConciergeView.swift; sourceTree = "<group>"; };
 		A26F0AAB2948BE23001CB2AA /* ConciergeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConciergeVC.swift; sourceTree = "<group>"; };
 		A26F0AB02948C818001CB2AA /* SZView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZView.swift; sourceTree = "<group>"; };
@@ -189,6 +201,7 @@
 		A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthView.swift; sourceTree = "<group>"; };
 		A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthVC.swift; sourceTree = "<group>"; };
 		A2B38581295ED7AA00E5EB7C /* SZTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZTextField.swift; sourceTree = "<group>"; };
+		A2F07846298AB0A7004A2B3F /* SinzakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinzakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F6EADD298773EB00DE754F /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A2F6EAE22987758C00DE754F /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
@@ -215,6 +228,13 @@
 				70220DD51C5772784980F559 /* Pods_Sinzak.framework in Frameworks */,
 				A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */,
 				A22BE5A5296B001B00D9815C /* KakaoSDKAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2F07843298AB0A7004A2B3F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +527,7 @@
 				A2806120292F50FA005AE0B3 /* .swiftlint.yml */,
 				A23415C52927D7A9007DADE7 /* .gitignore */,
 				A23415B02927D776007DADE7 /* Sinzak */,
+				A2F07847298AB0A7004A2B3F /* SinzakTests */,
 				A23415AF2927D776007DADE7 /* Products */,
 				73D41B78272D1995AF9DE204 /* Pods */,
 				0B7D5C41DAC50EA425D9F0D5 /* Frameworks */,
@@ -517,6 +538,7 @@
 			isa = PBXGroup;
 			children = (
 				A23415AE2927D776007DADE7 /* Sinzak.app */,
+				A2F07846298AB0A7004A2B3F /* SinzakTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -758,6 +780,14 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		A2F07847298AB0A7004A2B3F /* SinzakTests */ = {
+			isa = PBXGroup;
+			children = (
+				A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */,
+			);
+			path = SinzakTests;
+			sourceTree = "<group>";
+		};
 		A2F6EADC298773DA00DE754F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -839,6 +869,24 @@
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A2F07845298AB0A7004A2B3F /* SinzakTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2F0784E298AB0A7004A2B3F /* Build configuration list for PBXNativeTarget "SinzakTests" */;
+			buildPhases = (
+				A2F07842298AB0A7004A2B3F /* Sources */,
+				A2F07843298AB0A7004A2B3F /* Frameworks */,
+				A2F07844298AB0A7004A2B3F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A2F0784B298AB0A7004A2B3F /* PBXTargetDependency */,
+			);
+			name = SinzakTests;
+			productName = SinzakTests;
+			productReference = A2F07846298AB0A7004A2B3F /* SinzakTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -846,11 +894,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					A23415AD2927D776007DADE7 = {
 						CreatedOnToolsVersion = 13.4.1;
+					};
+					A2F07845298AB0A7004A2B3F = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = A23415AD2927D776007DADE7;
 					};
 				};
 			};
@@ -880,6 +932,7 @@
 			projectRoot = "";
 			targets = (
 				A23415AD2927D776007DADE7 /* Sinzak */,
+				A2F07845298AB0A7004A2B3F /* SinzakTests */,
 			);
 		};
 /* End PBXProject section */
@@ -899,6 +952,13 @@
 				A23415BB2927D778007DADE7 /* Assets.xcassets in Resources */,
 				A23415B92927D776007DADE7 /* Main.storyboard in Resources */,
 				A20CBD6629478B4A0012FF32 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2F07844298AB0A7004A2B3F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,7 +1101,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A2F07842298AB0A7004A2B3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2646BEB2991FB210004F4CE /* HomeAPIProviderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A2F0784B298AB0A7004A2B3F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A23415AD2927D776007DADE7 /* Sinzak */;
+			targetProxy = A2F0784A298AB0A7004A2B3F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A20CBD6829478B4A0012FF32 /* InfoPlist.strings */ = {
@@ -1263,6 +1339,52 @@
 			};
 			name = Release;
 		};
+		A2F0784C298AB0A7004A2B3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F7B353LPM3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimdee.SinzakTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sinzak.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sinzak";
+			};
+			name = Debug;
+		};
+		A2F0784D298AB0A7004A2B3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F7B353LPM3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimdee.SinzakTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sinzak.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sinzak";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1280,6 +1402,15 @@
 			buildConfigurations = (
 				A23415C32927D778007DADE7 /* Debug */,
 				A23415C42927D778007DADE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A2F0784E298AB0A7004A2B3F /* Build configuration list for PBXNativeTarget "SinzakTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2F0784C298AB0A7004A2B3F /* Debug */,
+				A2F0784D298AB0A7004A2B3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
