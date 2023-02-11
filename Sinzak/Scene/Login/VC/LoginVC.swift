@@ -92,6 +92,8 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
             if let email = email {
                 AuthManager.shared.checkEmail(email)
             }
+            // 키체인에 저장
+            saveUserInKeychain(userIdentifier)
         default:
             break
         }
