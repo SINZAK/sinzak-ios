@@ -92,6 +92,8 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
             if let email = email {
                 AuthManager.shared.checkEmail(email)
             }
+            // 키체인에 저장
+            saveUserInKeychain(userIdentifier)
         default:
             break
         }
@@ -100,6 +102,14 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
     /// Apple ID 연동 실패 시
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
+    }
+    /// 애플로그인 정보를 키체인에 저장 
+    private func saveUserInKeychain(_ userIdentifier: String) {
+        do {
+            try KeychainItem(service: "com.kimdee.Sinzak", account: "userIdentifier").saveItem(userIdentifier)
+        } catch {
+            print("키체인에 userIdentifier 저장 불가")
+        }
     }
 }
 // 카카오로그인 관련 메서드
