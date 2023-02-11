@@ -101,6 +101,14 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
     }
+    /// 애플로그인 정보를 키체인에 저장 
+    private func saveUserInKeychain(_ userIdentifier: String) {
+        do {
+            try KeychainItem(service: "com.kimdee.Sinzak", account: "userIdentifier").saveItem(userIdentifier)
+        } catch {
+            print("키체인에 userIdentifier 저장 불가")
+        }
+    }
 }
 // 카카오로그인 관련 메서드
 extension LoginVC {
