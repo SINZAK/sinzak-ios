@@ -78,4 +78,14 @@ struct I18NStrings {
     static let Profile = "Profile".localized
     // 비로그인 사용자용 화면
     static let youCanUseAfterLogin = "youCanUseAfterLogin".localized
+    // 팔로워, 팔로잉
+    static let follower = "follower".localized
+    static let following = "following".localized
+    // 프로필편집
+    static let editProfile = "editProfile".localized
+    // 프로필 탭 버튼
+    static let scrapList = "scrapList".localized // 스크랩 목록
+    static let requestList = "requestList".localized // 의뢰해요
+    static let salesList = "salesList".localized // 판매 작품
+    static let workList = "workList".localized // 작업해요
 }

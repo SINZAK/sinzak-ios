@@ -76,3 +76,14 @@
 
 // 비로그인 사용자용 화면
 "youCanUseAfterLogin" = "로그인 후에\n만나볼 수 있어요";
+
+// 팔로워, 팔로잉
+"follower" = "팔로워";
+"following" = "팔로잉";
+// 프로필편집
+"editProfile" = "프로필 편집";
+// 프로필 탭 버튼
+"scrapList" = "스크랩 목록";
+"requestList" = "의뢰해요";
+"salesList" = "판매 작품";
+"workList" = "작업해요";
