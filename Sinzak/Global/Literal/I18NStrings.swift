@@ -76,4 +76,6 @@ struct I18NStrings {
     static let Outsourcing = "Outsourcing".localized
     static let Chat = "Chat".localized
     static let Profile = "Profile".localized
+    // 비로그인 사용자용 화면
+    static let youCanUseAfterLogin = "youCanUseAfterLogin".localized
 }

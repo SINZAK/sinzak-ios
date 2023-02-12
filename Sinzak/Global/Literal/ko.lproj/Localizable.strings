@@ -73,3 +73,6 @@
 "Outsourcing" = "외주";
 "Chat" = "채팅";
 "Profile" = "프로필";
+
+// 비로그인 사용자용 화면
+"youCanUseAfterLogin" = "로그인 후에\n만나볼 수 있어요";
