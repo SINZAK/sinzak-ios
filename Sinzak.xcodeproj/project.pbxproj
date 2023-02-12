@@ -79,6 +79,9 @@
 		A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2947A2B298017B100EE2A96 /* OtherChatBubbleCVC.swift */; };
 		A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29CE9D62997EBBE00EB89B4 /* KeychainItem.swift */; };
 		A29CE9DA2998DA2700EB89B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A29CE9D92998DA2700EB89B4 /* GoogleService-Info.plist */; };
+		A29CE9DD2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = A29CE9DC2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		A29CE9DF2998DD2800EB89B4 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = A29CE9DE2998DD2800EB89B4 /* FirebaseCrashlytics */; };
+		A29CE9E12998DD2800EB89B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = A29CE9E02998DD2800EB89B4 /* FirebaseMessaging */; };
 		A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CA2967B13C004A63C1 /* Genre.swift */; };
 		A2AA89CE2967C33A004A63C1 /* InterestedGenreCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CD2967C33A004A63C1 /* InterestedGenreCVC.swift */; };
 		A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */; };
@@ -219,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */,
+				A29CE9DD2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				A22BE5A9296B001B00D9815C /* KakaoSDKUser in Frameworks */,
 				A22BE5A3296B001B00D9815C /* KakaoSDK in Frameworks */,
 				A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */,
@@ -226,10 +230,12 @@
 				A216BD48297FB6B5008964BC /* Tabman in Frameworks */,
 				A210CD5A292F4DDA00F86A08 /* ReactorKit in Frameworks */,
 				A210CD52292F4D6B00F86A08 /* Then in Frameworks */,
+				A29CE9E12998DD2800EB89B4 /* FirebaseMessaging in Frameworks */,
 				A2289D4E2986A3910017969C /* Kingfisher in Frameworks */,
 				A2F90537298968DA00AC588C /* SocketIO in Frameworks */,
 				A22BE593296AEB0300D9815C /* Moya in Frameworks */,
 				70220DD51C5772784980F559 /* Pods_Sinzak.framework in Frameworks */,
+				A29CE9DF2998DD2800EB89B4 /* FirebaseCrashlytics in Frameworks */,
 				A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */,
 				A22BE5A5296B001B00D9815C /* KakaoSDKAuth in Frameworks */,
 			);
@@ -862,6 +868,9 @@
 				A216BD47297FB6B5008964BC /* Tabman */,
 				A2289D4D2986A3910017969C /* Kingfisher */,
 				A2F90536298968DA00AC588C /* SocketIO */,
+				A29CE9DC2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				A29CE9DE2998DD2800EB89B4 /* FirebaseCrashlytics */,
+				A29CE9E02998DD2800EB89B4 /* FirebaseMessaging */,
 			);
 			productName = Sinzak;
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
@@ -924,6 +933,7 @@
 				A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */,
 				A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */,
+				A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
 			projectDirPath = "";
@@ -1482,6 +1492,14 @@
 				version = 2.13.1;
 			};
 		};
+		A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 9.6.0;
+			};
+		};
 		A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
@@ -1552,6 +1570,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
+		};
+		A29CE9DC2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		A29CE9DE2998DD2800EB89B4 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		A29CE9E02998DD2800EB89B4 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		A2F90536298968DA00AC588C /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
