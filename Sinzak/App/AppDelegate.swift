@@ -8,12 +8,15 @@
 import UIKit
 import KakaoSDKCommon
 import NaverThirdPartyLogin
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // 파이어베이스 초기화
+        FirebaseApp.configure()
         // 카카오로그인
         KakaoSDK.initSDK(appKey: "kakaof4e54dad18c8af8a67dccb0176283616")
         // 네이버로그인
