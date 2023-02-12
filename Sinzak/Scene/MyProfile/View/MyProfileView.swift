@@ -12,10 +12,16 @@ import Then
 
 final class MyProfileView: SZView {
     // MARK: - Properties
+    // 전체 스택뷰
     let wholeStackView = UIStackView().then {
         $0.spacing = 0
         $0.axis = .vertical
     }
+    // 1. 상단 뷰
+    let headView = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    // 프로필 이미지
     let profileImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.layer.cornerRadius = 20
@@ -102,9 +108,60 @@ final class MyProfileView: SZView {
         $0.layer.borderColor = CustomColor.black?.cgColor
         $0.layer.borderWidth = 1
     }
+    // 2. 스크랩목록
+    let scrapListView = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    private let scrapListLabel = UILabel().then {
+        $0.font = .body_B
+        $0.textColor = CustomColor.black
+        $0.text = I18NStrings.scrapList
+    }
+    let scrapListButton = UIButton().then {
+        $0.setImage(UIImage(named: "right-chevron"), for: .normal)
+    }
+    let scrapListSeperator = UIView().then {
+        $0.backgroundColor = CustomColor.gray60
+    }
+    // 3. 의뢰해요
+    let requestListView = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    private let requestListLabel = UILabel().then {
+        $0.font = .body_B
+        $0.textColor = CustomColor.black
+        $0.text = I18NStrings.requestList
+    }
+    let requestListButton = UIButton().then {
+        $0.setImage(UIImage(named: "right-chevron"), for: .normal)
+    }
+    let requestListSeperator = UIView().then {
+        $0.backgroundColor = CustomColor.gray60
+    }
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
+            wholeStackView
+        )
+        wholeStackView.addArangedSubviews(
+            headView,
+            scrapListView,
+            requestListView
+        )
+        // 외주해요
+        requestListView.addSubviews(
+            requestListLabel,
+            requestListButton,
+            requestListSeperator
+        )
+        // 스크랩목록
+        scrapListView.addSubviews(
+            scrapListLabel,
+            scrapListButton,
+            scrapListSeperator
+        )
+        // 상단쪽
+        headView.addSubviews(
             profileImage,
             nameBadgeStack,
             schoolVerifiedStack,
@@ -133,10 +190,14 @@ final class MyProfileView: SZView {
         )
     }
     override func setLayout() {
+        wholeStackView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+        }
         profileImage.snp.makeConstraints { make in
             make.width.height.equalTo(73)
             make.centerX.equalToSuperview()
-            make.top.equalTo(safeAreaLayoutGuide).inset(23)
+            make.top.equalToSuperview().inset(23)
         }
         nameBadgeStack.snp.makeConstraints { make in
             make.centerX.equalToSuperview().offset(6)
@@ -168,6 +229,48 @@ final class MyProfileView: SZView {
             make.height.equalTo(42)
             make.centerX.equalToSuperview()
             make.top.equalTo(introduceLabel.snp.bottom).offset(20)
+            make.bottom.equalToSuperview().inset(20)
+        }
+        headView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+        }
+        scrapListView.snp.makeConstraints { make in
+            make.top.equalTo(headView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(63)
+        }
+        scrapListLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(28)
+        }
+        scrapListButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(24)
+            make.trailing.equalToSuperview().inset(26.5)
+        }
+        scrapListSeperator.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(17)
+            make.height.equalTo(0.5)
+        }
+        requestListView.snp.makeConstraints { make in
+            make.top.equalTo(scrapListView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(63)
+        }
+        requestListLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(28)
+        }
+        requestListButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(24)
+            make.trailing.equalToSuperview().inset(26.5)
+        }
+        requestListSeperator.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(17)
+            make.height.equalTo(0.5)
         }
     }
 }
