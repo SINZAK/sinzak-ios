@@ -16,6 +16,7 @@ final class NotLoginedView: SZView {
         $0.font = .title_B
         $0.textAlignment = .center
         $0.textColor = CustomColor.black
+        $0.numberOfLines = 0
         $0.text = I18NStrings.youCanUseAfterLogin
     }
     private let startLabel = UILabel().then {
