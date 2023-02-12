@@ -87,5 +87,30 @@ extension AppDelegate {
         return true
     }
 }
-extension AppDelegate: UNUserNotificationCenterDelegate {}
-extension AppDelegate: MessagingDelegate {}
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func application(application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
+    // 포그라운드 상태에서도 알림: 로컬/푸시 동일
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // .banner, .list: iOS 14+부터 사용가능
+        completionHandler([.badge, .sound, .banner, .list])
+    }
+}
+extension AppDelegate: MessagingDelegate {
+    // 토큰 갱신 모니터링
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Firebase registration token: \(String(describing: fcmToken))")
+        
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        NotificationCenter.default.post(
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: dataDict
+        )
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+    
+}
