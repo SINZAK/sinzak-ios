@@ -53,6 +53,8 @@
 		A226537B29705A4400605697 /* ArtCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537A29705A4400605697 /* ArtCVC.swift */; };
 		A226537D29705F8100605697 /* BannerCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537C29705F8100605697 /* BannerCVC.swift */; };
 		A226537F297062A000605697 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537E297062A000605697 /* HomeHeader.swift */; };
+		A227064E299BD0C5000D5CF2 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227064D299BD0C5000D5CF2 /* SearchView.swift */; };
+		A2270651299BD10E000D5CF2 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2270650299BD10E000D5CF2 /* SearchVC.swift */; };
 		A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2289D4A2986A03E0017969C /* ViewModelType.swift */; };
 		A2289D4E2986A3910017969C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A2289D4D2986A3910017969C /* Kingfisher */; };
 		A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58F296AEA4F00D9815C /* AuthManager.swift */; };
@@ -170,6 +172,8 @@
 		A226537A29705A4400605697 /* ArtCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtCVC.swift; sourceTree = "<group>"; };
 		A226537C29705F8100605697 /* BannerCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCVC.swift; sourceTree = "<group>"; };
 		A226537E297062A000605697 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
+		A227064D299BD0C5000D5CF2 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		A2270650299BD10E000D5CF2 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		A2289D4A2986A03E0017969C /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		A22BE58F296AEA4F00D9815C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		A22BE594296AEB4300D9815C /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
@@ -554,6 +558,31 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		A227064B299BD0A3000D5CF2 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				A227064F299BD0FF000D5CF2 /* VC */,
+				A227064C299BD0AE000D5CF2 /* View */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		A227064C299BD0AE000D5CF2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A227064D299BD0C5000D5CF2 /* SearchView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A227064F299BD0FF000D5CF2 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2270650299BD10E000D5CF2 /* SearchVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
 		A2289D4929869FA80017969C /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -677,6 +706,7 @@
 		A2806124292F54A2005AE0B3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				A227064B299BD0A3000D5CF2 /* Search */,
 				A20E4A4C29990048009C1340 /* MyProfile */,
 				A20E4A452998F753009C1340 /* NotLogined */,
 				A2100F6E298692E500C85ADF /* Works */,
@@ -1117,6 +1147,7 @@
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
 				A2100F712986937A00C85ADF /* WorksView.swift in Sources */,
 				A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */,
+				A227064E299BD0C5000D5CF2 /* SearchView.swift in Sources */,
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
 				A2646BED299204B40004F4CE /* User.swift in Sources */,
 				A22BE597296AEC2A00D9815C /* Endpoint.swift in Sources */,
@@ -1130,6 +1161,7 @@
 				A20E4A4E29990064009C1340 /* MyProfileView.swift in Sources */,
 				A222F07C29837AFF007806D0 /* CategoryTagCVC.swift in Sources */,
 				A222F07F298382DF007806D0 /* Category.swift in Sources */,
+				A2270651299BD10E000D5CF2 /* SearchVC.swift in Sources */,
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A216BD4A297FCBC1008964BC /* ActivityNotiVC.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
