@@ -88,4 +88,8 @@ struct I18NStrings {
     static let requestList = "requestList".localized // 의뢰해요
     static let salesList = "salesList".localized // 판매 작품
     static let workList = "workList".localized // 작업해요
+    // 검색
+    static let workRequestSearchPlaceholder = "workRequestSearchPlaceholder".localized
+    static let recentQuery = "recentQuery".localized
+    static let removeAll = "removeAll".localized
 }
