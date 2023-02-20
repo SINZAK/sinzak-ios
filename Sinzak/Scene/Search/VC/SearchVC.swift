@@ -17,5 +17,13 @@ final class SearchVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+    override func configure() {
+        tabBarController?.tabBar.isHidden = true
+    }
+    override func setNavigationBar() {
+        super.setNavigationBar()
+        let searchBar = UISearchBar()
+        searchBar.placeholder = I18NStrings.workRequestSearchPlaceholder
+        self.navigationItem.titleView = searchBar
+    }
 }
