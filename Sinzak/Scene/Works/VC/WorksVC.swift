@@ -21,10 +21,14 @@ final class WorksVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
     // MARK: - Actions
     /// 검색화면으로 이동
     @objc func searchButtonTapped(_ sender: UIBarButtonItem) {
-        let vc = SZVC()
+        let vc = SearchVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: - Helpers
