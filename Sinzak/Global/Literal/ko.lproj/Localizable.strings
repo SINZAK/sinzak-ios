@@ -87,3 +87,7 @@
 "requestList" = "의뢰해요";
 "salesList" = "판매 작품";
 "workList" = "작업해요";
+// 검색
+"workRequestSearchPlaceholder" = "의뢰 및 작업 통합 검색";
+"recentQuery" = "최근 검색어";
+"removeAll" = "전체 삭제";
