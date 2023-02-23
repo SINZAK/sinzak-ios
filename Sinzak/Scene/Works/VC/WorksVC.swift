@@ -31,6 +31,10 @@ final class WorksVC: SZVC {
         let vc = SearchVC()
         navigationController?.pushViewController(vc, animated: true)
     }
+    @objc func writeButtonTapped(_ sender: UIButton) {
+        let vc = WriteCategoryVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     // MARK: - Helpers
     override func setNavigationBar() {
         super.setNavigationBar()
@@ -43,7 +47,7 @@ final class WorksVC: SZVC {
         navigationItem.rightBarButtonItem = search
     }
     override func configure() {
-        view.backgroundColor = CustomColor.white
+        mainView.writeButton.addTarget(self, action: #selector(writeButtonTapped), for: .touchUpInside)
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         mainView.collectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
