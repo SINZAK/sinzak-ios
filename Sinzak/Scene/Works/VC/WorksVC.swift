@@ -119,7 +119,7 @@ extension WorksVC {
                 )
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(256)
+                    heightDimension: .estimated(276)
                 )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets.leading = 8
