@@ -16,7 +16,7 @@ extension UIView {
 
 extension UIStackView {
     /// 여러개의 뷰를 스택뷰의 서브뷰로 한번에 추가합니다.
-    func addArangedSubviews(_ views: UIView...) {
+    func addArrangedSubviews(_ views: UIView...) {
         for view in views { addArrangedSubview(view) }
     }
 }
