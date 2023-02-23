@@ -7,11 +7,15 @@
 
 import UIKit
 
+enum SectionKind: Int {
+    case category = 0 // 검색결과에서 카테고리
+}
+
 final class SearchVC: SZVC {
     // MARK: - Properties
     private let historyView = SearchHistoryView()
     private let resultView = SearchResultView()
-    var query = String() {
+    var query = "Hello" {
         didSet {
             // rx로 바꾸기
             view = resultView
@@ -20,7 +24,7 @@ final class SearchVC: SZVC {
     }
     // MARK: - Lifecycle
     override func loadView() {
-        view = historyView
+        view = resultView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +48,10 @@ final class SearchVC: SZVC {
         /** 검색 결과 콜렉션뷰 */
         resultView.collectionView.delegate = self
         resultView.collectionView.dataSource = self
+        resultView.collectionView.register(SearchResultHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: SearchResultHeader.self))
+        resultView.collectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
+        resultView.collectionView.register(CategoryTagCVC.self, forCellWithReuseIdentifier: String(describing: CategoryTagCVC.self))
+        resultView.collectionView.collectionViewLayout = setResultLayout()
     }
     override func setNavigationBar() {
         super.setNavigationBar()
@@ -53,9 +61,21 @@ final class SearchVC: SZVC {
     }
 }
 extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    // 섹션
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if query.isEmpty {
+            return 1
+        }  else {
+            return 2
+        }
+    }
     // 아이템 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        if query.isEmpty {
+            return 5 // 쿼리 갯수
+        } else {
+            return section == SectionKind.category.rawValue ? WorksCategory.allCases.count : 9
+        }
     }
     // 셀 구성
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -64,7 +84,17 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.queryLabel.text = "쿼리 xx"
             return cell
         } else {
-            return UICollectionViewCell()
+            if indexPath.section == SectionKind.category.rawValue {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CategoryTagCVC.self), for: indexPath)  as? CategoryTagCVC else { return UICollectionViewCell() }
+                cell.categoryLabel.text = WorksCategory.allCases[indexPath.item].text
+                if indexPath.item == 0 {
+                    cell.setColor(kind: .selected)
+                }
+                return cell
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell() }
+                return cell
+            }
         }
     }
     // 셀 클릭했을 때
@@ -74,6 +104,15 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource {
             print(indexPath.item)
         } else {
             // 이미지 상세로 넘어가기
+        }
+    }
+    // 헤더
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if !query.isEmpty {
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: SearchResultHeader.self), for: indexPath) as? SearchResultHeader else { return UICollectionReusableView() }
+            return header
+        } else {
+            return UICollectionReusableView()
         }
     }
 }
@@ -99,5 +138,54 @@ extension SearchVC {
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         return layout
     }
-    /// - 검색결과 콜렉션 뷰 컴포지셔널 레이아웃 
+    /// - 검색결과 콜렉션 뷰 컴포지셔널 레이아웃
+    func setResultLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
+            // 카테고리 경우
+            if sectionNumber == SectionKind.category.rawValue {
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .estimated(70),
+                    heightDimension: .estimated(32))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(3.0),
+                    heightDimension: .estimated(100))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                group.interItemSpacing = .fixed(10)
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets.top = 15
+                section.contentInsets.leading = 16
+                section.contentInsets.trailing = 16
+                section.contentInsets.bottom = 15
+                section.interGroupSpacing = 0
+                section.orthogonalScrollingBehavior = .continuous
+                // 헤더 설정
+                let headerItemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(44))
+                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
+                section.boundarySupplementaryItems = [headerItem]
+                return section
+            } else { // 카테고리가 아닐 경우
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(0.5),
+                    heightDimension: .fractionalHeight(1.0)
+                )
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(276)
+                )
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets.leading = 8
+                item.contentInsets.trailing = 8
+                item.contentInsets.bottom = 16
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets.leading = 8
+                section.contentInsets.trailing = 8
+                section.contentInsets.bottom = 20
+                return section
+            }
+        }
+    }
 }
