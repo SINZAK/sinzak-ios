@@ -85,6 +85,8 @@
 		A280AB3E29A7371200C1729C /* SearchHistoryCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A280AB3D29A7371200C1729C /* SearchHistoryCVC.swift */; };
 		A280AB4029A7400100C1729C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A280AB3F29A7400100C1729C /* UIViewController+Extension.swift */; };
 		A280AB4229A7442300C1729C /* SearchResultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A280AB4129A7442300C1729C /* SearchResultHeader.swift */; };
+		A280AB4529A7634C00C1729C /* WriteCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A280AB4429A7634C00C1729C /* WriteCategoryView.swift */; };
+		A280AB4A29A763BE00C1729C /* WriteCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A280AB4929A763BE00C1729C /* WriteCategoryVC.swift */; };
 		A2947A2A298017A200EE2A96 /* MyChatBubbleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2947A29298017A200EE2A96 /* MyChatBubbleCVC.swift */; };
 		A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2947A2B298017B100EE2A96 /* OtherChatBubbleCVC.swift */; };
 		A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29CE9D62997EBBE00EB89B4 /* KeychainItem.swift */; };
@@ -204,6 +206,8 @@
 		A280AB3D29A7371200C1729C /* SearchHistoryCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCVC.swift; sourceTree = "<group>"; };
 		A280AB3F29A7400100C1729C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A280AB4129A7442300C1729C /* SearchResultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultHeader.swift; sourceTree = "<group>"; };
+		A280AB4429A7634C00C1729C /* WriteCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCategoryView.swift; sourceTree = "<group>"; };
+		A280AB4929A763BE00C1729C /* WriteCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCategoryVC.swift; sourceTree = "<group>"; };
 		A2947A29298017A200EE2A96 /* MyChatBubbleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatBubbleCVC.swift; sourceTree = "<group>"; };
 		A2947A2B298017B100EE2A96 /* OtherChatBubbleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChatBubbleCVC.swift; sourceTree = "<group>"; };
 		A29CE9D62997EBBE00EB89B4 /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
@@ -716,6 +720,7 @@
 		A2806124292F54A2005AE0B3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				A280AB4329A7630300C1729C /* Write */,
 				A227064B299BD0A3000D5CF2 /* Search */,
 				A20E4A4C29990048009C1340 /* MyProfile */,
 				A20E4A452998F753009C1340 /* NotLogined */,
@@ -779,6 +784,39 @@
 				A280AB4129A7442300C1729C /* SearchResultHeader.swift */,
 			);
 			path = Result;
+			sourceTree = "<group>";
+		};
+		A280AB4329A7630300C1729C /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				A280AB4629A7638200C1729C /* CategorySelect */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
+		A280AB4629A7638200C1729C /* CategorySelect */ = {
+			isa = PBXGroup;
+			children = (
+				A280AB4829A763AD00C1729C /* VC */,
+				A280AB4729A7639E00C1729C /* View */,
+			);
+			path = CategorySelect;
+			sourceTree = "<group>";
+		};
+		A280AB4729A7639E00C1729C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A280AB4429A7634C00C1729C /* WriteCategoryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A280AB4829A763AD00C1729C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A280AB4929A763BE00C1729C /* WriteCategoryVC.swift */,
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 		A2AA89C92967B11A004A63C1 /* Model */ = {
@@ -1190,6 +1228,7 @@
 				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,
 				A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */,
 				A20E4A4E29990064009C1340 /* MyProfileView.swift in Sources */,
+				A280AB4A29A763BE00C1729C /* WriteCategoryVC.swift in Sources */,
 				A222F07C29837AFF007806D0 /* CategoryTagCVC.swift in Sources */,
 				A222F07F298382DF007806D0 /* Category.swift in Sources */,
 				A2270651299BD10E000D5CF2 /* SearchVC.swift in Sources */,
@@ -1213,6 +1252,7 @@
 				A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */,
 				A2100F6A29865E8800C85ADF /* AlignOption.swift in Sources */,
 				A226537D29705F8100605697 /* BannerCVC.swift in Sources */,
+				A280AB4529A7634C00C1729C /* WriteCategoryView.swift in Sources */,
 				A2100F742986939A00C85ADF /* WorksVC.swift in Sources */,
 				A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */,
 				A2B38574295D88D400E5EB7C /* SignupGenreView.swift in Sources */,
