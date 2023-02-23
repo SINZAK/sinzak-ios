@@ -37,7 +37,7 @@ final class SearchHistoryCVC: UICollectionViewCell {
     }
     func setConstraints() {
         queryLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(32)
+            make.leading.trailing.equalToSuperview().inset(32)
             make.top.bottom.equalToSuperview().inset(16)
         }
 //        removeButton.snp.makeConstraints { make in
