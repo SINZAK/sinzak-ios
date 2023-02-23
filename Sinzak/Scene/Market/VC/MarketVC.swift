@@ -96,7 +96,7 @@ extension MarketVC {
                     heightDimension: .estimated(32))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(2.0),
+                    widthDimension: .fractionalWidth(3.0),
                     heightDimension: .estimated(100))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 group.interItemSpacing = .fixed(10)
