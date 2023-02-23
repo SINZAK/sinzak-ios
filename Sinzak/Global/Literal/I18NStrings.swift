@@ -93,4 +93,34 @@ struct I18NStrings {
     static let workRequestSearchPlaceholder = "workRequestSearchPlaceholder".localized
     static let recentQuery = "recentQuery".localized
     static let removeAll = "removeAll".localized
+    
+    // 판매글쓰기
+    // - 카테고리 선택
+    static let categorySelection = "categorySelection".localized
+    static let pleaseSelectGenre = "pleaseSelectGenre".localized
+    static let sellingArtwork = "sellingArtwork".localized
+    static let request = "request".localized
+    static let work = "work".localized
+    static let pleaseSelectCategoryUptoThree = "pleaseSelectCategoryUptoThree".localized
+    // - 사진등록
+    static let addPhotos = "addPhotos".localized
+    static let uploadPhotos = "uploadPhotos".localized
+    // - 작품정보
+    static let artworkInfo = "artworkInfo".localized
+    static let artworkTitle = "artworkTitle".localized
+    static let price = "price".localized
+    static let krw = "krw".localized
+    static let getPriceOffer = "getPriceOffer".localized
+    static let artworkDescriptionPlaceholder = "artworkDescriptionPlaceholder".localized
+    static let artworkDescription = "artworkDescription".localized
+    // - 의뢰내용
+    static let requestContent = "requestContent".localized
+    static let requestTitle = "requestTitle".localized
+    static let requestContentPlaceholder = "requestContentPlaceholder".localized
+    // - 작품사이즈
+    static let artworkSizeOptional = "artworkSizeOptional".localized
+    static let pleaseApproxSizeOfArtwork = "pleaseApproxSizeOfArtwork".localized
+    static let width = "width".localized // 가로
+    static let height = "height".localized // 세로
+    static let depth = "depth".localized // 높이
 }
