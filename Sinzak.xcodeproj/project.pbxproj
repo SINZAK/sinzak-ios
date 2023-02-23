@@ -53,7 +53,7 @@
 		A226537B29705A4400605697 /* ArtCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537A29705A4400605697 /* ArtCVC.swift */; };
 		A226537D29705F8100605697 /* BannerCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537C29705F8100605697 /* BannerCVC.swift */; };
 		A226537F297062A000605697 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537E297062A000605697 /* HomeHeader.swift */; };
-		A227064E299BD0C5000D5CF2 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227064D299BD0C5000D5CF2 /* SearchView.swift */; };
+		A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227064D299BD0C5000D5CF2 /* SearchResultView.swift */; };
 		A2270651299BD10E000D5CF2 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2270650299BD10E000D5CF2 /* SearchVC.swift */; };
 		A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2289D4A2986A03E0017969C /* ViewModelType.swift */; };
 		A2289D4E2986A3910017969C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A2289D4D2986A3910017969C /* Kingfisher */; };
@@ -81,6 +81,9 @@
 		A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F0AB22948C843001CB2AA /* SZVC.swift */; };
 		A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A2806120292F50FA005AE0B3 /* .swiftlint.yml */; };
 		A2806129292F585E005AE0B3 /* setColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2806128292F585E005AE0B3 /* setColor.swift */; };
+		A280AB3829A7222100C1729C /* SearchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A280AB3729A7222100C1729C /* SearchHistoryView.swift */; };
+		A280AB3E29A7371200C1729C /* SearchHistoryCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A280AB3D29A7371200C1729C /* SearchHistoryCVC.swift */; };
+		A280AB4029A7400100C1729C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A280AB3F29A7400100C1729C /* UIViewController+Extension.swift */; };
 		A2947A2A298017A200EE2A96 /* MyChatBubbleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2947A29298017A200EE2A96 /* MyChatBubbleCVC.swift */; };
 		A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2947A2B298017B100EE2A96 /* OtherChatBubbleCVC.swift */; };
 		A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29CE9D62997EBBE00EB89B4 /* KeychainItem.swift */; };
@@ -172,7 +175,7 @@
 		A226537A29705A4400605697 /* ArtCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtCVC.swift; sourceTree = "<group>"; };
 		A226537C29705F8100605697 /* BannerCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCVC.swift; sourceTree = "<group>"; };
 		A226537E297062A000605697 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
-		A227064D299BD0C5000D5CF2 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		A227064D299BD0C5000D5CF2 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		A2270650299BD10E000D5CF2 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		A2289D4A2986A03E0017969C /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		A22BE58F296AEA4F00D9815C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -196,6 +199,9 @@
 		A26F0AB22948C843001CB2AA /* SZVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZVC.swift; sourceTree = "<group>"; };
 		A2806120292F50FA005AE0B3 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A2806128292F585E005AE0B3 /* setColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setColor.swift; sourceTree = "<group>"; };
+		A280AB3729A7222100C1729C /* SearchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryView.swift; sourceTree = "<group>"; };
+		A280AB3D29A7371200C1729C /* SearchHistoryCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCVC.swift; sourceTree = "<group>"; };
+		A280AB3F29A7400100C1729C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		A2947A29298017A200EE2A96 /* MyChatBubbleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatBubbleCVC.swift; sourceTree = "<group>"; };
 		A2947A2B298017B100EE2A96 /* OtherChatBubbleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherChatBubbleCVC.swift; sourceTree = "<group>"; };
 		A29CE9D62997EBBE00EB89B4 /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
@@ -305,6 +311,7 @@
 			children = (
 				A20CBD6F29478BCF0012FF32 /* String+Extension.swift */,
 				A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */,
+				A280AB3F29A7400100C1729C /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -570,7 +577,8 @@
 		A227064C299BD0AE000D5CF2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A227064D299BD0C5000D5CF2 /* SearchView.swift */,
+				A280AB3A29A7243600C1729C /* Result */,
+				A280AB3929A7242000C1729C /* History */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -751,6 +759,23 @@
 				A20CBD5B294787C10012FF32 /* setFont.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		A280AB3929A7242000C1729C /* History */ = {
+			isa = PBXGroup;
+			children = (
+				A280AB3729A7222100C1729C /* SearchHistoryView.swift */,
+				A280AB3D29A7371200C1729C /* SearchHistoryCVC.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		A280AB3A29A7243600C1729C /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				A227064D299BD0C5000D5CF2 /* SearchResultView.swift */,
+			);
+			path = Result;
 			sourceTree = "<group>";
 		};
 		A2AA89C92967B11A004A63C1 /* Model */ = {
@@ -1132,6 +1157,8 @@
 				A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */,
 				A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */,
 				A26F0AB12948C818001CB2AA /* SZView.swift in Sources */,
+				A280AB3E29A7371200C1729C /* SearchHistoryCVC.swift in Sources */,
+				A280AB3829A7222100C1729C /* SearchHistoryView.swift in Sources */,
 				A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */,
 				A216BD53297FD60E008964BC /* ChatListView.swift in Sources */,
 				A2B0F6112980233900EC5C78 /* MarketVC.swift in Sources */,
@@ -1147,7 +1174,7 @@
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
 				A2100F712986937A00C85ADF /* WorksView.swift in Sources */,
 				A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */,
-				A227064E299BD0C5000D5CF2 /* SearchView.swift in Sources */,
+				A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */,
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
 				A2646BED299204B40004F4CE /* User.swift in Sources */,
 				A22BE597296AEC2A00D9815C /* Endpoint.swift in Sources */,
@@ -1173,6 +1200,7 @@
 				A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */,
 				A20E4A5229990091009C1340 /* MyProfileVC.swift in Sources */,
 				A2100F77298695A100C85ADF /* WorksCategory.swift in Sources */,
+				A280AB4029A7400100C1729C /* UIViewController+Extension.swift in Sources */,
 				A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */,
 				A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */,
 				A226537B29705A4400605697 /* ArtCVC.swift in Sources */,
