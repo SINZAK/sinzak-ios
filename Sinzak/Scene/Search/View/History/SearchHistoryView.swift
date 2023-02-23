@@ -12,7 +12,7 @@ import Then
 final class SearchHistoryView: SZView {
     // MARK: - Properties
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
-        $0.backgroundColor = .orange
+        $0.backgroundColor = .clear
     }
     private let titleLabel = UILabel().then {
         $0.font = .caption_R
