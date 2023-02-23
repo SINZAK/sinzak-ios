@@ -41,7 +41,7 @@ final class LoginView: SZView {
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(logotypeImage, logoLabel, startLabel, stackView)
-        stackView.addArangedSubviews(kakaoButton, naverButton, appleButton)
+        stackView.addArrangedSubviews(kakaoButton, naverButton, appleButton)
     }
     override func setLayout() {
         logotypeImage.snp.makeConstraints { make in

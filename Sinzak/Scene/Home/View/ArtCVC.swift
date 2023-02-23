@@ -81,7 +81,7 @@ final class ArtCVC: UICollectionViewCell {
             titleLabel, labelStack,
             authorLabel, middlePointLabel, uploadTimeLabel
         )
-        labelStack.addArangedSubviews(
+        labelStack.addArrangedSubviews(
             isDealing, priceLabel
         )
         favoriteBackground.addSubviews(

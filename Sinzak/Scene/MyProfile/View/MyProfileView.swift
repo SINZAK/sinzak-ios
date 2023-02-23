@@ -208,7 +208,7 @@ final class MyProfileView: SZView {
     override func setView() {
         addSubview(scrollView)
         scrollView.addSubview(wholeStackView)
-        wholeStackView.addArangedSubviews(
+        wholeStackView.addArrangedSubviews(
             headView,
             scrapListView,
             requestListView,
@@ -250,21 +250,21 @@ final class MyProfileView: SZView {
             introduceLabel,
             profileEditButton
         )
-        nameBadgeStack.addArangedSubviews(
+        nameBadgeStack.addArrangedSubviews(
             nameLabel, badgeImage
         )
-        schoolVerifiedStack.addArangedSubviews(
+        schoolVerifiedStack.addArrangedSubviews(
             schoolNameLabel, verifiedLabel
         )
-        followerFollowingStack.addArangedSubviews(
+        followerFollowingStack.addArrangedSubviews(
             followerStack,
             followingStack
         )
-        followerStack.addArangedSubviews(
+        followerStack.addArrangedSubviews(
             followerNumberLabel,
             followerLabel
         )
-        followingStack.addArangedSubviews(
+        followingStack.addArrangedSubviews(
             followingNumberLabel,
             followingLabel
         )

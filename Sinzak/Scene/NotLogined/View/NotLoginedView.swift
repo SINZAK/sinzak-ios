@@ -39,7 +39,7 @@ final class NotLoginedView: SZView {
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(loginLabel, startLabel, stackView)
-        stackView.addArangedSubviews(kakaoButton, naverButton, appleButton)
+        stackView.addArrangedSubviews(kakaoButton, naverButton, appleButton)
     }
     override func setLayout() {
         loginLabel.snp.makeConstraints { make in

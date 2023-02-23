@@ -87,7 +87,7 @@ final class ArtFullWidthCVC: UICollectionViewCell {
             authorLabel, middlePointLabel,
             authorSchoolLabel, uploadTimeLabel
         )
-        labelStack.addArangedSubviews(
+        labelStack.addArrangedSubviews(
             isDealing, priceLabel
         )
         favoriteBackground.addSubviews(

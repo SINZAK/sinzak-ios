@@ -78,7 +78,7 @@ final class ChatListCVC: UICollectionViewCell {
             schoolLabel, middlePoint, timeLabel,
             talkLabel
         )
-        nameBadgestack.addArangedSubviews(
+        nameBadgestack.addArrangedSubviews(
             nameLabel, verifiedBadge
         )
         chatCountBackground.addSubview(
