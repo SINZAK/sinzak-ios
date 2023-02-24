@@ -39,7 +39,7 @@ final class AddPhotosView: SZView {
         $0.layer.borderWidth = 2.0
     }
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
-        $0.backgroundColor = .gray.withAlphaComponent(0.3)
+        $0.backgroundColor = .clear
     }
     let uploadPhotoButton = UIButton().then {
         $0.layer.cornerRadius = 24
