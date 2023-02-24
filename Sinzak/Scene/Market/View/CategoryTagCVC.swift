@@ -47,6 +47,12 @@ final class CategoryTagCVC: UICollectionViewCell {
         categoryLabel.textColor = color
         tagBackgroundView.layer.borderColor = color.cgColor
     }
+    func updateCell(kind: Category) {
+        categoryLabel.text = kind.text
+    }
+    func updateCell(kind: WorksCategory) {
+        categoryLabel.text = kind.text
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
