@@ -92,3 +92,34 @@
 "workRequestSearchPlaceholder" = "의뢰 및 작업 통합 검색";
 "recentQuery" = "최근 검색어";
 "removeAll" = "전체 삭제";
+
+// 판매글쓰기
+// - 카테고리 선택
+"categorySelection" = "카테고리 선택";
+"pleaseSelectGenre" = "분야를 선택해주세요.";
+"sellingArtwork" = "작품 판매";
+"request" = "의뢰해요";
+"work" = "작업해요";
+"pleaseSelectCategoryUptoThree" = "카테고리를 선택해주세요. (최대 3개)";
+// - 사진등록
+"addPhotos" = "사진 등록";
+"uploadPhotos" = "사진 업로드하기";
+// - 작품정보
+"artworkInfo" = "작품 정보";
+"artworkTitle" = "작품 제목";
+"price" = "가격";
+"krw" = "원";
+"getPriceOffer" = "가격제안 받기";
+"artworkDescriptionPlaceholder" = "작품 의도, 작업 기간, 재료, 거래 방법 등을 자유롭게 표현해보세요.";
+"artworkDescription" = "작품 설명";
+// - 의뢰내용
+"requestContent" = "의뢰 내용";
+"requestTitle" = "제목";
+"requestContentPlaceholder" = "원하는 의뢰의 형태, 분위기, 재료 등을
+자유롭게 설명해주세요!";
+// - 작품사이즈
+"artworkSizeOptional" = "작품 사이즈(선택)";
+"pleaseApproxSizeOfArtwork" = "대략의 작품 사이즈를 알려주세요.";
+"width" = "가로"; // 가로
+"height" = "세로"; // 세로
+"depth" = "높이"; // 높이

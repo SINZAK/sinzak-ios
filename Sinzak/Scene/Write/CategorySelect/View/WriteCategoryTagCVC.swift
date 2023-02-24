@@ -1,51 +1,35 @@
 //
-//  CategoryTagCVC.swift
+//  WriteCategoryTagCVC.swift
 //  Sinzak
 //
-//  Created by Doy Kim on 2023/01/27.
+//  Created by Doy Kim on 2023/02/24.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-enum ColorKind {
-    case base
-    case selected
-    var color: UIColor {
-        switch self {
-        case .base:
-            return CustomColor.gray60!
-        case .selected:
-            return CustomColor.red!
-        }
-    }
-}
-
-final class CategoryTagCVC: UICollectionViewCell {
+final class WriteCategoryTagCVC: UICollectionViewCell {
     let checkIcon = UIImageView().then {
         $0.image = UIImage(named: "checkmark")?.withRenderingMode(.alwaysTemplate)
-        $0.tintColor = CustomColor.gray60
+        $0.tintColor = CustomColor.black
     }
     let categoryLabel = UILabel().then {
         $0.font = .caption_B
-        $0.textColor = CustomColor.gray60
+        $0.textColor = CustomColor.black
         $0.textAlignment = .right
         $0.text = "전체"
     }
     let tagBackgroundView = UIView().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 15
-        $0.backgroundColor = CustomColor.white
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = CustomColor.gray60?.cgColor
+        $0.backgroundColor = CustomColor.gray10
     }
     // MARK: - Init
-    func setColor(kind: ColorKind) {
-        let color = kind.color
-        checkIcon.tintColor = color
-        categoryLabel.textColor = color
-        tagBackgroundView.layer.borderColor = color.cgColor
+    func setColor(kind: WriteCategoryColor) {
+        checkIcon.tintColor = kind.fontColor
+        categoryLabel.textColor = kind.fontColor
+        tagBackgroundView.backgroundColor = kind.bgcolor
     }
     func updateCell(kind: Category) {
         categoryLabel.text = kind.text
@@ -87,3 +71,4 @@ final class CategoryTagCVC: UICollectionViewCell {
         }
     }
 }
+
