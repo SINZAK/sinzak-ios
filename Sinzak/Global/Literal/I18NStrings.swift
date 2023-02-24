@@ -105,6 +105,7 @@ struct I18NStrings {
     // - 사진등록
     static let addPhotos = "addPhotos".localized
     static let uploadPhotos = "uploadPhotos".localized
+    static let thumbnail = "thumbnail".localized
     // - 작품정보
     static let artworkInfo = "artworkInfo".localized
     static let artworkTitle = "artworkTitle".localized
