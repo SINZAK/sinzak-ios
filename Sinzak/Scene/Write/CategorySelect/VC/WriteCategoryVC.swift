@@ -29,7 +29,7 @@ final class WriteCategoryVC: SZVC {
     // MARK: - Actions
     @objc private func nextButtonTapped(_ sender: UIButton) {
         let vc = AddPhotosVC()
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: false)
     }
     // MARK: - Helpers
     override func configure() {

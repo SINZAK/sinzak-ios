@@ -17,8 +17,14 @@ final class ArtworkInfoVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    // MARK: - Actions
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        let vc = ArtworkSizeVC()
+        navigationController?.pushViewController(vc, animated: false)
+    }
     // MARK: - Helpers
     override func configure() {
+        mainView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     override func setNavigationBar() {
         super.setNavigationBar()
