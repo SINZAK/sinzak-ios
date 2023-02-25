@@ -17,12 +17,18 @@ final class AddPhotosVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    // MARK: - Actions
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        let vc = ArtworkInfoVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     // MARK: - Helpers
     override func configure() {
         mainView.collectionView.register(AddPhotoCVC.self, forCellWithReuseIdentifier: String(describing: AddPhotoCVC.self))
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         mainView.collectionView.collectionViewLayout = setLayout()
+        mainView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     override func setNavigationBar() {
         super.setNavigationBar()
