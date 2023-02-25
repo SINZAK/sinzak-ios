@@ -12,6 +12,7 @@ struct I18NStrings {
     static let confirm = "confirm".localized
     static let next = "next".localized
     static let cancel = "cancel".localized
+    static let finish = "finish".localized
     
     // - 로그인 화면
     static let logoText = "logoText".localized
