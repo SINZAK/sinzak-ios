@@ -10,6 +10,7 @@
 "confirm" = "확인";
 "next" = "다음";
 "cancel" = "취소";
+"finish" = "완료";
 
 // - 로그인 화면
 "logoText" = "신세대의 작품을 만나다";
@@ -104,6 +105,7 @@
 // - 사진등록
 "addPhotos" = "사진 등록";
 "uploadPhotos" = "사진 업로드하기";
+"thumbnail" = "썸네일";
 // - 작품정보
 "artworkInfo" = "작품 정보";
 "artworkTitle" = "작품 제목";

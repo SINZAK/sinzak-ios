@@ -9,6 +9,7 @@ import UIKit
 
 enum CustomColor {
     static let red = UIColor(named: "customRed")
+    static let red50 = UIColor(named: "customRed50")
     static let purple = UIColor(named: "customPurple")
     static let purple50 = UIColor(named: "customPurple50")
     // Grayscale

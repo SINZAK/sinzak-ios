@@ -45,6 +45,10 @@
 		A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD57297FD850008964BC /* ChatListCVC.swift */; };
 		A216BD5C297FE020008964BC /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD5B297FE020008964BC /* ChatView.swift */; };
 		A216BD5F297FE02D008964BC /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD5E297FE02D008964BC /* ChatVC.swift */; };
+		A2180DAD29AA38EE00BBC74A /* RequestContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2180DAC29AA38EE00BBC74A /* RequestContentVC.swift */; };
+		A2180DAF29AA38F700BBC74A /* RequestContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2180DAE29AA38F700BBC74A /* RequestContentView.swift */; };
+		A2180DB329AA3C0700BBC74A /* ArtworkSizeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2180DB229AA3C0700BBC74A /* ArtworkSizeVC.swift */; };
+		A2180DB629AA3C1A00BBC74A /* ArtworkSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2180DB529AA3C1A00BBC74A /* ArtworkSizeView.swift */; };
 		A222F07C29837AFF007806D0 /* CategoryTagCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222F07B29837AFF007806D0 /* CategoryTagCVC.swift */; };
 		A222F07F298382DF007806D0 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A222F07E298382DF007806D0 /* Category.swift */; };
 		A2265372296D7E5600605697 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2265371296D7E5600605697 /* HomeView.swift */; };
@@ -73,6 +77,11 @@
 		A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A23415BC2927D778007DADE7 /* LaunchScreen.storyboard */; };
 		A23415C62927D7A9007DADE7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A23415C52927D7A9007DADE7 /* .gitignore */; };
 		A2420F8229A7B9E8007D8937 /* WriteCategoryTagCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8129A7B9E8007D8937 /* WriteCategoryTagCVC.swift */; };
+		A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8529A85998007D8937 /* AddPhotosView.swift */; };
+		A2420F8929A859AF007D8937 /* AddPhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8829A859AF007D8937 /* AddPhotosVC.swift */; };
+		A2420F8B29A8BCE4007D8937 /* AddPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8A29A8BCE4007D8937 /* AddPhotoCVC.swift */; };
+		A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8D29A8FBA9007D8937 /* ArtworkInfoView.swift */; };
+		A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F9129A8FC62007D8937 /* ArtworkInfoVC.swift */; };
 		A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A257C36A297F99B100266E74 /* SeeMoreCVC.swift */; };
 		A2646BEB2991FB210004F4CE /* HomeAPIProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */; };
 		A2646BED299204B40004F4CE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2646BEC299204B30004F4CE /* User.swift */; };
@@ -175,6 +184,10 @@
 		A216BD57297FD850008964BC /* ChatListCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCVC.swift; sourceTree = "<group>"; };
 		A216BD5B297FE020008964BC /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		A216BD5E297FE02D008964BC /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		A2180DAC29AA38EE00BBC74A /* RequestContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestContentVC.swift; sourceTree = "<group>"; };
+		A2180DAE29AA38F700BBC74A /* RequestContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestContentView.swift; sourceTree = "<group>"; };
+		A2180DB229AA3C0700BBC74A /* ArtworkSizeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkSizeVC.swift; sourceTree = "<group>"; };
+		A2180DB529AA3C1A00BBC74A /* ArtworkSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkSizeView.swift; sourceTree = "<group>"; };
 		A222F07B29837AFF007806D0 /* CategoryTagCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTagCVC.swift; sourceTree = "<group>"; };
 		A222F07E298382DF007806D0 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		A2265371296D7E5600605697 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -199,6 +212,11 @@
 		A23415BF2927D778007DADE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A23415C52927D7A9007DADE7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A2420F8129A7B9E8007D8937 /* WriteCategoryTagCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCategoryTagCVC.swift; sourceTree = "<group>"; };
+		A2420F8529A85998007D8937 /* AddPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosView.swift; sourceTree = "<group>"; };
+		A2420F8829A859AF007D8937 /* AddPhotosVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosVC.swift; sourceTree = "<group>"; };
+		A2420F8A29A8BCE4007D8937 /* AddPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoCVC.swift; sourceTree = "<group>"; };
+		A2420F8D29A8FBA9007D8937 /* ArtworkInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkInfoView.swift; sourceTree = "<group>"; };
+		A2420F9129A8FC62007D8937 /* ArtworkInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkInfoVC.swift; sourceTree = "<group>"; };
 		A257C36A297F99B100266E74 /* SeeMoreCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCVC.swift; sourceTree = "<group>"; };
 		A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIProviderTests.swift; sourceTree = "<group>"; };
 		A2646BEC299204B30004F4CE /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -524,6 +542,56 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		A2180DA929AA38CB00BBC74A /* RequestContent */ = {
+			isa = PBXGroup;
+			children = (
+				A2180DAB29AA38E300BBC74A /* VC */,
+				A2180DAA29AA38DC00BBC74A /* View */,
+			);
+			path = RequestContent;
+			sourceTree = "<group>";
+		};
+		A2180DAA29AA38DC00BBC74A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2180DAE29AA38F700BBC74A /* RequestContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2180DAB29AA38E300BBC74A /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2180DAC29AA38EE00BBC74A /* RequestContentVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A2180DB029AA3BED00BBC74A /* ArtworkSize */ = {
+			isa = PBXGroup;
+			children = (
+				A2180DB429AA3C0B00BBC74A /* View */,
+				A2180DB129AA3BF800BBC74A /* VC */,
+			);
+			path = ArtworkSize;
+			sourceTree = "<group>";
+		};
+		A2180DB129AA3BF800BBC74A /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2180DB229AA3C0700BBC74A /* ArtworkSizeVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A2180DB429AA3C0B00BBC74A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2180DB529AA3C1A00BBC74A /* ArtworkSizeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		A222F07D298382B2007806D0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -670,6 +738,57 @@
 			path = Sinzak;
 			sourceTree = "<group>";
 		};
+		A2420F8329A8597D007D8937 /* AddPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				A2420F8729A8599E007D8937 /* VC */,
+				A2420F8429A85985007D8937 /* View */,
+			);
+			path = AddPhotos;
+			sourceTree = "<group>";
+		};
+		A2420F8429A85985007D8937 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2420F8529A85998007D8937 /* AddPhotosView.swift */,
+				A2420F8A29A8BCE4007D8937 /* AddPhotoCVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2420F8729A8599E007D8937 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2420F8829A859AF007D8937 /* AddPhotosVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A2420F8C29A8FB85007D8937 /* ArtworkInfo */ = {
+			isa = PBXGroup;
+			children = (
+				A2420F9029A8FC54007D8937 /* VC */,
+				A2420F8F29A8FC46007D8937 /* View */,
+			);
+			path = ArtworkInfo;
+			sourceTree = "<group>";
+		};
+		A2420F8F29A8FC46007D8937 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2420F8D29A8FBA9007D8937 /* ArtworkInfoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2420F9029A8FC54007D8937 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2420F9129A8FC62007D8937 /* ArtworkInfoVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
 		A26F0AA82948BDF0001CB2AA /* Concierge */ = {
 			isa = PBXGroup;
 			children = (
@@ -799,6 +918,10 @@
 		A280AB4329A7630300C1729C /* Write */ = {
 			isa = PBXGroup;
 			children = (
+				A2180DB029AA3BED00BBC74A /* ArtworkSize */,
+				A2180DA929AA38CB00BBC74A /* RequestContent */,
+				A2420F8C29A8FB85007D8937 /* ArtworkInfo */,
+				A2420F8329A8597D007D8937 /* AddPhotos */,
 				A280AB4629A7638200C1729C /* CategorySelect */,
 			);
 			path = Write;
@@ -1216,6 +1339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2420F8B29A8BCE4007D8937 /* AddPhotoCVC.swift in Sources */,
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A280AB4229A7442300C1729C /* SearchResultHeader.swift in Sources */,
 				A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */,
@@ -1265,12 +1389,16 @@
 				A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */,
 				A2AA89CE2967C33A004A63C1 /* InterestedGenreCVC.swift in Sources */,
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
+				A2420F8929A859AF007D8937 /* AddPhotosVC.swift in Sources */,
 				A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */,
 				A20E4A5229990091009C1340 /* MyProfileVC.swift in Sources */,
 				A2100F77298695A100C85ADF /* WorksCategory.swift in Sources */,
 				A280AB4029A7400100C1729C /* UIViewController+Extension.swift in Sources */,
+				A2180DB629AA3C1A00BBC74A /* ArtworkSizeView.swift in Sources */,
 				A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */,
+				A2180DAD29AA38EE00BBC74A /* RequestContentVC.swift in Sources */,
 				A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */,
+				A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */,
 				A226537B29705A4400605697 /* ArtCVC.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
@@ -1288,11 +1416,15 @@
 				A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */,
 				A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
+				A2180DB329AA3C0700BBC74A /* ArtworkSizeVC.swift in Sources */,
 				A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */,
 				A216BD4E297FCC02008964BC /* NotiView.swift in Sources */,
 				A2265372296D7E5600605697 /* HomeView.swift in Sources */,
+				A2180DAF29AA38F700BBC74A /* RequestContentView.swift in Sources */,
 				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
 				A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */,
+				A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */,
+				A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */,
 				A2420F8229A7B9E8007D8937 /* WriteCategoryTagCVC.swift in Sources */,
 				A216BD5C297FE020008964BC /* ChatView.swift in Sources */,
 				A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */,

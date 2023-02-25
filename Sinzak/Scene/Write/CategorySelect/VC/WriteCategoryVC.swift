@@ -27,6 +27,10 @@ final class WriteCategoryVC: SZVC {
         tabBarController?.tabBar.isHidden = true
     }
     // MARK: - Actions
+    @objc private func nextButtonTapped(_ sender: UIButton) {
+        let vc = AddPhotosVC()
+        navigationController?.pushViewController(vc, animated: false)
+    }
     // MARK: - Helpers
     override func configure() {
         mainView.collectionView.delegate = self
@@ -35,6 +39,7 @@ final class WriteCategoryVC: SZVC {
         mainView.collectionView.register(WriteCategoryCVC.self, forCellWithReuseIdentifier: String(describing: WriteCategoryCVC.self))
         mainView.collectionView.register(WriteCategoryTagCVC.self, forCellWithReuseIdentifier: String(describing: WriteCategoryTagCVC.self))
         mainView.collectionView.collectionViewLayout = setLayout()
+        mainView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     override func setNavigationBar() {
         super.setNavigationBar()
