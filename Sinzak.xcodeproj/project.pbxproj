@@ -76,6 +76,8 @@
 		A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8529A85998007D8937 /* AddPhotosView.swift */; };
 		A2420F8929A859AF007D8937 /* AddPhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8829A859AF007D8937 /* AddPhotosVC.swift */; };
 		A2420F8B29A8BCE4007D8937 /* AddPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8A29A8BCE4007D8937 /* AddPhotoCVC.swift */; };
+		A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8D29A8FBA9007D8937 /* ArtworkInfoView.swift */; };
+		A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F9129A8FC62007D8937 /* ArtworkInfoVC.swift */; };
 		A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A257C36A297F99B100266E74 /* SeeMoreCVC.swift */; };
 		A2646BEB2991FB210004F4CE /* HomeAPIProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */; };
 		A2646BED299204B40004F4CE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2646BEC299204B30004F4CE /* User.swift */; };
@@ -205,6 +207,8 @@
 		A2420F8529A85998007D8937 /* AddPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosView.swift; sourceTree = "<group>"; };
 		A2420F8829A859AF007D8937 /* AddPhotosVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosVC.swift; sourceTree = "<group>"; };
 		A2420F8A29A8BCE4007D8937 /* AddPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoCVC.swift; sourceTree = "<group>"; };
+		A2420F8D29A8FBA9007D8937 /* ArtworkInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkInfoView.swift; sourceTree = "<group>"; };
+		A2420F9129A8FC62007D8937 /* ArtworkInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkInfoVC.swift; sourceTree = "<group>"; };
 		A257C36A297F99B100266E74 /* SeeMoreCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCVC.swift; sourceTree = "<group>"; };
 		A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIProviderTests.swift; sourceTree = "<group>"; };
 		A2646BEC299204B30004F4CE /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -702,6 +706,31 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		A2420F8C29A8FB85007D8937 /* ArtworkInfo */ = {
+			isa = PBXGroup;
+			children = (
+				A2420F9029A8FC54007D8937 /* VC */,
+				A2420F8F29A8FC46007D8937 /* View */,
+			);
+			path = ArtworkInfo;
+			sourceTree = "<group>";
+		};
+		A2420F8F29A8FC46007D8937 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2420F8D29A8FBA9007D8937 /* ArtworkInfoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2420F9029A8FC54007D8937 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2420F9129A8FC62007D8937 /* ArtworkInfoVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
 		A26F0AA82948BDF0001CB2AA /* Concierge */ = {
 			isa = PBXGroup;
 			children = (
@@ -831,6 +860,7 @@
 		A280AB4329A7630300C1729C /* Write */ = {
 			isa = PBXGroup;
 			children = (
+				A2420F8C29A8FB85007D8937 /* ArtworkInfo */,
 				A2420F8329A8597D007D8937 /* AddPhotos */,
 				A280AB4629A7638200C1729C /* CategorySelect */,
 			);
@@ -1306,6 +1336,7 @@
 				A280AB4029A7400100C1729C /* UIViewController+Extension.swift in Sources */,
 				A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */,
 				A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */,
+				A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */,
 				A226537B29705A4400605697 /* ArtCVC.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
@@ -1328,6 +1359,7 @@
 				A2265372296D7E5600605697 /* HomeView.swift in Sources */,
 				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
 				A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */,
+				A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */,
 				A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */,
 				A2420F8229A7B9E8007D8937 /* WriteCategoryTagCVC.swift in Sources */,
 				A216BD5C297FE020008964BC /* ChatView.swift in Sources */,
