@@ -19,7 +19,7 @@ final class AddPhotosVC: SZVC {
     }
     // MARK: - Actions
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let vc = ArtworkInfoVC()
+        let vc = RequestContentVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: - Helpers
