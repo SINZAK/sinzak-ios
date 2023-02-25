@@ -8,5 +8,6 @@ target 'Sinzak' do
   # Pods for Sinzak
   pod 'SwiftLint'
   pod 'naveridlogin-sdk-ios'
+  pod 'lottie-ios'
 
 end
