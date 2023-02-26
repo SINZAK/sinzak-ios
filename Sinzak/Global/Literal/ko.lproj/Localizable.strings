@@ -11,6 +11,10 @@
 "next" = "다음";
 "cancel" = "취소";
 "finish" = "완료";
+"edit" = "수정하기";
+"remove" = "삭제하기";
+"report" = "신고하기";
+"blockUser" = "님 차단하기";
 
 // - 로그인 화면
 "logoText" = "신세대의 작품을 만나다";
