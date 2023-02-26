@@ -50,23 +50,49 @@ final class DetailVC: SZVC {
     // MARK: - Actions
     @objc func menuButtonTapped(_ sender: UIBarButtonItem) {
         // ActionSheet 띄우기
-        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let writerName = "신작" // 글작성자 이름
+        owner = DetailOwner.other
+        guard let owner = owner else { return }
+        switch owner {
+        case .mine:
+            let edit = UIAlertAction(title: I18NStrings.edit, style: .default) { [weak self] _ in
+                self?.editPost()
+            }
+            let remove = UIAlertAction(title: I18NStrings.remove, style: .default) { [weak self] _ in
+                self?.removePost()
+            }
+            alert.addAction(edit)
+            alert.addAction(remove)
+        case .other:
+            let report = UIAlertAction(title: I18NStrings.report, style: .default) { [weak self] _ in
+                self?.reportUser()
+            }
+            let block = UIAlertAction(title: writerName + I18NStrings.blockUser, style: .default) { [weak self] _ in
+                self?.blockUser()
+            }
+            alert.addAction(report)
+            alert.addAction(block)
+        }
+        let cancel = UIAlertAction(title: I18NStrings.cancel, style: .cancel)
+        alert.addAction(cancel)
+        present(alert, animated: true)
     }
     /// 글 수정
-    @objc func editPost() {
-        
+    func editPost() {
+        print("글 수정")
     }
     /// 글 삭제
-    @objc func removePost() {
-        
+    func removePost() {
+        print("글 삭제")
     }
     /// 글 작성자 신고하기
-    @objc func reportUser() {
-        
+    func reportUser() {
+        print("신고")
     }
     /// 글 작성자 차단하기
-    @objc func blockUser() {
-        
+    func blockUser() {
+        print("차단")
     }
     // MARK: - Helpers
     override func configure() {
