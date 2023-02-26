@@ -100,6 +100,9 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
             let vc = HomeDetailVC()
             vc.navigationItem.title = "팔로잉" // 섹션헤더 정보
             navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = DetailVC()
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     // 헤더
