@@ -18,12 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         // 루트 뷰 변경
-        let vc = TabBarVC()
-        let rootViewController = vc
-        let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = rootViewController
-        self.window = window
-        window.makeKeyAndVisible()
+        let vc = ConciergeVC()
+        changeRootVC(vc, animated: true)
+//        let rootViewController = vc
+//        let window = UIWindow(windowScene: windowScene)
+//        window.rootViewController = rootViewController
+//        self.window = window
+//        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -64,4 +65,12 @@ extension SceneDelegate {
                 }
             }
         }
+}
+// 루트뷰 설정하는 메서드 선언
+extension SceneDelegate {
+    func changeRootVC(_ vc: UIViewController, animated: Bool) {
+        guard let window = self.window else { return }
+        window.rootViewController = vc // 전환
+        UIView.transition(with: window, duration: 0.26, options: [.transitionCrossDissolve], animations: nil, completion: nil)
+      }
 }
