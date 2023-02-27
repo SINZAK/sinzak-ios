@@ -10,4 +10,9 @@ target 'Sinzak' do
   pod 'naveridlogin-sdk-ios'
   pod 'lottie-ios'
 
+  target 'SinzakTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
 end

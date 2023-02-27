@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		70220DD51C5772784980F559 /* Pods_Sinzak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2700FF81BC95B6E59A53DC75 /* Pods_Sinzak.framework */; };
+		3C5D7879C78C9C02F8AA44A2 /* Pods_SinzakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39586F75F77A4A0FF7AFD361 /* Pods_SinzakTests.framework */; };
 		A20CBD58294786550012FF32 /* SpoqaHanSansNeo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */; };
 		A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */; };
 		A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */; };
@@ -136,6 +136,7 @@
 		A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE4298776F300DE754F /* HomeManager.swift */; };
 		A2F90537298968DA00AC588C /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = A2F90536298968DA00AC588C /* SocketIO */; };
 		A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9053B29896A5200AC588C /* SocketIOManager.swift */; };
+		B956786E877708A9B8AFE5DB /* Pods_Sinzak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8CD86AADD717AFED5B4E8 /* Pods_Sinzak.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,9 +150,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2700FF81BC95B6E59A53DC75 /* Pods_Sinzak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DB488BBBBBFF96BBEF7A346 /* Pods-Sinzak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.release.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.release.xcconfig"; sourceTree = "<group>"; };
-		4C1051FDB08E63609D13B62C /* Pods-Sinzak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.debug.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.debug.xcconfig"; sourceTree = "<group>"; };
+		0622176AE19448E7EB43E50B /* Pods-Sinzak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.debug.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.debug.xcconfig"; sourceTree = "<group>"; };
+		15FEA333627984DFA376698C /* Pods-SinzakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinzakTests.debug.xcconfig"; path = "Target Support Files/Pods-SinzakTests/Pods-SinzakTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1A3733E31B68402AA3565046 /* Pods-Sinzak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.release.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.release.xcconfig"; sourceTree = "<group>"; };
+		39586F75F77A4A0FF7AFD361 /* Pods_SinzakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinzakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		64B8CD86AADD717AFED5B4E8 /* Pods_Sinzak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.ttf"; sourceTree = "<group>"; };
 		A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.ttf"; sourceTree = "<group>"; };
 		A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.ttf"; sourceTree = "<group>"; };
@@ -272,6 +275,7 @@
 		A2F6EAE22987758C00DE754F /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		A2F6EAE4298776F300DE754F /* HomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeManager.swift; sourceTree = "<group>"; };
 		A2F9053B29896A5200AC588C /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		EF5846D6AC7082592AF80051 /* Pods-SinzakTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinzakTests.release.xcconfig"; path = "Target Support Files/Pods-SinzakTests/Pods-SinzakTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,10 +296,10 @@
 				A2289D4E2986A3910017969C /* Kingfisher in Frameworks */,
 				A2F90537298968DA00AC588C /* SocketIO in Frameworks */,
 				A22BE593296AEB0300D9815C /* Moya in Frameworks */,
-				70220DD51C5772784980F559 /* Pods_Sinzak.framework in Frameworks */,
 				A29CE9DF2998DD2800EB89B4 /* FirebaseCrashlytics in Frameworks */,
 				A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */,
 				A22BE5A5296B001B00D9815C /* KakaoSDKAuth in Frameworks */,
+				B956786E877708A9B8AFE5DB /* Pods_Sinzak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,16 +307,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C5D7879C78C9C02F8AA44A2 /* Pods_SinzakTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B7D5C41DAC50EA425D9F0D5 /* Frameworks */ = {
+		318E17545D3D2EB021CF8489 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2700FF81BC95B6E59A53DC75 /* Pods_Sinzak.framework */,
+				64B8CD86AADD717AFED5B4E8 /* Pods_Sinzak.framework */,
+				39586F75F77A4A0FF7AFD361 /* Pods_SinzakTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -320,8 +326,10 @@
 		73D41B78272D1995AF9DE204 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4C1051FDB08E63609D13B62C /* Pods-Sinzak.debug.xcconfig */,
-				3DB488BBBBBFF96BBEF7A346 /* Pods-Sinzak.release.xcconfig */,
+				0622176AE19448E7EB43E50B /* Pods-Sinzak.debug.xcconfig */,
+				1A3733E31B68402AA3565046 /* Pods-Sinzak.release.xcconfig */,
+				15FEA333627984DFA376698C /* Pods-SinzakTests.debug.xcconfig */,
+				EF5846D6AC7082592AF80051 /* Pods-SinzakTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -716,7 +724,7 @@
 				A2F07847298AB0A7004A2B3F /* SinzakTests */,
 				A23415AF2927D776007DADE7 /* Products */,
 				73D41B78272D1995AF9DE204 /* Pods */,
-				0B7D5C41DAC50EA425D9F0D5 /* Frameworks */,
+				318E17545D3D2EB021CF8489 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1177,12 +1185,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A23415C22927D778007DADE7 /* Build configuration list for PBXNativeTarget "Sinzak" */;
 			buildPhases = (
-				63AF460DB6AD4937BE18FE0B /* [CP] Check Pods Manifest.lock */,
+				3316BC203034FDC82B81B5E7 /* [CP] Check Pods Manifest.lock */,
 				A23415AA2927D776007DADE7 /* Sources */,
 				A23415AB2927D776007DADE7 /* Frameworks */,
 				A23415AC2927D776007DADE7 /* Resources */,
 				A280611F292F4F42005AE0B3 /* ShellScript */,
-				9F7736D1F1D3153CD3C73CD6 /* [CP] Embed Pods Frameworks */,
+				3E91173BA4D43D1DBCC21DCD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1215,6 +1223,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A2F0784E298AB0A7004A2B3F /* Build configuration list for PBXNativeTarget "SinzakTests" */;
 			buildPhases = (
+				16FA4E75CBD8D71F17C210C0 /* [CP] Check Pods Manifest.lock */,
 				A2F07842298AB0A7004A2B3F /* Sources */,
 				A2F07843298AB0A7004A2B3F /* Frameworks */,
 				A2F07844298AB0A7004A2B3F /* Resources */,
@@ -1267,7 +1276,7 @@
 				A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */,
 				A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */,
+				A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
@@ -1310,7 +1319,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		63AF460DB6AD4937BE18FE0B /* [CP] Check Pods Manifest.lock */ = {
+		16FA4E75CBD8D71F17C210C0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SinzakTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3316BC203034FDC82B81B5E7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1332,7 +1363,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9F7736D1F1D3153CD3C73CD6 /* [CP] Embed Pods Frameworks */ = {
+		3E91173BA4D43D1DBCC21DCD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1651,7 +1682,7 @@
 		};
 		A23415C32927D778007DADE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4C1051FDB08E63609D13B62C /* Pods-Sinzak.debug.xcconfig */;
+			baseConfigurationReference = 0622176AE19448E7EB43E50B /* Pods-Sinzak.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1683,7 +1714,7 @@
 		};
 		A23415C42927D778007DADE7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DB488BBBBBFF96BBEF7A346 /* Pods-Sinzak.release.xcconfig */;
+			baseConfigurationReference = 1A3733E31B68402AA3565046 /* Pods-Sinzak.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1715,6 +1746,7 @@
 		};
 		A2F0784C298AB0A7004A2B3F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15FEA333627984DFA376698C /* Pods-SinzakTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1738,6 +1770,7 @@
 		};
 		A2F0784D298AB0A7004A2B3F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF5846D6AC7082592AF80051 /* Pods-SinzakTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1864,7 +1897,7 @@
 				minimumVersion = 9.6.0;
 			};
 		};
-		A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */ = {
+		A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
 			requirement = {
@@ -1952,7 +1985,7 @@
 		};
 		A2F90536298968DA00AC588C /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */;
+			package = A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
