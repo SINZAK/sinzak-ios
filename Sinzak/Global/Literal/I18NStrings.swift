@@ -87,6 +87,7 @@ struct I18NStrings {
     // 팔로워, 팔로잉
     static let follower = "follower".localized
     static let following = "following".localized
+    static let follow = "follow".localized
     // 프로필편집
     static let editProfile = "editProfile".localized
     // 프로필 탭 버튼

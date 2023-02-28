@@ -86,6 +86,7 @@
 // 팔로워, 팔로잉
 "follower" = "팔로워";
 "following" = "팔로잉";
+"follow" = "팔로우";
 // 프로필편집
 "editProfile" = "프로필 편집";
 // 프로필 탭 버튼
