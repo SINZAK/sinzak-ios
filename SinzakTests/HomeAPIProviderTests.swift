@@ -39,6 +39,27 @@ final class HomeAPIProviderTests: XCTestCase {
         }
         wait(for: [promise], timeout: 5)
     }
+    func testFetchHomeNotLogined_success() throws {
+        let promise = expectation(description: "홈 정보가 올 때까지 기다리기")
+
+        provider.request(.homeNotLogined) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decoder = JSONDecoder()
+                    let data = try decoder.decode(HomeNotLogined.self, from: response.data)
+                    print(data)
+                    XCTAssertNotNil(data)
+                    promise.fulfill()
+                } catch {
+                    XCTFail("API call failed with error: \(error)")
+                }
+            case .failure(let error):
+                XCTFail("API call failed with error: \(error)")
+            }
+        }
+        wait(for: [promise], timeout: 5)
+    }
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
