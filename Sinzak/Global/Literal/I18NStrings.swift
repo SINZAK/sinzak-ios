@@ -146,4 +146,8 @@ struct I18NStrings {
     static let suggest = "suggest".localized // 제안하기
     static let accept = "accept".localized // 수락하기
     static let decline = "decline".localized // 거절하기
+    // 웰컴 스크린
+    static let welcome = "welcome".localized
+    static let welcomeDescription = "welcomeDescription".localized
+    static let letsGoSeeArtworks = "letsGoSeeArtworks".localized
 }

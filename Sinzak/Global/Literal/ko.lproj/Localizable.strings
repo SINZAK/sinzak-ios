@@ -146,3 +146,7 @@
 "suggest" = "제안하기";
 "accept" = "수락하기";
 "decline" = "거절하기";
+// 웰컴 스크린
+"welcome" = "Welcome!";
+"welcomeDescription" = "신작에 가입이 완료되었습니다.\n이제 자유롭게 작품을 탐색하고 거래해보세요.";
+"letsGoSeeArtworks" = "작품 보러 가기";
