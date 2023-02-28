@@ -136,4 +136,12 @@ struct I18NStrings {
     static let askDeal = "askDeal".localized // 거래 문의하기
     static let sendPriceOffer = "sendPriceOffer".localized // 가격 제안하기
     static let notAllowedPriceOffer = "notAllowedPriceOffer".localized // 가격 제안 불가
+    // 가격 제안하기/받기
+    static let pleaseOfferPriceMatchesMarket = "pleaseOfferPriceMatchesMarket".localized // 시세에 맞는 가격을 제안해보세요.
+    static let currentBestPrice = "currentBestPrice".localized // 현재 최고 금액
+    static let canOnlyMakeOneSuggestionPerPost = "canOnlyMakeOneSuggestionPerPost".localized // 게시글 당 1회만 제안이 가능해요
+    static let suggestedPriceOffer = "suggestedPriceOffer".localized //  님께서 가격을 제안하셨어요.
+    static let suggest = "suggest".localized // 제안하기
+    static let accept = "accept".localized // 수락하기
+    static let decline = "decline".localized // 거절하기
 }
