@@ -12,6 +12,22 @@ class HomeManager {
     private init () {}
     static let shared = HomeManager()
     let provider = MoyaProvider<HomeAPI>()
+    func getHomeProductNotLogined(completion: @escaping (Result<HomeNotLogined, Error>) -> Void) {
+        provider.request(.homeNotLogined) { result in
+            switch result {
+            case let .success(data):
+                do {
+                    let decoder = JSONDecoder()
+                    let result = try decoder.decode(HomeNotLogined.self, from: data.data)
+                    completion(.success(result))
+                } catch {
+                    completion(.failure(error))
+                }
+            case let .failure(error):
+                completion(.failure(error))
+            }
+        }
+    }
     func getBannerInfo(completion: @escaping (Result<BannerList, Error>) -> Void) {
         provider.request(.banner) { result in
             switch result {
