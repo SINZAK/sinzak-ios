@@ -679,13 +679,13 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		A226CC4729ADF84B000161E8 /* PriceOffer */ = {
+		A226CC4729ADF84B000161E8 /* SendPriceOffer */ = {
 			isa = PBXGroup;
 			children = (
 				A226CC4929ADF865000161E8 /* VC */,
 				A226CC4829ADF85B000161E8 /* View */,
 			);
-			path = PriceOffer;
+			path = SendPriceOffer;
 			sourceTree = "<group>";
 		};
 		A226CC4829ADF85B000161E8 /* View */ = {
@@ -1146,7 +1146,7 @@
 		A2B969DE29ABA645006119B1 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				A226CC4729ADF84B000161E8 /* PriceOffer */,
+				A226CC4729ADF84B000161E8 /* SendPriceOffer */,
 				A226CC4629ADF809000161E8 /* Detail */,
 			);
 			path = Detail;
