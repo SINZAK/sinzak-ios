@@ -666,6 +666,15 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		A226CC4629ADF809000161E8 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				A2B969E229ABA68C006119B1 /* VC */,
+				A2B969DF29ABA64E006119B1 /* View */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		A227064B299BD0A3000D5CF2 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1108,8 +1117,7 @@
 		A2B969DE29ABA645006119B1 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				A2B969E229ABA68C006119B1 /* VC */,
-				A2B969DF29ABA64E006119B1 /* View */,
+				A226CC4629ADF809000161E8 /* Detail */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
