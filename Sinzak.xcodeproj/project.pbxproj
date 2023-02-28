@@ -62,6 +62,8 @@
 		A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC4C29ADF882000161E8 /* SendPriceOfferView.swift */; };
 		A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC5129AE0FC8000161E8 /* ReceivePriceOfferView.swift */; };
 		A226CC5529AE0FDD000161E8 /* ReceivePriceOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC5429AE0FDD000161E8 /* ReceivePriceOfferVC.swift */; };
+		A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC5729AE31C0000161E8 /* WelcomeVC.swift */; };
+		A226CC5C29AE31F1000161E8 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC5B29AE31F1000161E8 /* WelcomeView.swift */; };
 		A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227064D299BD0C5000D5CF2 /* SearchResultView.swift */; };
 		A2270651299BD10E000D5CF2 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2270650299BD10E000D5CF2 /* SearchVC.swift */; };
 		A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2289D4A2986A03E0017969C /* ViewModelType.swift */; };
@@ -212,6 +214,8 @@
 		A226CC4C29ADF882000161E8 /* SendPriceOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPriceOfferView.swift; sourceTree = "<group>"; };
 		A226CC5129AE0FC8000161E8 /* ReceivePriceOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivePriceOfferView.swift; sourceTree = "<group>"; };
 		A226CC5429AE0FDD000161E8 /* ReceivePriceOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivePriceOfferVC.swift; sourceTree = "<group>"; };
+		A226CC5729AE31C0000161E8 /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		A226CC5B29AE31F1000161E8 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A227064D299BD0C5000D5CF2 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		A2270650299BD10E000D5CF2 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		A2289D4A2986A03E0017969C /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -733,6 +737,31 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		A226CC5629AE3156000161E8 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				A226CC5A29AE31D3000161E8 /* VC */,
+				A226CC5929AE31C8000161E8 /* View */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		A226CC5929AE31C8000161E8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A226CC5B29AE31F1000161E8 /* WelcomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A226CC5A29AE31D3000161E8 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A226CC5729AE31C0000161E8 /* WelcomeVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
 		A227064B299BD0A3000D5CF2 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1116,6 +1145,7 @@
 		A2B38567295D883B00E5EB7C /* Signup */ = {
 			isa = PBXGroup;
 			children = (
+				A226CC5629AE3156000161E8 /* Welcome */,
 				A2AA89C92967B11A004A63C1 /* Model */,
 				A2B38569295D886300E5EB7C /* View */,
 				A2B3856A295D886900E5EB7C /* VC */,
@@ -1486,6 +1516,7 @@
 				A280AB3E29A7371200C1729C /* SearchHistoryCVC.swift in Sources */,
 				A280AB3829A7222100C1729C /* SearchHistoryView.swift in Sources */,
 				A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */,
+				A226CC5C29AE31F1000161E8 /* WelcomeView.swift in Sources */,
 				A216BD53297FD60E008964BC /* ChatListView.swift in Sources */,
 				A2B0F6112980233900EC5C78 /* MarketVC.swift in Sources */,
 				A280AB4F29A7A21C00C1729C /* WriteCategoryCVC.swift in Sources */,
@@ -1571,6 +1602,7 @@
 				A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */,
+				A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */,
 				A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 				A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */,

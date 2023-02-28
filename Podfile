@@ -9,6 +9,7 @@ target 'Sinzak' do
   pod 'SwiftLint'
   pod 'naveridlogin-sdk-ios'
   pod 'lottie-ios'
+  pod 'SwiftConfettiView'
 
   target 'SinzakTests' do
     inherit! :search_paths
