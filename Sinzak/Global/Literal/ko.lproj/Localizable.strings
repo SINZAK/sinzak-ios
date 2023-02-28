@@ -137,10 +137,12 @@
 "sendPriceOffer" = "가격 제안하기"; // 가격 제안하기
 "notAllowedPriceOffer" = "가격 제안 불가"; // 가격제안 불가
 // 가격 제안하기/받기
+"priceOffer" = "가격 제안";
 "pleaseOfferPriceMatchesMarket" = "시세에 맞는 가격을 제안해보세요.";
 "currentBestPrice" = "현재 최고 금액";
 "canOnlyMakeOneSuggestionPerPost" = "게시글 당 1회만 제안이 가능해요";
-"suggestedPriceOffer" = " 님께서 가격을 제안하셨어요.";
+"fromNim" = " 님께서";
+"suggestedPriceOffer" = "가격을 제안하셨어요.";
 "suggest" = "제안하기";
 "accept" = "수락하기";
 "decline" = "거절하기";
