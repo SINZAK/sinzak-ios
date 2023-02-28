@@ -14,6 +14,9 @@ target 'Sinzak' do
   target 'SinzakTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Firebase/Core'
+    pod 'Firebase/Database'
+    pod 'Firebase/Messaging'
   end
 
 end
