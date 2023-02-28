@@ -94,13 +94,17 @@ final class DetailVC: SZVC {
     func blockUser() {
         print("차단")
     }
+    /// 가격 제안하기
+    @objc func priceOfferButtonTapped(_ sender: UIButton) {
+        let vc = SendPriceOfferVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     // MARK: - Helpers
     override func configure() {
-        
+        mainView.priceOfferButton.addTarget(self, action: #selector(priceOfferButtonTapped), for: .touchUpInside)
     }
     override func setNavigationBar() {
         super.setNavigationBar()
-        
         let menu = UIBarButtonItem(image: UIImage(named: "chatMenu"), style: .plain, target: self, action: #selector(menuButtonTapped))
         navigationItem.rightBarButtonItem = menu
     }
