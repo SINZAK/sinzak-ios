@@ -57,6 +57,7 @@
 		A226537B29705A4400605697 /* ArtCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537A29705A4400605697 /* ArtCVC.swift */; };
 		A226537D29705F8100605697 /* BannerCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537C29705F8100605697 /* BannerCVC.swift */; };
 		A226537F297062A000605697 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226537E297062A000605697 /* HomeHeader.swift */; };
+		A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC4429ADAD88000161E8 /* UILabel+Extension.swift */; };
 		A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227064D299BD0C5000D5CF2 /* SearchResultView.swift */; };
 		A2270651299BD10E000D5CF2 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2270650299BD10E000D5CF2 /* SearchVC.swift */; };
 		A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2289D4A2986A03E0017969C /* ViewModelType.swift */; };
@@ -202,6 +203,7 @@
 		A226537A29705A4400605697 /* ArtCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtCVC.swift; sourceTree = "<group>"; };
 		A226537C29705F8100605697 /* BannerCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCVC.swift; sourceTree = "<group>"; };
 		A226537E297062A000605697 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
+		A226CC4429ADAD88000161E8 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		A227064D299BD0C5000D5CF2 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		A2270650299BD10E000D5CF2 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		A2289D4A2986A03E0017969C /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				A20CBD6F29478BCF0012FF32 /* String+Extension.swift */,
 				A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */,
 				A280AB3F29A7400100C1729C /* UIViewController+Extension.swift */,
+				A226CC4429ADAD88000161E8 /* UILabel+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1276,7 +1279,7 @@
 				A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */,
 				A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */,
 				A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
@@ -1496,6 +1499,7 @@
 				A216BD5C297FE020008964BC /* ChatView.swift in Sources */,
 				A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
+				A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */,
 				A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 				A280AB5329A7A5E600C1729C /* WriteCategoryHeaderKind.swift in Sources */,
@@ -1897,7 +1901,7 @@
 				minimumVersion = 9.6.0;
 			};
 		};
-		A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+		A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
 			requirement = {
@@ -1985,7 +1989,7 @@
 		};
 		A2F90536298968DA00AC588C /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			package = A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */;
 			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
