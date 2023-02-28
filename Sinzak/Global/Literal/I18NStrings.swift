@@ -130,6 +130,7 @@ struct I18NStrings {
     static let width = "width".localized // 가로
     static let height = "height".localized // 세로
     static let depth = "depth".localized // 높이
+    static let detailSize = "detailSize".localized
     // 프로덕트 상세
     static let scrap = "scrap".localized // 찜하기
     static let askDeal = "askDeal".localized // 거래 문의하기
