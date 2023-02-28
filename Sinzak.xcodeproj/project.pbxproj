@@ -60,6 +60,8 @@
 		A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC4429ADAD88000161E8 /* UILabel+Extension.swift */; };
 		A226CC4B29ADF875000161E8 /* SendPriceOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC4A29ADF875000161E8 /* SendPriceOfferVC.swift */; };
 		A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC4C29ADF882000161E8 /* SendPriceOfferView.swift */; };
+		A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC5129AE0FC8000161E8 /* ReceivePriceOfferView.swift */; };
+		A226CC5529AE0FDD000161E8 /* ReceivePriceOfferVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC5429AE0FDD000161E8 /* ReceivePriceOfferVC.swift */; };
 		A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227064D299BD0C5000D5CF2 /* SearchResultView.swift */; };
 		A2270651299BD10E000D5CF2 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2270650299BD10E000D5CF2 /* SearchVC.swift */; };
 		A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2289D4A2986A03E0017969C /* ViewModelType.swift */; };
@@ -208,6 +210,8 @@
 		A226CC4429ADAD88000161E8 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		A226CC4A29ADF875000161E8 /* SendPriceOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPriceOfferVC.swift; sourceTree = "<group>"; };
 		A226CC4C29ADF882000161E8 /* SendPriceOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPriceOfferView.swift; sourceTree = "<group>"; };
+		A226CC5129AE0FC8000161E8 /* ReceivePriceOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivePriceOfferView.swift; sourceTree = "<group>"; };
+		A226CC5429AE0FDD000161E8 /* ReceivePriceOfferVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivePriceOfferVC.swift; sourceTree = "<group>"; };
 		A227064D299BD0C5000D5CF2 /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		A2270650299BD10E000D5CF2 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		A2289D4A2986A03E0017969C /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -704,6 +708,31 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		A226CC4E29AE0FA2000161E8 /* ReceivePriceOffer */ = {
+			isa = PBXGroup;
+			children = (
+				A226CC5029AE0FB4000161E8 /* VC */,
+				A226CC4F29AE0FAC000161E8 /* View */,
+			);
+			path = ReceivePriceOffer;
+			sourceTree = "<group>";
+		};
+		A226CC4F29AE0FAC000161E8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A226CC5129AE0FC8000161E8 /* ReceivePriceOfferView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A226CC5029AE0FB4000161E8 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A226CC5429AE0FDD000161E8 /* ReceivePriceOfferVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
 		A227064B299BD0A3000D5CF2 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1146,6 +1175,7 @@
 		A2B969DE29ABA645006119B1 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				A226CC4E29AE0FA2000161E8 /* ReceivePriceOffer */,
 				A226CC4729ADF84B000161E8 /* SendPriceOffer */,
 				A226CC4629ADF809000161E8 /* Detail */,
 			);
@@ -1498,6 +1528,7 @@
 				A226CC4B29ADF875000161E8 /* SendPriceOfferVC.swift in Sources */,
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
 				A2420F8929A859AF007D8937 /* AddPhotosVC.swift in Sources */,
+				A226CC5529AE0FDD000161E8 /* ReceivePriceOfferVC.swift in Sources */,
 				A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */,
 				A20E4A5229990091009C1340 /* MyProfileVC.swift in Sources */,
 				A2100F77298695A100C85ADF /* WorksCategory.swift in Sources */,
@@ -1542,6 +1573,7 @@
 				A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */,
 				A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
+				A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */,
 				A280AB5329A7A5E600C1729C /* WriteCategoryHeaderKind.swift in Sources */,
 				A20E4A4B2998FA26009C1340 /* NotLoginedVC.swift in Sources */,
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,

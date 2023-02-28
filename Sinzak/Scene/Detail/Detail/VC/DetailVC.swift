@@ -96,7 +96,7 @@ final class DetailVC: SZVC {
     }
     /// 가격 제안하기
     @objc func priceOfferButtonTapped(_ sender: UIButton) {
-        let vc = SendPriceOfferVC()
+        let vc = ReceivePriceOfferVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: - Helpers
