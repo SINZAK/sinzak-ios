@@ -65,12 +65,12 @@
 		A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC5729AE31C0000161E8 /* WelcomeVC.swift */; };
 		A226CC5C29AE31F1000161E8 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC5B29AE31F1000161E8 /* WelcomeView.swift */; };
 		A226CC5E29AE3E00000161E8 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A226CC5D29AE3E00000161E8 /* HomeModel.swift */; };
+		A226CC6629AF2D1D000161E8 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = A226CC6529AF2D1D000161E8 /* RxMoya */; };
 		A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A227064D299BD0C5000D5CF2 /* SearchResultView.swift */; };
 		A2270651299BD10E000D5CF2 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2270650299BD10E000D5CF2 /* SearchVC.swift */; };
 		A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2289D4A2986A03E0017969C /* ViewModelType.swift */; };
 		A2289D4E2986A3910017969C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A2289D4D2986A3910017969C /* Kingfisher */; };
 		A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58F296AEA4F00D9815C /* AuthManager.swift */; };
-		A22BE593296AEB0300D9815C /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE592296AEB0300D9815C /* Moya */; };
 		A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE594296AEB4300D9815C /* AuthAPI.swift */; };
 		A22BE597296AEC2A00D9815C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE596296AEC2A00D9815C /* Endpoint.swift */; };
 		A22BE5A3296B001B00D9815C /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A2296B001B00D9815C /* KakaoSDK */; };
@@ -311,7 +311,7 @@
 				A29CE9E12998DD2800EB89B4 /* FirebaseMessaging in Frameworks */,
 				A2289D4E2986A3910017969C /* Kingfisher in Frameworks */,
 				A2F90537298968DA00AC588C /* SocketIO in Frameworks */,
-				A22BE593296AEB0300D9815C /* Moya in Frameworks */,
+				A226CC6629AF2D1D000161E8 /* RxMoya in Frameworks */,
 				A29CE9DF2998DD2800EB89B4 /* FirebaseCrashlytics in Frameworks */,
 				A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */,
 				A22BE5A5296B001B00D9815C /* KakaoSDKAuth in Frameworks */,
@@ -1307,7 +1307,6 @@
 				A210CD54292F4D8800F86A08 /* RxCocoa */,
 				A210CD56292F4D8800F86A08 /* RxSwift */,
 				A210CD59292F4DDA00F86A08 /* ReactorKit */,
-				A22BE592296AEB0300D9815C /* Moya */,
 				A22BE5A2296B001B00D9815C /* KakaoSDK */,
 				A22BE5A4296B001B00D9815C /* KakaoSDKAuth */,
 				A22BE5A6296B001B00D9815C /* KakaoSDKCommon */,
@@ -1318,6 +1317,7 @@
 				A29CE9DC2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				A29CE9DE2998DD2800EB89B4 /* FirebaseCrashlytics */,
 				A29CE9E02998DD2800EB89B4 /* FirebaseMessaging */,
+				A226CC6529AF2D1D000161E8 /* RxMoya */,
 			);
 			productName = Sinzak;
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
@@ -1377,12 +1377,12 @@
 				A210CD50292F4D6B00F86A08 /* XCRemoteSwiftPackageReference "Then" */,
 				A210CD53292F4D8800F86A08 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				A210CD58292F4DDA00F86A08 /* XCRemoteSwiftPackageReference "ReactorKit" */,
-				A22BE591296AEB0300D9815C /* XCRemoteSwiftPackageReference "Moya" */,
 				A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */,
 				A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */,
 				A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A226CC6429AF2D1D000161E8 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
 			projectDirPath = "";
@@ -1995,20 +1995,20 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		A226CC6429AF2D1D000161E8 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = exactVersion;
+				version = 15.0.3;
+			};
+		};
 		A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
 				kind = upToNextMinorVersion;
 				minimumVersion = 7.5.0;
-			};
-		};
-		A22BE591296AEB0300D9815C /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya";
-			requirement = {
-				kind = exactVersion;
-				version = 15.0.3;
 			};
 		};
 		A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
@@ -2027,7 +2027,7 @@
 				minimumVersion = 9.6.0;
 			};
 		};
-		A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+		A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
 			requirement = {
@@ -2068,15 +2068,15 @@
 			package = A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */;
 			productName = Tabman;
 		};
+		A226CC6529AF2D1D000161E8 /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A226CC6429AF2D1D000161E8 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
 		A2289D4D2986A3910017969C /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		A22BE592296AEB0300D9815C /* Moya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A22BE591296AEB0300D9815C /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
 		};
 		A22BE5A2296B001B00D9815C /* KakaoSDK */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2115,7 +2115,7 @@
 		};
 		A2F90536298968DA00AC588C /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			package = A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */;
 			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
