@@ -7,7 +7,14 @@
 
 import XCTest
 import Moya
+import RxSwift
+import RxMoya
+
 @testable import Sinzak
+
+enum APIError: Error {
+    case decodingFailed
+}
 
 final class HomeAPIProviderTests: XCTestCase {
     var provider = MoyaProvider<HomeAPI>()
@@ -58,6 +65,30 @@ final class HomeAPIProviderTests: XCTestCase {
                 XCTFail("API call failed with error: \(error)")
             }
         }
+        wait(for: [promise], timeout: 5)
+    }
+    func testRxSingleAndHomeRequest() throws {
+        let promise = expectation(description: "홈 정보가 올 때까지 기다리기")
+        let disposeBag = DisposeBag()
+        // let provider = MoyaProvider<HomeAPI>(plugins: [])
+        let homeObservable: Single<HomeNotLogined> = provider.rx.request(.homeNotLogined)
+            .map { response -> HomeNotLogined in
+                guard let user = try? JSONDecoder().decode(HomeNotLogined.self, from: response.data) else {
+                    throw APIError.decodingFailed
+                }
+                return user
+            }
+        homeObservable.subscribe { result in
+            switch result {
+            case let .success(data):
+                print("🌈🌈🌈🌈", data)
+                XCTAssertNotNil(data)
+            case let .failure(error):
+                print("🥲🥲🥲🥲", error)
+            }
+            promise.fulfill()
+        }
+        .disposed(by: disposeBag)
         wait(for: [promise], timeout: 5)
     }
     func testPerformanceExample() throws {
