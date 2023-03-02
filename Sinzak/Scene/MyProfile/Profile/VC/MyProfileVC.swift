@@ -20,8 +20,13 @@ final class MyProfileVC: SZVC {
     // MARK: - Actions
     @objc func settingButtonTapped(_ sender: UIBarButtonItem) {
     }
+    @objc func profileEditButtonTapped(_ sender: UIButton) {
+        let vc = EditProfileVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     // MARK: - Helpers
     override func configure() {
+        mainView.profileEditButton.addTarget(self, action: #selector(profileEditButtonTapped), for: .touchUpInside)
     }
     override func setNavigationBar() {
         super.setNavigationBar()
