@@ -77,6 +77,8 @@
 		A22BE5A5296B001B00D9815C /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A4296B001B00D9815C /* KakaoSDKAuth */; };
 		A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A6296B001B00D9815C /* KakaoSDKCommon */; };
 		A22BE5A9296B001B00D9815C /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A8296B001B00D9815C /* KakaoSDKUser */; };
+		A233891029B066EC00688FD8 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233890F29B066EC00688FD8 /* EditProfileView.swift */; };
+		A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891129B066F700688FD8 /* EditProfileVC.swift */; };
 		A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B12927D776007DADE7 /* AppDelegate.swift */; };
 		A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B32927D776007DADE7 /* SceneDelegate.swift */; };
 		A23415B62927D776007DADE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B52927D776007DADE7 /* ViewController.swift */; };
@@ -224,6 +226,8 @@
 		A22BE58F296AEA4F00D9815C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		A22BE594296AEB4300D9815C /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		A22BE596296AEC2A00D9815C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		A233890F29B066EC00688FD8 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		A233891129B066F700688FD8 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		A23415AE2927D776007DADE7 /* Sinzak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinzak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23415B12927D776007DADE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A23415B32927D776007DADE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -409,8 +413,8 @@
 		A20E4A4C29990048009C1340 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
-				A20E4A502999007C009C1340 /* VC */,
-				A20E4A4F29990071009C1340 /* View */,
+				A233890E29B066D400688FD8 /* EditProfile */,
+				A233890D29B066BF00688FD8 /* Profile */,
 			);
 			path = MyProfile;
 			sourceTree = "<group>";
@@ -814,6 +818,24 @@
 				A2F90538298969E100AC588C /* API */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		A233890D29B066BF00688FD8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A20E4A502999007C009C1340 /* VC */,
+				A20E4A4F29990071009C1340 /* View */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		A233890E29B066D400688FD8 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				A233890F29B066EC00688FD8 /* EditProfileView.swift */,
+				A233891129B066F700688FD8 /* EditProfileVC.swift */,
+			);
+			path = EditProfile;
 			sourceTree = "<group>";
 		};
 		A23415A52927D776007DADE7 = {
@@ -1558,6 +1580,7 @@
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
 				A280AB5129A7A5BB00C1729C /* WriteCategoryHeader.swift in Sources */,
 				A2646BED299204B40004F4CE /* User.swift in Sources */,
+				A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */,
 				A22BE597296AEC2A00D9815C /* Endpoint.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
@@ -1616,6 +1639,7 @@
 				A2180DAF29AA38F700BBC74A /* RequestContentView.swift in Sources */,
 				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
 				A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */,
+				A233891029B066EC00688FD8 /* EditProfileView.swift in Sources */,
 				A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */,
 				A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */,
 				A2420F8229A7B9E8007D8937 /* WriteCategoryTagCVC.swift in Sources */,
