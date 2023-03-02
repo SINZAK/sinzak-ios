@@ -832,10 +832,26 @@
 		A233890E29B066D400688FD8 /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
-				A233890F29B066EC00688FD8 /* EditProfileView.swift */,
-				A233891129B066F700688FD8 /* EditProfileVC.swift */,
+				A233891429B0673200688FD8 /* View */,
+				A233891329B0672B00688FD8 /* VC */,
 			);
 			path = EditProfile;
+			sourceTree = "<group>";
+		};
+		A233891329B0672B00688FD8 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A233891129B066F700688FD8 /* EditProfileVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A233891429B0673200688FD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A233890F29B066EC00688FD8 /* EditProfileView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A23415A52927D776007DADE7 = {
