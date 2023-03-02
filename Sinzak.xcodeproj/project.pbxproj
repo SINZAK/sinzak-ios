@@ -79,6 +79,8 @@
 		A22BE5A9296B001B00D9815C /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A8296B001B00D9815C /* KakaoSDKUser */; };
 		A233891029B066EC00688FD8 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233890F29B066EC00688FD8 /* EditProfileView.swift */; };
 		A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891129B066F700688FD8 /* EditProfileVC.swift */; };
+		A233891929B088D400688FD8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891829B088D400688FD8 /* SettingView.swift */; };
+		A233891C29B088E800688FD8 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891B29B088E800688FD8 /* SettingVC.swift */; };
 		A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B12927D776007DADE7 /* AppDelegate.swift */; };
 		A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B32927D776007DADE7 /* SceneDelegate.swift */; };
 		A23415B62927D776007DADE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B52927D776007DADE7 /* ViewController.swift */; };
@@ -228,6 +230,8 @@
 		A22BE596296AEC2A00D9815C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		A233890F29B066EC00688FD8 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		A233891129B066F700688FD8 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		A233891829B088D400688FD8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		A233891B29B088E800688FD8 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		A23415AE2927D776007DADE7 /* Sinzak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinzak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23415B12927D776007DADE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A23415B32927D776007DADE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -413,6 +417,7 @@
 		A20E4A4C29990048009C1340 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
+				A233891529B088B600688FD8 /* Setting */,
 				A233890E29B066D400688FD8 /* EditProfile */,
 				A233890D29B066BF00688FD8 /* Profile */,
 			);
@@ -852,6 +857,31 @@
 				A233890F29B066EC00688FD8 /* EditProfileView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A233891529B088B600688FD8 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A233891729B088C400688FD8 /* VC */,
+				A233891629B088BF00688FD8 /* View */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		A233891629B088BF00688FD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A233891829B088D400688FD8 /* SettingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A233891729B088C400688FD8 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A233891B29B088E800688FD8 /* SettingVC.swift */,
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 		A23415A52927D776007DADE7 = {
@@ -1568,6 +1598,7 @@
 				A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */,
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A280AB4229A7442300C1729C /* SearchResultHeader.swift in Sources */,
+				A233891C29B088E800688FD8 /* SettingVC.swift in Sources */,
 				A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */,
 				A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */,
 				A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */,
@@ -1585,6 +1616,7 @@
 				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,
 				A2265379296D80DC00605697 /* TabBarVC.swift in Sources */,
 				A2100F79298696D800C85ADF /* WorksHeader.swift in Sources */,
+				A233891929B088D400688FD8 /* SettingView.swift in Sources */,
 				A20E4A482998F796009C1340 /* NotLoginedView.swift in Sources */,
 				A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */,
 				A2100F6829865B2500C85ADF /* MarketHeader.swift in Sources */,
