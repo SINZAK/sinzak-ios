@@ -159,4 +159,21 @@ struct I18NStrings {
     static let welcome = "welcome".localized
     static let welcomeDescription = "welcomeDescription".localized
     static let letsGoSeeArtworks = "letsGoSeeArtworks".localized
+    // 설정
+    static let setting = "setting".localized
+    // - 섹션 타이틀
+    static let personalSetting = "personalSetting".localized
+    static let usageGuide = "usageGuide".localized
+    static let etcSection = "etcSection".localized
+    // - 섹션 내용
+    static let linkedAccounts = "linkedAccounts".localized
+    static let blockedUser = "blockedUser".localized
+    static let appVersion = "appVersion".localized
+    static let ask = "ask".localized
+    static let notice = "notice".localized
+    static let termsOfService = "termsOfService".localized
+    static let privacyPolicy = "privacyPolicy".localized
+    static let opensourceLicense = "opensourceLicense".localized
+    static let withdraw = "withdraw".localized
+    static let logout = "logout".localized
 }
