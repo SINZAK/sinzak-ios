@@ -23,6 +23,8 @@ final class MyProfileVC: SZVC {
     }
     // MARK: - Actions
     @objc func settingButtonTapped(_ sender: UIBarButtonItem) {
+        let vc = SettingVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func profileEditButtonTapped(_ sender: UIButton) {
         let vc = EditProfileVC()

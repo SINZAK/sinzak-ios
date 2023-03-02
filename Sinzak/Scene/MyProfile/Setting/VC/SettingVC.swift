@@ -25,5 +25,6 @@ final class SettingVC: SZVC {
     override func setNavigationBar() {
         super.setNavigationBar()
         
+        navigationItem.title = I18NStrings.setting
     }
 }
