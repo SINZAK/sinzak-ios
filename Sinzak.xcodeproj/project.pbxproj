@@ -81,6 +81,7 @@
 		A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891129B066F700688FD8 /* EditProfileVC.swift */; };
 		A233891929B088D400688FD8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891829B088D400688FD8 /* SettingView.swift */; };
 		A233891C29B088E800688FD8 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891B29B088E800688FD8 /* SettingVC.swift */; };
+		A233891F29B0CEC300688FD8 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891E29B0CEC300688FD8 /* Setting.swift */; };
 		A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B12927D776007DADE7 /* AppDelegate.swift */; };
 		A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B32927D776007DADE7 /* SceneDelegate.swift */; };
 		A23415B62927D776007DADE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B52927D776007DADE7 /* ViewController.swift */; };
@@ -232,6 +233,7 @@
 		A233891129B066F700688FD8 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		A233891829B088D400688FD8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A233891B29B088E800688FD8 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		A233891E29B0CEC300688FD8 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Setting.swift; path = Sinzak/Scene/MyProfile/Setting/VC/Setting.swift; sourceTree = SOURCE_ROOT; };
 		A23415AE2927D776007DADE7 /* Sinzak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinzak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23415B12927D776007DADE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A23415B32927D776007DADE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -862,6 +864,7 @@
 		A233891529B088B600688FD8 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				A233891D29B0CEB800688FD8 /* Model */,
 				A233891729B088C400688FD8 /* VC */,
 				A233891629B088BF00688FD8 /* View */,
 			);
@@ -882,6 +885,14 @@
 				A233891B29B088E800688FD8 /* SettingVC.swift */,
 			);
 			path = VC;
+			sourceTree = "<group>";
+		};
+		A233891D29B0CEB800688FD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A233891E29B0CEC300688FD8 /* Setting.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A23415A52927D776007DADE7 = {
@@ -1696,6 +1707,7 @@
 				A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */,
+				A233891F29B0CEC300688FD8 /* Setting.swift in Sources */,
 				A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */,
 				A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
