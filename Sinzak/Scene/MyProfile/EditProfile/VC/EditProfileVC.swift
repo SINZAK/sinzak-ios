@@ -17,6 +17,9 @@ final class EditProfileVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
+    }
     // MARK: - Actions
     @objc func finishButtonTapped(_ sender: UIBarButtonItem) {
         // - 수정내용 저장하는 로직

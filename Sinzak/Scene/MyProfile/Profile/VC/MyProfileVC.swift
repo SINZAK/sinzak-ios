@@ -17,6 +17,10 @@ final class MyProfileVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
     // MARK: - Actions
     @objc func settingButtonTapped(_ sender: UIBarButtonItem) {
     }
