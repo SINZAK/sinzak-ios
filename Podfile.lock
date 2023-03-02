@@ -109,6 +109,11 @@ PODS:
   - nanopb/encode (2.30909.0)
   - naveridlogin-sdk-ios (4.1.5)
   - PromisesObjC (2.1.1)
+  - RxBlocking (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - RxTest (6.5.0):
+    - RxSwift (= 6.5.0)
   - SwiftConfettiView (0.1.0)
   - SwiftLint (0.49.0)
 
@@ -118,6 +123,8 @@ DEPENDENCIES:
   - Firebase/Messaging
   - lottie-ios
   - naveridlogin-sdk-ios
+  - RxBlocking (= 6.5.0)
+  - RxTest (= 6.5.0)
   - SwiftConfettiView
   - SwiftLint
 
@@ -139,6 +146,9 @@ SPEC REPOS:
     - nanopb
     - naveridlogin-sdk-ios
     - PromisesObjC
+    - RxBlocking
+    - RxSwift
+    - RxTest
     - SwiftConfettiView
     - SwiftLint
 
@@ -159,9 +169,12 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  RxBlocking: 04b5fd28bb5ea49f7d64b80db8bbfe50d9cc1c7d
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  RxTest: eb2d23adefc5a5ebf5779c7792fa3edfe6ebcc17
   SwiftConfettiView: 1bdbc2e6913b6b1c76d8070802b212508ad5c352
   SwiftLint: 414d099c0f305c6c73e56139efb468666e535ece
 
-PODFILE CHECKSUM: 1e18a39f631f1edac5645a9e69af199ece719519
+PODFILE CHECKSUM: 2cc4e9c8f29901bcf99eaa1e9590a49330079a90
 
 COCOAPODS: 1.11.3

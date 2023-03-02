@@ -17,7 +17,8 @@ target 'Sinzak' do
     pod 'Firebase/Core'
     pod 'Firebase/Database'
     pod 'Firebase/Messaging'
-   
+    pod 'RxBlocking', '6.5.0'
+    pod 'RxTest', '6.5.0'
   end
 
 end
