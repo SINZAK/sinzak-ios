@@ -90,6 +90,15 @@ struct I18NStrings {
     static let follow = "follow".localized
     // 프로필편집
     static let editProfile = "editProfile".localized
+    static let changeProfilePhoto = "changeProfilePhoto".localized
+    static let nickname = "nickname".localized
+    static let introduction = "introduction".localized
+    static let school = "school".localized
+    static let verify = "verify".localized
+    static let verificationFinished = "verificationFinished".localized
+    static let genreOfInterest = "genreOfInterest".localized
+    static let change = "change".localized
+    static let applyCertifiedAuthor = "applyCertifiedAuthor".localized
     // 프로필 탭 버튼
     static let scrapList = "scrapList".localized // 스크랩 목록
     static let requestList = "requestList".localized // 의뢰해요
