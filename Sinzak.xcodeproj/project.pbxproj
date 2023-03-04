@@ -82,6 +82,9 @@
 		A233891929B088D400688FD8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891829B088D400688FD8 /* SettingView.swift */; };
 		A233891C29B088E800688FD8 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891B29B088E800688FD8 /* SettingVC.swift */; };
 		A233891F29B0CEC300688FD8 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891E29B0CEC300688FD8 /* Setting.swift */; };
+		A233892229B3756700688FD8 /* StompManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233892129B3756700688FD8 /* StompManager.swift */; };
+		A233892429B3772800688FD8 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233892329B3772800688FD8 /* Message.swift */; };
+		A233892629B37B1F00688FD8 /* Leave.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233892529B37B1F00688FD8 /* Leave.swift */; };
 		A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B12927D776007DADE7 /* AppDelegate.swift */; };
 		A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B32927D776007DADE7 /* SceneDelegate.swift */; };
 		A23415B62927D776007DADE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B52927D776007DADE7 /* ViewController.swift */; };
@@ -232,6 +235,9 @@
 		A233891829B088D400688FD8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A233891B29B088E800688FD8 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		A233891E29B0CEC300688FD8 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Setting.swift; path = Sinzak/Scene/MyProfile/Setting/VC/Setting.swift; sourceTree = SOURCE_ROOT; };
+		A233892129B3756700688FD8 /* StompManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompManager.swift; sourceTree = "<group>"; };
+		A233892329B3772800688FD8 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		A233892529B37B1F00688FD8 /* Leave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leave.swift; sourceTree = "<group>"; };
 		A23415AE2927D776007DADE7 /* Sinzak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinzak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23415B12927D776007DADE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A23415B32927D776007DADE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -816,6 +822,7 @@
 		A22BE58E296AEA4100D9815C /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				A233892029B3755A00688FD8 /* Stomp */,
 				A2F90539298969F500AC588C /* APIManager */,
 				A2F90538298969E100AC588C /* API */,
 			);
@@ -888,6 +895,16 @@
 				A233891E29B0CEC300688FD8 /* Setting.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A233892029B3755A00688FD8 /* Stomp */ = {
+			isa = PBXGroup;
+			children = (
+				A233892129B3756700688FD8 /* StompManager.swift */,
+				A233892329B3772800688FD8 /* Message.swift */,
+				A233892529B37B1F00688FD8 /* Leave.swift */,
+			);
+			path = Stomp;
 			sourceTree = "<group>";
 		};
 		A23415A52927D776007DADE7 = {
@@ -1592,6 +1609,7 @@
 			files = (
 				A2420F8B29A8BCE4007D8937 /* AddPhotoCVC.swift in Sources */,
 				A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */,
+				A233892429B3772800688FD8 /* Message.swift in Sources */,
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A280AB4229A7442300C1729C /* SearchResultHeader.swift in Sources */,
 				A233891C29B088E800688FD8 /* SettingVC.swift in Sources */,
@@ -1626,6 +1644,7 @@
 				A2646BED299204B40004F4CE /* User.swift in Sources */,
 				A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */,
 				A22BE597296AEC2A00D9815C /* Endpoint.swift in Sources */,
+				A233892629B37B1F00688FD8 /* Leave.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
 				A2947A2A298017A200EE2A96 /* MyChatBubbleCVC.swift in Sources */,
@@ -1681,6 +1700,7 @@
 				A216BD4E297FCC02008964BC /* NotiView.swift in Sources */,
 				A2265372296D7E5600605697 /* HomeView.swift in Sources */,
 				A2180DAF29AA38F700BBC74A /* RequestContentView.swift in Sources */,
+				A233892229B3756700688FD8 /* StompManager.swift in Sources */,
 				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
 				A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */,
 				A233891029B066EC00688FD8 /* EditProfileView.swift in Sources */,
