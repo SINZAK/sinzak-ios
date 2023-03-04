@@ -147,8 +147,6 @@
 		A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */; };
 		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
 		A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE4298776F300DE754F /* HomeManager.swift */; };
-		A2F90537298968DA00AC588C /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = A2F90536298968DA00AC588C /* SocketIO */; };
-		A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F9053B29896A5200AC588C /* SocketIOManager.swift */; };
 		B956786E877708A9B8AFE5DB /* Pods_Sinzak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8CD86AADD717AFED5B4E8 /* Pods_Sinzak.framework */; };
 /* End PBXBuildFile section */
 
@@ -300,7 +298,6 @@
 		A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A2F6EAE22987758C00DE754F /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		A2F6EAE4298776F300DE754F /* HomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeManager.swift; sourceTree = "<group>"; };
-		A2F9053B29896A5200AC588C /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		EF5846D6AC7082592AF80051 /* Pods-SinzakTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinzakTests.release.xcconfig"; path = "Target Support Files/Pods-SinzakTests/Pods-SinzakTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -320,7 +317,6 @@
 				A210CD52292F4D6B00F86A08 /* Then in Frameworks */,
 				A29CE9E12998DD2800EB89B4 /* FirebaseMessaging in Frameworks */,
 				A2289D4E2986A3910017969C /* Kingfisher in Frameworks */,
-				A2F90537298968DA00AC588C /* SocketIO in Frameworks */,
 				A226CC6629AF2D1D000161E8 /* RxMoya in Frameworks */,
 				A29CE9DF2998DD2800EB89B4 /* FirebaseCrashlytics in Frameworks */,
 				A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */,
@@ -820,7 +816,6 @@
 		A22BE58E296AEA4100D9815C /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				A2F9053A29896A3E00AC588C /* Socket */,
 				A2F90539298969F500AC588C /* APIManager */,
 				A2F90538298969E100AC588C /* API */,
 			);
@@ -1353,14 +1348,6 @@
 			path = APIManager;
 			sourceTree = "<group>";
 		};
-		A2F9053A29896A3E00AC588C /* Socket */ = {
-			isa = PBXGroup;
-			children = (
-				A2F9053B29896A5200AC588C /* SocketIOManager.swift */,
-			);
-			path = Socket;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1392,7 +1379,6 @@
 				A22BE5A8296B001B00D9815C /* KakaoSDKUser */,
 				A216BD47297FB6B5008964BC /* Tabman */,
 				A2289D4D2986A3910017969C /* Kingfisher */,
-				A2F90536298968DA00AC588C /* SocketIO */,
 				A29CE9DC2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				A29CE9DE2998DD2800EB89B4 /* FirebaseCrashlytics */,
 				A29CE9E02998DD2800EB89B4 /* FirebaseMessaging */,
@@ -1459,7 +1445,6 @@
 				A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */,
 				A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */,
 				A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A226CC6429AF2D1D000161E8 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
@@ -1709,7 +1694,6 @@
 				A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */,
 				A233891F29B0CEC300688FD8 /* Setting.swift in Sources */,
 				A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */,
-				A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 				A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */,
 				A280AB5329A7A5E600C1729C /* WriteCategoryHeaderKind.swift in Sources */,
@@ -2113,14 +2097,6 @@
 				minimumVersion = 9.6.0;
 			};
 		};
-		A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
-			requirement = {
-				kind = exactVersion;
-				version = 16.0.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2198,11 +2174,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
-		};
-		A2F90536298968DA00AC588C /* SocketIO */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A2F90535298968DA00AC588C /* XCRemoteSwiftPackageReference "socket" */;
-			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
