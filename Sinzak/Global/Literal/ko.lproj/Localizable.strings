@@ -89,6 +89,15 @@
 "follow" = "팔로우";
 // 프로필편집
 "editProfile" = "프로필 편집";
+"changeProfilePhoto" = "프로필 사진 바꾸기";
+"nickname" = "닉네임";
+"introduction" = "소개";
+"school" = "학교";
+"verify" = "인증하기";
+"verificationFinished" = "인증완료";
+"genreOfInterest" = "관심장르";
+"change" = "변경하기";
+"applyCertifiedAuthor" = "인증작가 신청하기";
 // 프로필 탭 버튼
 "scrapList" = "스크랩 목록";
 "requestList" = "의뢰해요";
@@ -150,3 +159,20 @@
 "welcome" = "Welcome!";
 "welcomeDescription" = "신작에 가입이 완료되었습니다.\n이제 자유롭게 작품을 탐색하고 거래해보세요.";
 "letsGoSeeArtworks" = "작품 보러 가기";
+// 설정
+"setting" = "설정";
+// - 섹션 타이틀
+"personalSetting" = "개인 설정";
+"usageGuide" = "이용 안내";
+"etcSection" = "기타";
+// - 섹션 내용
+"linkedAccounts" = "연결된 계정 관리";
+"blockedUser" = "차단 사용자 관리";
+"appVersion" = "앱 버전";
+"ask" = "문의하기";
+"notice" = "공지사항";
+"termsOfService" = "서비스 이용약관";
+"privacyPolicy" = "개인정보 처리방침";
+"opensourceLicense" = "오픈소스 라이선스";
+"withdraw" = "회원 탈퇴";
+"logout" = "로그아웃";

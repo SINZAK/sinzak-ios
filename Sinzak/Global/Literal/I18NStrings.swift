@@ -90,6 +90,15 @@ struct I18NStrings {
     static let follow = "follow".localized
     // 프로필편집
     static let editProfile = "editProfile".localized
+    static let changeProfilePhoto = "changeProfilePhoto".localized
+    static let nickname = "nickname".localized
+    static let introduction = "introduction".localized
+    static let school = "school".localized
+    static let verify = "verify".localized
+    static let verificationFinished = "verificationFinished".localized
+    static let genreOfInterest = "genreOfInterest".localized
+    static let change = "change".localized
+    static let applyCertifiedAuthor = "applyCertifiedAuthor".localized
     // 프로필 탭 버튼
     static let scrapList = "scrapList".localized // 스크랩 목록
     static let requestList = "requestList".localized // 의뢰해요
@@ -150,4 +159,21 @@ struct I18NStrings {
     static let welcome = "welcome".localized
     static let welcomeDescription = "welcomeDescription".localized
     static let letsGoSeeArtworks = "letsGoSeeArtworks".localized
+    // 설정
+    static let setting = "setting".localized
+    // - 섹션 타이틀
+    static let personalSetting = "personalSetting".localized
+    static let usageGuide = "usageGuide".localized
+    static let etcSection = "etcSection".localized
+    // - 섹션 내용
+    static let linkedAccounts = "linkedAccounts".localized
+    static let blockedUser = "blockedUser".localized
+    static let appVersion = "appVersion".localized
+    static let ask = "ask".localized
+    static let notice = "notice".localized
+    static let termsOfService = "termsOfService".localized
+    static let privacyPolicy = "privacyPolicy".localized
+    static let opensourceLicense = "opensourceLicense".localized
+    static let withdraw = "withdraw".localized
+    static let logout = "logout".localized
 }

@@ -77,6 +77,11 @@
 		A22BE5A5296B001B00D9815C /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A4296B001B00D9815C /* KakaoSDKAuth */; };
 		A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A6296B001B00D9815C /* KakaoSDKCommon */; };
 		A22BE5A9296B001B00D9815C /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A8296B001B00D9815C /* KakaoSDKUser */; };
+		A233891029B066EC00688FD8 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233890F29B066EC00688FD8 /* EditProfileView.swift */; };
+		A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891129B066F700688FD8 /* EditProfileVC.swift */; };
+		A233891929B088D400688FD8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891829B088D400688FD8 /* SettingView.swift */; };
+		A233891C29B088E800688FD8 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891B29B088E800688FD8 /* SettingVC.swift */; };
+		A233891F29B0CEC300688FD8 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891E29B0CEC300688FD8 /* Setting.swift */; };
 		A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B12927D776007DADE7 /* AppDelegate.swift */; };
 		A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B32927D776007DADE7 /* SceneDelegate.swift */; };
 		A23415B62927D776007DADE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23415B52927D776007DADE7 /* ViewController.swift */; };
@@ -224,6 +229,11 @@
 		A22BE58F296AEA4F00D9815C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		A22BE594296AEB4300D9815C /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		A22BE596296AEC2A00D9815C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		A233890F29B066EC00688FD8 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		A233891129B066F700688FD8 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		A233891829B088D400688FD8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		A233891B29B088E800688FD8 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		A233891E29B0CEC300688FD8 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Setting.swift; path = Sinzak/Scene/MyProfile/Setting/VC/Setting.swift; sourceTree = SOURCE_ROOT; };
 		A23415AE2927D776007DADE7 /* Sinzak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinzak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A23415B12927D776007DADE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A23415B32927D776007DADE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -409,8 +419,9 @@
 		A20E4A4C29990048009C1340 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
-				A20E4A502999007C009C1340 /* VC */,
-				A20E4A4F29990071009C1340 /* View */,
+				A233891529B088B600688FD8 /* Setting */,
+				A233890E29B066D400688FD8 /* EditProfile */,
+				A233890D29B066BF00688FD8 /* Profile */,
 			);
 			path = MyProfile;
 			sourceTree = "<group>";
@@ -814,6 +825,74 @@
 				A2F90538298969E100AC588C /* API */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		A233890D29B066BF00688FD8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A20E4A502999007C009C1340 /* VC */,
+				A20E4A4F29990071009C1340 /* View */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		A233890E29B066D400688FD8 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				A233891429B0673200688FD8 /* View */,
+				A233891329B0672B00688FD8 /* VC */,
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
+		A233891329B0672B00688FD8 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A233891129B066F700688FD8 /* EditProfileVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A233891429B0673200688FD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A233890F29B066EC00688FD8 /* EditProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A233891529B088B600688FD8 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A233891D29B0CEB800688FD8 /* Model */,
+				A233891729B088C400688FD8 /* VC */,
+				A233891629B088BF00688FD8 /* View */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		A233891629B088BF00688FD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A233891829B088D400688FD8 /* SettingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A233891729B088C400688FD8 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A233891B29B088E800688FD8 /* SettingVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A233891D29B0CEB800688FD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A233891E29B0CEC300688FD8 /* Setting.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A23415A52927D776007DADE7 = {
@@ -1530,6 +1609,7 @@
 				A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */,
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A280AB4229A7442300C1729C /* SearchResultHeader.swift in Sources */,
+				A233891C29B088E800688FD8 /* SettingVC.swift in Sources */,
 				A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */,
 				A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */,
 				A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */,
@@ -1547,6 +1627,7 @@
 				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,
 				A2265379296D80DC00605697 /* TabBarVC.swift in Sources */,
 				A2100F79298696D800C85ADF /* WorksHeader.swift in Sources */,
+				A233891929B088D400688FD8 /* SettingView.swift in Sources */,
 				A20E4A482998F796009C1340 /* NotLoginedView.swift in Sources */,
 				A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */,
 				A2100F6829865B2500C85ADF /* MarketHeader.swift in Sources */,
@@ -1558,6 +1639,7 @@
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
 				A280AB5129A7A5BB00C1729C /* WriteCategoryHeader.swift in Sources */,
 				A2646BED299204B40004F4CE /* User.swift in Sources */,
+				A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */,
 				A22BE597296AEC2A00D9815C /* Endpoint.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
@@ -1616,6 +1698,7 @@
 				A2180DAF29AA38F700BBC74A /* RequestContentView.swift in Sources */,
 				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
 				A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */,
+				A233891029B066EC00688FD8 /* EditProfileView.swift in Sources */,
 				A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */,
 				A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */,
 				A2420F8229A7B9E8007D8937 /* WriteCategoryTagCVC.swift in Sources */,
@@ -1624,6 +1707,7 @@
 				A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */,
+				A233891F29B0CEC300688FD8 /* Setting.swift in Sources */,
 				A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */,
 				A2F9053C29896A5200AC588C /* SocketIOManager.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
