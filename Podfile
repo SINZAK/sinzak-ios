@@ -10,6 +10,7 @@ target 'Sinzak' do
   pod 'naveridlogin-sdk-ios'
   pod 'lottie-ios'
   pod 'SwiftConfettiView'
+  pod "StompClientLib"
 
   target 'SinzakTests' do
     inherit! :search_paths
