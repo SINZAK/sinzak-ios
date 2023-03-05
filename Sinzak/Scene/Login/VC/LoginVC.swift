@@ -58,8 +58,14 @@ final class LoginVC: SZVC {
     }
     /// 로그인이 안될 경우 / 이메일 중복이 아닐 경우
     func goSignup() {
-        let vc = AgreementVC()
-        navigationController?.pushViewController(vc, animated: true)
+        let rootVC = AgreementVC()
+        let vc = UINavigationController(rootViewController: rootVC)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
+    }
+    /// 이미 가입한 유저일 경우 홈화면으로 이동
+    func goHome() {
+        let vc = TabBarVC()
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
     }
     // MARK: - Helpers
     override func configure() {
@@ -79,21 +85,33 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
         switch authorization.credential {
             // Apple ID
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            
             // 계정 정보 가져오기
-            let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
-            
-            print("User ID : \(userIdentifier)")
+            let idToken = appleIDCredential.identityToken
+            if let idToken = idToken {
+                let strToken = String(decoding: idToken, as: UTF8.self)
+                SNSLoginManager.shared.doAppleLogin(idToken: "\(strToken)") { [weak self] result in
+                    switch result {
+                    case let .success(data):
+                        if data.data.joined {
+                            // 가입했을 경우 홈으로 보내주고 액세스토큰, 리프레시 토큰은 키체인에 저장
+                            self?.goHome()
+                        } else {
+                            // 가입 안했을 경우 회원가입으로 보내기
+                            self?.goSignup()
+                        }
+                    case let .failure(error): print(error)
+                    }
+                }
+            }
             print("User Email : \(email ?? "")")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            
             if let email = email {
                 AuthManager.shared.checkEmail(email)
             }
             // 키체인에 저장
-            saveUserInKeychain(userIdentifier)
+            //saveUserInKeychain(userIdentifier)
         default:
             break
         }
