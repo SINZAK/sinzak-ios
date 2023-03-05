@@ -56,14 +56,20 @@
 "appWebDesign" = "앱/웹 디자인";
 // 대학교 선택
 "pleaseSelectUniversity" = "소속 대학교를 알려주세요.";
-"yearOfAdmission" = "입학년도";
-"selectYearStudentNumber" = "연도 선택 (학번)";
-"selectAcademicStatus" = "학적 선택";
-"enrolled" = "재학생";
-"graduated" = "졸업생";
-"universityName" = "학교 이름";
 "searchBySchoolName" = "학교 이름을 검색하세요.";
-
+"notStudent" = "대학생이 아니에요";
+"verifyTypeSelect" = "인증 방식 선택";
+"schoolWebmailAuth" = "학교 웹메일 인증";
+"schoolIdCardAuth" = "학생증 인증";
+"pleaseTypeSchoolEmail" = "학교메일을 입력하세요.";
+"uploadSchoolCardImage" = "사진 업로드하기";
+"schoolEmailAuthDescription" = "이메일을 입력하면 인증 메일을 보내드립니다.\n이메일 수신 후 인증번호를 입력하면 인증이 완료됩니다.";
+"schoolCardAuthDescription" = "모바일 학생증 캡쳐 화면 또는 실물 학생증 사진을\n업로드해주세요. 2~3일 내에 승인이 완료됩니다.";
+"enterYourEmailInCorrectFormat" = "올바른 형식의 메일을 입력하세요.";
+"authCode" = "인증번호";
+"fourDigitPlease" = "4자리 인증번호를 입력해주세요.";
+"verificationEmailHasBeenSent" = "인증메일이 전송되었습니다.";
+"authenticated" = "인증 완료!";
 // 대학교 인증
 "enrolledStudentAuth" = "재학생 인증";
 "graduatedStudentAuth" = "졸업생 인증";

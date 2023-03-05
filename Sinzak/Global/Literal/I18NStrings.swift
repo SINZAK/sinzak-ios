@@ -59,14 +59,20 @@ struct I18NStrings {
     
     // 대학교 선택
     static let pleaseSelectUniversity = "pleaseSelectUniversity".localized
-    static let yearOfAdmission = "yearOfAdmission".localized
-    static let selectYearStudentNumber = "selectYearStudentNumber".localized
-    static let selectAcademicStatus = "selectAcademicStatus".localized
-    static let enrolled = "enrolled".localized
-    static let graduated = "graduated".localized
-    static let universityName = "universityName".localized
     static let searchBySchoolName = "searchBySchoolName".localized
-    
+    static let notStudent = "notStudent".localized
+    static let verifyTypeSelect = "authTypeSelect".localized
+    static let schoolWebmailAuth = "schoolWebmailAuth".localized
+    static let schoolCardAuth = "schoolIdCardAuth".localized
+    static let pleaseTypeSchoolEmail = "pleaseTypeSchoolEmail".localized
+    static let uploadSchoolCardImage = "uploadSchoolCardImage".localized
+    static let schoolEmailAuthDescription = "schoolEmailAuthDescription".localized
+    static let schoolCardAuthDescription = "schoolCardAuthDescription".localized
+    static let enterYourEmailInCorrectFormat = "enterYourEmailInCorrectFormat".localized
+    static let authCode = "authCode".localized
+    static let fourDigitPlease = "fourDigitPlease".localized
+    static let verificationEmailHasBeenSent = "verificationEmailHasBeenSent".localized
+    static let authenticated = "authenticated".localized
     // 대학교 인증
     static let enrolledStudentAuth = "enrolledStudentAuth".localized
     static let graduatedStudentAuth = "graduatedStudentAuth".localized
