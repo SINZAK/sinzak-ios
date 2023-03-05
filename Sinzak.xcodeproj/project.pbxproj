@@ -146,6 +146,9 @@
 		A2B969D329AA5B1F006119B1 /* sinzak_splash_animation_light.json in Resources */ = {isa = PBXBuildFile; fileRef = A2B969D229AA5B1F006119B1 /* sinzak_splash_animation_light.json */; };
 		A2B969E129ABA661006119B1 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B969E029ABA661006119B1 /* DetailView.swift */; };
 		A2B969E429ABA699006119B1 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B969E329ABA699006119B1 /* DetailVC.swift */; };
+		A2DEC35629B4417F00CF0794 /* SNSLoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35529B4417F00CF0794 /* SNSLoginAPI.swift */; };
+		A2DEC35829B4441100CF0794 /* SNSLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */; };
+		A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */; };
 		A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EADD298773EB00DE754F /* BannerModel.swift */; };
 		A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */; };
 		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
@@ -299,6 +302,9 @@
 		A2B969D229AA5B1F006119B1 /* sinzak_splash_animation_light.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sinzak_splash_animation_light.json; sourceTree = "<group>"; };
 		A2B969E029ABA661006119B1 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		A2B969E329ABA699006119B1 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		A2DEC35529B4417F00CF0794 /* SNSLoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginAPI.swift; sourceTree = "<group>"; };
+		A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginManager.swift; sourceTree = "<group>"; };
+		A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLogin.swift; sourceTree = "<group>"; };
 		A2F07846298AB0A7004A2B3F /* SinzakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinzakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F6EADD298773EB00DE754F /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -1213,6 +1219,7 @@
 		A2B3855E2959A4AE00E5EB7C /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A2DEC35929B44E1D00CF0794 /* Model */,
 				A2B38565295D87FC00E5EB7C /* View */,
 				A2B38566295D880500E5EB7C /* VC */,
 			);
@@ -1321,6 +1328,14 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
+		A2DEC35929B44E1D00CF0794 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A2F07847298AB0A7004A2B3F /* SinzakTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1351,6 +1366,7 @@
 			children = (
 				A22BE596296AEC2A00D9815C /* Endpoint.swift */,
 				A22BE594296AEB4300D9815C /* AuthAPI.swift */,
+				A2DEC35529B4417F00CF0794 /* SNSLoginAPI.swift */,
 				A2F6EAE22987758C00DE754F /* HomeAPI.swift */,
 			);
 			path = API;
@@ -1361,6 +1377,7 @@
 			children = (
 				A22BE58F296AEA4F00D9815C /* AuthManager.swift */,
 				A2F6EAE4298776F300DE754F /* HomeManager.swift */,
+				A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -1651,6 +1668,7 @@
 				A216BD56297FD61D008964BC /* ChatListVC.swift in Sources */,
 				A216BD4C297FCBD1008964BC /* FollowNotiVC.swift in Sources */,
 				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,
+				A2DEC35829B4441100CF0794 /* SNSLoginManager.swift in Sources */,
 				A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */,
 				A20E4A4E29990064009C1340 /* MyProfileView.swift in Sources */,
 				A280AB4A29A763BE00C1729C /* WriteCategoryVC.swift in Sources */,
@@ -1671,6 +1689,7 @@
 				A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */,
 				A20E4A5229990091009C1340 /* MyProfileVC.swift in Sources */,
 				A2100F77298695A100C85ADF /* WorksCategory.swift in Sources */,
+				A2DEC35629B4417F00CF0794 /* SNSLoginAPI.swift in Sources */,
 				A280AB4029A7400100C1729C /* UIViewController+Extension.swift in Sources */,
 				A2180DB629AA3C1A00BBC74A /* ArtworkSizeView.swift in Sources */,
 				A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */,
@@ -1717,6 +1736,7 @@
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 				A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */,
 				A280AB5329A7A5E600C1729C /* WriteCategoryHeaderKind.swift in Sources */,
+				A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */,
 				A20E4A4B2998FA26009C1340 /* NotLoginedVC.swift in Sources */,
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,
 				A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */,
