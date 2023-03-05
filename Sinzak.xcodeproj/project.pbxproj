@@ -149,6 +149,8 @@
 		A2DEC35829B4441100CF0794 /* SNSLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */; };
 		A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */; };
 		A2DEC35F29B4638D00CF0794 /* SudentAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35E29B4638C00CF0794 /* SudentAuthView.swift */; };
+		A2DEC36429B4684100CF0794 /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC36329B4684100CF0794 /* School.swift */; };
+		A2DEC36629B46C8500CF0794 /* school.json in Resources */ = {isa = PBXBuildFile; fileRef = A2DEC36529B46C8500CF0794 /* school.json */; };
 		A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EADD298773EB00DE754F /* BannerModel.swift */; };
 		A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */; };
 		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
@@ -305,6 +307,8 @@
 		A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginManager.swift; sourceTree = "<group>"; };
 		A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLogin.swift; sourceTree = "<group>"; };
 		A2DEC35E29B4638C00CF0794 /* SudentAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SudentAuthView.swift; sourceTree = "<group>"; };
+		A2DEC36329B4684100CF0794 /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
+		A2DEC36529B46C8500CF0794 /* school.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = school.json; sourceTree = "<group>"; };
 		A2F07846298AB0A7004A2B3F /* SinzakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinzakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F6EADD298773EB00DE754F /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -1256,6 +1260,7 @@
 		A2B38568295D884400E5EB7C /* SchoolAuth */ = {
 			isa = PBXGroup;
 			children = (
+				A2DEC36229B4682E00CF0794 /* Model */,
 				A2DEC35C29B462DE00CF0794 /* UniversityInfo */,
 				A2DEC35D29B4630C00CF0794 /* StudentAuth */,
 			);
@@ -1366,6 +1371,15 @@
 				A2B3857B295D893A00E5EB7C /* UniversityInfoVC.swift */,
 			);
 			path = VC;
+			sourceTree = "<group>";
+		};
+		A2DEC36229B4682E00CF0794 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A2DEC36529B46C8500CF0794 /* school.json */,
+				A2DEC36329B4684100CF0794 /* School.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A2F07847298AB0A7004A2B3F /* SinzakTests */ = {
@@ -1535,6 +1549,7 @@
 				A23415C62927D7A9007DADE7 /* .gitignore in Resources */,
 				A20CBD6A29478B540012FF32 /* Localizable.strings in Resources */,
 				A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */,
+				A2DEC36629B46C8500CF0794 /* school.json in Resources */,
 				A2B969D329AA5B1F006119B1 /* sinzak_splash_animation_light.json in Resources */,
 				A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */,
 				A23415BB2927D778007DADE7 /* Assets.xcassets in Resources */,
@@ -1771,6 +1786,7 @@
 				A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */,
 				A20E4A4B2998FA26009C1340 /* NotLoginedVC.swift in Sources */,
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,
+				A2DEC36429B4684100CF0794 /* School.swift in Sources */,
 				A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */,
 				A280AB4D29A79E8A00C1729C /* WriteCategory.swift in Sources */,
 			);
