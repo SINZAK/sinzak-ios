@@ -24,7 +24,7 @@ final class UniversityInfoVC: SZVC {
         present(vc, animated: true)
     }
     @objc func nextButtonTapped(_ sender: UIButton) {
-        let vc = SZVC()  // studentauthvc로 이동
+        let vc = StudentAuthVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: - Helpers
