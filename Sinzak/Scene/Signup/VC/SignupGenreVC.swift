@@ -21,7 +21,10 @@ final class SignupGenreVC: SZVC {
     }
     
     // MARK: - Actions
-    
+    @objc func nextButtonTapped(_ sender: UIButton) {
+        let vc = UniversityInfoVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     // MARK: - Helpers
     override func configure() {
         mainView.collectionView.collectionViewLayout = setLayout()
@@ -29,6 +32,8 @@ final class SignupGenreVC: SZVC {
         mainView.collectionView.delegate = self
         mainView.collectionView.register(InterestedGenreCVC.self, forCellWithReuseIdentifier: String(describing: InterestedGenreCVC.self))
         mainView.collectionView.register(InterestedGenreHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: InterestedGenreHeader.self))
+        
+        mainView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
 }
 
