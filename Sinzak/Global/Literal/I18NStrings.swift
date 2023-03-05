@@ -74,8 +74,7 @@ struct I18NStrings {
     static let verificationEmailHasBeenSent = "verificationEmailHasBeenSent".localized
     static let authenticated = "authenticated".localized
     // 대학교 인증
-    static let enrolledStudentAuth = "enrolledStudentAuth".localized
-    static let graduatedStudentAuth = "graduatedStudentAuth".localized
+    static let schoolAuth = "schoolAuth".localized
     static let schoolWebMailAuth = "schoolWebMailAuth".localized
     static let emailAuthDescription = "emailAuthDescription".localized
     static let pleaseEnterSchoolEmail = "pleaseEnterSchoolEmail".localized

@@ -71,8 +71,7 @@
 "verificationEmailHasBeenSent" = "인증메일이 전송되었습니다.";
 "authenticated" = "인증 완료!";
 // 대학교 인증
-"enrolledStudentAuth" = "재학생 인증";
-"graduatedStudentAuth" = "졸업생 인증";
+"schoolAuth" = "학교 인증";
 "schoolWebMailAuth" = "학교 웹메일 인증";
 "emailAuthDescription" = "이메일을 입력하면 인증 메일을 보내드립니다.\n이메일 수신 후 본문에 포함된 링크를 클릭하면 인증이 완료됩니다. ";
 "pleaseEnterSchoolEmail" = "학교메일을 입력하세요.";
