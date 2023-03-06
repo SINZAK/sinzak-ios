@@ -17,9 +17,18 @@ final class CertifiedAuthorVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    // MAKR: - Helpers
+    // MARK: - Actions
+    @objc func schoolAuthButtonTapped(_ sender: UIButton) {
+        // 웰컴뷰 없애야함
+    }
+    @objc func applyButtonTapped(_ sender: UIButton) {
+        // 신청
+        navigationController?.popViewController(animated: true)
+    }
+    // MARK: - Helpers
     override func configure() {
-        
+        mainView.schoolAuthButton.addTarget(self, action: #selector(schoolAuthButtonTapped), for: .touchUpInside)
+        mainView.applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
     }
     override func setNavigationBar() {
         super.setNavigationBar()
