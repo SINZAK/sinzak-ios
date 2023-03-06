@@ -23,6 +23,7 @@ final class UniversityInfoView: SZView {
         $0.font = .caption_B
         $0.textColor = CustomColor.black
         $0.placeholder = I18NStrings.searchBySchoolName
+        $0.clearButtonMode = .whileEditing
     }
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         $0.clipsToBounds = true
