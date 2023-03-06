@@ -184,3 +184,13 @@
 "opensourceLicense" = "오픈소스 라이선스";
 "withdraw" = "회원 탈퇴";
 "logout" = "로그아웃";
+// 인증작가 신청
+"certifiedAuthorApplication" = "인증작가 신청";
+"sinzakCertifiedAuthor" = "신작 인증 작가";
+"sinzakCertifiedAuthorDescription01" = "인증 작가가 되면 이름 옆에 인증작가 배지 ";
+"sinzakCertifiedAuthorDescription02" = " 가 붙고,";
+"sinzakCertifiedAuthorDescription03" = "신작 추천 작품에 선정될 가능성이 높아집니다.";
+"firstStepSchoolAuth" = "1단계. 학교 인증";
+"secondStepPortfolioLink" = "2단계. 포트폴리오 링크";
+"secondStepPortfolioLinkDescription" = "개인 웹사이트, Behance, ArtStation, google drive 등\n링크 형식으로 포트폴리오를 첨부해주세요. ";
+"pleaseEnterLink" = "링크를 입력하세요.";
