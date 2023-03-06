@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Kingfisher
 
 final class ArtCVC: UICollectionViewCell {
     // MARK: - Properties
@@ -72,6 +73,18 @@ final class ArtCVC: UICollectionViewCell {
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    // MARK: - Setter
+    func setData(_ data: Products) {
+        if let thumbnail = data.thumbnail {
+            let url = URL(string: thumbnail)
+            imageView.kf.setImage(with: url)
+        }
+        titleLabel.text = data.title
+        authorLabel.text = data.author
+        uploadTimeLabel.text = data.date
+        priceLabel.text = "\(data.price)"
+        favoriteCountLabel.text = "\(data.likesCnt)"
     }
     // MARK: - Design Helpers
     func setupUI() {

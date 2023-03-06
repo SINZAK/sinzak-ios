@@ -223,6 +223,16 @@ final class DetailView: SZView {
         $0.setTitleColor(CustomColor.purple, for: .normal)
         $0.titleLabel?.font = .caption_B
     }
+    // MARK: - Setter
+    func setData(_ data: Products) {
+        titleNameLabel.text = data.title
+        priceLabel.text = "\(data.price)"
+        authorNameLabel.text = data.author
+        timeLabel.text = data.date
+        contentLabel.text = data.content
+        scrapCountLabel.text = "\(data.likesCnt)"
+        viewCountLabel.text = "\(data.popularity)"
+    }
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
