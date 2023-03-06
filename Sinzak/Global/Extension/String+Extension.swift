@@ -17,3 +17,13 @@ extension String {
         String(format: self.localized, arguments: arguments)
     }
 }
+// 문자열 -> 날짜
+extension String {
+    func toDate() -> Date {
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        guard let validDate = dateFormater.date(from: self) else { return Date() }
+        
+        return validDate
+    }
+}
