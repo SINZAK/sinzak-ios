@@ -188,4 +188,5 @@ struct I18NStrings {
     static let secondStepPortfolioLink = "secondStepPortfolioLink".localized
     static let secondStepPortfolioLinkDescription = "secondStepPortfolioLinkDescription".localized
     static let pleaseEnterLink = "pleaseEnterLink".localized
+    static let apply = "apply".localized
 }
