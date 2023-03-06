@@ -57,14 +57,14 @@ struct I18NStrings {
     static let logoBranding = "logoBranding".localized // 로고/브랜딩
     static let appWebDesign = "appWebDesign".localized// 앱/웹 디자인
     
-    // 대학교 선택
+    // 대학교 인증
     static let pleaseSelectUniversity = "pleaseSelectUniversity".localized
     static let searchBySchoolName = "searchBySchoolName".localized
     static let notStudent = "notStudent".localized
-    static let verifyTypeSelect = "authTypeSelect".localized
+    static let verifyTypeSelect = "verifyTypeSelect".localized
     static let schoolWebmailAuth = "schoolWebmailAuth".localized
     static let schoolCardAuth = "schoolIdCardAuth".localized
-    static let pleaseTypeSchoolEmail = "pleaseTypeSchoolEmail".localized
+    static let pleaseEnterSchoolEmail = "pleaseEnterSchoolEmail".localized
     static let uploadSchoolCardImage = "uploadSchoolCardImage".localized
     static let schoolEmailAuthDescription = "schoolEmailAuthDescription".localized
     static let schoolCardAuthDescription = "schoolCardAuthDescription".localized
@@ -72,12 +72,9 @@ struct I18NStrings {
     static let authCode = "authCode".localized
     static let fourDigitPlease = "fourDigitPlease".localized
     static let verificationEmailHasBeenSent = "verificationEmailHasBeenSent".localized
+    static let pleaseEnterAgain = "pleaseEnterAgain".localized
     static let authenticated = "authenticated".localized
-    // 대학교 인증
     static let schoolAuth = "schoolAuth".localized
-    static let schoolWebMailAuth = "schoolWebMailAuth".localized
-    static let emailAuthDescription = "emailAuthDescription".localized
-    static let pleaseEnterSchoolEmail = "pleaseEnterSchoolEmail".localized
     static let doNextTime = "doNextTime".localized
     static let sendMail = "sendMail".localized
     
