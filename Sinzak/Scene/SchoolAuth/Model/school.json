@@ -1,0 +1,309 @@
+{
+  "school": [
+    {
+      "koreanName": "가천대학교",
+      "englishName": "Gachon University",
+      "email": "gachon.ac.kr"
+    },
+    {
+      "koreanName": "강원대학교",
+      "englishName": "Gangwon National University",
+      "email": "kangwon.ac.kr"
+    },
+    {
+      "koreanName": "건국대학교",
+      "englishName": "Konkuk University",
+      "email": "konkuk.ac.kr"
+    },
+    {
+      "koreanName": "건국대학교(글로컬)",
+      "englishName": "Konkuk University (Global)",
+      "email": "kku.ac.kr"
+    },
+    {
+      "koreanName": "경기과학기술대학교",
+      "englishName": "Gyeonggi University of Science and Technology",
+      "email": "gtec.ac.kr"
+    },
+    {
+      "koreanName": "경기대학교",
+      "englishName": "Gyeonggi University",
+      "email": "kyonggi.ac.kr"
+    },
+    {
+      "koreanName": "경북대학교",
+      "englishName": "Kyungpook National University",
+      "email": "knu.ac.kr"
+    },
+    {
+      "koreanName": "경인교육대학교",
+      "englishName": "Gyeongin Education University",
+      "email": "ginue.ac.kr"
+    },
+    {
+      "koreanName": "경희대학교",
+      "englishName": "Kyunghee University",
+      "email": "khu.ac.kr"
+    },
+    {
+      "koreanName": "계원예술대학교",
+      "englishName": "Gyewon Art University",
+      "email": "kaywon.ac.kr"
+    },
+    {
+      "koreanName": "고려대학교",
+      "englishName": "Korea University",
+      "email": "korea.ac.kr"
+    },
+    {
+      "koreanName": "광운대학교",
+      "englishName": "Kwangwoon University",
+      "email": "kw.ac.kr"
+    },
+    {
+      "koreanName": "국민대학교",
+      "englishName": "Kookmin University",
+      "email": "kookmin.ac.kr"
+    },
+    {
+      "koreanName": "단국대학교",
+      "englishName": "Dankook University",
+      "email": "dankook.ac.kr"
+    },
+    {
+      "koreanName": "덕성여자대학교",
+      "englishName": "Duksung Women's University",
+      "email": "duksung.ac.kr"
+    },
+    {
+      "koreanName": "동국대학교",
+      "englishName": "Dongguk University",
+      "email": "dongguk.edu"
+    },
+    {
+      "koreanName": "동국대학교(경주)",
+      "englishName": "Dongguk University (Gyeongju)",
+      "email": "dongguk.ac.kr"
+    },
+    {
+      "koreanName": "동덕여자대학교",
+      "englishName": "Dongduk Women's University",
+      "email": "dongduk.ac.kr"
+    },
+    {
+      "koreanName": "명지대학교",
+      "englishName": "Myeongji University",
+      "email": "mju.ac.kr"
+    },
+    {
+      "koreanName": "명지전문대학",
+      "englishName": "Myeongji College",
+      "email": "mjc.ac.kr"
+    },
+    {
+      "koreanName": "부산대학교",
+      "englishName": "Busan University",
+      "email": "pusan.ac.kr"
+    },
+    {
+      "koreanName": "상명대학교",
+      "englishName": "Sangmyung University",
+      "email": "sangmyung.kr"
+    },
+    {
+      "koreanName": "서강대학교",
+      "englishName": "Sogang University",
+      "email": "sogang.ac.kr"
+    },
+    {
+      "koreanName": "서경대학교",
+      "englishName": "Seogyeong University",
+      "email": "skuniv.ac.kr"
+    },
+    {
+      "koreanName": "서울과학기술대학교",
+      "englishName": "Seoul Science and Technology University",
+      "email": "seoultech.ac.kr"
+    },
+    {
+      "koreanName": "서울교육대학교",
+      "englishName": "Seoul Education University",
+      "email": "snue.ac.kr"
+    },
+    {
+      "koreanName": "서울대학교",
+      "englishName": "Seoul National University",
+      "email": "snu.ac.kr"
+    },
+    {
+      "koreanName": "서울시립대학교",
+      "englishName": "Seoul National University",
+      "email": "uos.ac.kr"
+    },
+    {
+      "koreanName": "서울여자대학교",
+      "englishName": "Seoul Women's University",
+      "email": "swu.ac.kr"
+    },
+    {
+      "koreanName": "성균관대학교",
+      "englishName": "Sungkyunkwan University",
+      "email": "skku.edu"
+    },
+    {
+      "koreanName": "성신여자대학교",
+      "englishName": "Sungshin Women's University",
+      "email": "sungshin.ac.kr"
+    },
+    {
+      "koreanName": "세종대학교",
+      "englishName": "Sejong University",
+      "email": "sju.ac.kr"
+    },
+    {
+      "koreanName": "숙명여자대학교",
+      "englishName": "Sookmyung Women's University",
+      "email": "sookmyung.ac.kr"
+    },
+    {
+      "koreanName": "숭실대학교",
+      "englishName": "Soongsil University",
+      "email": "soongsil.ac.kr"
+    },
+    {
+      "koreanName": "아주대학교",
+      "englishName": "Ajou University",
+      "email": "ajou.ac.kr"
+    },
+    {
+      "koreanName": "연세대학교",
+      "englishName": "Yonsei University",
+      "email": "yonsei.ac.kr"
+    },
+    {
+      "koreanName": "영남대학교",
+      "englishName": "Yeungnam University",
+      "email": "ynu.ac.kr"
+    },
+    {
+      "koreanName": "이화여자대학교",
+      "englishName": "Ewha Women University",
+      "email": "ewhain.net"
+    },
+    {
+      "koreanName": "인천대학교",
+      "englishName": "Incheon University",
+      "email": "inu.ac.kr"
+    },
+    {
+      "koreanName": "인하공업전문대학",
+      "englishName": "Inha Technical College",
+      "email": "itc.ac.kr"
+    },
+    {
+      "koreanName": "인하대학교",
+      "englishName": "Inha University",
+      "email": "inha.edu"
+    },
+    {
+      "koreanName": "전남대학교",
+      "englishName": "Chonnam National University",
+      "email": "jnu.ac.kr"
+    },
+    {
+      "koreanName": "전북대학교",
+      "englishName": "Chonbuk National University",
+      "email": "jbnu.ac.kr"
+    },
+    {
+      "koreanName": "중앙대학교",
+      "englishName": "Chung-ang University",
+      "email": "cau.ac.kr"
+    },
+    {
+      "koreanName": "추계예술대학교",
+      "englishName": "Fall Arts University",
+      "email": "chugye.ac.kr"
+    },
+    {
+      "koreanName": "충남대학교",
+      "englishName": "Chungnam National University",
+      "email": "cnu.ac.kr"
+    },
+    {
+      "koreanName": "충북대학교",
+      "englishName": "Chungbuk National University",
+      "email": "chungbuk.ac.kr"
+    },
+    {
+      "koreanName": "한국방송통신대학교",
+      "englishName": "Korea Broadcasting and Communication University",
+      "email": "knou.ac.kr"
+    },
+    {
+      "koreanName": "한국산업기술대학교",
+      "englishName": "Korea Industrial Technology University",
+      "email": "kpu.ac.kr"
+    },
+    {
+      "koreanName": "한국예술종합학교",
+      "englishName": "Korea National University of Arts",
+      "email": "karts.ac.kr"
+    },
+    {
+      "koreanName": "한국외국어대학교",
+      "englishName": "Hankuk University of Foreign Studies",
+      "email": "hufs.ac.kr"
+    },
+    {
+      "koreanName": "한국체육대학교",
+      "englishName": "Korea Sports University",
+      "email": "knsu.ac.kr"
+    },
+    {
+      "koreanName": "한국항공대학교",
+      "englishName": "Korea Aviation University",
+      "email": "kau.kr"
+    },
+    {
+      "koreanName": "한양대학교",
+      "englishName": "Hanyang University",
+      "email": "hanyang.ac.kr"
+    },
+    {
+      "koreanName": "한양대학교(ERICA)",
+      "englishName": "Hanyang University (ERICA)",
+      "email": "hanyang.ac.kr"
+    },
+    {
+      "koreanName": "홍익대학교",
+      "englishName": "Hongik University",
+      "email": "hongik.ac.kr"
+    },
+    {
+      "koreanName": "DGIST",
+      "englishName": "Dgist",
+      "email": "dgist.ac.kr"
+    },
+    {
+      "koreanName": "GIST",
+      "englishName": "Gist",
+      "email": "gist.ac.kr"
+    },
+    {
+      "koreanName": "KAIST",
+      "englishName": "Kaist",
+      "email": "kaist.ac.kr"
+    },
+    {
+      "koreanName": "POSTECH",
+      "englishName": "Postech",
+      "email": "postech.ac.kr"
+    },
+    {
+      "koreanName": "UNIST",
+      "englishName": "Unist",
+      "email": "unist.ac.kr"
+    }
+  ]
+}

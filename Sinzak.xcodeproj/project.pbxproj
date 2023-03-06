@@ -140,8 +140,7 @@
 		A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38575295D88DC00E5EB7C /* SignupGenreVC.swift */; };
 		A2B3857A295D893300E5EB7C /* UniversityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38579295D893300E5EB7C /* UniversityInfoView.swift */; };
 		A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857B295D893A00E5EB7C /* UniversityInfoVC.swift */; };
-		A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */; };
-		A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */; };
+		A2B38580295D895800E5EB7C /* StudentAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857F295D895800E5EB7C /* StudentAuthVC.swift */; };
 		A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38581295ED7AA00E5EB7C /* SZTextField.swift */; };
 		A2B969D329AA5B1F006119B1 /* sinzak_splash_animation_light.json in Resources */ = {isa = PBXBuildFile; fileRef = A2B969D229AA5B1F006119B1 /* sinzak_splash_animation_light.json */; };
 		A2B969E129ABA661006119B1 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B969E029ABA661006119B1 /* DetailView.swift */; };
@@ -149,6 +148,9 @@
 		A2DEC35629B4417F00CF0794 /* SNSLoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35529B4417F00CF0794 /* SNSLoginAPI.swift */; };
 		A2DEC35829B4441100CF0794 /* SNSLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */; };
 		A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */; };
+		A2DEC35F29B4638D00CF0794 /* SudentAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35E29B4638C00CF0794 /* SudentAuthView.swift */; };
+		A2DEC36429B4684100CF0794 /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC36329B4684100CF0794 /* School.swift */; };
+		A2DEC36629B46C8500CF0794 /* school.json in Resources */ = {isa = PBXBuildFile; fileRef = A2DEC36529B46C8500CF0794 /* school.json */; };
 		A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EADD298773EB00DE754F /* BannerModel.swift */; };
 		A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */; };
 		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
@@ -296,8 +298,7 @@
 		A2B38575295D88DC00E5EB7C /* SignupGenreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVC.swift; sourceTree = "<group>"; };
 		A2B38579295D893300E5EB7C /* UniversityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoView.swift; sourceTree = "<group>"; };
 		A2B3857B295D893A00E5EB7C /* UniversityInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoVC.swift; sourceTree = "<group>"; };
-		A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthView.swift; sourceTree = "<group>"; };
-		A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolEmailAuthVC.swift; sourceTree = "<group>"; };
+		A2B3857F295D895800E5EB7C /* StudentAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAuthVC.swift; sourceTree = "<group>"; };
 		A2B38581295ED7AA00E5EB7C /* SZTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZTextField.swift; sourceTree = "<group>"; };
 		A2B969D229AA5B1F006119B1 /* sinzak_splash_animation_light.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sinzak_splash_animation_light.json; sourceTree = "<group>"; };
 		A2B969E029ABA661006119B1 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -305,6 +306,9 @@
 		A2DEC35529B4417F00CF0794 /* SNSLoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginAPI.swift; sourceTree = "<group>"; };
 		A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginManager.swift; sourceTree = "<group>"; };
 		A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLogin.swift; sourceTree = "<group>"; };
+		A2DEC35E29B4638C00CF0794 /* SudentAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SudentAuthView.swift; sourceTree = "<group>"; };
+		A2DEC36329B4684100CF0794 /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
+		A2DEC36529B46C8500CF0794 /* school.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = school.json; sourceTree = "<group>"; };
 		A2F07846298AB0A7004A2B3F /* SinzakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinzakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F6EADD298773EB00DE754F /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -1245,8 +1249,8 @@
 		A2B38567295D883B00E5EB7C /* Signup */ = {
 			isa = PBXGroup;
 			children = (
-				A226CC5629AE3156000161E8 /* Welcome */,
 				A2AA89C92967B11A004A63C1 /* Model */,
+				A226CC5629AE3156000161E8 /* Welcome */,
 				A2B38569295D886300E5EB7C /* View */,
 				A2B3856A295D886900E5EB7C /* VC */,
 			);
@@ -1256,8 +1260,9 @@
 		A2B38568295D884400E5EB7C /* SchoolAuth */ = {
 			isa = PBXGroup;
 			children = (
-				A2B38577295D88FE00E5EB7C /* View */,
-				A2B38578295D890300E5EB7C /* VC */,
+				A2DEC36229B4682E00CF0794 /* Model */,
+				A2DEC35C29B462DE00CF0794 /* UniversityInfo */,
+				A2DEC35D29B4630C00CF0794 /* StudentAuth */,
 			);
 			path = SchoolAuth;
 			sourceTree = "<group>";
@@ -1287,8 +1292,7 @@
 		A2B38577295D88FE00E5EB7C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A2B38579295D893300E5EB7C /* UniversityInfoView.swift */,
-				A2B3857D295D895000E5EB7C /* SchoolEmailAuthView.swift */,
+				A2DEC35E29B4638C00CF0794 /* SudentAuthView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1296,8 +1300,7 @@
 		A2B38578295D890300E5EB7C /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				A2B3857B295D893A00E5EB7C /* UniversityInfoVC.swift */,
-				A2B3857F295D895800E5EB7C /* SchoolEmailAuthVC.swift */,
+				A2B3857F295D895800E5EB7C /* StudentAuthVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1332,6 +1335,49 @@
 			isa = PBXGroup;
 			children = (
 				A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A2DEC35C29B462DE00CF0794 /* UniversityInfo */ = {
+			isa = PBXGroup;
+			children = (
+				A2DEC36029B4639700CF0794 /* View */,
+				A2DEC36129B463A500CF0794 /* VC */,
+			);
+			path = UniversityInfo;
+			sourceTree = "<group>";
+		};
+		A2DEC35D29B4630C00CF0794 /* StudentAuth */ = {
+			isa = PBXGroup;
+			children = (
+				A2B38577295D88FE00E5EB7C /* View */,
+				A2B38578295D890300E5EB7C /* VC */,
+			);
+			path = StudentAuth;
+			sourceTree = "<group>";
+		};
+		A2DEC36029B4639700CF0794 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2B38579295D893300E5EB7C /* UniversityInfoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2DEC36129B463A500CF0794 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2B3857B295D893A00E5EB7C /* UniversityInfoVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A2DEC36229B4682E00CF0794 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A2DEC36529B46C8500CF0794 /* school.json */,
+				A2DEC36329B4684100CF0794 /* School.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1503,6 +1549,7 @@
 				A23415C62927D7A9007DADE7 /* .gitignore in Resources */,
 				A20CBD6A29478B540012FF32 /* Localizable.strings in Resources */,
 				A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */,
+				A2DEC36629B46C8500CF0794 /* school.json in Resources */,
 				A2B969D329AA5B1F006119B1 /* sinzak_splash_animation_light.json in Resources */,
 				A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */,
 				A23415BB2927D778007DADE7 /* Assets.xcassets in Resources */,
@@ -1699,7 +1746,7 @@
 				A226537B29705A4400605697 /* ArtCVC.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
-				A2B38580295D895800E5EB7C /* SchoolEmailAuthVC.swift in Sources */,
+				A2B38580295D895800E5EB7C /* StudentAuthVC.swift in Sources */,
 				A2100F6A29865E8800C85ADF /* AlignOption.swift in Sources */,
 				A226537D29705F8100605697 /* BannerCVC.swift in Sources */,
 				A280AB4529A7634C00C1729C /* WriteCategoryView.swift in Sources */,
@@ -1711,8 +1758,8 @@
 				A216BD37297FA384008964BC /* HomeDetailView.swift in Sources */,
 				A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */,
 				A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */,
+				A2DEC35F29B4638D00CF0794 /* SudentAuthView.swift in Sources */,
 				A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */,
-				A2B3857E295D895000E5EB7C /* SchoolEmailAuthView.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
 				A2180DB329AA3C0700BBC74A /* ArtworkSizeVC.swift in Sources */,
 				A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */,
@@ -1739,6 +1786,7 @@
 				A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */,
 				A20E4A4B2998FA26009C1340 /* NotLoginedVC.swift in Sources */,
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,
+				A2DEC36429B4684100CF0794 /* School.swift in Sources */,
 				A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */,
 				A280AB4D29A79E8A00C1729C /* WriteCategory.swift in Sources */,
 			);
