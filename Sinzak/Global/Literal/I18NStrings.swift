@@ -178,4 +178,15 @@ struct I18NStrings {
     static let opensourceLicense = "opensourceLicense".localized
     static let withdraw = "withdraw".localized
     static let logout = "logout".localized
+    // 인증작가 신청
+    static let certifiedAuthorApplication = "certifiedAuthorApplication".localized
+    static let sinzakCertifiedAuthor = "sinzakCertifiedAuthor".localized
+    static let sinzakCertifiedAuthorDescription01 = "sinzakCertifiedAuthorDescription01".localized
+    static let sinzakCertifiedAuthorDescription02 = "sinzakCertifiedAuthorDescription02".localized
+    static let sinzakCertifiedAuthorDescription03 = "sinzakCertifiedAuthorDescription03".localized
+    static let firstStepSchoolAuth = "firstStepSchoolAuth".localized
+    static let secondStepPortfolioLink = "secondStepPortfolioLink".localized
+    static let secondStepPortfolioLinkDescription = "secondStepPortfolioLinkDescription".localized
+    static let pleaseEnterLink = "pleaseEnterLink".localized
+    static let apply = "apply".localized
 }

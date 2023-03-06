@@ -25,9 +25,13 @@ final class EditProfileVC: SZVC {
         // - 수정내용 저장하는 로직
         navigationController?.popViewController(animated: true)
     }
+    @objc func applyAuthorButtonTapped(_ sender: UIButton) {
+        let vc = CertifiedAuthorVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     // MARK: - Helpers
     override func configure() {
-        
+        mainView.applyAuthorButton.addTarget(self, action: #selector(applyAuthorButtonTapped), for: .touchUpInside)
     }
     override func setNavigationBar() {
         super.setNavigationBar()

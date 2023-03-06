@@ -151,6 +151,8 @@
 		A2DEC35F29B4638D00CF0794 /* SudentAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35E29B4638C00CF0794 /* SudentAuthView.swift */; };
 		A2DEC36429B4684100CF0794 /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC36329B4684100CF0794 /* School.swift */; };
 		A2DEC36629B46C8500CF0794 /* school.json in Resources */ = {isa = PBXBuildFile; fileRef = A2DEC36529B46C8500CF0794 /* school.json */; };
+		A2DEC36C29B5BD4500CF0794 /* CertifiedAuthorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC36B29B5BD4500CF0794 /* CertifiedAuthorVC.swift */; };
+		A2DEC36E29B5BD4E00CF0794 /* CertifiedAuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC36D29B5BD4E00CF0794 /* CertifiedAuthorView.swift */; };
 		A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EADD298773EB00DE754F /* BannerModel.swift */; };
 		A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */; };
 		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
@@ -309,6 +311,8 @@
 		A2DEC35E29B4638C00CF0794 /* SudentAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SudentAuthView.swift; sourceTree = "<group>"; };
 		A2DEC36329B4684100CF0794 /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
 		A2DEC36529B46C8500CF0794 /* school.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = school.json; sourceTree = "<group>"; };
+		A2DEC36B29B5BD4500CF0794 /* CertifiedAuthorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertifiedAuthorVC.swift; sourceTree = "<group>"; };
+		A2DEC36D29B5BD4E00CF0794 /* CertifiedAuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertifiedAuthorView.swift; sourceTree = "<group>"; };
 		A2F07846298AB0A7004A2B3F /* SinzakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SinzakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F6EADD298773EB00DE754F /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -431,6 +435,7 @@
 		A20E4A4C29990048009C1340 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
+				A2DEC36829B5BD0D00CF0794 /* CertifiedAuthor */,
 				A233891529B088B600688FD8 /* Setting */,
 				A233890E29B066D400688FD8 /* EditProfile */,
 				A233890D29B066BF00688FD8 /* Profile */,
@@ -1382,6 +1387,31 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		A2DEC36829B5BD0D00CF0794 /* CertifiedAuthor */ = {
+			isa = PBXGroup;
+			children = (
+				A2DEC36A29B5BD3200CF0794 /* VC */,
+				A2DEC36929B5BD2A00CF0794 /* View */,
+			);
+			path = CertifiedAuthor;
+			sourceTree = "<group>";
+		};
+		A2DEC36929B5BD2A00CF0794 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2DEC36D29B5BD4E00CF0794 /* CertifiedAuthorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2DEC36A29B5BD3200CF0794 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2DEC36B29B5BD4500CF0794 /* CertifiedAuthorVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
 		A2F07847298AB0A7004A2B3F /* SinzakTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1672,6 +1702,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2420F8B29A8BCE4007D8937 /* AddPhotoCVC.swift in Sources */,
+				A2DEC36E29B5BD4E00CF0794 /* CertifiedAuthorView.swift in Sources */,
 				A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */,
 				A233892429B3772800688FD8 /* Message.swift in Sources */,
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
@@ -1699,6 +1730,7 @@
 				A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */,
 				A2100F6829865B2500C85ADF /* MarketHeader.swift in Sources */,
 				A2B0F60E2980231A00EC5C78 /* MarketView.swift in Sources */,
+				A2DEC36C29B5BD4500CF0794 /* CertifiedAuthorVC.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
 				A2100F712986937A00C85ADF /* WorksView.swift in Sources */,
 				A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */,
