@@ -34,7 +34,7 @@ struct Products: Codable {
     let id: Int
     let title, content, author: String
     let price: Int
-    let thumbnail: String
+    let thumbnail: String?
     let date: String
     let suggest: Bool
     let likesCnt: Int
