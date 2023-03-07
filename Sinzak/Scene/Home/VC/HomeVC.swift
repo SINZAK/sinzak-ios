@@ -24,7 +24,7 @@ final class HomeVC: SZVC {
     var viewModel: HomeViewModel!
     let disposeBag = DisposeBag()
     var banner: BannerList = BannerList(data: [], success: true)
-    var homeNotLogined =  HomeNotLogined(data: DataClass(trading: [], new: [], hot: []), success: true)
+    var homeNotLogined =  HomeNotLogined(data: HomeNotLoginedData(trading: [], new: [], hot: []), success: true)
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
