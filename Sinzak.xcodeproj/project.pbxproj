@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C5D7879C78C9C02F8AA44A2 /* Pods_SinzakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39586F75F77A4A0FF7AFD361 /* Pods_SinzakTests.framework */; };
+		0BAC9C712210229EF1C827EA /* Pods_Sinzak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B395F23DAA5BE335A96B8534 /* Pods_Sinzak.framework */; };
 		A20CBD58294786550012FF32 /* SpoqaHanSansNeo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */; };
 		A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */; };
 		A20CBD5A294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */; };
@@ -30,7 +30,6 @@
 		A210CD52292F4D6B00F86A08 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD51292F4D6B00F86A08 /* Then */; };
 		A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD54292F4D8800F86A08 /* RxCocoa */; };
 		A210CD57292F4D8800F86A08 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD56292F4D8800F86A08 /* RxSwift */; };
-		A210CD5A292F4DDA00F86A08 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD59292F4DDA00F86A08 /* ReactorKit */; };
 		A216BD37297FA384008964BC /* HomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD36297FA384008964BC /* HomeDetailView.swift */; };
 		A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3A297FA3B4008964BC /* HomeDetailVC.swift */; };
 		A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */; };
@@ -73,10 +72,6 @@
 		A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE58F296AEA4F00D9815C /* AuthManager.swift */; };
 		A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE594296AEB4300D9815C /* AuthAPI.swift */; };
 		A22BE597296AEC2A00D9815C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22BE596296AEC2A00D9815C /* Endpoint.swift */; };
-		A22BE5A3296B001B00D9815C /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A2296B001B00D9815C /* KakaoSDK */; };
-		A22BE5A5296B001B00D9815C /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A4296B001B00D9815C /* KakaoSDKAuth */; };
-		A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A6296B001B00D9815C /* KakaoSDKCommon */; };
-		A22BE5A9296B001B00D9815C /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = A22BE5A8296B001B00D9815C /* KakaoSDKUser */; };
 		A233891029B066EC00688FD8 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233890F29B066EC00688FD8 /* EditProfileView.swift */; };
 		A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891129B066F700688FD8 /* EditProfileVC.swift */; };
 		A233891929B088D400688FD8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891829B088D400688FD8 /* SettingView.swift */; };
@@ -130,6 +125,9 @@
 		A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */; };
 		A2B0F60E2980231A00EC5C78 /* MarketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B0F60D2980231A00EC5C78 /* MarketView.swift */; };
 		A2B0F6112980233900EC5C78 /* MarketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B0F6102980233900EC5C78 /* MarketVC.swift */; };
+		A2B1C65E29B796A20008DADB /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A2B1C65D29B796A20008DADB /* KakaoSDKAuth */; };
+		A2B1C66029B796A20008DADB /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = A2B1C65F29B796A20008DADB /* KakaoSDKCommon */; };
+		A2B1C66229B796A20008DADB /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = A2B1C66129B796A20008DADB /* KakaoSDKUser */; };
 		A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3855F2959A4BB00E5EB7C /* LoginView.swift */; };
 		A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B385612959A4C500E5EB7C /* LoginVC.swift */; };
 		A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */; };
@@ -160,7 +158,7 @@
 		A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */; };
 		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
 		A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE4298776F300DE754F /* HomeManager.swift */; };
-		B956786E877708A9B8AFE5DB /* Pods_Sinzak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64B8CD86AADD717AFED5B4E8 /* Pods_Sinzak.framework */; };
+		B0F5738FAACAD65BA66A4041 /* Pods_SinzakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,11 +172,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0622176AE19448E7EB43E50B /* Pods-Sinzak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.debug.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.debug.xcconfig"; sourceTree = "<group>"; };
-		15FEA333627984DFA376698C /* Pods-SinzakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinzakTests.debug.xcconfig"; path = "Target Support Files/Pods-SinzakTests/Pods-SinzakTests.debug.xcconfig"; sourceTree = "<group>"; };
-		1A3733E31B68402AA3565046 /* Pods-Sinzak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.release.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.release.xcconfig"; sourceTree = "<group>"; };
-		39586F75F77A4A0FF7AFD361 /* Pods_SinzakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinzakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		64B8CD86AADD717AFED5B4E8 /* Pods_Sinzak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		33BF9F1E5512AD2AB674B076 /* Pods-SinzakTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinzakTests.release.xcconfig"; path = "Target Support Files/Pods-SinzakTests/Pods-SinzakTests.release.xcconfig"; sourceTree = "<group>"; };
+		6BD7B7C11AC9D4B82B7643D6 /* Pods-Sinzak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.release.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.release.xcconfig"; sourceTree = "<group>"; };
+		A080CF42B4E9FBA82C991070 /* Pods-Sinzak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinzak.debug.xcconfig"; path = "Target Support Files/Pods-Sinzak/Pods-Sinzak.debug.xcconfig"; sourceTree = "<group>"; };
 		A20CBD55294786530012FF32 /* SpoqaHanSansNeo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.ttf"; sourceTree = "<group>"; };
 		A20CBD56294786540012FF32 /* SpoqaHanSansNeo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.ttf"; sourceTree = "<group>"; };
 		A20CBD57294786550012FF32 /* SpoqaHanSansNeo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.ttf"; sourceTree = "<group>"; };
@@ -324,7 +320,9 @@
 		A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A2F6EAE22987758C00DE754F /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		A2F6EAE4298776F300DE754F /* HomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeManager.swift; sourceTree = "<group>"; };
-		EF5846D6AC7082592AF80051 /* Pods-SinzakTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinzakTests.release.xcconfig"; path = "Target Support Files/Pods-SinzakTests/Pods-SinzakTests.release.xcconfig"; sourceTree = "<group>"; };
+		A6ABEFC84FE28A7B2341F462 /* Pods-SinzakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinzakTests.debug.xcconfig"; path = "Target Support Files/Pods-SinzakTests/Pods-SinzakTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B395F23DAA5BE335A96B8534 /* Pods_Sinzak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinzakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,22 +330,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2B1C66029B796A20008DADB /* KakaoSDKCommon in Frameworks */,
 				A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */,
 				A29CE9DD2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				A22BE5A9296B001B00D9815C /* KakaoSDKUser in Frameworks */,
-				A22BE5A3296B001B00D9815C /* KakaoSDK in Frameworks */,
 				A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */,
 				A210CD57292F4D8800F86A08 /* RxSwift in Frameworks */,
 				A216BD48297FB6B5008964BC /* Tabman in Frameworks */,
-				A210CD5A292F4DDA00F86A08 /* ReactorKit in Frameworks */,
 				A210CD52292F4D6B00F86A08 /* Then in Frameworks */,
 				A29CE9E12998DD2800EB89B4 /* FirebaseMessaging in Frameworks */,
 				A2289D4E2986A3910017969C /* Kingfisher in Frameworks */,
 				A226CC6629AF2D1D000161E8 /* RxMoya in Frameworks */,
+				A2B1C66229B796A20008DADB /* KakaoSDKUser in Frameworks */,
 				A29CE9DF2998DD2800EB89B4 /* FirebaseCrashlytics in Frameworks */,
-				A22BE5A7296B001B00D9815C /* KakaoSDKCommon in Frameworks */,
-				A22BE5A5296B001B00D9815C /* KakaoSDKAuth in Frameworks */,
-				B956786E877708A9B8AFE5DB /* Pods_Sinzak.framework in Frameworks */,
+				A2B1C65E29B796A20008DADB /* KakaoSDKAuth in Frameworks */,
+				0BAC9C712210229EF1C827EA /* Pods_Sinzak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,29 +351,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C5D7879C78C9C02F8AA44A2 /* Pods_SinzakTests.framework in Frameworks */,
+				B0F5738FAACAD65BA66A4041 /* Pods_SinzakTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		318E17545D3D2EB021CF8489 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				64B8CD86AADD717AFED5B4E8 /* Pods_Sinzak.framework */,
-				39586F75F77A4A0FF7AFD361 /* Pods_SinzakTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		73D41B78272D1995AF9DE204 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0622176AE19448E7EB43E50B /* Pods-Sinzak.debug.xcconfig */,
-				1A3733E31B68402AA3565046 /* Pods-Sinzak.release.xcconfig */,
-				15FEA333627984DFA376698C /* Pods-SinzakTests.debug.xcconfig */,
-				EF5846D6AC7082592AF80051 /* Pods-SinzakTests.release.xcconfig */,
+				A080CF42B4E9FBA82C991070 /* Pods-Sinzak.debug.xcconfig */,
+				6BD7B7C11AC9D4B82B7643D6 /* Pods-Sinzak.release.xcconfig */,
+				A6ABEFC84FE28A7B2341F462 /* Pods-SinzakTests.debug.xcconfig */,
+				33BF9F1E5512AD2AB674B076 /* Pods-SinzakTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -939,7 +926,7 @@
 				A2F07847298AB0A7004A2B3F /* SinzakTests */,
 				A23415AF2927D776007DADE7 /* Products */,
 				73D41B78272D1995AF9DE204 /* Pods */,
-				318E17545D3D2EB021CF8489 /* Frameworks */,
+				DCD1067045B5B28005D552E6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1475,6 +1462,15 @@
 			path = APIManager;
 			sourceTree = "<group>";
 		};
+		DCD1067045B5B28005D552E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B395F23DAA5BE335A96B8534 /* Pods_Sinzak.framework */,
+				D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1482,12 +1478,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A23415C22927D778007DADE7 /* Build configuration list for PBXNativeTarget "Sinzak" */;
 			buildPhases = (
-				3316BC203034FDC82B81B5E7 /* [CP] Check Pods Manifest.lock */,
+				7D0FE61341B36495EDF9A0AD /* [CP] Check Pods Manifest.lock */,
 				A23415AA2927D776007DADE7 /* Sources */,
 				A23415AB2927D776007DADE7 /* Frameworks */,
 				A23415AC2927D776007DADE7 /* Resources */,
 				A280611F292F4F42005AE0B3 /* ShellScript */,
-				3E91173BA4D43D1DBCC21DCD /* [CP] Embed Pods Frameworks */,
+				8C13B62BDC141DDE593BDBDD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1499,17 +1495,15 @@
 				A210CD51292F4D6B00F86A08 /* Then */,
 				A210CD54292F4D8800F86A08 /* RxCocoa */,
 				A210CD56292F4D8800F86A08 /* RxSwift */,
-				A210CD59292F4DDA00F86A08 /* ReactorKit */,
-				A22BE5A2296B001B00D9815C /* KakaoSDK */,
-				A22BE5A4296B001B00D9815C /* KakaoSDKAuth */,
-				A22BE5A6296B001B00D9815C /* KakaoSDKCommon */,
-				A22BE5A8296B001B00D9815C /* KakaoSDKUser */,
 				A216BD47297FB6B5008964BC /* Tabman */,
 				A2289D4D2986A3910017969C /* Kingfisher */,
 				A29CE9DC2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				A29CE9DE2998DD2800EB89B4 /* FirebaseCrashlytics */,
 				A29CE9E02998DD2800EB89B4 /* FirebaseMessaging */,
 				A226CC6529AF2D1D000161E8 /* RxMoya */,
+				A2B1C65D29B796A20008DADB /* KakaoSDKAuth */,
+				A2B1C65F29B796A20008DADB /* KakaoSDKCommon */,
+				A2B1C66129B796A20008DADB /* KakaoSDKUser */,
 			);
 			productName = Sinzak;
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
@@ -1519,11 +1513,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A2F0784E298AB0A7004A2B3F /* Build configuration list for PBXNativeTarget "SinzakTests" */;
 			buildPhases = (
-				16FA4E75CBD8D71F17C210C0 /* [CP] Check Pods Manifest.lock */,
+				CDC0FBC0BD60C71FE1A65C10 /* [CP] Check Pods Manifest.lock */,
 				A2F07842298AB0A7004A2B3F /* Sources */,
 				A2F07843298AB0A7004A2B3F /* Frameworks */,
 				A2F07844298AB0A7004A2B3F /* Resources */,
-				9C7AB6B4BD4C4FA87583A705 /* [CP] Embed Pods Frameworks */,
+				C471A81A9A19925CFDB1A352 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1568,12 +1562,11 @@
 				A210CD4D292F4D5300F86A08 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				A210CD50292F4D6B00F86A08 /* XCRemoteSwiftPackageReference "Then" */,
 				A210CD53292F4D8800F86A08 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				A210CD58292F4DDA00F86A08 /* XCRemoteSwiftPackageReference "ReactorKit" */,
-				A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */,
 				A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A226CC6429AF2D1D000161E8 /* XCRemoteSwiftPackageReference "Moya" */,
+				A2B1C65C29B796A20008DADB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
 			projectDirPath = "";
@@ -1616,29 +1609,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		16FA4E75CBD8D71F17C210C0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SinzakTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3316BC203034FDC82B81B5E7 /* [CP] Check Pods Manifest.lock */ = {
+		7D0FE61341B36495EDF9A0AD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1660,7 +1631,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3E91173BA4D43D1DBCC21DCD /* [CP] Embed Pods Frameworks */ = {
+		8C13B62BDC141DDE593BDBDD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1675,23 +1646,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sinzak/Pods-Sinzak-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9C7AB6B4BD4C4FA87583A705 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SinzakTests/Pods-SinzakTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SinzakTests/Pods-SinzakTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SinzakTests/Pods-SinzakTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A280611F292F4F42005AE0B3 /* ShellScript */ = {
@@ -1710,6 +1664,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		C471A81A9A19925CFDB1A352 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SinzakTests/Pods-SinzakTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SinzakTests/Pods-SinzakTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SinzakTests/Pods-SinzakTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDC0FBC0BD60C71FE1A65C10 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SinzakTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2020,7 +2013,7 @@
 		};
 		A23415C32927D778007DADE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0622176AE19448E7EB43E50B /* Pods-Sinzak.debug.xcconfig */;
+			baseConfigurationReference = A080CF42B4E9FBA82C991070 /* Pods-Sinzak.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2052,7 +2045,7 @@
 		};
 		A23415C42927D778007DADE7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A3733E31B68402AA3565046 /* Pods-Sinzak.release.xcconfig */;
+			baseConfigurationReference = 6BD7B7C11AC9D4B82B7643D6 /* Pods-Sinzak.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2084,7 +2077,7 @@
 		};
 		A2F0784C298AB0A7004A2B3F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15FEA333627984DFA376698C /* Pods-SinzakTests.debug.xcconfig */;
+			baseConfigurationReference = A6ABEFC84FE28A7B2341F462 /* Pods-SinzakTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -2109,7 +2102,7 @@
 		};
 		A2F0784D298AB0A7004A2B3F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF5846D6AC7082592AF80051 /* Pods-SinzakTests.release.xcconfig */;
+			baseConfigurationReference = 33BF9F1E5512AD2AB674B076 /* Pods-SinzakTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -2189,14 +2182,6 @@
 				minimumVersion = 6.5.0;
 			};
 		};
-		A210CD58292F4DDA00F86A08 /* XCRemoteSwiftPackageReference "ReactorKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactorKit/ReactorKit";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 3.2.0;
-			};
-		};
 		A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uias/Tabman";
@@ -2221,20 +2206,20 @@
 				minimumVersion = 7.5.0;
 			};
 		};
-		A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
-			requirement = {
-				kind = exactVersion;
-				version = 2.13.1;
-			};
-		};
 		A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMinorVersion;
 				minimumVersion = 9.6.0;
+			};
+		};
+		A2B1C65C29B796A20008DADB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2260,11 +2245,6 @@
 			package = A210CD53292F4D8800F86A08 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		A210CD59292F4DDA00F86A08 /* ReactorKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A210CD58292F4DDA00F86A08 /* XCRemoteSwiftPackageReference "ReactorKit" */;
-			productName = ReactorKit;
-		};
 		A216BD47297FB6B5008964BC /* Tabman */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */;
@@ -2280,26 +2260,6 @@
 			package = A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		A22BE5A2296B001B00D9815C /* KakaoSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDK;
-		};
-		A22BE5A4296B001B00D9815C /* KakaoSDKAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDKAuth;
-		};
-		A22BE5A6296B001B00D9815C /* KakaoSDKCommon */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDKCommon;
-		};
-		A22BE5A8296B001B00D9815C /* KakaoSDKUser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A22BE5A1296B001B00D9815C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDKUser;
-		};
 		A29CE9DC2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -2314,6 +2274,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		A2B1C65D29B796A20008DADB /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2B1C65C29B796A20008DADB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		A2B1C65F29B796A20008DADB /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2B1C65C29B796A20008DADB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		A2B1C66129B796A20008DADB /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2B1C65C29B796A20008DADB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
