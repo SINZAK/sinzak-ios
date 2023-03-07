@@ -10,6 +10,7 @@ import KakaoSDKCommon
 import NaverThirdPartyLogin
 import FirebaseCore
 import FirebaseMessaging
+import KakaoSDKAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -50,7 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         /**  파이어베이스 설정 끝 */
         // 카카오로그인
-        KakaoSDK.initSDK(appKey: "kakaof4e54dad18c8af8a67dccb0176283616")
+        KakaoSDK.initSDK(appKey: "f4e54dad18c8af8a67dccb0176283616")
+
         // 네이버로그인
         application.registerForRemoteNotifications()
         let instance = NaverThirdPartyLoginConnection.getSharedInstance()
@@ -80,10 +82,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-// 네이버로그인 SDK 설정
+// 네이버, 카카오로그인 SDK 설정
 extension AppDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        // 네이버 로그인 설정
         NaverThirdPartyLoginConnection.getSharedInstance()?.application(app, open: url, options: options)
+        // 카카오 로그인 설정, 13 미만일 때만
+        if (AuthApi.isKakaoTalkLoginUrl(url)) {
+            return AuthController.handleOpenUrl(url: url)
+        }
+        
+        
         return true
     }
 }
