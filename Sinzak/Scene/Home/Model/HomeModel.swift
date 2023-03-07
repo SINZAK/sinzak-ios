@@ -9,13 +9,24 @@ import Foundation
 
 // MARK: - HomeNotLogined
 struct HomeNotLogined: Codable {
-    let data: DataClass
+    let data: HomeNotLoginedData
     let success: Bool
 }
 
-// MARK: - DataClass
-struct DataClass: Codable {
+// MARK: - Data - HomeNotLogined
+struct HomeNotLoginedData: Codable {
     let trading, new, hot: [Products]
+}
+
+// MARK: - HomeLogined
+struct HomeLogined: Codable {
+    let data: HomeLoginedData
+    let success: Bool
+}
+
+// MARK: - Data - HomeLogined
+struct HomeLoginedData: Codable {
+    let new, following, recommend: [Products]
 }
 
 // MARK: - Hot
@@ -23,7 +34,7 @@ struct Products: Codable {
     let id: Int
     let title, content, author: String
     let price: Int
-    let thumbnail: String?
+    let thumbnail: String
     let date: String
     let suggest: Bool
     let likesCnt: Int

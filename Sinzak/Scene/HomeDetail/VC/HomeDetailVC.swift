@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Kingfisher
 
 final class HomeDetailVC: SZVC {
     // MARK: - Properties

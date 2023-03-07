@@ -195,3 +195,11 @@
 "secondStepPortfolioLinkDescription" = "개인 웹사이트, Behance, ArtStation, google drive 등\n링크 형식으로 포트폴리오를 첨부해주세요. ";
 "pleaseEnterLink" = "링크를 입력하세요.";
 "apply" = "신청하기";
+// 홈 섹션 이름
+// - 비로그인 상태일 때
+"sectionTrading" = "지금 거래중";
+"sectionNew" = "최신 작품";
+"sectionHot" = "신작에서 사랑받는 작품";
+// 로그인 상태일 때
+"sectionRecommend" = "님을 위한 맞춤 거래";
+"sectionFollowing" = "내가 팔로잉하는 작가";

@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import Kingfisher
+import Moya
+import RxMoya
+import RxSwift
+import RxCocoa
 
 enum HomeType: Int {
     case banner = 0
@@ -15,27 +20,50 @@ enum HomeType: Int {
 final class HomeVC: SZVC {
     // MARK: - Properties
     let mainView = HomeView()
-    let shared = HomeManager.shared
+    let provider = MoyaProvider<HomeAPI>()
+    var viewModel: HomeViewModel!
+    let disposeBag = DisposeBag()
+    var banner: BannerList = BannerList(data: [], success: true)
+    var homeNotLogined =  HomeNotLogined(data: HomeNotLoginedData(trading: [], new: [], hot: []), success: true)
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        shared.getBannerInfo { result in
-            switch result {
-            case .success(let success):
-                print(success)
-            case .failure(let failure):
-                print(failure)
-            }
-        }
+        bind()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
     }
     // MARK: - Actions
+    func bind() {
+        viewModel = HomeViewModel(provider: provider)
+        
+        viewModel.homeObservable
+            .subscribe(onSuccess: { [weak self] data in
+            // Update UI
+            print("🍕🍕🍕", data)
+                self?.homeNotLogined = data
+                self?.mainView.homeCollectionView.reloadData()
+            
+        }, onFailure: { error in
+            // Handle error
+            print(error)
+        })
+        .disposed(by: disposeBag)
+
+        viewModel.bannerObservable.subscribe { [weak self] data in
+            self?.banner = data
+            self?.mainView.homeCollectionView.reloadData()
+            
+        } onFailure: { error in
+            print(error)
+        }
+        .disposed(by: disposeBag)
+
+    }
     @objc func didNotificitionButtonTapped(_ sender: UIBarButtonItem) {
         let vc = NotificationVC()
         navigationController?.pushViewController(vc, animated: true)
@@ -67,49 +95,74 @@ final class HomeVC: SZVC {
 extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
     // 섹션 개수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3 // 배너섹션 : 섹션갯수
+        return 4
     }
     // 섹션 내 아이템 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == HomeType.banner.rawValue ? 3 : 4 // 배너일 경우, 아닐 경우
+        if section == HomeType.banner.rawValue {
+            return banner.data.count
+        } else if section == HomeNotLoginedType.trading.rawValue {
+            return homeNotLogined.data.trading.count
+        } else if section == HomeNotLoginedType.hot.rawValue {
+            return homeNotLogined.data.hot.count
+        } else if section == HomeNotLoginedType.new.rawValue {
+            return homeNotLogined.data.new.count
+        } else { return 0 }
     }
     // 콜렉션 뷰 셀
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == HomeType.banner.rawValue {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: BannerCVC.self), for: indexPath) as? BannerCVC else { return UICollectionViewCell()}
-            cell.imageView.image = UIImage(named: "banner1")
+
+        switch indexPath.section {
+        case HomeType.banner.rawValue:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: BannerCVC.self), for: indexPath) as? BannerCVC else { return UICollectionViewCell()}
+                let url = URL(string: banner.data[indexPath.item].imageUrl)
+                cell.imageView.kf.setImage(with: url)
+                return cell
+        case HomeNotLoginedType.trading.rawValue:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell()}
+            cell.setData(homeNotLogined.data.trading[indexPath.item])
             return cell
-        } else {
-            if indexPath.item < 3 {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell()}
-                //cell.configure(data: Art) 로 데이터 세팅
-                return cell
-            } else if indexPath.item == 3 { // 마지막 셀일 경우
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SeeMoreCVC.self), for: indexPath) as? SeeMoreCVC else { return UICollectionViewCell()  }
-                return cell
-            } else {
-                return UICollectionViewCell()
-            }
+        case HomeNotLoginedType.hot.rawValue:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell()}
+            cell.setData(homeNotLogined.data.hot[indexPath.item])
+            return cell
+        case HomeNotLoginedType.new.rawValue:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell()}
+            cell.setData(homeNotLogined.data.new[indexPath.item])
+            return cell
+                
+        default:
+            return UICollectionViewCell()
         }
+        
+//        // 마지막 셀일 경우
+//               guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: SeeMoreCVC.self), for: indexPath) as? SeeMoreCVC else { return UICollectionViewCell()  }
+//               return cell
+//           } else {
+//               return UICollectionViewCell()
+//           }
     }
     // 셀 클릭 시
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 그냥 셀일 때
-        // 더보기셀(=마지막)일 때
-        if indexPath.item == 3 {
-            let vc = HomeDetailVC()
-            vc.navigationItem.title = "팔로잉" // 섹션헤더 정보
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            let vc = DetailVC()
-            navigationController?.pushViewController(vc, animated: true)
+        if indexPath.section != 0 {
+            // 더보기셀(=마지막)일 때
+//            if indexPath.item == 3 {
+//                let vc = HomeDetailVC()
+//                vc.navigationItem.title = HomeNotLoginedType.allCases[indexPath.section].title // 섹션헤더 정보
+//                navigationController?.pushViewController(vc, animated: true)
+//            } else {
+                let vc = DetailVC()
+            vc.mainView.setData(homeNotLogined.data.trading[0])
+                navigationController?.pushViewController(vc, animated: true)
+//            }
         }
     }
     // 헤더
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if indexPath.section != HomeType.banner.rawValue {
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: HomeHeader.self), for: indexPath) as? HomeHeader else { return UICollectionReusableView() }
-            header.titleLabel.text = "맞춤 거래"
+            header.titleLabel.text = HomeNotLoginedType.allCases[(indexPath.section - 1)].title
             return header
         } else {
             return UICollectionReusableView()

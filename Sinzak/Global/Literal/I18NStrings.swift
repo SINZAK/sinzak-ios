@@ -189,4 +189,12 @@ struct I18NStrings {
     static let secondStepPortfolioLinkDescription = "secondStepPortfolioLinkDescription".localized
     static let pleaseEnterLink = "pleaseEnterLink".localized
     static let apply = "apply".localized
+    // 홈 섹션 이름
+    // - 비로그인 상태일 때
+    static let sectionTrading = "sectionTrading".localized
+    static let sectionNew = "sectionNew".localized
+    static let sectionHot = "sectionHot".localized
+    // 로그인 상태일 때
+    static let sectionRecommend = "sectionRecommend".localized
+    static let sectionFollowing = "sectionFollowing".localized
 }
