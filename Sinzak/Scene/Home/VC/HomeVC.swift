@@ -16,21 +16,7 @@ enum HomeType: Int {
     case banner = 0
     case arts
 }
-enum HomeNotLoginedType: Int, CaseIterable {
-    case trading = 3
-    case new = 1
-    case hot = 2
-    var title: String {
-        switch self {
-        case .trading:
-            return "지금 거래중"
-        case .new:
-            return "신작에서 사랑받는 작품"
-        case .hot:
-            return "최신 작품"
-        }
-    }
-}
+
 final class HomeVC: SZVC {
     // MARK: - Properties
     let mainView = HomeView()
