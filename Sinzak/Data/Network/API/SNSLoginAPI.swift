@@ -10,6 +10,8 @@ import Moya
 
 enum SNSLoginAPI {
     case apple(idToken: String, origin: String = "apple")
+    case kakao(accessToken: String, origin: String = "kakao")
+    case naver(accessToken: String, origin: String = "naver")
 }
 
 extension SNSLoginAPI: TargetType {
@@ -18,13 +20,13 @@ extension SNSLoginAPI: TargetType {
     }
     var path: String {
         switch self {
-        case .apple:
+        case .apple, .kakao, .naver:
             return "/oauth/get"
         }
     }
     var method: Moya.Method {
         switch self {
-        case .apple: return .post
+        case .apple, .kakao, .naver: return .post
         }
     }
     var task: Task {
@@ -35,11 +37,24 @@ extension SNSLoginAPI: TargetType {
                 "origin": origin
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+        case .kakao(let accessToken, let origin):
+            let params: [String: String] = [
+                "accessToken": accessToken,
+                "origin": origin
+            ]
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+        case .naver(let accessToken, let origin):
+            let params: [String: String] = [
+                "accessToken": accessToken,
+                "origin": origin
+            ]
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         }
+    
     }
     var headers: [String : String]? {
         switch self {
-        case .apple:
+        case .apple, .kakao, .naver:
             return ["Content-type": "application/json"]
         }
     }
