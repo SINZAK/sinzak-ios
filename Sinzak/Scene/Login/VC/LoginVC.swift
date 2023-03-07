@@ -28,15 +28,32 @@ final class LoginVC: SZVC {
     /// 카카오 버튼 눌렀을 때
     @objc func kakaoButtonTapped(_ sender: UIButton) {
         // 로그인 / 회원가입 분기
-        UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
-            if let error = error {
-                print(error)
-            } else {
-                print("loginWithKakaoAccount() success.")
-                _ = oauthToken
-                // 이메일로 로그인 / 중복가입여부 체크
-                //self?.setKakaoUserInfo()
-                self?.goSignup()
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    print("loginWithKakaoTalk() success.")
+
+                    // do something
+                    if let token = oauthToken {
+                        SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken) { [weak self] result in
+                            switch result {
+                            case let .success(data):
+                                if data.data.joined {
+                                    // 가입했을 경우 홈으로 보내주고 액세스토큰, 리프레시 토큰은 키체인에 저장
+                                    self?.goHome()
+                                } else {
+                                    // 가입 안했을 경우 회원가입으로 보내기
+                                    self?.goSignup()
+                                }
+                            case let .failure(error): print(error)
+                            }
+                        }
+                    } else {
+                        print("login info doesn't come correctly")
+                    }
+                }
             }
         }
     }
@@ -54,7 +71,7 @@ final class LoginVC: SZVC {
     @objc func naverButtonTapped(_ sender: UIButton) {
         naverLoginInstance?.requestThirdPartyLogin()
         
-        goSignup()
+       // goSignup()
     }
     /// 로그인이 안될 경우 / 이메일 중복이 아닐 경우
     func goSignup() {
@@ -156,12 +173,7 @@ extension LoginVC {
                                     
                                     //do something
                                     _ = user
-                                    if let email = user?.kakaoAccount?.email {
-                                        // 로그인
-                                        
-                                        // 로그인 안될 경우, 이메일 중복여부
-                                        AuthManager.shared.checkEmail(email)
-                                    }
+                                    
                                 }
                             }
                         }
@@ -180,9 +192,25 @@ extension LoginVC: NaverThirdPartyLoginConnectionDelegate {
         print("네이버 로그인 성공")
         self.naverLoginPaser()
     }
-    
     func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
         print("네이버 토큰\(naverLoginInstance?.accessToken)")
+        if let loginInstance = naverLoginInstance {
+            SNSLoginManager.shared.doNaverLogin(accessToken: loginInstance.accessToken) { [weak self] result in
+                switch result {
+                case let .success(data):
+                    if data.data.joined {
+                        // 가입했을 경우 홈으로 보내주고 액세스토큰, 리프레시 토큰은 키체인에 저장
+                        self?.goHome()
+                    } else {
+                        // 가입 안했을 경우 회원가입으로 보내기
+                        self?.goSignup()
+                    }
+                case let .failure(error): print(error)
+                }
+            }
+        } else {
+            print("Naver Login Information doesn't delivered correctly.")
+        }
     }
     
     func oauth20ConnectionDidFinishDeleteToken() {
