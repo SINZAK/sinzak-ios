@@ -82,7 +82,7 @@ final class ArtCVC: UICollectionViewCell {
         }
         titleLabel.text = data.title
         authorLabel.text = data.author
-        uploadTimeLabel.text = data.date
+        uploadTimeLabel.text = data.date.toDate().toRelativeString()
         priceLabel.text = "\(data.price)"
         favoriteCountLabel.text = "\(data.likesCnt)"
     }
