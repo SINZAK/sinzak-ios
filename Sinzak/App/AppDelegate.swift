@@ -56,13 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 네이버로그인
         application.registerForRemoteNotifications()
         let instance = NaverThirdPartyLoginConnection.getSharedInstance()
-        instance?.isNaverAppOauthEnable = true //네이버앱 로그인 설정
-        instance?.isInAppOauthEnable = true //사파리 로그인 설정
+        instance?.isNaverAppOauthEnable = true // 네이버앱 로그인 설정
+        instance?.isInAppOauthEnable = true // 사파리 로그인 설정
 
-        instance?.serviceUrlScheme = "naverLoginSinzak" //URL Scheme
-        instance?.consumerKey = "DwXMEfKZq0tmkrsn6kLk" //클라이언트 아이디
-        instance?.consumerSecret = "2CAzvT18ok" //시크릿 아이디
-        instance?.appName = "신작" //앱이름
+        instance?.serviceUrlScheme = "naverLoginSinzak" // URL Scheme
+        instance?.consumerKey = "DwXMEfKZq0tmkrsn6kLk" // 클라이언트 아이디
+        instance?.consumerSecret = "2CAzvT18ok" // 시크릿 아이디
+        instance?.appName = "신작" // 앱이름
         return true
     }
 
