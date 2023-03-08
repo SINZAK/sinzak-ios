@@ -23,6 +23,7 @@ final class LoginVC: SZVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        naverLoginInstance?.delegate = self
     }
     // MARK: - Actions
     /// 카카오 버튼 눌렀을 때
@@ -114,6 +115,8 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
                         if data.data.joined {
                             // 가입했을 경우 홈으로 보내주고 액세스토큰, 리프레시 토큰은 키체인에 저장
                             self?.goHome()
+                            // 키체인에 저장
+                            self?.saveUserInKeychain(data.data.accessToken)
                         } else {
                             // 가입 안했을 경우 회원가입으로 보내기
                             self?.goSignup()
@@ -122,23 +125,18 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
                     }
                 }
             }
-            print("User Email : \(email ?? "")")
-            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            if let email = email {
-                AuthManager.shared.checkEmail(email)
-            }
-            // 키체인에 저장
-            //saveUserInKeychain(userIdentifier)
+            // print("User Email : \(email ?? "")")
+            // print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
+            
         default:
             break
         }
     }
-    
     /// Apple ID 연동 실패 시
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
     }
-    /// 애플로그인 정보를 키체인에 저장 
+    /// 로그인 정보를 키체인에 저장
     private func saveUserInKeychain(_ userIdentifier: String) {
         do {
             try KeychainItem(service: "com.kimdee.Sinzak", account: "userIdentifier").saveItem(userIdentifier)
@@ -157,7 +155,6 @@ extension LoginVC {
                 print("me() success")
                 var scopes = [String]()
                 if (user?.kakaoAccount?.emailNeedsAgreement == true) { scopes.append("account_email") }
-                
                 if scopes.count > 0 {
                     UserApi.shared.loginWithKakaoAccount(scopes: scopes) { (_, error) in
                         if let error = error {
@@ -170,10 +167,8 @@ extension LoginVC {
                                 }
                                 else {
                                     print("me() success.")
-                                    
                                     //do something
                                     _ = user
-                                    
                                 }
                             }
                         }
@@ -198,6 +193,7 @@ extension LoginVC: NaverThirdPartyLoginConnectionDelegate {
             SNSLoginManager.shared.doNaverLogin(accessToken: loginInstance.accessToken) { [weak self] result in
                 switch result {
                 case let .success(data):
+                    print("🤖🤖🤖", data)
                     if data.data.joined {
                         // 가입했을 경우 홈으로 보내주고 액세스토큰, 리프레시 토큰은 키체인에 저장
                         self?.goHome()
@@ -227,8 +223,16 @@ extension LoginVC: NaverThirdPartyLoginConnectionDelegate {
             return
         }
         
-        guard let tokenType = naverLoginInstance?.tokenType else { return }
-        guard let accessToken = naverLoginInstance?.accessToken else { return }
+        guard let tokenType = naverLoginInstance?.tokenType else {
+            return
+            
+        }
+        guard let accessToken = naverLoginInstance?.accessToken else {
+            return
+        }
+        
+        print("NAVER Access Token", accessToken)
+        
         
         let requestUrl = "https://openapi.naver.com/v1/nid/me"
         let url = URL(string: requestUrl)!
@@ -244,29 +248,27 @@ extension LoginVC: NaverThirdPartyLoginConnectionDelegate {
             if let resultCode = body["message"] as? String{
                 if resultCode.trimmingCharacters(in: .whitespaces) == "success"{
                     let resultJson = body["response"] as! [String: Any]
-                    
                     let name = resultJson["name"] as? String ?? ""
                     let id = resultJson["id"] as? String ?? ""
-                    let phone = resultJson["mobile"] as! String
+                    let phone = resultJson["mobile"] as? String ?? ""
                     let gender = resultJson["gender"] as? String ?? ""
                     let birthyear = resultJson["birthyear"] as? String ?? ""
                     let birthday = resultJson["birthday"] as? String ?? ""
                     let profile = resultJson["profile_image"] as? String ?? ""
                     let email = resultJson["email"] as? String ?? ""
                     let nickName = resultJson["nickname"] as? String ?? ""
-                    
-                    print("네이버 로그인 이름 ",name)
-                    print("네이버 로그인 아이디 ",id)
-                    print("네이버 로그인 핸드폰 ",phone)
-                    print("네이버 로그인 성별 ",gender)
-                    print("네이버 로그인 생년 ",birthyear)
-                    print("네이버 로그인 생일 ",birthday)
-                    print("네이버 로그인 프로필사진 ",profile)
-                    print("네이버 로그인 이메일 ",email)
-                    print("네이버 로그인 닉네임 ",nickName)
+                    print("네이버 로그인 이름 ", name)
+                    print("네이버 로그인 아이디 ", id)
+                    print("네이버 로그인 핸드폰 ", phone)
+                    print("네이버 로그인 성별 ", gender)
+                    print("네이버 로그인 생년 ", birthyear)
+                    print("네이버 로그인 생일 ", birthday)
+                    print("네이버 로그인 프로필사진 ", profile)
+                    print("네이버 로그인 이메일 ", email)
+                    print("네이버 로그인 닉네임 ", nickName)
                 }
-                else{
-                    //실패
+                else {
+                    // 실패
                 }
             }
         }
