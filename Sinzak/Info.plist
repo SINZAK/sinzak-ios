@@ -29,8 +29,6 @@
 	<array>
 		<string>kakaokompassauth</string>
 		<string>kakaolink</string>
-		<string>naversearchapp</string>
-		<string>naversearchthirdlogin</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
