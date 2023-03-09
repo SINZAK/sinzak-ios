@@ -26,7 +26,7 @@ final class LoginVC: SZVC {
         naverLoginInstance?.delegate = self
     }
     // MARK: - Actions
-    /// 카카오 버튼 눌렀을 때
+    /** 카카오 로그인 액션  */
     @objc func kakaoButtonTapped(_ sender: UIButton) {
         // 로그인 / 회원가입 분기
         if (UserApi.isKakaoTalkLoginAvailable()) {
@@ -41,8 +41,9 @@ final class LoginVC: SZVC {
                         SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken) { [weak self] result in
                             switch result {
                             case let .success(data):
+                                // 키체인에 저장
+                                self?.saveUserInKeychain(accessToken: data.data.accessToken, refreshToken: data.data.refreshToken)
                                 if data.data.joined {
-                                    // 가입했을 경우 홈으로 보내주고 액세스토큰, 리프레시 토큰은 키체인에 저장
                                     self?.goHome()
                                 } else {
                                     // 가입 안했을 경우 회원가입으로 보내기
@@ -58,7 +59,7 @@ final class LoginVC: SZVC {
             }
         }
     }
-    /// 애플 버튼 눌렀을 때
+    /** 애플 로그인 액션  */
     @objc func appleButtontapped(_ sender: UIButton) {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -68,12 +69,11 @@ final class LoginVC: SZVC {
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
-    /// 네이버 버튼 눌렀을 때
+    /**  네이버 로그인 액션 */
     @objc func naverButtonTapped(_ sender: UIButton) {
         naverLoginInstance?.requestThirdPartyLogin()
-        
-       // goSignup()
     }
+    /** 회원가입, 로그인 이후 메서드 */
     /// 로그인이 안될 경우 / 이메일 중복이 아닐 경우
     func goSignup() {
         let rootVC = AgreementVC()
@@ -86,13 +86,27 @@ final class LoginVC: SZVC {
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
     }
     // MARK: - Helpers
+    /** 토큰  정보를 키체인에 저장 */
+    private func saveUserInKeychain(accessToken: String, refreshToken: String) {
+        do {
+            try KeychainItem(account: TokenKind.accessToken.text).saveItem(accessToken)
+        } catch {
+            print("키체인에 액세스 토큰 정보 저장 불가")
+        }
+        do {
+            try KeychainItem(account: TokenKind.refreshToken.text).saveItem(refreshToken)
+        } catch {
+            print("키체인에 리프레시 토큰 정보 저장 불가")
+        }
+    }
+    
     override func configure() {
         mainView.kakaoButton.addTarget(self, action: #selector(kakaoButtonTapped), for: .touchUpInside)
         mainView.appleButton.addTarget(self, action: #selector(appleButtontapped), for: .touchUpInside)
         mainView.naverButton.addTarget(self, action: #selector(naverButtonTapped), for: .touchUpInside)
     }
 }
-// 애플 로그인 관련 메서드
+/** 애플 로그인 관련 메서드 */
 extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     /// 애플 로그인을 모달시트로 띄워줌
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
@@ -112,16 +126,17 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
                 SNSLoginManager.shared.doAppleLogin(idToken: "\(strToken)") { [weak self] result in
                     switch result {
                     case let .success(data):
+                        // 키체인에 저장
+                        self?.saveUserInKeychain(accessToken: data.data.accessToken, refreshToken: data.data.refreshToken)
                         if data.data.joined {
-                            // 가입했을 경우 홈으로 보내주고 액세스토큰, 리프레시 토큰은 키체인에 저장
                             self?.goHome()
-                            // 키체인에 저장
-                            self?.saveUserInKeychain(data.data.accessToken)
                         } else {
                             // 가입 안했을 경우 회원가입으로 보내기
                             self?.goSignup()
                         }
-                    case let .failure(error): print(error)
+                    case let .failure(error):
+                        print(error)
+                        self?.showAlert(title: "ERROR\n데이터를 가져올 수 없습니다.", okText: I18NStrings.confirm, cancelNeeded: false, completionHandler: nil)
                     }
                 }
             }
@@ -135,17 +150,10 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
     /// Apple ID 연동 실패 시
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
-    }
-    /// 로그인 정보를 키체인에 저장
-    private func saveUserInKeychain(_ userIdentifier: String) {
-        do {
-            try KeychainItem(service: "com.kimdee.Sinzak", account: "userIdentifier").saveItem(userIdentifier)
-        } catch {
-            print("키체인에 userIdentifier 저장 불가")
-        }
+        showAlert(title: "ERROR\nApple ID 연동에 실패했습니다.", okText: I18NStrings.confirm, cancelNeeded: false, completionHandler: nil)
     }
 }
-// 카카오로그인 관련 메서드
+/** 카카오로그인 관련 메서드 */
 extension LoginVC {
     func setKakaoUserInfo() {
         UserApi.shared.me() { (user, error) in
@@ -181,19 +189,19 @@ extension LoginVC {
         }
     }
 }
-// 네이버로그인 관련
+/** 네이버로그인 관련  메서드*/
 extension LoginVC: NaverThirdPartyLoginConnectionDelegate {
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
         print("네이버 로그인 성공")
         self.naverLoginPaser()
     }
     func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
-        print("네이버 토큰\(naverLoginInstance?.accessToken)")
         if let loginInstance = naverLoginInstance {
             SNSLoginManager.shared.doNaverLogin(accessToken: loginInstance.accessToken) { [weak self] result in
                 switch result {
                 case let .success(data):
-                    print("🤖🤖🤖", data)
+                    // 키체인에 저장
+                    self?.saveUserInKeychain(accessToken: data.data.accessToken, refreshToken: data.data.refreshToken)
                     if data.data.joined {
                         // 가입했을 경우 홈으로 보내주고 액세스토큰, 리프레시 토큰은 키체인에 저장
                         self?.goHome()
@@ -208,43 +216,31 @@ extension LoginVC: NaverThirdPartyLoginConnectionDelegate {
             print("Naver Login Information doesn't delivered correctly.")
         }
     }
-    
     func oauth20ConnectionDidFinishDeleteToken() {
         print("네이버 로그아웃")
     }
-    
     func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
         print("에러 = \(error.localizedDescription)")
     }
     func naverLoginPaser() {
         guard let accessToken = naverLoginInstance?.isValidAccessTokenExpireTimeNow() else { return }
-        
         if !accessToken {
             return
         }
-        
         guard let tokenType = naverLoginInstance?.tokenType else {
             return
-            
         }
         guard let accessToken = naverLoginInstance?.accessToken else {
             return
         }
-        
         print("NAVER Access Token", accessToken)
-        
         
         let requestUrl = "https://openapi.naver.com/v1/nid/me"
         let url = URL(string: requestUrl)!
-        
         let authorization = "\(tokenType) \(accessToken)"
-        
         let req = AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
-        
         req.responseJSON { response in
-            
             guard let body = response.value as? [String: Any] else { return }
-            
             if let resultCode = body["message"] as? String{
                 if resultCode.trimmingCharacters(in: .whitespaces) == "success"{
                     let resultJson = body["response"] as! [String: Any]

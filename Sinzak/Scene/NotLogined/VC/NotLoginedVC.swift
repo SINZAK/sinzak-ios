@@ -22,20 +22,18 @@ final class NotLoginedVC: SZVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        naverLoginInstance?.delegate = self
     }
     // MARK: - Actions
     /// 카카오 버튼 눌렀을 때
     @objc func kakaoButtonTapped(_ sender: UIButton) {
         // 로그인 / 회원가입 분기
-        UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
+        UserApi.shared.loginWithKakaoAccount { (oauthToken, error) in
             if let error = error {
                 print(error)
             } else {
                 print("loginWithKakaoAccount() success.")
                 _ = oauthToken
-                // 이메일로 로그인 / 중복가입여부 체크
-                //self?.setKakaoUserInfo()
-                self?.goSignup()
             }
         }
     }
@@ -43,7 +41,7 @@ final class NotLoginedVC: SZVC {
     @objc func appleButtontapped(_ sender: UIButton) {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email,]
+        request.requestedScopes = [.fullName, .email]
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
@@ -52,26 +50,44 @@ final class NotLoginedVC: SZVC {
     /// 네이버 버튼 눌렀을 때
     @objc func naverButtonTapped(_ sender: UIButton) {
         naverLoginInstance?.requestThirdPartyLogin()
-        
-        goSignup()
     }
+    /** 회원가입, 로그인 이후 메서드 */
     /// 로그인이 안될 경우 / 이메일 중복이 아닐 경우
     func goSignup() {
-        let vc = AgreementVC()
-        navigationController?.pushViewController(vc, animated: true)
+        let rootVC = AgreementVC()
+        let vc = UINavigationController(rootViewController: rootVC)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
+    }
+    /// 이미 가입한 유저일 경우 홈화면으로 이동
+    func goHome() {
+        let vc = TabBarVC()
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
     }
     // MARK: - Helpers
+    /** 토큰  정보를 키체인에 저장 */
+    private func saveUserInKeychain(accessToken: String, refreshToken: String) {
+        do {
+            try KeychainItem(account: TokenKind.accessToken.text).saveItem(accessToken)
+        } catch {
+            print("키체인에 액세스 토큰 정보 저장 불가")
+        }
+        do {
+            try KeychainItem(account: TokenKind.refreshToken.text).saveItem(refreshToken)
+        } catch {
+            print("키체인에 리프레시 토큰 정보 저장 불가")
+        }
+    }
+    
     override func configure() {
         mainView.kakaoButton.addTarget(self, action: #selector(kakaoButtonTapped), for: .touchUpInside)
         mainView.appleButton.addTarget(self, action: #selector(appleButtontapped), for: .touchUpInside)
         mainView.naverButton.addTarget(self, action: #selector(naverButtonTapped), for: .touchUpInside)
-        tabBarController?.tabBar.isHidden = true
     }
     override func setNavigationBar() {
         super.setNavigationBar()
     }
 }
-// 애플 로그인 관련 메서드
+/** 애플 로그인 관련 메서드 */
 extension NotLoginedVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     /// 애플 로그인을 모달시트로 띄워줌
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
@@ -83,17 +99,31 @@ extension NotLoginedVC: ASAuthorizationControllerDelegate, ASAuthorizationContro
             // Apple ID
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             // 계정 정보 가져오기
-            let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
-            print("User ID : \(userIdentifier)")
-            print("User Email : \(email ?? "")")
-            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            if let email = email {
-                AuthManager.shared.checkEmail(email)
+            let idToken = appleIDCredential.identityToken
+            if let idToken = idToken {
+                let strToken = String(decoding: idToken, as: UTF8.self)
+                SNSLoginManager.shared.doAppleLogin(idToken: "\(strToken)") { [weak self] result in
+                    switch result {
+                    case let .success(data):
+                        // 키체인에 저장
+                        self?.saveUserInKeychain(accessToken: data.data.accessToken, refreshToken: data.data.refreshToken)
+                        if data.data.joined {
+                            self?.goHome()
+                        } else {
+                            // 가입 안했을 경우 회원가입으로 보내기
+                            self?.goSignup()
+                        }
+                    case let .failure(error):
+                        print(error)
+                        self?.showAlert(title: "ERROR\n데이터를 가져올 수 없습니다.", okText: I18NStrings.confirm, cancelNeeded: false, completionHandler: nil)
+                    }
+                }
             }
-            // 키체인에 저장
-            saveUserInKeychain(userIdentifier)
+            // print("User Email : \(email ?? "")")
+            // print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
+            
         default:
             break
         }
@@ -101,17 +131,10 @@ extension NotLoginedVC: ASAuthorizationControllerDelegate, ASAuthorizationContro
     /// Apple ID 연동 실패 시
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
-    }
-    /// 애플로그인 정보를 키체인에 저장
-    private func saveUserInKeychain(_ userIdentifier: String) {
-        do {
-            try KeychainItem(service: "com.kimdee.Sinzak", account: "userIdentifier").saveItem(userIdentifier)
-        } catch {
-            print("키체인에 userIdentifier 저장 불가")
-        }
+        showAlert(title: "ERROR\nApple ID 연동에 실패했습니다.", okText: I18NStrings.confirm, cancelNeeded: false, completionHandler: nil)
     }
 }
-// 카카오로그인 관련 메서드
+/** 카카오로그인 관련 메서드 */
 extension NotLoginedVC {
     func setKakaoUserInfo() {
         UserApi.shared.me() { (user, error) in
@@ -121,7 +144,6 @@ extension NotLoginedVC {
                 print("me() success")
                 var scopes = [String]()
                 if (user?.kakaoAccount?.emailNeedsAgreement == true) { scopes.append("account_email") }
-                
                 if scopes.count > 0 {
                     UserApi.shared.loginWithKakaoAccount(scopes: scopes) { (_, error) in
                         if let error = error {
@@ -134,15 +156,8 @@ extension NotLoginedVC {
                                 }
                                 else {
                                     print("me() success.")
-                                    
                                     //do something
                                     _ = user
-                                    if let email = user?.kakaoAccount?.email {
-                                        // 로그인
-                                        
-                                        // 로그인 안될 경우, 이메일 중복여부
-                                        AuthManager.shared.checkEmail(email)
-                                    }
                                 }
                             }
                         }
@@ -155,14 +170,32 @@ extension NotLoginedVC {
         }
     }
 }
-// 네이버로그인 관련
+/** 네이버로그인 관련  메서드*/
 extension NotLoginedVC: NaverThirdPartyLoginConnectionDelegate {
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
         print("네이버 로그인 성공")
         self.naverLoginPaser()
     }
     func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
-        print("네이버 토큰 \(naverLoginInstance?.accessToken)")
+        if let loginInstance = naverLoginInstance {
+            SNSLoginManager.shared.doNaverLogin(accessToken: loginInstance.accessToken) { [weak self] result in
+                switch result {
+                case let .success(data):
+                    // 키체인에 저장
+                    self?.saveUserInKeychain(accessToken: data.data.accessToken, refreshToken: data.data.refreshToken)
+                    if data.data.joined {
+                        // 가입했을 경우 홈으로 보내주고 액세스토큰, 리프레시 토큰은 키체인에 저장
+                        self?.goHome()
+                    } else {
+                        // 가입 안했을 경우 회원가입으로 보내기
+                        self?.goSignup()
+                    }
+                case let .failure(error): print(error)
+                }
+            }
+        } else {
+            print("Naver Login Information doesn't delivered correctly.")
+        }
     }
     func oauth20ConnectionDidFinishDeleteToken() {
         print("네이버 로그아웃")
@@ -175,8 +208,14 @@ extension NotLoginedVC: NaverThirdPartyLoginConnectionDelegate {
         if !accessToken {
             return
         }
-        guard let tokenType = naverLoginInstance?.tokenType else { return }
-        guard let accessToken = naverLoginInstance?.accessToken else { return }
+        guard let tokenType = naverLoginInstance?.tokenType else {
+            return
+        }
+        guard let accessToken = naverLoginInstance?.accessToken else {
+            return
+        }
+        print("NAVER Access Token", accessToken)
+        
         let requestUrl = "https://openapi.naver.com/v1/nid/me"
         let url = URL(string: requestUrl)!
         let authorization = "\(tokenType) \(accessToken)"
@@ -188,25 +227,24 @@ extension NotLoginedVC: NaverThirdPartyLoginConnectionDelegate {
                     let resultJson = body["response"] as! [String: Any]
                     let name = resultJson["name"] as? String ?? ""
                     let id = resultJson["id"] as? String ?? ""
-                    let phone = resultJson["mobile"] as! String
+                    let phone = resultJson["mobile"] as? String ?? ""
                     let gender = resultJson["gender"] as? String ?? ""
                     let birthyear = resultJson["birthyear"] as? String ?? ""
                     let birthday = resultJson["birthday"] as? String ?? ""
                     let profile = resultJson["profile_image"] as? String ?? ""
                     let email = resultJson["email"] as? String ?? ""
                     let nickName = resultJson["nickname"] as? String ?? ""
-                    
-                    print("네이버 로그인 이름 ",name)
-                    print("네이버 로그인 아이디 ",id)
-                    print("네이버 로그인 핸드폰 ",phone)
-                    print("네이버 로그인 성별 ",gender)
-                    print("네이버 로그인 생년 ",birthyear)
-                    print("네이버 로그인 생일 ",birthday)
-                    print("네이버 로그인 프로필사진 ",profile)
-                    print("네이버 로그인 이메일 ",email)
-                    print("네이버 로그인 닉네임 ",nickName)
+                    print("네이버 로그인 이름 ", name)
+                    print("네이버 로그인 아이디 ", id)
+                    print("네이버 로그인 핸드폰 ", phone)
+                    print("네이버 로그인 성별 ", gender)
+                    print("네이버 로그인 생년 ", birthyear)
+                    print("네이버 로그인 생일 ", birthday)
+                    print("네이버 로그인 프로필사진 ", profile)
+                    print("네이버 로그인 이메일 ", email)
+                    print("네이버 로그인 닉네임 ", nickName)
                 }
-                else{
+                else {
                     // 실패
                 }
             }
