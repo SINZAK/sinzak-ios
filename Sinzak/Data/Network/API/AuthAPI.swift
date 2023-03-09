@@ -9,6 +9,7 @@ import Foundation
 import Moya
 
 enum AuthAPI {
+    case nicknameCheck(nickname: String)
     case join(joinInfo: Join)
     case editUserInfo(userInfo: UserInfo)
     case editCategoryLike(category: CategoryLikeEdit)
@@ -22,6 +23,8 @@ extension AuthAPI: TargetType {
     }
     var path: String {
         switch self {
+        case .nicknameCheck:
+            return "/check/nickname"
         case .join:
             return "/join"
         case .editUserInfo:
@@ -36,12 +39,17 @@ extension AuthAPI: TargetType {
     }
     var method: Moya.Method {
         switch self {
-        case .join, .editUserInfo, .fcmTokenUpdate, .reissue, .editCategoryLike:
+        case .nicknameCheck, .join, .editUserInfo, .fcmTokenUpdate, .reissue, .editCategoryLike:
             return .post
         }
     }
     var task: Task {
         switch self {
+            case .nicknameCheck(let nickname):
+            let params: [String: String] = [
+                "nickName": nickname
+            ]
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
             case .join(let joinInfo):
                 do {
                     let encoder = JSONEncoder()
@@ -100,7 +108,7 @@ extension AuthAPI: TargetType {
                 print("액세스토큰이 없어 불가능합니다.")
                 return header
             }
-        case .reissue:
+        case .nicknameCheck, .reissue:
             return header
         }
     }
