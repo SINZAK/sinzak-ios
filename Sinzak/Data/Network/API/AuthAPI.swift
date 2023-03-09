@@ -91,7 +91,7 @@ extension AuthAPI: TargetType {
         ]
         let accessToken = KeychainItem.currentAccessToken
         switch self {
-        case .join, .editUserInfo, .fcmTokenUpdate,  .reissue, .editCategoryLike:
+        case .join, .editUserInfo, .fcmTokenUpdate, .editCategoryLike:
             if !accessToken.isEmpty {
                 var header = header
                 header["Authorization"] = accessToken
@@ -100,6 +100,8 @@ extension AuthAPI: TargetType {
                 print("액세스토큰이 없어 불가능합니다.")
                 return header
             }
+        case .reissue:
+            return header
         }
     }
 }
