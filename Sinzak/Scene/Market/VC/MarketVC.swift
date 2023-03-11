@@ -22,6 +22,7 @@ final class MarketVC: SZVC {
         super.viewDidLoad()
         setNavigationBar()
         configure()
+        ProductsManager.shared.viewAllProducts()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
