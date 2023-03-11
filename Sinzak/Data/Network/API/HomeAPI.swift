@@ -11,7 +11,7 @@ import Moya
 enum HomeAPI {
     case banner
     case homeNotLogined
-    // case homeLogined
+    case homeLogined
 }
 
 extension HomeAPI: TargetType {
@@ -22,7 +22,7 @@ extension HomeAPI: TargetType {
         switch self {
         case .banner:
             return "/banner"
-        case .homeNotLogined:
+        case .homeNotLogined, .homeLogined:
             return "/home/products"
         }
     }
@@ -30,7 +30,7 @@ extension HomeAPI: TargetType {
         switch self {
         case .banner:
             return .get
-        case .homeNotLogined:
+        case .homeNotLogined, .homeLogined:
             return .post
         }
     }
@@ -38,16 +38,27 @@ extension HomeAPI: TargetType {
         switch self {
         case .banner:
             return .requestPlain
-        case .homeNotLogined:
+        case .homeNotLogined, .homeLogined:
             return .requestPlain
         }
     }
     var headers: [String : String]? {
+        let header = [
+            "Content-type": "application/json",
+        ]
+        let accessToken = KeychainItem.currentAccessToken
         switch self {
-        case .banner:
-            return nil
-        case .homeNotLogined:
-            return nil
+        case .banner, .homeNotLogined:
+            return header
+        case .homeLogined:
+            if !accessToken.isEmpty {
+                var header = header
+                header["Authorization"] = accessToken
+                return header
+            } else {
+                print("액세스토큰이 없어 불가능합니다.")
+                return header
+            }
         }
     }
 }
