@@ -9,7 +9,19 @@ import Foundation
 import Moya
 
 enum ProductsAPI {
+    // 조회
     case products(align: String, page: Int, size: Int, category: String, sale: Bool)
+    case productDetail(id: Int)
+    // 게시글 작성, 수정
+    case build
+    case edit
+    case delete
+    case imageUpload
+    // 게시글 액션
+    case likes
+    case sell
+    case suggest
+    case wish
 }
 
 extension ProductsAPI: TargetType {
@@ -20,11 +32,13 @@ extension ProductsAPI: TargetType {
         switch self {
         case .products:
             return "/products"
+        case .productDetail(let id):
+            return "/products/\(id)"
         }
     }
     var method: Moya.Method {
         switch self {
-        case .products:
+        default:
             return .post
         }
     }
@@ -39,7 +53,10 @@ extension ProductsAPI: TargetType {
                 "size": size
             ]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .productDetail:
+            return .requestPlain
         }
+    
     }
     var headers: [String: String]? {
         let header = [
@@ -47,7 +64,7 @@ extension ProductsAPI: TargetType {
         ]
         let accessToken = KeychainItem.currentAccessToken
         switch self {
-        case .products:
+        default:
             var header = header
             if !accessToken.isEmpty {
                 header["Authorization"] = accessToken
