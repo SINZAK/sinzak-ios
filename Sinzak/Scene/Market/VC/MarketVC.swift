@@ -22,7 +22,14 @@ final class MarketVC: SZVC {
         super.viewDidLoad()
         setNavigationBar()
         configure()
-        ProductsManager.shared.viewAllProducts()
+        ProductsManager.shared.viewAllProducts(align: .popular, category: .craft, page: 3, size: 3, sale: true) { result in
+            switch result {
+            case .success(let data):
+                print("#########", data)
+            case .failure(let error):
+                print("ERROR", error)
+            }
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

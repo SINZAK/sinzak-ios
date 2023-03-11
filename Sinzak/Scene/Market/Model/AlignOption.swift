@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AlignOption: CaseIterable {
+enum AlignOption: String, CaseIterable {
     case recommend
     case popular
     case recent

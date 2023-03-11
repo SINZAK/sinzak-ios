@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Category: CaseIterable {
+enum Category: String, CaseIterable {
     case all
     case painting
     case orient
