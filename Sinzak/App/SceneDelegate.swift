@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKAuth
+import NaverThirdPartyLogin
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -56,14 +57,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 }
-// 카카오 SDK Auth 설정
 extension SceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        // 카카오 SDK 설정
         if let url = URLContexts.first?.url {
             if (AuthApi.isKakaoTalkLoginUrl(url)) {
                 _ = AuthController.handleOpenUrl(url: url)
             }
         }
+        // 네이버 SDK 설정
+        NaverThirdPartyLoginConnection
+                .getSharedInstance()?
+                .receiveAccessToken(URLContexts.first?.url)
     }
 }
 // 루트뷰 설정하는 메서드 선언

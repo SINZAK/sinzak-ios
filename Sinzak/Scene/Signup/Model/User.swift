@@ -13,24 +13,36 @@ enum SNS: String {
     case apple
     case google
 }
-/// 회원가입 모델 
-struct JoinUser: Codable {
-    // properties
-    let category_like: String
-    let email: String
-    let name: String
-    let nickName: String
-    let origin: String
+// MARK: - 회원가입 모델
+struct Join: Codable {
+    let categoryLike, nickname: String
     let term: Bool
-    let tokenId: String
-    // initializer
-    init(category_like: String, email: String, name: String, nickName: String, origin: SNS, term: Bool, tokenId: String = "") {
-        self.category_like = category_like
-        self.email = email
-        self.name = name
-        self.nickName = nickName
-        self.origin = origin.rawValue
-        self.term = term
-        self.tokenId = tokenId
+    // CodingKeys
+    enum CodingKeys: String, CodingKey {
+        case categoryLike = "category_like"
+        case nickname = "nickName"
+        case term
     }
+    // Init
+    init(categoryLike: [String], nickname: String, term: Bool = true) {
+        self.categoryLike = categoryLike.map { $0 }.joined(separator: ",")
+        self.nickname = nickname
+        self.term = term
+    }
+}
+// MARK: - 사용자 정보 수정
+struct UserInfo: Codable {
+    let introduction, name, picture: String
+}
+// MARK: - 관심정보 수정
+struct CategoryLikeEdit: Codable {
+    let categoryLike: String
+    init(categoryLike: [String], nickname: String, term: Bool = true) {
+        self.categoryLike = categoryLike.map { $0 }.joined(separator: ",")
+    }
+}
+// MARK: - FCM 토큰 업데이트
+struct FCMTokenUpdate: Codable {
+    let fcmToken: String
+    let userId: Int
 }
