@@ -9,6 +9,8 @@ import Foundation
 import Moya
 
 enum UserAPI {
+    // 모든 사용자보기
+    // case allUsers
     // 사용자
     case myProfile
     case myWishlist
@@ -28,7 +30,18 @@ extension UserAPI: TargetType {
         switch self {
         case .myProfile:
             return "/users/my-profile"
-
+        case .myWishlist:
+            return "/users/wish"
+        case .myWorklist:
+            return "/users/work-employ"
+        case .mySearchHistory:
+            return "/users/history"
+        case .otherProfile(let userId):
+            return "/users/\(userId)/profile"
+        case .otherFollowing(let userId):
+            return "/users/\(userId)/followings"
+        case .otherFollower(let userId):
+            return "/users/\(userId)/followers"
         }
     }
     var method: Moya.Method {
