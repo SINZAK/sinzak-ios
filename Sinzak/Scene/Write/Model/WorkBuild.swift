@@ -24,3 +24,10 @@ struct WorkBuild: Codable {
         self.suggest = suggest
     }
 }
+
+struct WorkBuildEdit: Codable {
+    let title: String
+    let content: String
+    let price: Int
+    let suggest: Bool
+}
