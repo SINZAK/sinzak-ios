@@ -31,6 +31,14 @@ final class SignupNameView: SZView {
         $0.textColor = CustomColor.black
         $0.clearButtonMode = .whileEditing
     }
+    let checkButton = UIButton().then {
+        $0.setTitle("중복확인", for: .normal)
+        $0.setTitleColor(CustomColor.red, for: .normal)
+        $0.titleLabel?.font = .caption_B
+        $0.layer.borderColor = CustomColor.red!.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 19
+    }
     // 다음 버튼
     let nextButton = UIButton().then {
         $0.setTitle(I18NStrings.next, for: .normal)
@@ -41,7 +49,7 @@ final class SignupNameView: SZView {
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
-            titleLabel, descriptionLabel, nameTextField, nextButton
+            titleLabel, descriptionLabel, nameTextField, nextButton, checkButton
         )
     }
     override func setLayout() {
@@ -53,10 +61,17 @@ final class SignupNameView: SZView {
             make.leading.equalTo(titleLabel)
             make.top.equalTo(titleLabel.snp.bottom).offset(8.21)
         }
+        checkButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(37)
+            make.width.equalTo(86)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(28)
+        }
         nameTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.equalToSuperview().inset(16)
+            make.trailing.equalTo(checkButton.snp.leading).offset(-11)
             make.height.equalTo(60)
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(15.87)
+            make.centerY.equalTo(checkButton)
         }
         nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7.4)
