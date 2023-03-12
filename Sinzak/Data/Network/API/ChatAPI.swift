@@ -9,9 +9,9 @@ import Foundation
 import Moya
 
 enum ChatAPI {
-    case chatRoomList
-    case chatRoom(uuid: String)
-    case chatRoomMessages(uuid: String)
+    case chatRoomList // 챗룸 리스트
+    case chatRoom(uuid: String) // 특정 챗룸 정보 조회
+    case chatRoomMessages(uuid: String) // 메시지 조회
     case allChatRoomForPost(postId: Int, postType: String)
 }
 
@@ -23,8 +23,12 @@ extension ChatAPI: TargetType {
         switch self {
         case .chatRoomList:
             return "/chat/rooms"
-            
-
+        case .chatRoom(let uuid):
+            return "/chat/rooms/\(uuid)"
+        case .chatRoomMessages(let uuid):
+            return "/chat/rooms/\(uuid)/message"
+        case .allChatRoomForPost:
+            return "/chat/rooms/post"
         }
     }
     var method: Moya.Method {
@@ -37,8 +41,14 @@ extension ChatAPI: TargetType {
     }
     var task: Moya.Task {
         switch self {
-        default:
+        case .chatRoomList, .chatRoom, .chatRoomMessages:
             return .requestPlain
+        case .allChatRoomForPost(let postId, let postType):
+            let params: [String: Any] = [
+                "postId": postId,
+                "postType": postType
+            ]
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         }
     }
     var headers: [String : String]? {
