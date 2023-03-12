@@ -1075,6 +1075,65 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A254E15529BE0879001047FD /* Agreement */ = {
+			isa = PBXGroup;
+			children = (
+				A254E15629BE0898001047FD /* View */,
+				A254E15729BE08AB001047FD /* VC */,
+			);
+			path = Agreement;
+			sourceTree = "<group>";
+		};
+		A254E15629BE0898001047FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2B3856B295D888800E5EB7C /* AgreementView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A254E15729BE08AB001047FD /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2B3856D295D889400E5EB7C /* AgreementVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A254E15829BE08BC001047FD /* Name */ = {
+			isa = PBXGroup;
+			children = (
+				A254E15929BE08D7001047FD /* View */,
+				A254E15A29BE08E1001047FD /* VC */,
+			);
+			path = Name;
+			sourceTree = "<group>";
+		};
+		A254E15929BE08D7001047FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2B3856F295D88B600E5EB7C /* SignupNameView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A254E15A29BE08E1001047FD /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				A2B38571295D88C000E5EB7C /* SignupNameVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		A254E15B29BE08F5001047FD /* Genre */ = {
+			isa = PBXGroup;
+			children = (
+				A2B38569295D886300E5EB7C /* View */,
+				A2B3856A295D886900E5EB7C /* VC */,
+			);
+			path = Genre;
+			sourceTree = "<group>";
+		};
 		A26F0AA82948BDF0001CB2AA /* Concierge */ = {
 			isa = PBXGroup;
 			children = (
@@ -1331,9 +1390,10 @@
 			children = (
 				A254E14829BDB068001047FD /* ViewModel */,
 				A2AA89C92967B11A004A63C1 /* Model */,
+				A254E15829BE08BC001047FD /* Name */,
+				A254E15529BE0879001047FD /* Agreement */,
 				A226CC5629AE3156000161E8 /* Welcome */,
-				A2B38569295D886300E5EB7C /* View */,
-				A2B3856A295D886900E5EB7C /* VC */,
+				A254E15B29BE08F5001047FD /* Genre */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -1351,8 +1411,6 @@
 		A2B38569295D886300E5EB7C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A2B3856B295D888800E5EB7C /* AgreementView.swift */,
-				A2B3856F295D88B600E5EB7C /* SignupNameView.swift */,
 				A2B38573295D88D400E5EB7C /* SignupGenreView.swift */,
 				A2AA89CD2967C33A004A63C1 /* InterestedGenreCVC.swift */,
 				A2AA89CF2967CDBB004A63C1 /* InterestedGenreHeader.swift */,
@@ -1363,8 +1421,6 @@
 		A2B3856A295D886900E5EB7C /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				A2B3856D295D889400E5EB7C /* AgreementVC.swift */,
-				A2B38571295D88C000E5EB7C /* SignupNameVC.swift */,
 				A2B38575295D88DC00E5EB7C /* SignupGenreVC.swift */,
 			);
 			path = VC;
