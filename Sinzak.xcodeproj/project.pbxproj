@@ -105,6 +105,7 @@
 		A254E14A29BDB076001047FD /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E14929BDB076001047FD /* SignupViewModel.swift */; };
 		A254E14F29BDFD79001047FD /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E14E29BDFD79001047FD /* WebView.swift */; };
 		A254E15129BDFD84001047FD /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E15029BDFD84001047FD /* WebVC.swift */; };
+		A254E15429BE0413001047FD /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = A254E15329BE0413001047FD /* RxKeyboard */; };
 		A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A257C36A297F99B100266E74 /* SeeMoreCVC.swift */; };
 		A2646BEB2991FB210004F4CE /* HomeAPIProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */; };
 		A2646BED299204B40004F4CE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2646BEC299204B30004F4CE /* User.swift */; };
@@ -358,6 +359,7 @@
 				A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */,
 				A29CE9DD2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */,
+				A254E15429BE0413001047FD /* RxKeyboard in Frameworks */,
 				A210CD57292F4D8800F86A08 /* RxSwift in Frameworks */,
 				A216BD48297FB6B5008964BC /* Tabman in Frameworks */,
 				A210CD52292F4D6B00F86A08 /* Then in Frameworks */,
@@ -1588,6 +1590,7 @@
 				A2B1C65D29B796A20008DADB /* KakaoSDKAuth */,
 				A2B1C65F29B796A20008DADB /* KakaoSDKCommon */,
 				A2B1C66129B796A20008DADB /* KakaoSDKUser */,
+				A254E15329BE0413001047FD /* RxKeyboard */,
 			);
 			productName = Sinzak;
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
@@ -1651,6 +1654,7 @@
 				A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A226CC6429AF2D1D000161E8 /* XCRemoteSwiftPackageReference "Moya" */,
 				A2B1C65C29B796A20008DADB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				A254E15229BE0413001047FD /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
 			projectDirPath = "";
@@ -2302,6 +2306,14 @@
 				minimumVersion = 7.5.0;
 			};
 		};
+		A254E15229BE0413001047FD /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -2355,6 +2367,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A2289D4C2986A3910017969C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		A254E15329BE0413001047FD /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A254E15229BE0413001047FD /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
 		};
 		A29CE9DC2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
