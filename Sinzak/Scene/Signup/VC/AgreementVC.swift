@@ -29,13 +29,19 @@ final class AgreementVC: SZVC {
     }
     // MARK: - Actions
     @objc func termsOfServiceButtonTapped(_ sender: UIButton) {
-        
+        let vc = WebVC()
+        vc.destinationURL = "https://massive-mint-a61.notion.site/bfd66407b0ca4d428a8214165627c191"
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func privacyPolicyButtonTapped(_ sender: UIButton) {
-        
+        let vc = WebVC()
+        vc.destinationURL = "https://massive-mint-a61.notion.site/cd0047fcc1d1451aa0375eae9b60f5b4"
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func marketingInfoButtonTapped(_ sender: UIButton) {
-        
+        let vc = WebVC()
+        vc.destinationURL = "https://massive-mint-a61.notion.site/cb0fde6cb51347719f9d100e8e5aba68"
+        navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: - Helpers
     override func configure() {
