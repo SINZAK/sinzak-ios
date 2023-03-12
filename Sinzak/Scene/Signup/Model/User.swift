@@ -15,8 +15,8 @@ enum SNS: String {
 }
 // MARK: - 회원가입 모델
 struct Join: Codable {
-    let categoryLike, nickname: String
-    let term: Bool
+    var categoryLike, nickname: String
+    var term: Bool
     // CodingKeys
     enum CodingKeys: String, CodingKey {
         case categoryLike = "category_like"

@@ -18,7 +18,7 @@ final class AgreementView: SZView {
         $0.textColor = CustomColor.black
     }
     // 전체 동의
-    private let fullCheckButton = UIButton().then {
+    let fullCheckButton = UIButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
         $0.setImage(UIImage(named: "checked"), for: .selected)
     }
@@ -33,7 +33,7 @@ final class AgreementView: SZView {
         $0.layer.cornerRadius = 0.5
     }
     // 14세 이상
-    private let olderFourteenCheckButton = UIButton().then {
+    let olderFourteenCheckButton = UIButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
         $0.setImage(UIImage(named: "checked"), for: .selected)
     }
@@ -42,11 +42,8 @@ final class AgreementView: SZView {
         $0.font = .body_M
         $0.textColor = CustomColor.black
     }
-    private let olderFourteenMoreButton = UIButton().then {
-        $0.setImage(UIImage(named: "right-chevron"), for: .normal)
-    }
     // 이용약관
-    private let termsOfServiceCheckButton = UIButton().then {
+    let termsOfServiceCheckButton = UIButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
         $0.setImage(UIImage(named: "checked"), for: .selected)
     }
@@ -55,11 +52,11 @@ final class AgreementView: SZView {
         $0.font = .body_M
         $0.textColor = CustomColor.black
     }
-    private let termsOfServiceMoreButton = UIButton().then {
+    let termsOfServiceMoreButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron"), for: .normal)
     }
     // 개인정보 처리방침
-    private let privacyPolicyCheckButton = UIButton().then {
+    let privacyPolicyCheckButton = UIButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
         $0.setImage(UIImage(named: "checked"), for: .selected)
     }
@@ -68,11 +65,11 @@ final class AgreementView: SZView {
         $0.font = .body_M
         $0.textColor = CustomColor.black
     }
-    private let privacyPolicyMoreButton = UIButton().then {
+    let privacyPolicyMoreButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron"), for: .normal)
     }
     // 마케팅 정보
-    private let marketingInfoCheckButton = UIButton().then {
+    let marketingInfoCheckButton = UIButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
         $0.setImage(UIImage(named: "checked"), for: .selected)
     }
@@ -81,7 +78,7 @@ final class AgreementView: SZView {
         $0.font = .body_M
         $0.textColor = CustomColor.black
     }
-    private let marketingInfoMoreButton = UIButton().then {
+    let marketingInfoMoreButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron"), for: .normal)
     }
     // 확인 버튼
@@ -95,7 +92,7 @@ final class AgreementView: SZView {
     override func setView() {
         addSubviews(
             titleLabel, fullCheckButton, fullAgreeLabel, dividerView,
-            olderFourteenCheckButton, olderFourteenLabel, olderFourteenMoreButton,
+            olderFourteenCheckButton, olderFourteenLabel,
             termsOfServiceCheckButton, termsOfServiceLabel, termsOfServiceMoreButton,
             privacyPolicyCheckButton, privacyPolicyLabel, privacyPolicyMoreButton,
             marketingInfoCheckButton, marketingInfoLabel, marketingInfoMoreButton,
@@ -129,11 +126,6 @@ final class AgreementView: SZView {
             make.leading.equalTo(fullAgreeLabel)
             make.centerY.equalTo(olderFourteenCheckButton)
         }
-        olderFourteenMoreButton.snp.makeConstraints { make in
-            make.width.height.equalTo(20)
-            make.trailing.equalToSuperview().inset(35.32)
-            make.centerY.equalTo(olderFourteenCheckButton)
-        }
         termsOfServiceCheckButton.snp.makeConstraints { make in
             make.width.height.leading.equalTo(fullCheckButton)
             make.top.equalTo(olderFourteenCheckButton.snp.bottom).offset(23)
@@ -143,7 +135,8 @@ final class AgreementView: SZView {
             make.centerY.equalTo(termsOfServiceCheckButton)
         }
         termsOfServiceMoreButton.snp.makeConstraints { make in
-            make.width.height.trailing.equalTo(olderFourteenMoreButton)
+            make.width.height.equalTo(20)
+            make.trailing.equalToSuperview().inset(35.32)
             make.centerY.equalTo(termsOfServiceCheckButton)
         }
         privacyPolicyCheckButton.snp.makeConstraints { make in
@@ -155,7 +148,7 @@ final class AgreementView: SZView {
             make.centerY.equalTo(privacyPolicyCheckButton)
         }
         privacyPolicyMoreButton.snp.makeConstraints { make in
-            make.width.height.trailing.equalTo(olderFourteenMoreButton)
+            make.width.height.trailing.equalTo(termsOfServiceMoreButton)
             make.centerY.equalTo(privacyPolicyCheckButton)
         }
         marketingInfoCheckButton.snp.makeConstraints { make in
@@ -167,7 +160,7 @@ final class AgreementView: SZView {
             make.centerY.equalTo(marketingInfoCheckButton)
         }
         marketingInfoMoreButton.snp.makeConstraints { make in
-            make.width.height.trailing.equalTo(olderFourteenMoreButton)
+            make.width.height.trailing.equalTo(termsOfServiceMoreButton)
             make.centerY.equalTo(marketingInfoCheckButton)
         }
         confirmButton.snp.makeConstraints { make in

@@ -10,6 +10,7 @@ import UIKit
 final class SignupNameVC: SZVC {
     // MARK: - Properties
     let mainView = SignupNameView()
+    var viewModel = SignupViewModel()
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
