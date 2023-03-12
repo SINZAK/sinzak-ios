@@ -39,6 +39,11 @@ final class SignupNameView: SZView {
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 19
     }
+    let nameValidationLabel = UILabel().then {
+        $0.text = "이름을 입력해주세요"
+        $0.font = .caption_R
+        $0.textColor = CustomColor.purple
+    }
     // 다음 버튼
     let nextButton = UIButton().then {
         $0.setTitle(I18NStrings.next, for: .normal)
@@ -49,7 +54,7 @@ final class SignupNameView: SZView {
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
-            titleLabel, descriptionLabel, nameTextField, nextButton, checkButton
+            titleLabel, descriptionLabel, nameTextField, nextButton, checkButton, nameValidationLabel
         )
     }
     override func setLayout() {
@@ -72,6 +77,10 @@ final class SignupNameView: SZView {
             make.trailing.equalTo(checkButton.snp.leading).offset(-11)
             make.height.equalTo(60)
             make.centerY.equalTo(checkButton)
+        }
+        nameValidationLabel.snp.makeConstraints { make in
+            make.leading.equalTo(nameTextField).offset(15)
+            make.top.equalTo(nameTextField.snp.bottom).offset(8)
         }
         nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7.4)
