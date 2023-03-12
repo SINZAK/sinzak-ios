@@ -43,3 +43,19 @@ extension String {
     }
 }
 
+// 고유한 파일네임 만들기
+extension String {
+    /// prefix, fileExtension 을 이용해 파일이름 고유하게 만들어줌
+    /// - 예: prefix-uniqueString.fileExtension
+    static func uniqueFilename(withPrefix prefix: String? = nil, fileExtension: String? = nil) -> String {
+            let uniqueString = ProcessInfo.processInfo.globallyUniqueString
+            
+            if prefix != nil && fileExtension != nil {
+                return "\(prefix!)-\(uniqueString).\(fileExtension!)"
+            } else if prefix != nil && fileExtension  == nil {
+                return "\(prefix!)-\(uniqueString)"
+            } else {
+                return uniqueString
+            }
+        }
+}
