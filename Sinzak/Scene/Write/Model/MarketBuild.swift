@@ -26,3 +26,9 @@ struct MarketBuild: Codable {
         self.price = price
     }
 }
+struct MarketBuildEdit: Codable {
+    let title: String
+    let content: String
+    let height, vertical, width: Int
+    let suggest: Bool
+    let price: Int}
