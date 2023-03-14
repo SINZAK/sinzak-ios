@@ -40,7 +40,6 @@ final class SignupNameView: SZView {
         $0.layer.cornerRadius = 19
     }
     let nameValidationLabel = UILabel().then {
-        $0.text = "이름을 입력해주세요"
         $0.font = .caption_R
         $0.textColor = CustomColor.purple
     }
