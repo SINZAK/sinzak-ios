@@ -86,6 +86,17 @@ final class ArtCVC: UICollectionViewCell {
         priceLabel.text = "\(data.price)"
         favoriteCountLabel.text = "\(data.likesCnt)"
     }
+    func setData(_ data: MarketProduct) {
+        //if let thumbnail = data.thumbnail {
+        let url = URL(string: data.thumbnail)
+        imageView.kf.setImage(with: url)
+        //}
+        titleLabel.text = data.title
+        authorLabel.text = data.author
+        uploadTimeLabel.text = data.date.toDate().toRelativeString()
+        priceLabel.text = "\(data.price)"
+        favoriteCountLabel.text = "\(data.likesCnt)"
+    }
     // MARK: - Design Helpers
     func setupUI() {
         contentView.backgroundColor = .clear
