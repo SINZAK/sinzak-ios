@@ -83,7 +83,7 @@ extension AuthAPI: TargetType {
             let params: [String: String] = [
                 "nickName": nickname
             ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
             case .join(let joinInfo):
                 do {
                     let encoder = JSONEncoder()

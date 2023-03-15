@@ -20,7 +20,7 @@ class AuthManager {
             switch result {
             case let .success(data):
                 do { let decoder = JSONDecoder()
-                    let result = try decoder.decode(ShortMessageResult.self, from: data.data)
+                    let result = try decoder.decode(OnlySuccess.self, from: data.data)
                     completion(result.success)
                 } catch {
                     completion(false)
