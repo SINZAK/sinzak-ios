@@ -22,19 +22,12 @@ final class SignupNameVC: SZVC {
         super.viewDidLoad()
     }
     // MARK: - Actions
-    @objc
-    func nextButtonTapped(_ sender: UIButton) {
-        let vc = SignupGenreVC()
-        vc.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(vc, animated: true)
-    }
     // MARK: - Helpers
     override func configure() {
-        mainView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         bind()
     }
     func bind() {
-        let input = SignupViewModel.Input(nameText: mainView.nameTextField.rx.text)
+        let input = SignupViewModel.Input(nameText: mainView.nameTextField.rx.text, checkButtonTap: mainView.checkButton.rx.tap, nextButtonTap: mainView.nextButton.rx.tap)
         let output = viewModel.transform(input: input)
         // 닉네임 유효성 검사
         output.nameValidation
@@ -50,6 +43,34 @@ final class SignupNameVC: SZVC {
                 self.mainView.checkButton.setTitleColor(btnColor, for: .normal)
                 self.mainView.checkButton.layer.borderColor = btnColor.cgColor
             })
+            .disposed(by: viewModel.disposeBag)
+        // 중복체크 탭 시
+        output.checkButtonTap
+            .bind { [unowned self] _ in
+                guard let name = self.mainView.nameTextField.text else { return }
+                viewModel.checkNickname(for: name) { bool in
+                    let color: UIColor = bool  ? CustomColor.red! : CustomColor.purple!
+                    let text: String = bool ? "사용할 수 있습니다." : "중복된 닉네임입니다."
+                    self.mainView.nameValidationLabel.textColor = color
+                    self.mainView.nameValidationLabel.text = text
+                    // 버튼
+                    let btnColor: UIColor = bool ? CustomColor.red! : CustomColor.gray60!
+                    self.mainView.checkButton.isEnabled = bool
+                    self.mainView.checkButton.setTitleColor(btnColor, for: .normal)
+                    self.mainView.checkButton.layer.borderColor = btnColor.cgColor
+                    // 아래 확인버튼
+                    self.mainView.nextButton.isEnabled = bool
+                    self.mainView.nextButton.backgroundColor = btnColor
+                }
+            }
+            .disposed(by: viewModel.disposeBag)
+        // 다음버튼 눌렀을 때
+        output.nextButtonTap
+            .bind { [unowned self] _ in
+                let vc = SignupGenreVC()
+                vc.modalPresentationStyle = .fullScreen
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
             .disposed(by: viewModel.disposeBag)
         // 키보드 자동 설정
         RxKeyboard.instance.visibleHeight
