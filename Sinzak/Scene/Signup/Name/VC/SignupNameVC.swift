@@ -68,7 +68,8 @@ final class SignupNameVC: SZVC {
         output.nextButtonTap
             .bind { [unowned self] _ in
                 let vc = SignupGenreVC()
-                vc.modalPresentationStyle = .fullScreen
+                viewModel.joinInfo.nickname = mainView.nameTextField.text!
+                vc.viewModel = self.viewModel
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: viewModel.disposeBag)
