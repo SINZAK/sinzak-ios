@@ -33,7 +33,7 @@ final class SignupGenreView: SZView {
     let nextButton = UIButton().then {
         $0.setTitle(I18NStrings.next, for: .normal)
         $0.titleLabel?.font = .body_B
-        $0.backgroundColor = CustomColor.gray10
+        $0.backgroundColor = CustomColor.red
         $0.layer.cornerRadius = 30
     }
     // MARK: - Design Helpers

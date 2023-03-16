@@ -32,8 +32,8 @@ final class InterestedGenreCVC: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     // 셀 선택여부에 따라 디자인 변경
-    func designUI(isSelected: Bool = false) {
-        switch isSelected {
+    func isUserSelected(_ bool: Bool = false) {
+        switch bool {
         case true:
             textLabel.textColor = CustomColor.white
             baseView.backgroundColor = CustomColor.red
@@ -69,6 +69,6 @@ final class InterestedGenreCVC: UICollectionViewCell {
             make.leading.equalTo(imageView).offset(-8)
             make.trailing.equalTo(textLabel).offset(15)
         }
-        designUI()
+        isUserSelected()
     }
 }
