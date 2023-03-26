@@ -31,6 +31,8 @@
 		A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD54292F4D8800F86A08 /* RxCocoa */; };
 		A210CD57292F4D8800F86A08 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD56292F4D8800F86A08 /* RxSwift */; };
 		A2121ACC29D05034008F5406 /* SchoolAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2121ACB29D05034008F5406 /* SchoolAuthViewModel.swift */; };
+		A2121ACE29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2121ACD29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift */; };
+		A2121AD029D075AE008F5406 /* UnivCertify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2121ACF29D075AE008F5406 /* UnivCertify.swift */; };
 		A216BD37297FA384008964BC /* HomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD36297FA384008964BC /* HomeDetailView.swift */; };
 		A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3A297FA3B4008964BC /* HomeDetailVC.swift */; };
 		A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */; };
@@ -213,6 +215,8 @@
 		A2100F76298695A100C85ADF /* WorksCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksCategory.swift; sourceTree = "<group>"; };
 		A2100F78298696D800C85ADF /* WorksHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksHeader.swift; sourceTree = "<group>"; };
 		A2121ACB29D05034008F5406 /* SchoolAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAuthViewModel.swift; sourceTree = "<group>"; };
+		A2121ACD29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityAutoCompletionCVC.swift; sourceTree = "<group>"; };
+		A2121ACF29D075AE008F5406 /* UnivCertify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCertify.swift; sourceTree = "<group>"; };
 		A216BD36297FA384008964BC /* HomeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailView.swift; sourceTree = "<group>"; };
 		A216BD3A297FA3B4008964BC /* HomeDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailVC.swift; sourceTree = "<group>"; };
 		A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFullWidthCVC.swift; sourceTree = "<group>"; };
@@ -1512,6 +1516,7 @@
 			isa = PBXGroup;
 			children = (
 				A2B38579295D893300E5EB7C /* UniversityInfoView.swift */,
+				A2121ACD29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1529,6 +1534,7 @@
 			children = (
 				A2DEC36529B46C8500CF0794 /* school.json */,
 				A2DEC36329B4684100CF0794 /* School.swift */,
+				A2121ACF29D075AE008F5406 /* UnivCertify.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1872,6 +1878,7 @@
 				A2420F8B29A8BCE4007D8937 /* AddPhotoCVC.swift in Sources */,
 				A2DEC36E29B5BD4E00CF0794 /* CertifiedAuthorView.swift in Sources */,
 				A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */,
+				A2121AD029D075AE008F5406 /* UnivCertify.swift in Sources */,
 				A233892429B3772800688FD8 /* Message.swift in Sources */,
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A280AB4229A7442300C1729C /* SearchResultHeader.swift in Sources */,
@@ -1974,6 +1981,7 @@
 				A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */,
 				A2DEC35F29B4638D00CF0794 /* SudentAuthView.swift in Sources */,
 				A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */,
+				A2121ACE29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
 				A2180DB329AA3C0700BBC74A /* ArtworkSizeVC.swift in Sources */,
 				A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */,

@@ -27,7 +27,7 @@ final class UniversityInfoView: SZView {
     }
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         $0.clipsToBounds = true
-        $0.layer.cornerRadius = 30
+        $0.layer.cornerRadius = 16
         $0.backgroundColor = CustomColor.gray10
         $0.isHidden = true // 검색결과가 있을 경우 false 처리 후 보여주기
     }
