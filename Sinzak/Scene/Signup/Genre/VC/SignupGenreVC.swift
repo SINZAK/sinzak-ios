@@ -41,15 +41,21 @@ final class SignupGenreVC: SZVC {
                 var genre = Array<String>()
                 for (section, datas) in userSelect.enumerated() {
                     for item in datas {
-                        genre.append(genreList[section].category[item])
+                        genre.append(genreList[section].category[item].rawValue)
                     }
                 }
-                print(genre)
                 viewModel.joinInfo.categoryLike = genre.map { $0 }.joined(separator: ",")
-                // 회원가입 시키기 
-                
-                let vc = UniversityInfoVC()
-                self.navigationController?.pushViewController(vc, animated: true)
+                // 회원가입 시키기
+                debugPrint(viewModel.joinInfo)
+                AuthManager.shared.join(viewModel.joinInfo) { result in
+                    if result {
+                        let vc = UniversityInfoVC()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    } else {
+                        debugPrint(result)
+                        showAlert(title: "ERROR: 회원가입에 실패하였습니다. 다시 시도해주세요.", okText: "확인", cancelNeeded: false, completionHandler: nil)
+                    }
+                }
             }
             .disposed(by: viewModel.disposeBag)
     }
@@ -64,7 +70,7 @@ extension SignupGenreVC: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: InterestedGenreCVC.self), for: indexPath) as? InterestedGenreCVC else { return UICollectionViewCell()}
-        cell.textLabel.text = genreList[indexPath.section].category[indexPath.item]
+        cell.textLabel.text = genreList[indexPath.section].category[indexPath.item].text
        let bool =  userSelect[indexPath.section].contains(indexPath.item)
         cell.isUserSelected(bool)
         return cell
@@ -119,7 +125,6 @@ extension SignupGenreVC {
         section.boundarySupplementaryItems = [headerItem]
         
         let layout = UICollectionViewCompositionalLayout(section: section)
-        
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 19
         layout.configuration = config

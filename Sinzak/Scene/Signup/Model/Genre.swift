@@ -9,7 +9,54 @@ import Foundation
 
 struct Genre {
     let type: String
-    let category: [String]
+    let category: [AllGenre]
+}
+
+enum AllGenre: String {
+    case painting
+    case orientalPainting
+    case sculpture
+    case print
+    case craft
+    case portrait
+    case etc
+    case illust
+    case packageLagel
+    case printDesign
+    case posterBannerSign
+    case logobranding
+    case appWebDesign
+    
+    var text: String {
+        switch self {
+        case .painting:
+            return I18NStrings.painting
+        case .orientalPainting:
+            return I18NStrings.orientalPainting
+        case .sculpture:
+            return I18NStrings.sculpture
+        case .print:
+            return I18NStrings.print
+        case .craft:
+            return I18NStrings.craft
+        case .portrait:
+            return I18NStrings.portrait
+        case .etc:
+            return I18NStrings.etc
+        case .illust:
+            return I18NStrings.illust
+        case .packageLagel:
+            return I18NStrings.packageLabel
+        case .printDesign:
+            return I18NStrings.printDesign
+        case .posterBannerSign:
+            return I18NStrings.posterBannerSign
+        case .logobranding:
+            return I18NStrings.logoBranding
+        case .appWebDesign:
+            return I18NStrings.appWebDesign
+        }
+    }
 }
 
 // 회원가입 관심장르
@@ -17,23 +64,23 @@ extension Genre {
     static let list: [Genre] = [
         Genre(type: I18NStrings.fineart,
               category: [
-                I18NStrings.painting,
-                I18NStrings.orientalPainting,
-                I18NStrings.sculpture,
-                I18NStrings.print,
-                I18NStrings.craft,
-                I18NStrings.portrait,
-                I18NStrings.etc
+                .painting,
+                .orientalPainting,
+                .sculpture,
+                .print,
+                .craft,
+                .portrait,
+                .etc
               ]
              ),
         Genre(type: I18NStrings.design,
               category: [
-                I18NStrings.illust,
-                I18NStrings.packageLabel,
-                I18NStrings.printDesign,
-                I18NStrings.posterBannerSign,
-                I18NStrings.logoBranding,
-                I18NStrings.appWebDesign
+                .illust,
+                .packageLagel,
+                .printDesign,
+                .posterBannerSign,
+                .logobranding,
+                .appWebDesign
               ]
              )
     ]
