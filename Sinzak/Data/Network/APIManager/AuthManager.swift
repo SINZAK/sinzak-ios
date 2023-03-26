@@ -36,13 +36,15 @@ class AuthManager {
         provider.request(.join(joinInfo: joinInfo)) { result in
             switch result {
             case .success(let response):
-                do {
-                    let result = try response.map(OnlySuccess.self)
-                    completion(result.success)
-                } catch {
-                    print("Error decoding JSON: \(error.localizedDescription)")
-                    completion(false)
-                }
+                print(response)
+                completion(true)
+//                do {
+//                    let result = try response.map(OnlySuccess.self)
+//                    completion(result.success)
+//                } catch {
+//                    print("Error decoding JSON: \(error.localizedDescription)")
+//                    completion(false)
+//                }
             case .failure(let error):
                 print(error.localizedDescription)
                 completion(false)
