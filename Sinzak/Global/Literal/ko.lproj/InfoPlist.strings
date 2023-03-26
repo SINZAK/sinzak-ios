@@ -7,3 +7,7 @@
 */
 // 앱 이름
 "CFBundleDisplayName" = "신작";
+// 사용권한
+"NSCameraUsageDescription" = "학생증 인증, 작품 이미지, 프로필 사진 등록 등을 위하여 카메라를 사용합니다.";
+"NSPhotoLibraryUsageDescription" = "학생증 인증, 작품 이미지, 프로필 사진 등록 등을 위하여 사진앨범에서 사진을 선택할 수 있습니다.";
+"NSMicrophoneUsageDescription" = "앱에서는 마이크 권한을 사용하지 않습니다.";
