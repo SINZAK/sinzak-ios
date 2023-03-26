@@ -10,7 +10,8 @@ import RxSwift
 import RxCocoa
 
 final class SchoolAuthViewModel: ViewModelType {
-        var disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
+    var univEmailModel = UnivMailCertify(code: nil, univName: "", univEmail: "")
     
     struct Input {
         let queryText: ControlProperty<String?>
@@ -26,9 +27,9 @@ final class SchoolAuthViewModel: ViewModelType {
         let queryText = input.queryText
             .orEmpty
             .distinctUntilChanged()
-            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
             .share()
         
-        return Output(queryText: queryText, nextButtonTap: input.nextButtonTap, notStudentButtonTap: input.nextButtonTap)
+        return Output(queryText: queryText, nextButtonTap: input.nextButtonTap, notStudentButtonTap: input.notStudentButtonTap)
     }
 }
