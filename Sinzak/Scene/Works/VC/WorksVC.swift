@@ -14,12 +14,22 @@ final class WorksVC: SZVC {
         case category = 0
         case art
     }
+    var worksitem: [MarketProduct] = []
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        ProductsManager.shared.viewAllProducts(align: .popular, category: .painting, page: 3, size: 3, sale: true) { [weak self] result in
+            switch result {
+            case .success(let data):
+                print("#########", data)
+                self?.worksitem = data.content
+            case .failure(let error):
+                print("ERROR", error)
+            }
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -61,7 +71,7 @@ extension WorksVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return 2
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == SectionKind.category.rawValue ? WorksCategory.allCases.count : 9
+        return section == SectionKind.category.rawValue ? WorksCategory.allCases.count : worksitem.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == SectionKind.category.rawValue {
@@ -73,6 +83,8 @@ extension WorksVC: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell() }
+            let item = worksitem[indexPath.item]
+            cell.setData(item)
             return cell
         }
     }

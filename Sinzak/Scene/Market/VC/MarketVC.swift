@@ -14,6 +14,11 @@ final class MarketVC: SZVC {
         case category = 0
         case art
     }
+    var marketProduct: [MarketProduct] = [] {
+        didSet {
+            mainView.collectionView.reloadData()
+        }
+    }
     // MARK: - Init
     override func loadView() {
         view = mainView
@@ -22,10 +27,11 @@ final class MarketVC: SZVC {
         super.viewDidLoad()
         setNavigationBar()
         configure()
-        ProductsManager.shared.viewAllProducts(align: .popular, category: .craft, page: 3, size: 3, sale: true) { result in
+        ProductsManager.shared.viewAllProducts(align: .popular, category: .painting, page: 3, size: 3, sale: true) { [weak self] result in
             switch result {
             case .success(let data):
                 print("#########", data)
+                self?.marketProduct = data.content
             case .failure(let error):
                 print("ERROR", error)
             }
@@ -71,7 +77,7 @@ extension MarketVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return 2
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == SectionKind.category.rawValue ? Category.allCases.count : 9
+        return section == SectionKind.category.rawValue ? Category.allCases.count : marketProduct.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == SectionKind.category.rawValue {
@@ -83,6 +89,8 @@ extension MarketVC: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell() }
+            let item = marketProduct[indexPath.item]
+            cell.setData(item)
             return cell
         }
     }
