@@ -30,6 +30,7 @@
 		A210CD52292F4D6B00F86A08 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD51292F4D6B00F86A08 /* Then */; };
 		A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD54292F4D8800F86A08 /* RxCocoa */; };
 		A210CD57292F4D8800F86A08 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD56292F4D8800F86A08 /* RxSwift */; };
+		A2121ACC29D05034008F5406 /* SchoolAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2121ACB29D05034008F5406 /* SchoolAuthViewModel.swift */; };
 		A216BD37297FA384008964BC /* HomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD36297FA384008964BC /* HomeDetailView.swift */; };
 		A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3A297FA3B4008964BC /* HomeDetailVC.swift */; };
 		A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */; };
@@ -211,6 +212,7 @@
 		A2100F732986939A00C85ADF /* WorksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksVC.swift; sourceTree = "<group>"; };
 		A2100F76298695A100C85ADF /* WorksCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksCategory.swift; sourceTree = "<group>"; };
 		A2100F78298696D800C85ADF /* WorksHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksHeader.swift; sourceTree = "<group>"; };
+		A2121ACB29D05034008F5406 /* SchoolAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAuthViewModel.swift; sourceTree = "<group>"; };
 		A216BD36297FA384008964BC /* HomeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailView.swift; sourceTree = "<group>"; };
 		A216BD3A297FA3B4008964BC /* HomeDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailVC.swift; sourceTree = "<group>"; };
 		A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtFullWidthCVC.swift; sourceTree = "<group>"; };
@@ -514,6 +516,14 @@
 				A2100F76298695A100C85ADF /* WorksCategory.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A2121ACA29D0501D008F5406 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A2121ACB29D05034008F5406 /* SchoolAuthViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		A216BD35297FA363008964BC /* HomeDetail */ = {
@@ -1404,6 +1414,7 @@
 		A2B38568295D884400E5EB7C /* SchoolAuth */ = {
 			isa = PBXGroup;
 			children = (
+				A2121ACA29D0501D008F5406 /* ViewModel */,
 				A2DEC36229B4682E00CF0794 /* Model */,
 				A2DEC35C29B462DE00CF0794 /* UniversityInfo */,
 				A2DEC35D29B4630C00CF0794 /* StudentAuth */,
@@ -1928,6 +1939,7 @@
 				A226CC4B29ADF875000161E8 /* SendPriceOfferVC.swift in Sources */,
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
 				A2420F8929A859AF007D8937 /* AddPhotosVC.swift in Sources */,
+				A2121ACC29D05034008F5406 /* SchoolAuthViewModel.swift in Sources */,
 				A226CC5529AE0FDD000161E8 /* ReceivePriceOfferVC.swift in Sources */,
 				A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */,
 				A20E4A5229990091009C1340 /* MyProfileVC.swift in Sources */,
