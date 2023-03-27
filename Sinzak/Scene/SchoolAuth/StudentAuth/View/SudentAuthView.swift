@@ -148,6 +148,14 @@ final class StudentAuthView: SZView {
         $0.layer.borderWidth = 2
         $0.isHidden = true
     }
+    let selectedPhoto: UIImageView = UIImageView().then {
+        $0.layer.cornerRadius = 24
+        $0.clipsToBounds = true
+        $0.layer.borderColor = CustomColor.gray40!.cgColor
+        $0.layer.borderWidth = 2
+        $0.isHidden = true
+        $0.contentMode = .scaleAspectFill
+    }
     let photoNameLabel = UILabel().then {
         $0.font = .body_B
         $0.textColor = CustomColor.black
@@ -221,7 +229,8 @@ final class StudentAuthView: SZView {
         schoolCardView.addSubviews(
             schoolCardDescription,
             photoUploadButton,
-            uploadedPhotoView
+            uploadedPhotoView,
+            selectedPhoto
         )
         uploadedPhotoView.addSubviews(
             photoNameLabel,
@@ -299,6 +308,11 @@ final class StudentAuthView: SZView {
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().inset(16)
             make.trailing.equalTo(cancelButton.snp.leading).offset(-5)
+        }
+        selectedPhoto.snp.makeConstraints { make in
+            make.top.equalTo(uploadedPhotoView.snp.bottom).offset(26)
+            make.horizontalEdges.equalToSuperview().inset(36)
+            make.height.equalTo(selectedPhoto.snp.width).multipliedBy(0.7)
         }
         // 하단 버튼
         buttonStack.snp.makeConstraints { make in
