@@ -33,7 +33,7 @@ final class SignupNameVC: SZVC {
         output.nameValidation
             .bind(onNext: {  [unowned self] bool in
                 // 텍스트
-                let color: UIColor = bool  ? CustomColor.red! : CustomColor.purple!
+                let color: UIColor = bool  ? CustomColor.purple! : CustomColor.red!
                 let text: String = bool ? "멋진 이름이네요" : "사용불가능한 이름입니다."
                 self.mainView.nameValidationLabel.textColor = color
                 self.mainView.nameValidationLabel.text = text
