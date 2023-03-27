@@ -98,7 +98,7 @@ final class StudentAuthView: SZView {
     let webmailValidationLabel = UILabel().then {
         $0.font = .caption_M
         $0.textColor = CustomColor.red
-        $0.text = I18NStrings.enterYourEmailInCorrectFormat
+        $0.text = ""
     }
     let authCodeLabel = UILabel().then {
         $0.font = .caption_M
@@ -117,7 +117,7 @@ final class StudentAuthView: SZView {
     let authCodeValidationLabel = UILabel().then {
         $0.font = .caption_M
         $0.textColor = CustomColor.red
-        $0.text = I18NStrings.pleaseEnterAgain
+        $0.text = ""
     }
     // - 학생증 인증
     let schoolCardView = UIView().then {
@@ -251,7 +251,7 @@ final class StudentAuthView: SZView {
             make.height.equalTo(40)
         }
         webmailView.snp.makeConstraints { make in
-            make.top.equalTo(authButtonStack.snp.bottom).offset(30)
+            make.top.equalTo(authButtonStack.snp.bottom).offset(12)
             make.bottom.lessThanOrEqualTo(buttonStack.snp.top).offset(-20)
             make.leading.trailing.equalToSuperview()
         }

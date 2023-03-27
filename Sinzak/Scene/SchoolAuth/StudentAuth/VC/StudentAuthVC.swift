@@ -9,6 +9,7 @@ import UIKit
 import YPImagePicker
 import RxSwift
 import RxCocoa
+import RxKeyboard
 
 final class StudentAuthVC: SZVC {
     // MARK: - Properties
@@ -69,6 +70,7 @@ final class StudentAuthVC: SZVC {
         navigationItem.title = I18NStrings.schoolAuth
     }
     func bind() {
+        // 사진 업로드
         mainView.photoUploadButton.rx
             .tap
             .withUnretained(self)
@@ -89,6 +91,7 @@ final class StudentAuthVC: SZVC {
                 vc.present(picker, animated: true, completion: nil)
             }
             .disposed(by: viewModel.disposeBag)
+        // 사진 취소
         mainView.cancelButton.rx
             .tap
             .withUnretained(self)
@@ -103,6 +106,72 @@ final class StudentAuthVC: SZVC {
                 }
             }
             .disposed(by: viewModel.disposeBag)
-
+        // 텍스트필드쪽
+        let mailValidation = mainView.webmailTextField.rx.text
+            .orEmpty
+            .map {
+              $0.isValidString(.email)
+            }
+            .share()
+        mailValidation
+            .withUnretained(self)
+            .bind { (vc, bool) in
+                let text: String = bool ? "엔터를 눌러 인증메일을 전송해주세요" : I18NStrings.enterYourEmailInCorrectFormat
+                let color: UIColor = bool  ? CustomColor.purple! : CustomColor.red!
+                vc.mainView.webmailValidationLabel.textColor = color
+                vc.mainView.webmailValidationLabel.text = text
+            }
+            .disposed(by: viewModel.disposeBag)
+        mainView.webmailTextField.rx
+            .controlEvent([.editingDidEndOnExit])
+            .withUnretained(self)
+            .bind { (vc, _) in
+                // 인증메일 전송
+                vc.mainView.webmailValidationLabel.text = "인증메일이 전송되었습니다."
+                vc.mainView.webmailTextField.isUserInteractionEnabled = false
+                vc.mainView.layoutIfNeeded()
+            }
+            .disposed(by: viewModel.disposeBag)
+        let authcodeValidation = mainView.authCodeTextField
+            .rx.text
+            .orEmpty
+            .map { $0.isValidString(.digit)}
+            .share()
+        authcodeValidation
+            .withUnretained(self)
+            .bind { (vc, bool) in
+                let text: String = bool ? "" :  I18NStrings.pleaseEnterAgain
+                let color: UIColor = bool  ? CustomColor.purple! : CustomColor.red!
+                vc.mainView.authCodeValidationLabel.textColor = color
+                vc.mainView.authCodeValidationLabel.text = text
+                vc.mainView.layoutIfNeeded()
+            }
+            .disposed(by: viewModel.disposeBag)
+        mainView.authCodeTextField.rx
+            .controlEvent([.editingDidEndOnExit])
+            .withUnretained(self)
+            .bind { (vc, _) in
+                // 인증코드 전송되고 맞았을 때
+                vc.mainView.authCodeValidationLabel.text = "인증완료"
+                vc.mainView.layoutIfNeeded()
+            }
+            .disposed(by: viewModel.disposeBag)
+        // 키보드 자동 설정
+        RxKeyboard.instance.visibleHeight
+            .drive(with: self, onNext: { (vc, keyboardHeight) in
+             print("keyBoard 높이는 \(keyboardHeight) 입니다.")
+             if keyboardHeight > 0 {
+                 vc.mainView.buttonStack.snp.updateConstraints { make in
+                     make.bottom.equalTo(self.mainView.safeAreaLayoutGuide).offset(-keyboardHeight + self.mainView.safeAreaInsets.bottom - 20)
+                     vc.mainView.layoutIfNeeded()
+                 }
+             } else {
+                 vc.mainView.buttonStack.snp.updateConstraints { make in
+                     make.bottom.equalTo(self.mainView.safeAreaLayoutGuide)
+                     vc.mainView.layoutIfNeeded()
+                 }
+             }
+         })
+         .disposed(by: viewModel.disposeBag)
     }
 }
