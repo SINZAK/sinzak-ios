@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class SZVC: UIViewController {
     override func viewDidLoad() {
@@ -34,4 +35,5 @@ class SZVC: UIViewController {
     /// VC에서 실행할 메서드
     func configure() {
     }
+    let disposeBag = DisposeBag()
 }

@@ -22,7 +22,6 @@ final class HomeVC: SZVC {
     let mainView = HomeView()
     let provider = MoyaProvider<HomeAPI>()
     var viewModel: HomeViewModel!
-    let disposeBag = DisposeBag()
     var banner: BannerList = BannerList(data: [], success: true)
     var homeNotLogined =  HomeNotLogined(data: HomeNotLoginedData(trading: [], new: [], hot: []), success: true)
     // MARK: - Lifecycle
