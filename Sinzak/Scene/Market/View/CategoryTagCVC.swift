@@ -30,7 +30,7 @@ final class CategoryTagCVC: UICollectionViewCell {
     let categoryLabel = UILabel().then {
         $0.font = .caption_B
         $0.textColor = CustomColor.gray60
-        $0.textAlignment = .right
+        $0.texttAlignment = .right
         $0.text = "전체"
     }
     let tagBackgroundView = UIView().then {
