@@ -7,20 +7,26 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 protocol MarketVMInput {
-    
+    func writeButtonTapped()
 }
 
 protocol MarketVMOutput {
-    
+    var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
 }
 
 protocol MarketVM: MarketVMInput, MarketVMOutput {}
 
 final class DefaultMarketVM: MarketVM {
     
+    // MARK: - Input
+    func writeButtonTapped() {
+        let vc = WriteCategoryVC()
+        pushWriteCategoryVC.accept(vc)
+    }
     
-    
-    
+    // MARK: - Output
+    var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
 }

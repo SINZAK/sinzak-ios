@@ -9,6 +9,7 @@ import UIKit
 
 final class MarketVC: SZVC {
     // MARK: - Properties
+    let viewModel: MarketVM!
     let mainView = MarketView()
     enum SectionKind: Int {
         case category = 0
@@ -20,6 +21,16 @@ final class MarketVC: SZVC {
         }
     }
     // MARK: - Init
+    init(viewModel: MarketVM) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = mainView
     }
@@ -54,10 +65,7 @@ final class MarketVC: SZVC {
         let vc = SearchVC()
         navigationController?.pushViewController(vc, animated: true)
     }
-    @objc func writeButtonTapped(_ sender: UIButton) {
-        let vc = WriteCategoryVC()
-        navigationController?.pushViewController(vc, animated: true)
-    }
+
     // MARK: - Helpers
     override func setNavigationBar() {
         super.setNavigationBar()
@@ -70,7 +78,6 @@ final class MarketVC: SZVC {
         navigationItem.rightBarButtonItem = search
     }
     override func configure() {
-        mainView.writeButton.addTarget(self, action: #selector(writeButtonTapped), for: .touchUpInside)
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         mainView.collectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
@@ -88,11 +95,19 @@ extension MarketVC {
     }
     
     func bindInput() {
-        
+        mainView.writeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.writeButtonTapped()
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
-        
+        viewModel.pushWriteCategoryVC
+            .subscribe(onNext: { [weak self] vc in
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 

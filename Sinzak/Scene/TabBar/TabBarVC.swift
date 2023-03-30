@@ -28,7 +28,8 @@ final class TabBarVC: UITabBarController {
                                          image: UIImage(named: "home"),
                                          selectedImage: UIImage(named: "home-selected"))
         // 마켓
-        let marketVC = UINavigationController(rootViewController: MarketVC())
+        let marketVM = DefaultMarketVM()
+        let marketVC = UINavigationController(rootViewController: MarketVC(viewModel: marketVM))
         marketVC.tabBarItem = UITabBarItem(title: I18NStrings.Market,
                                          image: UIImage(named: "market"),
                                          selectedImage: UIImage(named: "market-selected"))
