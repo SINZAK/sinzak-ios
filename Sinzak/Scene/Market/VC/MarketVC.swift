@@ -20,6 +20,14 @@ final class MarketVC: SZVC {
             mainView.collectionView.reloadData()
         }
     }
+    
+    let searchBarButton = UIBarButtonItem(
+        image: UIImage(named: "search"),
+        style: .plain,
+        target: nil,
+        action: nil
+    )
+    
     // MARK: - Init
     init(viewModel: MarketVM) {
         self.viewModel = viewModel
@@ -59,23 +67,12 @@ final class MarketVC: SZVC {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
     }
-    // MARK: - Actions
-    /// 검색화면으로 이동
-    @objc func searchButtonTapped(_ sender: UIBarButtonItem) {
-        let vc = SearchVC()
-        navigationController?.pushViewController(vc, animated: true)
-    }
 
     // MARK: - Helpers
     override func setNavigationBar() {
         super.setNavigationBar()
         navigationItem.title = "마켓"
-        let search = UIBarButtonItem(
-            image: UIImage(named: "search"),
-            style: .plain,
-            target: self,
-            action: #selector(searchButtonTapped))
-        navigationItem.rightBarButtonItem = search
+        navigationItem.rightBarButtonItem = searchBarButton
     }
     override func configure() {
         mainView.collectionView.delegate = self
@@ -100,10 +97,22 @@ extension MarketVC {
                 self?.viewModel.writeButtonTapped()
             })
             .disposed(by: disposeBag)
+        
+        searchBarButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.searchButtonTapped()
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
         viewModel.pushWriteCategoryVC
+            .subscribe(onNext: { [weak self] vc in
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.pushSerachVC
             .subscribe(onNext: { [weak self] vc in
                 self?.navigationController?.pushViewController(vc, animated: true)
             })

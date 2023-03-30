@@ -11,10 +11,12 @@ import RxCocoa
 
 protocol MarketVMInput {
     func writeButtonTapped()
+    func searchButtonTapped()
 }
 
 protocol MarketVMOutput {
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
+    var pushSerachVC: PublishRelay<SearchVC> { get }
 }
 
 protocol MarketVM: MarketVMInput, MarketVMOutput {}
@@ -27,6 +29,12 @@ final class DefaultMarketVM: MarketVM {
         pushWriteCategoryVC.accept(vc)
     }
     
+    func searchButtonTapped() {
+        let vc = SearchVC()
+        pushSerachVC.accept(vc)
+    }
+    
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
+    var pushSerachVC: PublishRelay<SearchVC> = PublishRelay()
 }
