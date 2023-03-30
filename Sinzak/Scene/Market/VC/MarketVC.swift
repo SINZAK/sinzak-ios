@@ -27,7 +27,14 @@ final class MarketVC: SZVC {
         super.viewDidLoad()
         setNavigationBar()
         configure()
-        ProductsManager.shared.viewAllProducts(align: .popular, category: .painting, page: 3, size: 3, sale: true) { [weak self] result in
+        bind()
+        ProductsManager.shared.viewAllProducts(
+            align: .popular,
+            category: .painting,
+            page: 3,
+            size: 3,
+            sale: true
+        ) { [weak self] result in
             switch result {
             case .success(let data):
                 print("#########", data)
@@ -72,6 +79,23 @@ final class MarketVC: SZVC {
         mainView.collectionView.collectionViewLayout = setLayout()
     }
 }
+
+// MARK: - Bind
+extension MarketVC {
+    func bind() {
+        bindInput()
+        bindOutput()
+    }
+    
+    func bindInput() {
+        
+    }
+    
+    func bindOutput() {
+        
+    }
+}
+
 extension MarketVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
