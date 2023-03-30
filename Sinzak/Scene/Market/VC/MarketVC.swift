@@ -15,6 +15,8 @@ final class MarketVC: SZVC {
         case category = 0
         case art
     }
+    
+    // TODO: 마켓 정보
     var marketProduct: [MarketProduct] = [] {
         didSet {
             mainView.collectionView.reloadData()
@@ -47,6 +49,8 @@ final class MarketVC: SZVC {
         setNavigationBar()
         configure()
         bind()
+        
+        // TODO: 상품 호출
         ProductsManager.shared.viewAllProducts(
             align: .popular,
             category: .painting,
