@@ -76,7 +76,6 @@ final class MarketVC: SZVC {
     }
     override func configure() {
         mainView.collectionView.delegate = self
-        mainView.collectionView.dataSource = self
         mainView.collectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
         mainView.collectionView.register(CategoryTagCVC.self, forCellWithReuseIdentifier: String(describing: CategoryTagCVC.self))
         mainView.collectionView.register(MarketHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: MarketHeader.self))
@@ -120,7 +119,7 @@ extension MarketVC {
     }
 }
 
-extension MarketVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MarketVC: UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
