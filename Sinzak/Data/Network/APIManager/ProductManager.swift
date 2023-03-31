@@ -20,7 +20,7 @@ class ProductsManager {
     private let disposeBag = DisposeBag()
     
     func fetchProducts(
-        aligh: AlignOption,
+        align: AlignOption,
         category: Category,
         page: Int,
         size: Int,
@@ -32,7 +32,7 @@ class ProductsManager {
             }
             
             self.provider.rx.request(.products(
-                align: aligh.rawValue,
+                align: align.rawValue,
                 page: page,
                 size: size,
                 category: category.rawValue,

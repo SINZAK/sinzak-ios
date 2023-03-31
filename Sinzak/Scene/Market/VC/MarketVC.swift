@@ -92,6 +92,12 @@ extension MarketVC {
                 self?.viewModel.searchButtonTapped()
             })
             .disposed(by: disposeBag)
+        
+        mainView.collectionView.refreshControl?.rx.controlEvent(.valueChanged)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.refresh()
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
@@ -109,6 +115,17 @@ extension MarketVC {
         
         viewModel.sections
             .bind(to: mainView.collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        viewModel.endRefresh
+            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] in
+                if $0 {
+                    self?.mainView.collectionView.refreshControl?.endRefreshing()
+                }
+            })
             .disposed(by: disposeBag)
     }
 }
@@ -196,13 +213,15 @@ private extension MarketVC {
                     return cell
                 }
             },
-            configureSupplementaryView: { _, collectionView, _, indexPath in
+            configureSupplementaryView: { [weak self] _, collectionView, _, indexPath in
+                guard let self = self else { return UICollectionReusableView() }
                 if indexPath.section != 0 {
                     guard let header = collectionView.dequeueReusableSupplementaryView(
                         ofKind: UICollectionView.elementKindSectionHeader,
                         withReuseIdentifier: MarketHeader.identifier,
                         for: indexPath
                     ) as? MarketHeader else { return UICollectionReusableView() }
+                    header.isSaling = self.viewModel.isSaling
                     return header
                 } else {
                     return UICollectionReusableView()

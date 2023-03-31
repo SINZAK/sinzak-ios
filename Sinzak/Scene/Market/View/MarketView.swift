@@ -25,6 +25,9 @@ final class MarketView: SZView {
         addSubviews(
             collectionView, writeButton
         )
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .black
+        collectionView.refreshControl = refreshControl
     }
     override func setLayout() {
         collectionView.snp.makeConstraints { make in

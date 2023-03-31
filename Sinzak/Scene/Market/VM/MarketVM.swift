@@ -14,12 +14,15 @@ protocol MarketVMInput {
     func viewDidLoad()
     func writeButtonTapped()
     func searchButtonTapped()
+    func refresh()
 }
 
 protocol MarketVMOutput {
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
     var pushSerachVC: PublishRelay<SearchVC> { get }
     var sections: BehaviorRelay<[MarketSectionModel]> { get }
+    var isSaling: BehaviorRelay<Bool> { get }
+    var endRefresh: PublishRelay<Bool> { get }
 }
 
 protocol MarketVM: MarketVMInput, MarketVMOutput {}
@@ -31,31 +34,13 @@ final class DefaultMarketVM: MarketVM {
     // MARK: - Input
     
     func viewDidLoad() {
-        
-        ProductsManager.shared.fetchProducts(
-            aligh: .recommend,
-            category: .all,
-            page: 0,
-            size: 5,
-            sale: false
-        )
-        .subscribe(
-            onSuccess: { [weak self] products in
-                guard let self = self else { return }
-                var currentSectionModel = self.sections.value
-                let newSectionModel: [MarketSectionModel] = [
-                    .artSection(items: products.map {
-                        .artSectionItem(marketProduct: $0)
-                    })
-                ]
-                currentSectionModel.append(contentsOf: newSectionModel)
-                self.sections.accept(currentSectionModel)
-            },
-            onFailure: { error in
-                Log.error(error)
-            }
-        )
-        .disposed(by: disposeBag)
+        fetchMarketProducts(align: .recommend, category: .all, page: 0, size: 15, sale: false)
+    }
+    
+    func refresh() {
+        endRefresh.accept(false)
+        refreshMarketProducts(align: .recommend, category: .all, page: 0, size: 15, sale: isSaling.value)
+        endRefresh.accept(true)
     }
     
     func writeButtonTapped() {
@@ -76,11 +61,73 @@ final class DefaultMarketVM: MarketVM {
             .categorySectionItem(category: $0)
         })
     ])
+    var isSaling: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var endRefresh: PublishRelay<Bool> = PublishRelay()
 }
+
+private extension DefaultMarketVM {
+    func fetchMarketProducts(align: AlignOption, category: Category, page: Int, size: Int, sale: Bool) {
+        ProductsManager.shared.fetchProducts(
+            align: align,
+            category: category,
+            page: page,
+            size: size,
+            sale: sale
+        )
+        .subscribe(
+            onSuccess: { [weak self] products in
+                guard let self = self else { return }
+                var currentSectionModel = self.sections.value
+                let newSectionModel: [MarketSectionModel] = [
+                    .artSection(items: products.map {
+                        .artSectionItem(marketProduct: $0)
+                    })
+                ]
+                currentSectionModel.append(contentsOf: newSectionModel)
+                self.sections.accept(currentSectionModel)
+            },
+            onFailure: { error in
+                Log.error(error)
+            }
+        )
+        .disposed(by: disposeBag)
+    }
     
+    func refreshMarketProducts(align: AlignOption, category: Category, page: Int, size: Int, sale: Bool) {
+        ProductsManager.shared.fetchProducts(
+            align: align,
+            category: category,
+            page: page,
+            size: size,
+            sale: sale
+        )
+        .subscribe(
+            onSuccess: { [weak self] products in
+                guard let self = self else { return }
+                let newSectionModel: [MarketSectionModel] = [
+                    .categorySection(itmes: Category.allCases.map {
+                        .categorySectionItem(category: $0)
+                    }),
+                    .artSection(items: products.map {
+                        .artSectionItem(marketProduct: $0)
+                    })
+                ]
+                self.sections.accept(newSectionModel)
+            },
+            onFailure: { error in
+                Log.error(error)
+            }
+        )
+        .disposed(by: disposeBag)
+    }
+}
+
 // MARK: - RxDataSource
 
-enum MarketSectionModel {
+enum MarketSectionModel: Equatable {
+    static func == (lhs: MarketSectionModel, rhs: MarketSectionModel) -> Bool {
+        type(of: lhs) == type(of: lhs)
+    }
     case categorySection(itmes: [MarketSectionItem])
     case artSection(items: [MarketSectionItem])
 }
