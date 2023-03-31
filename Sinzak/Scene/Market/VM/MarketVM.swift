@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import
 
 protocol MarketVMInput {
     func writeButtonTapped()
@@ -37,4 +38,9 @@ final class DefaultMarketVM: MarketVM {
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
     var pushSerachVC: PublishRelay<SearchVC> = PublishRelay()
+}
+
+// MARK: - RxDataSource
+extension MarketVM {
+    
 }

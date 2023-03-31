@@ -17,7 +17,10 @@ final class MarketVC: SZVC {
     }
     
     // TODO: 마켓 정보
-    var marketProduct: [MarketProduct] = [] {
+    var marketProduct: [MarketProduct] = [
+        MarketProduct(author: "test", complete: true, content: "tests", date: "test", id: "test", like: true, likesCnt: 50000, price: 1000, suggest: true, thumbnail: "", title: "test"),
+        MarketProduct(author: "test", complete: false, content: "tests", date: "test", id: "test", like: false, likesCnt: 5, price: 1000, suggest: false, thumbnail: "", title: "test")
+    ] {
         didSet {
             mainView.collectionView.reloadData()
         }
@@ -51,21 +54,21 @@ final class MarketVC: SZVC {
         bind()
         
         // TODO: 상품 호출
-        ProductsManager.shared.viewAllProducts(
-            align: .popular,
-            category: .painting,
-            page: 3,
-            size: 3,
-            sale: true
-        ) { [weak self] result in
-            switch result {
-            case .success(let data):
-                print("#########", data)
-                self?.marketProduct = data.content
-            case .failure(let error):
-                print("ERROR", error)
-            }
-        }
+//        ProductsManager.shared.viewAllProducts(
+//            align: .popular,
+//            category: .painting,
+//            page: 3,
+//            size: 3,
+//            sale: true
+//        ) { [weak self] result in
+//            switch result {
+//            case .success(let data):
+//                print("#########", data)
+//                self?.marketProduct = data.content
+//            case .failure(let error):
+//                print("ERROR", error)
+//            }
+//        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -80,6 +83,7 @@ final class MarketVC: SZVC {
     }
     override func configure() {
         mainView.collectionView.delegate = self
+        mainView.collectionView.dataSource = self
         mainView.collectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
         mainView.collectionView.register(CategoryTagCVC.self, forCellWithReuseIdentifier: String(describing: CategoryTagCVC.self))
         mainView.collectionView.register(MarketHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: MarketHeader.self))
@@ -101,7 +105,7 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
-        searchBarButton.rx.tap
+         searchBarButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.searchButtonTapped()
             })
@@ -123,7 +127,7 @@ extension MarketVC {
     }
 }
 
-extension MarketVC: UICollectionViewDelegate {
+extension MarketVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -132,9 +136,10 @@ extension MarketVC: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 10
-//        return section == SectionKind.category.rawValue ? Category.allCases.count : marketProduct.count
+//        return 10
+        return section == SectionKind.category.rawValue ? Category.allCases.count : marketProduct.count
     }
+    
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
@@ -160,7 +165,11 @@ extension MarketVC: UICollectionViewDelegate {
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
         if indexPath.section != SectionKind.category.rawValue {
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: MarketHeader.self), for: indexPath) as? MarketHeader else { return UICollectionReusableView() }
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: String(describing: MarketHeader.self),
+                for: indexPath
+            ) as? MarketHeader else { return UICollectionReusableView() }
             return header
         } else {
             return UICollectionReusableView()

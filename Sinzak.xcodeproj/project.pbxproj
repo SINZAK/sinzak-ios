@@ -178,6 +178,8 @@
 		EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8656129D5BADD00424FC1 /* MarketVM.swift */; };
 		EDCBB52229D47DBF004E68B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDCBB52129D47DBF004E68B9 /* GoogleService-Info.plist */; };
 		EDCBB52429D47F36004E68B9 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCBB52329D47F36004E68B9 /* Endpoint.swift */; };
+		EDE5EC5329D669EC00BB211F /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = EDE5EC5229D669EC00BB211F /* Differentiator */; };
+		EDE5EC5529D669EC00BB211F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = EDE5EC5429D669EC00BB211F /* RxDataSources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -368,6 +370,7 @@
 			files = (
 				A2B1C66029B796A20008DADB /* KakaoSDKCommon in Frameworks */,
 				A210CD55292F4D8800F86A08 /* RxCocoa in Frameworks */,
+				EDE5EC5329D669EC00BB211F /* Differentiator in Frameworks */,
 				A29CE9DD2998DD2800EB89B4 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */,
 				A254E15429BE0413001047FD /* RxKeyboard in Frameworks */,
@@ -380,6 +383,7 @@
 				A226CC6629AF2D1D000161E8 /* RxMoya in Frameworks */,
 				A2B1C66229B796A20008DADB /* KakaoSDKUser in Frameworks */,
 				A29CE9DF2998DD2800EB89B4 /* FirebaseCrashlytics in Frameworks */,
+				EDE5EC5529D669EC00BB211F /* RxDataSources in Frameworks */,
 				A2B1C65E29B796A20008DADB /* KakaoSDKAuth in Frameworks */,
 				0BAC9C712210229EF1C827EA /* Pods_Sinzak.framework in Frameworks */,
 			);
@@ -1681,6 +1685,8 @@
 				A2B1C66129B796A20008DADB /* KakaoSDKUser */,
 				A254E15329BE0413001047FD /* RxKeyboard */,
 				A2121AD229D081B7008F5406 /* YPImagePicker */,
+				EDE5EC5229D669EC00BB211F /* Differentiator */,
+				EDE5EC5429D669EC00BB211F /* RxDataSources */,
 			);
 			productName = Sinzak;
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
@@ -1746,6 +1752,7 @@
 				A2B1C65C29B796A20008DADB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A254E15229BE0413001047FD /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 				A2121AD129D081B7008F5406 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
+				EDE5EC5129D669EB00BB211F /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
 			projectDirPath = "";
@@ -2434,6 +2441,15 @@
 				kind = branch;
 			};
 		};
+		EDE5EC5129D669EB00BB211F /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				kind = versionRange;
+				maximumVersion = 6.0.0;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2511,6 +2527,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A2B1C65C29B796A20008DADB /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
+		};
+		EDE5EC5229D669EC00BB211F /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDE5EC5129D669EB00BB211F /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		EDE5EC5429D669EC00BB211F /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDE5EC5129D669EB00BB211F /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
