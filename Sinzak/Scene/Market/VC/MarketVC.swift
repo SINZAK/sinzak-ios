@@ -98,6 +98,12 @@ extension MarketVC {
                 self?.viewModel.refresh()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.isSaling
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.refresh()
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
