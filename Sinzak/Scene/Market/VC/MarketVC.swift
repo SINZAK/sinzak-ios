@@ -20,16 +20,6 @@ final class MarketVC: SZVC {
         case art
     }
     
-    // TODO: 마켓 정보
-    var marketProduct: [MarketProduct] = [
-        MarketProduct(author: "test", complete: true, content: "tests", date: "test", id: "test", like: true, likesCnt: 50000, price: 1000, suggest: true, thumbnail: "", title: "test"),
-        MarketProduct(author: "test", complete: false, content: "tests", date: "test", id: "test", like: false, likesCnt: 5, price: 1000, suggest: false, thumbnail: "", title: "test")
-    ] {
-        didSet {
-            mainView.collectionView.reloadData()
-        }
-    }
-    
     let searchBarButton = UIBarButtonItem(
         image: UIImage(named: "search"),
         style: .plain,
@@ -56,23 +46,6 @@ final class MarketVC: SZVC {
         setNavigationBar()
         configure()
         bind()
-        
-        // TODO: 상품 호출
-//        ProductsManager.shared.viewAllProducts(
-//            align: .popular,
-//            category: .painting,
-//            page: 3,
-//            size: 3,
-//            sale: true
-//        ) { [weak self] result in
-//            switch result {
-//            case .success(let data):
-//                print("#########", data)
-//                self?.marketProduct = data.content
-//            case .failure(let error):
-//                print("ERROR", error)
-//            }
-//        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,11 +59,19 @@ final class MarketVC: SZVC {
         navigationItem.rightBarButtonItem = searchBarButton
     }
     override func configure() {
-        mainView.collectionView.delegate = self
-        mainView.collectionView.dataSource = self
-        mainView.collectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
-        mainView.collectionView.register(CategoryTagCVC.self, forCellWithReuseIdentifier: String(describing: CategoryTagCVC.self))
-        mainView.collectionView.register(MarketHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: MarketHeader.self))
+        mainView.collectionView.register(
+            ArtCVC.self,
+            forCellWithReuseIdentifier: String(describing: ArtCVC.self)
+        )
+        mainView.collectionView.register(
+            CategoryTagCVC.self,
+            forCellWithReuseIdentifier: String(describing: CategoryTagCVC.self)
+        )
+        mainView.collectionView.register(
+            MarketHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: String(describing: MarketHeader.self)
+        )
         mainView.collectionView.collectionViewLayout = setLayout()
     }
 }
@@ -100,6 +81,11 @@ extension MarketVC {
     func bind() {
         bindInput()
         bindOutput()
+        
+        let dataSource = dataSource()
+        Observable.just(viewModel.sections)
+            .bind(to: mainView.collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
     
     func bindInput() {
@@ -131,55 +117,6 @@ extension MarketVC {
     }
 }
 
-extension MarketVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-//        return 10
-        return section == SectionKind.category.rawValue ? Category.allCases.count : marketProduct.count
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        if indexPath.section == SectionKind.category.rawValue {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CategoryTagCVC.self), for: indexPath)  as? CategoryTagCVC else { return UICollectionViewCell() }
-            cell.categoryLabel.text = Category.allCases[indexPath.item].text
-            if indexPath.item == 0 {
-                cell.setColor(kind: .selected)
-            }
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell() }
-            let item = marketProduct[indexPath.item]
-            cell.setData(item)
-            return cell
-        }
-    }
-    // 헤더
-    func collectionView(
-        _ collectionView: UICollectionView,
-        viewForSupplementaryElementOfKind kind: String,
-        at indexPath: IndexPath
-    ) -> UICollectionReusableView {
-        if indexPath.section != SectionKind.category.rawValue {
-            guard let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: String(describing: MarketHeader.self),
-                for: indexPath
-            ) as? MarketHeader else { return UICollectionReusableView() }
-            return header
-        } else {
-            return UICollectionReusableView()
-        }
-    }
-}
 // 컴포지셔널 레이아웃
 extension MarketVC {
     /// 컴포지셔널 레이아웃 세팅
@@ -226,7 +163,7 @@ extension MarketVC {
                 let headerItemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .estimated(24))
-                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
+                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 headerItem.contentInsets.leading = 16
                 headerItem.contentInsets.trailing = 16
                 section.boundarySupplementaryItems = [headerItem]
@@ -236,38 +173,44 @@ extension MarketVC {
     }
 }
 
+// MARK: - DataSouce
+
 private extension MarketVC {
-    func dataSource() -> RxCollectionViewSectionedReloadDataSource<MarketSctionModel> {
-        return RxCollectionViewSectionedReloadDataSource<MarketSctionModel>(configureCell: { dataSource, collectionView, indexPath, _ in
-            
-            switch dataSource[indexPath] {
-            case let .categorySectionItem(title):
-                guard let cell: CategoryTagCVC = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: String(describing: CategoryTagCVC.self),
-                    for: indexPath
-                ) as? CategoryTagCVC else { return UICollectionViewCell() }
-                cell.categoryLabel.text = title
-                return cell
-                
-            case let .artSectionItem(marketProduct):
-                guard let cell: ArtCVC = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: String(describing: ArtCVC.self),
-                    for: indexPath
-                ) as? ArtCVC else { return UICollectionViewCell() }
-                cell.setData(marketProduct)
-                return cell
-            }
-        }, configureSupplementaryView: { _, collectionView, _, indexPath in
-            if indexPath.section != 0 {
-                guard let header = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: UICollectionView.elementKindSectionHeader,
-                    withReuseIdentifier: String(describing: MarketHeader.self),
-                    for: indexPath
-                ) as? MarketHeader else { return UICollectionReusableView() }
-                return header
-            } else {
-                return UICollectionReusableView()
-            }
-        })
+    func dataSource() -> RxCollectionViewSectionedReloadDataSource<MarketSectionModel> {
+        return RxCollectionViewSectionedReloadDataSource<MarketSectionModel>(
+            configureCell: { dataSource, collectionView, indexPath, _ in
+                switch dataSource[indexPath] {
+                case let .categorySectionItem(category):
+                    guard let cell: CategoryTagCVC = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: String(describing: CategoryTagCVC.self),
+                        for: indexPath
+                    ) as? CategoryTagCVC else { return UICollectionViewCell() }
+                    cell.categoryLabel.text = category.text
+                    if indexPath.item == 0 {
+                        cell.setColor(kind: .selected)
+                    }
+                    return cell
+                    
+                case let .artSectionItem(marketProduct):
+                    guard let cell: ArtCVC = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: String(describing: ArtCVC.self),
+                        for: indexPath
+                    ) as? ArtCVC else { return UICollectionViewCell() }
+                    cell.setData(marketProduct)
+                    return cell
+                }
+            },
+            configureSupplementaryView: { _, collectionView, _, indexPath in
+                if indexPath.section != 0 {
+                    guard let header = collectionView.dequeueReusableSupplementaryView(
+                        ofKind: UICollectionView.elementKindSectionHeader,
+                        withReuseIdentifier: String(describing: MarketHeader.self),
+                        for: indexPath
+                    ) as? MarketHeader else { return UICollectionReusableView() }
+                    return header
+                } else {
+                    return UICollectionReusableView()
+                }
+            })
     }
 }

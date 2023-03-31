@@ -18,6 +18,8 @@ protocol MarketVMInput {
 protocol MarketVMOutput {
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
     var pushSerachVC: PublishRelay<SearchVC> { get }
+    
+    var sections: [MarketSectionModel] { get set }
 }
 
 protocol MarketVM: MarketVMInput, MarketVMOutput {}
@@ -38,21 +40,32 @@ final class DefaultMarketVM: MarketVM {
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
     var pushSerachVC: PublishRelay<SearchVC> = PublishRelay()
+    
+    var sections: [MarketSectionModel] = [
+        .categorySection(itmes: Category.allCases.map {
+                MarketSectionItem.categorySectionItem(category: $0)
+            }),
+            .artSection(items: [
+                .artSectionItem(marketProduct: MarketProduct(author: "test", complete: true, content: "tests", date: "test", id: "test", like: true, likesCnt: 50000, price: 1000, suggest: true, thumbnail: "", title: "test"))
+            ])
+    ]
 }
+    
+
 
 // MARK: - RxDataSource
 
-enum MarketSctionModel {
+enum MarketSectionModel {
     case categorySection(itmes: [MarketSectionItem])
     case artSection(items: [MarketSectionItem])
 }
 
 enum MarketSectionItem {
-    case categorySectionItem(title: String)
+    case categorySectionItem(category: Category)
     case artSectionItem(marketProduct: MarketProduct)
 }
 
-extension MarketSctionModel: SectionModelType {
+extension MarketSectionModel: SectionModelType {
     typealias Item = MarketSectionItem
     
     var items: [MarketSectionItem] {
@@ -64,7 +77,7 @@ extension MarketSctionModel: SectionModelType {
         }
     }
     
-    init(original: MarketSctionModel, items: [Item]) {
+    init(original: MarketSectionModel, items: [Item]) {
         switch original {
         case .categorySection(itmes: _):
             self = .categorySection(itmes: items)
