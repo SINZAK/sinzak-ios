@@ -34,7 +34,7 @@ final class DefaultMarketVM: MarketVM {
         
         ProductsManager.shared.fetchProducts(
             aligh: .recommend,
-            category: .painting,
+            category: .all,
             page: 0,
             size: 5,
             sale: false
@@ -44,7 +44,7 @@ final class DefaultMarketVM: MarketVM {
                 guard let self = self else { return }
                 var currentSectionModel = self.sections.value
                 let newSectionModel: [MarketSectionModel] = [
-                    .artSection(items: products.content.map {
+                    .artSection(items: products.map {
                         .artSectionItem(marketProduct: $0)
                     })
                 ]

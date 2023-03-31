@@ -25,8 +25,8 @@ class ProductsManager {
         page: Int,
         size: Int,
         sale: Bool
-    ) -> Single<MarketProducts> {
-        return Single<MarketProducts>.create { [weak self] single in
+    ) -> Single<[MarketProduct]> {
+        return Single<[MarketProduct]>.create { [weak self] single in
             guard let self = self else {
                 return Disposables.create {}
             }
@@ -49,9 +49,17 @@ class ProductsManager {
                         return
                     }
                     do {
-                        let result = try JSONDecoder().decode(MarketProducts.self, from: response.data)
-                        Log.debug(result)
-                        single(.success(result))
+                        guard let content = try JSONDecoder().decode(MarketProductsResponseDTO.self, from: response.data).content else {
+                            Log.debug("content가 없습니다!")
+                            return
+                        }
+                        
+                        let marketProducts = content.map { responseDTO in
+                            responseDTO.toDomain()
+                        }
+                        
+                        Log.debug(marketProducts)
+                        single(.success(marketProducts))
                     } catch {
                         single(.failure(APIErrors.decodingError))
                     }

@@ -14,7 +14,6 @@ enum APIError: Int, Error {
     case serverError = 500
 }
 
-
 enum APIErrors: Error {
     case noContent
     case jsonEncoding
