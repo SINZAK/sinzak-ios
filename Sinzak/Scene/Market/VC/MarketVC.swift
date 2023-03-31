@@ -12,13 +12,9 @@ import RxDataSources
 
 final class MarketVC: SZVC {
     // MARK: - Properties
-    let viewModel: MarketVM!
-    let mainView = MarketView()
-    
-    enum SectionKind: Int {
-        case category = 0
-        case art
-    }
+    private let viewModel: MarketVM!
+    private let mainView = MarketView()
+    private lazy var dataSource = getDataSource()
     
     let searchBarButton = UIBarButtonItem(
         image: UIImage(named: "search"),
@@ -45,6 +41,7 @@ final class MarketVC: SZVC {
         super.viewDidLoad()
         setNavigationBar()
         configure()
+        viewModel.viewDidLoad()
         bind()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -81,11 +78,6 @@ extension MarketVC {
     func bind() {
         bindInput()
         bindOutput()
-        
-        let dataSource = dataSource()
-        Observable.just(viewModel.sections)
-            .bind(to: mainView.collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
     }
     
     func bindInput() {
@@ -113,6 +105,10 @@ extension MarketVC {
             .subscribe(onNext: { [weak self] vc in
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
+            .disposed(by: disposeBag)
+        
+        viewModel.sections
+            .bind(to: mainView.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
 }
@@ -176,7 +172,7 @@ extension MarketVC {
 // MARK: - DataSouce
 
 private extension MarketVC {
-    func dataSource() -> RxCollectionViewSectionedReloadDataSource<MarketSectionModel> {
+    func getDataSource() -> RxCollectionViewSectionedReloadDataSource<MarketSectionModel> {
         return RxCollectionViewSectionedReloadDataSource<MarketSectionModel>(
             configureCell: { dataSource, collectionView, indexPath, _ in
                 switch dataSource[indexPath] {

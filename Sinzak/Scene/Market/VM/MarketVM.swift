@@ -11,6 +11,7 @@ import RxCocoa
 import RxDataSources
 
 protocol MarketVMInput {
+    func viewDidLoad()
     func writeButtonTapped()
     func searchButtonTapped()
 }
@@ -18,15 +19,45 @@ protocol MarketVMInput {
 protocol MarketVMOutput {
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
     var pushSerachVC: PublishRelay<SearchVC> { get }
-    
-    var sections: [MarketSectionModel] { get set }
+    var sections: BehaviorRelay<[MarketSectionModel]> { get }
 }
 
 protocol MarketVM: MarketVMInput, MarketVMOutput {}
 
 final class DefaultMarketVM: MarketVM {
     
+    private let disposeBag = DisposeBag()
+    
     // MARK: - Input
+    
+    func viewDidLoad() {
+        
+        ProductsManager.shared.fetchProducts(
+            aligh: .recommend,
+            category: .painting,
+            page: 1,
+            size: 5,
+            sale: false
+        )
+        .subscribe(
+            onSuccess: { [weak self] products in
+                guard let self = self else { return }
+                var currentSectionModel = self.sections.value
+                let newSectionModel: [MarketSectionModel] = [
+                    .artSection(items: products.content.map {
+                        .artSectionItem(marketProduct: $0)
+                    })
+                ]
+                currentSectionModel.append(contentsOf: newSectionModel)
+                self.sections.accept(currentSectionModel)
+            },
+            onFailure: { error in
+                Log.error(error)
+            }
+        )
+        .disposed(by: disposeBag)
+    }
+    
     func writeButtonTapped() {
         let vc = WriteCategoryVC()
         pushWriteCategoryVC.accept(vc)
@@ -40,19 +71,13 @@ final class DefaultMarketVM: MarketVM {
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
     var pushSerachVC: PublishRelay<SearchVC> = PublishRelay()
-    
-    var sections: [MarketSectionModel] = [
+    var sections: BehaviorRelay<[MarketSectionModel]> = BehaviorRelay(value: [
         .categorySection(itmes: Category.allCases.map {
-                MarketSectionItem.categorySectionItem(category: $0)
-            }),
-            .artSection(items: [
-                .artSectionItem(marketProduct: MarketProduct(author: "test", complete: true, content: "tests", date: "test", id: "test", like: true, likesCnt: 50000, price: 1000, suggest: true, thumbnail: "", title: "test"))
-            ])
-    ]
+            .categorySectionItem(category: $0)
+        })
+    ])
 }
     
-
-
 // MARK: - RxDataSource
 
 enum MarketSectionModel {

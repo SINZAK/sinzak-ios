@@ -180,6 +180,7 @@
 		EDCBB52429D47F36004E68B9 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCBB52329D47F36004E68B9 /* Endpoint.swift */; };
 		EDE5EC5329D669EC00BB211F /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = EDE5EC5229D669EC00BB211F /* Differentiator */; };
 		EDE5EC5529D669EC00BB211F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = EDE5EC5429D669EC00BB211F /* RxDataSources */; };
+		EDE5EC5729D6EB3200BB211F /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5629D6EB3200BB211F /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -361,6 +362,7 @@
 		EDC8656129D5BADD00424FC1 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		EDCBB52129D47DBF004E68B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDCBB52329D47F36004E68B9 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		EDE5EC5629D6EB3200BB211F /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1266,6 +1268,7 @@
 			children = (
 				A2806128292F585E005AE0B3 /* setColor.swift */,
 				A20CBD5B294787C10012FF32 /* setFont.swift */,
+				EDE5EC5629D6EB3200BB211F /* Log.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1944,6 +1947,7 @@
 				A233892629B37B1F00688FD8 /* Leave.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2A2C4E329C20D8500F0CFC6 /* HTTPHeaderField.swift in Sources */,
+				EDE5EC5729D6EB3200BB211F /* Log.swift in Sources */,
 				A254E13829BCF6EB001047FD /* ProductsAPI.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
 				A2947A2A298017A200EE2A96 /* MyChatBubbleCVC.swift in Sources */,

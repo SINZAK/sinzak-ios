@@ -8,49 +8,35 @@
 import Foundation
 import Differentiator
 
-// MARK: - ProductList
 struct MarketProducts: Codable {
     let content: [MarketProduct]
     let pageable: Pageable
-    let empty, first, last: Bool
-    let number, numberOfElements: Int
-    let size: Int
-    let sort: Sort
+    let last: Bool
     let totalElements, totalPages: Int
+    let sort: Sort
+    let first: Bool
+    let size, number, numberOfElements: Int
+    let empty: Bool
 }
 
 // MARK: - Content
 struct MarketProduct: Codable {
-    let author: String
-    let complete: Bool
-    let content, date, id: String
-    let like: Bool
-    let likesCnt, price: Int
-    let suggest: Bool
+    let id: Int
+    let title, content, author: String
+    let price: Int
     let thumbnail: String
-    let title: String
-}
-
-struct SectionOfMarketProduct {
-    var header: MarketHeader
-    var items: [MarketProductItem]
-}
-
-extension SectionOfMarketProduct: SectionModelType {
-    typealias MarketProductItem = MarketProduct
-    
-    init(original: SectionOfMarketProduct, items: [MarketProduct]) {
-        self = original
-        self.items = items
-    }
+    let date: String
+    let suggest, like: Bool
+    let likesCnt: Int
+    let complete: Bool
+    let popularity: Int
 }
 
 // MARK: - Pageable
 struct Pageable: Codable {
-    let offset, pageNumber, pageSize: Int
-    let paged: Bool
     let sort: Sort
-    let unpaged: Bool
+    let offset, pageNumber, pageSize: Int
+    let paged, unpaged: Bool
 }
 
 // MARK: - Sort
