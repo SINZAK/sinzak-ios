@@ -58,16 +58,16 @@ final class MarketVC: SZVC {
     override func configure() {
         mainView.collectionView.register(
             ArtCVC.self,
-            forCellWithReuseIdentifier: String(describing: ArtCVC.self)
+            forCellWithReuseIdentifier: ArtCVC.identifier
         )
         mainView.collectionView.register(
             CategoryTagCVC.self,
-            forCellWithReuseIdentifier: String(describing: CategoryTagCVC.self)
+            forCellWithReuseIdentifier: CategoryTagCVC.identifier
         )
         mainView.collectionView.register(
             MarketHeader.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: String(describing: MarketHeader.self)
+            withReuseIdentifier: MarketHeader.identifier
         )
         mainView.collectionView.collectionViewLayout = setLayout()
     }
@@ -178,7 +178,7 @@ private extension MarketVC {
                 switch dataSource[indexPath] {
                 case let .categorySectionItem(category):
                     guard let cell: CategoryTagCVC = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: String(describing: CategoryTagCVC.self),
+                        withReuseIdentifier: CategoryTagCVC.identifier,
                         for: indexPath
                     ) as? CategoryTagCVC else { return UICollectionViewCell() }
                     cell.categoryLabel.text = category.text
@@ -189,7 +189,7 @@ private extension MarketVC {
                     
                 case let .artSectionItem(marketProduct):
                     guard let cell: ArtCVC = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: String(describing: ArtCVC.self),
+                        withReuseIdentifier: ArtCVC.identifier,
                         for: indexPath
                     ) as? ArtCVC else { return UICollectionViewCell() }
                     cell.setData(marketProduct)
@@ -200,7 +200,7 @@ private extension MarketVC {
                 if indexPath.section != 0 {
                     guard let header = collectionView.dequeueReusableSupplementaryView(
                         ofKind: UICollectionView.elementKindSectionHeader,
-                        withReuseIdentifier: String(describing: MarketHeader.self),
+                        withReuseIdentifier: MarketHeader.identifier,
                         for: indexPath
                     ) as? MarketHeader else { return UICollectionReusableView() }
                     return header

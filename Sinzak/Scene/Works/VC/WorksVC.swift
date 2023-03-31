@@ -21,15 +21,6 @@ final class WorksVC: SZVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        ProductsManager.shared.viewAllProducts(align: .popular, category: .painting, page: 3, size: 3, sale: true) { [weak self] result in
-            switch result {
-            case .success(let data):
-                print("#########", data)
-                self?.worksitem = data.content
-            case .failure(let error):
-                print("ERROR", error)
-            }
-        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

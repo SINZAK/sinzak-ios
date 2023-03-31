@@ -88,7 +88,7 @@ final class ArtCVC: UICollectionViewCell {
     }
     func setData(_ data: MarketProduct) {
         //if let thumbnail = data.thumbnail {
-        let url = URL(string: data.thumbnail)
+        let url = URL(string: data.thumbnail ?? "")
         imageView.kf.setImage(with: url)
         //}
         titleLabel.text = data.title

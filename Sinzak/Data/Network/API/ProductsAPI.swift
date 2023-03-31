@@ -76,10 +76,15 @@ extension ProductsAPI: TargetType {
         switch self {
         case .products(let align, let page, let size, let category, let sale):
             let sale: String = sale ? "true" : "false"
-            let param: [String: Any] = [
+            let param: [String: Any] = category == "all" ? [
+                "align": align,
+                "page": page,
+                "sale": sale,
+                "size": size
+            ] : [
                 "align": align,
                 "categories": category,
-                "page": "0...\(page)",
+                "page": page,
                 "sale": sale,
                 "size": size
             ]

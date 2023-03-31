@@ -35,7 +35,7 @@ final class DefaultMarketVM: MarketVM {
         ProductsManager.shared.fetchProducts(
             aligh: .recommend,
             category: .painting,
-            page: 1,
+            page: 0,
             size: 5,
             sale: false
         )
