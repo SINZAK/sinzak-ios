@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import
+import RxDataSources
 
 protocol MarketVMInput {
     func writeButtonTapped()
@@ -41,6 +41,35 @@ final class DefaultMarketVM: MarketVM {
 }
 
 // MARK: - RxDataSource
-extension MarketVM {
+
+enum MarketSctionModel {
+    case categorySection(itmes: [MarketSectionItem])
+    case artSection(items: [MarketSectionItem])
+}
+
+enum MarketSectionItem {
+    case categorySectionItem(title: String)
+    case artSectionItem(marketProduct: MarketProduct)
+}
+
+extension MarketSctionModel: SectionModelType {
+    typealias Item = MarketSectionItem
     
+    var items: [MarketSectionItem] {
+        switch self {
+        case .categorySection(itmes: let items):
+            return items.map { $0 }
+        case .artSection(items: let items):
+            return items.map { $0 }
+        }
+    }
+    
+    init(original: MarketSctionModel, items: [Item]) {
+        switch original {
+        case .categorySection(itmes: _):
+            self = .categorySection(itmes: items)
+        case .artSection(items: _):
+            self = .artSection(items: items)
+        }
+    }
 }

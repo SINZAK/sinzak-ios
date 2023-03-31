@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Differentiator
 
 // MARK: - ProductList
 struct MarketProducts: Codable {
@@ -28,6 +29,20 @@ struct MarketProduct: Codable {
     let suggest: Bool
     let thumbnail: String
     let title: String
+}
+
+struct SectionOfMarketProduct {
+    var header: MarketHeader
+    var items: [MarketProductItem]
+}
+
+extension SectionOfMarketProduct: SectionModelType {
+    typealias MarketProductItem = MarketProduct
+    
+    init(original: SectionOfMarketProduct, items: [MarketProduct]) {
+        self = original
+        self.items = items
+    }
 }
 
 // MARK: - Pageable

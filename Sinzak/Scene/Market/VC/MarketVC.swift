@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 final class MarketVC: SZVC {
     // MARK: - Properties
     let viewModel: MarketVM!
     let mainView = MarketView()
+    
     enum SectionKind: Int {
         case category = 0
         case art
@@ -229,5 +233,41 @@ extension MarketVC {
                 return section
             }
         }
+    }
+}
+
+private extension MarketVC {
+    func dataSource() -> RxCollectionViewSectionedReloadDataSource<MarketSctionModel> {
+        return RxCollectionViewSectionedReloadDataSource<MarketSctionModel>(configureCell: { dataSource, collectionView, indexPath, _ in
+            
+            switch dataSource[indexPath] {
+            case let .categorySectionItem(title):
+                guard let cell: CategoryTagCVC = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: String(describing: CategoryTagCVC.self),
+                    for: indexPath
+                ) as? CategoryTagCVC else { return UICollectionViewCell() }
+                cell.categoryLabel.text = title
+                return cell
+                
+            case let .artSectionItem(marketProduct):
+                guard let cell: ArtCVC = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: String(describing: ArtCVC.self),
+                    for: indexPath
+                ) as? ArtCVC else { return UICollectionViewCell() }
+                cell.setData(marketProduct)
+                return cell
+            }
+        }, configureSupplementaryView: { _, collectionView, _, indexPath in
+            if indexPath.section != 0 {
+                guard let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: String(describing: MarketHeader.self),
+                    for: indexPath
+                ) as? MarketHeader else { return UICollectionReusableView() }
+                return header
+            } else {
+                return UICollectionReusableView()
+            }
+        })
     }
 }
