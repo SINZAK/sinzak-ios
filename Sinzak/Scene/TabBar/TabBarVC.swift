@@ -17,8 +17,8 @@ final class TabBarVC: UITabBarController {
     /// 탭바 색상 지정
     private func setUI() {
         tabBar.tintColor = CustomColor.red
-        tabBar.unselectedItemTintColor = CustomColor.black
-        tabBar.backgroundColor = CustomColor.white
+        tabBar.unselectedItemTintColor = CustomColor.label
+        tabBar.backgroundColor = CustomColor.background
     }
     /// 탭 바 구성
     private func setTabBarController() {

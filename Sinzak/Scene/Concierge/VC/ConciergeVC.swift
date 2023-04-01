@@ -15,6 +15,7 @@ final class ConciergeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         concierge()
+        view.backgroundColor = CustomColor.background
     }
     func concierge() {
         mainView.logoView.play { _ in

@@ -75,13 +75,20 @@ extension ProductsAPI: TargetType {
     var task: Moya.Task {
         switch self {
         case .products(let align, let page, let size, let category, let sale):
-            let param: [String: Any] = [
+            let sale: String = sale ? "true" : "false"
+            let param: [String: Any] = category == "all" ? [
+                "align": align,
+                "page": page,
+                "sale": sale,
+                "size": size
+            ] : [
                 "align": align,
                 "categories": category,
                 "page": page,
                 "sale": sale,
                 "size": size
             ]
+            
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
             
         case .build(let post):

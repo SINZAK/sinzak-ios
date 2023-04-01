@@ -23,6 +23,23 @@ enum ColorKind {
 }
 
 final class CategoryTagCVC: UICollectionViewCell {
+    
+    // MARK: - Property
+    
+    var isChecked: Bool {
+        willSet {
+            if newValue {
+                setColor(kind: .selected)
+            } else {
+                setColor(kind: .base)
+            }
+        }
+    }
+    
+    var category: Category?
+    
+    // MARK: - UI
+    
     let checkIcon = UIImageView().then {
         $0.image = UIImage(named: "checkmark")?.withRenderingMode(.alwaysTemplate)
         $0.tintColor = CustomColor.gray60
@@ -36,10 +53,11 @@ final class CategoryTagCVC: UICollectionViewCell {
     let tagBackgroundView = UIView().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 15
-        $0.backgroundColor = CustomColor.white
+        $0.backgroundColor = CustomColor.background
         $0.layer.borderWidth = 1
         $0.layer.borderColor = CustomColor.gray60?.cgColor
     }
+    
     // MARK: - Init
     func setColor(kind: ColorKind) {
         let color = kind.color
@@ -47,13 +65,14 @@ final class CategoryTagCVC: UICollectionViewCell {
         categoryLabel.textColor = color
         tagBackgroundView.layer.borderColor = color.cgColor
     }
-    func updateCell(kind: Category) {
-        categoryLabel.text = kind.text
+    
+    func updateCell(category: Category) {
+        self.category = category
+        categoryLabel.text = category.text
     }
-    func updateCell(kind: WorksCategory) {
-        categoryLabel.text = kind.text
-    }
+    
     override init(frame: CGRect) {
+        self.isChecked = false
         super.init(frame: frame)
         setupUI()
         setConstraints()
@@ -61,24 +80,28 @@ final class CategoryTagCVC: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     // MARK: - UI
-    func setupUI() {
+    private func setupUI() {
         contentView.addSubviews(
             tagBackgroundView, checkIcon, categoryLabel
         )
     }
-    func setConstraints() {
+    
+    private func setConstraints() {
         categoryLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.lessThanOrEqualToSuperview().inset(15)
             make.top.bottom.equalToSuperview().inset(9)
         }
+        
         checkIcon.snp.makeConstraints { make in
             make.centerY.equalTo(categoryLabel)
             make.width.height.equalTo(20)
             make.leading.equalToSuperview().inset(8)
             make.trailing.equalTo(categoryLabel.snp.leading).offset(-2)
         }
+        
         tagBackgroundView.snp.makeConstraints { make in
             make.leading.equalTo(checkIcon).offset(-8)
             make.top.equalTo(categoryLabel).offset(-9)
