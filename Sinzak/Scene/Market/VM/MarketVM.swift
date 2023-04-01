@@ -34,12 +34,24 @@ final class DefaultMarketVM: MarketVM {
     // MARK: - Input
     
     func viewDidLoad() {
-        fetchMarketProducts(align: .recommend, category: .all, page: 0, size: 15, sale: false)
+        fetchMarketProducts(
+            align: .recommend,
+            category: .all,
+            page: 0,
+            size: 15,
+            sale: false
+        )
     }
     
     func refresh() {
         endRefresh.accept(false)
-        refreshMarketProducts(align: .recommend, category: .all, page: 0, size: 15, sale: isSaling.value)
+        refreshMarketProducts(
+            align: .recommend,
+            category: .all,
+            page: 0,
+            size: 15,
+            sale: isSaling.value
+        )
         endRefresh.accept(true)
     }
     
@@ -104,6 +116,8 @@ private extension DefaultMarketVM {
         .subscribe(
             onSuccess: { [weak self] products in
                 guard let self = self else { return }
+                
+                
                 let newSectionModel: [MarketSectionModel] = [
                     .categorySection(itmes: Category.allCases.map {
                         .categorySectionItem(category: $0)

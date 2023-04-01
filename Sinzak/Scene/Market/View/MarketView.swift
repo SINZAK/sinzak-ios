@@ -11,27 +11,51 @@ import Then
 
 final class MarketView: SZView {
     // MARK: - Properties
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+    lazy var collectionView1 = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         $0.backgroundColor = .clear
     }
+    
+    lazy var collectionView2 = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        $0.backgroundColor = .clear
+    }
+    
+    let viewOptionButton = UIButton().then {
+        $0.setImage(UIImage(named: "radiobtn-unchecked"), for: .normal)
+        $0.setTitle("판매중 작품만 보기", for: .normal)
+        $0.titleLabel?.font = .caption_M
+        $0.setTitleColor(CustomColor.gray80, for: .normal)
+        $0.tintColor = CustomColor.gray80
+    }
+    
+    let alignButton = UIButton().then {
+        $0.setImage(UIImage(named: "align"), for: .normal)
+        $0.setTitle("신작추천순", for: .normal)
+        $0.titleLabel?.font = .caption_B
+        $0.setTitleColor(CustomColor.gray80, for: .normal)
+        $0.tintColor = CustomColor.gray80
+    }
+    
     let writeButton = UIButton().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 31
         $0.backgroundColor = CustomColor.red
         $0.setImage(UIImage(named: "plus"), for: .normal)
     }
+    
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
-            collectionView, writeButton
+            collectionView1, collectionView2, writeButton
         )
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = .black
-        collectionView.refreshControl = refreshControl
-        collectionView.allowsMultipleSelection = true
+        collectionView2.refreshControl = refreshControl
     }
+    
     override func setLayout() {
-        collectionView.snp.makeConstraints { make in
+        
+        
+        collectionView2.snp.makeConstraints { make in
             make.trailing.leading.bottom.equalToSuperview()
             make.top.equalTo(safeAreaLayoutGuide)
         }

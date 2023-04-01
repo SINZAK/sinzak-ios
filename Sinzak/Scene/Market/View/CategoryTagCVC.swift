@@ -61,13 +61,15 @@ final class CategoryTagCVC: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     // MARK: - UI
     func setupUI() {
         contentView.addSubviews(
             tagBackgroundView, checkIcon, categoryLabel
         )
     }
-    func setConstraints() {
+    
+    private func setConstraints() {
         categoryLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.lessThanOrEqualToSuperview().inset(15)
@@ -86,4 +88,12 @@ final class CategoryTagCVC: UICollectionViewCell {
             make.trailing.equalTo(categoryLabel).offset(15)
         }
     }
+    
+//    private func setSelected(_ selected: Bool) {
+//        if selected {
+//            setColor(kind: .selected)
+//        } else {
+//            setColor(kind: .base)
+//        }
+//    }
 }

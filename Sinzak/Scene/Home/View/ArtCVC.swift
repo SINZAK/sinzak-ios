@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import Kingfisher
+import SkeletonView
 
 final class ArtCVC: UICollectionViewCell {
     // MARK: - Properties
@@ -17,6 +18,7 @@ final class ArtCVC: UICollectionViewCell {
         $0.layer.cornerRadius = 12
         $0.contentMode = .scaleAspectFill
         $0.image = UIImage(named: "emptySquare")
+        $0.isSkeletonable = true
     }
     private let favoriteBackground = UIView().then {
         $0.backgroundColor = CustomColor.gray80!.withAlphaComponent(0.4)
@@ -35,6 +37,8 @@ final class ArtCVC: UICollectionViewCell {
         $0.textColor = CustomColor.black
         $0.font = .body_M
         $0.text = "Flower Garden"
+        $0.isSkeletonable = true
+
     }
     let labelStack = UIStackView().then {
         $0.spacing = 2
@@ -49,11 +53,15 @@ final class ArtCVC: UICollectionViewCell {
         $0.textColor = CustomColor.black
         $0.font = .body_B
         $0.text = "33,000원"
+        $0.isSkeletonable = true
+
     }
     let authorLabel = UILabel().then {
         $0.textColor = CustomColor.black
         $0.font = .caption_R
         $0.text = "신작 작가"
+        $0.isSkeletonable = true
+
     }
     private let middlePointLabel = UILabel().then {
         $0.textColor = CustomColor.gray60
@@ -64,12 +72,15 @@ final class ArtCVC: UICollectionViewCell {
         $0.textColor = CustomColor.gray60
         $0.font = .caption_M
         $0.text = "10시간 전"
+        $0.isSkeletonable = true
+
     }
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
         setConstraints()
+        isSkeletonable = true
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

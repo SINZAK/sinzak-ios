@@ -56,20 +56,21 @@ final class MarketVC: SZVC {
         navigationItem.rightBarButtonItem = searchBarButton
     }
     override func configure() {
-        mainView.collectionView.register(
+        mainView.collectionView2.register(
             ArtCVC.self,
             forCellWithReuseIdentifier: ArtCVC.identifier
         )
-        mainView.collectionView.register(
+        mainView.collectionView2.register(
             CategoryTagCVC.self,
             forCellWithReuseIdentifier: CategoryTagCVC.identifier
         )
-        mainView.collectionView.register(
+        mainView.collectionView2.register(
             MarketHeader.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: MarketHeader.identifier
         )
-        mainView.collectionView.collectionViewLayout = setLayout()
+        mainView.collectionView2.collectionViewLayout = setLayout()
+//        mainView.collectionView.
     }
 }
 
@@ -93,7 +94,7 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
-        mainView.collectionView.refreshControl?.rx.controlEvent(.valueChanged)
+        mainView.collectionView2.refreshControl?.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.refresh()
             })
@@ -104,15 +105,6 @@ extension MarketVC {
                 self?.viewModel.refresh()
             })
             .disposed(by: disposeBag)
-        
-        mainView.collectionView.rx.itemSelected
-            .subscribe { [weak self] indexPath in
-                
-                guard let cell = self?.mainView.collectionView.cellForItem(at: indexPath) as? CategoryTagCVC else { return }
-                cell.setColor(kind: .selected)
-                
-            }
-        
     }
     
     func bindOutput() {
@@ -129,7 +121,7 @@ extension MarketVC {
             .disposed(by: disposeBag)
         
         viewModel.sections
-            .bind(to: mainView.collectionView.rx.items(dataSource: dataSource))
+            .bind(to: mainView.collectionView2.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
         viewModel.endRefresh
@@ -138,18 +130,7 @@ extension MarketVC {
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] in
                 if $0 {
-                    self?.mainView.collectionView.refreshControl?.endRefreshing()
-                }
-                
-                let arr = [1, 3, 5]
-                    
-                Array(0...7).forEach {
-                    guard let cell = self?.mainView.collectionView.cellForItem(at: IndexPath(item: $0, section: 0)) as? CategoryTagCVC else { return }
-                    if arr.contains($0) {
-                        cell.setColor(kind: .selected)
-                    } else {
-                        cell.setColor(kind: .base)
-                    }
+                    self?.mainView.collectionView2.refreshControl?.endRefreshing()
                 }
             })
             .disposed(by: disposeBag)
@@ -226,11 +207,10 @@ private extension MarketVC {
                     ) as? CategoryTagCVC else { return UICollectionViewCell() }
                     cell.categoryLabel.text = category.text
 //                    if indexPath.item == 0 {
+//                        cell.isSelected = true
 //                        cell.setColor(kind: .selected)
 //                    }
-                    if indexPath.item == 0 {
-                        cell.isSelected = true
-                    }
+                    print(indexPath.item)
                     return cell
                     
                 case let .artSectionItem(marketProduct):

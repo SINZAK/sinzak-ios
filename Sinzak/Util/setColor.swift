@@ -11,8 +11,9 @@ enum CustomColor {
     static let red = UIColor(named: "customRed")
     static let red50 = UIColor(named: "customRed50")
     static let purple = UIColor(named: "customPurple")
-    static let purple50 = UIColor(named: "customPurple50")
+//    static let purple50 = UIColor(named: "customPurple50")
     // Grayscale
+    static let customBackground = UIColor(named: "customBackground")
     static let black = UIColor(named: "customBlack")
     static let white = UIColor(named: "customWhite")
     static let gray80 = UIColor(named: "customGray80")
@@ -20,4 +21,5 @@ enum CustomColor {
     static let gray40 = UIColor(named: "customGray40")
     static let gray20 = UIColor(named: "customGray20")
     static let gray10 = UIColor(named: "customGray10")
+    
 }
