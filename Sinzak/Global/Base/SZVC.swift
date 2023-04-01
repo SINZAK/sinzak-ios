@@ -13,6 +13,7 @@ class SZVC: UIViewController {
         super.viewDidLoad()
         setNavigationBar()
         configure()
+        view.backgroundColor = CustomColor.background
     }
     /// 네비게이션 바 설정.
     func setNavigationBar() {
