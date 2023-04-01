@@ -64,13 +64,8 @@ final class MarketVC: SZVC {
             CategoryTagCVC.self,
             forCellWithReuseIdentifier: CategoryTagCVC.identifier
         )
-        mainView.collectionView2.register(
-            MarketHeader.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: MarketHeader.identifier
-        )
+
         mainView.collectionView2.collectionViewLayout = setLayout()
-//        mainView.collectionView.
     }
 }
 
@@ -220,20 +215,6 @@ private extension MarketVC {
                     ) as? ArtCVC else { return UICollectionViewCell() }
                     cell.setData(marketProduct)
                     return cell
-                }
-            },
-            configureSupplementaryView: { [weak self] _, collectionView, _, indexPath in
-                guard let self = self else { return UICollectionReusableView() }
-                if indexPath.section != 0 {
-                    guard let header = collectionView.dequeueReusableSupplementaryView(
-                        ofKind: UICollectionView.elementKindSectionHeader,
-                        withReuseIdentifier: MarketHeader.identifier,
-                        for: indexPath
-                    ) as? MarketHeader else { return UICollectionReusableView() }
-                    header.isSaling = self.viewModel.isSaling
-                    return header
-                } else {
-                    return UICollectionReusableView()
                 }
             })
     }

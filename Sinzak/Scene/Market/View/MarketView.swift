@@ -45,7 +45,9 @@ final class MarketView: SZView {
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
-            collectionView1, collectionView2, writeButton
+            collectionView1,
+            viewOptionButton, alignButton,
+            collectionView2, writeButton
         )
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = .black
@@ -53,7 +55,6 @@ final class MarketView: SZView {
     }
     
     override func setLayout() {
-        
         
         collectionView2.snp.makeConstraints { make in
             make.trailing.leading.bottom.equalToSuperview()
