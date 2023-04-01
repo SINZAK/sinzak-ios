@@ -56,10 +56,30 @@ final class MarketView: SZView {
     
     override func setLayout() {
         
-        collectionView2.snp.makeConstraints { make in
-            make.trailing.leading.bottom.equalToSuperview()
+        collectionView1.snp.makeConstraints { make in
+            make.trailing.leading.equalToSuperview()
             make.top.equalTo(safeAreaLayoutGuide)
+            make.height.equalTo(56.0)
         }
+        
+        viewOptionButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(18.0)
+            make.bottom.equalTo(collectionView1.snp.bottom)
+            make.height.equalTo(22)
+        }
+        
+        alignButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(18.0)
+            make.bottom.equalTo(collectionView1.snp.bottom)
+            make.height.equalTo(22)
+        }
+        
+        collectionView2.snp.makeConstraints { make in
+            make.trailing.leading.equalToSuperview()
+            make.top.equalTo(alignButton.snp.bottom)
+            make.bottom.equalTo(safeAreaLayoutGuide)
+        }
+        
         writeButton.snp.makeConstraints { make in
             make.width.height.equalTo(62)
             make.bottom.equalTo(safeAreaLayoutGuide).inset(7)

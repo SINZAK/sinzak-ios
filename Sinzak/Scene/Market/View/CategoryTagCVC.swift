@@ -36,10 +36,11 @@ final class CategoryTagCVC: UICollectionViewCell {
     let tagBackgroundView = UIView().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 15
-        $0.backgroundColor = CustomColor.white
+        $0.backgroundColor = CustomColor.background
         $0.layer.borderWidth = 1
         $0.layer.borderColor = CustomColor.gray60?.cgColor
     }
+    
     // MARK: - Init
     func setColor(kind: ColorKind) {
         let color = kind.color
@@ -88,12 +89,5 @@ final class CategoryTagCVC: UICollectionViewCell {
             make.trailing.equalTo(categoryLabel).offset(15)
         }
     }
-    
-//    private func setSelected(_ selected: Bool) {
-//        if selected {
-//            setColor(kind: .selected)
-//        } else {
-//            setColor(kind: .base)
-//        }
-//    }
+
 }
