@@ -20,6 +20,7 @@ protocol MarketVMInput {
 protocol MarketVMOutput {
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
     var pushSerachVC: PublishRelay<SearchVC> { get }
+    var sections1: BehaviorRelay<[CategoryDataSection]> { get }
     var sections: BehaviorRelay<[MarketSectionModel]> { get }
     var isSaling: BehaviorRelay<Bool> { get }
     var endRefresh: PublishRelay<Bool> { get }
@@ -68,6 +69,10 @@ final class DefaultMarketVM: MarketVM {
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
     var pushSerachVC: PublishRelay<SearchVC> = PublishRelay()
+    let sections1: BehaviorRelay<[CategoryDataSection]> = BehaviorRelay(value: [
+        CategoryDataSection(items: Category.allCases.map { CategoryData(category: $0) })    
+    ])
+    
     var sections: BehaviorRelay<[MarketSectionModel]> = BehaviorRelay(value: [
         .categorySection(itmes: Category.allCases.map {
             .categorySectionItem(category: $0)
@@ -78,7 +83,13 @@ final class DefaultMarketVM: MarketVM {
 }
 
 private extension DefaultMarketVM {
-    func fetchMarketProducts(align: AlignOption, category: Category, page: Int, size: Int, sale: Bool) {
+    func fetchMarketProducts(
+        align: AlignOption,
+        category: Category,
+        page: Int,
+        size: Int,
+        sale: Bool
+    ) {
         ProductsManager.shared.fetchProducts(
             align: align,
             category: category,
@@ -116,7 +127,6 @@ private extension DefaultMarketVM {
         .subscribe(
             onSuccess: { [weak self] products in
                 guard let self = self else { return }
-                
                 
                 let newSectionModel: [MarketSectionModel] = [
                     .categorySection(itmes: Category.allCases.map {

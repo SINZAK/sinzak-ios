@@ -23,6 +23,14 @@ enum ColorKind {
 }
 
 final class CategoryTagCVC: UICollectionViewCell {
+    
+    // MARK: - Property
+    
+    var isChecked: Bool = false
+    var category: Category?
+    
+    // MARK: - UI
+    
     let checkIcon = UIImageView().then {
         $0.image = UIImage(named: "checkmark")?.withRenderingMode(.alwaysTemplate)
         $0.tintColor = CustomColor.gray60
@@ -48,12 +56,12 @@ final class CategoryTagCVC: UICollectionViewCell {
         categoryLabel.textColor = color
         tagBackgroundView.layer.borderColor = color.cgColor
     }
-    func updateCell(kind: Category) {
-        categoryLabel.text = kind.text
+    
+    func updateCell(category: Category) {
+        self.category = category
+        categoryLabel.text = category.text
     }
-    func updateCell(kind: WorksCategory) {
-        categoryLabel.text = kind.text
-    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -64,7 +72,7 @@ final class CategoryTagCVC: UICollectionViewCell {
     }
 
     // MARK: - UI
-    func setupUI() {
+    private func setupUI() {
         contentView.addSubviews(
             tagBackgroundView, checkIcon, categoryLabel
         )
@@ -76,12 +84,14 @@ final class CategoryTagCVC: UICollectionViewCell {
             make.trailing.lessThanOrEqualToSuperview().inset(15)
             make.top.bottom.equalToSuperview().inset(9)
         }
+        
         checkIcon.snp.makeConstraints { make in
             make.centerY.equalTo(categoryLabel)
             make.width.height.equalTo(20)
             make.leading.equalToSuperview().inset(8)
             make.trailing.equalTo(categoryLabel.snp.leading).offset(-2)
         }
+        
         tagBackgroundView.snp.makeConstraints { make in
             make.leading.equalTo(checkIcon).offset(-8)
             make.top.equalTo(categoryLabel).offset(-9)
@@ -89,5 +99,4 @@ final class CategoryTagCVC: UICollectionViewCell {
             make.trailing.equalTo(categoryLabel).offset(15)
         }
     }
-
 }

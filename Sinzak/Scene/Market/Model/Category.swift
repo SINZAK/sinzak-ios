@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 enum Category: String, CaseIterable {
     case all
@@ -32,5 +33,22 @@ enum Category: String, CaseIterable {
         case .other:
             return "기타"
         }
+    }
+}
+
+struct CategoryData {
+    let category: Category
+}
+
+struct CategoryDataSection {
+    var items: [CategoryData]
+}
+
+extension CategoryDataSection: SectionModelType {
+    typealias Item = CategoryData
+    
+    init(original: CategoryDataSection, items: [CategoryData]) {
+        self = original
+        self.items = items
     }
 }

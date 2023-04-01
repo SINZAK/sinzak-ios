@@ -64,19 +64,19 @@ final class MarketView: SZView {
         
         viewOptionButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(18.0)
-            make.bottom.equalTo(collectionView1.snp.bottom)
+            make.top.equalTo(collectionView1.snp.bottom).offset(8.0)
             make.height.equalTo(22)
         }
-        
+    
         alignButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(18.0)
-            make.bottom.equalTo(collectionView1.snp.bottom)
+            make.top.equalTo(collectionView1.snp.bottom).offset(8.0)
             make.height.equalTo(22)
         }
         
         collectionView2.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview()
-            make.top.equalTo(alignButton.snp.bottom)
+            make.top.equalTo(alignButton.snp.bottom).offset(8.0)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
         

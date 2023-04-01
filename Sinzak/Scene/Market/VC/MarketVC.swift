@@ -14,7 +14,6 @@ final class MarketVC: SZVC {
     // MARK: - Properties
     private let viewModel: MarketVM!
     private let mainView = MarketView()
-    private lazy var dataSource = getDataSource()
     
     let searchBarButton = UIBarButtonItem(
         image: UIImage(named: "search"),
@@ -56,15 +55,29 @@ final class MarketVC: SZVC {
         navigationItem.rightBarButtonItem = searchBarButton
     }
     override func configure() {
+        
+        mainView.collectionView1.register(
+            CategoryTagCVC.self,
+            forCellWithReuseIdentifier: CategoryTagCVC.identifier
+        )
+        
         mainView.collectionView2.register(
             ArtCVC.self,
             forCellWithReuseIdentifier: ArtCVC.identifier
         )
+        
         mainView.collectionView2.register(
             CategoryTagCVC.self,
             forCellWithReuseIdentifier: CategoryTagCVC.identifier
         )
-
+        
+        mainView.collectionView2.register(
+            MarketHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: MarketHeader.identifier
+        )
+        
+        mainView.collectionView1.collectionViewLayout = setLayout1()
         mainView.collectionView2.collectionViewLayout = setLayout()
     }
 }
@@ -115,8 +128,12 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
+        viewModel.sections1
+            .bind(to: mainView.collectionView1.rx.items(dataSource: getDataSource1()))
+            .disposed(by: disposeBag)
+        
         viewModel.sections
-            .bind(to: mainView.collectionView2.rx.items(dataSource: dataSource))
+            .bind(to: mainView.collectionView2.rx.items(dataSource: getDataSource()))
             .disposed(by: disposeBag)
         
         viewModel.endRefresh
@@ -134,6 +151,29 @@ extension MarketVC {
 
 // 컴포지셔널 레이아웃
 extension MarketVC {
+    
+    func setLayout1() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
+            // 카테고리 경우
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .estimated(70),
+                    heightDimension: .estimated(32))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(3.0),
+                    heightDimension: .estimated(100))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                group.interItemSpacing = .fixed(10)
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets.top = 15
+                section.contentInsets.leading = 16
+                section.contentInsets.bottom = 15
+                section.interGroupSpacing = 0
+                section.orthogonalScrollingBehavior = .continuous
+                return section
+        }
+    }
+    
     /// 컴포지셔널 레이아웃 세팅
     func setLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
@@ -191,6 +231,21 @@ extension MarketVC {
 // MARK: - DataSouce
 
 private extension MarketVC {
+    
+    func getDataSource1() -> RxCollectionViewSectionedReloadDataSource<CategoryDataSection> {
+        return RxCollectionViewSectionedReloadDataSource<CategoryDataSection>(
+            configureCell: { _, collectionView, indexPath, item in
+                guard let cell: CategoryTagCVC = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: CategoryTagCVC.identifier,
+                    for: indexPath
+                ) as? CategoryTagCVC else { return UICollectionViewCell() }
+                cell.updateCell(category: item.category)
+                
+                print(indexPath.item)
+                return cell
+            })
+    }
+
     func getDataSource() -> RxCollectionViewSectionedReloadDataSource<MarketSectionModel> {
         return RxCollectionViewSectionedReloadDataSource<MarketSectionModel>(
             configureCell: { dataSource, collectionView, indexPath, _ in
@@ -201,10 +256,7 @@ private extension MarketVC {
                         for: indexPath
                     ) as? CategoryTagCVC else { return UICollectionViewCell() }
                     cell.categoryLabel.text = category.text
-//                    if indexPath.item == 0 {
-//                        cell.isSelected = true
-//                        cell.setColor(kind: .selected)
-//                    }
+
                     print(indexPath.item)
                     return cell
                     
@@ -215,6 +267,20 @@ private extension MarketVC {
                     ) as? ArtCVC else { return UICollectionViewCell() }
                     cell.setData(marketProduct)
                     return cell
+                }
+            },
+            configureSupplementaryView: { [weak self] _, collectionView, _, indexPath in
+                guard let self = self else { return UICollectionReusableView() }
+                if indexPath.section != 0 {
+                    guard let header = collectionView.dequeueReusableSupplementaryView(
+                        ofKind: UICollectionView.elementKindSectionHeader,
+                        withReuseIdentifier: MarketHeader.identifier,
+                        for: indexPath
+                    ) as? MarketHeader else { return UICollectionReusableView() }
+                    header.isSaling = self.viewModel.isSaling
+                    return header
+                } else {
+                    return UICollectionReusableView()
                 }
             })
     }
