@@ -104,6 +104,15 @@ extension MarketVC {
                 self?.viewModel.refresh()
             })
             .disposed(by: disposeBag)
+        
+        mainView.collectionView.rx.itemSelected
+            .subscribe { [weak self] indexPath in
+                
+                guard let cell = self?.mainView.collectionView.cellForItem(at: indexPath) as? CategoryTagCVC else { return }
+                cell.setColor(kind: .selected)
+                
+            }
+        
     }
     
     func bindOutput() {
@@ -130,6 +139,17 @@ extension MarketVC {
             .drive(onNext: { [weak self] in
                 if $0 {
                     self?.mainView.collectionView.refreshControl?.endRefreshing()
+                }
+                
+                let arr = [1, 3, 5]
+                    
+                Array(0...7).forEach {
+                    guard let cell = self?.mainView.collectionView.cellForItem(at: IndexPath(item: $0, section: 0)) as? CategoryTagCVC else { return }
+                    if arr.contains($0) {
+                        cell.setColor(kind: .selected)
+                    } else {
+                        cell.setColor(kind: .base)
+                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -205,8 +225,11 @@ private extension MarketVC {
                         for: indexPath
                     ) as? CategoryTagCVC else { return UICollectionViewCell() }
                     cell.categoryLabel.text = category.text
+//                    if indexPath.item == 0 {
+//                        cell.setColor(kind: .selected)
+//                    }
                     if indexPath.item == 0 {
-                        cell.setColor(kind: .selected)
+                        cell.isSelected = true
                     }
                     return cell
                     

@@ -28,6 +28,7 @@ final class MarketView: SZView {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = .black
         collectionView.refreshControl = refreshControl
+        collectionView.allowsMultipleSelection = true
     }
     override func setLayout() {
         collectionView.snp.makeConstraints { make in
