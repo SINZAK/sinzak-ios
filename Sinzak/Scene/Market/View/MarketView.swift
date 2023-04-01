@@ -11,11 +11,11 @@ import Then
 
 final class MarketView: SZView {
     // MARK: - Properties
-    lazy var collectionView1 = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+    lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         $0.backgroundColor = .clear
     }
     
-    lazy var collectionView2 = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+    lazy var productCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         $0.backgroundColor = .clear
     }
     
@@ -45,18 +45,18 @@ final class MarketView: SZView {
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
-            collectionView1,
+            categoryCollectionView,
             viewOptionButton, alignButton,
-            collectionView2, writeButton
+            productCollectionView, writeButton
         )
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = .black
-        collectionView2.refreshControl = refreshControl
+        productCollectionView.refreshControl = refreshControl
     }
     
     override func setLayout() {
         
-        collectionView1.snp.makeConstraints { make in
+        categoryCollectionView.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview()
             make.top.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(56.0)
@@ -64,17 +64,17 @@ final class MarketView: SZView {
         
         viewOptionButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(18.0)
-            make.top.equalTo(collectionView1.snp.bottom).offset(8.0)
+            make.top.equalTo(categoryCollectionView.snp.bottom).offset(8.0)
             make.height.equalTo(22)
         }
     
         alignButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(18.0)
-            make.top.equalTo(collectionView1.snp.bottom).offset(8.0)
+            make.top.equalTo(categoryCollectionView.snp.bottom).offset(8.0)
             make.height.equalTo(22)
         }
         
-        collectionView2.snp.makeConstraints { make in
+        productCollectionView.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview()
             make.top.equalTo(alignButton.snp.bottom).offset(8.0)
             make.bottom.equalTo(safeAreaLayoutGuide)

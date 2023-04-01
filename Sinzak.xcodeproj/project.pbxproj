@@ -175,7 +175,6 @@
 		A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE4298776F300DE754F /* HomeManager.swift */; };
 		B0F5738FAACAD65BA66A4041 /* Pods_SinzakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */; };
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
-		ED86968E29D8875C001A1A9F /* MarketHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86968D29D8875C001A1A9F /* MarketHeader.swift */; };
 		EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8656129D5BADD00424FC1 /* MarketVM.swift */; };
 		EDCBB52229D47DBF004E68B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDCBB52129D47DBF004E68B9 /* GoogleService-Info.plist */; };
 		EDCBB52429D47F36004E68B9 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCBB52329D47F36004E68B9 /* Endpoint.swift */; };
@@ -362,7 +361,6 @@
 		A6ABEFC84FE28A7B2341F462 /* Pods-SinzakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinzakTests.debug.xcconfig"; path = "Target Support Files/Pods-SinzakTests/Pods-SinzakTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B395F23DAA5BE335A96B8534 /* Pods_Sinzak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinzakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED86968D29D8875C001A1A9F /* MarketHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketHeader.swift; sourceTree = "<group>"; };
 		EDC8656129D5BADD00424FC1 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		EDCBB52129D47DBF004E68B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDCBB52329D47F36004E68B9 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -1385,7 +1383,6 @@
 			isa = PBXGroup;
 			children = (
 				A2B0F6102980233900EC5C78 /* MarketVC.swift */,
-				ED86968D29D8875C001A1A9F /* MarketHeader.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2019,7 +2016,6 @@
 				A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */,
 				A226537B29705A4400605697 /* ArtCVC.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
-				ED86968E29D8875C001A1A9F /* MarketHeader.swift in Sources */,
 				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
 				A254E14229BD0571001047FD /* ChatAPI.swift in Sources */,
 				A2B38580295D895800E5EB7C /* StudentAuthVC.swift in Sources */,

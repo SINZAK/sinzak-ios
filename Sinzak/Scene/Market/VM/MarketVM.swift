@@ -20,8 +20,8 @@ protocol MarketVMInput {
 protocol MarketVMOutput {
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
     var pushSerachVC: PublishRelay<SearchVC> { get }
-    var sections1: BehaviorRelay<[CategoryDataSection]> { get }
-    var sections: BehaviorRelay<[MarketSectionModel]> { get }
+    var categorySections: BehaviorRelay<[CategoryDataSection]> { get }
+    var productSections: BehaviorRelay<[MarketProductDataSection]> { get }
     var isSaling: BehaviorRelay<Bool> { get }
     var endRefresh: PublishRelay<Bool> { get }
 }
@@ -69,14 +69,11 @@ final class DefaultMarketVM: MarketVM {
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
     var pushSerachVC: PublishRelay<SearchVC> = PublishRelay()
-    let sections1: BehaviorRelay<[CategoryDataSection]> = BehaviorRelay(value: [
+    let categorySections: BehaviorRelay<[CategoryDataSection]> = BehaviorRelay(value: [
         CategoryDataSection(items: Category.allCases.map { CategoryData(category: $0) })    
     ])
-    
-    var sections: BehaviorRelay<[MarketSectionModel]> = BehaviorRelay(value: [
-        .categorySection(itmes: Category.allCases.map {
-            .categorySectionItem(category: $0)
-        })
+    let productSections: BehaviorRelay<[MarketProductDataSection]> = BehaviorRelay(value: [
+        MarketProductDataSection(items: [])
     ])
     var isSaling: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var endRefresh: PublishRelay<Bool> = PublishRelay()
@@ -100,14 +97,13 @@ private extension DefaultMarketVM {
         .subscribe(
             onSuccess: { [weak self] products in
                 guard let self = self else { return }
-                var currentSectionModel = self.sections.value
-                let newSectionModel: [MarketSectionModel] = [
-                    .artSection(items: products.map {
-                        .artSectionItem(marketProduct: $0)
-                    })
+                var currentSectionModel = self.productSections.value
+                let newSectionModel: [MarketProductDataSection] = [
+                    MarketProductDataSection(items: products)
                 ]
+                
                 currentSectionModel.append(contentsOf: newSectionModel)
-                self.sections.accept(currentSectionModel)
+                self.productSections.accept(currentSectionModel)
             },
             onFailure: { error in
                 Log.error(error)
@@ -128,57 +124,15 @@ private extension DefaultMarketVM {
             onSuccess: { [weak self] products in
                 guard let self = self else { return }
                 
-                let newSectionModel: [MarketSectionModel] = [
-                    .categorySection(itmes: Category.allCases.map {
-                        .categorySectionItem(category: $0)
-                    }),
-                    .artSection(items: products.map {
-                        .artSectionItem(marketProduct: $0)
-                    })
+                let newSectionModel: [MarketProductDataSection] = [
+                    MarketProductDataSection(items: products)
                 ]
-                self.sections.accept(newSectionModel)
+                self.productSections.accept(newSectionModel)
             },
             onFailure: { error in
                 Log.error(error)
             }
         )
         .disposed(by: disposeBag)
-    }
-}
-
-// MARK: - RxDataSource
-
-enum MarketSectionModel: Equatable {
-    static func == (lhs: MarketSectionModel, rhs: MarketSectionModel) -> Bool {
-        type(of: lhs) == type(of: lhs)
-    }
-    case categorySection(itmes: [MarketSectionItem])
-    case artSection(items: [MarketSectionItem])
-}
-
-enum MarketSectionItem {
-    case categorySectionItem(category: Category)
-    case artSectionItem(marketProduct: MarketProduct)
-}
-
-extension MarketSectionModel: SectionModelType {
-    typealias Item = MarketSectionItem
-    
-    var items: [MarketSectionItem] {
-        switch self {
-        case .categorySection(itmes: let items):
-            return items.map { $0 }
-        case .artSection(items: let items):
-            return items.map { $0 }
-        }
-    }
-    
-    init(original: MarketSectionModel, items: [Item]) {
-        switch original {
-        case .categorySection(itmes: _):
-            self = .categorySection(itmes: items)
-        case .artSection(items: _):
-            self = .artSection(items: items)
-        }
     }
 }

@@ -32,7 +32,7 @@ final class ConciergeView: UIView {
     }
     // MARK: - Actions, Helpers
     func setView() {
-        backgroundColor = .systemBackground
+        backgroundColor = CustomColor.background
         addSubview(logoView)
     }
     func setConstraints() {
