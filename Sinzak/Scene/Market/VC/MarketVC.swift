@@ -68,6 +68,8 @@ final class MarketVC: SZVC {
         
         mainView.categoryCollectionView.collectionViewLayout = setCategoryLayout()
         mainView.productCollectionView.collectionViewLayout = setProductLayout()
+        
+        mainView.categoryCollectionView.allowsMultipleSelection = true
     }
 }
 
@@ -102,6 +104,25 @@ extension MarketVC {
                 self?.viewModel.refresh()
             })
             .disposed(by: disposeBag)
+        
+        mainView.viewOptionButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                let current = self?.viewModel.isSaling.value ?? false
+                self?.viewModel.isSaling.accept(!current)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.categoryCollectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.selectCategory(with: indexPath)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.categoryCollectionView.rx.itemDeselected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.selectCategory(with: indexPath)
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
@@ -132,6 +153,18 @@ extension MarketVC {
             .drive(onNext: { [weak self] in
                 if $0 {
                     self?.mainView.productCollectionView.refreshControl?.endRefreshing()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isSaling
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] in
+                if $0 {
+                    self?.mainView.viewOptionButton.setImage(UIImage(named: "radiobtn-checked"), for: .normal)
+                } else {
+                    self?.mainView.viewOptionButton.setImage(UIImage(named: "radiobtn-unchecked"), for: .normal)
                 }
             })
             .disposed(by: disposeBag)
@@ -201,6 +234,7 @@ private extension MarketVC {
                     for: indexPath
                 ) as? CategoryTagCVC else { return UICollectionViewCell() }
                 cell.updateCell(category: item.category)
+                
                 return cell
             })
     }
@@ -215,5 +249,53 @@ private extension MarketVC {
                 cell.setData(item)
                 return cell
             })
+    }
+}
+
+// MARK: - Private Method
+
+private extension MarketVC {
+    
+    func selectCategory(with indexPath: IndexPath) {
+        
+        var currentCategories: [Category] = viewModel.selectedCategory.value
+        let selectedCell = getCategoryCell(at: indexPath)
+        
+        if selectedCell.category == .all {
+            if selectedCell.isChecked { return }
+            (1..<Category.allCases.count)
+                .forEach {
+                    let notAllCell = getCategoryCell(at: IndexPath(item: $0, section: 0))
+                    notAllCell.isChecked = false
+                    currentCategories = []
+                }
+        } else {
+           
+            if selectedCell.isChecked {
+                currentCategories.remove(at: currentCategories.firstIndex(of: selectedCell.category!)!)
+                if currentCategories.isEmpty {
+                    let firstCell = getCategoryCell(at: IndexPath(item: 0, section: 0))
+                    firstCell.isChecked = true
+                }
+            } else {
+                guard currentCategories.count <= 2 else { return }
+                guard let firstCell = mainView
+                    .categoryCollectionView
+                    .cellForItem(at: IndexPath(item: 0, section: 0)) as? CategoryTagCVC else { return }
+                firstCell.isChecked = false
+                currentCategories.append(selectedCell.category ?? .all)
+            }
+        }
+        
+        Log.debug(currentCategories)
+        viewModel.selectedCategory.accept(currentCategories)
+        selectedCell.isChecked = !selectedCell.isChecked
+    }
+    
+    func getCategoryCell(at indexPath: IndexPath) -> CategoryTagCVC {
+        guard let cell = mainView
+            .categoryCollectionView
+            .cellForItem(at: indexPath) as? CategoryTagCVC else { return CategoryTagCVC() }
+        return cell
     }
 }

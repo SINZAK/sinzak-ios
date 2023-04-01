@@ -13,6 +13,7 @@ final class MarketView: SZView {
     // MARK: - Properties
     lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         $0.backgroundColor = .clear
+        
     }
     
     lazy var productCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {

@@ -15,6 +15,7 @@ protocol MarketVMInput {
     func writeButtonTapped()
     func searchButtonTapped()
     func refresh()
+    var selectedCategory: BehaviorRelay<[Category]> { get }
 }
 
 protocol MarketVMOutput {
@@ -65,6 +66,8 @@ final class DefaultMarketVM: MarketVM {
         let vc = SearchVC()
         pushSerachVC.accept(vc)
     }
+    
+    var selectedCategory: BehaviorRelay<[Category]> = .init(value: [])
     
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
