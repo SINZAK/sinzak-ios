@@ -79,7 +79,7 @@ final class DefaultMarketVM: MarketVM {
         presentSelectAlignVC.accept(vc)
     }
     
-    var selectedCategory: BehaviorRelay<[Category]> = .init(value: [.all])
+    var selectedCategory: BehaviorRelay<[Category]> = .init(value: [])
     
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()

@@ -14,6 +14,7 @@ final class MarketVC: SZVC {
     // MARK: - Properties
     private let viewModel: MarketVM!
     private let mainView = MarketView()
+    let backgroundScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
     
     let searchBarButton = UIBarButtonItem(
         image: UIImage(named: "search"),
@@ -112,7 +113,22 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
+        viewModel.selectedCategory
+            .observe(on: backgroundScheduler)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.refresh()
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.isSaling
+            .observe(on: backgroundScheduler)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.refresh()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.currentAlign
+            .observe(on: backgroundScheduler)
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.refresh()
             })
@@ -191,10 +207,10 @@ extension MarketVC {
             .drive(onNext: { [weak self] in
                 if $0 {
                     self?.mainView.productCollectionView.refreshControl?.endRefreshing()
+                    self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
                 }
             })
             .disposed(by: disposeBag)
-        
     }
 }
 
@@ -255,11 +271,15 @@ private extension MarketVC {
     
     func getCategoryDataSource() -> RxCollectionViewSectionedReloadDataSource<CategoryDataSection> {
         return RxCollectionViewSectionedReloadDataSource<CategoryDataSection>(
-            configureCell: { _, collectionView, indexPath, item in
+            configureCell: { [weak self] _, collectionView, indexPath, item in
+                guard let self = self else { return UICollectionViewCell() }
                 guard let cell: CategoryTagCVC = collectionView.dequeueReusableCell(
                     withReuseIdentifier: CategoryTagCVC.identifier,
                     for: indexPath
                 ) as? CategoryTagCVC else { return UICollectionViewCell() }
+                if self.viewModel.selectedCategory.value.isEmpty && item.category == .all {
+                    cell.isChecked = true
+                }
                 cell.updateCell(category: item.category)
                 
                 return cell

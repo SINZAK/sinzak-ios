@@ -76,7 +76,7 @@ extension ProductsAPI: TargetType {
         switch self {
         case .products(let align, let page, let size, let category, let sale):
             let sale: String = sale ? "true" : "false"
-            let param: [String: Any] = category == ["all"] ? [
+            let param: [String: Any] = category == ["all"] || category.isEmpty ? [
                 "align": align,
                 "page": page,
                 "sale": sale,
