@@ -93,6 +93,19 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
+        mainView.viewOptionButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                let current = self?.viewModel.isSaling.value ?? false
+                self?.viewModel.isSaling.accept(!current)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.alignButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.alignButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        
         mainView.productCollectionView.refreshControl?.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.refresh()
@@ -102,13 +115,6 @@ extension MarketVC {
         viewModel.isSaling
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.refresh()
-            })
-            .disposed(by: disposeBag)
-        
-        mainView.viewOptionButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                let current = self?.viewModel.isSaling.value ?? false
-                self?.viewModel.isSaling.accept(!current)
             })
             .disposed(by: disposeBag)
         
@@ -135,6 +141,14 @@ extension MarketVC {
         viewModel.pushSerachVC
             .subscribe(onNext: { [weak self] vc in
                 self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.presentSelectAlignVC
+            .subscribe(onNext: { [weak self] vc in
+                vc.modalPresentationStyle = .custom
+                vc.transitioningDelegate = self
+                self?.present(vc, animated: true)
             })
             .disposed(by: disposeBag)
         
@@ -171,7 +185,7 @@ extension MarketVC {
     }
 }
 
-// 컴포지셔널 레이아웃
+// MARK: - 컴포지셔널 레이아웃
 extension MarketVC {
     
     // TODO: View 수직 스크롤 끄기
@@ -249,6 +263,21 @@ private extension MarketVC {
                 cell.setData(item)
                 return cell
             })
+    }
+}
+
+// MARK: - ViewControllerTransitioning
+
+extension MarketVC: UIViewControllerTransitioningDelegate {
+    func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?,
+        source: UIViewController
+    ) -> UIPresentationController? {
+        SelectAlignPC(
+            presentedViewController: presented,
+            presenting: presenting
+        )
     }
 }
 

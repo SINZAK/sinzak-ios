@@ -174,7 +174,11 @@
 		A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE22987758C00DE754F /* HomeAPI.swift */; };
 		A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F6EAE4298776F300DE754F /* HomeManager.swift */; };
 		B0F5738FAACAD65BA66A4041 /* Pods_SinzakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */; };
+		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
+		ED86969029D9351A001A1A9F /* SelectAlignPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */; };
+		ED86969229D9359D001A1A9F /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86969129D9359D001A1A9F /* UIView+Extension.swift */; };
+		ED86969429D936A8001A1A9F /* SelectAlignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86969329D936A8001A1A9F /* SelectAlignVC.swift */; };
 		EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8656129D5BADD00424FC1 /* MarketVM.swift */; };
 		EDCBB52229D47DBF004E68B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDCBB52129D47DBF004E68B9 /* GoogleService-Info.plist */; };
 		EDCBB52429D47F36004E68B9 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCBB52329D47F36004E68B9 /* Endpoint.swift */; };
@@ -361,6 +365,10 @@
 		A6ABEFC84FE28A7B2341F462 /* Pods-SinzakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinzakTests.debug.xcconfig"; path = "Target Support Files/Pods-SinzakTests/Pods-SinzakTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B395F23DAA5BE335A96B8534 /* Pods_Sinzak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinzakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
+		ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignPC.swift; sourceTree = "<group>"; };
+		ED86969129D9359D001A1A9F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		ED86969329D936A8001A1A9F /* SelectAlignVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignVC.swift; sourceTree = "<group>"; };
 		EDC8656129D5BADD00424FC1 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		EDCBB52129D47DBF004E68B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDCBB52329D47F36004E68B9 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -1375,6 +1383,9 @@
 			children = (
 				A2B0F60D2980231A00EC5C78 /* MarketView.swift */,
 				A222F07B29837AFF007806D0 /* CategoryTagCVC.swift */,
+				ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */,
+				ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */,
+				ED86969329D936A8001A1A9F /* SelectAlignVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1665,6 +1676,7 @@
 			children = (
 				EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */,
 				EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */,
+				ED86969129D9359D001A1A9F /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1938,6 +1950,7 @@
 				A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */,
 				A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */,
 				A26F0AB12948C818001CB2AA /* SZView.swift in Sources */,
+				ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */,
 				A280AB3E29A7371200C1729C /* SearchHistoryCVC.swift in Sources */,
 				A280AB3829A7222100C1729C /* SearchHistoryView.swift in Sources */,
 				A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */,
@@ -2014,6 +2027,7 @@
 				A254E14729BDA193001047FD /* WorkBuild.swift in Sources */,
 				A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */,
 				A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */,
+				ED86969229D9359D001A1A9F /* UIView+Extension.swift in Sources */,
 				A226537B29705A4400605697 /* ArtCVC.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
@@ -2038,6 +2052,7 @@
 				A2121ACE29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
 				A2180DB329AA3C0700BBC74A /* ArtworkSizeVC.swift in Sources */,
+				ED86969029D9351A001A1A9F /* SelectAlignPC.swift in Sources */,
 				A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */,
 				A216BD4E297FCC02008964BC /* NotiView.swift in Sources */,
 				A2265372296D7E5600605697 /* HomeView.swift in Sources */,
@@ -2053,6 +2068,7 @@
 				A254E14A29BDB076001047FD /* SignupViewModel.swift in Sources */,
 				A2B969E129ABA661006119B1 /* DetailView.swift in Sources */,
 				A216BD5C297FE020008964BC /* ChatView.swift in Sources */,
+				ED86969429D936A8001A1A9F /* SelectAlignVC.swift in Sources */,
 				EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */,
 				A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,

@@ -14,13 +14,16 @@ protocol MarketVMInput {
     func viewDidLoad()
     func writeButtonTapped()
     func searchButtonTapped()
+    func alignButtonTapped()
     func refresh()
+    
     var selectedCategory: BehaviorRelay<[Category]> { get }
 }
 
 protocol MarketVMOutput {
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
     var pushSerachVC: PublishRelay<SearchVC> { get }
+    var presentSelectAlignVC: PublishRelay<SelectAlignVC> { get }
     var categorySections: BehaviorRelay<[CategoryDataSection]> { get }
     var productSections: BehaviorRelay<[MarketProductDataSection]> { get }
     var isSaling: BehaviorRelay<Bool> { get }
@@ -67,11 +70,17 @@ final class DefaultMarketVM: MarketVM {
         pushSerachVC.accept(vc)
     }
     
+    func alignButtonTapped() {
+        let vc = SelectAlignVC()
+        presentSelectAlignVC.accept(vc)
+    }
+    
     var selectedCategory: BehaviorRelay<[Category]> = .init(value: [])
     
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
     var pushSerachVC: PublishRelay<SearchVC> = PublishRelay()
+    var presentSelectAlignVC: PublishRelay<SelectAlignVC> = PublishRelay<SelectAlignVC>()
     let categorySections: BehaviorRelay<[CategoryDataSection]> = BehaviorRelay(value: [
         CategoryDataSection(items: Category.allCases.map { CategoryData(category: $0) })    
     ])
