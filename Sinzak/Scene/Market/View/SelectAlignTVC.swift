@@ -15,7 +15,11 @@ final class SelectAlignTVC: UITableViewCell {
     
     var isChecked: Bool = false {
         willSet {
-            
+            if newValue {
+                checkImageView.isHidden = false
+            } else {
+                checkImageView.isHidden = true
+            }
         }
     }
     
@@ -54,13 +58,17 @@ final class SelectAlignTVC: UITableViewCell {
         return imageView
     }()
     
-//    private let separateView
+    private let separateView: UIView = {
+        let view = UIView()
+        view.backgroundColor = CustomColor.gray60
+        
+        return view
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         cofigureLayout()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -70,6 +78,12 @@ final class SelectAlignTVC: UITableViewCell {
     func configureCell(with alignOption: AlignOption) {
         self.alignOption = alignOption
         alignLabel.text = alignOption.text
+        if alignOption == .recommend || alignOption == .popular {
+            infoButton.isHidden = false
+        }
+        if alignOption == .high {
+            separateView.isHidden = true
+        }
     }
 }
 
@@ -81,7 +95,8 @@ private extension SelectAlignTVC {
         [
             alignLabel,
             infoButton,
-            checkImageView
+            checkImageView,
+            separateView
         ].forEach { addSubviews($0) }
         
         alignLabel.snp.makeConstraints {
@@ -97,6 +112,12 @@ private extension SelectAlignTVC {
         checkImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(24.0)
             $0.centerY.equalToSuperview()
+        }
+        
+        separateView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(16.0)
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(0.5)
         }
     }
 }

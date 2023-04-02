@@ -33,6 +33,11 @@ final class SelectAlignVC: SZVC {
                     for: indexPath
                 ) as? SelectAlignTVC else { return UITableViewCell() }
             cell.configureCell(with: item.alignOption)
+            
+            // TODO: 나중에 지워
+            if item.alignOption == .recommend {
+                cell.isChecked = true
+            }
             return cell
     })
     
@@ -86,6 +91,7 @@ final class SelectAlignVC: SZVC {
         )
         
         selectTableView.isScrollEnabled = false
+        selectTableView.separatorStyle = .none
         
     }
 }
