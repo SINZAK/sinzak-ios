@@ -13,23 +13,6 @@ final class SelectAlignTVC: UITableViewCell {
     
     var alignOption: AlignOption?
     
-//    override var isSelected: Bool {
-//        willSet {
-//            if newValue {
-//                print("true")
-//                checkImageView.isHidden = false
-//            } else {
-//                print("false")
-//                checkImageView.isHidden = true
-//            }
-//        }
-//    }
-    override var isSelected: Bool {
-        willSet {
-            Log.debug(isSelected)
-        }
-    }
-    
     // MARK: - UI
     
     private let alignLabel: UILabel = {

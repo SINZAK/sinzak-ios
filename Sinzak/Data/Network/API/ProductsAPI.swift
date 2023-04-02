@@ -10,7 +10,7 @@ import Moya
 
 enum ProductsAPI {
     // 조회
-    case products(align: String, page: Int, size: Int, category: String, sale: Bool)
+    case products(align: String, page: Int, size: Int, category: [String], sale: Bool)
     case productDetail(id: Int)
     // 홈 섹션별
     case homeFollowing
@@ -76,14 +76,14 @@ extension ProductsAPI: TargetType {
         switch self {
         case .products(let align, let page, let size, let category, let sale):
             let sale: String = sale ? "true" : "false"
-            let param: [String: Any] = category == "all" ? [
+            let param: [String: Any] = category == ["all"] ? [
                 "align": align,
                 "page": page,
                 "sale": sale,
                 "size": size
             ] : [
                 "align": align,
-                "categories": category,
+                "categories": category.joined(separator: ","),
                 "page": page,
                 "sale": sale,
                 "size": size

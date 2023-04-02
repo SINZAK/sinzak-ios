@@ -184,7 +184,6 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
 
-        
         viewModel.endRefresh
             .delay(.milliseconds(500), scheduler: MainScheduler.instance)
             .distinctUntilChanged()

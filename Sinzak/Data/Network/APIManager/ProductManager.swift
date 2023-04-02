@@ -21,7 +21,7 @@ class ProductsManager {
     
     func fetchProducts(
         align: AlignOption,
-        category: Category,
+        category: [Category],
         page: Int,
         size: Int,
         sale: Bool
@@ -35,7 +35,7 @@ class ProductsManager {
                 align: align.rawValue,
                 page: page,
                 size: size,
-                category: category.rawValue,
+                category: category.map { $0.rawValue },
                 sale: sale
             ))
             .subscribe { event in

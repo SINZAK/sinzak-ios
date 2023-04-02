@@ -41,8 +41,6 @@ final class SelectAlignVC: SZVC {
             if item.alignOption == self.currnetAlign.value {
                 cell.isSelected = true
                 cell.checkImageView.isHidden = false
-                print(cell.isSelected)
-                print(cell.checkImageView.isHidden)
             }
                         
             return cell

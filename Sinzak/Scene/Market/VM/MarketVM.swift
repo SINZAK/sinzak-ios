@@ -45,7 +45,7 @@ final class DefaultMarketVM: MarketVM {
     func viewDidLoad() {
         fetchMarketProducts(
             align: .recommend,
-            category: .all,
+            category: selectedCategory.value,
             page: 0,
             size: 15,
             sale: false
@@ -55,8 +55,8 @@ final class DefaultMarketVM: MarketVM {
     func refresh() {
         endRefresh.accept(false)
         refreshMarketProducts(
-            align: .recommend,
-            category: .all,
+            align: currentAlign.value,
+            category: selectedCategory.value,
             page: 0,
             size: 15,
             sale: isSaling.value
@@ -79,7 +79,7 @@ final class DefaultMarketVM: MarketVM {
         presentSelectAlignVC.accept(vc)
     }
     
-    var selectedCategory: BehaviorRelay<[Category]> = .init(value: [])
+    var selectedCategory: BehaviorRelay<[Category]> = .init(value: [.all])
     
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
@@ -102,7 +102,7 @@ final class DefaultMarketVM: MarketVM {
 private extension DefaultMarketVM {
     func fetchMarketProducts(
         align: AlignOption,
-        category: Category,
+        category: [Category],
         page: Int,
         size: Int,
         sale: Bool
@@ -132,7 +132,13 @@ private extension DefaultMarketVM {
         .disposed(by: disposeBag)
     }
     
-    func refreshMarketProducts(align: AlignOption, category: Category, page: Int, size: Int, sale: Bool) {
+    func refreshMarketProducts(
+        align: AlignOption,
+        category: [Category],
+        page: Int,
+        size: Int,
+        sale: Bool
+    ) {
         ProductsManager.shared.fetchProducts(
             align: align,
             category: category,
