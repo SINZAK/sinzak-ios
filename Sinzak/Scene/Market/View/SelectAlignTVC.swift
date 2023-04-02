@@ -13,13 +13,20 @@ final class SelectAlignTVC: UITableViewCell {
     
     var alignOption: AlignOption?
     
-    var isChecked: Bool = false {
+//    override var isSelected: Bool {
+//        willSet {
+//            if newValue {
+//                print("true")
+//                checkImageView.isHidden = false
+//            } else {
+//                print("false")
+//                checkImageView.isHidden = true
+//            }
+//        }
+//    }
+    override var isSelected: Bool {
         willSet {
-            if newValue {
-                checkImageView.isHidden = false
-            } else {
-                checkImageView.isHidden = true
-            }
+            Log.debug(isSelected)
         }
     }
     
@@ -45,7 +52,7 @@ final class SelectAlignTVC: UITableViewCell {
         return button
     }()
     
-    private let checkImageView: UIImageView = {
+    let checkImageView: UIImageView = {
         let imageView = UIImageView()
         let checkIcon = UIImage(named: "checkmark")?
             .withTintColor(
@@ -92,6 +99,8 @@ final class SelectAlignTVC: UITableViewCell {
 private extension SelectAlignTVC {
 
     func cofigureLayout() {
+        self.backgroundColor = CustomColor.background
+        
         [
             alignLabel,
             infoButton,

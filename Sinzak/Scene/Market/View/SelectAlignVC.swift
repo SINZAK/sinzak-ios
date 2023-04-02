@@ -18,26 +18,33 @@ final class SelectAlignVC: SZVC {
     
     private var hasSetPointOrigin = false
     private var pointOrigin: CGPoint?
+    private var currnetAlign: BehaviorRelay<AlignOption>
     
-    let alignOptionSections: BehaviorRelay<[AlignOptionDataSection]> = BehaviorRelay(value: [
+    // MARK: - Sections
+    private let alignOptionSections: BehaviorRelay<[AlignOptionDataSection]> = BehaviorRelay(value: [
         AlignOptionDataSection(items: AlignOption.allCases.map {
             AlignOptionData(alignOption: $0)
         })
     ])
     
-    let alignOptionDataSource: RxTableViewSectionedReloadDataSource<AlignOptionDataSection> = RxTableViewSectionedReloadDataSource<AlignOptionDataSection>(
-        configureCell: { _, tableView, indexPath, item in
+    // MARK: - DataSource
+    private lazy var alignOptionDataSource: RxTableViewSectionedReloadDataSource<AlignOptionDataSection> = RxTableViewSectionedReloadDataSource<AlignOptionDataSection>(
+        configureCell: { [weak self] _, tableView, indexPath, item in
+            guard let self = self else { return UITableViewCell() }
             guard let cell: SelectAlignTVC = tableView
                 .dequeueReusableCell(
                     withIdentifier: SelectAlignTVC.identifier,
                     for: indexPath
                 ) as? SelectAlignTVC else { return UITableViewCell() }
             cell.configureCell(with: item.alignOption)
-            
-            // TODO: 나중에 지워
-            if item.alignOption == .recommend {
-                cell.isChecked = true
+            cell.selectionStyle = .none
+            if item.alignOption == self.currnetAlign.value {
+                cell.isSelected = true
+                cell.checkImageView.isHidden = false
+                print(cell.isSelected)
+                print(cell.checkImageView.isHidden)
             }
+                        
             return cell
     })
     
@@ -72,7 +79,9 @@ final class SelectAlignVC: SZVC {
     
     // MARK: - Init
     
-    init() {
+    init(with currentAlign: BehaviorRelay<AlignOption>) {
+        self.currnetAlign = currentAlign
+        
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -90,9 +99,10 @@ final class SelectAlignVC: SZVC {
             forCellReuseIdentifier: SelectAlignTVC.identifier
         )
         
+        selectTableView.backgroundColor = CustomColor.background
+        
         selectTableView.isScrollEnabled = false
         selectTableView.separatorStyle = .none
-        
     }
 }
 
@@ -106,8 +116,21 @@ private extension SelectAlignVC {
             .bind(to: selectTableView.rx.items(dataSource: alignOptionDataSource))
             .disposed(by: disposeBag)
         
+        selectTableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.selectAlignOption(with: indexPath)
+            })
+            .disposed(by: disposeBag)
+        
+        selectTableView.rx.itemDeselected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.selectAlignOption(with: indexPath)
+            })
+            .disposed(by: disposeBag)
+        
         selectTableView.rx.setDelegate(self)
             .disposed(by: disposeBag)
+        
     }
 }
 
@@ -147,12 +170,32 @@ private extension SelectAlignVC {
         }
     }
     
+    func getSelectAlignCell(with indexPath: IndexPath) -> SelectAlignTVC {
+        guard let cell = selectTableView
+            .cellForRow(at: indexPath) as? SelectAlignTVC else { return SelectAlignTVC() }
+        
+        return cell
+    }
+    
     func configureGesture() {
         let panGesture = UIPanGestureRecognizer(
             target: self,
             action: #selector(panGestureRecognizerAction)
         )
         view.addGestureRecognizer(panGesture)
+    }
+    
+    func selectAlignOption(with indexPath: IndexPath) {
+        let selectedCell = getSelectAlignCell(with: indexPath)
+        selectedCell.checkImageView.isHidden = false
+        self.currnetAlign.accept(selectedCell.alignOption ?? .recommend)
+        (0..<AlignOption.allCases.count).forEach {
+            let cell = getSelectAlignCell(with: IndexPath(row: $0, section: 0))
+            if cell.alignOption != selectedCell.alignOption {
+                cell.checkImageView.isHidden = true
+            }
+        }
+        dismiss(animated: true)
     }
     
     // MARK: - Selector

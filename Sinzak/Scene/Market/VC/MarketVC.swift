@@ -132,6 +132,8 @@ extension MarketVC {
     }
     
     func bindOutput() {
+    
+        // MARK: - 화면이동
         viewModel.pushWriteCategoryVC
             .subscribe(onNext: { [weak self] vc in
                 self?.navigationController?.pushViewController(vc, animated: true)
@@ -152,6 +154,7 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
+        // MARK: - Collection View Section
         viewModel.categorySections
             .bind(to: mainView.categoryCollectionView.rx.items(dataSource: getCategoryDataSource()))
             .disposed(by: disposeBag)
@@ -159,6 +162,28 @@ extension MarketVC {
         viewModel.productSections
             .bind(to: mainView.productCollectionView.rx.items(dataSource: getProductDataSource()))
             .disposed(by: disposeBag)
+        
+        // MARK: - 검색 옵션
+        viewModel.isSaling
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] in
+                if $0 {
+                    self?.mainView.viewOptionButton.setImage(UIImage(named: "radiobtn-checked"), for: .normal)
+                } else {
+                    self?.mainView.viewOptionButton.setImage(UIImage(named: "radiobtn-unchecked"), for: .normal)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.currentAlign
+            .asDriver(onErrorJustReturn: .recommend)
+            .drive(onNext: { [weak self] alignOption in
+                guard let self = self else { return }
+                self.mainView.alignButton.setTitle(alignOption.text, for: .normal)
+            })
+            .disposed(by: disposeBag)
+
         
         viewModel.endRefresh
             .delay(.milliseconds(500), scheduler: MainScheduler.instance)
@@ -171,17 +196,6 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
-        viewModel.isSaling
-            .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: false)
-            .drive(onNext: { [weak self] in
-                if $0 {
-                    self?.mainView.viewOptionButton.setImage(UIImage(named: "radiobtn-checked"), for: .normal)
-                } else {
-                    self?.mainView.viewOptionButton.setImage(UIImage(named: "radiobtn-unchecked"), for: .normal)
-                }
-            })
-            .disposed(by: disposeBag)
     }
 }
 
