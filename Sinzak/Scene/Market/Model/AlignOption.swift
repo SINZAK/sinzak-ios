@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 enum AlignOption: String, CaseIterable {
     case recommend
@@ -37,5 +38,22 @@ enum AlignOption: String, CaseIterable {
         default:
             return nil
         }
+    }
+}
+
+struct AlignOptionData {
+    let alignOption: AlignOption
+}
+
+struct AlignOptionDataSection {
+    var items: [AlignOptionData]
+}
+
+extension AlignOptionDataSection: SectionModelType {
+    typealias Item = AlignOptionData
+    
+    init(original: AlignOptionDataSection, items: [AlignOptionData]) {
+        self = original
+        self.items = items
     }
 }
