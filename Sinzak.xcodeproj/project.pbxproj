@@ -178,6 +178,7 @@
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
 		ED7F92C129DAEFD000C55FBF /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F92C029DAEFD000C55FBF /* Endpoint.swift */; };
 		ED7F92C329DAF08300C55FBF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED7F92C229DAF08300C55FBF /* GoogleService-Info.plist */; };
+		ED7F92C629DAF54600C55FBF /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F92C529DAF54600C55FBF /* LoginVM.swift */; };
 		ED86969029D9351A001A1A9F /* SelectAlignPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */; };
 		ED86969229D9359D001A1A9F /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86969129D9359D001A1A9F /* UIView+Extension.swift */; };
 		ED86969429D936A8001A1A9F /* SelectAlignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86969329D936A8001A1A9F /* SelectAlignVC.swift */; };
@@ -368,6 +369,7 @@
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED7F92C029DAEFD000C55FBF /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		ED7F92C229DAF08300C55FBF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ED7F92C529DAF54600C55FBF /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignPC.swift; sourceTree = "<group>"; };
 		ED86969129D9359D001A1A9F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		ED86969329D936A8001A1A9F /* SelectAlignVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignVC.swift; sourceTree = "<group>"; };
@@ -1412,6 +1414,7 @@
 				A2DEC35929B44E1D00CF0794 /* Model */,
 				A2B38565295D87FC00E5EB7C /* View */,
 				A2B38566295D880500E5EB7C /* VC */,
+				ED7F92C429DAF52B00C55FBF /* VM */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1661,6 +1664,14 @@
 				D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED7F92C429DAF52B00C55FBF /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				ED7F92C529DAF54600C55FBF /* LoginVM.swift */,
+			);
+			path = VM;
 			sourceTree = "<group>";
 		};
 		EDC8656029D5BAC600424FC1 /* VM */ = {
@@ -1986,6 +1997,7 @@
 				A233892629B37B1F00688FD8 /* Leave.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2A2C4E329C20D8500F0CFC6 /* HTTPHeaderField.swift in Sources */,
+				ED7F92C629DAF54600C55FBF /* LoginVM.swift in Sources */,
 				EDE5EC5729D6EB3200BB211F /* Log.swift in Sources */,
 				A254E13829BCF6EB001047FD /* ProductsAPI.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
