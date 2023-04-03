@@ -61,14 +61,15 @@ extension SceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         // 카카오 SDK 설정
         if let url = URLContexts.first?.url {
-            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+            if AuthApi.isKakaoTalkLoginUrl(url) {
                 _ = AuthController.handleOpenUrl(url: url)
+            } else {
+                // 네이버 SDK 설정
+                NaverThirdPartyLoginConnection
+                    .getSharedInstance()?
+                    .receiveAccessToken(URLContexts.first?.url)                
             }
         }
-        // 네이버 SDK 설정
-        NaverThirdPartyLoginConnection
-                .getSharedInstance()?
-                .receiveAccessToken(URLContexts.first?.url)
     }
 }
 // 루트뷰 설정하는 메서드 선언
