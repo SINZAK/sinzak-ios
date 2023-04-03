@@ -6,18 +6,18 @@ target 'Sinzak' do
   use_frameworks!
 
   # Pods for Sinzak
-  pod 'SwiftLint'
-  pod 'naveridlogin-sdk-ios'
-  pod 'lottie-ios'
-  pod 'SwiftConfettiView'
-  pod 'StompClientLib'
+  pod 'SwiftLint', '0.49.0'
+  pod 'naveridlogin-sdk-ios', '4.1.5'
+  pod 'lottie-ios', '3.4.2'
+  pod 'SwiftConfettiView', '0.1.0'
+  pod 'StompClientLib', '1.4.1'
 
   target 'SinzakTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'Firebase/Core'
-    pod 'Firebase/Database'
-    pod 'Firebase/Messaging'
+    pod 'Firebase/Core', '9.5.0'
+    pod 'Firebase/Database', '9.5.0'
+    pod 'Firebase/Messaging', '9.5.0'
     pod 'RxBlocking', '6.5.0'
     pod 'RxTest', '6.5.0'
   end

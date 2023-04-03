@@ -179,9 +179,9 @@
 		ED86969029D9351A001A1A9F /* SelectAlignPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */; };
 		ED86969229D9359D001A1A9F /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86969129D9359D001A1A9F /* UIView+Extension.swift */; };
 		ED86969429D936A8001A1A9F /* SelectAlignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86969329D936A8001A1A9F /* SelectAlignVC.swift */; };
+		ED8826BB29DAE7D400CF1135 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8826BA29DAE7D400CF1135 /* Endpoint.swift */; };
+		ED8826BD29DAE7EE00CF1135 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8826BC29DAE7EE00CF1135 /* GoogleService-Info.plist */; };
 		EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8656129D5BADD00424FC1 /* MarketVM.swift */; };
-		EDCBB52229D47DBF004E68B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDCBB52129D47DBF004E68B9 /* GoogleService-Info.plist */; };
-		EDCBB52429D47F36004E68B9 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCBB52329D47F36004E68B9 /* Endpoint.swift */; };
 		EDE5EC5329D669EC00BB211F /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = EDE5EC5229D669EC00BB211F /* Differentiator */; };
 		EDE5EC5529D669EC00BB211F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = EDE5EC5429D669EC00BB211F /* RxDataSources */; };
 		EDE5EC5729D6EB3200BB211F /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5629D6EB3200BB211F /* Log.swift */; };
@@ -369,9 +369,9 @@
 		ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignPC.swift; sourceTree = "<group>"; };
 		ED86969129D9359D001A1A9F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		ED86969329D936A8001A1A9F /* SelectAlignVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignVC.swift; sourceTree = "<group>"; };
+		ED8826BA29DAE7D400CF1135 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		ED8826BC29DAE7EE00CF1135 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDC8656129D5BADD00424FC1 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
-		EDCBB52129D47DBF004E68B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EDCBB52329D47F36004E68B9 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		EDE5EC5629D6EB3200BB211F /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extenstion.swift"; sourceTree = "<group>"; };
 		EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Extentsion.swift"; sourceTree = "<group>"; };
@@ -1019,7 +1019,7 @@
 				A2806124292F54A2005AE0B3 /* Scene */,
 				A2806127292F5848005AE0B3 /* Util */,
 				A23415BF2927D778007DADE7 /* Info.plist */,
-				EDCBB52129D47DBF004E68B9 /* GoogleService-Info.plist */,
+				ED8826BC29DAE7EE00CF1135 /* GoogleService-Info.plist */,
 			);
 			path = Sinzak;
 			sourceTree = "<group>";
@@ -1631,7 +1631,7 @@
 		A2F90538298969E100AC588C /* API */ = {
 			isa = PBXGroup;
 			children = (
-				EDCBB52329D47F36004E68B9 /* Endpoint.swift */,
+				ED8826BA29DAE7D400CF1135 /* Endpoint.swift */,
 				A22BE594296AEB4300D9815C /* AuthAPI.swift */,
 				A2DEC35529B4417F00CF0794 /* SNSLoginAPI.swift */,
 				A2F6EAE22987758C00DE754F /* HomeAPI.swift */,
@@ -1810,6 +1810,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED8826BD29DAE7EE00CF1135 /* GoogleService-Info.plist in Resources */,
 				A20CBD58294786550012FF32 /* SpoqaHanSansNeo-Medium.ttf in Resources */,
 				A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */,
 				A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */,
@@ -1822,7 +1823,6 @@
 				A23415BB2927D778007DADE7 /* Assets.xcassets in Resources */,
 				A23415B92927D776007DADE7 /* Main.storyboard in Resources */,
 				A20CBD6629478B4A0012FF32 /* InfoPlist.strings in Resources */,
-				EDCBB52229D47DBF004E68B9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1945,6 +1945,7 @@
 				A233892429B3772800688FD8 /* Message.swift in Sources */,
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A280AB4229A7442300C1729C /* SearchResultHeader.swift in Sources */,
+				ED8826BB29DAE7D400CF1135 /* Endpoint.swift in Sources */,
 				A233891C29B088E800688FD8 /* SettingVC.swift in Sources */,
 				A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */,
 				A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */,
@@ -1961,7 +1962,6 @@
 				A24E909E29B7246E006B3347 /* HomeSection.swift in Sources */,
 				A280AB4F29A7A21C00C1729C /* WriteCategoryCVC.swift in Sources */,
 				A226CC5E29AE3E00000161E8 /* HomeModel.swift in Sources */,
-				EDCBB52429D47F36004E68B9 /* Endpoint.swift in Sources */,
 				A2B3857A295D893300E5EB7C /* UniversityInfoView.swift in Sources */,
 				A2265374296D7E5E00605697 /* HomeVC.swift in Sources */,
 				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,

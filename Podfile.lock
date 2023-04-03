@@ -121,16 +121,16 @@ PODS:
   - SwiftLint (0.49.0)
 
 DEPENDENCIES:
-  - Firebase/Core
-  - Firebase/Database
-  - Firebase/Messaging
-  - lottie-ios
-  - naveridlogin-sdk-ios
+  - Firebase/Core (= 9.5.0)
+  - Firebase/Database (= 9.5.0)
+  - Firebase/Messaging (= 9.5.0)
+  - lottie-ios (= 3.4.2)
+  - naveridlogin-sdk-ios (= 4.1.5)
   - RxBlocking (= 6.5.0)
   - RxTest (= 6.5.0)
-  - StompClientLib
-  - SwiftConfettiView
-  - SwiftLint
+  - StompClientLib (= 1.4.1)
+  - SwiftConfettiView (= 0.1.0)
+  - SwiftLint (= 0.49.0)
 
 SPEC REPOS:
   trunk:
@@ -183,6 +183,6 @@ SPEC CHECKSUMS:
   SwiftConfettiView: 1bdbc2e6913b6b1c76d8070802b212508ad5c352
   SwiftLint: 414d099c0f305c6c73e56139efb468666e535ece
 
-PODFILE CHECKSUM: f483d2e2a2fc1e4db382f25ea873c4a6cc97c22b
+PODFILE CHECKSUM: ada692d28dc3994b95bc002b7b01b37b8e9867cf
 
 COCOAPODS: 1.11.3
