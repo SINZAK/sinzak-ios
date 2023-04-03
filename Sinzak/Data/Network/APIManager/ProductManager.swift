@@ -18,7 +18,8 @@ class ProductsManager {
     static let shared = ProductsManager()
     let provider = MoyaProvider<ProductsAPI>()
     private let disposeBag = DisposeBag()
-    
+    let backgroundScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
+
     func fetchProducts(
         align: AlignOption,
         category: [Category],
@@ -30,7 +31,6 @@ class ProductsManager {
             guard let self = self else {
                 return Disposables.create {}
             }
-            
             self.provider.rx.request(.products(
                 align: align.rawValue,
                 page: page,
@@ -38,6 +38,7 @@ class ProductsManager {
                 category: category.map { $0.rawValue },
                 sale: sale
             ))
+            .observe(on: self.backgroundScheduler)
             .subscribe { event in
                 switch event {
                 case let .success(response):
@@ -57,7 +58,6 @@ class ProductsManager {
                         let marketProducts = content.map { responseDTO in
                             responseDTO.toDomain()
                         }
-                        
                         Log.debug(marketProducts)
                         single(.success(marketProducts))
                     } catch {
