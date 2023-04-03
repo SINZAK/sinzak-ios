@@ -10,10 +10,13 @@ import AuthenticationServices
 import KakaoSDKUser
 import NaverThirdPartyLogin
 import Alamofire
+import RxSwift
 
 final class LoginVC: SZVC {
     // MARK: - Properties
     let mainView = LoginView()
+    let viewModel: LoginVM!
+    
     // 네이버로그인 인스턴스
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
@@ -21,15 +24,26 @@ final class LoginVC: SZVC {
     override func loadView() {
         view = mainView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         naverLoginInstance?.delegate = self
     }
+    
+    init(viewModel: LoginVM!) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Actions
     /** 카카오 로그인 액션  */
     @objc func kakaoButtonTapped(_ sender: UIButton) {
         // 로그인 / 회원가입 분기
-        if (UserApi.isKakaoTalkLoginAvailable()) {
+        if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {
                     print(error)
@@ -101,9 +115,32 @@ final class LoginVC: SZVC {
     }
     
     override func configure() {
-        mainView.kakaoButton.addTarget(self, action: #selector(kakaoButtonTapped), for: .touchUpInside)
+//        mainView.kakaoButton.addTarget(self, action: #selector(kakaoButtonTapped), for: .touchUpInside)
         mainView.appleButton.addTarget(self, action: #selector(appleButtontapped), for: .touchUpInside)
         mainView.naverButton.addTarget(self, action: #selector(naverButtonTapped), for: .touchUpInside)
+        bind()
+    }
+    
+    func bind() {
+        bindInput()
+        bindOutput()
+    }
+    
+    // MARK: - Bind Input
+    func bindInput() {
+        
+        mainView.kakaoButton.rx.tap
+            .observe(on: ConcurrentDispatchQueueScheduler(qos: .default))
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.kakaoButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        
+    }
+    
+    // MARK: - Bind Output
+    func bindOutput() {
+        
     }
 }
 /** 애플 로그인 관련 메서드 */

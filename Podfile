@@ -6,11 +6,19 @@ target 'Sinzak' do
   use_frameworks!
 
   # Pods for Sinzak
+
+	# Lint
   pod 'SwiftLint', '0.49.0'
-  pod 'naveridlogin-sdk-ios', '4.1.5'
+
+  # Auth
+  pod 'KakaoSDKAuth'
+  pod 'KakaoSDKUser'
+  pod 'naveridlogin-sdk-ios', '4.1.5'							
+ 
   pod 'lottie-ios', '3.4.2'
   pod 'SwiftConfettiView', '0.1.0'
   pod 'StompClientLib', '1.4.1'
+
 
   target 'SinzakTests' do
     inherit! :search_paths

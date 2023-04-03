@@ -9,9 +9,11 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxDataSources
+import KakaoSDKAuth
+
 
 protocol LoginVMInput {
-
+    func kakaoButtonTapped()
 }
 
 protocol LoginVMOutput {
@@ -25,6 +27,10 @@ final class DefaultLoginVM: LoginVM {
     private let disposeBag = DisposeBag()
     
     // MARK: - Input
+    
+    func kakaoButtonTapped() {
+        
+    }
     
     // MARK: - Output
     
