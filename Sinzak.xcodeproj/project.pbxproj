@@ -177,10 +177,10 @@
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
 		ED7F92C129DAEFD000C55FBF /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F92C029DAEFD000C55FBF /* Endpoint.swift */; };
+		ED7F92C329DAF08300C55FBF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED7F92C229DAF08300C55FBF /* GoogleService-Info.plist */; };
 		ED86969029D9351A001A1A9F /* SelectAlignPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */; };
 		ED86969229D9359D001A1A9F /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86969129D9359D001A1A9F /* UIView+Extension.swift */; };
 		ED86969429D936A8001A1A9F /* SelectAlignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86969329D936A8001A1A9F /* SelectAlignVC.swift */; };
-		ED8826BD29DAE7EE00CF1135 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8826BC29DAE7EE00CF1135 /* GoogleService-Info.plist */; };
 		EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8656129D5BADD00424FC1 /* MarketVM.swift */; };
 		EDE5EC5329D669EC00BB211F /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = EDE5EC5229D669EC00BB211F /* Differentiator */; };
 		EDE5EC5529D669EC00BB211F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = EDE5EC5429D669EC00BB211F /* RxDataSources */; };
@@ -367,10 +367,10 @@
 		D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinzakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED7F92C029DAEFD000C55FBF /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		ED7F92C229DAF08300C55FBF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignPC.swift; sourceTree = "<group>"; };
 		ED86969129D9359D001A1A9F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		ED86969329D936A8001A1A9F /* SelectAlignVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignVC.swift; sourceTree = "<group>"; };
-		ED8826BC29DAE7EE00CF1135 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDC8656129D5BADD00424FC1 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		EDE5EC5629D6EB3200BB211F /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extenstion.swift"; sourceTree = "<group>"; };
@@ -1019,7 +1019,7 @@
 				A2806124292F54A2005AE0B3 /* Scene */,
 				A2806127292F5848005AE0B3 /* Util */,
 				A23415BF2927D778007DADE7 /* Info.plist */,
-				ED8826BC29DAE7EE00CF1135 /* GoogleService-Info.plist */,
+				ED7F92C229DAF08300C55FBF /* GoogleService-Info.plist */,
 			);
 			path = Sinzak;
 			sourceTree = "<group>";
@@ -1810,7 +1810,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED8826BD29DAE7EE00CF1135 /* GoogleService-Info.plist in Resources */,
+				ED7F92C329DAF08300C55FBF /* GoogleService-Info.plist in Resources */,
 				A20CBD58294786550012FF32 /* SpoqaHanSansNeo-Medium.ttf in Resources */,
 				A20CBD59294786550012FF32 /* SpoqaHanSansNeo-Regular.ttf in Resources */,
 				A2806121292F50FA005AE0B3 /* .swiftlint.yml in Resources */,
