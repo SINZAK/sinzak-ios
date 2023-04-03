@@ -6,20 +6,34 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 final class MarketVC: SZVC {
     // MARK: - Properties
-    let mainView = MarketView()
-    enum SectionKind: Int {
-        case category = 0
-        case art
-    }
-    var marketProduct: [MarketProduct] = [] {
-        didSet {
-            mainView.collectionView.reloadData()
-        }
-    }
+    private let viewModel: MarketVM!
+    private let mainView = MarketView()
+    let backgroundScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
+    
+    let searchBarButton = UIBarButtonItem(
+        image: UIImage(named: "search"),
+        style: .plain,
+        target: nil,
+        action: nil
+    )
+    
     // MARK: - Init
+    init(viewModel: MarketVM) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = mainView
     }
@@ -27,97 +41,192 @@ final class MarketVC: SZVC {
         super.viewDidLoad()
         setNavigationBar()
         configure()
-        ProductsManager.shared.viewAllProducts(align: .popular, category: .painting, page: 3, size: 3, sale: true) { [weak self] result in
-            switch result {
-            case .success(let data):
-                print("#########", data)
-                self?.marketProduct = data.content
-            case .failure(let error):
-                print("ERROR", error)
-            }
-        }
+        viewModel.viewDidLoad()
+        bind()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
     }
-    // MARK: - Actions
-    /// 검색화면으로 이동
-    @objc func searchButtonTapped(_ sender: UIBarButtonItem) {
-        let vc = SearchVC()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    @objc func writeButtonTapped(_ sender: UIButton) {
-        let vc = WriteCategoryVC()
-        navigationController?.pushViewController(vc, animated: true)
-    }
+
     // MARK: - Helpers
     override func setNavigationBar() {
         super.setNavigationBar()
         navigationItem.title = "마켓"
-        let search = UIBarButtonItem(
-            image: UIImage(named: "search"),
-            style: .plain,
-            target: self,
-            action: #selector(searchButtonTapped))
-        navigationItem.rightBarButtonItem = search
+        navigationItem.rightBarButtonItem = searchBarButton
     }
     override func configure() {
-        mainView.writeButton.addTarget(self, action: #selector(writeButtonTapped), for: .touchUpInside)
-        mainView.collectionView.delegate = self
-        mainView.collectionView.dataSource = self
-        mainView.collectionView.register(ArtCVC.self, forCellWithReuseIdentifier: String(describing: ArtCVC.self))
-        mainView.collectionView.register(CategoryTagCVC.self, forCellWithReuseIdentifier: String(describing: CategoryTagCVC.self))
-        mainView.collectionView.register(MarketHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: MarketHeader.self))
-        mainView.collectionView.collectionViewLayout = setLayout()
+        
+        mainView.categoryCollectionView.register(
+            CategoryTagCVC.self,
+            forCellWithReuseIdentifier: CategoryTagCVC.identifier
+        )
+        
+        mainView.productCollectionView.register(
+            ArtCVC.self,
+            forCellWithReuseIdentifier: ArtCVC.identifier
+        )
+        
+        mainView.categoryCollectionView.collectionViewLayout = setCategoryLayout()
+        mainView.productCollectionView.collectionViewLayout = setProductLayout()
+        
+        mainView.categoryCollectionView.allowsMultipleSelection = true
     }
 }
-extension MarketVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == SectionKind.category.rawValue ? Category.allCases.count : marketProduct.count
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == SectionKind.category.rawValue {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CategoryTagCVC.self), for: indexPath)  as? CategoryTagCVC else { return UICollectionViewCell() }
-            cell.categoryLabel.text = Category.allCases[indexPath.item].text
-            if indexPath.item == 0 {
-                cell.setColor(kind: .selected)
-            }
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell() }
-            let item = marketProduct[indexPath.item]
-            cell.setData(item)
-            return cell
-        }
-    }
-    // 헤더
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if indexPath.section != SectionKind.category.rawValue {
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: MarketHeader.self), for: indexPath) as? MarketHeader else { return UICollectionReusableView() }
-            return header
-        } else {
-            return UICollectionReusableView()
-        }
-    }
-}
-// 컴포지셔널 레이아웃
+
+// MARK: - Bind
 extension MarketVC {
-    /// 컴포지셔널 레이아웃 세팅
-    func setLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
-            // 카테고리 경우
-            if sectionNumber == SectionKind.category.rawValue {
+    func bind() {
+        bindInput()
+        bindOutput()
+    }
+    
+    func bindInput() {
+        mainView.writeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.writeButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        
+         searchBarButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.searchButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.viewOptionButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                let current = self?.viewModel.isSaling.value ?? false
+                self?.viewModel.isSaling.accept(!current)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.alignButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.alignButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.productCollectionView.refreshControl?.rx.controlEvent(.valueChanged)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.refresh()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.selectedCategory
+            .observe(on: backgroundScheduler)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.refresh()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isSaling
+            .observe(on: backgroundScheduler)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.refresh()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.currentAlign
+            .observe(on: backgroundScheduler)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.refresh()
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.categoryCollectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.selectCategory(with: indexPath)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.categoryCollectionView.rx.itemDeselected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.selectCategory(with: indexPath)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func bindOutput() {
+    
+        // MARK: - 화면이동
+        viewModel.pushWriteCategoryVC
+            .subscribe(onNext: { [weak self] vc in
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.pushSerachVC
+            .subscribe(onNext: { [weak self] vc in
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.presentSelectAlignVC
+            .subscribe(onNext: { [weak self] vc in
+                vc.modalPresentationStyle = .custom
+                vc.transitioningDelegate = self
+                self?.present(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        // MARK: - Collection View Section
+        viewModel.categorySections
+            .bind(to: mainView.categoryCollectionView.rx.items(dataSource: getCategoryDataSource()))
+            .disposed(by: disposeBag)
+        
+        viewModel.productSections
+            .bind(to: mainView.productCollectionView.rx.items(dataSource: getProductDataSource()))
+            .disposed(by: disposeBag)
+        
+        // MARK: - 검색 옵션
+        viewModel.isSaling
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] in
+                if $0 {
+                    self?.mainView.viewOptionButton.setImage(UIImage(named: "radiobtn-checked"), for: .normal)
+                } else {
+                    self?.mainView.viewOptionButton.setImage(UIImage(named: "radiobtn-unchecked"), for: .normal)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.currentAlign
+            .asDriver(onErrorJustReturn: .recommend)
+            .drive(onNext: { [weak self] alignOption in
+                guard let self = self else { return }
+                self.mainView.alignButton.setTitle(alignOption.text, for: .normal)
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.endRefresh
+            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] in
+                if $0 {
+                    self?.mainView.productCollectionView.refreshControl?.endRefreshing()
+                    self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - 컴포지셔널 레이아웃
+extension MarketVC {
+    
+    // TODO: View 수직 스크롤 끄기
+    func setCategoryLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .estimated(70),
                     heightDimension: .estimated(32))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(3.0),
-                    heightDimension: .estimated(100))
+                    heightDimension: .estimated(64.0))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 group.interItemSpacing = .fixed(10)
                 let section = NSCollectionLayoutSection(group: group)
@@ -127,7 +236,11 @@ extension MarketVC {
                 section.interGroupSpacing = 0
                 section.orthogonalScrollingBehavior = .continuous
                 return section
-            } else { // 카테고리가 아닐 경우
+        }
+    }
+    
+    func setProductLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(0.5),
                     heightDimension: .fractionalHeight(1.0)
@@ -146,16 +259,105 @@ extension MarketVC {
                 section.contentInsets.leading = 8
                 section.contentInsets.trailing = 8
                 section.contentInsets.bottom = 72
-                // 헤더 설정
-                let headerItemSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(24))
-                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
-                headerItem.contentInsets.leading = 16
-                headerItem.contentInsets.trailing = 16
-                section.boundarySupplementaryItems = [headerItem]
+   
                 return section
+        }
+    }
+}
+
+// MARK: - DataSouce
+
+private extension MarketVC {
+    
+    func getCategoryDataSource() -> RxCollectionViewSectionedReloadDataSource<CategoryDataSection> {
+        return RxCollectionViewSectionedReloadDataSource<CategoryDataSection>(
+            configureCell: { [weak self] _, collectionView, indexPath, item in
+                guard let self = self else { return UICollectionViewCell() }
+                guard let cell: CategoryTagCVC = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: CategoryTagCVC.identifier,
+                    for: indexPath
+                ) as? CategoryTagCVC else { return UICollectionViewCell() }
+                if self.viewModel.selectedCategory.value.isEmpty && item.category == .all {
+                    cell.isChecked = true
+                }
+                cell.updateCell(category: item.category)
+                
+                return cell
+            })
+    }
+    
+    func getProductDataSource() -> RxCollectionViewSectionedReloadDataSource<MarketProductDataSection> {
+        return RxCollectionViewSectionedReloadDataSource<MarketProductDataSection>(
+            configureCell: { _, collectionView, indexPath, item in
+                guard let cell: ArtCVC = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: ArtCVC.identifier,
+                    for: indexPath
+                ) as? ArtCVC else { return UICollectionViewCell() }
+                cell.setData(item)
+                return cell
+            })
+    }
+}
+
+// MARK: - ViewControllerTransitioning
+
+extension MarketVC: UIViewControllerTransitioningDelegate {
+    func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?,
+        source: UIViewController
+    ) -> UIPresentationController? {
+        SelectAlignPC(
+            presentedViewController: presented,
+            presenting: presenting
+        )
+    }
+}
+
+// MARK: - Private Method
+
+private extension MarketVC {
+    
+    func selectCategory(with indexPath: IndexPath) {
+        
+        var currentCategories: [Category] = viewModel.selectedCategory.value
+        let selectedCell = getCategoryCell(at: indexPath)
+        
+        if selectedCell.category == .all {
+            if selectedCell.isChecked { return }
+            (1..<Category.allCases.count)
+                .forEach {
+                    let notAllCell = getCategoryCell(at: IndexPath(item: $0, section: 0))
+                    notAllCell.isChecked = false
+                    currentCategories = []
+                }
+        } else {
+           
+            if selectedCell.isChecked {
+                currentCategories.remove(at: currentCategories.firstIndex(of: selectedCell.category!)!)
+                if currentCategories.isEmpty {
+                    let firstCell = getCategoryCell(at: IndexPath(item: 0, section: 0))
+                    firstCell.isChecked = true
+                }
+            } else {
+                guard currentCategories.count <= 2 else { return }
+                guard let firstCell = mainView
+                    .categoryCollectionView
+                    .cellForItem(at: IndexPath(item: 0, section: 0)) as? CategoryTagCVC else { return }
+                firstCell.isChecked = false
+                currentCategories.append(selectedCell.category ?? .all)
             }
         }
+        
+        Log.debug(currentCategories)
+        viewModel.selectedCategory.accept(currentCategories)
+        selectedCell.isChecked = !selectedCell.isChecked
+    }
+    
+    func getCategoryCell(at indexPath: IndexPath) -> CategoryTagCVC {
+        guard let cell = mainView
+            .categoryCollectionView
+            .cellForItem(at: indexPath) as? CategoryTagCVC else { return CategoryTagCVC() }
+        return cell
     }
 }

@@ -11,7 +11,6 @@ import RxSwift
 final class AgreementVC: SZVC {
     // MARK: - Properties
     let mainView = AgreementView()
-    let disposeBag = DisposeBag()
     var viewModel = SignupViewModel()
     var fourteenSelected = false
     var privacySelected = false

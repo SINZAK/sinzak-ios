@@ -17,8 +17,8 @@ final class TabBarVC: UITabBarController {
     /// 탭바 색상 지정
     private func setUI() {
         tabBar.tintColor = CustomColor.red
-        tabBar.unselectedItemTintColor = CustomColor.black
-        tabBar.backgroundColor = CustomColor.white
+        tabBar.unselectedItemTintColor = CustomColor.label
+        tabBar.backgroundColor = CustomColor.background
     }
     /// 탭 바 구성
     private func setTabBarController() {
@@ -28,7 +28,8 @@ final class TabBarVC: UITabBarController {
                                          image: UIImage(named: "home"),
                                          selectedImage: UIImage(named: "home-selected"))
         // 마켓
-        let marketVC = UINavigationController(rootViewController: MarketVC())
+        let marketVM = DefaultMarketVM()
+        let marketVC = UINavigationController(rootViewController: MarketVC(viewModel: marketVM))
         marketVC.tabBarItem = UITabBarItem(title: I18NStrings.Market,
                                          image: UIImage(named: "market"),
                                          selectedImage: UIImage(named: "market-selected"))

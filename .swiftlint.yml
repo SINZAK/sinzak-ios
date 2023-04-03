@@ -1,5 +1,6 @@
 # Swift Lint Rule Customize 
 disabled_rules:
+  - trailing_whitespace
   - unused_optional_binding
   - identifier_name
   - force_cast

@@ -52,7 +52,7 @@ extension SNSLoginAPI: TargetType {
         }
     
     }
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         switch self {
         case .apple, .kakao, .naver:
             return ["Content-type": "application/json"]

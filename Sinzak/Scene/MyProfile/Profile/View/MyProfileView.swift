@@ -56,7 +56,7 @@ final class MyProfileView: SZView {
     }
     let verifiedLabel = UILabel().then {
         $0.font = .caption_M
-        $0.textColor = CustomColor.purple50
+        $0.textColor = CustomColor.purple
         $0.text = " verified"
     }
     let schoolVerifiedStack = UIStackView().then {
