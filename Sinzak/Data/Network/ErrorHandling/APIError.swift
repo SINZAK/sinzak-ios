@@ -7,14 +7,7 @@
 
 import Foundation
 
-enum APIError: Int, Error {
-    case decodingFailed = 999
-    case invalidRequest = 400
-    case noAuth = 404
-    case serverError = 500
-}
-
-enum APIErrors: Error {
+enum APIError: Error {
     case noContent
     case jsonEncoding
     case decodingError
@@ -34,5 +27,4 @@ enum APIErrors: Error {
         case .unknown(let error):   return "알 수 없는 에러입니다.\n\(String(describing: error))"
         }
     }
-    
 }

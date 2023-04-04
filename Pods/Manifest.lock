@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.6.4)
   - Firebase/Core (9.5.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (~> 9.5.0)
@@ -100,6 +101,17 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - KakaoSDKAuth (2.13.1):
+    - KakaoSDKCommon (= 2.13.1)
+  - KakaoSDKCommon (2.13.1):
+    - KakaoSDKCommon/Common (= 2.13.1)
+    - KakaoSDKCommon/Network (= 2.13.1)
+  - KakaoSDKCommon/Common (2.13.1)
+  - KakaoSDKCommon/Network (2.13.1):
+    - Alamofire (~> 5.1)
+    - KakaoSDKCommon/Common (= 2.13.1)
+  - KakaoSDKUser (2.13.1):
+    - KakaoSDKAuth (= 2.13.1)
   - leveldb-library (1.22.1)
   - lottie-ios (3.4.2)
   - nanopb (2.30909.0):
@@ -109,7 +121,34 @@ PODS:
   - nanopb/encode (2.30909.0)
   - naveridlogin-sdk-ios (4.1.5)
   - PromisesObjC (2.1.1)
+  - RxAlamofire (6.1.1):
+    - RxAlamofire/Core (= 6.1.1)
+  - RxAlamofire/Core (6.1.1):
+    - Alamofire (~> 5.4)
+    - RxSwift (~> 6.0)
   - RxBlocking (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxKakaoSDKAuth (2.13.1):
+    - KakaoSDKAuth (= 2.13.1)
+    - RxKakaoSDKCommon (= 2.13.1)
+  - RxKakaoSDKCommon (2.13.1):
+    - RxKakaoSDKCommon/Common (= 2.13.1)
+    - RxKakaoSDKCommon/Network (= 2.13.1)
+  - RxKakaoSDKCommon/Common (2.13.1):
+    - KakaoSDKCommon/Common (= 2.13.1)
+    - RxCocoa
+    - RxSwift (~> 6.0)
+  - RxKakaoSDKCommon/Network (2.13.1):
+    - KakaoSDKCommon/Network (= 2.13.1)
+    - RxAlamofire (~> 6.0)
+    - RxKakaoSDKCommon/Common (= 2.13.1)
+  - RxKakaoSDKUser (2.13.1):
+    - KakaoSDKUser (= 2.13.1)
+    - RxKakaoSDKAuth (= 2.13.1)
+  - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
   - RxTest (6.5.0):
@@ -124,9 +163,17 @@ DEPENDENCIES:
   - Firebase/Core (= 9.5.0)
   - Firebase/Database (= 9.5.0)
   - Firebase/Messaging (= 9.5.0)
+  - KakaoSDKAuth (= 2.13.1)
+  - KakaoSDKCommon (= 2.13.1)
+  - KakaoSDKUser (= 2.13.1)
   - lottie-ios (= 3.4.2)
   - naveridlogin-sdk-ios (= 4.1.5)
   - RxBlocking (= 6.5.0)
+  - RxCocoa (~> 6.5.0)
+  - RxKakaoSDKAuth (= 2.13.1)
+  - RxKakaoSDKCommon (= 2.13.1)
+  - RxKakaoSDKUser (= 2.13.1)
+  - RxSwift (~> 6.5.0)
   - RxTest (= 6.5.0)
   - StompClientLib (= 1.4.1)
   - SwiftConfettiView (= 0.1.0)
@@ -134,6 +181,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -145,12 +193,21 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKUser
     - leveldb-library
     - lottie-ios
     - nanopb
     - naveridlogin-sdk-ios
     - PromisesObjC
+    - RxAlamofire
     - RxBlocking
+    - RxCocoa
+    - RxKakaoSDKAuth
+    - RxKakaoSDKCommon
+    - RxKakaoSDKUser
+    - RxRelay
     - RxSwift
     - RxTest
     - SocketRocket
@@ -159,6 +216,7 @@ SPEC REPOS:
     - SwiftLint
 
 SPEC CHECKSUMS:
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   Firebase: 800f16f07af493d98d017446a315c27af0552f41
   FirebaseAnalytics: 1b60984a408320dda637306f3f733699ef8473d7
   FirebaseCore: 25c0400b670fd1e2f2104349cd3b5dcce8d9418f
@@ -170,12 +228,21 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 6ee231473fbd75c11221dfce489894334024eead
   GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  KakaoSDKAuth: d9de0cb0c723441ced3616d481952bde34438dcb
+  KakaoSDKCommon: a16807e19984a0a208c3117c7ef117f101a9a128
+  KakaoSDKUser: 92d34cf6af7b123c22a7ee44424332123e356901
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   lottie-ios: 6bbc53eef6957e4744a50321507015fba72d8ca6
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
   RxBlocking: 04b5fd28bb5ea49f7d64b80db8bbfe50d9cc1c7d
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxKakaoSDKAuth: a9fc4cbc2bc2ea1e1e46d75558ef06022b7bb3b3
+  RxKakaoSDKCommon: 3b317abb6b2cef1a18ba6626ea8233c117d5930c
+  RxKakaoSDKUser: fbeac97d5a0ab0581b28672ee43562df3e50e968
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   RxTest: eb2d23adefc5a5ebf5779c7792fa3edfe6ebcc17
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
@@ -183,6 +250,6 @@ SPEC CHECKSUMS:
   SwiftConfettiView: 1bdbc2e6913b6b1c76d8070802b212508ad5c352
   SwiftLint: 414d099c0f305c6c73e56139efb468666e535ece
 
-PODFILE CHECKSUM: ada692d28dc3994b95bc002b7b01b37b8e9867cf
+PODFILE CHECKSUM: e2aeff7bca764d2c470f005cddb23774a5172c4d
 
 COCOAPODS: 1.11.3

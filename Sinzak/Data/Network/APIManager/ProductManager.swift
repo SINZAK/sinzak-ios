@@ -45,8 +45,8 @@ class ProductsManager {
                     
                     Log.debug(response.request?.url ?? "url이 없습니다.")
                     
-                    guard 200..<299 ~= response.statusCode else {
-                        single(.failure(APIErrors.badStatus(code: response.statusCode)))
+                    guard 200..<300 ~= response.statusCode else {
+                        single(.failure(APIError.badStatus(code: response.statusCode)))
                         return
                     }
                     do {
@@ -61,11 +61,11 @@ class ProductsManager {
                         Log.debug(marketProducts)
                         single(.success(marketProducts))
                     } catch {
-                        single(.failure(APIErrors.decodingError))
+                        single(.failure(APIError.decodingError))
                     }
                     
                 case let .failure(error):
-                    single(.failure(APIErrors.unknown(error)))
+                    single(.failure(APIError.unknown(error)))
                 }
             }
             .disposed(by: self.disposeBag)

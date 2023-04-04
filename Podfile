@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '15.0'
 
 target 'Sinzak' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -11,9 +11,17 @@ target 'Sinzak' do
   pod 'SwiftLint', '0.49.0'
 
   # Auth
-  pod 'KakaoSDKAuth'
-  pod 'KakaoSDKUser'
-  pod 'naveridlogin-sdk-ios', '4.1.5'							
+	pod 'KakaoSDKCommon', '2.13.1'
+  pod 'RxKakaoSDKCommon', '2.13.1'
+	pod 'KakaoSDKAuth', '2.13.1'
+  pod 'RxKakaoSDKAuth', '2.13.1'
+  pod 'KakaoSDKUser', '2.13.1'
+  pod 'RxKakaoSDKUser', '2.13.1'
+  pod 'naveridlogin-sdk-ios', '4.1.5'			
+
+  # Rx
+	pod 'RxSwift', '~> 6.5.0'
+	pod 'RxCocoa', '~> 6.5.0'				
  
   pod 'lottie-ios', '3.4.2'
   pod 'SwiftConfettiView', '0.1.0'
@@ -30,4 +38,13 @@ target 'Sinzak' do
     pod 'RxTest', '6.5.0'
   end
 
+end
+
+
+ post_install do |installer|
+  installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+      end
+  end
 end

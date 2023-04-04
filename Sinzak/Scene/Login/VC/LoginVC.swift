@@ -130,7 +130,6 @@ final class LoginVC: SZVC {
     func bindInput() {
         
         mainView.kakaoButton.rx.tap
-            .observe(on: ConcurrentDispatchQueueScheduler(qos: .default))
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.kakaoButtonTapped()
             })

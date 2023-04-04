@@ -9,9 +9,9 @@ import Foundation
 import Moya
 
 enum SNSLoginAPI {
-    case apple(idToken: String, origin: String = "apple")
-    case kakao(accessToken: String, origin: String = "kakao")
-    case naver(accessToken: String, origin: String = "naver")
+    case apple(idToken: String)
+    case kakao(accessToken: String)
+    case naver(accessToken: String)
 }
 
 extension SNSLoginAPI: TargetType {
@@ -31,22 +31,22 @@ extension SNSLoginAPI: TargetType {
     }
     var task: Task {
         switch self {
-        case .apple(let idToken, let origin):
+        case .apple(let idToken):
             let params: [String: String] = [
                 "idToken": idToken,
-                "origin": origin
+                "origin": "apple"
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
-        case .kakao(let accessToken, let origin):
+        case .kakao(let accessToken):
             let params: [String: String] = [
                 "accessToken": accessToken,
-                "origin": origin
+                "origin": "kakao"
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
-        case .naver(let accessToken, let origin):
+        case .naver(let accessToken):
             let params: [String: String] = [
                 "accessToken": accessToken,
-                "origin": origin
+                "origin": "naver"
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         }
