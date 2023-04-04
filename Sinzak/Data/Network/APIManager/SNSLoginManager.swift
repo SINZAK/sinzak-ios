@@ -52,8 +52,8 @@ class SNSLoginManager {
     }
     
     func doKakaoLogin(accessToken: String) -> Single<SNSLoginGrant> {
-        Log.debug("Thread: \(Thread.current)")
         return provider.rx.request(.kakao(accessToken: accessToken))
+            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map { response in
                 if !(200..<300 ~= response.statusCode) {
                     throw APIError.badStatus(code: response.statusCode)

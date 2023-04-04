@@ -362,11 +362,8 @@
 		A6ABEFC84FE28A7B2341F462 /* Pods-SinzakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinzakTests.debug.xcconfig"; path = "Target Support Files/Pods-SinzakTests/Pods-SinzakTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B395F23DAA5BE335A96B8534 /* Pods_Sinzak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sinzak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinzakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED06B4F129DB48BA0016F646 /* KakaoSDKUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KakaoSDKUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED06B4F329DB4A930016F646 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		ED316FFB29DB397200BA718D /* RxKakaoSDKUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxKakaoSDKUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
-		ED63A5D429DB379C00CBFAA2 /* KakaoSDKUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KakaoSDKUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7F92C029DAEFD000C55FBF /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		ED7F92C229DAF08300C55FBF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginDTO.swift; sourceTree = "<group>"; };
@@ -1657,9 +1654,6 @@
 			isa = PBXGroup;
 			children = (
 				ED06B4F329DB4A930016F646 /* libz.tbd */,
-				ED06B4F129DB48BA0016F646 /* KakaoSDKUser.framework */,
-				ED316FFB29DB397200BA718D /* RxKakaoSDKUser.framework */,
-				ED63A5D429DB379C00CBFAA2 /* KakaoSDKUser.framework */,
 				B395F23DAA5BE335A96B8534 /* Pods_Sinzak.framework */,
 				D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */,
 			);

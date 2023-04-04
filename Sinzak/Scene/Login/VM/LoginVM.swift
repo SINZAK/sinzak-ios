@@ -10,6 +10,8 @@ import RxSwift
 import RxCocoa
 import KakaoSDKAuth
 import KakaoSDKUser
+import RxKakaoSDKAuth
+import RxKakaoSDKUser
 
 protocol LoginVMInput {
     func kakaoButtonTapped()
@@ -28,17 +30,37 @@ final class DefaultLoginVM: LoginVM {
     // MARK: - Input
     
     func kakaoButtonTapped() {
+//        if UserApi.isKakaoTalkLoginAvailable() {
+//            UserApi.shared.loginWithKakaoTalk { [weak self] oauthToken, error in
+//                guard let self = self else { return }
+//                self.authWithKakao(oauthToken: oauthToken, error: error)
+//            }
+//        } else {
+//            UserApi.shared.loginWithKakaoAccount { [weak self] oauthToken, error in
+//                guard let self = self else { return }
+//                self.authWithKakao(oauthToken: oauthToken, error: error)
+//            }
+//        }
+        
         if UserApi.isKakaoTalkLoginAvailable() {
-            UserApi.shared.loginWithKakaoTalk { [weak self] oauthToken, error in
-                guard let self = self else { return }
-                self.authWithKakao(oauthToken: oauthToken, error: error)
-            }
+            UserApi.shared.rx.loginWithKakaoTalk()
+                .subscribe(onNext: { [weak self] _ in
+                    Log.debug("Login With KakaoTalk success.")
+                }, onError: { error in
+                    Log.error("login With KakaoTalk error: \(error)")
+                })
+                .disposed(by: disposeBag)
         } else {
-            UserApi.shared.loginWithKakaoAccount { [weak self] oauthToken, error in
-                guard let self = self else { return }
-                self.authWithKakao(oauthToken: oauthToken, error: error)
-            }
+            UserApi.shared.rx.loginWithKakaoAccount()
+                .subscribe(onNext: { [weak self] _ in
+                    Log.debug("Login With KakaoAccount sucess.")
+                }, onError: { error in
+                    Log.error("login With KakaoAccount error: \(error)")
+                })
+                .disposed(by: disposeBag)
         }
+        
+        
     }
     
     // MARK: - Output
@@ -53,31 +75,9 @@ private extension DefaultLoginVM {
         } else {
             
             if let token = oauthToken {
-//                Task {
-//                    do {
-//                        let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken).value
-//                        self.saveUserInKeychain(
-//                            accessToken: snsLoginGrant.accessToken,
-//                            refreshToken: snsLoginGrant.refreshToken
-//                        )
-//                        if snsLoginGrant.joined {
-//                            Log.debug("홈화면으로")
-//                        } else {
-//                            Log.debug("회원가입으로")
-//                        }
-//                    } catch {
-//                        if error is APIError {
-//                            let apiError = error as! APIError
-//                            Log.error(apiError.info)
-//                        }
-//                    }
-//                }
-                SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken)
-                    .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
-                    .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
-                    .subscribe(onSuccess: { [weak self] snsLoginGrant in
-                        Log.debug("Thread: \(Thread.current)")
-                        guard let self = self else { return }
+                Task {
+                    do {
+                        let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken).value
                         self.saveUserInKeychain(
                             accessToken: snsLoginGrant.accessToken,
                             refreshToken: snsLoginGrant.refreshToken
@@ -88,15 +88,37 @@ private extension DefaultLoginVM {
                         } else {
                             Log.debug("회원가입으로")
                         }
-                    }, onFailure: { error in
+                    } catch {
                         if error is APIError {
                             let apiError = error as! APIError
                             Log.error(apiError.info)
-                        } else {
-                            Log.error(error)
                         }
-                    })
-                    .disposed(by: disposeBag)
+                    }
+                }
+//                SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken)
+//                    .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+//                    .subscribe(onSuccess: { [weak self] snsLoginGrant in
+//                        Log.debug("Thread: \(Thread.current)")
+//                        guard let self = self else { return }
+//                        self.saveUserInKeychain(
+//                            accessToken: snsLoginGrant.accessToken,
+//                            refreshToken: snsLoginGrant.refreshToken
+//                        )
+//                        Log.debug("Thread: \(Thread.current)")
+//                        if snsLoginGrant.joined {
+//                            Log.debug("홈화면으로")
+//                        } else {
+//                            Log.debug("회원가입으로")
+//                        }
+//                    }, onFailure: { error in
+//                        if error is APIError {
+//                            let apiError = error as! APIError
+//                            Log.error(apiError.info)
+//                        } else {
+//                            Log.error(error)
+//                        }
+//                    })
+//                    .disposed(by: disposeBag)
             }
         }
     }

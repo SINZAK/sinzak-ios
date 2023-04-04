@@ -11,12 +11,6 @@ target 'Sinzak' do
   pod 'SwiftLint', '0.49.0'
 
   # Auth
-	pod 'KakaoSDKCommon', '2.13.1'
-  pod 'RxKakaoSDKCommon', '2.13.1'
-	pod 'KakaoSDKAuth', '2.13.1'
-  pod 'RxKakaoSDKAuth', '2.13.1'
-  pod 'KakaoSDKUser', '2.13.1'
-  pod 'RxKakaoSDKUser', '2.13.1'
   pod 'naveridlogin-sdk-ios', '4.1.5'			
 
   # Rx
@@ -40,11 +34,3 @@ target 'Sinzak' do
 
 end
 
-
- post_install do |installer|
-  installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
-      end
-  end
-end
