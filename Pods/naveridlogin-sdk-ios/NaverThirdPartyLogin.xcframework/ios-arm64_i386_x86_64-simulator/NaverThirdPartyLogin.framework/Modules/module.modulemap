@@ -1,6 +1,0 @@
-framework module NaverThirdPartyLogin {
-  umbrella header "NaverThirdPartyLogin.h"
-
-  export *
-  module * { export * }
-}

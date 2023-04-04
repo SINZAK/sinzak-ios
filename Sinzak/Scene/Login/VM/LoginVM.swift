@@ -9,9 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import KakaoSDKAuth
-import RxKakaoSDKAuth
 import KakaoSDKUser
-import RxKakaoSDKUser
 
 protocol LoginVMInput {
     func kakaoButtonTapped()
@@ -74,13 +72,6 @@ private extension DefaultLoginVM {
                         }
                     }
                 }
-                
-//                SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken)
-//                    .subscribe(onSuccess: { grant in
-//                        print(grant.accessToken)
-//                    })
-//                    .disposed(by: disposeBag)
-                
             }
         }
     }
