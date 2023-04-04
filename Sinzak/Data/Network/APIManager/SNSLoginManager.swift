@@ -52,40 +52,28 @@ class SNSLoginManager {
     }
     
     func doKakaoLogin(accessToken: String) -> Single<SNSLoginGrant> {
-        return Single<SNSLoginGrant>.create { [weak self] single in
-            guard let self = self else { return Disposables.create {} }
-            self.provider.rx.request(.kakao(accessToken: accessToken))
-                .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
-                .subscribe { event in
-                    switch event {
-                    case let .success(response):
-                        Log.debug(response.request?.url ?? "No URL")
-                        
-                        guard 200..<300 ~= response.statusCode else {
-                            single(.failure(APIError.badStatus(code: response.statusCode)))
-                            return
-                        }
-                        do {
-                            guard let snsLoginGrantDTO = try JSONDecoder().decode(
-                                SNSLoginResultDTO.self,
-                                from: response.data
-                            ).data else {
-                                single(.failure(APIError.noContent))
-                                return
-                            }
-                            let snsLoginGrant = snsLoginGrantDTO.toDomain()
-                            Log.debug(snsLoginGrant)
-                            single(.success(snsLoginGrant))
-                        } catch {
-                            single(.failure(APIError.decodingError))
-                        }
-                    case let .failure(error):
-                        single(.failure(APIError.unknown(error)))
-                    }
+        Log.debug("Thread: \(Thread.current)")
+        return provider.rx.request(.kakao(accessToken: accessToken))
+            .map { response in
+                if !(200..<300 ~= response.statusCode) {
+                    throw APIError.badStatus(code: response.statusCode)
                 }
-                .disposed(by: self.disposeBag)
-            return Disposables.create {}
-        }
+                Log.debug("Thread: \(Thread.current)")
+                do {
+                    let snsLoginResultDTO = try JSONDecoder().decode(
+                        SNSLoginResultDTO.self,
+                        from: response.data
+                    )
+            
+                    guard let snsLoginGrantDTO = snsLoginResultDTO.data else {
+                        throw APIError.noContent
+                    }
+                    return snsLoginGrantDTO.toDomain()
+                    
+                } catch {
+                    throw APIError.decodingError
+                }
+            }
     }
     
     /// naver 로그인

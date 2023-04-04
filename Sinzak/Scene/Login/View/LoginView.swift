@@ -12,13 +12,14 @@ import SnapKit
 
 final class LoginView: SZView {
     // MARK: - Properties
+    // TODO: 다크 모드 확인
     private let logotypeImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "logotype")
     }
     private let logoLabel = UILabel().then {
         $0.font = .subtitle_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.logoText
     }
     private let startLabel = UILabel().then {

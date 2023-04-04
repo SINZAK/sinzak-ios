@@ -53,25 +53,50 @@ private extension DefaultLoginVM {
         } else {
             
             if let token = oauthToken {
-                Task {
-                    do {
-                        let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken).value
+//                Task {
+//                    do {
+//                        let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken).value
+//                        self.saveUserInKeychain(
+//                            accessToken: snsLoginGrant.accessToken,
+//                            refreshToken: snsLoginGrant.refreshToken
+//                        )
+//                        if snsLoginGrant.joined {
+//                            Log.debug("홈화면으로")
+//                        } else {
+//                            Log.debug("회원가입으로")
+//                        }
+//                    } catch {
+//                        if error is APIError {
+//                            let apiError = error as! APIError
+//                            Log.error(apiError.info)
+//                        }
+//                    }
+//                }
+                SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken)
+                    .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+                    .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+                    .subscribe(onSuccess: { [weak self] snsLoginGrant in
+                        Log.debug("Thread: \(Thread.current)")
+                        guard let self = self else { return }
                         self.saveUserInKeychain(
                             accessToken: snsLoginGrant.accessToken,
                             refreshToken: snsLoginGrant.refreshToken
                         )
+                        Log.debug("Thread: \(Thread.current)")
                         if snsLoginGrant.joined {
                             Log.debug("홈화면으로")
                         } else {
                             Log.debug("회원가입으로")
                         }
-                    } catch {
+                    }, onFailure: { error in
                         if error is APIError {
                             let apiError = error as! APIError
                             Log.error(apiError.info)
+                        } else {
+                            Log.error(error)
                         }
-                    }
-                }
+                    })
+                    .disposed(by: disposeBag)
             }
         }
     }
