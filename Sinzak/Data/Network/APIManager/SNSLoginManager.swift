@@ -51,29 +51,56 @@ class SNSLoginManager {
         }
     }
     
-    func doKakaoLogin(accessToken: String) -> Single<SNSLoginGrant> {
-        return provider.rx.request(.kakao(accessToken: accessToken))
-            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
-            .map { response in
-                if !(200..<300 ~= response.statusCode) {
-                    throw APIError.badStatus(code: response.statusCode)
-                }
-                Log.debug("Thread: \(Thread.current)")
-                do {
-                    let snsLoginResultDTO = try JSONDecoder().decode(
-                        SNSLoginResultDTO.self,
-                        from: response.data
-                    )
+    func doKakaoLogin(accessToken: String) async throws -> SNSLoginGrant {
+//        return provider.rx.request(.kakao(accessToken: accessToken))
+//            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+//            .map { response in
+//                if !(200..<300 ~= response.statusCode) {
+//                    throw APIError.badStatus(code: response.statusCode)
+//                }
+//                Log.debug("Thread: \(Thread.current)")
+//                do {
+//                    let snsLoginResultDTO = try JSONDecoder().decode(
+//                        SNSLoginResultDTO.self,
+//                        from: response.data
+//                    )
+//
+//                    guard let snsLoginGrantDTO = snsLoginResultDTO.data else {
+//                        throw APIError.noContent
+//                    }
+//                    return snsLoginGrantDTO.toDomain()
+//
+//                } catch {
+//                    throw APIError.decodingError
+//                }
+//            }
+        var response: Response
+        do {
+            response = try await provider.rx.request(.kakao(accessToken: accessToken)).value
+            Log.debug(response.request?.url ?? "")
+        } catch {
+            throw APIError.unknown(error)
+        }
+        Log.debug("Thread: \(Thread.current)")
+        if !(200..<300 ~= response.statusCode) {
+            throw APIError.badStatus(code: response.statusCode)
+        }
+        
+        do {
+            let snsLoginResultDTO = try JSONDecoder().decode(
+                SNSLoginResultDTO.self,
+                from: response.data
+            )
             
-                    guard let snsLoginGrantDTO = snsLoginResultDTO.data else {
-                        throw APIError.noContent
-                    }
-                    return snsLoginGrantDTO.toDomain()
-                    
-                } catch {
-                    throw APIError.decodingError
-                }
+            guard let snsLoginGrantDTO = snsLoginResultDTO.data else {
+                throw APIError.noContent
             }
+            return snsLoginGrantDTO.toDomain()
+            
+        } catch {
+            throw APIError.decodingError
+        }
+        
     }
     
     /// naver 로그인

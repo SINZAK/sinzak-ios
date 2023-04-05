@@ -30,36 +30,35 @@ final class DefaultLoginVM: LoginVM {
     // MARK: - Input
     
     func kakaoButtonTapped() {
-//        if UserApi.isKakaoTalkLoginAvailable() {
-//            UserApi.shared.loginWithKakaoTalk { [weak self] oauthToken, error in
-//                guard let self = self else { return }
-//                self.authWithKakao(oauthToken: oauthToken, error: error)
-//            }
-//        } else {
-//            UserApi.shared.loginWithKakaoAccount { [weak self] oauthToken, error in
-//                guard let self = self else { return }
-//                self.authWithKakao(oauthToken: oauthToken, error: error)
-//            }
-//        }
-        
         if UserApi.isKakaoTalkLoginAvailable() {
-            UserApi.shared.rx.loginWithKakaoTalk()
-                .subscribe(onNext: { [weak self] _ in
-                    Log.debug("Login With KakaoTalk success.")
-                }, onError: { error in
-                    Log.error("login With KakaoTalk error: \(error)")
-                })
-                .disposed(by: disposeBag)
+            UserApi.shared.loginWithKakaoTalk { [weak self] oauthToken, error in
+                guard let self = self else { return }
+                self.authWithKakao(oauthToken: oauthToken, error: error)
+            }
         } else {
-            UserApi.shared.rx.loginWithKakaoAccount()
-                .subscribe(onNext: { [weak self] _ in
-                    Log.debug("Login With KakaoAccount sucess.")
-                }, onError: { error in
-                    Log.error("login With KakaoAccount error: \(error)")
-                })
-                .disposed(by: disposeBag)
+            UserApi.shared.loginWithKakaoAccount { [weak self] oauthToken, error in
+                guard let self = self else { return }
+                self.authWithKakao(oauthToken: oauthToken, error: error)
+            }
         }
         
+//        if UserApi.isKakaoTalkLoginAvailable() {
+//            UserApi.shared.rx.loginWithKakaoTalk()
+//                .subscribe(onNext: { [weak self] _ in
+//                    Log.debug("Login With KakaoTalk success.")
+//                }, onError: { error in
+//                    Log.error("login With KakaoTalk error: \(error)")
+//                })
+//                .disposed(by: disposeBag)
+//        } else {
+//            UserApi.shared.rx.loginWithKakaoAccount()
+//                .subscribe(onNext: { [weak self] _ in
+//                    Log.debug("Login With KakaoAccount sucess.")
+//                }, onError: { error in
+//                    Log.error("login With KakaoAccount error: \(error)")
+//                })
+//                .disposed(by: disposeBag)
+//        }
         
     }
     
@@ -74,11 +73,12 @@ private extension DefaultLoginVM {
             Log.error(error)
         } else {
             
-            if let token = oauthToken {
+            if let token = oauthToken?.accessToken {
                 Task {
                     do {
-                        let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken).value
-                        self.saveUserInKeychain(
+                        Log.debug("인디게이터 시작")
+                        let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token)
+                        saveUserInKeychain(
                             accessToken: snsLoginGrant.accessToken,
                             refreshToken: snsLoginGrant.refreshToken
                         )
@@ -88,15 +88,18 @@ private extension DefaultLoginVM {
                         } else {
                             Log.debug("회원가입으로")
                         }
+                        Log.debug("인디게이터 끝")
                     } catch {
                         if error is APIError {
                             let apiError = error as! APIError
                             Log.error(apiError.info)
-                        }
-                    }
+                        } else {
+                            Log.error(error)
+                        }                    }
                 }
+            }
+                
 //                SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken)
-//                    .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
 //                    .subscribe(onSuccess: { [weak self] snsLoginGrant in
 //                        Log.debug("Thread: \(Thread.current)")
 //                        guard let self = self else { return }
@@ -119,7 +122,7 @@ private extension DefaultLoginVM {
 //                        }
 //                    })
 //                    .disposed(by: disposeBag)
-            }
+//            }
         }
     }
 
