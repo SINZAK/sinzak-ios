@@ -97,7 +97,8 @@ private extension DefaultLoginVM {
     
     func goSignUp() {
         DispatchQueue.main.async { [weak self] in
-            let vc = AgreementVC()
+            let vm = DefaultAgreementVM()
+            let vc = AgreementVC(viewModel: vm)
             self?.pushSignUp.accept(vc)
         }
     }

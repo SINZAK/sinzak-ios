@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // 루트 뷰 변경
 //        let vc = ConciergeVC()
-        let vc = AgreementVC()
+        let vc = AgreementVC(viewModel: DefaultAgreementVM())
         changeRootVC(vc, animated: true)
     }
 
