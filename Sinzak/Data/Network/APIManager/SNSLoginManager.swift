@@ -51,29 +51,9 @@ class SNSLoginManager {
         }
     }
     
+    
+    /// kakao 로그인
     func doKakaoLogin(accessToken: String) async throws -> SNSLoginGrant {
-//        return provider.rx.request(.kakao(accessToken: accessToken))
-//            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
-//            .map { response in
-//                if !(200..<300 ~= response.statusCode) {
-//                    throw APIError.badStatus(code: response.statusCode)
-//                }
-//                Log.debug("Thread: \(Thread.current)")
-//                do {
-//                    let snsLoginResultDTO = try JSONDecoder().decode(
-//                        SNSLoginResultDTO.self,
-//                        from: response.data
-//                    )
-//
-//                    guard let snsLoginGrantDTO = snsLoginResultDTO.data else {
-//                        throw APIError.noContent
-//                    }
-//                    return snsLoginGrantDTO.toDomain()
-//
-//                } catch {
-//                    throw APIError.decodingError
-//                }
-//            }
         var response: Response
         do {
             response = try await provider.rx.request(.kakao(accessToken: accessToken)).value
@@ -100,7 +80,6 @@ class SNSLoginManager {
         } catch {
             throw APIError.decodingError
         }
-        
     }
     
     /// naver 로그인

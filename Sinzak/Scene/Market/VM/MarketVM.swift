@@ -126,7 +126,10 @@ private extension DefaultMarketVM {
                 self.productSections.accept(currentSectionModel)
             },
             onFailure: { error in
-                Log.error(error)
+                if error is APIError {
+                    let apiError = error as? APIError
+                    Log.debug(apiError?.info ?? "")
+                }
             }
         )
         .disposed(by: disposeBag)
@@ -148,15 +151,19 @@ private extension DefaultMarketVM {
         )
         .subscribe(
             onSuccess: { [weak self] products in
+                Log.debug("Thread: \(Thread.current)")
                 guard let self = self else { return }
-                
                 let newSectionModel: [MarketProductDataSection] = [
                     MarketProductDataSection(items: products)
                 ]
                 self.productSections.accept(newSectionModel)
             },
             onFailure: { error in
-                Log.error(error)
+                if error is APIError {
+                    let apiError = error as? APIError
+                    Log.debug(apiError?.info ?? "")
+                }
+                
             }
         )
         .disposed(by: disposeBag)

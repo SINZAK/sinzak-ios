@@ -6,27 +6,41 @@
 //
 
 import UIKit
+import SwiftUI
 import SnapKit
 import Then
 import Lottie
 
 final class ConciergeView: UIView {
     // MARK: - Properties
-//    private let logoView = UIImageView().then {
-//        $0.image = UIImage(named: "splash_logo")
-//        $0.contentMode = .scaleAspectFit
-//    } // 기존 스태틱 이미지
-    var logoView = AnimationView(name: "sinzak_splash_animation_light").then {
-        $0.backgroundColor = .clear
-        $0.contentMode = .scaleAspectFit
-        $0.loopMode = .playOnce
-    }
+    
+    lazy var logoView: AnimationView = {
+        let currentScheme = UITraitCollection.current.userInterfaceStyle
+        
+        func schemeTransform(userInterfaceStyle: UIUserInterfaceStyle) -> ColorScheme {
+            if userInterfaceStyle == .light {
+                return .light
+            } else if userInterfaceStyle == .dark {
+                return .dark
+            }
+            return .light
+        }
+        let scheme = schemeTransform(userInterfaceStyle: currentScheme)
+        
+        let animationView = scheme == .light ? AnimationView(name: "sinzak_splash_animation_light") : AnimationView(name: "sinzak_splash_animation_dark")
+        animationView.backgroundColor = .clear
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .playOnce
+        return animationView
+    }()
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setView()
         setConstraints()
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

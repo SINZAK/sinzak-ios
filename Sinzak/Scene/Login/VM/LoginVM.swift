@@ -41,25 +41,6 @@ final class DefaultLoginVM: LoginVM {
                 self.authWithKakao(oauthToken: oauthToken, error: error)
             }
         }
-        
-//        if UserApi.isKakaoTalkLoginAvailable() {
-//            UserApi.shared.rx.loginWithKakaoTalk()
-//                .subscribe(onNext: { [weak self] _ in
-//                    Log.debug("Login With KakaoTalk success.")
-//                }, onError: { error in
-//                    Log.error("login With KakaoTalk error: \(error)")
-//                })
-//                .disposed(by: disposeBag)
-//        } else {
-//            UserApi.shared.rx.loginWithKakaoAccount()
-//                .subscribe(onNext: { [weak self] _ in
-//                    Log.debug("Login With KakaoAccount sucess.")
-//                }, onError: { error in
-//                    Log.error("login With KakaoAccount error: \(error)")
-//                })
-//                .disposed(by: disposeBag)
-//        }
-        
     }
     
     // MARK: - Output
@@ -82,7 +63,6 @@ private extension DefaultLoginVM {
                             accessToken: snsLoginGrant.accessToken,
                             refreshToken: snsLoginGrant.refreshToken
                         )
-                        Log.debug("Thread: \(Thread.current)")
                         if snsLoginGrant.joined {
                             Log.debug("홈화면으로")
                         } else {
@@ -91,38 +71,13 @@ private extension DefaultLoginVM {
                         Log.debug("인디게이터 끝")
                     } catch {
                         if error is APIError {
-                            let apiError = error as! APIError
-                            Log.error(apiError.info)
+                            let apiError = error as? APIError
+                            Log.error(apiError?.info ?? "")
                         } else {
                             Log.error(error)
                         }                    }
                 }
             }
-                
-//                SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken)
-//                    .subscribe(onSuccess: { [weak self] snsLoginGrant in
-//                        Log.debug("Thread: \(Thread.current)")
-//                        guard let self = self else { return }
-//                        self.saveUserInKeychain(
-//                            accessToken: snsLoginGrant.accessToken,
-//                            refreshToken: snsLoginGrant.refreshToken
-//                        )
-//                        Log.debug("Thread: \(Thread.current)")
-//                        if snsLoginGrant.joined {
-//                            Log.debug("홈화면으로")
-//                        } else {
-//                            Log.debug("회원가입으로")
-//                        }
-//                    }, onFailure: { error in
-//                        if error is APIError {
-//                            let apiError = error as! APIError
-//                            Log.error(apiError.info)
-//                        } else {
-//                            Log.error(error)
-//                        }
-//                    })
-//                    .disposed(by: disposeBag)
-//            }
         }
     }
 
