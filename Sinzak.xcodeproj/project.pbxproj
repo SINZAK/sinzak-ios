@@ -178,6 +178,7 @@
 		ED15161329DCBEBF00227CC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED15161229DCBEBF00227CC8 /* GoogleService-Info.plist */; };
 		ED15161529DCBED000227CC8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15161429DCBED000227CC8 /* Endpoint.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
+		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
 		ED7F92D129DB0F2A00C55FBF /* SNSLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */; };
 		ED86969029D9351A001A1A9F /* SelectAlignPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */; };
@@ -373,6 +374,7 @@
 		ED15161229DCBEBF00227CC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED15161429DCBED000227CC8 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
+		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginDTO.swift; sourceTree = "<group>"; };
 		ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignPC.swift; sourceTree = "<group>"; };
 		ED86969129D9359D001A1A9F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -1131,6 +1133,7 @@
 			children = (
 				A254E15629BE0898001047FD /* View */,
 				A254E15729BE08AB001047FD /* VC */,
+				ED47113229DF2EBD00708562 /* VM */,
 			);
 			path = Agreement;
 			sourceTree = "<group>";
@@ -1675,6 +1678,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		ED47113229DF2EBD00708562 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				ED47113329DF2EE400708562 /* AgreementVM.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
 		ED7F92C429DAF52B00C55FBF /* VM */ = {
 			isa = PBXGroup;
 			children = (
@@ -2104,6 +2115,7 @@
 				A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */,
 				A280AB5329A7A5E600C1729C /* WriteCategoryHeaderKind.swift in Sources */,
 				A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */,
+				ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */,
 				A20E4A4B2998FA26009C1340 /* NotLoginedVC.swift in Sources */,
 				A254E13A29BCF897001047FD /* ProductManager.swift in Sources */,
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,

@@ -15,7 +15,7 @@ final class AgreementView: SZView {
     private let titleLabel = UILabel().then {
         $0.text = I18NStrings.consentToUseOfService
         $0.font = .subtitle_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     // 전체 동의
     let fullCheckButton = UIButton().then {
@@ -25,7 +25,7 @@ final class AgreementView: SZView {
     private let fullAgreeLabel = UILabel().then {
         $0.text = I18NStrings.fullAgree
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     // 구분선
     private let dividerView = UIView().then {
@@ -40,7 +40,7 @@ final class AgreementView: SZView {
     private let olderFourteenLabel = UILabel().then {
         $0.text = I18NStrings.olderThanfourteenYears
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     // 이용약관
     let termsOfServiceCheckButton = UIButton().then {
@@ -50,7 +50,7 @@ final class AgreementView: SZView {
     private let termsOfServiceLabel = UILabel().then {
         $0.text = I18NStrings.requiredTermsOfService
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     let termsOfServiceMoreButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron"), for: .normal)
@@ -63,7 +63,7 @@ final class AgreementView: SZView {
     private let privacyPolicyLabel = UILabel().then {
         $0.text = I18NStrings.requiredPrivacyPolicy
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     let privacyPolicyMoreButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron"), for: .normal)
@@ -76,7 +76,7 @@ final class AgreementView: SZView {
     private let marketingInfoLabel = UILabel().then {
         $0.text = I18NStrings.optionalMarketingInformation
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     let marketingInfoMoreButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron"), for: .normal)
@@ -85,7 +85,7 @@ final class AgreementView: SZView {
     let confirmButton = UIButton().then {
         $0.setTitle(I18NStrings.confirm, for: .normal)
         $0.titleLabel?.font = .body_B
-        $0.backgroundColor = CustomColor.gray10
+        $0.backgroundColor = CustomColor.gray20
         $0.layer.cornerRadius = 30
     }
     // MARK: - Design Helpers

@@ -18,7 +18,8 @@ protocol LoginVMInput {
 }
 
 protocol LoginVMOutput {
-    
+    var changeRootTabBar: PublishRelay<TabBarVC> { get }
+    var pushSignUp: PublishRelay<AgreementVC> { get }
 }
 
 protocol LoginVM: LoginVMInput, LoginVMOutput {}
@@ -31,67 +32,97 @@ final class DefaultLoginVM: LoginVM {
     
     func kakaoButtonTapped() {
         if UserApi.isKakaoTalkLoginAvailable() {
-            UserApi.shared.loginWithKakaoTalk { [weak self] oauthToken, error in
-                guard let self = self else { return }
-                self.authWithKakao(oauthToken: oauthToken, error: error)
-            }
+       
+            UserApi.shared.rx.loginWithKakaoTalk()
+                .subscribe(onNext: { [weak self] oauthToken in
+                    do {
+                        try self?.authWithKakao(oauthToken: oauthToken)
+                    } catch {
+                        self?.handleError(error)
+                    }
+                }, onError: { [weak self] error in
+                    self?.handleError(error)
+                })
+                .disposed(by: disposeBag)
+    
         } else {
-            UserApi.shared.loginWithKakaoAccount { [weak self] oauthToken, error in
-                guard let self = self else { return }
-                self.authWithKakao(oauthToken: oauthToken, error: error)
-            }
+            UserApi.shared.rx.loginWithKakaoAccount()
+                .subscribe(onNext: { [weak self] oauthToken in
+                    do {
+                        try self?.authWithKakao(oauthToken: oauthToken)
+                    } catch {
+                        self?.handleError(error)
+                    }
+                }, onError: { [weak self] error in
+                    self?.handleError(error)
+                })
+                .disposed(by: disposeBag)
         }
     }
     
     // MARK: - Output
-    
+    var changeRootTabBar: PublishRelay<TabBarVC> = .init()
+    var pushSignUp: PublishRelay<AgreementVC> = .init()
 }
-
-private extension DefaultLoginVM {
     
-    private func authWithKakao(oauthToken: OAuthToken?, error: Error?) {
-        if let error = error {
-            Log.error(error)
-        } else {
-            
-            if let token = oauthToken?.accessToken {
-                Task {
-                    do {
-                        Log.debug("인디게이터 시작")
-                        let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token)
-                        saveUserInKeychain(
-                            accessToken: snsLoginGrant.accessToken,
-                            refreshToken: snsLoginGrant.refreshToken
-                        )
-                        if snsLoginGrant.joined {
-                            Log.debug("홈화면으로")
-                        } else {
-                            Log.debug("회원가입으로")
-                        }
-                        Log.debug("인디게이터 끝")
-                    } catch {
-                        if error is APIError {
-                            let apiError = error as? APIError
-                            Log.error(apiError?.info ?? "")
-                        } else {
-                            Log.error(error)
-                        }                    }
+private extension DefaultLoginVM {
+
+    func authWithKakao(oauthToken: OAuthToken?) throws {
+        if let token = oauthToken?.accessToken {
+            Task {
+                do {
+                    let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token)
+                    saveUserInKeychain(
+                        accessToken: snsLoginGrant.accessToken,
+                        refreshToken: snsLoginGrant.refreshToken
+                    )
+                    if snsLoginGrant.joined {
+                        goTabBar()
+                    } else {
+                        goSignUp()
+                    }
+                } catch {
+                    throw error
                 }
             }
         }
     }
-
-    /** 토큰  정보를 키체인에 저장 */
-    private func saveUserInKeychain(accessToken: String, refreshToken: String) {
-            do {
-                try KeychainItem(account: TokenKind.accessToken.text).saveItem(accessToken)
-            } catch {
-                print("키체인에 액세스 토큰 정보 저장 불가")
-            }
-            do {
-                try KeychainItem(account: TokenKind.refreshToken.text).saveItem(refreshToken)
-            } catch {
-                print("키체인에 리프레시 토큰 정보 저장 불가")
-            }
+    
+    func goTabBar() {
+        DispatchQueue.main.async { [weak self] in
+            let vc = TabBarVC()
+            self?.changeRootTabBar.accept(vc)
+        }
     }
+    
+    func goSignUp() {
+        DispatchQueue.main.async { [weak self] in
+            let vc = AgreementVC()
+            self?.pushSignUp.accept(vc)
+        }
+    }
+    
+    /** 토큰  정보를 키체인에 저장 */
+    func saveUserInKeychain(accessToken: String, refreshToken: String) {
+        do {
+            try KeychainItem(account: TokenKind.accessToken.text).saveItem(accessToken)
+        } catch {
+            print("키체인에 액세스 토큰 정보 저장 불가")
+        }
+        do {
+            try KeychainItem(account: TokenKind.refreshToken.text).saveItem(refreshToken)
+        } catch {
+            print("키체인에 리프레시 토큰 정보 저장 불가")
+        }
+    }
+    
+    func handleError(_ error: Error ) {
+        if error is APIError {
+            let apiError = error as! APIError
+            Log.error(apiError.info)
+        } else {
+            Log.debug(error)
+        }
+    }
+    
 }

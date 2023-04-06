@@ -40,39 +40,7 @@ final class LoginVC: SZVC {
     }
 
     // MARK: - Actions
-    /** 카카오 로그인 액션  */
-    @objc func kakaoButtonTapped(_ sender: UIButton) {
-        // 로그인 / 회원가입 분기
-        if UserApi.isKakaoTalkLoginAvailable() {
-            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
-                if let error = error {
-                    print(error)
-                } else {
-                    print("loginWithKakaoTalk() success.")
-
-                    // do something
-                    if let token = oauthToken {
-                        SNSLoginManager.shared.doKakaoLogin(accessToken: token.accessToken) { [weak self] result in
-                            switch result {
-                            case let .success(data):
-                                // 키체인에 저장
-                                self?.saveUserInKeychain(accessToken: data.data.accessToken, refreshToken: data.data.refreshToken)
-                                if data.data.joined {
-                                    self?.goHome()
-                                } else {
-                                    // 가입 안했을 경우 회원가입으로 보내기
-                                    self?.goSignup()
-                                }
-                            case let .failure(error): print(error)
-                            }
-                        }
-                    } else {
-                        print("login info doesn't come correctly")
-                    }
-                }
-            }
-        }
-    }
+    
     /** 애플 로그인 액션  */
     @objc func appleButtontapped(_ sender: UIButton) {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -115,7 +83,6 @@ final class LoginVC: SZVC {
     }
     
     override func configure() {
-//        mainView.kakaoButton.addTarget(self, action: #selector(kakaoButtonTapped), for: .touchUpInside)
         mainView.appleButton.addTarget(self, action: #selector(appleButtontapped), for: .touchUpInside)
         mainView.naverButton.addTarget(self, action: #selector(naverButtonTapped), for: .touchUpInside)
         bind()
@@ -139,7 +106,19 @@ final class LoginVC: SZVC {
     
     // MARK: - Bind Output
     func bindOutput() {
+        viewModel.changeRootTabBar
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { vc in
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
         
+        viewModel.pushSignUp
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] vc in
+                self?.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 /** 애플 로그인 관련 메서드 */

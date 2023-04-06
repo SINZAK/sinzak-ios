@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Frame 93@1x.png",
+      "filename" : "iosKakao1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Frame 93@2x.png",
+      "filename" : "iosKakao2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Frame 93@3x.png",
+      "filename" : "iosKakao3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

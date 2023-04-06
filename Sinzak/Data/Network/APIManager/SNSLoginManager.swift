@@ -32,36 +32,18 @@ class SNSLoginManager {
             }
         }
     }
-    /// kakao 로그인
-    func doKakaoLogin(accessToken: String, origin: String = "kakao", completion: @escaping ((Result<SNSLoginResult, Error>) -> Void) ) {
-        provider.request(.kakao(accessToken: accessToken)) { (result) in
-            // escaping completion handler로 처리하기
-            switch result {
-            case let .success(data):
-                do {
-                    let decoder = JSONDecoder()
-                    let result = try decoder.decode(SNSLoginResult.self, from: data.data)
-                    completion(.success(result))
-                } catch {
-                    completion(.failure(error))
-                }
-            case let .failure(error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
     
     /// kakao 로그인
     func doKakaoLogin(accessToken: String) async throws -> SNSLoginGrant {
         var response: Response
+        
         do {
             response = try await provider.rx.request(.kakao(accessToken: accessToken)).value
             Log.debug(response.request?.url ?? "")
         } catch {
             throw APIError.unknown(error)
         }
-        Log.debug("Thread: \(Thread.current)")
+        
         if !(200..<300 ~= response.statusCode) {
             throw APIError.badStatus(code: response.statusCode)
         }

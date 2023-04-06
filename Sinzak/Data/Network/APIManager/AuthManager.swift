@@ -53,7 +53,7 @@ class AuthManager {
     }
     /// 회원정보 추가, 편집
     /// - 자기소개, 이름, 사진
-    func editUserInfo(_ userInfo: UserInfo, completion: @escaping ((Bool)-> Void)) {
+    func editUserInfo(_ userInfo: UserInfo, completion: @escaping ((Bool) -> Void)) {
         provider.request(.editUserInfo(userInfo: userInfo)) { result in
             switch result {
             case .success(let response):
