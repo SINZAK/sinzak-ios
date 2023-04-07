@@ -106,7 +106,6 @@
 		A254E14529BDA11B001047FD /* MarketBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E14429BDA11B001047FD /* MarketBuild.swift */; };
 		A254E14729BDA193001047FD /* WorkBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E14629BDA193001047FD /* WorkBuild.swift */; };
 		A254E14A29BDB076001047FD /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E14929BDB076001047FD /* SignupViewModel.swift */; };
-		A254E14F29BDFD79001047FD /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E14E29BDFD79001047FD /* WebView.swift */; };
 		A254E15129BDFD84001047FD /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E15029BDFD84001047FD /* WebVC.swift */; };
 		A254E15429BE0413001047FD /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = A254E15329BE0413001047FD /* RxKeyboard */; };
 		A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A257C36A297F99B100266E74 /* SeeMoreCVC.swift */; };
@@ -179,6 +178,7 @@
 		ED15161529DCBED000227CC8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15161429DCBED000227CC8 /* Endpoint.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
+		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
 		ED7F92D129DB0F2A00C55FBF /* SNSLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */; };
 		ED86969029D9351A001A1A9F /* SelectAlignPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */; };
@@ -304,7 +304,6 @@
 		A254E14429BDA11B001047FD /* MarketBuild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketBuild.swift; sourceTree = "<group>"; };
 		A254E14629BDA193001047FD /* WorkBuild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkBuild.swift; sourceTree = "<group>"; };
 		A254E14929BDB076001047FD /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
-		A254E14E29BDFD79001047FD /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		A254E15029BDFD84001047FD /* WebVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		A257C36A297F99B100266E74 /* SeeMoreCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreCVC.swift; sourceTree = "<group>"; };
 		A2646BEA2991FB210004F4CE /* HomeAPIProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIProviderTests.swift; sourceTree = "<group>"; };
@@ -375,6 +374,7 @@
 		ED15161429DCBED000227CC8 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
+		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginDTO.swift; sourceTree = "<group>"; };
 		ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignPC.swift; sourceTree = "<group>"; };
 		ED86969129D9359D001A1A9F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -393,6 +393,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */,
 				0961FB4429DCBDCB00B55EF3 /* KakaoSDKCommon in Frameworks */,
 				ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */,
 				EDE5EC5329D669EC00BB211F /* Differentiator in Frameworks */,
@@ -1123,7 +1124,6 @@
 		A254E14D29BDFD64001047FD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A254E14E29BDFD79001047FD /* WebView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1671,6 +1671,7 @@
 		DCD1067045B5B28005D552E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED47113529DF3A3B00708562 /* WebKit.framework */,
 				ED06B4F329DB4A930016F646 /* libz.tbd */,
 				B395F23DAA5BE335A96B8534 /* Pods_Sinzak.framework */,
 				D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */,
@@ -2039,7 +2040,6 @@
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A216BD4A297FCBC1008964BC /* ActivityNotiVC.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
-				A254E14F29BDFD79001047FD /* WebView.swift in Sources */,
 				A216BD5F297FE02D008964BC /* ChatVC.swift in Sources */,
 				A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */,
 				A20CBD6529478B130012FF32 /* I18NStrings.swift in Sources */,

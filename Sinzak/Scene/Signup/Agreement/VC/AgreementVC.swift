@@ -68,12 +68,9 @@ final class AgreementVC: SZVC {
         viewModel.presentWebView
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] webVC in
-                Log.debug("show")
-//                webVC.modalPresentationStyle = .automatic
-//                self?.present(webVC, animated: true)
-                self?.navigationController?.pushViewController(webVC, animated: true)
+                webVC.modalPresentationStyle = .pageSheet
+                self?.present(webVC, animated: true)
             })
             .disposed(by: disposeBag)
     }
-    
 }

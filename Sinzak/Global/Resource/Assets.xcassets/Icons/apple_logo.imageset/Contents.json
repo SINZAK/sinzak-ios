@@ -1,17 +1,83 @@
 {
   "images" : [
     {
-      "filename" : "White-Logo-Square-@1x.png",
+      "filename" : "iosApple1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "White-Logo-Square-@2x.png",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "iosApple1x 1.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iosApple_dark1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "iosApple2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "White-Logo-Square-@3x.png",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "iosApple2x 1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iosApple_dark2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "iosApple3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "iosApple3x 1.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iosApple_dark3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
