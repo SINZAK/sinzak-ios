@@ -179,6 +179,8 @@
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
+		ED47113829E01B3700708562 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113729E01B3700708562 /* CheckButton.swift */; };
+		ED47113C29E0363000708562 /* SZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113B29E0363000708562 /* SZButton.swift */; };
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
 		ED7F92D129DB0F2A00C55FBF /* SNSLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */; };
 		ED86969029D9351A001A1A9F /* SelectAlignPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */; };
@@ -375,6 +377,8 @@
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		ED47113729E01B3700708562 /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
+		ED47113B29E0363000708562 /* SZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZButton.swift; sourceTree = "<group>"; };
 		ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginDTO.swift; sourceTree = "<group>"; };
 		ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignPC.swift; sourceTree = "<group>"; };
 		ED86969129D9359D001A1A9F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -467,6 +471,9 @@
 				A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */,
 				A280AB3F29A7400100C1729C /* UIViewController+Extension.swift */,
 				A226CC4429ADAD88000161E8 /* UILabel+Extension.swift */,
+				EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */,
+				EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */,
+				ED86969129D9359D001A1A9F /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1142,6 +1149,7 @@
 			isa = PBXGroup;
 			children = (
 				A2B3856B295D888800E5EB7C /* AgreementView.swift */,
+				ED47113729E01B3700708562 /* CheckButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1219,6 +1227,7 @@
 				A26F0AB02948C818001CB2AA /* SZView.swift */,
 				A26F0AB22948C843001CB2AA /* SZVC.swift */,
 				A2B38581295ED7AA00E5EB7C /* SZTextField.swift */,
+				ED47113B29E0363000708562 /* SZButton.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1294,7 +1303,6 @@
 		A2806127292F5848005AE0B3 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				EDE5EC5929D6FB3700BB211F /* Extensions */,
 				A2806128292F585E005AE0B3 /* setColor.swift */,
 				A20CBD5B294787C10012FF32 /* setFont.swift */,
 				EDE5EC5629D6EB3200BB211F /* Log.swift */,
@@ -1703,16 +1711,6 @@
 			path = VM;
 			sourceTree = "<group>";
 		};
-		EDE5EC5929D6FB3700BB211F /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */,
-				EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */,
-				ED86969129D9359D001A1A9F /* UIView+Extension.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		EDE5EC5E29D7060C00BB211F /* DTO */ = {
 			isa = PBXGroup;
 			children = (
@@ -2075,6 +2073,7 @@
 				A2100F742986939A00C85ADF /* WorksVC.swift in Sources */,
 				A2B969E429ABA699006119B1 /* DetailVC.swift in Sources */,
 				A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */,
+				ED47113C29E0363000708562 /* SZButton.swift in Sources */,
 				A254E13E29BD032D001047FD /* WorksAPI.swift in Sources */,
 				A2B38574295D88D400E5EB7C /* SignupGenreView.swift in Sources */,
 				A254E14529BDA11B001047FD /* MarketBuild.swift in Sources */,
@@ -2091,6 +2090,7 @@
 				A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */,
 				A216BD4E297FCC02008964BC /* NotiView.swift in Sources */,
 				A2265372296D7E5600605697 /* HomeView.swift in Sources */,
+				ED47113829E01B3700708562 /* CheckButton.swift in Sources */,
 				A2180DAF29AA38F700BBC74A /* RequestContentView.swift in Sources */,
 				A233892229B3756700688FD8 /* StompManager.swift in Sources */,
 				A2B1C66529BB11DF0008DADB /* ResultMessage.swift in Sources */,

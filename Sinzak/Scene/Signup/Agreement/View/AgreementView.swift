@@ -19,9 +19,8 @@ final class AgreementView: SZView {
     }
     
     // 전체 동의
-    let fullCheckButton = UIButton().then {
+    let fullCheckButton = CheckButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
-        $0.setImage(UIImage(named: "checked"), for: .selected)
     }
     
     private let fullAgreeLabel = UILabel().then {
@@ -37,9 +36,8 @@ final class AgreementView: SZView {
     }
     
     // 14세 이상
-    let olderFourteenCheckButton = UIButton().then {
+    let olderFourteenCheckButton = CheckButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
-        $0.setImage(UIImage(named: "checked"), for: .selected)
     }
     
     private let olderFourteenLabel = UILabel().then {
@@ -49,9 +47,8 @@ final class AgreementView: SZView {
     }
     
     // 이용약관
-    let termsOfServiceCheckButton = UIButton().then {
+    let termsOfServiceCheckButton = CheckButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
-        $0.setImage(UIImage(named: "checked"), for: .selected)
     }
     
     private let termsOfServiceLabel = UILabel().then {
@@ -65,9 +62,8 @@ final class AgreementView: SZView {
     }
     
     // 개인정보 처리방침
-    let privacyPolicyCheckButton = UIButton().then {
+    let privacyPolicyCheckButton = CheckButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
-        $0.setImage(UIImage(named: "checked"), for: .selected)
     }
     
     private let privacyPolicyLabel = UILabel().then {
@@ -81,9 +77,8 @@ final class AgreementView: SZView {
     }
     
     // 마케팅 정보
-    let marketingInfoCheckButton = UIButton().then {
+    let marketingInfoCheckButton = CheckButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
-        $0.setImage(UIImage(named: "checked"), for: .selected)
     }
     
     private let marketingInfoLabel = UILabel().then {
@@ -97,7 +92,7 @@ final class AgreementView: SZView {
     }
     
     // 확인 버튼
-    let confirmButton = UIButton().then {
+    let confirmButton = SZButton().then {
         $0.setTitle(I18NStrings.confirm, for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.gray20

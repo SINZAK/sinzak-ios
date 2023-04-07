@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 루트 뷰 변경
         let vc = ConciergeVC()
         
-//        let vc = LoginVC(viewModel: DefaultLoginVM())
+//        let vc = AgreementVC(viewModel: DefaultAgreementVM())
         changeRootVC(vc, animated: true)
     }
 
