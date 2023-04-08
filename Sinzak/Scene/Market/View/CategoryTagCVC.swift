@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import SkeletonView
 
 enum ColorKind {
     case base
@@ -43,12 +44,14 @@ final class CategoryTagCVC: UICollectionViewCell {
     let checkIcon = UIImageView().then {
         $0.image = UIImage(named: "checkmark")?.withRenderingMode(.alwaysTemplate)
         $0.tintColor = CustomColor.gray60
+        $0.isSkeletonable = true
     }
     let categoryLabel = UILabel().then {
         $0.font = .caption_B
         $0.textColor = CustomColor.gray60
         $0.textAlignment = .right
-        $0.text = "전체"
+        $0.text = "회화일"
+        $0.isSkeletonable = true
     }
     let tagBackgroundView = UIView().then {
         $0.clipsToBounds = true
@@ -56,9 +59,9 @@ final class CategoryTagCVC: UICollectionViewCell {
         $0.backgroundColor = CustomColor.background
         $0.layer.borderWidth = 1
         $0.layer.borderColor = CustomColor.gray60?.cgColor
+        $0.isSkeletonable = true
     }
     
-    // MARK: - Init
     func setColor(kind: ColorKind) {
         let color = kind.color
         checkIcon.tintColor = color
@@ -71,12 +74,16 @@ final class CategoryTagCVC: UICollectionViewCell {
         categoryLabel.text = category.text
     }
     
+    // MARK: - Init
     override init(frame: CGRect) {
         self.isChecked = false
         super.init(frame: frame)
         setupUI()
         setConstraints()
+        isSkeletonable = true
+        contentView.isSkeletonable = true
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -86,6 +93,7 @@ final class CategoryTagCVC: UICollectionViewCell {
         contentView.addSubviews(
             tagBackgroundView, checkIcon, categoryLabel
         )
+        self.contentView.isSkeletonable = true
     }
     
     private func setConstraints() {

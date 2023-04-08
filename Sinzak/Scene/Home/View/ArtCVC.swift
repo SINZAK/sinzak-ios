@@ -13,7 +13,7 @@ import SkeletonView
 
 final class ArtCVC: UICollectionViewCell {
     // MARK: - Properties
-    let imageView = UIImageView().then {
+    private let imageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
         $0.contentMode = .scaleAspectFill
@@ -24,56 +24,55 @@ final class ArtCVC: UICollectionViewCell {
         $0.backgroundColor = CustomColor.gray80!.withAlphaComponent(0.4)
         $0.layer.cornerRadius = 16
     }
-    let favoriteCountLabel = UILabel().then {
+    private let favoriteCountLabel = UILabel().then {
         $0.text = "1.3K"
         $0.font = .buttonText_R
         $0.textAlignment = .center
         $0.textColor = CustomColor.white
     }
-    let favoriteButton = UIButton().then {
+    private let favoriteButton = UIButton().then {
         $0.setImage(UIImage(named: "favorite"), for: .normal) // 눌리면 "favorite-fill"
     }
-    let titleLabel = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.textColor = CustomColor.black
         $0.font = .body_M
         $0.text = "Flower Garden"
         $0.isSkeletonable = true
 
     }
-    let labelStack = UIStackView().then {
+    private let labelStack = UIStackView().then {
         $0.spacing = 2
         $0.axis = .horizontal
+        $0.isSkeletonable = true
     }
-    let isDealing = UIImageView().then {
+    private let isDealing = UIImageView().then {
         $0.contentMode = .scaleAspectFit
-        $0.isHidden = false
+        $0.isHidden = true
         $0.image = UIImage(named: "isDealing")
     }
-    let priceLabel = UILabel().then {
+    private let priceLabel = UILabel().then {
         $0.textColor = CustomColor.black
         $0.font = .body_B
         $0.text = "33,000원"
         $0.isSkeletonable = true
 
     }
-    let authorLabel = UILabel().then {
+    private let authorLabel = UILabel().then {
         $0.textColor = CustomColor.black
         $0.font = .caption_R
         $0.text = "신작 작가"
         $0.isSkeletonable = true
-
     }
     private let middlePointLabel = UILabel().then {
         $0.textColor = CustomColor.gray60
         $0.font = .caption_M
         $0.text = "· "
     }
-    let uploadTimeLabel = UILabel().then {
+    private let uploadTimeLabel = UILabel().then {
         $0.textColor = CustomColor.gray60
         $0.font = .caption_M
         $0.text = "10시간 전"
         $0.isSkeletonable = true
-
     }
     // MARK: - Init
     override init(frame: CGRect) {
@@ -81,6 +80,7 @@ final class ArtCVC: UICollectionViewCell {
         setupUI()
         setConstraints()
         isSkeletonable = true
+        contentView.isSkeletonable = true
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -97,6 +97,7 @@ final class ArtCVC: UICollectionViewCell {
         priceLabel.text = "\(data.price)"
         favoriteCountLabel.text = "\(data.likesCnt)"
     }
+    
     func setData(_ data: MarketProduct) {
         //if let thumbnail = data.thumbnail {
         let url = URL(string: data.thumbnail ?? "")
@@ -108,8 +109,17 @@ final class ArtCVC: UICollectionViewCell {
         priceLabel.text = "\(data.price)"
         favoriteCountLabel.text = "\(data.likesCnt)"
     }
+    
+    func setSkeleton() {
+        favoriteBackground.isHidden = true
+        favoriteButton.isHidden = true
+        favoriteCountLabel.isHidden = true
+        middlePointLabel.isHidden = true
+        uploadTimeLabel.isHidden = true
+    }
     // MARK: - Design Helpers
     func setupUI() {
+        contentView.isSkeletonable = true
         contentView.backgroundColor = .clear
         contentView.addSubviews(
             imageView, favoriteBackground,
