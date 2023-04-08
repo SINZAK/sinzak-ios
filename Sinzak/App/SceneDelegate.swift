@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let vc = ConciergeVC()
         
 //        let vc = AgreementVC(viewModel: DefaultAgreementVM())
+//        let vc = MarketVC(viewModel: DefaultMarketVM())
         changeRootVC(vc, animated: true)
     }
 

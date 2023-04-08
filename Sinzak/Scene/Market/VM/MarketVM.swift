@@ -32,6 +32,8 @@ protocol MarketVMOutput {
     var currentAlign: BehaviorRelay<AlignOption> { get }
     
     var endRefresh: PublishRelay<Bool> { get }
+    
+    var presentSkeleton: PublishRelay<MarketSkeletonVC> { get }
 }
 
 protocol MarketVM: MarketVMInput, MarketVMOutput {}
@@ -54,14 +56,18 @@ final class DefaultMarketVM: MarketVM {
     
     func refresh() {
         endRefresh.accept(false)
-        refreshMarketProducts(
-            align: currentAlign.value,
-            category: selectedCategory.value,
-            page: 0,
-            size: 15,
-            sale: isSaling.value
-        )
-        endRefresh.accept(true)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let skeletonVC = MarketSkeletonVC(
+                productSections: self.productSections,
+                align: self.currentAlign.value,
+                category: self.selectedCategory.value,
+                page: 0,
+                size: 15,
+                sale: self.isSaling.value
+            )
+            self.presentSkeleton.accept(skeletonVC)
+        }
     }
     
     func writeButtonTapped() {
@@ -97,6 +103,8 @@ final class DefaultMarketVM: MarketVM {
     var currentAlign: BehaviorRelay<AlignOption> = .init(value: .recommend)
     
     var endRefresh: PublishRelay<Bool> = PublishRelay()
+    
+    var presentSkeleton: PublishRelay<MarketSkeletonVC> = .init()
 }
 
 private extension DefaultMarketVM {
@@ -151,6 +159,7 @@ private extension DefaultMarketVM {
         )
         .subscribe(
             onSuccess: { [weak self] products in
+                
                 Log.debug("Thread: \(Thread.current)")
                 guard let self = self else { return }
                 let newSectionModel: [MarketProductDataSection] = [
