@@ -160,8 +160,9 @@ extension MarketVC {
         viewModel.presentSkeleton
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] vc in
-                vc.modalPresentationStyle = .fullScreen
-                self?.present(vc, animated: false)
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                self?.present(nav, animated: false)
             })
             .disposed(by: disposeBag)
             

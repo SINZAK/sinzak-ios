@@ -43,7 +43,7 @@ final class MarketSkeletonVC: SZVC {
     private lazy var categoryFlowLayout: UICollectionViewLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 4.0
+        layout.minimumInteritemSpacing = 4.0
         layout.estimatedItemSize = CGSize(width: 96.0, height: 30.0)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 16.0, bottom: 0, right: 16.0)
         
@@ -177,6 +177,11 @@ final class MarketSkeletonVC: SZVC {
         productCollectionView.dataSource = self
         
         configureLayout()
+    }
+    
+    override func setNavigationBar() {
+        super.setNavigationBar()
+        navigationItem.title = "마켓"
     }
     
     func configureLayout() {
