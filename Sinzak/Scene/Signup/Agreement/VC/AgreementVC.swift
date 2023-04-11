@@ -170,3 +170,4 @@ final class AgreementVC: SZVC {
     }
 }
 // TODO: 마케팅 정보 수신동의 처리
+// TODO: 만 14세 이상 확인?

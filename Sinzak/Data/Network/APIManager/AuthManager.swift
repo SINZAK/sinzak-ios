@@ -31,6 +31,33 @@ class AuthManager {
             }
         }
     }
+    
+    func checkNickname(for nickNmae: String) async throws -> Bool {
+        do {
+            let response = try await provider.rx.request(.nicknameCheck(nickname: nickNmae)).value
+            Log.debug(response.request?.url ?? "")
+            
+            if !(200..<300 ~= response.statusCode) {
+                throw APIError.badStatus(code: response.statusCode)
+            }
+            
+            do {
+                guard let checkInfo = try JSONSerialization
+                    .jsonObject(with: response.data) as? [String: Any] else {
+                    throw APIError.decodingError
+                }
+                let success: Int = checkInfo["success"] as? Int ?? -1
+                
+                return success == 1 ? true : false
+            } catch {
+                throw APIError.decodingError
+            }
+            
+        } catch {
+            throw APIError.unknown(error)
+        }
+    }
+    
     /// 회원가입
     func join(_ joinInfo: Join, completion: @escaping ((Bool) -> Void)) {
         provider.request(.join(joinInfo: joinInfo)) { result in

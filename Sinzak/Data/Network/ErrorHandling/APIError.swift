@@ -27,4 +27,11 @@ enum APIError: Error {
         case .unknown(let error):   return "알 수 없는 에러입니다.\n\(String(describing: error))"
         }
     }
+    
+    static func logError(_ error: Error) {
+        if error is APIError {
+            let apiError = error as! APIError
+            Log.error(apiError.info)
+        }
+    }
 }

@@ -26,7 +26,7 @@
 // 서비스 이용동의
 "consentToUseOfService" = "서비스 이용 동의";
 "fullAgree" = "약관 전체동의";
-"olderThanfourteenYears" = "만 14세 이상입니다.";
+"olderThanfourteenYears" = "(필수) 만 14세 이상입니다.";
 "requiredTermsOfService" = "(필수) 서비스 이용약관";
 "requiredPrivacyPolicy" = "(필수) 개인정보 처리방침";
 "optionalMarketingInformation" = "(선택) 마케팅 정보 수신동의";

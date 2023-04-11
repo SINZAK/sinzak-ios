@@ -45,20 +45,17 @@ final class DefaultAgreementVM: AgreementVM {
     // MARK: - Input
     func termsOfServiceMoreButtonTapped() {
         let vc = WebVC()
-        Log.debug("tap")
         vc.destinationURL = "https://sinzak.notion.site/bfd66407b0ca4d428a8214165627c191"
         presentWebView.accept(vc)
     }
     
     func privacyPolicyMoreButtonTapped() {
         let vc = WebVC()
-        Log.debug("tap")
         vc.destinationURL = "https://sinzak.notion.site/cd0047fcc1d1451aa0375eae9b60f5b4"
         presentWebView.accept(vc)
     }
     
     func marketingInfoMoreButtonTapped() {
-        Log.debug("tap")
         let vc = WebVC()
         vc.destinationURL = "https://sinzak.notion.site/cb0fde6cb51347719f9d100e8e5aba68"
         presentWebView.accept(vc)
@@ -97,7 +94,8 @@ final class DefaultAgreementVM: AgreementVM {
     }
     
     func confirmButtonTapped() {
-        let vc = SignupNameVC()
+        let vm = DefaultSignupNameVM()
+        let vc = SignupNameVC(viewModel: vm)
         pushNameVC.accept(vc)
     }
     
