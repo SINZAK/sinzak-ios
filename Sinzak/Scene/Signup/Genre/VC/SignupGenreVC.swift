@@ -13,7 +13,7 @@ final class SignupGenreVC: SZVC {
     let mainView = SignupGenreView()
     let genreList = Genre.list
     var viewModel = SignupViewModel()
-    var userSelect: [[Int]] = [[],[]] {
+    var userSelect: [[Int]] = [[], []] {
         didSet {
             mainView.collectionView.reloadData()
         }
@@ -37,61 +37,110 @@ final class SignupGenreVC: SZVC {
     }
     func bind() {
         mainView.nextButton.rx.tap
-            .bind { [unowned self] _ in
-                var genre = Array<String>()
-                for (section, datas) in userSelect.enumerated() {
-                    for item in datas {
-                        genre.append(genreList[section].category[item].rawValue)
-                    }
-                }
-                viewModel.joinInfo.categoryLike = genre.map { $0 }.joined(separator: ",")
-                // 회원가입 시키기
-                debugPrint(viewModel.joinInfo)
-                AuthManager.shared.join(viewModel.joinInfo) { result in
-                    if result {
-                        let vc = UniversityInfoVC()
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    } else {
-                        debugPrint(result)
-                        showAlert(title: "ERROR: 회원가입에 실패하였습니다. 다시 시도해주세요.", okText: "확인", cancelNeeded: false, completionHandler: nil)
-                    }
-                }
-            }
+            .withUnretained(self)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { owner, _ in
+                let vc = UniversityInfoVC()
+                owner.navigationController?.pushViewController(vc, animated: true)
+            })
             .disposed(by: viewModel.disposeBag)
+
+            // TODO: 선택한거 저장, 회원가입 로직이동해야함
+//            .bind { [weak self]  _ in
+//                guard let self = self else { return }
+//                let vc = StudentAuthVC()
+//                self.navigationController?.pushViewController(vc, animated: true)
+                
+//                var genre = [String]()
+//                for (section, datas) in userSelect.enumerated() {
+//                    for item in datas {
+//                        genre.append(genreList[section].category[item].rawValue)
+//                    }
+//                }
+                
+//                viewModel.joinInfo.categoryLike = genre.map { $0 }.joined(separator: ",")
+//                // 회원가입 시키기
+//                debugPrint(viewModel.joinInfo)
+//                AuthManager.shared.join(viewModel.joinInfo) { [weak self] result in
+//                    guard let self = self else { return }
+//                    if result {
+//                        let vc = UniversityInfoVC()
+//                        self.navigationController?.pushViewController(vc, animated: true)
+//                    } else {
+//                        debugPrint(result)
+//                        self.showAlert(
+//                            title: "ERROR: 회원가입에 실패하였습니다. 다시 시도해주세요.",
+//                            okText: "확인",
+//                            cancelNeeded: false,
+//                            completionHandler: nil
+//                        )
+//                    }
+//                }
+//            }
     }
 }
 
 extension SignupGenreVC: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return genreList.count
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         return genreList[section].category.count
     }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: InterestedGenreCVC.self), for: indexPath) as? InterestedGenreCVC else { return UICollectionViewCell()}
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: String(describing: InterestedGenreCVC.self),
+            for: indexPath
+        ) as? InterestedGenreCVC else { return UICollectionViewCell()}
+        
         cell.textLabel.text = genreList[indexPath.section].category[indexPath.item].text
-       let bool =  userSelect[indexPath.section].contains(indexPath.item)
+       let bool = userSelect[indexPath.section].contains(indexPath.item)
         cell.isUserSelected(bool)
         return cell
     }
     // 선택했을 때
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         // 선택할 수 있는 최대갯수 = 3
         if userSelect[indexPath.section].contains(indexPath.item) {
             let index = userSelect[indexPath.section].firstIndex(of: indexPath.item)
             userSelect[indexPath.section].remove(at: index!)
         } else {
             if userSelect[0].count + userSelect[1].count == 3 {
-                showAlert(title: "최대 3개까지 선택할 수 있습니다.", okText: I18NStrings.confirm, cancelNeeded: false, completionHandler: nil)
+                showAlert(
+                    title: "최대 3개까지 선택할 수 있습니다.",
+                    okText: I18NStrings.confirm,
+                    cancelNeeded: false,
+                    completionHandler: nil
+                )
             } else {
                 userSelect[indexPath.section].append(indexPath.item)
             }
         }
     }
+    
     // 헤더
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: InterestedGenreHeader.self), for: indexPath) as? InterestedGenreHeader else { return UICollectionReusableView() }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: String(describing: InterestedGenreHeader.self),
+            for: indexPath
+        ) as? InterestedGenreHeader else { return UICollectionReusableView() }
         header.titleLabel.text = genreList[indexPath.section].type
         return header
     }
