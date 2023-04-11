@@ -14,7 +14,7 @@ final class UniversityInfoView: SZView {
     private let titleLabel = UILabel().then {
         $0.text = I18NStrings.pleaseSelectUniversity
         $0.font = .subtitle_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     let searchTextField = SZTextField(insets: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)).then {
         $0.backgroundColor = CustomColor.gray10

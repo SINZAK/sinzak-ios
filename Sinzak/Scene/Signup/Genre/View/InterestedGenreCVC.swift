@@ -16,6 +16,7 @@ final class InterestedGenreCVC: UICollectionViewCell {
         $0.contentMode = .scaleAspectFit
     }
     let textLabel = UILabel().then {
+        $0.textColor = CustomColor.label
         $0.font = .caption_B
     }
     let baseView = UIView().then {
@@ -39,9 +40,12 @@ final class InterestedGenreCVC: UICollectionViewCell {
             baseView.backgroundColor = CustomColor.red
             imageView.image = UIImage(named: "checkmark-white")
         case false:
-            textLabel.textColor = CustomColor.black
+            textLabel.textColor = CustomColor.label
             baseView.backgroundColor = CustomColor.gray10
-            imageView.image = UIImage(named: "checkmark-black")
+            imageView.image = UIImage(named: "checkmark-black")?.withTintColor(
+                CustomColor.label ?? .label,
+                renderingMode: .alwaysOriginal
+            )
         }
     }
     
@@ -58,17 +62,20 @@ final class InterestedGenreCVC: UICollectionViewCell {
             make.centerY.equalToSuperview()
             make.top.bottom.equalToSuperview().inset(8)
         }
+        
         textLabel.snp.makeConstraints { make in
             make.leading.equalTo(imageView.snp.trailing).offset(2)
             make.centerY.equalTo(imageView)
             make.trailing.equalToSuperview().inset(15)
         }
+        
         baseView.snp.makeConstraints { make in
             make.top.equalTo(imageView).offset(-8)
             make.bottom.equalTo(imageView).offset(8)
             make.leading.equalTo(imageView).offset(-8)
             make.trailing.equalTo(textLabel).offset(15)
         }
+        
         isUserSelected()
     }
 }

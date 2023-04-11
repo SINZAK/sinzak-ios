@@ -15,7 +15,7 @@ final class SignupGenreView: SZView {
     private let titleLabel = UILabel().then {
         $0.text = I18NStrings.pleaseSelectGenreOfInterest
         $0.font = .subtitle_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.numberOfLines = 0
     }
     private let descriptionLabel = UILabel().then {

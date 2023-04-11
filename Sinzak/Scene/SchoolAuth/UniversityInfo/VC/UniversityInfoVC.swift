@@ -27,6 +27,12 @@ final class UniversityInfoVC: SZVC {
         super.viewDidLoad()
         schoolList = SchoolList.loadJson()!.school.flatMap { $0.koreanName }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
     // MARK: - Actions
     // MARK: - Helpers
     override func configure() {
@@ -35,6 +41,7 @@ final class UniversityInfoVC: SZVC {
         mainView.collectionView.register(UniversityAutoCompletionCVC.self, forCellWithReuseIdentifier: String(describing: UniversityAutoCompletionCVC.self))
         bind()
     }
+    
     override func setNavigationBar() {
         super.setNavigationBar()
         navigationItem.leftBarButtonItem = nil // 이미 가입이 끝난 상황이라 뒤로 돌아가면 안됨
