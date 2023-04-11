@@ -113,16 +113,17 @@ final class SignupNameVC: SZVC {
         
         viewModel.doubleCheckResult
             .asDriver(onErrorJustReturn: .beforeCheck)
-            .map {
-                
+            .map { result in
+                switch result {
+                case .sucess(_, _):
+                    return true
+                default:
+                    return false
+                }
             }
-                
-//            .drive(onNext: { [weak self] result in
-//                switch result {
-//                case let .sucess(_, _):
-//                    self?.mainView.nextButton.rx
-//                }
-//            })
+            .asDriver(onErrorJustReturn: false)
+            .drive(mainView.nextButton.rx.isEnabled)
+            .disposed(by: disposeBag)
     }
 }
 
