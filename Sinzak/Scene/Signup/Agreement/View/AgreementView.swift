@@ -178,7 +178,7 @@ final class AgreementView: SZView {
         confirmButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7.4)
             make.height.equalTo(65)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalToSuperview().inset(24.0)
         }
     }
 }
