@@ -30,6 +30,7 @@ final class SignupNameView: SZView {
         $0.font = .body_B
         $0.textColor = CustomColor.black
         $0.clearButtonMode = .whileEditing
+        $0.becomeFirstResponder()
     }
     let checkButton = DoubleCheckButton().then {
         $0.setTitle("중복확인", for: .normal)
@@ -84,7 +85,7 @@ final class SignupNameView: SZView {
         nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7.4)
             make.height.equalTo(65)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalToSuperview().inset(24.0).inset(24.0)
         }
     }
 }
