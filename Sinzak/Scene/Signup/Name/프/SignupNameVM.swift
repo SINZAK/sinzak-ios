@@ -13,12 +13,14 @@ import RxDataSources
 protocol SignupNameVMInput {
     func nameTextFieldInput(name: String)
     func tapCheckButton()
+    func tapNextButton()
 }
 
 protocol SignupNameVMOutput {
     var isValidCheckButton: BehaviorRelay<Bool> { get }
     var currentInputName: BehaviorRelay<String> { get }
     var doubleCheckResult: BehaviorRelay<DoubleCheckResult> { get }
+    var pushSignupGenreVC: PublishRelay<SignupGenreVC> { get }
 }
 
 protocol SignupNameVM: SignupNameVMInput, SignupNameVMOutput {}
@@ -52,10 +54,16 @@ final class DefaultSignupNameVM: SignupNameVM {
         }
     }
     
+    func tapNextButton() {
+        let vc = SignupGenreVC()
+        pushSignupGenreVC.accept(vc)
+    }
+    
     // MARK: - Output
     var isValidCheckButton: BehaviorRelay<Bool> = .init(value: false)
     var currentInputName: BehaviorRelay<String> = .init(value: "")
     var doubleCheckResult: BehaviorRelay<DoubleCheckResult> = .init(value: .beforeCheck)
+    var pushSignupGenreVC: PublishRelay<SignupGenreVC> = .init()
 }
 
 enum DoubleCheckResult {

@@ -45,7 +45,7 @@ final class SignupNameView: SZView {
         $0.textColor = CustomColor.purple
     }
     // 다음 버튼
-    let nextButton = UIButton().then {
+    let nextButton = SZButton().then {
         $0.setTitle(I18NStrings.next, for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.gray10

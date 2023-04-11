@@ -8,7 +8,6 @@
 import UIKit
 
 final class CheckButton: UIButton {
-    
     override var isSelected: Bool {
         willSet {
             if newValue {

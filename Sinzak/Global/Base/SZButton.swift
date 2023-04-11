@@ -15,7 +15,7 @@ final class SZButton: UIButton {
                 self.setTitleColor(CustomColor.white, for: .normal)
             } else {
                 self.backgroundColor = CustomColor.gray20
-                self.setTitleColor(CustomColor.gray10, for: .normal)
+                self.setTitleColor(CustomColor.gray10, for: .disabled)
             }
         }
     }

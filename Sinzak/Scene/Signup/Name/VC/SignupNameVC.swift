@@ -82,6 +82,13 @@ final class SignupNameVC: SZVC {
                 }
             })
             .disposed(by: disposeBag)
+        
+        mainView.nextButton.rx.tap
+            .withUnretained(self)
+            .subscribe { owner, _ in
+                owner.viewModel.tapNextButton()
+            }
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
@@ -91,10 +98,11 @@ final class SignupNameVC: SZVC {
             .drive(mainView.checkButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
-//        let doubleCheckResult = viewModel.doubleCheckResult
-
-        viewModel.doubleCheckResult
+        let doubleCheckResult = viewModel.doubleCheckResult
             .asDriver(onErrorJustReturn: .beforeCheck)
+            .debug("test: doubleCheckResult")
+
+        doubleCheckResult
             .drive(onNext: { [weak self] result in
                 switch result {
                 case .beforeCheck:
@@ -111,8 +119,7 @@ final class SignupNameVC: SZVC {
             })
             .disposed(by: disposeBag)
         
-        viewModel.doubleCheckResult
-            .asDriver(onErrorJustReturn: .beforeCheck)
+        doubleCheckResult
             .map { result in
                 switch result {
                 case .sucess(_, _):
@@ -124,7 +131,13 @@ final class SignupNameVC: SZVC {
             .asDriver(onErrorJustReturn: false)
             .drive(mainView.nextButton.rx.isEnabled)
             .disposed(by: disposeBag)
+        
+        viewModel.pushSignupGenreVC
+            .withUnretained(self)
+            .observe(on: MainScheduler.instance)
+            .bind(onNext: { owner, vc in
+                owner.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
-
-// TODO: 버튼 처리
