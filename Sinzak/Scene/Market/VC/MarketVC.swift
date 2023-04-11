@@ -37,6 +37,9 @@ final class MarketVC: SZVC {
     override func loadView() {
         view = mainView
     }
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.viewDidLoad()
@@ -45,6 +48,8 @@ final class MarketVC: SZVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        
+        Log.debug("viewWillAppear selectCategory \(viewModel.selectedCategory.value)")
     }
 
     // MARK: - Helpers
@@ -121,6 +126,7 @@ extension MarketVC {
         mainView.categoryCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.selectCategory(with: indexPath)
+//                self?.mainView.categoryCollectionView.selected
             })
             .disposed(by: disposeBag)
         
@@ -263,6 +269,7 @@ extension MarketVC: UIViewControllerTransitioningDelegate {
 private extension MarketVC {
     
     func selectCategory(with indexPath: IndexPath) {
+        Log.debug("before: \(viewModel.selectedCategory.value)")
         var currentCategories: [Category] = viewModel.selectedCategory.value
         let selectedCell = getCategoryCell(at: indexPath)
         
@@ -292,7 +299,7 @@ private extension MarketVC {
             }
         }
         
-        Log.debug(currentCategories)
+        Log.debug("after: \(currentCategories)")
         viewModel.selectedCategory.accept(currentCategories)
         selectedCell.isChecked = !selectedCell.isChecked
     }

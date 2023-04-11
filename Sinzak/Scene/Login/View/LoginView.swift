@@ -12,7 +12,6 @@ import SnapKit
 
 final class LoginView: SZView {
     // MARK: - Properties
-    // TODO: 다크 모드 확인
     private let logotypeImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "logotype")

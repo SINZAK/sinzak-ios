@@ -48,58 +48,58 @@ final class AgreementVC: SZVC {
     func bindInput() {
         // MARK: - 약관 웹뷰로 연결
         mainView.termsOfServiceMoreButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.termsOfServiceMoreButtonTapped()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.termsOfServiceMoreButtonTapped()
             })
             .disposed(by: disposeBag)
         
         mainView.privacyPolicyMoreButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.privacyPolicyMoreButtonTapped()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.privacyPolicyMoreButtonTapped()
             })
             .disposed(by: disposeBag)
         
         mainView.marketingInfoMoreButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.marketingInfoMoreButtonTapped()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.marketingInfoMoreButtonTapped()
             })
             .disposed(by: disposeBag)
         
         // MARK: - 체크 버튼
         mainView.fullCheckButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.fullCheckbuttonTapped()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.fullCheckbuttonTapped()
             })
             .disposed(by: disposeBag)
         
         mainView.olderFourteenCheckButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.olderFourteenCheckButtonTapped()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.olderFourteenCheckButtonTapped()
             })
             .disposed(by: disposeBag)
         
         mainView.termsOfServiceCheckButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.termsOfServiceCheckButtonTapped()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.termsOfServiceCheckButtonTapped()
             })
             .disposed(by: disposeBag)
         
         mainView.privacyPolicyCheckButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.privacyPolicyCheckButtonTapped()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.privacyPolicyCheckButtonTapped()
             })
             .disposed(by: disposeBag)
         
         mainView.marketingInfoCheckButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.marketingInfoCheckButtonTapped()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.marketingInfoCheckButtonTapped()
             })
             .disposed(by: disposeBag)
         
         // MARK: - 다음 버튼
         mainView.confirmButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.confirmButtonTapped()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.confirmButtonTapped()
             })
             .disposed(by: disposeBag)
     }
@@ -108,9 +108,9 @@ final class AgreementVC: SZVC {
     func bindOutput() {
         viewModel.presentWebView
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] webVC in
+            .subscribe(with: self, onNext: { owner, webVC in
                 webVC.modalPresentationStyle = .pageSheet
-                self?.present(webVC, animated: true)
+                owner.present(webVC, animated: true)
             })
             .disposed(by: disposeBag)
         

@@ -45,7 +45,7 @@ final class LoginVC: SZVC {
     @objc func appleButtontapped(_ sender: UIButton) {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email,]
+        request.requestedScopes = [.fullName, .email]
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
@@ -97,8 +97,8 @@ final class LoginVC: SZVC {
     func bindInput() {
         
         mainView.kakaoButton.rx.tap
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.kakaoButtonTapped()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.kakaoButtonTapped()
             })
             .disposed(by: disposeBag)
         

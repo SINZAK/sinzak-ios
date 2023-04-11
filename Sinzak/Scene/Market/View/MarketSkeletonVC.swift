@@ -21,6 +21,8 @@ final class MarketSkeletonVC: SZVC {
     private let size: Int
     private let sale: Bool
     
+    private let categoryDataSource: [Category] = Category.allCases
+    
     private let productDataSource: [MarketProduct] = [
         MarketProduct.init(
             id: 0,
@@ -43,8 +45,8 @@ final class MarketSkeletonVC: SZVC {
     private lazy var categoryFlowLayout: UICollectionViewLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 4.0
-        layout.estimatedItemSize = CGSize(width: 96.0, height: 30.0)
+        layout.minimumInteritemSpacing = 8.0
+        layout.estimatedItemSize = CGSize(width: 80, height: 30.0)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 16.0, bottom: 0, right: 16.0)
         
         return layout
@@ -116,7 +118,7 @@ final class MarketSkeletonVC: SZVC {
             sale: sale
         )
         .delay(
-            .milliseconds(2000),
+            .milliseconds(1000),
             scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
         )
         .subscribe(
@@ -288,3 +290,14 @@ extension MarketSkeletonVC: SkeletonCollectionViewDataSource {
     }
 }
 
+//extension MarketSkeletonVC: UICollectionViewDelegateFlowLayout {
+//
+//    func collectionView(
+//        _ collectionView: UICollectionView,
+//        layout collectionViewLayout: UICollectionViewLayout,
+//        sizeForItemAt indexPath: IndexPath
+//    ) -> CGSize {
+//        <#code#>
+//    }
+//
+//}
