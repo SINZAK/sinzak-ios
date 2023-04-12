@@ -32,7 +32,7 @@ final class UniversityAutoCompletionCVC: UICollectionViewCell {
     }
     func setConstraints() {
         textLabel.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(20)
+            make.horizontalEdges.equalToSuperview().inset(24)
             make.verticalEdges.equalToSuperview().inset(4)
         }
     }

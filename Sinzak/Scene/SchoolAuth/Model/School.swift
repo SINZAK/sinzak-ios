@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 struct School: Codable {
     let koreanName: String
@@ -31,3 +32,20 @@ extension SchoolList {
     }
 }
 // 사용예 : SchoolList.loadJson()! 으로 하거나 SchoolList.loadJson()?.school
+
+struct SchoolData {
+    let school: School
+}
+
+struct SchoolDataSection {
+    var items: [SchoolData]
+}
+
+extension SchoolDataSection: SectionModelType {
+    typealias Item = SchoolData
+    
+    init(original: SchoolDataSection, items: [SchoolData]) {
+        self = original
+        self.items = items
+    }
+}
