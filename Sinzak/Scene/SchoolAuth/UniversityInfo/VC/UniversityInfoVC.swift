@@ -150,14 +150,26 @@ extension UniversityInfoVC {
 // MARK: - Data Source
 private extension UniversityInfoVC {
     func getSchoolDataSoure() -> RxCollectionViewSectionedReloadDataSource<SchoolDataSection> {
-        return RxCollectionViewSectionedReloadDataSource<SchoolDataSection> { _, collectionView, indexPath, item in
+        return RxCollectionViewSectionedReloadDataSource<SchoolDataSection> { [weak self] _, collectionView, indexPath, item in
+            guard let self = self else { return UICollectionViewCell() }
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: UniversityAutoCompletionCVC.identifier,
                 for: indexPath
             ) as? UniversityAutoCompletionCVC else { return UICollectionViewCell() }
             
-            cell.textLabel.text = item.school.koreanName
-            
+            let text = item.school.koreanName
+            cell.textLabel.text = text
+            let color: UIColor = CustomColor.red ?? .red
+            let attributedString = NSMutableAttributedString(string: cell.textLabel.text ?? "")
+            Log.debug(attributedString)
+            attributedString.addAttribute(
+                .foregroundColor,
+                value: color,
+                range: (text as NSString).range(of: self.viewModel.currentInputText)
+            )
+            cell.textLabel.attributedText = attributedString
+            Log.debug(attributedString)
+
             return cell
         }
     }

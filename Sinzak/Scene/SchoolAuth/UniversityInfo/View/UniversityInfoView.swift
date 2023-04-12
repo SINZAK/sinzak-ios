@@ -26,6 +26,7 @@ final class UniversityInfoView: SZView {
         $0.clearButtonMode = .whileEditing
     }
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        $0.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 8)
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 16
         $0.backgroundColor = CustomColor.gray10

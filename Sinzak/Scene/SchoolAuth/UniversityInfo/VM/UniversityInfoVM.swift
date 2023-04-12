@@ -17,6 +17,7 @@ protocol UniversityInfoVMInput {
 protocol UniversityInfoVMOutput {
     var isCollectionViewHide: BehaviorRelay<Bool> { get }
     var schoolSections: BehaviorRelay<[SchoolDataSection]> { get }
+    var currentInputText: String { get set }
 }
 
 protocol UniversityInfoVM: UniversityInfoVMInput, UniversityInfoVMOutput {}
@@ -28,7 +29,7 @@ final class DefaultUniversityInfoVM: UniversityInfoVM {
     // MARK: - Property
     
     /// 전체 학교 리스트
-    let schoolList: [School] = SchoolList.loadJson()!.school
+    private let schoolList: [School] = SchoolList.loadJson()!.school
     
     // MARK: - Input
     
@@ -39,6 +40,7 @@ final class DefaultUniversityInfoVM: UniversityInfoVM {
             isCollectionViewHide.accept(false)
         }
         
+        currentInputText = text
         let filteredSchool: [SchoolData] = schoolList
             .filter { $0.koreanName.contains(text) }
             .map { SchoolData(school: $0) }
@@ -52,5 +54,6 @@ final class DefaultUniversityInfoVM: UniversityInfoVM {
     
     var isCollectionViewHide: BehaviorRelay<Bool> = .init(value: true)
     var schoolSections: BehaviorRelay<[SchoolDataSection]> = .init(value: [])
-    
+    var currentInputText: String = ""
+
 }
