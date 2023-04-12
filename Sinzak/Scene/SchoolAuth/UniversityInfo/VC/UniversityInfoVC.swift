@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxKeyboard
 
 final class UniversityInfoVC: SZVC {
     // MARK: - Properties
@@ -30,6 +31,17 @@ final class UniversityInfoVC: SZVC {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+        UIView.animate(
+            withDuration: 0.3,
+            animations: { [weak self] in
+                self?.mainView.collectionView.alpha = 0
+            },
+            completion: { [weak self] result in
+                if result {
+                    self?.mainView.collectionView.isHidden = true
+                }
+            })
+        
         view.endEditing(true)
     }
     
@@ -46,8 +58,13 @@ final class UniversityInfoVC: SZVC {
         super.setNavigationBar()
         navigationItem.leftBarButtonItem = nil // 이미 가입이 끝난 상황이라 뒤로 돌아가면 안됨
     }
+    
     func bind() {
-        let input = SchoolAuthViewModel.Input(queryText: mainView.searchTextField.rx.text, nextButtonTap: mainView.nextButton.rx.tap, notStudentButtonTap: mainView.notStudentButton.rx.tap)
+        let input = SchoolAuthViewModel.Input(
+            queryText: mainView.searchTextField.rx.text,
+            nextButtonTap: mainView.nextButton.rx.tap,
+            notStudentButtonTap: mainView.notStudentButton.rx.tap
+        )
         let output = viewModel.transform(input: input)
         output.nextButtonTap
             .bind { [weak self] _ in
@@ -79,23 +96,62 @@ final class UniversityInfoVC: SZVC {
                     if !self.filteredData.isEmpty {
                         self.mainView.collectionView.isHidden = false
                     } else {
-                        self.mainView.collectionView.isHidden = true
+//                        self.mainView.collectionView.isHidden = true
                     }
                 } else {
                     self.filteredData.removeAll(keepingCapacity: false)
                     self.mainView.collectionView.isHidden = true
                 }
             }.disposed(by: viewModel.disposeBag)
+        
+        bindInput()
+        bindOutput()
+    }
+    
+    func bindInput() {
+        RxKeyboard.instance.visibleHeight
+            .skip(1)
+            .drive(onNext: { [weak self] keyboardVisibleHeignt in
+                guard let self = self else { return }
+                if keyboardVisibleHeignt > 0 {
+                    
+                    self.mainView.buttonStack.snp.updateConstraints {
+                        $0.bottom.equalToSuperview().inset(keyboardVisibleHeignt + 16.0)
+                    }
+                    self.view.layoutIfNeeded()
+                    
+                } else {
+                    self.mainView.buttonStack.snp.updateConstraints {
+                        $0.bottom.equalToSuperview().inset(24.0)
+                    }
+                    self.view.layoutIfNeeded()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func bindOutput() {
+        
     }
 }
 // collection view
 extension UniversityInfoVC: UICollectionViewDelegate {
     // 콜렉션 뷰 셀
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: UniversityAutoCompletionCVC.self), for: indexPath) as? UniversityAutoCompletionCVC else { return UICollectionViewCell() }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: String(describing: UniversityAutoCompletionCVC.self),
+            for: indexPath
+        ) as? UniversityAutoCompletionCVC else { return UICollectionViewCell() }
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         if filteredData.count >= indexPath.item {
             mainView.searchTextField.text = filteredData[indexPath.item]
         }

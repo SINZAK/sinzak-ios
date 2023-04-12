@@ -21,7 +21,7 @@ final class UniversityInfoView: SZView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 19
         $0.font = .caption_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.placeholder = I18NStrings.searchBySchoolName
         $0.clearButtonMode = .whileEditing
     }
@@ -81,7 +81,7 @@ final class UniversityInfoView: SZView {
         }
         buttonStack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalToSuperview().inset(24.0)
             make.height.equalTo(65)
         }
     }
