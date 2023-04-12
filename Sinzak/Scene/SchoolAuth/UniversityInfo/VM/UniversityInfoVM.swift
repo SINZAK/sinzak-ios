@@ -41,6 +41,7 @@ final class DefaultUniversityInfoVM: UniversityInfoVM {
         }
         
         currentInputText = text
+        Log.debug("text: \(currentInputText)")
         let filteredSchool: [SchoolData] = schoolList
             .filter { $0.koreanName.contains(text) }
             .map { SchoolData(school: $0) }

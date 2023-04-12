@@ -83,6 +83,19 @@ final class UniversityInfoVC: SZVC {
                 }
             })
             .disposed(by: disposeBag)
+        
+        mainView.collectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let cell = self?.mainView.collectionView.cellForItem(at: indexPath) as? UniversityAutoCompletionCVC else {
+                    return
+                }
+                self?.mainView.searchTextField.text = cell.textLabel.text
+                self?.view.endEditing(true)
+                self?.viewModel.isCollectionViewHide.accept(true)
+            })
+            .disposed(by: disposeBag)
+        
+//        mainView.collectionView.rx.pre
             
         RxKeyboard.instance.visibleHeight
             .skip(1)
@@ -138,7 +151,7 @@ extension UniversityInfoVC {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(40)
+                heightDimension: .estimated(36)
             )
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             let section = NSCollectionLayoutSection(group: group)

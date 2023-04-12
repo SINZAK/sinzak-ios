@@ -36,4 +36,9 @@ final class UniversityAutoCompletionCVC: UICollectionViewCell {
             make.verticalEdges.equalToSuperview().inset(4)
         }
     }
+
+    override func prepareForReuse() {
+        textLabel.text = ""
+        textLabel.textColor = CustomColor.black
+    }
 }
