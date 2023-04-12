@@ -40,12 +40,12 @@ final class SignupGenreVC: SZVC {
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { owner, _ in
-                let vc = UniversityInfoVC()
+                let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
                 owner.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: viewModel.disposeBag)
 
-            // TODO: 선택한거 저장, 회원가입 로직이동해야함 
+            // TODO: 선택한거 저장, 회원가입 로직이동해야함
 //            .bind { [weak self]  _ in
 //                guard let self = self else { return }
 //                let vc = StudentAuthVC()

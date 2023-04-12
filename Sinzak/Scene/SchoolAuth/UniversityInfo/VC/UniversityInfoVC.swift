@@ -12,40 +12,38 @@ import RxKeyboard
 final class UniversityInfoVC: SZVC {
     // MARK: - Properties
     private let mainView = UniversityInfoView()
-    var viewModel = SchoolAuthViewModel()
-    var schoolList: [String] = []
+    var viewModel: UniversityInfoVM!
     var filteredData: [String] = [] {
         didSet {
             self.configureDataSource()
         }
     }
     private var dataSource: UICollectionViewDiffableDataSource<Int, String>!
+    
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        schoolList = SchoolList.loadJson()!.school.flatMap { $0.koreanName }
+    }
+    
+    // MARK: - Init
+    init(viewModel: UniversityInfoVM) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        UIView.animate(
-            withDuration: 0.3,
-            animations: { [weak self] in
-                self?.mainView.collectionView.alpha = 0
-            },
-            completion: { [weak self] result in
-                if result {
-                    self?.mainView.collectionView.isHidden = true
-                }
-            })
-        
+        viewModel.isCollectionViewHide.accept(true)
         view.endEditing(true)
     }
-    
-    // MARK: - Actions
+        
     // MARK: - Helpers
     override func configure() {
         mainView.collectionView.delegate = self
@@ -60,55 +58,77 @@ final class UniversityInfoVC: SZVC {
     }
     
     func bind() {
-        let input = SchoolAuthViewModel.Input(
-            queryText: mainView.searchTextField.rx.text,
-            nextButtonTap: mainView.nextButton.rx.tap,
-            notStudentButtonTap: mainView.notStudentButton.rx.tap
-        )
-        let output = viewModel.transform(input: input)
-        output.nextButtonTap
-            .bind { [weak self] _ in
-                guard let self = self else { return }
-                self.viewModel.univEmailModel.univName = self.mainView.searchTextField.text ?? ""
-                let vc = StudentAuthVC()
-                vc.viewModel = self.viewModel
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            .disposed(by: viewModel.disposeBag)
-        output.notStudentButtonTap
-            .bind { [weak self] _ in
-                guard let self = self else { return }
-                let vc = WelcomeVC()
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
-            }
-            .disposed(by: viewModel.disposeBag)
-        output.queryText
-            .bind { [weak self] query in
-                guard let self = self else { return }
-                if query.count > 0 {
-                    self.filteredData.removeAll(keepingCapacity: false)
-                    let searchPredicate = NSPredicate(format: "SELF CONTAINS %@", query)
-                    let array = (self.schoolList as NSArray).filtered(using: searchPredicate)
-                    self.filteredData = array as! [String]
-                    print(self.filteredData)
-                    /// 이제 검색목록을 뷰에 뿌리기
-                    if !self.filteredData.isEmpty {
-                        self.mainView.collectionView.isHidden = false
-                    } else {
-//                        self.mainView.collectionView.isHidden = true
-                    }
-                } else {
-                    self.filteredData.removeAll(keepingCapacity: false)
-                    self.mainView.collectionView.isHidden = true
-                }
-            }.disposed(by: viewModel.disposeBag)
+//        let input = SchoolAuthViewModel.Input(
+//            queryText: mainView.searchTextField.rx.text,
+//            nextButtonTap: mainView.nextButton.rx.tap,
+//            notStudentButtonTap: mainView.notStudentButton.rx.tap
+//        )
+//        let output = viewModel.transform(input: input)
+//        output.nextButtonTap
+//            .bind { [weak self] _ in
+//                guard let self = self else { return }
+//                self.viewModel.univEmailModel.univName = self.mainView.searchTextField.text ?? ""
+//                let vc = StudentAuthVC()
+//                vc.viewModel = self.viewModel
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            }
+//            .disposed(by: viewModel.disposeBag)
+//        output.notStudentButtonTap
+//            .bind { [weak self] _ in
+//                guard let self = self else { return }
+//                let vc = WelcomeVC()
+//                vc.modalPresentationStyle = .fullScreen
+//                self.present(vc, animated: true)
+//            }
+//            .disposed(by: viewModel.disposeBag)
+//        output.queryText
+//            .bind { [weak self] query in
+//                guard let self = self else { return }
+//                if query.count > 0 {
+//                    self.filteredData.removeAll(keepingCapacity: false)
+//                    let searchPredicate = NSPredicate(format: "SELF CONTAINS %@", query)
+//                    let array = (self.schoolList as NSArray).filtered(using: searchPredicate)
+//                    self.filteredData = array as! [String]
+//                    print(self.filteredData)
+//                    /// 이제 검색목록을 뷰에 뿌리기
+//                    if !self.filteredData.isEmpty {
+//                        self.mainView.collectionView.isHidden = false
+//                    } else {
+////                        self.mainView.collectionView.isHidden = true
+//                    }
+//                } else {
+//                    self.filteredData.removeAll(keepingCapacity: false)
+//                    self.mainView.collectionView.isHidden = true
+//                }
+//            }.disposed(by: viewModel.disposeBag)
         
         bindInput()
         bindOutput()
     }
     
     func bindInput() {
+        
+        mainView.searchTextField.rx.text
+            .orEmpty
+            .distinctUntilChanged()
+            .skip(1)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, text in
+                
+                owner.viewModel.textFieldInput(text)
+                
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.searchTextField.rx.controlEvent(.editingDidBegin)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                if !(owner.mainView.searchTextField.text?.isEmpty ?? true) {
+                    owner.viewModel.isCollectionViewHide.accept(false)
+                }
+            })
+            .disposed(by: disposeBag)
+            
         RxKeyboard.instance.visibleHeight
             .skip(1)
             .drive(onNext: { [weak self] keyboardVisibleHeignt in
@@ -132,8 +152,24 @@ final class UniversityInfoVC: SZVC {
     
     func bindOutput() {
         
+        viewModel.isCollectionViewHide
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: true)
+            .drive(onNext: { [weak self] in
+                if $0 {
+                    self?.hideCollectionView()
+                    
+                } else {
+                    self?.showCollectionView()
+                    
+                }
+            })
+            .disposed(by: disposeBag)
+        
     }
 }
+
+
 // collection view
 extension UniversityInfoVC: UICollectionViewDelegate {
     // 콜렉션 뷰 셀
@@ -199,5 +235,29 @@ extension UniversityInfoVC {
         snapshot.appendSections([0])
         snapshot.appendItems(filteredData, toSection: 0 )
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+private extension UniversityInfoVC {
+    func hideCollectionView() {
+        UIView.animate(
+            withDuration: 0.3,
+            animations: { [weak self] in
+                self?.mainView.collectionView.alpha = 0
+            },
+            completion: { [weak self] result in
+                if result {
+                    self?.mainView.collectionView.isHidden = true
+                }
+            })
+    }
+    
+    func showCollectionView() {
+        mainView.collectionView.isHidden = false
+        UIView.animate(
+            withDuration: 0.3,
+            animations: { [weak self] in
+                self?.mainView.collectionView.alpha = 1
+            })
     }
 }
