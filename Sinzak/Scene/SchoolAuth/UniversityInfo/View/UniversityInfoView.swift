@@ -16,6 +16,19 @@ final class UniversityInfoView: SZView {
         $0.font = .subtitle_B
         $0.textColor = CustomColor.label
     }
+    
+    let noAutoMakeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "자동 완성 목록에 없는 대학의 경우,\n확인 버튼을 눌러 다음으로 넘어가 주세요."
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.font = .caption_B
+        label.textColor = CustomColor.gray80
+        label.isHidden = true
+        
+        return label
+    }()
+    
     let searchTextField = SZTextField(insets: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)).then {
         $0.backgroundColor = CustomColor.gray10
         $0.clipsToBounds = true
@@ -45,7 +58,7 @@ final class UniversityInfoView: SZView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 33
     }
-    let nextButton = UIButton().then {
+    let nextButton = SchoolAuthButton().then {
         $0.setTitle(I18NStrings.next, for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.titleLabel?.font = .body_B
@@ -58,7 +71,8 @@ final class UniversityInfoView: SZView {
         addSubviews(
             titleLabel, searchTextField,
             collectionView,
-            buttonStack
+            buttonStack,
+            noAutoMakeLabel
         )
         buttonStack.addArrangedSubviews(
             notStudentButton, nextButton
@@ -79,6 +93,10 @@ final class UniversityInfoView: SZView {
             make.leading.trailing.equalTo(searchTextField)
             make.top.equalTo(searchTextField.snp.bottom).offset(12)
             make.height.equalTo(128)
+        }
+        noAutoMakeLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(collectionView.snp.top).offset(16.0)
         }
         buttonStack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)

@@ -35,7 +35,7 @@ final class UniversityInfoVC: SZVC {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        viewModel.isCollectionViewHide.accept(true)
+        viewModel.isHideCollectionView.accept(true)
         view.endEditing(true)
     }
         
@@ -55,6 +55,7 @@ final class UniversityInfoVC: SZVC {
         navigationItem.leftBarButtonItem = nil // 이미 가입이 끝난 상황이라 뒤로 돌아가면 안됨
     }
     
+    // MARK: - Bind
     func bind() {
         
         bindInput()
@@ -69,9 +70,12 @@ final class UniversityInfoVC: SZVC {
             .skip(1)
             .withUnretained(self)
             .subscribe(onNext: { owner, text in
-                
+                if text.isEmpty {
+                    owner.viewModel.isEnableNextButton.accept(false)
+                } else {
+                    owner.viewModel.isEnableNextButton.accept(true)
+                }
                 owner.viewModel.textFieldInput(text)
-                
             })
             .disposed(by: disposeBag)
         
@@ -79,7 +83,7 @@ final class UniversityInfoVC: SZVC {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 if !(owner.mainView.searchTextField.text?.isEmpty ?? true) {
-                    owner.viewModel.isCollectionViewHide.accept(false)
+                    owner.viewModel.isHideCollectionView.accept(false)
                 }
             })
             .disposed(by: disposeBag)
@@ -91,12 +95,17 @@ final class UniversityInfoVC: SZVC {
                 }
                 self?.mainView.searchTextField.text = cell.textLabel.text
                 self?.view.endEditing(true)
-                self?.viewModel.isCollectionViewHide.accept(true)
+                self?.viewModel.isHideCollectionView.accept(true)
             })
             .disposed(by: disposeBag)
         
-//        mainView.collectionView.rx.pre
-            
+        mainView.nextButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.viewModel.tapNextButton()
+            })
+            .disposed(by: disposeBag)
+                    
         RxKeyboard.instance.visibleHeight
             .skip(1)
             .drive(onNext: { [weak self] keyboardVisibleHeignt in
@@ -120,16 +129,15 @@ final class UniversityInfoVC: SZVC {
     
     func bindOutput() {
         
-        viewModel.isCollectionViewHide
+        viewModel.isHideCollectionView
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: true)
             .drive(onNext: { [weak self] in
                 if $0 {
-                    self?.hideCollectionView()
-                    
+                    self?.mainView.collectionView.hideViewAnimate()
+                    self?.viewModel.isHideNoAutoMakeLabel.accept(true)
                 } else {
-                    self?.showCollectionView()
-                    
+                    self?.mainView.collectionView.showViewAnimate()
                 }
             })
             .disposed(by: disposeBag)
@@ -137,6 +145,24 @@ final class UniversityInfoVC: SZVC {
         viewModel.schoolSections
             .observe(on: MainScheduler.instance)
             .bind(to: mainView.collectionView.rx.items(dataSource: getSchoolDataSoure()))
+            .disposed(by: disposeBag)
+        
+        viewModel.isHideNoAutoMakeLabel
+            .asDriver(onErrorJustReturn: true)
+            .drive(mainView.noAutoMakeLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.isEnableNextButton
+            .asDriver(onErrorJustReturn: false)
+            .drive(mainView.nextButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.presentStudentAuthView
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, vc in
+                owner.navigationController?.pushViewController(vc, animated: true)
+            })
             .disposed(by: disposeBag)
     }
 }
@@ -174,40 +200,14 @@ private extension UniversityInfoVC {
             cell.textLabel.text = text
             let color: UIColor = CustomColor.red ?? .red
             let attributedString = NSMutableAttributedString(string: cell.textLabel.text ?? "")
-            Log.debug(attributedString)
             attributedString.addAttribute(
                 .foregroundColor,
                 value: color,
                 range: (text as NSString).range(of: self.viewModel.currentInputText)
             )
             cell.textLabel.attributedText = attributedString
-            Log.debug(attributedString)
-
+            
             return cell
         }
-    }
-}
-
-private extension UniversityInfoVC {
-    func hideCollectionView() {
-        UIView.animate(
-            withDuration: 0.3,
-            animations: { [weak self] in
-                self?.mainView.collectionView.alpha = 0
-            },
-            completion: { [weak self] result in
-                if result {
-                    self?.mainView.collectionView.isHidden = true
-                }
-            })
-    }
-    
-    func showCollectionView() {
-        mainView.collectionView.isHidden = false
-        UIView.animate(
-            withDuration: 0.3,
-            animations: { [weak self] in
-                self?.mainView.collectionView.alpha = 1
-            })
     }
 }

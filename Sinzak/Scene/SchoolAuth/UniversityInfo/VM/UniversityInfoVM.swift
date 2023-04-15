@@ -12,12 +12,18 @@ import RxDataSources
 
 protocol UniversityInfoVMInput {
     func textFieldInput(_ text: String)
+    func tapNextButton()
 }
 
 protocol UniversityInfoVMOutput {
-    var isCollectionViewHide: BehaviorRelay<Bool> { get }
+    var isHideCollectionView: BehaviorRelay<Bool> { get }
+    var isHideNoAutoMakeLabel: BehaviorRelay<Bool> { get }
     var schoolSections: BehaviorRelay<[SchoolDataSection]> { get }
     var currentInputText: String { get set }
+    
+    var isEnableNextButton: BehaviorRelay<Bool> { get }
+    
+    var presentStudentAuthView: PublishRelay<StudentAuthVC> { get }
 }
 
 protocol UniversityInfoVM: UniversityInfoVMInput, UniversityInfoVMOutput {}
@@ -35,26 +41,38 @@ final class DefaultUniversityInfoVM: UniversityInfoVM {
     
     func textFieldInput(_ text: String) {
         if text.isEmpty {
-            isCollectionViewHide.accept(true)
+            isHideCollectionView.accept(true)
         } else {
-            isCollectionViewHide.accept(false)
+            isHideCollectionView.accept(false)
         }
         
         currentInputText = text
-        Log.debug("text: \(currentInputText)")
         let filteredSchool: [SchoolData] = schoolList
             .filter { $0.koreanName.contains(text) }
             .map { SchoolData(school: $0) }
         
+        if filteredSchool.isEmpty && !isHideCollectionView.value {
+            isHideNoAutoMakeLabel.accept(false)
+        } else {
+            isHideNoAutoMakeLabel.accept(true)
+        }
+        
         let newSchoolSection: SchoolDataSection = .init(items: filteredSchool)
         schoolSections.accept([newSchoolSection])
-
+    }
+    
+    func tapNextButton() {
+        let vc = StudentAuthVC()
+        presentStudentAuthView.accept(vc)
     }
     
     // MARK: - Output
     
-    var isCollectionViewHide: BehaviorRelay<Bool> = .init(value: true)
+    var isHideCollectionView: BehaviorRelay<Bool> = .init(value: true)
+    var isHideNoAutoMakeLabel: BehaviorRelay<Bool> = .init(value: true)
     var schoolSections: BehaviorRelay<[SchoolDataSection]> = .init(value: [])
     var currentInputText: String = ""
 
+    var isEnableNextButton: BehaviorRelay<Bool> = .init(value: false)
+    var presentStudentAuthView: PublishRelay<StudentAuthVC> = .init()
 }

@@ -12,6 +12,28 @@ extension UIView {
     func addSubviews(_ views: UIView...) {
         views.forEach { self.addSubview($0) }
     }
+    
+    func hideViewAnimate() {
+        UIView.animate(
+            withDuration: 0.3,
+            animations: { [weak self] in
+                self?.alpha = 0
+            },
+            completion: { [weak self] result in
+                if result {
+                    self?.isHidden = true
+                }
+            })
+    }
+    
+    func showViewAnimate() {
+        self.isHidden = false
+        UIView.animate(
+            withDuration: 0.3,
+            animations: { [weak self] in
+                self?.alpha = 1
+            })
+    }
 }
 
 extension UIStackView {

@@ -176,6 +176,7 @@
 		ED15161129DCBE8F00227CC8 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = ED15161029DCBE8F00227CC8 /* RxKakaoSDKUser */; };
 		ED15161329DCBEBF00227CC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED15161229DCBEBF00227CC8 /* GoogleService-Info.plist */; };
 		ED15161529DCBED000227CC8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15161429DCBED000227CC8 /* Endpoint.swift */; };
+		ED19B0CB29EAE24500C951D1 /* SchoolAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19B0CA29EAE24500C951D1 /* SchoolAuthButton.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
@@ -378,6 +379,7 @@
 		ED06B4F329DB4A930016F646 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ED15161229DCBEBF00227CC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED15161429DCBED000227CC8 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		ED19B0CA29EAE24500C951D1 /* SchoolAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAuthButton.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -1481,6 +1483,7 @@
 		A2B38568295D884400E5EB7C /* SchoolAuth */ = {
 			isa = PBXGroup;
 			children = (
+				ED19B0CA29EAE24500C951D1 /* SchoolAuthButton.swift */,
 				A2121ACA29D0501D008F5406 /* ViewModel */,
 				A2DEC36229B4682E00CF0794 /* Model */,
 				A2DEC35C29B462DE00CF0794 /* UniversityInfo */,
@@ -2039,6 +2042,7 @@
 				A2100F712986937A00C85ADF /* WorksView.swift in Sources */,
 				A2DEC37129B636C300CF0794 /* APIError.swift in Sources */,
 				A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */,
+				ED19B0CB29EAE24500C951D1 /* SchoolAuthButton.swift in Sources */,
 				A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */,
 				ED7F92D129DB0F2A00C55FBF /* SNSLoginDTO.swift in Sources */,
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
