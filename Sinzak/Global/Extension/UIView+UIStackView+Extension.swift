@@ -13,9 +13,9 @@ extension UIView {
         views.forEach { self.addSubview($0) }
     }
     
-    func hideViewAnimate() {
+    func hideViewAnimate(duration: TimeInterval = 0.3) {
         UIView.animate(
-            withDuration: 0.3,
+            withDuration: duration,
             animations: { [weak self] in
                 self?.alpha = 0
             },
@@ -26,10 +26,10 @@ extension UIView {
             })
     }
     
-    func showViewAnimate() {
+    func showViewAnimate(duration: TimeInterval = 0.3) {
         self.isHidden = false
         UIView.animate(
-            withDuration: 0.3,
+            withDuration: duration,
             animations: { [weak self] in
                 self?.alpha = 1
             })
