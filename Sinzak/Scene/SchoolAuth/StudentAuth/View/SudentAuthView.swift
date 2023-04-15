@@ -242,7 +242,7 @@ final class StudentAuthView: SZView {
     }
     override func setLayout() {
         selectAuthTypeLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(36)
+            make.leading.equalToSuperview().inset(40)
             make.top.equalTo(safeAreaLayoutGuide).inset(20)
         }
         authButtonStack.snp.makeConstraints { make in
@@ -250,14 +250,16 @@ final class StudentAuthView: SZView {
             make.top.equalTo(selectAuthTypeLabel.snp.bottom).offset(6)
             make.height.equalTo(40)
         }
+    
+        // MARK:- 메일 인증 뷰
         webmailView.snp.makeConstraints { make in
             make.top.equalTo(authButtonStack.snp.bottom).offset(12)
-            make.bottom.lessThanOrEqualTo(buttonStack.snp.top).offset(-20)
+            make.bottom.equalTo(buttonStack.snp.top)
             make.leading.trailing.equalToSuperview()
         }
         webmailDescription.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(33)
-            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(34)
+            make.top.equalToSuperview().inset(36.0)
         }
         webmailTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
@@ -265,34 +267,35 @@ final class StudentAuthView: SZView {
             make.height.equalTo(60)
         }
         webmailValidationLabel.snp.makeConstraints { make in
-            make.leading.equalTo(webmailTextField).offset(18)
-            make.top.equalTo(webmailTextField.snp.bottom).offset(3)
+            make.leading.equalToSuperview().offset(28)
+            make.top.equalTo(webmailTextField.snp.bottom).offset(4)
         }
         authCodeLabel.snp.makeConstraints { make in
             make.leading.equalTo(webmailDescription)
-            make.top.equalTo(webmailValidationLabel.snp.bottom).offset(24)
+            make.top.equalTo(webmailValidationLabel.snp.bottom).offset(20)
         }
         authCodeTextField.snp.makeConstraints { make in
             make.leading.trailing.height.equalTo(webmailTextField)
-            make.top.equalTo(authCodeLabel.snp.bottom).offset(3)
+            make.top.equalTo(authCodeLabel.snp.bottom).offset(4)
         }
         authCodeValidationLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(webmailValidationLabel)
-            make.top.equalTo(authCodeTextField.snp.bottom).offset(3)
+            make.leading.equalTo(webmailValidationLabel)
+            make.top.equalTo(authCodeTextField.snp.bottom).offset(4)
         }
-        // 학생증 뷰
+        
+        // 학생증 인증 뷰
         schoolCardView.snp.makeConstraints { make in
-            make.top.equalTo(authButtonStack.snp.bottom).offset(30)
-            make.bottom.lessThanOrEqualTo(buttonStack.snp.top).offset(-20)
+            make.top.equalTo(authButtonStack.snp.bottom)
+            make.bottom.equalTo(buttonStack.snp.top)
             make.leading.trailing.equalToSuperview()
         }
         schoolCardDescription.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(33)
-            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(34)
+            make.top.equalToSuperview().inset(36.0)
         }
         photoUploadButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(33)
-            make.width.equalTo(200)
+            make.leading.equalToSuperview().inset(32)
+            make.width.equalTo(192)
             make.height.equalTo(48)
             make.top.equalTo(schoolCardDescription.snp.bottom).offset(16)
         }
@@ -314,10 +317,11 @@ final class StudentAuthView: SZView {
             make.horizontalEdges.equalToSuperview().inset(36)
             make.height.equalTo(selectedPhoto.snp.width).multipliedBy(0.7)
         }
+        
         // 하단 버튼
         buttonStack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalToSuperview().inset(24.0)
             make.height.equalTo(65)
         }
     }

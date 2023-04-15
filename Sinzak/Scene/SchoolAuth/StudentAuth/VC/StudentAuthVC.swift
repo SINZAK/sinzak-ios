@@ -157,21 +157,21 @@ final class StudentAuthVC: SZVC {
             }
             .disposed(by: viewModel.disposeBag)
         // 키보드 자동 설정
-        RxKeyboard.instance.visibleHeight
-            .drive(with: self, onNext: { (vc, keyboardHeight) in
-             print("keyBoard 높이는 \(keyboardHeight) 입니다.")
-             if keyboardHeight > 0 {
-                 vc.mainView.buttonStack.snp.updateConstraints { make in
-                     make.bottom.equalTo(self.mainView.safeAreaLayoutGuide).offset(-keyboardHeight + self.mainView.safeAreaInsets.bottom - 20)
-                     vc.mainView.layoutIfNeeded()
-                 }
-             } else {
-                 vc.mainView.buttonStack.snp.updateConstraints { make in
-                     make.bottom.equalTo(self.mainView.safeAreaLayoutGuide)
-                     vc.mainView.layoutIfNeeded()
-                 }
-             }
-         })
-         .disposed(by: viewModel.disposeBag)
+//        RxKeyboard.instance.visibleHeight
+//            .drive(with: self, onNext: { (vc, keyboardHeight) in
+//             print("keyBoard 높이는 \(keyboardHeight) 입니다.")
+//             if keyboardHeight > 0 {
+//                 vc.mainView.buttonStack.snp.updateConstraints { make in
+//                     make.bottom.equalTo(self.mainView.safeAreaLayoutGuide).offset(-keyboardHeight + self.mainView.safeAreaInsets.bottom - 20)
+//                     vc.mainView.layoutIfNeeded()
+//                 }
+//             } else {
+//                 vc.mainView.buttonStack.snp.updateConstraints { make in
+//                     make.bottom.equalTo(self.mainView.safeAreaLayoutGuide)
+//                     vc.mainView.layoutIfNeeded()
+//                 }
+//             }
+//         })
+//         .disposed(by: viewModel.disposeBag)
     }
 }
