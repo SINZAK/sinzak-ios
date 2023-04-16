@@ -177,6 +177,7 @@
 		ED15161329DCBEBF00227CC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED15161229DCBEBF00227CC8 /* GoogleService-Info.plist */; };
 		ED15161529DCBED000227CC8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15161429DCBED000227CC8 /* Endpoint.swift */; };
 		ED19B0CB29EAE24500C951D1 /* SchoolAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19B0CA29EAE24500C951D1 /* SchoolAuthButton.swift */; };
+		ED19B14029EC6DE100C951D1 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
@@ -380,6 +381,7 @@
 		ED15161229DCBEBF00227CC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED15161429DCBED000227CC8 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		ED19B0CA29EAE24500C951D1 /* SchoolAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAuthButton.swift; sourceTree = "<group>"; };
+		ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -484,6 +486,7 @@
 				EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */,
 				EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */,
 				ED86969129D9359D001A1A9F /* UIView+Extension.swift */,
+				ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2069,6 +2072,7 @@
 				A222F07F298382DF007806D0 /* Category.swift in Sources */,
 				EDE5EC5D29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift in Sources */,
 				A2270651299BD10E000D5CF2 /* SearchVC.swift in Sources */,
+				ED19B14029EC6DE100C951D1 /* UIScrollView+Extension.swift in Sources */,
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A216BD4A297FCBC1008964BC /* ActivityNotiVC.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,

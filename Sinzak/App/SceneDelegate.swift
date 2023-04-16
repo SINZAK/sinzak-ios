@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // 루트 뷰 변경
 //        let vc = ConciergeVC()
         
-        let vc = SignupGenreVC()
+        let vc = StudentAuthVC()
         let nav = UINavigationController(rootViewController: vc)
         changeRootVC(nav, animated: true)
     }

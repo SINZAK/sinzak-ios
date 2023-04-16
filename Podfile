@@ -15,7 +15,7 @@ target 'Sinzak' do
 
   # Rx
 	pod 'RxSwift', '~> 6.5.0'
-	pod 'RxCocoa', '~> 6.5.0'				
+	pod 'RxCocoa', '~> 6.5.0'		
  
   pod 'lottie-ios', '3.4.2'
   pod 'SwiftConfettiView', '0.1.0'
