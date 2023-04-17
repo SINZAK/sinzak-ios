@@ -39,7 +39,6 @@ final class SignupGenreVC: SZVC {
     
     // MARK: - Helpers
     override func configure() {
-        mainView.collectionView.collectionViewLayout = setLayout()
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self
         mainView.collectionView.register(InterestedGenreCVC.self, forCellWithReuseIdentifier: String(describing: InterestedGenreCVC.self))
@@ -88,6 +87,17 @@ final class SignupGenreVC: SZVC {
 //                    }
 //                }
 //            }
+        
+        bindInput()
+        bindOutput()
+    }
+    
+    func bindInput() {
+        
+    }
+    
+    func bindOutput() {
+        
     }
 }
 
@@ -154,40 +164,5 @@ extension SignupGenreVC: UICollectionViewDataSource, UICollectionViewDelegate {
         ) as? InterestedGenreHeader else { return UICollectionReusableView() }
         header.titleLabel.text = genreList[indexPath.section].type
         return header
-    }
-}
-
-extension SignupGenreVC {
-    /// 컴포지셔널 레이아웃 세팅
-    func setLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(100),
-            heightDimension: .estimated(40)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 5, bottom: 5, trailing: 8)
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(130)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        group.interItemSpacing = .fixed(10)
-        
-        let section = NSCollectionLayoutSection(group: group)
-         
-        section.interGroupSpacing = 8
-        
-        let headerItemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(30))
-        let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
-        section.boundarySupplementaryItems = [headerItem]
-        
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 19
-        layout.configuration = config
-        return layout
     }
 }
