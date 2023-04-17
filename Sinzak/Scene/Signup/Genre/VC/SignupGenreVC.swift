@@ -7,17 +7,13 @@
 
 import UIKit
 import RxSwift
+import RxDataSources
 
 final class SignupGenreVC: SZVC {
     // MARK: - Properties
     let mainView = SignupGenreView()
-    let genreList = Genre.list
     var viewModel: SignupGenreVM
-    var userSelect: [[Int]] = [[], []] {
-        didSet {
-            mainView.collectionView.reloadData()
-        }
-    }
+
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
@@ -39,10 +35,15 @@ final class SignupGenreVC: SZVC {
     
     // MARK: - Helpers
     override func configure() {
-        mainView.collectionView.dataSource = self
-        mainView.collectionView.delegate = self
-        mainView.collectionView.register(InterestedGenreCVC.self, forCellWithReuseIdentifier: String(describing: InterestedGenreCVC.self))
-        mainView.collectionView.register(InterestedGenreHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: InterestedGenreHeader.self))
+        mainView.collectionView.register(
+            InterestedGenreCVC.self,
+            forCellWithReuseIdentifier: InterestedGenreCVC.identifier
+        )
+        mainView.collectionView.register(
+            InterestedGenreHeader.self,
+            forSupplementaryViewOfKind: "header",
+            withReuseIdentifier: InterestedGenreHeader.identifier
+        )
         bind()
     }
     func bind() {
@@ -97,10 +98,40 @@ final class SignupGenreVC: SZVC {
     }
     
     func bindOutput() {
-        
+        viewModel.allGenreSections
+            .observe(on: MainScheduler.instance)
+            .bind(to: mainView.collectionView.rx.items(dataSource: getGenreDataSource()))
+            .disposed(by: disposeBag)
     }
 }
 
+private extension SignupGenreVC {
+    func getGenreDataSource() -> RxCollectionViewSectionedReloadDataSource<AllGenreDataSection> {
+        return RxCollectionViewSectionedReloadDataSource(
+            configureCell: { _, collectionView, indexPath, item in
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: InterestedGenreCVC.identifier,
+                    for: indexPath
+                ) as? InterestedGenreCVC else { return UICollectionViewCell() }
+                
+                cell.textLabel.text = item.text
+                return cell
+            },
+            configureSupplementaryView: { dataSourece, collectionView, kind, indexPath in
+                guard let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: InterestedGenreHeader.identifier,
+                    for: indexPath) as? InterestedGenreHeader else { return UICollectionReusableView() }
+                
+                header.titleLabel.text = dataSourece.sectionModels[indexPath.section].header
+                
+                return header
+            }
+        )
+    }
+}
+
+/*
 extension SignupGenreVC: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -166,3 +197,5 @@ extension SignupGenreVC: UICollectionViewDataSource, UICollectionViewDelegate {
         return header
     }
 }
+
+*/

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxDataSources
 
 struct Genre {
     let type: String
@@ -61,27 +63,41 @@ enum AllGenre: String {
 
 // 회원가입 관심장르
 extension Genre {
-    static let list: [Genre] = [
-        Genre(type: I18NStrings.fineart,
-              category: [
-                .painting,
-                .orientalPainting,
-                .sculpture,
-                .print,
-                .craft,
-                .portrait,
-                .etc
-              ]
-             ),
-        Genre(type: I18NStrings.design,
-              category: [
-                .illust,
-                .packageLagel,
-                .printDesign,
-                .posterBannerSign,
-                .logobranding,
-                .appWebDesign
-              ]
-             )
-    ]
+    
+    static let fineArtList: Genre = Genre(
+        type: I18NStrings.fineart,
+        category: [
+            .painting,
+            .orientalPainting,
+            .sculpture,
+            .print,
+            .craft,
+            .portrait,
+            .etc
+        ])
+    
+    static let desingList: Genre = Genre(
+        type: I18NStrings.design,
+        category: [
+            .illust,
+            .packageLagel,
+            .printDesign,
+            .posterBannerSign,
+            .logobranding,
+            .appWebDesign
+        ])
+}
+
+struct AllGenreDataSection {
+    let header: String
+    var items: [AllGenre]
+}
+
+extension AllGenreDataSection: SectionModelType {
+    typealias Item = AllGenre
+    
+    init(original: AllGenreDataSection, items: [AllGenre]) {
+        self = original
+        self.items = items
+    }
 }
