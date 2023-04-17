@@ -202,6 +202,7 @@
 		EDE5EC5D29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */; };
 		EDE5EC6029D70ABA00BB211F /* MarketProductsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */; };
 		EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501229ED388F001733C6 /* SignupGenreVM.swift */; };
+		EDF4501729ED5919001733C6 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501629ED5919001733C6 /* UICollectionView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -404,6 +405,7 @@
 		EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Extentsion.swift"; sourceTree = "<group>"; };
 		EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketProductsResponseDTO.swift; sourceTree = "<group>"; };
 		EDF4501229ED388F001733C6 /* SignupGenreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVM.swift; sourceTree = "<group>"; };
+		EDF4501629ED5919001733C6 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -489,6 +491,7 @@
 				EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */,
 				ED86969129D9359D001A1A9F /* UIView+Extension.swift */,
 				ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */,
+				EDF4501629ED5919001733C6 /* UICollectionView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2059,6 +2062,7 @@
 				A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */,
 				ED19B0CB29EAE24500C951D1 /* SchoolAuthButton.swift in Sources */,
 				A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */,
+				EDF4501729ED5919001733C6 /* UICollectionView+Extension.swift in Sources */,
 				ED7F92D129DB0F2A00C55FBF /* SNSLoginDTO.swift in Sources */,
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
 				A280AB5129A7A5BB00C1729C /* WriteCategoryHeader.swift in Sources */,

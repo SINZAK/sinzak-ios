@@ -26,6 +26,7 @@ final class SignupGenreView: SZView {
     }
     // 관심장르 목록 콜렉션 뷰
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+        $0.allowsMultipleSelection = true
         $0.backgroundColor = .clear
         $0.bounces = false
     }

@@ -11,11 +11,12 @@ import RxCocoa
 import RxDataSources
 
 protocol SignupGenreVMInput {
-    
+    func tapInterestedGenreCell(genres: [AllGenre])
 }
 
 protocol SignupGenreVMOutput {
     var allGenreSections: BehaviorRelay<[AllGenreDataSection]> { get }
+    var selectedGenre: BehaviorRelay<[AllGenre]> { get }
 }
 
 protocol SignupGenreVM: SignupGenreVMInput, SignupGenreVMOutput {}
@@ -25,6 +26,9 @@ final class DefaultSignupGenreVM: SignupGenreVM {
     private let disposeBag = DisposeBag()
     
     // MARK: - Input
+    func tapInterestedGenreCell(genres: [AllGenre]) {
+        selectedGenre.accept(genres)
+    }
     
     // MARK: - Output
     let allGenreSections: BehaviorRelay<[AllGenreDataSection]> = .init(value: [
@@ -38,4 +42,6 @@ final class DefaultSignupGenreVM: SignupGenreVM {
             items: Genre.desingList.category
         )
     ])
+    
+    var selectedGenre: BehaviorRelay<[AllGenre]> = .init(value: [])
 }

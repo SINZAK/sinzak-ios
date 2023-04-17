@@ -12,6 +12,12 @@ import SnapKit
 
 final class InterestedGenreCVC: UICollectionViewCell {
     // MARK: Properties
+    override var isSelected: Bool {
+        willSet {
+            isUserSelected(newValue)
+        }
+    }
+    
     let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
     }
