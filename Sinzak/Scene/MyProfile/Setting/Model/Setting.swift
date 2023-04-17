@@ -1,11 +1,9 @@
 //
-//  Setting.swift
+//  File.swift
 //  Sinzak
 //
-//  Created by Doy Kim on 2023/03/02.
+//  Created by JongHoon on 2023/04/18.
 //
-
-import Foundation
 
 enum Setting: CaseIterable {
     case personalSetting

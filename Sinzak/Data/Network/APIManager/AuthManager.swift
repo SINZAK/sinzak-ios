@@ -59,7 +59,7 @@ class AuthManager {
         }
     }
     
-    /// 회원가입    
+    /// 회원가입
     func join(_ joinInfo: Join) -> Single<Bool> {
         return provider.rx.request(.join(joinInfo: joinInfo))
             .map({ response in
@@ -80,6 +80,29 @@ class AuthManager {
                     throw APIError.errorMessage(message)
                 }
                 return result.success ?? false
+            })
+    }
+    
+    /// 회원 탈퇴
+    func resign() -> Single<Void> {
+        return provider.rx.request(.resign)
+            .map({ response in
+                
+                Log.debug(response.request?.url ?? "")
+                if !(200..<300 ~= response.statusCode) {
+                    throw APIError.badStatus(code: response.statusCode)
+                }
+                
+                let result: ResultMessageDTO
+                do {
+                    result = try JSONDecoder().decode(ResultMessageDTO.self, from: response.data)
+                } catch {
+                    throw APIError.decodingError
+                }
+                
+                if let message = result.message {
+                    throw APIError.errorMessage(message)
+                }
             })
     }
     

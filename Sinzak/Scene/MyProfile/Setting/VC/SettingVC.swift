@@ -105,5 +105,18 @@ extension SettingVC {
 extension SettingVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 내용별로 하기
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        if indexPath == [2, 0] {
+            AuthManager.shared.resign()
+                .subscribe(
+                    onSuccess: { _ in
+                        Log.debug("회원 탈퇴 성공")
+                        KeychainItem.deleteTokenInKeychain()
+                    }, onFailure: { error in
+                        APIError.logError(error)
+                    })
+                .disposed(by: disposeBag)
+        }
     }
 }

@@ -79,7 +79,6 @@
 		A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891129B066F700688FD8 /* EditProfileVC.swift */; };
 		A233891929B088D400688FD8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891829B088D400688FD8 /* SettingView.swift */; };
 		A233891C29B088E800688FD8 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891B29B088E800688FD8 /* SettingVC.swift */; };
-		A233891F29B0CEC300688FD8 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233891E29B0CEC300688FD8 /* Setting.swift */; };
 		A233892229B3756700688FD8 /* StompManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233892129B3756700688FD8 /* StompManager.swift */; };
 		A233892429B3772800688FD8 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233892329B3772800688FD8 /* Message.swift */; };
 		A233892629B37B1F00688FD8 /* Leave.swift in Sources */ = {isa = PBXBuildFile; fileRef = A233892529B37B1F00688FD8 /* Leave.swift */; };
@@ -202,6 +201,7 @@
 		EDE5EC6029D70ABA00BB211F /* MarketProductsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */; };
 		EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501229ED388F001733C6 /* SignupGenreVM.swift */; };
 		EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */; };
+		EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501C29EDAE7C001733C6 /* Setting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -284,7 +284,6 @@
 		A233891129B066F700688FD8 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		A233891829B088D400688FD8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A233891B29B088E800688FD8 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
-		A233891E29B0CEC300688FD8 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Setting.swift; path = Sinzak/Scene/MyProfile/Setting/VC/Setting.swift; sourceTree = SOURCE_ROOT; };
 		A233892129B3756700688FD8 /* StompManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompManager.swift; sourceTree = "<group>"; };
 		A233892329B3772800688FD8 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		A233892529B37B1F00688FD8 /* Leave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leave.swift; sourceTree = "<group>"; };
@@ -404,6 +403,7 @@
 		EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketProductsResponseDTO.swift; sourceTree = "<group>"; };
 		EDF4501229ED388F001733C6 /* SignupGenreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVM.swift; sourceTree = "<group>"; };
 		EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultMessageDTO.swift; sourceTree = "<group>"; };
+		EDF4501C29EDAE7C001733C6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -980,7 +980,7 @@
 		A233891529B088B600688FD8 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				A233891D29B0CEB800688FD8 /* Model */,
+				EDF4501B29EDAE72001733C6 /* Model */,
 				A233891729B088C400688FD8 /* VC */,
 				A233891629B088BF00688FD8 /* View */,
 			);
@@ -1001,14 +1001,6 @@
 				A233891B29B088E800688FD8 /* SettingVC.swift */,
 			);
 			path = VC;
-			sourceTree = "<group>";
-		};
-		A233891D29B0CEB800688FD8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				A233891E29B0CEC300688FD8 /* Setting.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		A233892029B3755A00688FD8 /* Stomp */ = {
@@ -1758,6 +1750,14 @@
 			path = ResultModel;
 			sourceTree = "<group>";
 		};
+		EDF4501B29EDAE72001733C6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EDF4501C29EDAE7C001733C6 /* Setting.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2046,6 +2046,7 @@
 				A2B0F60E2980231A00EC5C78 /* MarketView.swift in Sources */,
 				A2DEC36C29B5BD4500CF0794 /* CertifiedAuthorVC.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
+				EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */,
 				EDE5EC5B29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift in Sources */,
 				A2100F712986937A00C85ADF /* WorksView.swift in Sources */,
 				A2DEC37129B636C300CF0794 /* APIError.swift in Sources */,
@@ -2153,7 +2154,6 @@
 				A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */,
-				A233891F29B0CEC300688FD8 /* Setting.swift in Sources */,
 				ED15161529DCBED000227CC8 /* Endpoint.swift in Sources */,
 				A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
