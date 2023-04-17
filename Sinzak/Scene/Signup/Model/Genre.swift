@@ -16,24 +16,24 @@ struct Genre {
 
 enum AllGenre: String {
     case painting
-    case orientalPainting
+    case orient
     case sculpture
     case print
     case craft
+    
     case portrait
-    case etc
-    case illust
-    case packageLagel
-    case printDesign
-    case posterBannerSign
-    case logobranding
-    case appWebDesign
+    case illustration
+    case logo
+    case poster
+    case design
+    case editorial
+    case label
     
     var text: String {
         switch self {
         case .painting:
             return I18NStrings.painting
-        case .orientalPainting:
+        case .orient:
             return I18NStrings.orientalPainting
         case .sculpture:
             return I18NStrings.sculpture
@@ -43,19 +43,17 @@ enum AllGenre: String {
             return I18NStrings.craft
         case .portrait:
             return I18NStrings.portrait
-        case .etc:
-            return I18NStrings.etc
-        case .illust:
+        case .illustration:
             return I18NStrings.illust
-        case .packageLagel:
+        case .label:
             return I18NStrings.packageLabel
-        case .printDesign:
+        case .editorial:
             return I18NStrings.printDesign
-        case .posterBannerSign:
+        case .poster:
             return I18NStrings.posterBannerSign
-        case .logobranding:
+        case .logo:
             return I18NStrings.logoBranding
-        case .appWebDesign:
+        case .design:
             return I18NStrings.appWebDesign
         }
     }
@@ -68,23 +66,22 @@ extension Genre {
         type: I18NStrings.fineart,
         category: [
             .painting,
-            .orientalPainting,
+            .orient,
             .sculpture,
             .print,
-            .craft,
-            .portrait,
-            .etc
+            .craft
         ])
     
     static let desingList: Genre = Genre(
         type: I18NStrings.design,
         category: [
-            .illust,
-            .packageLagel,
-            .printDesign,
-            .posterBannerSign,
-            .logobranding,
-            .appWebDesign
+            .portrait,
+            .illustration,
+            .logo,
+            .poster,
+            .design,
+            .editorial,
+            .label
         ])
 }
 

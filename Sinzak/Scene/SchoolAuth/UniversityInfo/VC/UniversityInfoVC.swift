@@ -51,8 +51,8 @@ final class UniversityInfoVC: SZVC {
     
     override func setNavigationBar() {
         super.setNavigationBar()
-        // TODO: 로그인 처리 이동?? 필요할거같음
-        navigationItem.leftBarButtonItem = nil // 이미 가입이 끝난 상황이라 뒤로 돌아가면 안됨
+        navigationItem.hidesBackButton = true 
+        navigationItem.leftBarButtonItem = nil
     }
     
     // MARK: - Bind

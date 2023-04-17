@@ -11,13 +11,13 @@ import RxCocoa
 import RxDataSources
 
 protocol SignupGenreVMInput {
-    func tapInterestedGenreCell(genres: [AllGenre])
+    func tapInterestedGenreCell(genres: [String])
     func tapNextButton()
 }
 
 protocol SignupGenreVMOutput {
     var allGenreSections: BehaviorRelay<[AllGenreDataSection]> { get }
-    var selectedGenre: BehaviorRelay<[AllGenre]> { get }
+    var selectedGenre: BehaviorRelay<[String]> { get }
     var pushUniversityInfoView: PublishRelay<UniversityInfoVC> { get }
 }
 
@@ -27,12 +27,45 @@ final class DefaultSignupGenreVM: SignupGenreVM {
     
     private let disposeBag = DisposeBag()
     
+    private var onboardingUser: OnboardingUser
+    
+    init(onboardingUser: OnboardingUser) {
+        self.onboardingUser = onboardingUser
+    }
+    
     // MARK: - Input
-    func tapInterestedGenreCell(genres: [AllGenre]) {
+    func tapInterestedGenreCell(genres: [String]) {
         selectedGenre.accept(genres)
     }
     
     func tapNextButton() {
+        
+//        KeychainItem.saveTokenInKeychain(
+//            accessToken: onboardingUser.accesToken ?? "",
+//            refreshToken: onboardingUser.refreshToken ?? ""
+//        )
+//
+//        Log.debug(KeychainItem.currentAccessToken)
+//        Log.debug(KeychainItem.currentRefreshToken)
+//
+//        let join: Join = Join(
+//            categoryLike: selectedGenre.value,
+//            nickname: onboardingUser.nickname ?? "",
+//            term: onboardingUser.term ?? false
+//        )
+//        AuthManager.shared.join(join)
+//            .subscribe(
+//                with: self,
+//                onSuccess: { owner, _ in
+//                    let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
+//                    owner.pushUniversityInfoView.accept(vc)
+//                },
+//                onFailure: { _, error in
+//                    APIError.logError(error)
+//                    KeychainItem.deleteTokenInKeychain()
+//                })
+//            .disposed(by: disposeBag)
+        
         let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
         pushUniversityInfoView.accept(vc)
     }
@@ -50,6 +83,6 @@ final class DefaultSignupGenreVM: SignupGenreVM {
         )
     ])
     
-    var selectedGenre: BehaviorRelay<[AllGenre]> = .init(value: [])
+    var selectedGenre: BehaviorRelay<[String]> = .init(value: [])
     var pushUniversityInfoView: PublishRelay<UniversityInfoVC> = .init()
 }

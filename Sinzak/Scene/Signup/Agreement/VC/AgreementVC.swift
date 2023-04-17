@@ -115,42 +115,42 @@ final class AgreementVC: SZVC {
             .disposed(by: disposeBag)
         
         // MARK: - 체크 버튼
-        viewModel.isFullCheckbuttonTapped
+        viewModel.isFullCheckbuttonChecked
             .asDriver(onErrorJustReturn: false)
             .drive(mainView.fullCheckButton.rx.isSelected)
             .disposed(by: disposeBag)
         
-        viewModel.isOlderFourteenCheckButtonTapped
+        viewModel.isOlderFourteenCheckButtonChecked
             .asDriver(onErrorJustReturn: false)
             .drive(mainView.olderFourteenCheckButton.rx.isSelected)
             .disposed(by: disposeBag)
         
-        viewModel.isTermsOfServiceCheckButtonTapped
+        viewModel.isTermsOfServiceCheckButtonChecked
             .asDriver(onErrorJustReturn: false)
             .drive(mainView.termsOfServiceCheckButton.rx.isSelected)
             .disposed(by: disposeBag)
         
-        viewModel.isPrivacyPolicyCheckButtonTapped
+        viewModel.isPrivacyPolicyCheckButtonChecked
             .asDriver(onErrorJustReturn: false)
             .drive(mainView.privacyPolicyCheckButton.rx.isSelected)
             .disposed(by: disposeBag)
         
-        viewModel.isMarketingInfoCheckButtonTapped
+        viewModel.isMarketingInfoCheckButtonChecked
             .asDriver(onErrorJustReturn: false)
             .drive(mainView.marketingInfoCheckButton.rx.isSelected)
             .disposed(by: disposeBag)
         
         Observable.combineLatest(
-            viewModel.isOlderFourteenCheckButtonTapped,
-            viewModel.isTermsOfServiceCheckButtonTapped,
-            viewModel.isPrivacyPolicyCheckButtonTapped,
-            viewModel.isMarketingInfoCheckButtonTapped
+            viewModel.isOlderFourteenCheckButtonChecked,
+            viewModel.isTermsOfServiceCheckButtonChecked,
+            viewModel.isPrivacyPolicyCheckButtonChecked,
+            viewModel.isMarketingInfoCheckButtonChecked
         )
         .observe(on: MainScheduler.instance)
         .subscribe(onNext: { [weak self] older, service, privacy, marketing in
             guard let self = self else { return }
             if !(older && service && privacy && marketing) {
-                self.viewModel.isFullCheckbuttonTapped.accept(false)
+                self.viewModel.isFullCheckbuttonChecked.accept(false)
             }
             
             if older && service && privacy {

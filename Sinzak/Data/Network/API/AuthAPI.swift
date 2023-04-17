@@ -79,21 +79,21 @@ extension AuthAPI: TargetType {
     }
     var task: Task {
         switch self {
-            case .nicknameCheck(let nickname):
+        case .nicknameCheck(let nickname):
             let params: [String: String] = [
                 "nickName": nickname
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
-            case .join(let joinInfo):
-                do {
-                    let encoder = JSONEncoder()
-                    let data = try encoder.encode(joinInfo)
-                    let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
-                    return .requestParameters(parameters: dictionary, encoding: URLEncoding.queryString)
-                } catch {
-                    print("Error encoding userInfo: \(error)")
-                    return .requestPlain
-                }
+        case .join(let joinInfo):
+            do {
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(joinInfo)
+                let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
+                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
+            } catch {
+                print("Error encoding userInfo: \(error)")
+                return .requestPlain
+            }
         case .editUserImage(let image):
             var formData: [MultipartFormData] = []
             guard let imageData = image.jpegData(compressionQuality: 0.6) else { return .uploadMultipart(formData)}
@@ -105,7 +105,7 @@ extension AuthAPI: TargetType {
                 let encoder = JSONEncoder()
                 let data = try encoder.encode(userInfo)
                 let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
-                return .requestParameters(parameters: dictionary, encoding: URLEncoding.queryString)
+                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
             } catch {
                 print("Error encoding userInfo: \(error)")
                 return .requestPlain
@@ -161,9 +161,10 @@ extension AuthAPI: TargetType {
     }
     var headers: [String: String]? {
         let header = [
-            "Content-type": "application/json",
+            "Content-type": "application/json"
         ]
         let accessToken = KeychainItem.currentAccessToken
+        
         switch self {
         case .nicknameCheck, .reissue:
             return header
@@ -181,7 +182,7 @@ extension AuthAPI: TargetType {
                 header["Authorization"] = accessToken
                 return header
             } else {
-                print("액세스토큰이 없어 불가능합니다.")
+                Log.error("액세스토큰이 없어 불가능합니다.")
                 return header
             }
         }

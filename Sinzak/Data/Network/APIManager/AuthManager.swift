@@ -7,12 +7,13 @@
 
 import Foundation
 import Moya
+import RxSwift
 
 class AuthManager {
     // MARK: - Properties
     private init () {}
     static let shared = AuthManager()
-    let provider = MoyaProvider<AuthAPI>()
+    private let provider = MoyaProvider<AuthAPI>()
     // MARK: - Methods
     /// 닉네임 중복 확인
     func checkNickname(for nickname: String, completion: @escaping ((Bool) -> Void)) {
@@ -78,6 +79,30 @@ class AuthManager {
             }
         }
     }
+    
+    func join(_ joinInfo: Join) -> Single<Bool> {
+        return provider.rx.request(.join(joinInfo: joinInfo))
+            .map({ response in
+                
+                Log.debug(response.request?.url ?? "")
+                if !(200..<300 ~= response.statusCode) {
+                    throw APIError.badStatus(code: response.statusCode)
+                }
+                
+                let result: ResultMessageDTO
+                do {
+                    result = try JSONDecoder().decode(ResultMessageDTO.self, from: response.data)
+                } catch {
+                    throw APIError.decodingError
+                }
+                
+                if let message = result.message {
+                    throw APIError.errorMessage(message)
+                }
+                return result.success ?? false
+            })
+    }
+    
     /// 회원정보 추가, 편집
     /// - 자기소개, 이름, 사진
     func editUserInfo(_ userInfo: UserInfo, completion: @escaping ((Bool) -> Void)) {

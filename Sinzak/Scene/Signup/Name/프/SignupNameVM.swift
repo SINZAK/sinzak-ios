@@ -29,14 +29,20 @@ final class DefaultSignupNameVM: SignupNameVM {
     
     private let disposeBag = DisposeBag()
     
+    private var onboardingUser: OnboardingUser
+    
+    init(onboardingUser: OnboardingUser) {
+        self.onboardingUser = onboardingUser
+    }
+    
     // MARK: - Input
     
     func nameTextFieldInput(name: String) {
         doubleCheckResult.accept(.beforeCheck)
         if isValidCheckButton.value != name.isValidString(.nickname) {
             isValidCheckButton.accept(name.isValidString(.nickname))
-            currentInputName.accept(name)
         }
+        currentInputName.accept(name)
     }
     
     func tapCheckButton() {
@@ -55,7 +61,8 @@ final class DefaultSignupNameVM: SignupNameVM {
     }
     
     func tapNextButton() {
-        let vc = SignupGenreVC(viewModel: DefaultSignupGenreVM())
+        onboardingUser.nickname = currentInputName.value
+        let vc = SignupGenreVC(viewModel: DefaultSignupGenreVM(onboardingUser: onboardingUser))
         pushSignupGenreVC.accept(vc)
     }
     

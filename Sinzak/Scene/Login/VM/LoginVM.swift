@@ -28,11 +28,11 @@ final class DefaultLoginVM: LoginVM {
     
     private let disposeBag = DisposeBag()
     
-    // MARK: - Input
+    private var onboardingUser: OnboardingUser = OnboardingUser()
     
+    // MARK: - Input
     func kakaoButtonTapped() {
         if UserApi.isKakaoTalkLoginAvailable() {
-       
             UserApi.shared.rx.loginWithKakaoTalk()
                 .subscribe(onNext: { [weak self] oauthToken in
                     do {
@@ -72,13 +72,17 @@ private extension DefaultLoginVM {
             Task {
                 do {
                     let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token)
-                    saveUserInKeychain(
-                        accessToken: snsLoginGrant.accessToken,
-                        refreshToken: snsLoginGrant.refreshToken
-                    )
+//                    saveUserInKeychain(
+//                        accessToken: snsLoginGrant.accessToken,
+//                        refreshToken: snsLoginGrant.refreshToken
+//                    )
+                    Log.debug(snsLoginGrant.accessToken)
+                    Log.debug(snsLoginGrant.refreshToken)
                     if snsLoginGrant.joined {
                         goTabBar()
                     } else {
+                        self.onboardingUser.accesToken = snsLoginGrant.accessToken
+                        self.onboardingUser.refreshToken = snsLoginGrant.accessToken
                         goSignUp()
                     }
                 } catch {
@@ -97,9 +101,10 @@ private extension DefaultLoginVM {
     
     func goSignUp() {
         DispatchQueue.main.async { [weak self] in
-            let vm = DefaultAgreementVM()
+            guard let self = self else { return }
+            let vm = DefaultAgreementVM(onboardingUser: self.onboardingUser)
             let vc = AgreementVC(viewModel: vm)
-            self?.pushSignUp.accept(vc)
+            self.pushSignUp.accept(vc)
         }
     }
     
@@ -108,12 +113,12 @@ private extension DefaultLoginVM {
         do {
             try KeychainItem(account: TokenKind.accessToken.text).saveItem(accessToken)
         } catch {
-            print("키체인에 액세스 토큰 정보 저장 불가")
+            Log.error("키체인에 액세스 토큰 정보 저장 불가")
         }
         do {
             try KeychainItem(account: TokenKind.refreshToken.text).saveItem(refreshToken)
         } catch {
-            print("키체인에 리프레시 토큰 정보 저장 불가")
+            Log.error("키체인에 리프레시 토큰 정보 저장 불가")
         }
     }
     
@@ -125,5 +130,4 @@ private extension DefaultLoginVM {
             Log.debug(error)
         }
     }
-    
 }

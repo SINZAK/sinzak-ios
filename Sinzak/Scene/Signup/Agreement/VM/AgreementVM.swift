@@ -27,11 +27,11 @@ protocol AgreementVMInput {
 protocol AgreementVMOutput {
     var presentWebView: PublishRelay<WebVC> { get }
     
-    var isFullCheckbuttonTapped: BehaviorRelay<Bool> { get }
-    var isOlderFourteenCheckButtonTapped: BehaviorRelay<Bool> { get }
-    var isTermsOfServiceCheckButtonTapped: BehaviorRelay<Bool> { get }
-    var isPrivacyPolicyCheckButtonTapped: BehaviorRelay<Bool> { get }
-    var isMarketingInfoCheckButtonTapped: BehaviorRelay<Bool> { get }
+    var isFullCheckbuttonChecked: BehaviorRelay<Bool> { get }
+    var isOlderFourteenCheckButtonChecked: BehaviorRelay<Bool> { get }
+    var isTermsOfServiceCheckButtonChecked: BehaviorRelay<Bool> { get }
+    var isPrivacyPolicyCheckButtonChecked: BehaviorRelay<Bool> { get }
+    var isMarketingInfoCheckButtonChecked: BehaviorRelay<Bool> { get }
     
     var pushNameVC: PublishRelay<SignupNameVC> { get }
 }
@@ -41,6 +41,12 @@ protocol AgreementVM: AgreementVMInput, AgreementVMOutput {}
 final class DefaultAgreementVM: AgreementVM {
     
     private let disposeBag = DisposeBag()
+    
+    private var onboardingUser: OnboardingUser
+    
+    init(onboardingUser: OnboardingUser) {
+        self.onboardingUser = onboardingUser
+    }
         
     // MARK: - Input
     func termsOfServiceMoreButtonTapped() {
@@ -62,39 +68,40 @@ final class DefaultAgreementVM: AgreementVM {
     }
     
     func fullCheckbuttonTapped() {
-        if !isFullCheckbuttonTapped.value {
+        if !isFullCheckbuttonChecked.value {
             [
-                isOlderFourteenCheckButtonTapped,
-                isTermsOfServiceCheckButtonTapped,
-                isPrivacyPolicyCheckButtonTapped,
-                isMarketingInfoCheckButtonTapped
+                isOlderFourteenCheckButtonChecked,
+                isTermsOfServiceCheckButtonChecked,
+                isPrivacyPolicyCheckButtonChecked,
+                isMarketingInfoCheckButtonChecked
             ].forEach { $0.accept(true) }
         }
-        isFullCheckbuttonTapped.accept(!isFullCheckbuttonTapped.value)
+        isFullCheckbuttonChecked.accept(!isFullCheckbuttonChecked.value)
     }
     
     func olderFourteenCheckButtonTapped() {
-        isOlderFourteenCheckButtonTapped
-            .accept(!isOlderFourteenCheckButtonTapped.value)
+        isOlderFourteenCheckButtonChecked
+            .accept(!isOlderFourteenCheckButtonChecked.value)
     }
     
     func termsOfServiceCheckButtonTapped() {
-        isTermsOfServiceCheckButtonTapped
-            .accept(!isTermsOfServiceCheckButtonTapped.value)
+        isTermsOfServiceCheckButtonChecked
+            .accept(!isTermsOfServiceCheckButtonChecked.value)
     }
     
     func privacyPolicyCheckButtonTapped() {
-        isPrivacyPolicyCheckButtonTapped
-            .accept(!isPrivacyPolicyCheckButtonTapped.value)
+        isPrivacyPolicyCheckButtonChecked
+            .accept(!isPrivacyPolicyCheckButtonChecked.value)
     }
      
     func marketingInfoCheckButtonTapped() {
-        isMarketingInfoCheckButtonTapped
-            .accept(!isMarketingInfoCheckButtonTapped.value)
+        isMarketingInfoCheckButtonChecked
+            .accept(!isMarketingInfoCheckButtonChecked.value)
     }
     
     func confirmButtonTapped() {
-        let vm = DefaultSignupNameVM()
+        onboardingUser.term = isMarketingInfoCheckButtonChecked.value
+        let vm = DefaultSignupNameVM(onboardingUser: onboardingUser)
         let vc = SignupNameVC(viewModel: vm)
         pushNameVC.accept(vc)
     }
@@ -103,11 +110,11 @@ final class DefaultAgreementVM: AgreementVM {
     
     var presentWebView: PublishRelay<WebVC> = .init()
     
-    var isFullCheckbuttonTapped: BehaviorRelay<Bool> = .init(value: false)
-    var isOlderFourteenCheckButtonTapped: BehaviorRelay<Bool> = .init(value: false)
-    var isTermsOfServiceCheckButtonTapped: BehaviorRelay<Bool> = .init(value: false)
-    var isPrivacyPolicyCheckButtonTapped: BehaviorRelay<Bool> = .init(value: false)
-    var isMarketingInfoCheckButtonTapped: BehaviorRelay<Bool> = .init(value: false)
+    var isFullCheckbuttonChecked: BehaviorRelay<Bool> = .init(value: false)
+    var isOlderFourteenCheckButtonChecked: BehaviorRelay<Bool> = .init(value: false)
+    var isTermsOfServiceCheckButtonChecked: BehaviorRelay<Bool> = .init(value: false)
+    var isPrivacyPolicyCheckButtonChecked: BehaviorRelay<Bool> = .init(value: false)
+    var isMarketingInfoCheckButtonChecked: BehaviorRelay<Bool> = .init(value: false)
     
     var pushNameVC: PublishRelay<SignupNameVC> = .init()
 }

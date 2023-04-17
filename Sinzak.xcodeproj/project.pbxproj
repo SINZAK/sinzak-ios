@@ -201,7 +201,7 @@
 		EDE5EC5D29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */; };
 		EDE5EC6029D70ABA00BB211F /* MarketProductsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */; };
 		EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501229ED388F001733C6 /* SignupGenreVM.swift */; };
-		EDF4501729ED5919001733C6 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501629ED5919001733C6 /* UICollectionView+Extension.swift */; };
+		EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -403,7 +403,7 @@
 		EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Extentsion.swift"; sourceTree = "<group>"; };
 		EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketProductsResponseDTO.swift; sourceTree = "<group>"; };
 		EDF4501229ED388F001733C6 /* SignupGenreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVM.swift; sourceTree = "<group>"; };
-		EDF4501629ED5919001733C6 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultMessageDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -489,7 +489,6 @@
 				EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */,
 				ED86969129D9359D001A1A9F /* UIView+Extension.swift */,
 				ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */,
-				EDF4501629ED5919001733C6 /* UICollectionView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -934,7 +933,7 @@
 			isa = PBXGroup;
 			children = (
 				EDE5EC5E29D7060C00BB211F /* DTO */,
-				A2B1C66329BB11340008DADB /* ResultModel */,
+				EDF4501829ED8DB8001733C6 /* ResultModel */,
 				A2DEC36F29B636B000CF0794 /* ErrorHandling */,
 				A233892029B3755A00688FD8 /* Stomp */,
 				A2F90539298969F500AC588C /* APIManager */,
@@ -1431,14 +1430,6 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
-		A2B1C66329BB11340008DADB /* ResultModel */ = {
-			isa = PBXGroup;
-			children = (
-				A2B1C66429BB11DF0008DADB /* ResultMessage.swift */,
-			);
-			path = ResultModel;
-			sourceTree = "<group>";
-		};
 		A2B3855E2959A4AE00E5EB7C /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1746,6 +1737,7 @@
 			children = (
 				EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */,
 				ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */,
+				EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1756,6 +1748,14 @@
 				EDF4501229ED388F001733C6 /* SignupGenreVM.swift */,
 			);
 			path = VM;
+			sourceTree = "<group>";
+		};
+		EDF4501829ED8DB8001733C6 /* ResultModel */ = {
+			isa = PBXGroup;
+			children = (
+				A2B1C66429BB11DF0008DADB /* ResultMessage.swift */,
+			);
+			path = ResultModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2029,6 +2029,7 @@
 				A254E14029BD0427001047FD /* UserAPI.swift in Sources */,
 				EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */,
 				A226CC5C29AE31F1000161E8 /* WelcomeView.swift in Sources */,
+				EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */,
 				A216BD53297FD60E008964BC /* ChatListView.swift in Sources */,
 				A2B0F6112980233900EC5C78 /* MarketVC.swift in Sources */,
 				A24E909E29B7246E006B3347 /* HomeSection.swift in Sources */,
@@ -2051,7 +2052,6 @@
 				A2F6EAE1298774FC00DE754F /* HomeViewModel.swift in Sources */,
 				ED19B0CB29EAE24500C951D1 /* SchoolAuthButton.swift in Sources */,
 				A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */,
-				EDF4501729ED5919001733C6 /* UICollectionView+Extension.swift in Sources */,
 				ED7F92D129DB0F2A00C55FBF /* SNSLoginDTO.swift in Sources */,
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
 				A280AB5129A7A5BB00C1729C /* WriteCategoryHeader.swift in Sources */,

@@ -14,9 +14,26 @@ enum SNS: String {
     case google
 }
 // MARK: - 회원가입 모델
+
+struct OnboardingUser {
+    var accesToken: String?
+    var refreshToken: String?
+    var nickname: String?
+    var categoryLike: [String]?
+    var term: Bool?
+    
+    init() {
+        self.accesToken = nil
+        self.refreshToken = nil
+        self.nickname = nil
+        self.categoryLike = nil
+        self.term = nil
+    }
+}
+
 struct Join: Codable {
     var categoryLike, nickname: String
-    var term: Bool
+    var term: String
     // CodingKeys
     enum CodingKeys: String, CodingKey {
         case categoryLike = "category_like"
@@ -27,7 +44,7 @@ struct Join: Codable {
     init(categoryLike: [String], nickname: String, term: Bool = true) {
         self.categoryLike = categoryLike.map { $0 }.joined(separator: ",")
         self.nickname = nickname
-        self.term = term
+        self.term = term ? "true" : "false"
     }
 }
 // MARK: - 사용자 정보 수정

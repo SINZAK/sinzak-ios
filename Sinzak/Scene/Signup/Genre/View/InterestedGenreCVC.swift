@@ -18,6 +18,8 @@ final class InterestedGenreCVC: UICollectionViewCell {
         }
     }
     
+    var genre: AllGenre?
+    
     let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
     }
@@ -38,8 +40,9 @@ final class InterestedGenreCVC: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // 셀 선택여부에 따라 디자인 변경
-    func isUserSelected(_ bool: Bool = false) {
+    private func isUserSelected(_ bool: Bool = false) {
         switch bool {
         case true:
             textLabel.textColor = CustomColor.white
@@ -55,13 +58,19 @@ final class InterestedGenreCVC: UICollectionViewCell {
         }
     }
     
-    func setupUI() {
+    func configureCell(with genre: AllGenre) {
+        self.genre = genre
+        self.textLabel.text = genre.text
+    }
+    
+    private func setupUI() {
         backgroundColor = .clear
         contentView.addSubviews(
             baseView, imageView, textLabel
         )
     }
-    func setConstraints() {
+    
+    private func setConstraints() {
         imageView.snp.makeConstraints { make in
             make.width.height.equalTo(20)
             make.leading.equalToSuperview().inset(8)

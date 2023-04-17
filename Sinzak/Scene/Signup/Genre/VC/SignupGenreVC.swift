@@ -55,10 +55,36 @@ final class SignupGenreVC: SZVC {
         mainView.collectionView.rx.itemSelected
             .withUnretained(self)
             .subscribe(onNext: { owner, indexPath in
-                let selectedIndexPath = owner.mainView.collectionView.indexPathsForSelectedItems
-                if selectedIndexPath?.count == 4 {
-                    owner.mainView.collectionView.deselectItem(at: indexPath, animated: false)
+                guard let selectedIndexPath = owner.mainView.collectionView.indexPathsForSelectedItems else {
+                    return
                 }
+                if selectedIndexPath.count == 4 {
+                    owner.mainView.collectionView.deselectItem(at: indexPath, animated: false)
+                } else {
+                    let selectedGenre: [String] = selectedIndexPath
+                        .map { indexPath in
+                            guard let cell = owner.mainView.collectionView.cellForItem(at: indexPath) as? InterestedGenreCVC else { return "" }
+                            return cell.genre?.rawValue ?? ""
+                        }
+                    owner.viewModel.selectedGenre.accept(selectedGenre)
+                    Log.debug(owner.viewModel.selectedGenre.value)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.collectionView.rx.itemDeselected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                guard let selectedIndexPath = owner.mainView.collectionView.indexPathsForSelectedItems else {
+                    return
+                }
+                let selectedGenre: [String] = selectedIndexPath
+                    .map { indexPath in
+                        guard let cell = owner.mainView.collectionView.cellForItem(at: indexPath) as? InterestedGenreCVC else { return "" }
+                        return cell.genre?.rawValue ?? ""
+                    }
+                owner.viewModel.selectedGenre.accept(selectedGenre)
+                Log.debug(owner.viewModel.selectedGenre.value)
             })
             .disposed(by: disposeBag)
         
@@ -95,7 +121,7 @@ private extension SignupGenreVC {
                     for: indexPath
                 ) as? InterestedGenreCVC else { return UICollectionViewCell() }
                 
-                cell.textLabel.text = item.text
+                cell.configureCell(with: item)
                 return cell
             },
             configureSupplementaryView: { dataSourece, collectionView, kind, indexPath in
