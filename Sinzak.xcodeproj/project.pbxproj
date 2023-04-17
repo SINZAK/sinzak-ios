@@ -201,6 +201,7 @@
 		EDE5EC5B29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */; };
 		EDE5EC5D29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */; };
 		EDE5EC6029D70ABA00BB211F /* MarketProductsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */; };
+		EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501229ED388F001733C6 /* SignupGenreVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -402,6 +403,7 @@
 		EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extenstion.swift"; sourceTree = "<group>"; };
 		EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Extentsion.swift"; sourceTree = "<group>"; };
 		EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketProductsResponseDTO.swift; sourceTree = "<group>"; };
+		EDF4501229ED388F001733C6 /* SignupGenreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1207,6 +1209,7 @@
 			children = (
 				A2B38569295D886300E5EB7C /* View */,
 				A2B3856A295D886900E5EB7C /* VC */,
+				EDF4501129ED3880001733C6 /* VM */,
 			);
 			path = Genre;
 			sourceTree = "<group>";
@@ -1755,6 +1758,14 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		EDF4501129ED3880001733C6 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				EDF4501229ED388F001733C6 /* SignupGenreVM.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2024,6 +2035,7 @@
 				A280AB3829A7222100C1729C /* SearchHistoryView.swift in Sources */,
 				A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */,
 				A254E14029BD0427001047FD /* UserAPI.swift in Sources */,
+				EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */,
 				A226CC5C29AE31F1000161E8 /* WelcomeView.swift in Sources */,
 				A216BD53297FD60E008964BC /* ChatListView.swift in Sources */,
 				A2B0F6112980233900EC5C78 /* MarketVC.swift in Sources */,

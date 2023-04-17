@@ -55,7 +55,7 @@ final class DefaultSignupNameVM: SignupNameVM {
     }
     
     func tapNextButton() {
-        let vc = SignupGenreVC()
+        let vc = SignupGenreVC(viewModel: DefaultSignupGenreVM())
         pushSignupGenreVC.accept(vc)
     }
     
