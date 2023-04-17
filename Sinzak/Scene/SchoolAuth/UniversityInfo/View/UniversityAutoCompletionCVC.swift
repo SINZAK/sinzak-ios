@@ -13,7 +13,7 @@ final class UniversityAutoCompletionCVC: UICollectionViewCell {
     // MARK: - Properties
     let textLabel = UILabel().then {
         $0.font = .caption_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     
     // MARK: - Init
@@ -39,6 +39,6 @@ final class UniversityAutoCompletionCVC: UICollectionViewCell {
 
     override func prepareForReuse() {
         textLabel.text = ""
-        textLabel.textColor = CustomColor.black
+        textLabel.textColor = CustomColor.label
     }
 }
