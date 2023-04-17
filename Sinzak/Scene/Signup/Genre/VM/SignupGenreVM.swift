@@ -40,34 +40,31 @@ final class DefaultSignupGenreVM: SignupGenreVM {
     
     func tapNextButton() {
         
-//        KeychainItem.saveTokenInKeychain(
-//            accessToken: onboardingUser.accesToken ?? "",
-//            refreshToken: onboardingUser.refreshToken ?? ""
-//        )
-//
-//        Log.debug(KeychainItem.currentAccessToken)
-//        Log.debug(KeychainItem.currentRefreshToken)
-//
-//        let join: Join = Join(
-//            categoryLike: selectedGenre.value,
-//            nickname: onboardingUser.nickname ?? "",
-//            term: onboardingUser.term ?? false
-//        )
-//        AuthManager.shared.join(join)
-//            .subscribe(
-//                with: self,
-//                onSuccess: { owner, _ in
-//                    let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
-//                    owner.pushUniversityInfoView.accept(vc)
-//                },
-//                onFailure: { _, error in
-//                    APIError.logError(error)
-//                    KeychainItem.deleteTokenInKeychain()
-//                })
-//            .disposed(by: disposeBag)
-        
-        let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
-        pushUniversityInfoView.accept(vc)
+        KeychainItem.saveTokenInKeychain(
+            accessToken: onboardingUser.accesToken ?? "",
+            refreshToken: onboardingUser.refreshToken ?? ""
+        )
+
+        Log.debug(KeychainItem.currentAccessToken)
+        Log.debug(KeychainItem.currentRefreshToken)
+
+        let join: Join = Join(
+            categoryLike: selectedGenre.value,
+            nickname: onboardingUser.nickname ?? "",
+            term: onboardingUser.term ?? false
+        )
+        AuthManager.shared.join(join)
+            .subscribe(
+                with: self,
+                onSuccess: { owner, _ in
+                    let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
+                    owner.pushUniversityInfoView.accept(vc)
+                },
+                onFailure: { _, error in
+                    APIError.logError(error)
+                    KeychainItem.deleteTokenInKeychain()
+                })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Output
