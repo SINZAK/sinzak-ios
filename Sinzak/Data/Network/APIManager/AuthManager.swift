@@ -97,6 +97,7 @@ class AuthManager {
             }
         }
     }
+    
     /// 관심장르 편집
     func editCategory(_ category: CategoryLikeEdit, completion: @escaping ((Bool)-> Void)) {
         provider.request(.editCategoryLike(category: category)) { result in
