@@ -47,7 +47,6 @@ final class SignupGenreVC: SZVC {
         bind()
     }
     func bind() {
-        
         bindInput()
         bindOutput()
     }
@@ -62,12 +61,27 @@ final class SignupGenreVC: SZVC {
                 }
             })
             .disposed(by: disposeBag)
+        
+        mainView.nextButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.viewModel.tapNextButton()
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
         viewModel.allGenreSections
             .observe(on: MainScheduler.instance)
             .bind(to: mainView.collectionView.rx.items(dataSource: getGenreDataSource()))
+            .disposed(by: disposeBag)
+        
+        viewModel.pushUniversityInfoView
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, vc in
+                owner.navigationController?.pushViewController(vc, animated: true)
+            })
             .disposed(by: disposeBag)
     }
 }

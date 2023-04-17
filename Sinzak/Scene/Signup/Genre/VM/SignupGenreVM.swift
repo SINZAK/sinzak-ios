@@ -12,11 +12,13 @@ import RxDataSources
 
 protocol SignupGenreVMInput {
     func tapInterestedGenreCell(genres: [AllGenre])
+    func tapNextButton()
 }
 
 protocol SignupGenreVMOutput {
     var allGenreSections: BehaviorRelay<[AllGenreDataSection]> { get }
     var selectedGenre: BehaviorRelay<[AllGenre]> { get }
+    var pushUniversityInfoView: PublishRelay<UniversityInfoVC> { get }
 }
 
 protocol SignupGenreVM: SignupGenreVMInput, SignupGenreVMOutput {}
@@ -28,6 +30,11 @@ final class DefaultSignupGenreVM: SignupGenreVM {
     // MARK: - Input
     func tapInterestedGenreCell(genres: [AllGenre]) {
         selectedGenre.accept(genres)
+    }
+    
+    func tapNextButton() {
+        let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
+        pushUniversityInfoView.accept(vc)
     }
     
     // MARK: - Output
@@ -44,4 +51,5 @@ final class DefaultSignupGenreVM: SignupGenreVM {
     ])
     
     var selectedGenre: BehaviorRelay<[AllGenre]> = .init(value: [])
+    var pushUniversityInfoView: PublishRelay<UniversityInfoVC> = .init()
 }
