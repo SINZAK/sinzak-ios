@@ -51,7 +51,7 @@ final class UniversityInfoVC: SZVC {
     
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.hidesBackButton = true 
+        navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = nil
     }
     
@@ -96,6 +96,13 @@ final class UniversityInfoVC: SZVC {
                 self?.mainView.searchTextField.text = cell.textLabel.text
                 self?.view.endEditing(true)
                 self?.viewModel.isHideCollectionView.accept(true)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.notStudentButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.viewModel.tapNotStudentButton()
             })
             .disposed(by: disposeBag)
         
@@ -157,7 +164,16 @@ final class UniversityInfoVC: SZVC {
             .drive(mainView.nextButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        viewModel.presentStudentAuthView
+        viewModel.presentTabBarView
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, vc in
+                vc.modalPresentationStyle = .fullScreen
+                owner.present(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.pushStudentAuthView
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, vc in

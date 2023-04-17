@@ -12,6 +12,7 @@ import RxDataSources
 
 protocol UniversityInfoVMInput {
     func textFieldInput(_ text: String)
+    func tapNotStudentButton()
     func tapNextButton()
 }
 
@@ -23,7 +24,8 @@ protocol UniversityInfoVMOutput {
     
     var isEnableNextButton: BehaviorRelay<Bool> { get }
     
-    var presentStudentAuthView: PublishRelay<StudentAuthVC> { get }
+    var presentTabBarView: PublishRelay<TabBarVC> { get }
+    var pushStudentAuthView: PublishRelay<StudentAuthVC> { get }
 }
 
 protocol UniversityInfoVM: UniversityInfoVMInput, UniversityInfoVMOutput {}
@@ -61,9 +63,14 @@ final class DefaultUniversityInfoVM: UniversityInfoVM {
         schoolSections.accept([newSchoolSection])
     }
     
+    func tapNotStudentButton() {
+        let vc = TabBarVC()
+        presentTabBarView.accept(vc)
+    }
+    
     func tapNextButton() {
         let vc = StudentAuthVC()
-        presentStudentAuthView.accept(vc)
+        pushStudentAuthView.accept(vc)
     }
     
     // MARK: - Output
@@ -74,5 +81,7 @@ final class DefaultUniversityInfoVM: UniversityInfoVM {
     var currentInputText: String = ""
 
     var isEnableNextButton: BehaviorRelay<Bool> = .init(value: false)
-    var presentStudentAuthView: PublishRelay<StudentAuthVC> = .init()
+    
+    var presentTabBarView: PublishRelay<TabBarVC> = .init()
+    var pushStudentAuthView: PublishRelay<StudentAuthVC> = .init()
 }
