@@ -758,10 +758,10 @@
 		A2265370296D7E4600605697 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				A2F6EADF298774E800DE754F /* ViewModel */,
 				A2F6EADC298773DA00DE754F /* Model */,
 				A2265375296D7E6300605697 /* View */,
 				A2265376296D7E6C00605697 /* VC */,
+				A2F6EADF298774E800DE754F /* VM */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1638,12 +1638,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		A2F6EADF298774E800DE754F /* ViewModel */ = {
+		A2F6EADF298774E800DE754F /* VM */ = {
 			isa = PBXGroup;
 			children = (
 				A2F6EAE0298774FC00DE754F /* HomeViewModel.swift */,
 			);
-			path = ViewModel;
+			path = VM;
 			sourceTree = "<group>";
 		};
 		A2F90538298969E100AC588C /* API */ = {

@@ -23,7 +23,11 @@ final class TabBarVC: UITabBarController {
     /// 탭 바 구성
     private func setTabBarController() {
         // 홈
-        let homeVC = UINavigationController(rootViewController: HomeVC())
+    
+        let homeVC = KeychainItem.currentAccessToken.isEmpty ?
+        UINavigationController(rootViewController: HomeVC(mode: .noLoggedIn)) :
+        UINavigationController(rootViewController: HomeVC(mode: .loggedIn))
+        
         homeVC.tabBarItem = UITabBarItem(title: I18NStrings.Home,
                                          image: UIImage(named: "home"),
                                          selectedImage: UIImage(named: "home-selected"))

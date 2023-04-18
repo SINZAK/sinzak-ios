@@ -13,7 +13,7 @@ import SnapKit
 final class HomeHeader: UICollectionReusableView {
     let titleLabel = UILabel().then {
         $0.font = .subtitle_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
