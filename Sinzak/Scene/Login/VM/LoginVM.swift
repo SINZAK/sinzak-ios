@@ -15,6 +15,7 @@ import RxKakaoSDKUser
 
 protocol LoginVMInput {
     func kakaoButtonTapped()
+    var onboardingUser: OnboardingUser { get set }
 }
 
 protocol LoginVMOutput {
@@ -28,7 +29,7 @@ final class DefaultLoginVM: LoginVM {
     
     private let disposeBag = DisposeBag()
     
-    private var onboardingUser: OnboardingUser = OnboardingUser()
+    var onboardingUser: OnboardingUser = OnboardingUser()
     
     // MARK: - Input
     func kakaoButtonTapped() {
@@ -72,13 +73,14 @@ private extension DefaultLoginVM {
             Task {
                 do {
                     let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token)
-//                    saveUserInKeychain(
-//                        accessToken: snsLoginGrant.accessToken,
-//                        refreshToken: snsLoginGrant.refreshToken
-//                    )
+
                     Log.debug(snsLoginGrant.accessToken)
                     Log.debug(snsLoginGrant.refreshToken)
                     if snsLoginGrant.joined {
+                        KeychainItem.saveTokenInKeychain(
+                            accessToken: snsLoginGrant.accessToken,
+                            refreshToken: snsLoginGrant.refreshToken
+                        )
                         goTabBar()
                     } else {
                         self.onboardingUser.accesToken = snsLoginGrant.accessToken
@@ -105,20 +107,6 @@ private extension DefaultLoginVM {
             let vm = DefaultAgreementVM(onboardingUser: self.onboardingUser)
             let vc = AgreementVC(viewModel: vm)
             self.pushSignUp.accept(vc)
-        }
-    }
-    
-    /** 토큰  정보를 키체인에 저장 */
-    func saveUserInKeychain(accessToken: String, refreshToken: String) {
-        do {
-            try KeychainItem(account: TokenKind.accessToken.text).saveItem(accessToken)
-        } catch {
-            Log.error("키체인에 액세스 토큰 정보 저장 불가")
-        }
-        do {
-            try KeychainItem(account: TokenKind.refreshToken.text).saveItem(refreshToken)
-        } catch {
-            Log.error("키체인에 리프레시 토큰 정보 저장 불가")
         }
     }
     

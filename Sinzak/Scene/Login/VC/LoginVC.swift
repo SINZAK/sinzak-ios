@@ -15,7 +15,7 @@ import RxSwift
 final class LoginVC: SZVC {
     // MARK: - Properties
     let mainView = LoginView()
-    let viewModel: LoginVM!
+    var viewModel: LoginVM!
     
     // 네이버로그인 인스턴스
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
@@ -28,6 +28,16 @@ final class LoginVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         naverLoginInstance?.delegate = self
+        
+        naverLoginInstance?.requestDeleteToken()
+        
+//        UserApi.shared.logout {(error) in
+//            if let error = error {
+//                Log.error(error)
+//            } else {
+//                Log.debug("Kakao logout() success.")
+//            }
+//        }
     }
     
     init(viewModel: LoginVM!) {
@@ -58,7 +68,7 @@ final class LoginVC: SZVC {
     /** 회원가입, 로그인 이후 메서드 */
     /// 로그인이 안될 경우 / 이메일 중복이 아닐 경우
     func goSignup() {
-        let rootVC = AgreementVC(viewModel: DefaultAgreementVM(onboardingUser: OnboardingUser()))
+        let rootVC = AgreementVC(viewModel: DefaultAgreementVM(onboardingUser: viewModel.onboardingUser))
         let vc = UINavigationController(rootViewController: rootVC)
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
     }
@@ -168,42 +178,7 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
         showAlert(title: "ERROR\nApple ID 연동에 실패했습니다.", okText: I18NStrings.confirm, cancelNeeded: false, completionHandler: nil)
     }
 }
-/** 카카오로그인 관련 메서드 */
-extension LoginVC {
-    func setKakaoUserInfo() {
-        UserApi.shared.me() { (user, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("me() success")
-                var scopes = [String]()
-                if (user?.kakaoAccount?.emailNeedsAgreement == true) { scopes.append("account_email") }
-                if scopes.count > 0 {
-                    UserApi.shared.loginWithKakaoAccount(scopes: scopes) { (_, error) in
-                        if let error = error {
-                            print(error)
-                        }
-                        else {
-                            UserApi.shared.me() { (user, error) in
-                                if let error = error {
-                                    print(error)
-                                }
-                                else {
-                                    print("me() success.")
-                                    //do something
-                                    _ = user
-                                }
-                            }
-                        }
-                    }
-                }
-                else {
-                    print("사용자의 추가 동의가 필요하지 않습니다.")
-                }
-            }
-        }
-    }
-}
+
 /** 네이버로그인 관련  메서드*/
 extension LoginVC: NaverThirdPartyLoginConnectionDelegate {
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
@@ -215,13 +190,18 @@ extension LoginVC: NaverThirdPartyLoginConnectionDelegate {
             SNSLoginManager.shared.doNaverLogin(accessToken: loginInstance.accessToken) { [weak self] result in
                 switch result {
                 case let .success(data):
-                    // 키체인에 저장
-                    self?.saveUserInKeychain(accessToken: data.data.accessToken, refreshToken: data.data.refreshToken)
+                    
                     if data.data.joined {
                         // 가입했을 경우 홈으로 보내주고 액세스토큰, 리프레시 토큰은 키체인에 저장
+                        KeychainItem.saveTokenInKeychain(
+                            accessToken: data.data.accessToken,
+                            refreshToken: data.data.refreshToken
+                        )
                         self?.goHome()
                     } else {
                         // 가입 안했을 경우 회원가입으로 보내기
+                        self?.viewModel.onboardingUser.accesToken = data.data.accessToken
+                        self?.viewModel.onboardingUser.refreshToken = data.data.refreshToken
                         self?.goSignup()
                     }
                 case let .failure(error): print(error)

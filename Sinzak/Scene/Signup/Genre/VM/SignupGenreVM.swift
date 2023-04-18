@@ -59,6 +59,7 @@ final class DefaultSignupGenreVM: SignupGenreVM {
                 onSuccess: { owner, _ in
                     let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
                     owner.pushUniversityInfoView.accept(vc)
+                    Log.debug("회원가입 성공, \(join)")
                 },
                 onFailure: { _, error in
                     APIError.logError(error)
