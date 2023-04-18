@@ -38,6 +38,7 @@ final class LoginVC: SZVC {
 //                Log.debug("Kakao logout() success.")
 //            }
 //        }
+        
     }
     
     init(viewModel: LoginVM!) {
@@ -48,53 +49,8 @@ final class LoginVC: SZVC {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    // MARK: - Actions
-    
-    /** 애플 로그인 액션  */
-    @objc func appleButtontapped(_ sender: UIButton) {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
-    }
-    /**  네이버 로그인 액션 */
-    @objc func naverButtonTapped(_ sender: UIButton) {
-        naverLoginInstance?.requestThirdPartyLogin()
-    }
-    /** 회원가입, 로그인 이후 메서드 */
-    /// 로그인이 안될 경우 / 이메일 중복이 아닐 경우
-    func goSignup() {
-        let rootVC = AgreementVC(viewModel: DefaultAgreementVM(onboardingUser: viewModel.onboardingUser))
-        let vc = UINavigationController(rootViewController: rootVC)
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
-    }
-    /// 이미 가입한 유저일 경우 홈화면으로 이동
-    func goHome() {
-        let vc = TabBarVC()
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
-    }
-    // MARK: - Helpers
-    /** 토큰  정보를 키체인에 저장 */
-    private func saveUserInKeychain(accessToken: String, refreshToken: String) {
-        do {
-            try KeychainItem(account: TokenKind.accessToken.text).saveItem(accessToken)
-        } catch {
-            print("키체인에 액세스 토큰 정보 저장 불가")
-        }
-        do {
-            try KeychainItem(account: TokenKind.refreshToken.text).saveItem(refreshToken)
-        } catch {
-            print("키체인에 리프레시 토큰 정보 저장 불가")
-        }
-    }
     
     override func configure() {
-        mainView.appleButton.addTarget(self, action: #selector(appleButtontapped), for: .touchUpInside)
-        mainView.naverButton.addTarget(self, action: #selector(naverButtonTapped), for: .touchUpInside)
         bind()
     }
     
@@ -109,6 +65,26 @@ final class LoginVC: SZVC {
         mainView.kakaoButton.rx.tap
             .subscribe(with: self, onNext: { owner, _ in
                 owner.viewModel.kakaoButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.naverButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.naverLoginInstance?.requestThirdPartyLogin()
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.appleButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                let appleIDProvider = ASAuthorizationAppleIDProvider()
+                let request = appleIDProvider.createRequest()
+                request.requestedScopes = [.fullName, .email]
+                let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+                authorizationController.delegate = owner
+                authorizationController.presentationContextProvider = owner
+                authorizationController.performRequests()
             })
             .disposed(by: disposeBag)
         
@@ -138,33 +114,22 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
         return self.view.window!
     }
     /// Apple ID 연동 성공 시
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
         switch authorization.credential {
             // Apple ID
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             // 계정 정보 가져오기
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
             let idToken = appleIDCredential.identityToken
             if let idToken = idToken {
                 let strToken = String(decoding: idToken, as: UTF8.self)
-                SNSLoginManager.shared.doAppleLogin(idToken: "\(strToken)") { [weak self] result in
-                    switch result {
-                    case let .success(data):
-                        // 키체인에 저장
-                        self?.saveUserInKeychain(accessToken: data.data.accessToken, refreshToken: data.data.refreshToken)
-                        if data.data.joined {
-                            self?.goHome()
-                        } else {
-                            // 가입 안했을 경우 회원가입으로 보내기
-                            self?.goSignup()
-                        }
-                    case let .failure(error):
-                        print(error)
-                        self?.showAlert(title: "ERROR\n데이터를 가져올 수 없습니다.", okText: I18NStrings.confirm, cancelNeeded: false, completionHandler: nil)
-                    }
-                }
+                viewModel.appleAuthorizationControl(token: strToken)
             }
+            
+//            let fullName = appleIDCredential.fullName
+//            let email = appleIDCredential.email
             // print("User Email : \(email ?? "")")
             // print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             
@@ -173,7 +138,10 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
         }
     }
     /// Apple ID 연동 실패 시
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithError error: Error
+    ) {
         // Handle error.
         showAlert(title: "ERROR\nApple ID 연동에 실패했습니다.", okText: I18NStrings.confirm, cancelNeeded: false, completionHandler: nil)
     }

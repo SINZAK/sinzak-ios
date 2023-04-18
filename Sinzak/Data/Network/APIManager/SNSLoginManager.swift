@@ -33,6 +33,33 @@ class SNSLoginManager {
         }
     }
     
+    func doAppleLogin(idToken: String) -> Single<SNSLoginGrant> {
+        return provider.rx.request(.apple(idToken: idToken))
+            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+            .map { response in
+                
+                Log.debug(response.request?.url ?? "")
+                
+                if !(200..<300 ~= response.statusCode) {
+                    throw APIError.badStatus(code: response.statusCode)
+                }
+                
+                do {
+                    let snsLoginResultDTO = try JSONDecoder().decode(
+                        SNSLoginResultDTO.self,
+                        from: response.data
+                    )
+                    
+                    guard let snsLoginGrantDTO = snsLoginResultDTO.data else {
+                        throw APIError.noContent
+                    }
+                    return snsLoginGrantDTO.toDomain()
+                } catch {
+                    throw APIError.decodingError
+                }
+            }
+    }
+    
     /// kakao 로그인
     func doKakaoLogin(accessToken: String) async throws -> SNSLoginGrant {
         var response: Response
@@ -86,6 +113,7 @@ class SNSLoginManager {
     /// naver 로그인
     func doNaverLogin(accessToken: String) -> Single<SNSLoginGrant> {
         return provider.rx.request(.naver(accessToken: accessToken))
+            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map { response in
     
                 Log.debug(response.request?.url ?? "")

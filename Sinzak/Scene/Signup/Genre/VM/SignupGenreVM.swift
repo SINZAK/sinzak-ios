@@ -54,6 +54,7 @@ final class DefaultSignupGenreVM: SignupGenreVM {
             term: onboardingUser.term ?? false
         )
         AuthManager.shared.join(join)
+            .observe(on: MainScheduler.instance)
             .subscribe(
                 with: self,
                 onSuccess: { owner, _ in

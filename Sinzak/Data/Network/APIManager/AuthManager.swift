@@ -46,6 +46,7 @@ class AuthManager {
     /// 회원가입
     func join(_ joinInfo: Join) -> Single<Bool> {
         return provider.rx.request(.join(joinInfo: joinInfo))
+            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map({ response in
                 
                 Log.debug(response.request?.url ?? "")
@@ -70,6 +71,7 @@ class AuthManager {
     /// 회원 탈퇴
     func resign() -> Single<Void> {
         return provider.rx.request(.resign)
+            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map({ response in
                 
                 Log.debug(response.request?.url ?? "")

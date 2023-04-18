@@ -18,6 +18,7 @@ import Alamofire
 protocol LoginVMInput {
     func kakaoButtonTapped()
     func naverOauth20ConnectionDidFinishRequestACTokenWithAuthCode()
+    func appleAuthorizationControl(token: String)
     var onboardingUser: OnboardingUser { get set }
 }
 
@@ -125,6 +126,30 @@ final class DefaultLoginVM: LoginVM {
 //                }
 //            }
 //        }
+    }
+    
+    func appleAuthorizationControl(token: String) {
+        SNSLoginManager.shared.doAppleLogin(idToken: token)
+            .subscribe(
+                with: self,
+                onSuccess: { owner, snsLoginGrant in
+                    Log.debug(snsLoginGrant.accessToken)
+                    Log.debug(snsLoginGrant.refreshToken)
+                    if snsLoginGrant.joined {
+                        owner.goTabBar(
+                            accessToken: snsLoginGrant.accessToken,
+                            refreshToken: snsLoginGrant.refreshToken
+                        )
+                    } else {
+                        owner.goSignUp(
+                            accessToken: snsLoginGrant.accessToken,
+                            refreshToken: snsLoginGrant.refreshToken
+                        )
+                    }
+                }, onFailure: { _, error in
+                    Log.error(error)
+                })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Output
