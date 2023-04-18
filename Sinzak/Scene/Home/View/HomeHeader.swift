@@ -23,10 +23,10 @@ final class HomeHeader: UICollectionReusableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func setupUI() {
+    private func setupUI() {
        addSubview(titleLabel)
     }
-    func setConstraints() {
+    private func setConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview()
         }
