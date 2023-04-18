@@ -27,18 +27,18 @@ final class BannerCVC: UICollectionViewCell {
     }
     // MARK: - SetData
     func setData(banner: Banner) {
-        let url = URL(string: banner.imageUrl)
+        let url = URL(string: banner.imageURL)
         imageView.kf.setImage(with: url,
                               placeholder: UIImage(named: "banner"),
                               options: [.cacheOriginalImage],
                               completionHandler: nil)
     }
     // MARK: - Design Helper
-    func setupUI() {
+    private func setupUI() {
         contentView.backgroundColor = .clear
         contentView.addSubview(imageView)
     }
-    func setConstraints() {
+    private func setConstraints() {
         imageView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalToSuperview()

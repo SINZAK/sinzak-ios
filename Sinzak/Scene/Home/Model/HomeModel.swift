@@ -8,13 +8,13 @@
 import Foundation
 
 // MARK: - HomeNotLogined
-struct HomeNotLogined: Codable {
-    let data: HomeNotLoginedData
+struct HomeNotLoggedInProducts: Codable {
+    let data: HomeNotLoggedinProductsData
     let success: Bool
 }
 
 // MARK: - Data - HomeNotLogined
-struct HomeNotLoginedData: Codable {
+struct HomeNotLoggedinProductsData: Codable {
     let trading, new, hot: [Products]
 }
 
