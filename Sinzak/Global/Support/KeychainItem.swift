@@ -176,4 +176,8 @@ extension KeychainItem {
             Log.error("키체인에 리프레시 토큰 삭제 실패")
         }
     }
+    
+    static var isLoggedIn: Bool {
+        return !currentAccessToken.isEmpty
+    }
 }

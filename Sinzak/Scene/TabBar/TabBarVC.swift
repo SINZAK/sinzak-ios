@@ -24,9 +24,9 @@ final class TabBarVC: UITabBarController {
     private func setTabBarController() {
         // 홈
                 
-        let homeVM = KeychainItem.currentAccessToken.isEmpty ?
-        DefaultHomeVM(isLogin: false) :
-        DefaultHomeVM(isLogin: true)
+        let homeVM = KeychainItem.isLoggedIn ?
+        DefaultHomeVM(isLogin: true) :
+        DefaultHomeVM(isLogin: false)
         let homeVC = UINavigationController(rootViewController: HomeVC(viewModel: homeVM))
         
         homeVC.tabBarItem = UITabBarItem(title: I18NStrings.Home,

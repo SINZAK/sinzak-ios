@@ -45,4 +45,8 @@ final class BannerCVC: UICollectionViewCell {
             make.height.equalTo(imageView.snp.width).multipliedBy(0.39)
         }
     }
+    
+    override func prepareForReuse() {
+        imageView.image = nil
+    }
 }

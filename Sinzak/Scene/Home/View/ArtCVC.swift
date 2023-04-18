@@ -99,10 +99,8 @@ final class ArtCVC: UICollectionViewCell {
     }
     
     func setData(_ data: MarketProduct) {
-        //if let thumbnail = data.thumbnail {
-        let url = URL(string: data.thumbnail ?? "")
+        let url = URL(string: data.thumbnail)
         imageView.kf.setImage(with: url)
-        //}
         titleLabel.text = data.title
         authorLabel.text = data.author
         uploadTimeLabel.text = data.date.toDate().toRelativeString()
@@ -179,5 +177,14 @@ final class ArtCVC: UICollectionViewCell {
             make.leading.equalTo(middlePointLabel.snp.trailing)
             make.trailing.lessThanOrEqualToSuperview().inset(7)
         }
+    }
+    
+    override func prepareForReuse() {
+        imageView.image = nil
+        titleLabel.text = nil
+        authorLabel.text = nil
+        uploadTimeLabel.text = nil
+        priceLabel.text = nil
+        favoriteCountLabel.text = nil
     }
 }
