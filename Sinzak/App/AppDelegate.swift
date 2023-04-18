@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         instance?.serviceUrlScheme = "naverLoginSinzak" // URL Scheme
         instance?.consumerKey = "DwXMEfKZq0tmkrsn6kLk" // 클라이언트 아이디
-        instance?.consumerSecret = "2CAzvT18ok" // 시크릿 아이디
+        instance?.consumerSecret = "LyWqWH9srQ" // 시크릿 아이디
         instance?.appName = "신작" // 앱이름
         return true
     }

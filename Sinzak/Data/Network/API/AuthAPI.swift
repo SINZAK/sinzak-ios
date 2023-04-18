@@ -79,21 +79,21 @@ extension AuthAPI: TargetType {
     }
     var task: Task {
         switch self {
-            case .nicknameCheck(let nickname):
+        case .nicknameCheck(let nickname):
             let params: [String: String] = [
                 "nickName": nickname
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
-            case .join(let joinInfo):
-                do {
-                    let encoder = JSONEncoder()
-                    let data = try encoder.encode(joinInfo)
-                    let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
-                    return .requestParameters(parameters: dictionary, encoding: URLEncoding.queryString)
-                } catch {
-                    print("Error encoding userInfo: \(error)")
-                    return .requestPlain
-                }
+        case .join(let joinInfo):
+            do {
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(joinInfo)
+                let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
+                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
+            } catch {
+                print("Error encoding userInfo: \(error)")
+                return .requestPlain
+            }
         case .editUserImage(let image):
             var formData: [MultipartFormData] = []
             guard let imageData = image.jpegData(compressionQuality: 0.6) else { return .uploadMultipart(formData)}
@@ -105,7 +105,7 @@ extension AuthAPI: TargetType {
                 let encoder = JSONEncoder()
                 let data = try encoder.encode(userInfo)
                 let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
-                return .requestParameters(parameters: dictionary, encoding: URLEncoding.queryString)
+                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
             } catch {
                 print("Error encoding userInfo: \(error)")
                 return .requestPlain
@@ -114,13 +114,13 @@ extension AuthAPI: TargetType {
             let params: [String: String] = [
                 "categoryLike": category.categoryLike
             ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .fcmTokenUpdate(let fcmInfo):
             do {
                 let encoder = JSONEncoder()
                 let data = try encoder.encode(fcmInfo)
                 let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
-                return .requestParameters(parameters: dictionary, encoding: URLEncoding.queryString)
+                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
             } catch {
                 print("Error encoding userInfo: \(error)")
                 return .requestPlain
@@ -130,40 +130,41 @@ extension AuthAPI: TargetType {
                 "accessToken": KeychainItem.currentAccessToken,
                 "refreshToken": KeychainItem.currentRefreshToken
             ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
             
         case .deleteOneHistory(let id):
             let params: [String: Any] = [
                 "id": id
             ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
             
         case .follow(let userId), .unfollow(let userId):
             let params: [String: Any] = [
                 "userId": userId
             ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .report(let reason, let userId):
             let params: [String: Any] = [
                 "reason": reason,
                 "userId": userId
             ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
             
         case .cancelReport(let userId):
             let params: [String: Any] = [
                 "userId": userId
             ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .deleteSearchHistory, .reportList, .resign:
             return .requestPlain
         }
     }
     var headers: [String: String]? {
         let header = [
-            "Content-type": "application/json",
+            "Content-type": "application/json"
         ]
         let accessToken = KeychainItem.currentAccessToken
+        
         switch self {
         case .nicknameCheck, .reissue:
             return header
@@ -181,7 +182,7 @@ extension AuthAPI: TargetType {
                 header["Authorization"] = accessToken
                 return header
             } else {
-                print("액세스토큰이 없어 불가능합니다.")
+                Log.error("액세스토큰이 없어 불가능합니다.")
                 return header
             }
         }

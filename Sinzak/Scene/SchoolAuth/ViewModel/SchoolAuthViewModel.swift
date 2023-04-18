@@ -19,7 +19,7 @@ final class SchoolAuthViewModel: ViewModelType {
         let notStudentButtonTap: ControlEvent<Void>
     }
     struct Output {
-        let queryText:  Observable<ControlProperty<String>.Element>
+        let queryText: Observable<ControlProperty<String>.Element>
         let nextButtonTap: ControlEvent<Void>
         let notStudentButtonTap: ControlEvent<Void>
     }

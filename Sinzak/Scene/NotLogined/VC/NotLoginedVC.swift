@@ -54,7 +54,7 @@ final class NotLoginedVC: SZVC {
     /** 회원가입, 로그인 이후 메서드 */
     /// 로그인이 안될 경우 / 이메일 중복이 아닐 경우
     func goSignup() {
-        let rootVC = AgreementVC()
+        let rootVC = AgreementVC(viewModel: DefaultAgreementVM(onboardingUser: OnboardingUser()))
         let vc = UINavigationController(rootViewController: rootVC)
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
     }

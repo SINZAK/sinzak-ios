@@ -114,9 +114,30 @@ struct KeychainItem {
         }
         return query
     }
+}
+
+// MARK: - Token
+
+extension KeychainItem {
     
     /**
-     디바이스 키체인에 accessToken, refreshToken 저장
+      keychain에 accessToken, refreshToken 저장
+     */
+    static func saveTokenInKeychain(accessToken: String, refreshToken: String) {
+        do {
+            try KeychainItem(account: TokenKind.accessToken.text).saveItem(accessToken)
+        } catch {
+            Log.error("키체인에 액세스 토큰 정보 저장 불가")
+        }
+        do {
+            try KeychainItem(account: TokenKind.refreshToken.text).saveItem(refreshToken)
+        } catch {
+            Log.error("키체인에 리프레시 토큰 정보 저장 불가")
+        }
+    }
+    
+    /**
+     디바이스 키체인에 accessToken 읽어오기
      */
     static var currentAccessToken: String {
         do {
@@ -126,6 +147,10 @@ struct KeychainItem {
             return ""
         }
     }
+    
+    /**
+     디바이스 키체인에 refreshToken 읽어오기
+     */
     static var currentRefreshToken: String {
         do {
             let storedRefreshToken = try KeychainItem(account: TokenKind.refreshToken.text).readItem()
@@ -134,18 +159,21 @@ struct KeychainItem {
             return ""
         }
     }
-    static func deleteAccessTokenFromKeychain() {
+    
+    /**
+     keychain에 accessToken, refreshToken 삭제
+     */
+    static func deleteTokenInKeychain() {
         do {
             try KeychainItem(account: TokenKind.accessToken.text).deleteItem()
         } catch {
-            print("키체인에서 accessToken를 제거할 수 없습니다.")
+            Log.error("키체인에 엑세스 토큰 삭제 실패")
         }
-    }
-    static func deleteRefreshTokenFromKeychain() {
+        
         do {
             try KeychainItem(account: TokenKind.refreshToken.text).deleteItem()
         } catch {
-            print("키체인에서 refreshToken를 제거할 수 없습니다.")
+            Log.error("키체인에 리프레시 토큰 삭제 실패")
         }
     }
 }

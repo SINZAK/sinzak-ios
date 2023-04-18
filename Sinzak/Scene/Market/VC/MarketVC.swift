@@ -37,16 +37,19 @@ final class MarketVC: SZVC {
     override func loadView() {
         view = mainView
     }
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
-        configure()
         viewModel.viewDidLoad()
-        bind()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        
+        Log.debug("viewWillAppear selectCategory \(viewModel.selectedCategory.value)")
     }
 
     // MARK: - Helpers
@@ -56,21 +59,7 @@ final class MarketVC: SZVC {
         navigationItem.rightBarButtonItem = searchBarButton
     }
     override func configure() {
-        
-        mainView.categoryCollectionView.register(
-            CategoryTagCVC.self,
-            forCellWithReuseIdentifier: CategoryTagCVC.identifier
-        )
-        
-        mainView.productCollectionView.register(
-            ArtCVC.self,
-            forCellWithReuseIdentifier: ArtCVC.identifier
-        )
-        
-        mainView.categoryCollectionView.collectionViewLayout = setCategoryLayout()
-        mainView.productCollectionView.collectionViewLayout = setProductLayout()
-        
-        mainView.categoryCollectionView.allowsMultipleSelection = true
+        bind()
     }
 }
 
@@ -137,6 +126,7 @@ extension MarketVC {
         mainView.categoryCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.selectCategory(with: indexPath)
+//                self?.mainView.categoryCollectionView.selected
             })
             .disposed(by: disposeBag)
         
@@ -151,18 +141,21 @@ extension MarketVC {
     
         // MARK: - 화면이동
         viewModel.pushWriteCategoryVC
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] vc in
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
         
         viewModel.pushSerachVC
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] vc in
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
         
         viewModel.presentSelectAlignVC
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] vc in
                 vc.modalPresentationStyle = .custom
                 vc.transitioningDelegate = self
@@ -170,6 +163,15 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
+        viewModel.presentSkeleton
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] vc in
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                self?.present(nav, animated: false)
+            })
+            .disposed(by: disposeBag)
+            
         // MARK: - Collection View Section
         viewModel.categorySections
             .bind(to: mainView.categoryCollectionView.rx.items(dataSource: getCategoryDataSource()))
@@ -214,61 +216,9 @@ extension MarketVC {
     }
 }
 
-// MARK: - 컴포지셔널 레이아웃
-extension MarketVC {
-    
-    // TODO: View 수직 스크롤 끄기
-    func setCategoryLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
-                let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .estimated(70),
-                    heightDimension: .estimated(32))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(3.0),
-                    heightDimension: .estimated(64.0))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                group.interItemSpacing = .fixed(10)
-                let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.top = 15
-                section.contentInsets.leading = 16
-                section.contentInsets.bottom = 15
-                section.interGroupSpacing = 0
-                section.orthogonalScrollingBehavior = .continuous
-                return section
-        }
-    }
-    
-    func setProductLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
-                let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(0.5),
-                    heightDimension: .fractionalHeight(1.0)
-                )
-                let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(276)
-                )
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets.leading = 8
-                item.contentInsets.trailing = 8
-                item.contentInsets.bottom = 16
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.top = 10
-                section.contentInsets.leading = 8
-                section.contentInsets.trailing = 8
-                section.contentInsets.bottom = 72
-   
-                return section
-        }
-    }
-}
-
 // MARK: - DataSouce
 
 private extension MarketVC {
-    
     func getCategoryDataSource() -> RxCollectionViewSectionedReloadDataSource<CategoryDataSection> {
         return RxCollectionViewSectionedReloadDataSource<CategoryDataSection>(
             configureCell: { [weak self] _, collectionView, indexPath, item in
@@ -319,7 +269,7 @@ extension MarketVC: UIViewControllerTransitioningDelegate {
 private extension MarketVC {
     
     func selectCategory(with indexPath: IndexPath) {
-        
+        Log.debug("before: \(viewModel.selectedCategory.value)")
         var currentCategories: [Category] = viewModel.selectedCategory.value
         let selectedCell = getCategoryCell(at: indexPath)
         
@@ -349,7 +299,7 @@ private extension MarketVC {
             }
         }
         
-        Log.debug(currentCategories)
+        Log.debug("after: \(currentCategories)")
         viewModel.selectedCategory.accept(currentCategories)
         selectedCell.isChecked = !selectedCell.isChecked
     }

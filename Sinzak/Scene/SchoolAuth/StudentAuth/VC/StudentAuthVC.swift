@@ -24,6 +24,10 @@ final class StudentAuthVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
     // MARK: - Actions
     @objc func webmailButtonTapped(_ sender: UIButton) {
         mainView.changeButtonStatus(.webmail)
@@ -63,6 +67,10 @@ final class StudentAuthVC: SZVC {
         mainView.schoolcardButton.addTarget(self, action: #selector(schoolCardButtonTapped), for: .touchUpInside)
         mainView.doNextButton.addTarget(self, action: #selector(doNextButtonTapped), for: .touchUpInside)
         mainView.finishButton.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
+        
+        let touch = UITapGestureRecognizer(target: self, action: #selector(endEditing))
+        mainView.containerView.addGestureRecognizer(touch)
+        
         bind()
     }
     override func setNavigationBar() {
@@ -156,22 +164,67 @@ final class StudentAuthVC: SZVC {
                 vc.mainView.layoutIfNeeded()
             }
             .disposed(by: viewModel.disposeBag)
-        // 키보드 자동 설정
+
+        
+        
         RxKeyboard.instance.visibleHeight
-            .drive(with: self, onNext: { (vc, keyboardHeight) in
-             print("keyBoard 높이는 \(keyboardHeight) 입니다.")
-             if keyboardHeight > 0 {
-                 vc.mainView.buttonStack.snp.updateConstraints { make in
-                     make.bottom.equalTo(self.mainView.safeAreaLayoutGuide).offset(-keyboardHeight + self.mainView.safeAreaInsets.bottom - 20)
-                     vc.mainView.layoutIfNeeded()
-                 }
-             } else {
-                 vc.mainView.buttonStack.snp.updateConstraints { make in
-                     make.bottom.equalTo(self.mainView.safeAreaLayoutGuide)
-                     vc.mainView.layoutIfNeeded()
-                 }
-             }
-         })
-         .disposed(by: viewModel.disposeBag)
+            .skip(1)
+            .drive(onNext: { [weak self] keyboardVisibleHeignt in
+                guard let self = self else { return }
+                Log.debug("keyboard: \(keyboardVisibleHeignt)")
+                if keyboardVisibleHeignt > 0 {
+
+//                    self.mainView.buttonStack.snp.updateConstraints {
+//                        $0.bottom.equalToSuperview().inset(keyboardVisibleHeignt + 16.0)
+//                    }
+//                    self.mainView.webmailView.snp.updateConstraints {
+//                        $0.bottom.equalTo(keyboardVisibleHeignt)
+//                    }
+                    let window = UIApplication.shared.windows.first
+                    let extra = window!.safeAreaInsets.bottom
+                    Log.debug("\(self.mainView.authCodeValidationLabel.frame.maxY + self.mainView.authButtonStack.frame.maxY > self.view.frame.height -  keyboardVisibleHeignt)")
+                    
+                    
+//                        self.mainView.selectAuthTypeLabel.snp.updateConstraints { make in
+//                            make.leading.equalToSuperview().inset(40)
+//                            make.top.equalTo(self.view.safeAreaLayoutGuide).inset(-32)
+//                        }
+//                        self.view.layoutIfNeeded()
+                    self.mainView.scrollView.contentInset.bottom = 100
+                    
+                    self.mainView.scrollView.scroll(to: .bottom)
+//                    self.mainView.scrollView.
+
+                } else {
+//                    self.mainView.buttonStack.snp.updateConstraints {
+//                        $0.bottom.equalToSuperview().inset(24.0)
+//                    }
+//                    self.mainView.selectAuthTypeLabel.snp.updateConstraints { make in
+//                        make.leading.equalToSuperview().inset(40)
+//                        make.top.equalTo(self.view.safeAreaLayoutGuide).inset(20)
+//                    }
+//                    self.view.layoutIfNeeded()
+                    self.mainView.scrollView.contentInset.bottom = 0
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        bindInput()
+        bindOutput()
+    }
+    
+    func bindInput() {
+        
+    }
+    
+    func bindOutput() {
+        
+    }
+}
+
+// MARK: - Private Method
+private extension StudentAuthVC {
+    @objc func endEditing() {
+        self.view.endEditing(true)
     }
 }

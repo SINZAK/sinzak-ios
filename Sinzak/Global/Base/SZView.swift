@@ -10,7 +10,7 @@ import UIKit
 class SZView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground // 다크,라이트모드 
+        backgroundColor = CustomColor.background
         setView()
         setLayout()
     }

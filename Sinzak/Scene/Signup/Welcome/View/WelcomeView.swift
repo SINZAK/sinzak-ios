@@ -64,7 +64,7 @@ final class WelcomeView: SZView {
         letsGoButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(65)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalToSuperview().inset(24.0)
         }
         imageView.snp.makeConstraints { make in
             make.bottom.lessThanOrEqualTo(letsGoButton.snp.top).offset(-20)

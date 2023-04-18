@@ -18,7 +18,7 @@ class HomeViewModel {
         homeObservable = provider.rx.request(.homeNotLogined)
             .map { response -> HomeNotLogined in
                 guard let home = try? JSONDecoder().decode(HomeNotLogined.self, from: response.data) else {
-                    throw APIError.decodingFailed
+                    throw APIError.decodingError
                 }
                 print("🍺🍺🍺 Home", home)
                 return home
@@ -26,7 +26,7 @@ class HomeViewModel {
         bannerObservable = provider.rx.request(.banner)
             .map { response -> BannerList in
                 guard let banner = try? JSONDecoder().decode(BannerList.self, from: response.data) else {
-                    throw APIError.decodingFailed
+                    throw APIError.decodingError
                 }
                 print("🍺🍺🍺🍺 Banner", banner)
                 return banner

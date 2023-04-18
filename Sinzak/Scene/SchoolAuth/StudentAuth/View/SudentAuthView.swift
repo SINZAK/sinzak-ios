@@ -22,7 +22,7 @@ enum ButtonSelected {
         case .selected:
             return CustomColor.white!
         case .not:
-            return CustomColor.black!
+            return CustomColor.label!
         }
     }
     var backgroundColor: UIColor {
@@ -33,21 +33,38 @@ enum ButtonSelected {
             return CustomColor.gray10!
         }
     }
-    var image: String {
+    var image: UIImage {
         switch self {
         case .selected:
-            return "checkmark-white"
+            return UIImage(named: "checkmark-white")!
         case .not:
-            return "checkmark-black"
+            return UIImage(named: "checkmark-black")!.withTintColor(
+                .label,
+                renderingMode: .alwaysOriginal
+            )
         }
     }
 }
 
 final class StudentAuthView: SZView {
     // MARK: - Properties
+    
+    let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+//        scrollView.showsVerticalScrollIndicator = false
+        
+        return scrollView
+    }()
+    
+    let containerView: SZView = {
+        let view = SZView()
+        
+        return view
+    }()
+    
     let selectAuthTypeLabel = UILabel().then {
         $0.text = I18NStrings.verifyTypeSelect
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.font = .caption_M
     }
     // 상단 인증타입 버튼
@@ -60,7 +77,7 @@ final class StudentAuthView: SZView {
         $0.setTitle(I18NStrings.schoolWebmailAuth, for: .normal)
         $0.setTitleColor(ButtonSelected.selected.foregroundColor, for: .normal)
         $0.tintColor = ButtonSelected.selected.foregroundColor
-        $0.setImage(UIImage(named: ButtonSelected.selected.image), for: .normal)
+        $0.setImage(ButtonSelected.selected.image, for: .normal)
         $0.backgroundColor = ButtonSelected.selected.backgroundColor
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 20
@@ -70,7 +87,7 @@ final class StudentAuthView: SZView {
         $0.setTitle(I18NStrings.schoolCardAuth, for: .normal)
         $0.setTitleColor(ButtonSelected.not.foregroundColor, for: .normal)
         $0.tintColor = ButtonSelected.not.foregroundColor
-        $0.setImage(UIImage(named: ButtonSelected.not.image), for: .normal)
+        $0.setImage(ButtonSelected.not.image, for: .normal)
         $0.backgroundColor = ButtonSelected.not.backgroundColor
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 20
@@ -78,11 +95,13 @@ final class StudentAuthView: SZView {
     }
     // 인증별 뷰
     // - 웹메일 인증
-    let webmailView = UIView()
+    
+    let webmailView = SZView()
+    
     let webmailDescription = UILabel().then {
         $0.text = I18NStrings.schoolEmailAuthDescription
         $0.font = .caption_R
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.addInterlineSpacing(spacing: 3)
         $0.numberOfLines = 2
     }
@@ -91,7 +110,7 @@ final class StudentAuthView: SZView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 30
         $0.font = .caption_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.placeholder = I18NStrings.pleaseEnterSchoolEmail
         $0.clearButtonMode = .whileEditing
     }
@@ -102,7 +121,7 @@ final class StudentAuthView: SZView {
     }
     let authCodeLabel = UILabel().then {
         $0.font = .caption_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.authCode
     }
     let authCodeTextField = SZTextField(insets: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)).then {
@@ -110,7 +129,7 @@ final class StudentAuthView: SZView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 30
         $0.font = .caption_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.placeholder = I18NStrings.fourDigitPlease
         $0.clearButtonMode = .whileEditing
     }
@@ -120,13 +139,13 @@ final class StudentAuthView: SZView {
         $0.text = ""
     }
     // - 학생증 인증
-    let schoolCardView = UIView().then {
+    let schoolCardView = SZView().then {
         $0.isHidden = true
     }
     let schoolCardDescription = UILabel().then {
         $0.text = I18NStrings.schoolCardAuthDescription
         $0.font = .caption_R
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.addInterlineSpacing(spacing: 3)
         $0.numberOfLines = 2
     }
@@ -144,7 +163,7 @@ final class StudentAuthView: SZView {
     let uploadedPhotoView = UIView().then {
         $0.layer.cornerRadius = 24
         $0.clipsToBounds = true
-        $0.layer.borderColor = CustomColor.black!.cgColor
+        $0.layer.borderColor = CustomColor.label!.cgColor
         $0.layer.borderWidth = 2
         $0.isHidden = true
     }
@@ -158,7 +177,7 @@ final class StudentAuthView: SZView {
     }
     let photoNameLabel = UILabel().then {
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = "F48A6CC-C83EE822..."
     }
     let cancelButton = UIButton().then {
@@ -191,29 +210,35 @@ final class StudentAuthView: SZView {
         switch selected {
         case .webmail:
             webmailButton.setTitleColor(ButtonSelected.selected.foregroundColor, for: .normal)
-            webmailButton.setImage(UIImage(named: ButtonSelected.selected.image), for: .normal)
+            webmailButton.setImage(ButtonSelected.selected.image, for: .normal)
             webmailButton.backgroundColor = ButtonSelected.selected.backgroundColor
             schoolcardButton.setTitleColor(ButtonSelected.not.foregroundColor, for: .normal)
-            schoolcardButton.setImage(UIImage(named: ButtonSelected.not.image), for: .normal)
+            schoolcardButton.setImage(ButtonSelected.not.image, for: .normal)
             schoolcardButton.backgroundColor = ButtonSelected.not.backgroundColor
         case .idcard:
             schoolcardButton.setTitleColor(ButtonSelected.selected.foregroundColor, for: .normal)
-            schoolcardButton.setImage(UIImage(named: ButtonSelected.selected.image), for: .normal)
+            schoolcardButton.setImage(ButtonSelected.selected.image, for: .normal)
             schoolcardButton.backgroundColor = ButtonSelected.selected.backgroundColor
             webmailButton.setTitleColor(ButtonSelected.not.foregroundColor, for: .normal)
-            webmailButton.setImage(UIImage(named: ButtonSelected.not.image), for: .normal)
+            webmailButton.setImage(ButtonSelected.not.image, for: .normal)
             webmailButton.backgroundColor = ButtonSelected.not.backgroundColor
         }
     }
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
+            scrollView
+        )
+        scrollView.addSubview(containerView)
+        
+        containerView.addSubviews(
             selectAuthTypeLabel,
             authButtonStack,
             schoolCardView,
             webmailView,
             buttonStack
         )
+        
         authButtonStack.addArrangedSubviews(
             webmailButton,
             schoolcardButton
@@ -241,23 +266,35 @@ final class StudentAuthView: SZView {
         )
     }
     override func setLayout() {
+        scrollView.snp.makeConstraints {
+            $0.edges.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        containerView.snp.makeConstraints {
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+            $0.height.equalTo(self.safeAreaLayoutGuide)
+        }
+        
         selectAuthTypeLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(36)
-            make.top.equalTo(safeAreaLayoutGuide).inset(20)
+            make.leading.equalToSuperview().inset(40)
+            make.top.equalToSuperview()
         }
         authButtonStack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(31)
             make.top.equalTo(selectAuthTypeLabel.snp.bottom).offset(6)
             make.height.equalTo(40)
         }
+    
+        // MARK: - 메일 인증 뷰
         webmailView.snp.makeConstraints { make in
             make.top.equalTo(authButtonStack.snp.bottom).offset(12)
-            make.bottom.lessThanOrEqualTo(buttonStack.snp.top).offset(-20)
+            make.bottom.equalTo(buttonStack.snp.top)
             make.leading.trailing.equalToSuperview()
         }
         webmailDescription.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(33)
-            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(34)
+            make.top.equalToSuperview().inset(36.0)
         }
         webmailTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
@@ -265,34 +302,35 @@ final class StudentAuthView: SZView {
             make.height.equalTo(60)
         }
         webmailValidationLabel.snp.makeConstraints { make in
-            make.leading.equalTo(webmailTextField).offset(18)
-            make.top.equalTo(webmailTextField.snp.bottom).offset(3)
+            make.leading.equalToSuperview().offset(28)
+            make.top.equalTo(webmailTextField.snp.bottom).offset(4)
         }
         authCodeLabel.snp.makeConstraints { make in
             make.leading.equalTo(webmailDescription)
-            make.top.equalTo(webmailValidationLabel.snp.bottom).offset(24)
+            make.top.equalTo(webmailValidationLabel.snp.bottom).offset(20)
         }
         authCodeTextField.snp.makeConstraints { make in
             make.leading.trailing.height.equalTo(webmailTextField)
-            make.top.equalTo(authCodeLabel.snp.bottom).offset(3)
+            make.top.equalTo(authCodeLabel.snp.bottom).offset(4)
         }
         authCodeValidationLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(webmailValidationLabel)
-            make.top.equalTo(authCodeTextField.snp.bottom).offset(3)
+            make.leading.equalTo(webmailValidationLabel)
+            make.top.equalTo(authCodeTextField.snp.bottom).offset(4)
         }
-        // 학생증 뷰
+        
+        // 학생증 인증 뷰
         schoolCardView.snp.makeConstraints { make in
-            make.top.equalTo(authButtonStack.snp.bottom).offset(30)
-            make.bottom.lessThanOrEqualTo(buttonStack.snp.top).offset(-20)
+            make.top.equalTo(authButtonStack.snp.bottom)
+            make.bottom.equalTo(buttonStack.snp.top)
             make.leading.trailing.equalToSuperview()
         }
         schoolCardDescription.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(33)
-            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(34)
+            make.top.equalToSuperview().inset(36.0)
         }
         photoUploadButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(33)
-            make.width.equalTo(200)
+            make.leading.equalToSuperview().inset(32)
+            make.width.equalTo(192)
             make.height.equalTo(48)
             make.top.equalTo(schoolCardDescription.snp.bottom).offset(16)
         }
@@ -314,10 +352,11 @@ final class StudentAuthView: SZView {
             make.horizontalEdges.equalToSuperview().inset(36)
             make.height.equalTo(selectedPhoto.snp.width).multipliedBy(0.7)
         }
+        
         // 하단 버튼
         buttonStack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalToSuperview().inset(24.0)
             make.height.equalTo(65)
         }
     }

@@ -10,16 +10,21 @@ import RxSwift
 import Moya
 
 protocol ProductManagerType {
-    
+    func fetchProducts(
+        align: AlignOption,
+        category: [Category],
+        page: Int,
+        size: Int,
+        sale: Bool
+    ) -> Single<[MarketProduct]>
 }
 
-class ProductsManager {
+class ProductsManager: ProductManagerType {
     private init () {}
     static let shared = ProductsManager()
     let provider = MoyaProvider<ProductsAPI>()
     private let disposeBag = DisposeBag()
-    let backgroundScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
-
+    
     func fetchProducts(
         align: AlignOption,
         category: [Category],
@@ -27,49 +32,33 @@ class ProductsManager {
         size: Int,
         sale: Bool
     ) -> Single<[MarketProduct]> {
-        return Single<[MarketProduct]>.create { [weak self] single in
-            guard let self = self else {
-                return Disposables.create {}
+        return provider.rx.request(.products(
+            align: align.rawValue,
+            page: page,
+            size: size,
+            category: category.map { $0.rawValue },
+            sale: sale
+        ))
+        .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+        .map { response in
+            Log.debug("Thread: \(Thread.current)")
+            if !(200..<300 ~= response.statusCode) {
+                throw APIError.badStatus(code: response.statusCode)
             }
-            self.provider.rx.request(.products(
-                align: align.rawValue,
-                page: page,
-                size: size,
-                category: category.map { $0.rawValue },
-                sale: sale
-            ))
-            .observe(on: self.backgroundScheduler)
-            .subscribe { event in
-                switch event {
-                case let .success(response):
-                    
-                    Log.debug(response.request?.url ?? "url이 없습니다.")
-                    
-                    guard 200..<299 ~= response.statusCode else {
-                        single(.failure(APIErrors.badStatus(code: response.statusCode)))
-                        return
-                    }
-                    do {
-                        guard let content = try JSONDecoder().decode(MarketProductsResponseDTO.self, from: response.data).content else {
-                            Log.debug("content가 없습니다!")
-                            return
-                        }
-                        
-                        let marketProducts = content.map { responseDTO in
-                            responseDTO.toDomain()
-                        }
-                        Log.debug(marketProducts)
-                        single(.success(marketProducts))
-                    } catch {
-                        single(.failure(APIErrors.decodingError))
-                    }
-                    
-                case let .failure(error):
-                    single(.failure(APIErrors.unknown(error)))
+            Log.debug(response.request?.url ?? "")
+            
+            do {
+                let productsResponseDTO = try JSONDecoder().decode(
+                    MarketProductsResponseDTO.self,
+                    from: response.data
+                )
+                guard let productsDTO = productsResponseDTO.content else {
+                    throw APIError.noContent
                 }
+                return productsDTO.map { $0.toDomain() }
+            } catch {
+                throw APIError.decodingError
             }
-            .disposed(by: self.disposeBag)
-            return Disposables.create {}
         }
     }
 }

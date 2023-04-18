@@ -18,7 +18,7 @@ final class LoginView: SZView {
     }
     private let logoLabel = UILabel().then {
         $0.font = .subtitle_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.logoText
     }
     private let startLabel = UILabel().then {

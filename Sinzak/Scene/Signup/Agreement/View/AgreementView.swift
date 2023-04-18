@@ -15,79 +15,90 @@ final class AgreementView: SZView {
     private let titleLabel = UILabel().then {
         $0.text = I18NStrings.consentToUseOfService
         $0.font = .subtitle_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
+    
     // 전체 동의
-    let fullCheckButton = UIButton().then {
+    let fullCheckButton = CheckButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
-        $0.setImage(UIImage(named: "checked"), for: .selected)
     }
+    
     private let fullAgreeLabel = UILabel().then {
         $0.text = I18NStrings.fullAgree
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
+    
     // 구분선
     private let dividerView = UIView().then {
         $0.backgroundColor = CustomColor.gray60
         $0.layer.cornerRadius = 0.5
     }
+    
     // 14세 이상
-    let olderFourteenCheckButton = UIButton().then {
+    let olderFourteenCheckButton = CheckButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
-        $0.setImage(UIImage(named: "checked"), for: .selected)
     }
+    
     private let olderFourteenLabel = UILabel().then {
         $0.text = I18NStrings.olderThanfourteenYears
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
+    
     // 이용약관
-    let termsOfServiceCheckButton = UIButton().then {
+    let termsOfServiceCheckButton = CheckButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
-        $0.setImage(UIImage(named: "checked"), for: .selected)
     }
+    
     private let termsOfServiceLabel = UILabel().then {
         $0.text = I18NStrings.requiredTermsOfService
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
+    
     let termsOfServiceMoreButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron"), for: .normal)
     }
+    
     // 개인정보 처리방침
-    let privacyPolicyCheckButton = UIButton().then {
+    let privacyPolicyCheckButton = CheckButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
-        $0.setImage(UIImage(named: "checked"), for: .selected)
     }
+    
     private let privacyPolicyLabel = UILabel().then {
         $0.text = I18NStrings.requiredPrivacyPolicy
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
+    
     let privacyPolicyMoreButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron"), for: .normal)
     }
+    
     // 마케팅 정보
-    let marketingInfoCheckButton = UIButton().then {
+    let marketingInfoCheckButton = CheckButton().then {
         $0.setImage(UIImage(named: "check"), for: .normal)
-        $0.setImage(UIImage(named: "checked"), for: .selected)
     }
+    
     private let marketingInfoLabel = UILabel().then {
         $0.text = I18NStrings.optionalMarketingInformation
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
+    
     let marketingInfoMoreButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron"), for: .normal)
     }
+    
     // 확인 버튼
-    let confirmButton = UIButton().then {
+    let confirmButton = SZButton().then {
         $0.setTitle(I18NStrings.confirm, for: .normal)
         $0.titleLabel?.font = .body_B
-        $0.backgroundColor = CustomColor.gray10
+        $0.backgroundColor = CustomColor.gray20
         $0.layer.cornerRadius = 30
     }
+    
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
@@ -99,6 +110,7 @@ final class AgreementView: SZView {
             confirmButton
         )
     }
+    
     override func setLayout() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).inset(15.87)
@@ -166,7 +178,7 @@ final class AgreementView: SZView {
         confirmButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(7.4)
             make.height.equalTo(65)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalToSuperview().inset(24.0)
         }
     }
 }
