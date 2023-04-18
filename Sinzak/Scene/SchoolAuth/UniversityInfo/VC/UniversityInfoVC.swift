@@ -164,7 +164,7 @@ final class UniversityInfoVC: SZVC {
             .drive(mainView.nextButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        viewModel.presentTabBarView
+        viewModel.presentWelcomeView
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, vc in

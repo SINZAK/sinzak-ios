@@ -24,7 +24,7 @@ protocol UniversityInfoVMOutput {
     
     var isEnableNextButton: BehaviorRelay<Bool> { get }
     
-    var presentTabBarView: PublishRelay<TabBarVC> { get }
+    var presentWelcomeView: PublishRelay<WelcomeVC> { get }
     var pushStudentAuthView: PublishRelay<StudentAuthVC> { get }
 }
 
@@ -64,8 +64,8 @@ final class DefaultUniversityInfoVM: UniversityInfoVM {
     }
     
     func tapNotStudentButton() {
-        let vc = TabBarVC()
-        presentTabBarView.accept(vc)
+        let vc = WelcomeVC()
+        presentWelcomeView.accept(vc)
     }
     
     func tapNextButton() {
@@ -82,6 +82,6 @@ final class DefaultUniversityInfoVM: UniversityInfoVM {
 
     var isEnableNextButton: BehaviorRelay<Bool> = .init(value: false)
     
-    var presentTabBarView: PublishRelay<TabBarVC> = .init()
+    var presentWelcomeView: PublishRelay<WelcomeVC> = .init()
     var pushStudentAuthView: PublishRelay<StudentAuthVC> = .init()
 }
