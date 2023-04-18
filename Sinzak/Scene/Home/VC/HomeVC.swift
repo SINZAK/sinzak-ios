@@ -17,6 +17,7 @@ enum HomeType: Int {
     case arts
 }
 
+
 final class HomeVC: SZVC {
     // MARK: - Properties
     let mainView = HomeView()
