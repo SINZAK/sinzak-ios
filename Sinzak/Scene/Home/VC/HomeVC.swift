@@ -17,6 +17,10 @@ enum HomeType: Int {
     case arts
 }
 
+enum HomeMode {
+    case loggedIn
+    case noLoggedIn
+}
 
 final class HomeVC: SZVC {
     // MARK: - Properties
@@ -37,6 +41,22 @@ final class HomeVC: SZVC {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
     }
+    
+    // MARK: - Init
+    init(mode: HomeMode) {
+        switch mode {
+        case .loggedIn:
+            Log.debug("로그인 모드")
+        case .noLoggedIn:
+            Log.debug("로그인 안됨")
+        }
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Actions
     func bind() {
         viewModel = HomeViewModel(provider: provider)
@@ -70,14 +90,18 @@ final class HomeVC: SZVC {
     }
     // MARK: - Helpers
     override func setNavigationBar() {
-        let logotype = UIBarButtonItem(image: UIImage(named: "logotype-right"),
-                                       style: .plain,
-                                       target: self,
-                                       action: nil)
-        let notification = UIBarButtonItem(image: UIImage(named: "notification"),
-                                           style: .plain,
-                                           target: self,
-                                           action: #selector(didNotificitionButtonTapped) )
+        let logotype = UIBarButtonItem(
+            image: UIImage(named: "logotype-right"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        let notification = UIBarButtonItem(
+            image: UIImage(named: "notification")?.withTintColor(.label, renderingMode: .alwaysOriginal),
+            style: .plain,
+            target: self,
+            action: #selector(didNotificitionButtonTapped)
+        )
         navigationItem.leftBarButtonItem = logotype
         navigationItem.rightBarButtonItem = notification
     }

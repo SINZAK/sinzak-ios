@@ -21,7 +21,7 @@ final class ArtCVC: UICollectionViewCell {
         $0.isSkeletonable = true
     }
     private let favoriteBackground = UIView().then {
-        $0.backgroundColor = CustomColor.gray80!.withAlphaComponent(0.4)
+        $0.backgroundColor = CustomColor.onlyGray80!.withAlphaComponent(0.4)
         $0.layer.cornerRadius = 16
     }
     private let favoriteCountLabel = UILabel().then {
@@ -34,7 +34,7 @@ final class ArtCVC: UICollectionViewCell {
         $0.setImage(UIImage(named: "favorite"), for: .normal) // 눌리면 "favorite-fill"
     }
     private let titleLabel = UILabel().then {
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.font = .body_M
         $0.text = "Flower Garden"
         $0.isSkeletonable = true
@@ -51,14 +51,14 @@ final class ArtCVC: UICollectionViewCell {
         $0.image = UIImage(named: "isDealing")
     }
     private let priceLabel = UILabel().then {
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.font = .body_B
         $0.text = "33,000원"
         $0.isSkeletonable = true
 
     }
     private let authorLabel = UILabel().then {
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.font = .caption_R
         $0.text = "신작 작가"
         $0.isSkeletonable = true
