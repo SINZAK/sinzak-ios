@@ -13,6 +13,9 @@ import SkeletonView
 
 final class ArtCVC: UICollectionViewCell {
     // MARK: - Properties
+    
+    var products: Products?
+    
     private let imageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
@@ -87,6 +90,9 @@ final class ArtCVC: UICollectionViewCell {
     }
     // MARK: - Setter
     func setData(_ data: Products) {
+        
+        self.products = data
+        
         if let thumbnail = data.thumbnail {
             let url = URL(string: thumbnail)
             imageView.kf.setImage(with: url)

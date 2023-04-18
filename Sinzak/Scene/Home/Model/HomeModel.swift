@@ -8,24 +8,24 @@
 import Foundation
 
 // MARK: - HomeNotLogined
-struct HomeNotLoggedInProducts: Codable {
-    let data: HomeNotLoggedinProductsData
+struct HomeNotLoggedInProductsResponse: Codable {
+    let data: HomeNotLoggedInProducts
     let success: Bool
 }
 
 // MARK: - Data - HomeNotLogined
-struct HomeNotLoggedinProductsData: Codable {
+struct HomeNotLoggedInProducts: Codable {
     let trading, new, hot: [Products]
 }
 
 // MARK: - HomeLogined
-struct HomeLogined: Codable {
-    let data: HomeLoginedData
+struct HomeLoggedInProductsResponse: Codable {
+    let data: HomeLoggedInProducts
     let success: Bool
 }
 
 // MARK: - Data - HomeLogined
-struct HomeLoginedData: Codable {
+struct HomeLoggedInProducts: Codable {
     let new, following, recommend: [Products]
 }
 
