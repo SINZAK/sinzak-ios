@@ -31,9 +31,9 @@ enum DetailType {
         }
     }
 }
-final class DetailVC: SZVC {
+final class ProductsDetailVC: SZVC {
     // MARK: - Properties
-    let mainView = DetailView()
+    let mainView = ProductsDetailView()
     var owner: DetailOwner?
     var type: DetailType?
     // MARK: - Lifecycle

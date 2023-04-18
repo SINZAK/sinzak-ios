@@ -13,12 +13,15 @@ import Moya
 
 protocol HomeVMInput {
     func viewDidLoad()
+    func tapProductsCell(products: Products)
 }
 
 protocol HomeVMOutput {
     var isLogin: Bool { get }
     
     var homeSectionModel: BehaviorRelay<[HomeSection]> { get }
+    
+    var pushProductsDetailView: PublishRelay<ProductsDetailVC> { get }
 }
 
 protocol HomeVM: HomeVMInput, HomeVMOutput {}
@@ -34,30 +37,13 @@ final class DefaultHomeVM: HomeVM {
     // MARK: - Input
     
     func viewDidLoad() {
-        
-        if isLogin {
-            
-        } else {
-            
-            let bannerObservable = HomeManager.shared.getBannerInfo().asObservable()
-            let productsObservable = HomeManager.shared.getHomeProductNotLoggedIn().asObservable()
-            
-            Observable.zip(bannerObservable, productsObservable)
-                .subscribe(onNext: { [weak self] banners, products in
-                    
-                    let sectionModel: [HomeSection] = [
-                        .bannerSection(items: banners.map { SectionItem.bannerSectionItem(banner: $0) }),
-                        .productSection(title: I18NStrings.sectionNew, items: products.new.map { SectionItem.productSectionItem(product: $0) }),
-                        .productSection(title: I18NStrings.sectionHot, items: products.hot.map { SectionItem.productSectionItem(product: $0) }),
-                        .productSection(title: I18NStrings.sectionTrading, items: products.trading.map { SectionItem.productSectionItem(product: $0) })
-                    ]
-                    
-                    self?.homeSectionModel.accept(sectionModel)
-                }, onError: { error in
-                    Log.error(error)
-                })
-                .disposed(by: disposeBag)
-        }
+        fetchSections()
+    }
+    
+    func tapProductsCell(products: Products) {
+        let vc = ProductsDetailVC()
+        vc.mainView.setData(products)
+        pushProductsDetailView.accept(vc)
     }
     
     // MARK: - Output
@@ -66,4 +52,65 @@ final class DefaultHomeVM: HomeVM {
     
     var homeSectionModel: BehaviorRelay<[HomeSection]> = .init(value: [])
     
+    var pushProductsDetailView: PublishRelay<ProductsDetailVC> = .init()
+    
+}
+
+private extension DefaultHomeVM {
+    func fetchSections() {
+        let bannerObservable = HomeManager.shared.getBannerInfo().asObservable()
+
+        if isLogin {
+            let loggedInProductsObservable = HomeManager.shared.getHomeProductLoggedIn().asObservable()
+            
+            Observable.zip(bannerObservable, loggedInProductsObservable)
+                .subscribe(onNext: { [weak self] banners, products in
+                    
+                    let productSections: [HomeSection] = zip(
+                        HomeLoggedInType.allCases.map { $0.title },
+                        [products.recommend, products.following, products.new]
+                    )
+                        .filter { !$0.1.isEmpty }
+                        .map { .productSection(
+                            title: $0.0,
+                            items: $0.1.map { .productSectionItem(product: $0) }
+                        )}
+                    
+                    let sectionModel: [HomeSection] = [
+                        .bannerSection(items: banners.map { .bannerSectionItem(banner: $0) })
+                    ] + productSections
+                    
+                    self?.homeSectionModel.accept(sectionModel)
+                }, onError: { error in
+                    Log.error(error)
+                })
+                .disposed(by: disposeBag)
+            
+        } else {
+            let notLoggedInProductsObservable = HomeManager.shared.getHomeProductNotLoggedIn().asObservable()
+            
+            Observable.zip(bannerObservable, notLoggedInProductsObservable)
+                .subscribe(onNext: { [weak self] banners, products in
+
+                    let productSections: [HomeSection] = zip(
+                        HomeNotLoggedInType.allCases.map { $0.title },
+                        [products.new, products.hot, products.trading]
+                    )
+                        .filter { !$0.1.isEmpty }
+                        .map { .productSection(
+                            title: $0.0,
+                            items: $0.1.map { .productSectionItem(product: $0) }
+                        )}
+                    
+                    let sectionModel: [HomeSection] = [
+                        .bannerSection(items: banners.map { .bannerSectionItem(banner: $0) })
+                    ] + productSections
+                    
+                    self?.homeSectionModel.accept(sectionModel)
+                }, onError: { error in
+                    Log.error(error)
+                })
+                .disposed(by: disposeBag)
+        }
+    }
 }

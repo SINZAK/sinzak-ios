@@ -20,9 +20,9 @@ final class ConciergeVC: UIViewController {
     func concierge() {
         mainView.logoView.play { _ in
             // TODO: 네트워크 상태와 자동로그인 여부 확인하여 분기
-//            let root = LoginVC(viewModel: DefaultLoginVM())
-//            let vc = UINavigationController(rootViewController: root)
-            let vc = TabBarVC()
+            let root = LoginVC(viewModel: DefaultLoginVM())
+            let vc = UINavigationController(rootViewController: root)
+//            let vc = TabBarVC()
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
         }
     }

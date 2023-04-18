@@ -152,8 +152,8 @@
 		A2B38580295D895800E5EB7C /* StudentAuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3857F295D895800E5EB7C /* StudentAuthVC.swift */; };
 		A2B38582295ED7AA00E5EB7C /* SZTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38581295ED7AA00E5EB7C /* SZTextField.swift */; };
 		A2B969D329AA5B1F006119B1 /* sinzak_splash_animation_light.json in Resources */ = {isa = PBXBuildFile; fileRef = A2B969D229AA5B1F006119B1 /* sinzak_splash_animation_light.json */; };
-		A2B969E129ABA661006119B1 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B969E029ABA661006119B1 /* DetailView.swift */; };
-		A2B969E429ABA699006119B1 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B969E329ABA699006119B1 /* DetailVC.swift */; };
+		A2B969E129ABA661006119B1 /* ProductsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B969E029ABA661006119B1 /* ProductsDetailView.swift */; };
+		A2B969E429ABA699006119B1 /* ProductsDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B969E329ABA699006119B1 /* ProductsDetailVC.swift */; };
 		A2DEC35629B4417F00CF0794 /* SNSLoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35529B4417F00CF0794 /* SNSLoginAPI.swift */; };
 		A2DEC35829B4441100CF0794 /* SNSLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */; };
 		A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */; };
@@ -357,8 +357,8 @@
 		A2B3857F295D895800E5EB7C /* StudentAuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAuthVC.swift; sourceTree = "<group>"; };
 		A2B38581295ED7AA00E5EB7C /* SZTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZTextField.swift; sourceTree = "<group>"; };
 		A2B969D229AA5B1F006119B1 /* sinzak_splash_animation_light.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sinzak_splash_animation_light.json; sourceTree = "<group>"; };
-		A2B969E029ABA661006119B1 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
-		A2B969E329ABA699006119B1 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		A2B969E029ABA661006119B1 /* ProductsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailView.swift; sourceTree = "<group>"; };
+		A2B969E329ABA699006119B1 /* ProductsDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailVC.swift; sourceTree = "<group>"; };
 		A2DEC35529B4417F00CF0794 /* SNSLoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginAPI.swift; sourceTree = "<group>"; };
 		A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginManager.swift; sourceTree = "<group>"; };
 		A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLogin.swift; sourceTree = "<group>"; };
@@ -1522,7 +1522,7 @@
 		A2B969DF29ABA64E006119B1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A2B969E029ABA661006119B1 /* DetailView.swift */,
+				A2B969E029ABA661006119B1 /* ProductsDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1530,7 +1530,7 @@
 		A2B969E229ABA68C006119B1 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				A2B969E329ABA699006119B1 /* DetailVC.swift */,
+				A2B969E329ABA699006119B1 /* ProductsDetailVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2120,7 +2120,7 @@
 				A226537D29705F8100605697 /* BannerCVC.swift in Sources */,
 				A280AB4529A7634C00C1729C /* WriteCategoryView.swift in Sources */,
 				A2100F742986939A00C85ADF /* WorksVC.swift in Sources */,
-				A2B969E429ABA699006119B1 /* DetailVC.swift in Sources */,
+				A2B969E429ABA699006119B1 /* ProductsDetailVC.swift in Sources */,
 				A22BE590296AEA4F00D9815C /* AuthManager.swift in Sources */,
 				ED47113C29E0363000708562 /* SZButton.swift in Sources */,
 				A254E13E29BD032D001047FD /* WorksAPI.swift in Sources */,
@@ -2151,7 +2151,7 @@
 				ED47113F29E03C6200708562 /* SignupNameVM.swift in Sources */,
 				A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */,
 				A2420F8229A7B9E8007D8937 /* WriteCategoryTagCVC.swift in Sources */,
-				A2B969E129ABA661006119B1 /* DetailView.swift in Sources */,
+				A2B969E129ABA661006119B1 /* ProductsDetailView.swift in Sources */,
 				A216BD5C297FE020008964BC /* ChatView.swift in Sources */,
 				ED86969429D936A8001A1A9F /* SelectAlignVC.swift in Sources */,
 				EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */,

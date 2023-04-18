@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class DetailView: SZView {
+final class ProductsDetailView: SZView {
     // MARK: - Properties
     let scrollView = UIScrollView().then {
         $0.backgroundColor = .clear

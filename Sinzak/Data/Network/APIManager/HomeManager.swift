@@ -14,45 +14,11 @@ class HomeManager {
     static let shared = HomeManager()
     let provider = MoyaProvider<HomeAPI>()
     
-    func getHomeProductNotLogined(completion: @escaping (Result<HomeNotLoggedInProducts, Error>) -> Void) {
-        provider.request(.homeNotLogined) { result in
-            switch result {
-            case let .success(data):
-                do {
-                    let decoder = JSONDecoder()
-                    let result = try decoder.decode(HomeNotLoggedInProducts.self, from: data.data)
-                    completion(.success(result))
-                } catch {
-                    completion(.failure(error))
-                }
-            case let .failure(error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func getBannerInfo(completion: @escaping (Result<BannerList, Error>) -> Void) {
-        provider.request(.banner) { result in
-            switch result {
-            case let .success(data):
-                do {
-                    let decoder = JSONDecoder()
-                    let result = try decoder.decode(BannerList.self, from: data.data)
-                    completion(.success(result))
-                } catch {
-                    completion(.failure(error))
-                }
-            case let .failure(error):
-                completion(.failure(error))
-            }
-        }
-    }
-
-    func getHomeProductNotLoggedIn() -> Single<HomeNotLoggedinProductsData> {
-        return provider.rx.request(.homeNotLogined)
+    func getHomeProductLoggedIn() -> Single<HomeLoggedInProducts> {
+        return provider.rx.request(.homeLogined)
             .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map({ response in
-                
+                Log.debug("Thread: \(Thread.current)")
                 Log.debug(response.request?.url ?? "")
                 
                 if !(200..<300 ~= response.statusCode) {
@@ -60,7 +26,27 @@ class HomeManager {
                 }
                 
                 do {
-                    let products = try JSONDecoder().decode(HomeNotLoggedInProducts.self, from: response.data)
+                    let products = try JSONDecoder().decode(HomeLoggedInProductsResponse.self, from: response.data)
+                    return products.data
+                } catch {
+                    throw APIError.decodingError
+                }
+            })
+    }
+
+    func getHomeProductNotLoggedIn() -> Single<HomeNotLoggedInProducts> {
+        return provider.rx.request(.homeNotLogined)
+            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+            .map({ response in
+                Log.debug("Thread: \(Thread.current)")
+                Log.debug(response.request?.url ?? "")
+                
+                if !(200..<300 ~= response.statusCode) {
+                    throw APIError.badStatus(code: response.statusCode)
+                }
+                
+                do {
+                    let products = try JSONDecoder().decode(HomeNotLoggedInProductsResponse.self, from: response.data)
                     return products.data
                 } catch {
                     throw APIError.decodingError
@@ -73,7 +59,8 @@ class HomeManager {
             .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map({ response in
                 Log.debug(response.request?.url ?? "")
-                
+                Log.debug("Thread: \(Thread.current)")
+
                 if !(200..<300 ~= response.statusCode) {
                     throw APIError.badStatus(code: response.statusCode)
                 }

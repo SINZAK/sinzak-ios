@@ -55,6 +55,22 @@ final class HomeVC: SZVC {
     
     func bindInput() {
         
+        // TODO: 아이디 전달해서 상세 조회 하게 수정해야함
+        mainView.homeCollectionView.rx.itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, indexPath in
+                
+                if indexPath.section == 0 {
+                    Log.debug("배너 탭!")
+                    return
+                }
+                
+                guard let cell = owner.mainView.homeCollectionView.cellForItem(at: indexPath) as? ArtCVC else { return }
+                guard let products = cell.products else { return }
+                owner.viewModel.tapProductsCell(products: products)
+            })
+            .disposed(by: disposeBag)
+        
     }
     
     func bindOutput() {
@@ -62,6 +78,15 @@ final class HomeVC: SZVC {
             .observe(on: MainScheduler.instance)
             .bind(to: mainView.homeCollectionView.rx.items(dataSource: getHomeDataSource()))
             .disposed(by: disposeBag)
+        
+        viewModel.pushProductsDetailView
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, vc in
+                owner.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag
+            )
     }
     
     @objc func didNotificitionButtonTapped(_ sender: UIBarButtonItem) {

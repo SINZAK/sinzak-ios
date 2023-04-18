@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HomeNotLoginedType: Int, CaseIterable {
+enum HomeNotLoggedInType: Int, CaseIterable {
     case trading = 3
     case new = 1
     case hot = 2
@@ -23,7 +23,7 @@ enum HomeNotLoginedType: Int, CaseIterable {
     }
 }
 
-enum HomeLoginedType: Int, CaseIterable {
+enum HomeLoggedInType: Int, CaseIterable {
     case new = 1
     case recommend = 2
     case following = 3
