@@ -12,9 +12,12 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import RxKakaoSDKAuth
 import RxKakaoSDKUser
+import NaverThirdPartyLogin
+import Alamofire
 
 protocol LoginVMInput {
     func kakaoButtonTapped()
+    func naverOauth20ConnectionDidFinishRequestACTokenWithAuthCode()
     var onboardingUser: OnboardingUser { get set }
 }
 
@@ -30,6 +33,9 @@ final class DefaultLoginVM: LoginVM {
     private let disposeBag = DisposeBag()
     
     var onboardingUser: OnboardingUser = OnboardingUser()
+    
+    // 네이버로그인 인스턴스
+    let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
     // MARK: - Input
     func kakaoButtonTapped() {
@@ -61,6 +67,66 @@ final class DefaultLoginVM: LoginVM {
         }
     }
     
+    func naverOauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
+        guard let accessToken = naverLoginInstance?.isValidAccessTokenExpireTimeNow() else { return }
+        if !accessToken {
+            return
+        }
+        guard let accessToken = naverLoginInstance?.accessToken else {
+            return
+        }
+        
+        SNSLoginManager.shared.doNaverLogin(accessToken: accessToken)
+            .subscribe(
+                with: self,
+                onSuccess: { owner, snsLoginGrant in
+                    Log.debug(snsLoginGrant.accessToken)
+                    Log.debug(snsLoginGrant.refreshToken)
+                    if snsLoginGrant.joined {
+                        owner.goTabBar(
+                            accessToken: snsLoginGrant.accessToken,
+                            refreshToken: snsLoginGrant.refreshToken
+                        )
+                    } else {
+                        owner.goSignUp(
+                            accessToken: snsLoginGrant.accessToken,
+                            refreshToken: snsLoginGrant.refreshToken
+                        )
+                    }
+                }, onFailure: { _, error in
+                    Log.error(error)
+                })
+            .disposed(by: disposeBag)
+        
+        //        guard let tokenType = naverLoginInstance?.tokenType else {
+        //            return
+        //        }
+//        print("NAVER Access Token", accessToken)
+//
+//        let requestUrl = "https://openapi.naver.com/v1/nid/me"
+//        let url = URL(string: requestUrl)!
+//        let authorization = "\(tokenType) \(accessToken)"
+//        let req = AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
+//        req.responseData { response in
+//
+//            guard let body = try? JSONSerialization.jsonObject(with: response.value ?? Data()) as? [String: Any] else {
+//                Log.error("네이버 data decoding 에러")
+//                return
+//            }
+//            if let resultCode = body["message"] as? String {
+//                if resultCode.trimmingCharacters(in: .whitespaces) == "success" {
+//                    let resultJson = body["response"] as! [String: Any]
+//                    let id = resultJson["id"] as? String ?? ""
+//                    let email = resultJson["email"] as? String ?? ""
+//                    print("네이버 로그인 아이디 ", id)
+//                    print("네이버 로그인 이메일 ", email)
+//                } else {
+//                    Log.error("네이버 정보 가져오기 싪")
+//                }
+//            }
+//        }
+    }
+    
     // MARK: - Output
     var changeRootTabBar: PublishRelay<TabBarVC> = .init()
     var pushSignUp: PublishRelay<AgreementVC> = .init()
@@ -73,19 +139,19 @@ private extension DefaultLoginVM {
             Task {
                 do {
                     let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token)
-
+                    
                     Log.debug(snsLoginGrant.accessToken)
                     Log.debug(snsLoginGrant.refreshToken)
                     if snsLoginGrant.joined {
-                        KeychainItem.saveTokenInKeychain(
+                        goTabBar(
                             accessToken: snsLoginGrant.accessToken,
                             refreshToken: snsLoginGrant.refreshToken
                         )
-                        goTabBar()
                     } else {
-                        self.onboardingUser.accesToken = snsLoginGrant.accessToken
-                        self.onboardingUser.refreshToken = snsLoginGrant.accessToken
-                        goSignUp()
+                        goSignUp(
+                            accessToken: snsLoginGrant.accessToken,
+                            refreshToken: snsLoginGrant.refreshToken
+                        )
                     }
                 } catch {
                     throw error
@@ -94,14 +160,20 @@ private extension DefaultLoginVM {
         }
     }
     
-    func goTabBar() {
+    func goTabBar(accessToken: String, refreshToken: String) {
+        KeychainItem.saveTokenInKeychain(
+            accessToken: accessToken,
+            refreshToken: refreshToken
+        )
         DispatchQueue.main.async { [weak self] in
             let vc = TabBarVC()
             self?.changeRootTabBar.accept(vc)
         }
     }
     
-    func goSignUp() {
+    func goSignUp(accessToken: String, refreshToken: String) {
+        self.onboardingUser.accesToken = accessToken
+        self.onboardingUser.refreshToken = refreshToken
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             let vm = DefaultAgreementVM(onboardingUser: self.onboardingUser)

@@ -15,24 +15,8 @@ class AuthManager {
     static let shared = AuthManager()
     private let provider = MoyaProvider<AuthAPI>()
     // MARK: - Methods
-    /// 닉네임 중복 확인
-    func checkNickname(for nickname: String, completion: @escaping ((Bool) -> Void)) {
-        provider.request(.nicknameCheck(nickname: nickname)) { result in
-            switch result {
-            case let .success(data):
-                do { let decoder = JSONDecoder()
-                    let result = try decoder.decode(OnlySuccess.self, from: data.data)
-                    completion(result.success)
-                } catch {
-                    completion(false)
-                }
-            case let .failure(error):
-                print("Nickname check error", error)
-                completion(false)
-            }
-        }
-    }
     
+    /// 닉네임 중복 확인
     func checkNickname(for nickNmae: String) async throws -> Bool {
         do {
             let response = try await provider.rx.request(.nicknameCheck(nickname: nickNmae)).value

@@ -82,4 +82,31 @@ class SNSLoginManager {
             }
         }
     }
+    
+    /// naver 로그인
+    func doNaverLogin(accessToken: String) -> Single<SNSLoginGrant> {
+        return provider.rx.request(.naver(accessToken: accessToken))
+            .map { response in
+    
+                Log.debug(response.request?.url ?? "")
+                
+                if !(200..<300 ~= response.statusCode) {
+                    throw APIError.badStatus(code: response.statusCode)
+                }
+                
+                do {
+                    let snsLoginResultDTO = try JSONDecoder().decode(
+                        SNSLoginResultDTO.self,
+                        from: response.data
+                    )
+                    
+                    guard let snsLoginGrantDTO = snsLoginResultDTO.data else {
+                        throw APIError.noContent
+                    }
+                    return snsLoginGrantDTO.toDomain()
+                } catch {
+                    throw APIError.decodingError
+                }
+            }
+    }
 }
