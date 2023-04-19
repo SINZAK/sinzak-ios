@@ -18,7 +18,6 @@ class HomeManager {
         return provider.rx.request(.homeLogined)
             .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map({ response in
-                Log.debug("Thread: \(Thread.current)")
                 Log.debug(response.request?.url ?? "")
                 
                 if !(200..<300 ~= response.statusCode) {
@@ -38,7 +37,6 @@ class HomeManager {
         return provider.rx.request(.homeNotLogined)
             .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map({ response in
-                Log.debug("Thread: \(Thread.current)")
                 Log.debug(response.request?.url ?? "")
                 
                 if !(200..<300 ~= response.statusCode) {
@@ -59,7 +57,6 @@ class HomeManager {
             .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map({ response in
                 Log.debug(response.request?.url ?? "")
-                Log.debug("Thread: \(Thread.current)")
 
                 if !(200..<300 ~= response.statusCode) {
                     throw APIError.badStatus(code: response.statusCode)

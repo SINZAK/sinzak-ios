@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import NaverThirdPartyLogin
+import KakaoSDKUser
 
 final class SettingVC: SZVC {
     // MARK: - Properties
@@ -107,12 +109,35 @@ extension SettingVC: UICollectionViewDelegate {
         // 내용별로 하기
         collectionView.deselectItem(at: indexPath, animated: true)
         
+        if indexPath == [2, 1] {
+            KeychainItem.deleteTokenInKeychain()
+            NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
+            
+            UserApi.shared.logout {(error) in
+                if let error = error {
+                    Log.error(error)
+                } else {
+                    Log.debug("Kakao logout() success.")
+                }
+            }
+        }
+        
         if indexPath == [2, 0] {
+            KeychainItem.deleteTokenInKeychain()
+            NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
+            
+            UserApi.shared.logout {(error) in
+                if let error = error {
+                    Log.error(error)
+                } else {
+                    Log.debug("Kakao logout() success.")
+                }
+            }
+
             AuthManager.shared.resign()
                 .subscribe(
                     onSuccess: { _ in
                         Log.debug("회원 탈퇴 성공")
-                        KeychainItem.deleteTokenInKeychain()
                     }, onFailure: { error in
                         APIError.logError(error)
                     })

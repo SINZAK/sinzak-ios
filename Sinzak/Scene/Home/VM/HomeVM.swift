@@ -66,9 +66,10 @@ private extension DefaultHomeVM {
             Observable.zip(bannerObservable, loggedInProductsObservable)
                 .subscribe(onNext: { [weak self] banners, products in
                     
+                    // TODO: ~~~님을 위한 맞춤 거래 추가해야함
                     let productSections: [HomeSection] = zip(
                         HomeLoggedInType.allCases.map { $0.title },
-                        [products.recommend, products.following, products.new]
+                        [products.recommend, products.new, products.following]
                     )
                         .filter { !$0.1.isEmpty }
                         .map { .productSection(

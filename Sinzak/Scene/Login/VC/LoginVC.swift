@@ -31,13 +31,13 @@ final class LoginVC: SZVC {
         
         naverLoginInstance?.requestDeleteToken()
         
-//        UserApi.shared.logout {(error) in
-//            if let error = error {
-//                Log.error(error)
-//            } else {
-//                Log.debug("Kakao logout() success.")
-//            }
-//        }
+        UserApi.shared.logout {(error) in
+            if let error = error {
+                Log.error(error)
+            } else {
+                Log.debug("Kakao logout() success.")
+            }
+        }
         
     }
     
