@@ -12,6 +12,7 @@ import RxMoya
 import RxSwift
 import RxCocoa
 import RxDataSources
+import SkeletonView
 
 enum HomeType: Int {
     case banner = 0
@@ -31,6 +32,12 @@ final class HomeVC: SZVC {
         super.viewDidLoad()
         bind()
         viewModel.viewDidLoad()
+        
+        configureSkeleton()
+        mainView.homeCollectionView.isHidden = true
+        mainView.homeProductSekeletoneCollectionView.isHidden = false
+        view.showAnimatedSkeleton()
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -85,8 +92,7 @@ final class HomeVC: SZVC {
             .bind(onNext: { owner, vc in
                 owner.navigationController?.pushViewController(vc, animated: true)
             })
-            .disposed(by: disposeBag
-            )
+            .disposed(by: disposeBag)
     }
     
     @objc func didNotificitionButtonTapped(_ sender: UIBarButtonItem) {
@@ -128,6 +134,27 @@ final class HomeVC: SZVC {
             forSupplementaryViewOfKind: "header",
             withReuseIdentifier: HomeHeader.identifier
         )
+    }
+    
+    func configureSkeleton() {
+        view.isSkeletonable = true
+        Log.debug(UIScreen.main.bounds.width)
+        Log.debug(UIScreen.main)
+        lazy var productFlowLayout: UICollectionViewLayout = {
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            layout.estimatedItemSize = CGSize(width: 165, height: 240.0)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 40, bottom: 40, right: 0)
+            layout.minimumInteritemSpacing = 28.0
+            //            layout.headerReferenceSize = CGSize(width: 10, height: 40)
+            //            layout.headerReferenceSize = CGSize(width: width, height: 40)
+            //            layout.minimumLineSpacing =
+            
+            return layout
+        }()
+        
+        mainView.homeProductSekeletoneCollectionView.collectionViewLayout = setLayout()
+        mainView.homeProductSekeletoneCollectionView.dataSource = self
     }
 }
 
@@ -217,5 +244,102 @@ extension HomeVC {
                 return section
             }
         }
+    }
+}
+
+extension HomeVC: SkeletonCollectionViewDataSource {
+    func collectionSkeletonView(
+        _ skeletonView: UICollectionView,
+        cellIdentifierForItemAt indexPath: IndexPath
+    ) -> SkeletonView.ReusableCellIdentifier {
+        switch indexPath.section {
+        case 0: return BannerCVC.identifier
+        default: return ArtCVC.identifier
+        }
+    }
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return 3
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        switch indexPath.section {
+        case 0:
+            let banner = Banner(id: 0, content: "", imageURL: "", href: "")
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: BannerCVC.identifier,
+                for: indexPath
+            ) as? BannerCVC else { return UICollectionViewCell() }
+            cell.setData(banner: banner)
+            return cell
+            
+        default:
+            let product = MarketProduct(
+                id: 0, title: "skeleton",
+                content: "", author: "skeletonskeleton",
+                price: 30000, thumbnail: "skeleton",
+                date: "skeleton", suggest: false,
+                like: false, likesCnt: 100,
+                complete: false, popularity: 0
+            )
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: ArtCVC.identifier,
+                for: indexPath
+            ) as? ArtCVC else { return UICollectionViewCell() }
+            cell.setData(product)
+            cell.setSkeleton()
+            return cell
+        }
+    }
+
+    func collectionSkeletonView(
+        _ skeletonView: UICollectionView,
+        skeletonCellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell? {
+        switch indexPath.section {
+        case 0:
+            let banner = Banner(id: 0, content: "", imageURL: "", href: "")
+            guard let cell = skeletonView.dequeueReusableCell(
+                withReuseIdentifier: BannerCVC.identifier,
+                for: indexPath
+            ) as? BannerCVC else { return UICollectionViewCell() }
+            cell.setData(banner: banner)
+            return cell
+            
+        default:
+            let product = MarketProduct(
+                id: 0, title: "skeleton",
+                content: "", author: "skeletonskeleton",
+                price: 30000, thumbnail: "skeleton",
+                date: "skeleton", suggest: false,
+                like: false, likesCnt: 100,
+                complete: false, popularity: 0
+            )
+            guard let cell = skeletonView.dequeueReusableCell(
+                withReuseIdentifier: ArtCVC.identifier,
+                for: indexPath
+            ) as? ArtCVC else { return UICollectionViewCell() }
+            cell.setData(product)
+            cell.setSkeleton()
+            return cell
+        }
+    }
+    
+    func collectionSkeletonView(
+        _ skeletonView: UICollectionView,
+        supplementaryViewIdentifierOfKind: String,
+        at indexPath: IndexPath
+    ) -> ReusableCellIdentifier? {
+        return HomeHeader.identifier
     }
 }
