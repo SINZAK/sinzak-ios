@@ -13,6 +13,7 @@ import Kingfisher
 final class BannerCVC: UICollectionViewCell {
     // MARK: - Properties
     let imageView = UIImageView().then {
+        $0.isSkeletonable = true
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 20
     }
@@ -21,6 +22,8 @@ final class BannerCVC: UICollectionViewCell {
         super.init(frame: frame)
         setupUI()
         setConstraints()
+        isSkeletonable = true
+        contentView.isSkeletonable = true
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

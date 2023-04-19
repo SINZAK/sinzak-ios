@@ -13,20 +13,36 @@ class HomeView: SZView {
         $0.backgroundColor = .clear
     }
     
-    let homeSekeletoneCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    lazy var homeProductSekeletoneCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: UICollectionViewFlowLayout()
+        )
         collectionView.backgroundColor = .clear
         collectionView.isSkeletonable = true
         collectionView.isHidden = true
-        
+        collectionView.register(
+            BannerCVC.self,
+            forCellWithReuseIdentifier: BannerCVC.identifier
+        )
+        collectionView.register(
+            ArtCVC.self,
+            forCellWithReuseIdentifier: ArtCVC.identifier
+        )
+        collectionView.register(
+            HomeHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: HomeHeader.identifier
+        )
+
         return collectionView
     }()
-    
+
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
             homeCollectionView,
-            homeSekeletoneCollectionView
+            homeProductSekeletoneCollectionView
         )
     }
     override func setLayout() {
@@ -35,7 +51,7 @@ class HomeView: SZView {
             make.top.equalTo(safeAreaLayoutGuide)
         }
         
-        homeSekeletoneCollectionView.snp.makeConstraints {
+        homeProductSekeletoneCollectionView.snp.makeConstraints {
             $0.edges.equalTo(homeCollectionView)
         }
     }
