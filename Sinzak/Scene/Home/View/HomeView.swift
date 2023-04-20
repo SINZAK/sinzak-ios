@@ -55,7 +55,7 @@ class HomeView: SZView {
         
         skeletonView.snp.makeConstraints {
             $0.trailing.leading.equalToSuperview()
-            $0.top.equalTo(homeCollectionView)
+            $0.top.equalTo(homeCollectionView.snp.top)
             $0.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }
