@@ -12,6 +12,7 @@ import SnapKit
 
 final class HomeHeader: UICollectionReusableView {
     let titleLabel = UILabel().then {
+        $0.isSkeletonable = true
         $0.font = .subtitle_B
         $0.textColor = CustomColor.label
     }
@@ -28,7 +29,7 @@ final class HomeHeader: UICollectionReusableView {
     }
     private func setConstraints() {
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().inset(24.0)
         }
     }
 }

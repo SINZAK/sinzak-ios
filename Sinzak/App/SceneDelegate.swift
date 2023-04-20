@@ -18,7 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let vc = ConciergeVC()
         
 //        let vc = SignupGenreVC(viewModel: DefaultSignupGenreVM())
-        let nav = UINavigationController(rootViewController: vc)
+//        let nav = UINavigationController(rootViewController: vc)
+        let nav = TabBarVC()
         changeRootVC(nav, animated: true)
     }
 

@@ -137,7 +137,8 @@ final class HomeVC: SZVC {
     override func configure() {
         bind()
         mainView.homeCollectionView.collectionViewLayout = setLayout()
-        mainView.skeletonView.collectionView.dataSource = self
+        mainView.skeletonView.collectionView1.dataSource = self
+        mainView.skeletonView.collectionView2.dataSource = self
         view.isSkeletonable = true
     }
 }
@@ -204,20 +205,24 @@ extension HomeVC {
                 return section
             } else { // 배너가 아닐 경우
                 let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .fractionalHeight(1.0)
-                )
-                let groupSize = NSCollectionLayoutSize(
                     widthDimension: .estimated(165),
-                    heightDimension: .estimated(240)
+                    heightDimension: .estimated(248)
                 )
+                
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                item.contentInsets = .init(top: 0, leading: 40, bottom: 0, trailing: 0)
+                
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .estimated(205),
+                    heightDimension: .estimated(256)
+                )
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
                 group.interItemSpacing = .fixed(28)
+                
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.leading = 40
-                section.contentInsets.bottom = 40
-                section.interGroupSpacing = 28
+                section.contentInsets.leading = 0
+                section.contentInsets.bottom = 32
+                
                 // 헤더 설정
                 let headerItemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
@@ -242,14 +247,14 @@ extension HomeVC: SkeletonCollectionViewDataSource {
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 2
     }
     
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 3
+        return 1
     }
     
     func collectionView(
