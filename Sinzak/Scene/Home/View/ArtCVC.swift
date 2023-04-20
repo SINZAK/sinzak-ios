@@ -77,6 +77,16 @@ final class ArtCVC: UICollectionViewCell {
         $0.text = "10시간 전"
         $0.isSkeletonable = true
     }
+    
+    private let productForSkeleton = MarketProduct(
+        id: 0, title: "skeleton",
+        content: "", author: "skeletonskeleton",
+        price: 30000, thumbnail: "skeleton",
+        date: "skeleton", suggest: false,
+        like: false, likesCnt: 100,
+        complete: false, popularity: 0
+    )
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -115,11 +125,14 @@ final class ArtCVC: UICollectionViewCell {
     }
     
     func setSkeleton() {
+        self.setData(productForSkeleton)
         favoriteBackground.isHidden = true
         favoriteButton.isHidden = true
         favoriteCountLabel.isHidden = true
         middlePointLabel.isHidden = true
         uploadTimeLabel.isHidden = true
+        titleLabel.text = "        "
+        priceLabel.text = "      "
     }
     // MARK: - Design Helpers
     func setupUI() {

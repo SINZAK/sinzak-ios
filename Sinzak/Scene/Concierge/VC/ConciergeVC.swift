@@ -22,7 +22,16 @@ final class ConciergeVC: UIViewController {
             // TODO: 네트워크 상태와 자동로그인 여부 확인하여 분기
 //            let root = LoginVC(viewModel: DefaultLoginVM())
 //            let vc = UINavigationController(rootViewController: root)
-            let vc = TabBarVC()
+//            let vc = TabBarVC()
+            
+            let vc: UIViewController
+            if KeychainItem.isLoggedIn {
+                vc = TabBarVC()
+            } else {
+                let root = LoginVC(viewModel: DefaultLoginVM())
+                vc = UINavigationController(rootViewController: root)
+            }
+            
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
         }
     }

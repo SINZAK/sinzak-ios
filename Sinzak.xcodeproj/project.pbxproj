@@ -176,6 +176,7 @@
 		ED15161529DCBED000227CC8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED15161429DCBED000227CC8 /* Endpoint.swift */; };
 		ED19B0CB29EAE24500C951D1 /* SchoolAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19B0CA29EAE24500C951D1 /* SchoolAuthButton.swift */; };
 		ED19B14029EC6DE100C951D1 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */; };
+		ED2A581F29F11FC7002CE83E /* HomeSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A581E29F11FC7002CE83E /* HomeSkeletonView.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
@@ -382,6 +383,7 @@
 		ED15161429DCBED000227CC8 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		ED19B0CA29EAE24500C951D1 /* SchoolAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAuthButton.swift; sourceTree = "<group>"; };
 		ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
+		ED2A581E29F11FC7002CE83E /* HomeSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonView.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -772,6 +774,7 @@
 			isa = PBXGroup;
 			children = (
 				A2265371296D7E5600605697 /* HomeView.swift */,
+				ED2A581E29F11FC7002CE83E /* HomeSkeletonView.swift */,
 				A226537A29705A4400605697 /* ArtCVC.swift */,
 				A226537C29705F8100605697 /* BannerCVC.swift */,
 				A257C36A297F99B100266E74 /* SeeMoreCVC.swift */,
@@ -2070,6 +2073,7 @@
 				A254E13829BCF6EB001047FD /* ProductsAPI.swift in Sources */,
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
 				A2947A2A298017A200EE2A96 /* MyChatBubbleCVC.swift in Sources */,
+				ED2A581F29F11FC7002CE83E /* HomeSkeletonView.swift in Sources */,
 				A216BD56297FD61D008964BC /* ChatListVC.swift in Sources */,
 				A216BD4C297FCBD1008964BC /* FollowNotiVC.swift in Sources */,
 				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,

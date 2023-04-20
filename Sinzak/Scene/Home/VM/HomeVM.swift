@@ -12,13 +12,14 @@ import RxDataSources
 import Moya
 
 protocol HomeVMInput {
-    func viewDidLoad()
+    func fetchData()
     func tapProductsCell(products: Products)
 }
 
 protocol HomeVMOutput {
     var isLogin: Bool { get }
     
+    var showSkeleton: BehaviorRelay<Bool> { get }
     var homeSectionModel: BehaviorRelay<[HomeSection]> { get }
     
     var pushProductsDetailView: PublishRelay<ProductsDetailVC> { get }
@@ -36,7 +37,7 @@ final class DefaultHomeVM: HomeVM {
     
     // MARK: - Input
     
-    func viewDidLoad() {
+    func fetchData() {
         fetchSections()
     }
     
@@ -50,21 +51,22 @@ final class DefaultHomeVM: HomeVM {
     
     var isLogin: Bool
     
+    var showSkeleton: BehaviorRelay<Bool> = .init(value: false)
     var homeSectionModel: BehaviorRelay<[HomeSection]> = .init(value: [])
     
     var pushProductsDetailView: PublishRelay<ProductsDetailVC> = .init()
-    
 }
 
 private extension DefaultHomeVM {
     func fetchSections() {
+        showSkeleton.accept(true)
         let bannerObservable = HomeManager.shared.getBannerInfo().asObservable()
 
         if isLogin {
             let loggedInProductsObservable = HomeManager.shared.getHomeProductLoggedIn().asObservable()
             
             Observable.zip(bannerObservable, loggedInProductsObservable)
-                .subscribe(onNext: { [weak self] banners, products in
+                .map({ [weak self] banners, products in
                     
                     // TODO: ~~~님을 위한 맞춤 거래 추가해야함
                     let productSections: [HomeSection] = zip(
@@ -82,17 +84,26 @@ private extension DefaultHomeVM {
                     ] + productSections
                     
                     self?.homeSectionModel.accept(sectionModel)
-                }, onError: { error in
-                    Log.error(error)
                 })
+                .delay(
+                    .milliseconds(1000),
+                    scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
+                )
+                .subscribe(
+                    onNext: { [weak self] in
+                        self?.showSkeleton.accept(false)
+                    },
+                    onError: { error in
+                        Log.error(error)
+                    })
                 .disposed(by: disposeBag)
             
         } else {
             let notLoggedInProductsObservable = HomeManager.shared.getHomeProductNotLoggedIn().asObservable()
             
             Observable.zip(bannerObservable, notLoggedInProductsObservable)
-                .subscribe(onNext: { [weak self] banners, products in
-
+                .map({ [weak self] banners, products in
+                    
                     let productSections: [HomeSection] = zip(
                         HomeNotLoggedInType.allCases.map { $0.title },
                         [products.new, products.hot, products.trading]
@@ -108,9 +119,18 @@ private extension DefaultHomeVM {
                     ] + productSections
                     
                     self?.homeSectionModel.accept(sectionModel)
-                }, onError: { error in
-                    Log.error(error)
                 })
+                .delay(
+                    .milliseconds(1000),
+                    scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
+                )
+                .subscribe(
+                    onNext: { [weak self] in
+                        self?.showSkeleton.accept(false)
+                    },
+                    onError: { error in
+                        Log.error(error)
+                    })
                 .disposed(by: disposeBag)
         }
     }
