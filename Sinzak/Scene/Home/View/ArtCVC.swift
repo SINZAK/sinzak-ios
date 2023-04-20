@@ -79,10 +79,10 @@ final class ArtCVC: UICollectionViewCell {
     }
     
     private let productForSkeleton = MarketProduct(
-        id: 0, title: "skeleton",
-        content: "", author: "skeletonskeleton",
+        id: 0, title: "      ",
+        content: "", author: "             ",
         price: 30000, thumbnail: "skeleton",
-        date: "skeleton", suggest: false,
+        date: "       ", suggest: false,
         like: false, likesCnt: 100,
         complete: false, popularity: 0
     )
@@ -125,14 +125,17 @@ final class ArtCVC: UICollectionViewCell {
     }
     
     func setSkeleton() {
-        self.setData(productForSkeleton)
+//        self.setData(productForSkeleton)
         favoriteBackground.isHidden = true
         favoriteButton.isHidden = true
         favoriteCountLabel.isHidden = true
         middlePointLabel.isHidden = true
         uploadTimeLabel.isHidden = true
-        titleLabel.text = "        "
-        priceLabel.text = "      "
+        imageView.image = nil
+        [titleLabel, priceLabel, authorLabel].forEach { $0.textColor = .clear }
+        titleLabel.text = "dfdfdfdfdfhdd"
+        priceLabel.text = "fdffd"
+        authorLabel.text = "fdfddddd"
     }
     // MARK: - Design Helpers
     func setupUI() {
