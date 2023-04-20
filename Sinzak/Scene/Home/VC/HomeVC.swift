@@ -58,6 +58,14 @@ final class HomeVC: SZVC {
         mainView.homeCollectionView.refreshControl?.rx.controlEvent(.valueChanged)
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                
+                owner.mainView.skeletonView.snp.remakeConstraints {
+                    $0.trailing.leading.equalToSuperview()
+                    $0.top.equalTo(owner.view.safeAreaLayoutGuide)
+                        .offset(owner.mainView.refreshControl.bounds.height)
+                    $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
+                }
+                
                 owner.viewModel.fetchData()
             })
             .disposed(by: disposeBag)
@@ -92,6 +100,11 @@ final class HomeVC: SZVC {
                 } else {
                     owner.view.hideSkeleton()
                     owner.mainView.skeletonView.isHidden = true
+                    owner.mainView.skeletonView.snp.remakeConstraints {
+                        $0.trailing.leading.equalToSuperview()
+                        $0.top.equalTo(owner.view.safeAreaLayoutGuide)
+                        $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
+                    }
                     owner.mainView.homeCollectionView.refreshControl?.endRefreshing()
                 }})
             .disposed(by: disposeBag)
