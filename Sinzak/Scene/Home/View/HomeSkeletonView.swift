@@ -17,11 +17,12 @@ class HomeSkeletonView: SZView {
         $0.isSkeletonable = true
     }
     
-    lazy var productFlowLayout: UICollectionViewLayout = {
+    let productFlowLayout: UICollectionViewLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-//        layout.estimatedItemSize = CGSize(width: 165, height: 240)
-//        layout.sectionInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0)
+        layout.estimatedItemSize = CGSize(width: 165, height: 240)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0)
+//        layout.collectionViewContentSize
 //        layout.minimumLineSpacing = 16.0
 //        layout.minimumInteritemSpacing = 28.0
         //            layout.headerReferenceSize = CGSize(width: 10, height: 40)
@@ -31,21 +32,23 @@ class HomeSkeletonView: SZView {
         return layout
     }()
     
-    lazy var homeProductSekeletoneCollectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
-            collectionViewLayout: productFlowLayout
+            collectionViewLayout: UICollectionViewLayout()
         )
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.estimatedItemSize = CGSize(width: 165, height: 240)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0)
+        
+        collectionView.collectionViewLayout = layout
         collectionView.backgroundColor = .clear
         collectionView.isSkeletonable = true
         collectionView.register(
             ArtCVC.self,
             forCellWithReuseIdentifier: ArtCVC.identifier
-        )
-        collectionView.register(
-            HomeHeader.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: HomeHeader.identifier
         )
 
         return collectionView
@@ -57,7 +60,7 @@ class HomeSkeletonView: SZView {
         self.isSkeletonable = true
         addSubviews(
             imageView,
-            homeProductSekeletoneCollectionView
+            collectionView
         )
     }
     override func setLayout() {
@@ -68,7 +71,7 @@ class HomeSkeletonView: SZView {
             $0.height.equalTo(imageView.snp.width).multipliedBy(0.42)
         }
         
-        homeProductSekeletoneCollectionView.snp.makeConstraints { make in
+        collectionView.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom).offset(32.0)
             make.trailing.leading.bottom.equalToSuperview()
         }

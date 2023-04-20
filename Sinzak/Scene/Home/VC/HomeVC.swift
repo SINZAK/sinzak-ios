@@ -30,14 +30,8 @@ final class HomeVC: SZVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
-        viewModel.fetchData()
-//        viewModel.viewDidLoad()
         
-//        mainView.homeCollectionView.isHidden = true
-//        mainView.skeletonView.isHidden = false
-//        view.showAnimatedSkeleton()
-
+        viewModel.fetchData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -95,12 +89,10 @@ final class HomeVC: SZVC {
                 if showSkeleton {
                     owner.view.showAnimatedSkeleton()
                     owner.mainView.skeletonView.isHidden = false
-                    owner.view.layoutIfNeeded()
                 } else {
                     owner.view.hideSkeleton()
                     owner.mainView.skeletonView.isHidden = true
                     owner.mainView.homeCollectionView.refreshControl?.endRefreshing()
-                    owner.view.layoutIfNeeded()
                 }})
             .disposed(by: disposeBag)
         
@@ -143,8 +135,9 @@ final class HomeVC: SZVC {
         navigationItem.rightBarButtonItem = notification
     }
     override func configure() {
+        bind()
         mainView.homeCollectionView.collectionViewLayout = setLayout()
-        mainView.skeletonView.homeProductSekeletoneCollectionView.dataSource = self
+        mainView.skeletonView.collectionView.dataSource = self
         view.isSkeletonable = true
     }
 }
