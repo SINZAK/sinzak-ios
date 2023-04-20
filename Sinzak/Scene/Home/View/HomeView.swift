@@ -9,40 +9,42 @@ import UIKit
 
 class HomeView: SZView {
     // MARK: - Properties
-    lazy var homeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
-        $0.backgroundColor = .clear
-    }
     
-    lazy var homeProductSekeletoneCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: UICollectionViewFlowLayout()
-        )
-        collectionView.backgroundColor = .clear
-        collectionView.isSkeletonable = true
-        collectionView.isHidden = true
-        collectionView.register(
+    let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = CustomColor.refreshControl
+        
+        return refreshControl
+    }()
+    
+    lazy var homeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        $0.refreshControl = refreshControl
+        $0.backgroundColor = .clear
+        $0.register(
             BannerCVC.self,
             forCellWithReuseIdentifier: BannerCVC.identifier
         )
-        collectionView.register(
+        $0.register(
             ArtCVC.self,
-            forCellWithReuseIdentifier: ArtCVC.identifier
+            forCellWithReuseIdentifier: ArtCVC.identifier)
+        $0.register(
+            SeeMoreCVC.self,
+            forCellWithReuseIdentifier: SeeMoreCVC.identifier
         )
-        collectionView.register(
+        $0.register(
             HomeHeader.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            forSupplementaryViewOfKind: "header",
             withReuseIdentifier: HomeHeader.identifier
         )
-
-        return collectionView
-    }()
+    }
+    
+    lazy var skeletonView = HomeSkeletonView()
 
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
             homeCollectionView,
-            homeProductSekeletoneCollectionView
+            skeletonView
         )
     }
     override func setLayout() {
@@ -51,8 +53,10 @@ class HomeView: SZView {
             make.top.equalTo(safeAreaLayoutGuide)
         }
         
-        homeProductSekeletoneCollectionView.snp.makeConstraints {
-            $0.edges.equalTo(homeCollectionView)
+        skeletonView.snp.makeConstraints {
+            $0.trailing.leading.equalToSuperview()
+            $0.top.equalTo(homeCollectionView)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }
 }

@@ -23,4 +23,5 @@ enum CustomColor {
     static let gray20 = UIColor(named: "customGray20")
     static let gray10 = UIColor(named: "customGray10")
     static let onlyGray80 = UIColor(named: "onlyCustomGray80")
+    static let refreshControl = UIColor(named: "refreshControl")
 }

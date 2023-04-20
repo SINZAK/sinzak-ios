@@ -13,7 +13,6 @@ import Kingfisher
 final class BannerCVC: UICollectionViewCell {
     // MARK: - Properties
     let imageView = UIImageView().then {
-        $0.isSkeletonable = true
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 20
     }
