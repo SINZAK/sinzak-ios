@@ -98,34 +98,6 @@ final class DefaultLoginVM: LoginVM {
                     Log.error(error)
                 })
             .disposed(by: disposeBag)
-        
-        //        guard let tokenType = naverLoginInstance?.tokenType else {
-        //            return
-        //        }
-//        print("NAVER Access Token", accessToken)
-//
-//        let requestUrl = "https://openapi.naver.com/v1/nid/me"
-//        let url = URL(string: requestUrl)!
-//        let authorization = "\(tokenType) \(accessToken)"
-//        let req = AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization": authorization])
-//        req.responseData { response in
-//
-//            guard let body = try? JSONSerialization.jsonObject(with: response.value ?? Data()) as? [String: Any] else {
-//                Log.error("네이버 data decoding 에러")
-//                return
-//            }
-//            if let resultCode = body["message"] as? String {
-//                if resultCode.trimmingCharacters(in: .whitespaces) == "success" {
-//                    let resultJson = body["response"] as! [String: Any]
-//                    let id = resultJson["id"] as? String ?? ""
-//                    let email = resultJson["email"] as? String ?? ""
-//                    print("네이버 로그인 아이디 ", id)
-//                    print("네이버 로그인 이메일 ", email)
-//                } else {
-//                    Log.error("네이버 정보 가져오기 싪")
-//                }
-//            }
-//        }
     }
     
     func appleAuthorizationControl(token: String) {
@@ -190,6 +162,7 @@ private extension DefaultLoginVM {
             accessToken: accessToken,
             refreshToken: refreshToken
         )
+        AuthManager.shared.fetchMyProfile()
         DispatchQueue.main.async { [weak self] in
             let vc = TabBarVC()
             self?.changeRootTabBar.accept(vc)
