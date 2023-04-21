@@ -29,7 +29,10 @@ protocol HomeVM: HomeVMInput, HomeVMOutput {}
 
 final class DefaultHomeVM: HomeVM {
     
-    private let provider = MoyaProvider<HomeAPI>()
+    private let provider = MoyaProvider<HomeAPI>(
+        callbackQueue: .global(),
+        plugins: [MoyaLoggerPlugin()]
+    )
     private let disposeBag = DisposeBag()
     
     init(isLogin: Bool) {
@@ -62,7 +65,7 @@ private extension DefaultHomeVM {
     func fetchSections() {
         showSkeleton.accept(true)
 
-        let bannerObservable = provider.rx.request(.banner, callbackQueue: .global())
+        let bannerObservable = provider.rx.request(.banner)
             .do(onSuccess: {
                 Log.debug($0.request?.url ?? "")
             })

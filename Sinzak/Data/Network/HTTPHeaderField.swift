@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum HeaderField: String {
     case contentType = "Content-Type"
     case authorization = "Authorization"
@@ -19,8 +18,8 @@ enum ContentType: String {
 }
 
 extension HeaderField {
-    static var header: [String:String] {
-        var header: [String:String] = [:]
+    static var header: [String: String] {
+        var header: [String: String] = [:]
         header[HeaderField.contentType.rawValue] = ContentType.json.rawValue
         header[HeaderField.authorization.rawValue] = KeychainItem.currentAccessToken
         return header
