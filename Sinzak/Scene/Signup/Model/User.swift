@@ -48,7 +48,7 @@ struct Join: Codable {
     }
 }
 // MARK: - 사용자 정보 수정
-struct UserInfo: Codable {
+struct UserInfoEdit: Codable {
     let introduction, name, picture: String
 }
 // MARK: - 관심정보 수정
