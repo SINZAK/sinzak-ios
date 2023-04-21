@@ -6,6 +6,7 @@ disabled_rules:
   - force_cast
   - function_body_length
   - empty_enum_arguments
+  - implicit_getter
 opt_in_rules:
 
 included:
