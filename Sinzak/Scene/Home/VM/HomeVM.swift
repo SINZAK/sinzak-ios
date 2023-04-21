@@ -64,7 +64,6 @@ private extension DefaultHomeVM {
 
         let bannerObservable = provider.rx.request(.banner, callbackQueue: .global())
             .do(onSuccess: {
-                Log.debug("Thread: \(Thread.current)")
                 Log.debug($0.request?.url ?? "")
             })
             .filterSuccessfulStatusCodes()

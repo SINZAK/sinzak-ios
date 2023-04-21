@@ -177,6 +177,7 @@
 		ED19B0CB29EAE24500C951D1 /* SchoolAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19B0CA29EAE24500C951D1 /* SchoolAuthButton.swift */; };
 		ED19B14029EC6DE100C951D1 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */; };
 		ED2A581F29F11FC7002CE83E /* HomeSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A581E29F11FC7002CE83E /* HomeSkeletonView.swift */; };
+		ED2A582929F2B93A002CE83E /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582829F2B93A002CE83E /* MoyaLoggerPlugin.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
@@ -384,6 +385,7 @@
 		ED19B0CA29EAE24500C951D1 /* SchoolAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolAuthButton.swift; sourceTree = "<group>"; };
 		ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		ED2A581E29F11FC7002CE83E /* HomeSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonView.swift; sourceTree = "<group>"; };
+		ED2A582829F2B93A002CE83E /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -1671,6 +1673,7 @@
 			isa = PBXGroup;
 			children = (
 				A22BE58F296AEA4F00D9815C /* AuthManager.swift */,
+				ED2A582829F2B93A002CE83E /* MoyaLoggerPlugin.swift */,
 				A2F6EAE4298776F300DE754F /* HomeManager.swift */,
 				A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */,
 				A254E13929BCF897001047FD /* ProductManager.swift */,
@@ -2133,6 +2136,7 @@
 				EDF4502129EEC1CB001733C6 /* HomeSectionModel.swift in Sources */,
 				A26F0AAC2948BE23001CB2AA /* ConciergeVC.swift in Sources */,
 				A216BD37297FA384008964BC /* HomeDetailView.swift in Sources */,
+				ED2A582929F2B93A002CE83E /* MoyaLoggerPlugin.swift in Sources */,
 				A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */,
 				A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */,
 				A2DEC35F29B4638D00CF0794 /* SudentAuthView.swift in Sources */,

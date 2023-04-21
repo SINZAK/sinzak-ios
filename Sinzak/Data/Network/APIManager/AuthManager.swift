@@ -132,7 +132,7 @@ class AuthManager {
     }
     /// FCM 토큰 업데이트
     func updateFCMToken(_ token: FCMTokenUpdate, completion: @escaping ((Bool)-> Void)) {
-        provider.request(.fcmTokenUpdate(fcmInfo: token)) { result in
+        provider.request(.fcmTokenUpdate(fcmInfo: token), callbackQueue: .global()) { result in
             switch result {
             case .success(let response):
                 do {
