@@ -1672,8 +1672,8 @@
 		A2F90539298969F500AC588C /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
-				A22BE58F296AEA4F00D9815C /* AuthManager.swift */,
 				ED2A582829F2B93A002CE83E /* MoyaLoggerPlugin.swift */,
+				A22BE58F296AEA4F00D9815C /* AuthManager.swift */,
 				A2F6EAE4298776F300DE754F /* HomeManager.swift */,
 				A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */,
 				A254E13929BCF897001047FD /* ProductManager.swift */,
