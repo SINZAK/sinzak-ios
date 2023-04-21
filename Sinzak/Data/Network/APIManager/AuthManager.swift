@@ -13,7 +13,11 @@ class AuthManager {
     // MARK: - Properties
     private init () {}
     static let shared = AuthManager()
-    private let provider = MoyaProvider<AuthAPI>()
+    private let provider = MoyaProvider<AuthAPI>(
+        callbackQueue: .global(),
+        plugins: [MoyaLoggerPlugin()]
+    )
+    let disposeBag = DisposeBag()
     // MARK: - Methods
     
     /// 닉네임 중복 확인
@@ -46,7 +50,6 @@ class AuthManager {
     /// 회원가입
     func join(_ joinInfo: Join) -> Single<Bool> {
         return provider.rx.request(.join(joinInfo: joinInfo))
-            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map({ response in
                 
                 Log.debug(response.request?.url ?? "")
@@ -71,7 +74,6 @@ class AuthManager {
     /// 회원 탈퇴
     func resign() -> Single<Void> {
         return provider.rx.request(.resign)
-            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map({ response in
                 
                 Log.debug(response.request?.url ?? "")
@@ -92,9 +94,39 @@ class AuthManager {
             })
     }
     
+    /// reissue 토큰 재발급
+    func reissue() -> Single<Reissue> {
+        return provider.rx.request(.reissue)
+            .filterSuccessfulStatusCodes()
+            .map(Reissue.self)
+            .do(onSuccess: { reissue in
+                Log.debug(reissue)
+                KeychainItem.saveTokenInKeychain(
+                    accessToken: reissue.accessToken,
+                    refreshToken: reissue.refreshToken
+                )
+            })
+            .retry(2)
+    }
+    
+    /// 프로필 정보 가져와 저장
+    func fetchMyProfile() {
+            provider.rx.request(.myProfile)
+            .filterSuccessfulStatusCodes()
+            .map(UserInfoResponse.self)
+            .subscribe(
+                onSuccess: { userInfoResponse in
+                    UserInfoManager.shared.saveUserInfo(with: userInfoResponse.data)
+                }, onFailure: { error in
+                    Log.error(error)
+                }
+            )
+            .disposed(by: disposeBag)
+    }
+    
     /// 회원정보 추가, 편집
     /// - 자기소개, 이름, 사진
-    func editUserInfo(_ userInfo: UserInfo, completion: @escaping ((Bool) -> Void)) {
+    func editUserInfo(_ userInfo: UserInfoEdit, completion: @escaping ((Bool) -> Void)) {
         provider.request(.editUserInfo(userInfo: userInfo)) { result in
             switch result {
             case .success(let response):

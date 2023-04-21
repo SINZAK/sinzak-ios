@@ -13,11 +13,12 @@ enum AuthAPI {
     case nicknameCheck(nickname: String)
     case join(joinInfo: Join)
     case editUserImage(image: UIImage)
-    case editUserInfo(userInfo: UserInfo)
+    case editUserInfo(userInfo: UserInfoEdit)
     case editCategoryLike(category: CategoryLikeEdit)
     // 액세스토큰, FCM 토큰
-    case fcmTokenUpdate(fcmInfo: FCMTokenUpdate) // fcm 토큰 업데이트 ㅡ
+    case fcmTokenUpdate(fcmInfo: FCMTokenUpdate) // fcm 토큰 업데이트
     case reissue // 액세스 토큰 갱신
+    case myProfile // 내 프로필 확인
     // 검색기록 삭제
     case deleteSearchHistory // 검색기록 전체 삭제
     case deleteOneHistory(id: Int) // 검색기록 한 개 삭제
@@ -53,6 +54,8 @@ extension AuthAPI: TargetType {
             return "/users/fcm"
         case .reissue:
             return "/reissue"
+        case .myProfile:
+            return "/users/my-profile"
         case .deleteSearchHistory:
             return "/users/deletehistories"
         case .deleteOneHistory:
@@ -73,6 +76,8 @@ extension AuthAPI: TargetType {
     }
     var method: Moya.Method {
         switch self {
+        case .myProfile:
+            return .get
         default:
             return .post
         }
@@ -126,12 +131,9 @@ extension AuthAPI: TargetType {
                 return .requestPlain
             }
         case .reissue:
-            let params: [String: String] = [
-                "accessToken": KeychainItem.currentAccessToken,
-                "refreshToken": KeychainItem.currentRefreshToken
-            ]
-            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
-            
+            return .requestPlain
+        case .myProfile:
+            return .requestPlain
         case .deleteOneHistory(let id):
             let params: [String: Any] = [
                 "id": id
@@ -166,7 +168,7 @@ extension AuthAPI: TargetType {
         let accessToken = KeychainItem.currentAccessToken
         
         switch self {
-        case .nicknameCheck, .reissue:
+        case .nicknameCheck:
             return header
             
         case .editUserImage:

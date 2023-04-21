@@ -6,9 +6,17 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
 
 final class ConciergeVC: UIViewController {
+    
+    let disposeBag = DisposeBag()
     let mainView = ConciergeView()
+    
+    let nextVC: PublishRelay<UIViewController> = .init()
+    let endAnimation: PublishRelay<Bool> = .init()
+    
     override func loadView() {
         view = mainView
     }
@@ -16,32 +24,43 @@ final class ConciergeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = CustomColor.background
+        
+        Observable.zip(nextVC.asObservable(), endAnimation.asObservable())
+            .subscribe(onNext: { vc, _ in
+                UserInfoManager.shared.logUserInfo()
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                    .changeRootVC(vc, animated: false)
+            })
+            .disposed(by: disposeBag)
+        
+        getNextVC()
         concierge()
     }
     
     func concierge() {
-        // 애니메이션, 로그인(1. 로그인화면, 2. 탭화면), 정보 저장
-        
-        if KeychainItem.isLoggedIn {
-            
-        }
-        
-        // 애니메이션
-        mainView.logoView.play { _ in
+        // 유저 정보 저장해야함
+        mainView.logoView.play { [weak self] _ in
             // TODO: 네트워크 상태와 자동로그인 여부 확인하여 분기
-//            let root = LoginVC(viewModel: DefaultLoginVM())
-//            let vc = UINavigationController(rootViewController: root)
-//            let vc = TabBarVC()
             
-            let vc: UIViewController
-            if KeychainItem.isLoggedIn {
-                vc = TabBarVC()
-            } else {
-                let root = LoginVC(viewModel: DefaultLoginVM())
-                vc = UINavigationController(rootViewController: root)
-            }
-            
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(vc, animated: false)
+            self?.endAnimation.accept(true)
+        }
+    }
+    
+    func getNextVC() {
+        if KeychainItem.isLoggedIn {
+            AuthManager.shared.reissue()
+                .observe(on: MainScheduler.instance)
+                .subscribe(with: self, onSuccess: { owner, _ in
+                    AuthManager.shared.fetchMyProfile()
+                    owner.nextVC.accept(TabBarVC())
+                }, onFailure: { _, error in
+                    Log.error(error)
+                })
+                .disposed(by: disposeBag)
+        } else {
+            let root = LoginVC(viewModel: DefaultLoginVM())
+            let vc = UINavigationController(rootViewController: root)
+            nextVC.accept(vc)
         }
     }
 }

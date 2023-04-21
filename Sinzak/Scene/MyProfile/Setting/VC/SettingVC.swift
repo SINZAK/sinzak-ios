@@ -110,6 +110,7 @@ extension SettingVC: UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
         
         if indexPath == [2, 1] {
+            UserInfoManager.shared.logout()
             KeychainItem.deleteTokenInKeychain()
             NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
             
@@ -123,6 +124,7 @@ extension SettingVC: UICollectionViewDelegate {
         }
         
         if indexPath == [2, 0] {
+            UserInfoManager.shared.logout()
             KeychainItem.deleteTokenInKeychain()
             NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
             
