@@ -29,6 +29,7 @@ protocol HomeVM: HomeVMInput, HomeVMOutput {}
 
 final class DefaultHomeVM: HomeVM {
     
+    private let provider = MoyaProvider<HomeAPI>()
     private let disposeBag = DisposeBag()
     
     init(isLogin: Bool) {
@@ -60,8 +61,17 @@ final class DefaultHomeVM: HomeVM {
 private extension DefaultHomeVM {
     func fetchSections() {
         showSkeleton.accept(true)
-        let bannerObservable = HomeManager.shared.getBannerInfo().asObservable()
 
+        let bannerObservable = provider.rx.request(.banner, callbackQueue: .global())
+            .do(onSuccess: {
+                Log.debug("Thread: \(Thread.current)")
+                Log.debug($0.request?.url ?? "")
+            })
+            .filterSuccessfulStatusCodes()
+            .map(BannerList.self)
+            .map { $0.data }
+            .asObservable()
+                
         if isLogin {
             let loggedInProductsObservable = HomeManager.shared.getHomeProductLoggedIn().asObservable()
             
