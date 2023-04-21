@@ -18,11 +18,12 @@ final class MoyaLoggerPlugin: PluginType {
         let url = httpRequest.url?.description ?? ""
         let method = httpRequest.method?.rawValue ?? ""
         var log = "----------------------- ✨ API Log ✨ -----------------------\n"
-        log.append("✨ url: \(url)\n")
-        log.append("✨ method: \(method)\n")
+        log.append("[Will Send]")
+        log.append("✨ URL: \(url)\n")
+        log.append("✨ METHOD: \(method)\n")
         log.append("✨ API: \(target)\n")
         if let headers = httpRequest.allHTTPHeaderFields, !headers.isEmpty {
-            log.append("✨ header: \(headers)\n")
+            log.append("✨ HEADER: \(headers)\n")
         }
         if let body = httpRequest.httpBody, let bodyString = String(
             bytes: body,
@@ -36,11 +37,51 @@ final class MoyaLoggerPlugin: PluginType {
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         switch result {
-        case .success(_):
+        case let .success(response):
             // TODO: 토큰 리프레쉬 작업 추가
-            break
+            onSucceed(response, target: target)
         case let .failure(error):
-            Log.error(error)
+            onFail(error, target: target)
         }
     }
+}
+
+private extension MoyaLoggerPlugin {
+    
+    func onSucceed(_ response: Response, target: TargetType) {
+        let request = response.request
+        let url = request?.url?.absoluteString ?? ""
+        let statusCode = response.statusCode
+        
+        let log = """
+            ----------------------- ✨ API Log ✨ -----------------------
+            [Did Receive - Success]
+            ✨ API: \(target)
+            ✨ URL: \(url)
+            ✨ STATUS CODE: \(statusCode)
+            ----------------------- ✨ End Log ✨ -----------------------
+            """
+        print(log)
+    }
+    
+    func onFail(_ error: MoyaError, target: TargetType) {
+        
+        let request = error.response?.request
+        let url = request?.url?.absoluteString ?? ""
+        let statusCode = error.response?.statusCode ?? 0
+        let errorDescription = error.errorDescription ?? ""
+        
+        let log = """
+            ----------------------- ✨ API Log ✨ -----------------------
+            [Did Receive - Failure]
+            ✨ API: \(target)
+            ✨ URL: \(url)
+            ✨ STATUS CODE: \(statusCode)
+            ✨ ERROR: \(error)
+            ✨ ERROR Description: \(errorDescription)
+            ----------------------- ✨ End Log ✨ -----------------------
+            """
+        print(log)
+    }
+    
 }

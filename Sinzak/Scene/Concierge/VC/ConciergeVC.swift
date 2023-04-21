@@ -12,12 +12,21 @@ final class ConciergeVC: UIViewController {
     override func loadView() {
         view = mainView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        concierge()
         view.backgroundColor = CustomColor.background
+        concierge()
     }
+    
     func concierge() {
+        // 애니메이션, 로그인(1. 로그인화면, 2. 탭화면), 정보 저장
+        
+        if KeychainItem.isLoggedIn {
+            
+        }
+        
+        // 애니메이션
         mainView.logoView.play { _ in
             // TODO: 네트워크 상태와 자동로그인 여부 확인하여 분기
 //            let root = LoginVC(viewModel: DefaultLoginVM())
