@@ -178,6 +178,9 @@
 		ED19B14029EC6DE100C951D1 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */; };
 		ED2A581F29F11FC7002CE83E /* HomeSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A581E29F11FC7002CE83E /* HomeSkeletonView.swift */; };
 		ED2A582929F2B93A002CE83E /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582829F2B93A002CE83E /* MoyaLoggerPlugin.swift */; };
+		ED2A582B29F2F3C8002CE83E /* Reissue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582A29F2F3C8002CE83E /* Reissue.swift */; };
+		ED2A582D29F306F9002CE83E /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582C29F306F9002CE83E /* UserInfo.swift */; };
+		ED2A583029F30C3E002CE83E /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582F29F30C3E002CE83E /* UserInfoManager.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
@@ -386,6 +389,9 @@
 		ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		ED2A581E29F11FC7002CE83E /* HomeSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonView.swift; sourceTree = "<group>"; };
 		ED2A582829F2B93A002CE83E /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
+		ED2A582A29F2F3C8002CE83E /* Reissue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reissue.swift; sourceTree = "<group>"; };
+		ED2A582C29F306F9002CE83E /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		ED2A582F29F30C3E002CE83E /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -931,6 +937,7 @@
 		A22BE58A296AE88600D9815C /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				ED2A582E29F30B8E002CE83E /* UserDefaults */,
 				A22BE58E296AEA4100D9815C /* Network */,
 			);
 			path = Data;
@@ -1544,6 +1551,8 @@
 			isa = PBXGroup;
 			children = (
 				A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */,
+				ED2A582A29F2F3C8002CE83E /* Reissue.swift */,
+				ED2A582C29F306F9002CE83E /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1690,6 +1699,14 @@
 				D69FF5B545FF67C534A00433 /* Pods_SinzakTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED2A582E29F30B8E002CE83E /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				ED2A582F29F30C3E002CE83E /* UserInfoManager.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		ED47113229DF2EBD00708562 /* VM */ = {
@@ -2116,9 +2133,11 @@
 				A254E14729BDA193001047FD /* WorkBuild.swift in Sources */,
 				A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */,
 				A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */,
+				ED2A582D29F306F9002CE83E /* UserInfo.swift in Sources */,
 				ED86969229D9359D001A1A9F /* UIView+Extension.swift in Sources */,
 				A226537B29705A4400605697 /* ArtCVC.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
+				ED2A582B29F2F3C8002CE83E /* Reissue.swift in Sources */,
 				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
 				A254E14229BD0571001047FD /* ChatAPI.swift in Sources */,
 				A2B38580295D895800E5EB7C /* StudentAuthVC.swift in Sources */,
@@ -2154,6 +2173,7 @@
 				A2B1C66529BB11DF0008DADB /* ResultMessage.swift in Sources */,
 				A26F0AB32948C843001CB2AA /* SZVC.swift in Sources */,
 				A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */,
+				ED2A583029F30C3E002CE83E /* UserInfoManager.swift in Sources */,
 				A233891029B066EC00688FD8 /* EditProfileView.swift in Sources */,
 				A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */,
 				ED47113F29E03C6200708562 /* SignupNameVM.swift in Sources */,
