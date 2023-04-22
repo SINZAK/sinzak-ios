@@ -18,10 +18,10 @@ final class MoyaLoggerPlugin: PluginType {
         let url = httpRequest.url?.description ?? ""
         let method = httpRequest.method?.rawValue ?? ""
         var log = "----------------------- ✨ API Log ✨ -----------------------\n"
-        log.append("[Will Send]")
+        log.append("[Will Send]\n")
+        log.append("✨ API: \(target)\n")
         log.append("✨ URL: \(url)\n")
         log.append("✨ METHOD: \(method)\n")
-        log.append("✨ API: \(target)\n")
         if let headers = httpRequest.allHTTPHeaderFields, !headers.isEmpty {
             log.append("✨ HEADER: \(headers)\n")
         }
@@ -55,7 +55,7 @@ private extension MoyaLoggerPlugin {
         
         let log = """
             ----------------------- ✨ API Log ✨ -----------------------
-            [Did Receive - Success]
+            [Did Receive - Success] 
             ✨ API: \(target)
             ✨ URL: \(url)
             ✨ STATUS CODE: \(statusCode)

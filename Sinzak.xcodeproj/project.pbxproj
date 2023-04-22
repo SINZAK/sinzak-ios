@@ -204,6 +204,8 @@
 		EDE5EC5B29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */; };
 		EDE5EC5D29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */; };
 		EDE5EC6029D70ABA00BB211F /* MarketProductsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */; };
+		EDEEFFB229F3A38600C828B9 /* ReissueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEEFFB129F3A38600C828B9 /* ReissueDTO.swift */; };
+		EDEEFFB429F3A4AC00C828B9 /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEEFFB329F3A4AC00C828B9 /* UserInfoDTO.swift */; };
 		EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501229ED388F001733C6 /* SignupGenreVM.swift */; };
 		EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */; };
 		EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501C29EDAE7C001733C6 /* Setting.swift */; };
@@ -412,6 +414,8 @@
 		EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extenstion.swift"; sourceTree = "<group>"; };
 		EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Extentsion.swift"; sourceTree = "<group>"; };
 		EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketProductsResponseDTO.swift; sourceTree = "<group>"; };
+		EDEEFFB129F3A38600C828B9 /* ReissueDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueDTO.swift; sourceTree = "<group>"; };
+		EDEEFFB329F3A4AC00C828B9 /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		EDF4501229ED388F001733C6 /* SignupGenreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVM.swift; sourceTree = "<group>"; };
 		EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultMessageDTO.swift; sourceTree = "<group>"; };
 		EDF4501C29EDAE7C001733C6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
@@ -1756,6 +1760,8 @@
 				EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */,
 				ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */,
 				EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */,
+				EDEEFFB129F3A38600C828B9 /* ReissueDTO.swift */,
+				EDEEFFB329F3A4AC00C828B9 /* UserInfoDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -2051,6 +2057,7 @@
 				ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */,
 				A280AB3E29A7371200C1729C /* SearchHistoryCVC.swift in Sources */,
 				A280AB3829A7222100C1729C /* SearchHistoryView.swift in Sources */,
+				EDEEFFB229F3A38600C828B9 /* ReissueDTO.swift in Sources */,
 				A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */,
 				A254E14029BD0427001047FD /* UserAPI.swift in Sources */,
 				EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */,
@@ -2168,6 +2175,7 @@
 				A216BD4E297FCC02008964BC /* NotiView.swift in Sources */,
 				A2265372296D7E5600605697 /* HomeView.swift in Sources */,
 				ED47113829E01B3700708562 /* CheckButton.swift in Sources */,
+				EDEEFFB429F3A4AC00C828B9 /* UserInfoDTO.swift in Sources */,
 				A2180DAF29AA38F700BBC74A /* RequestContentView.swift in Sources */,
 				A233892229B3756700688FD8 /* StompManager.swift in Sources */,
 				A2B1C66529BB11DF0008DADB /* ResultMessage.swift in Sources */,
