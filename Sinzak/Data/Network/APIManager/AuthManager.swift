@@ -98,7 +98,8 @@ class AuthManager {
     func reissue() -> Single<Reissue> {
         return provider.rx.request(.reissue)
             .filterSuccessfulStatusCodes()
-            .map(Reissue.self)
+            .map(ReissueDTO.self)
+            .map { $0.toDomain() }
             .do(onSuccess: { reissue in
                 Log.debug(reissue)
                 KeychainItem.saveTokenInKeychain(
@@ -113,14 +114,17 @@ class AuthManager {
     func fetchMyProfile() {
             provider.rx.request(.myProfile)
             .filterSuccessfulStatusCodes()
-            .map(UserInfoResponse.self)
-            .subscribe(
-                onSuccess: { userInfoResponse in
-                    UserInfoManager.shared.saveUserInfo(with: userInfoResponse.data)
-                }, onFailure: { error in
+            .map(UserInfoResponseDTO.self)
+            .subscribe(onSuccess: { responseDTO in
+                do {
+                    guard let response = try responseDTO.data?.toDomain() else { throw APIError.noContent }
+                    UserInfoManager.shared.saveUserInfo(with: response)
+                } catch {
                     Log.error(error)
                 }
-            )
+            }, onFailure: { error in
+                Log.error(error)
+            })
             .disposed(by: disposeBag)
     }
     

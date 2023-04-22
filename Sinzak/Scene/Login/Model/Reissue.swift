@@ -11,5 +11,5 @@ struct Reissue: Codable {
     let grantType, accessToken, refreshToken: String
     let accessTokenExpireDate: Int
     let joined: Bool
-    let origin: String
+    let origin: String?
 }
