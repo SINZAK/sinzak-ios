@@ -23,6 +23,11 @@ final class SignupNameVC: SZVC {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        mainView.nameTextField.becomeFirstResponder()
+    }
+    
     // MARK: - Init
     
     init(viewModel: SignupNameVM) {
@@ -100,7 +105,6 @@ final class SignupNameVC: SZVC {
         
         let doubleCheckResult = viewModel.doubleCheckResult
             .asDriver(onErrorJustReturn: .beforeCheck)
-            .debug("test: doubleCheckResult")
 
         doubleCheckResult
             .drive(onNext: { [weak self] result in
