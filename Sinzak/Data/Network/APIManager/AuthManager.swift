@@ -15,7 +15,7 @@ class AuthManager {
     static let shared = AuthManager()
     private let provider = MoyaProvider<AuthAPI>(
         callbackQueue: .global(),
-        plugins: [MoyaLoggerPlugin()]
+        plugins: [MoyaLoggerPlugin.shared]
     )
     let disposeBag = DisposeBag()
     // MARK: - Methods

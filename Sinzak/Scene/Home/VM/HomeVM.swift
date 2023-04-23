@@ -31,7 +31,7 @@ final class DefaultHomeVM: HomeVM {
     
     private let provider = MoyaProvider<HomeAPI>(
         callbackQueue: .global(),
-        plugins: [MoyaLoggerPlugin()]
+        plugins: [MoyaLoggerPlugin.shared]
     )
     private let disposeBag = DisposeBag()
     
