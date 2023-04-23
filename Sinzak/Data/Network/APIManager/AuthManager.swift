@@ -94,7 +94,7 @@ class AuthManager {
             })
     }
     
-    /// reissue 토큰 재발급
+    /// reissue 토큰 재발급(Concierge View에서 로그인용으로 사용)
     func reissue() -> Single<Reissue> {
         return provider.rx.request(.reissue)
             .filterSuccessfulStatusCodes()
@@ -108,6 +108,27 @@ class AuthManager {
                 )
             })
             .retry(2)
+    }
+    
+    /// reissue 토큰 재발급(plug in 에서 만료시 사용)
+    func reissueForPlugin() {
+        let provider = MoyaProvider<AuthAPI>(callbackQueue: .global())
+        provider.rx.request(.reissue)
+            .filterSuccessfulStatusCodes()
+            .map(ReissueDTO.self)
+            .map { $0.toDomain() }
+            .retry(1)
+            .subscribe(
+                onSuccess: { reissue in
+                    Log.debug("Success Reissue: \(reissue)")
+                    KeychainItem.saveTokenInKeychain(
+                        accessToken: reissue.accessToken,
+                        refreshToken: reissue.refreshToken
+                    )
+                }, onFailure: { error in
+                    Log.error("Fail Reissue: \(error)")
+                })
+            .disposed(by: disposeBag)
     }
     
     /// 프로필 정보 가져와 저장
