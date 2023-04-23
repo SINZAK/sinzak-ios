@@ -45,9 +45,6 @@ final class DefaultSignupGenreVM: SignupGenreVM {
             refreshToken: onboardingUser.refreshToken ?? ""
         )
 
-        Log.debug(KeychainItem.currentAccessToken)
-        Log.debug(KeychainItem.currentRefreshToken)
-
         let join: Join = Join(
             categoryLike: selectedGenre.value,
             nickname: onboardingUser.nickname ?? "",
@@ -62,6 +59,8 @@ final class DefaultSignupGenreVM: SignupGenreVM {
                     owner.pushUniversityInfoView.accept(vc)
                     AuthManager.shared.fetchMyProfile()
                     Log.debug("회원가입 성공, \(join)")
+                    Log.debug("Access Token - \(KeychainItem.currentAccessToken)")
+                    Log.debug("Refresh Token - \(KeychainItem.currentRefreshToken)")
                 },
                 onFailure: { _, error in
                     APIError.logError(error)

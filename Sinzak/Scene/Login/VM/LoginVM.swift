@@ -81,8 +81,8 @@ final class DefaultLoginVM: LoginVM {
             .subscribe(
                 with: self,
                 onSuccess: { owner, snsLoginGrant in
-                    Log.debug(snsLoginGrant.accessToken)
-                    Log.debug(snsLoginGrant.refreshToken)
+                    Log.debug("Access Token: \(snsLoginGrant.accessToken)")
+                    Log.debug("Refresh Token: \(snsLoginGrant.refreshToken)")
                     if snsLoginGrant.joined {
                         owner.goTabBar(
                             accessToken: snsLoginGrant.accessToken,
@@ -105,8 +105,8 @@ final class DefaultLoginVM: LoginVM {
             .subscribe(
                 with: self,
                 onSuccess: { owner, snsLoginGrant in
-                    Log.debug(snsLoginGrant.accessToken)
-                    Log.debug(snsLoginGrant.refreshToken)
+                    Log.debug("Access Token: \(snsLoginGrant.accessToken)")
+                    Log.debug("Refresh Token: \(snsLoginGrant.refreshToken)")
                     if snsLoginGrant.joined {
                         owner.goTabBar(
                             accessToken: snsLoginGrant.accessToken,
@@ -137,8 +137,8 @@ private extension DefaultLoginVM {
                 do {
                     let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token)
                     
-                    Log.debug(snsLoginGrant.accessToken)
-                    Log.debug(snsLoginGrant.refreshToken)
+                    Log.debug("Access Token: \(snsLoginGrant.accessToken)")
+                    Log.debug("Refresh Token: \(snsLoginGrant.refreshToken)")
                     if snsLoginGrant.joined {
                         goTabBar(
                             accessToken: snsLoginGrant.accessToken,

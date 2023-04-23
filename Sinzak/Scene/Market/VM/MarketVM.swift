@@ -136,7 +136,7 @@ private extension DefaultMarketVM {
             onFailure: { error in
                 if error is APIError {
                     let apiError = error as? APIError
-                    Log.debug(apiError?.info ?? "")
+                    Log.error(apiError?.info ?? "")
                 }
             }
         )
@@ -160,7 +160,6 @@ private extension DefaultMarketVM {
         .subscribe(
             onSuccess: { [weak self] products in
                 
-                Log.debug("Thread: \(Thread.current)")
                 guard let self = self else { return }
                 let newSectionModel: [MarketProductDataSection] = [
                     MarketProductDataSection(items: products)
@@ -170,7 +169,7 @@ private extension DefaultMarketVM {
             onFailure: { error in
                 if error is APIError {
                     let apiError = error as? APIError
-                    Log.debug(apiError?.info ?? "")
+                    Log.error(apiError?.info ?? "")
                 }
                 
             }
