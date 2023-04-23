@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         application.registerForRemoteNotifications()
+        /*
         /**  파이어베이스 설정 시작*/
         // 파이어베이스 초기화
         FirebaseApp.configure()
@@ -48,20 +49,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("FCM registration token: \(token)")
                 //self.fcmRegTokenMessage.text  = "Remote FCM registration token: \(token)"
             }
-        }
-        /**  파이어베이스 설정 끝 */
+        } //  파이어베이스 설정 끝
+         */
+        
         // 카카오로그인
-        KakaoSDK.initSDK(appKey: "f4e54dad18c8af8a67dccb0176283616")
-
+        let kakaoAppKey = Bundle.main.infoDictionary?["KAKAO_NATIVE_APP_KEY"] as? String ?? ""
+        KakaoSDK.initSDK(appKey: kakaoAppKey)
+        
         // 네이버로그인
         application.registerForRemoteNotifications()
         let instance = NaverThirdPartyLoginConnection.getSharedInstance()
         instance?.isNaverAppOauthEnable = true // 네이버앱 로그인 설정
         instance?.isInAppOauthEnable = true // 사파리 로그인 설정
-
-        instance?.serviceUrlScheme = "naverLoginSinzak" // URL Scheme
-        instance?.consumerKey = "DwXMEfKZq0tmkrsn6kLk" // 클라이언트 아이디
-        instance?.consumerSecret = "LyWqWH9srQ" // 시크릿 아이디
+        
+        let naverURLScheme = Bundle.main.infoDictionary?["NAVER_URL_SCHEME"] as? String ?? ""
+        let naverClientID = Bundle.main.infoDictionary?["NAVER_CLIENT_ID"] as? String ?? ""
+        let naverSecretID = Bundle.main.infoDictionary?["NAVER_SECRET_ID"] as? String ?? ""
+        
+        instance?.serviceUrlScheme = naverURLScheme // URL Scheme
+        instance?.consumerKey = naverClientID // 클라이언트 아이디
+        instance?.consumerSecret = naverSecretID // 시크릿 아이디
         instance?.appName = "신작" // 앱이름
         return true
     }
@@ -84,14 +91,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // 네이버, 카카오로그인 SDK 설정
 extension AppDelegate {
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         // 네이버 로그인 설정
         NaverThirdPartyLoginConnection.getSharedInstance()?.application(app, open: url, options: options)
         // 카카오 로그인 설정, 13 미만일 때만
-        if (AuthApi.isKakaoTalkLoginUrl(url)) {
+        if AuthApi.isKakaoTalkLoginUrl(url) {
             return AuthController.handleOpenUrl(url: url)
         }
-        
         
         return true
     }
@@ -107,6 +113,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         completionHandler([.badge, .sound, .banner, .list])
     }
 }
+/*
 extension AppDelegate: MessagingDelegate {
     // 토큰 갱신 모니터링
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
@@ -123,3 +130,4 @@ extension AppDelegate: MessagingDelegate {
     }
     
 }
+*/
