@@ -28,7 +28,7 @@ final class SignupNameView: SZView {
         $0.backgroundColor = CustomColor.gray10
         $0.layer.cornerRadius = 26
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.clearButtonMode = .whileEditing
     }
     let checkButton = DoubleCheckButton().then {
