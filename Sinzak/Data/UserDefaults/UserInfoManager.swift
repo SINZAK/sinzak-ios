@@ -94,19 +94,19 @@ extension UserInfoManager {
     
     func saveUserInfo(with userInfo: UserInfo) {
         let profile = userInfo.profile
-        UserInfoManager.userID = profile.userID ?? -1
-        UserInfoManager.myProfile = profile.myProfile ?? false
-        UserInfoManager.name = profile.name ?? ""
+        UserInfoManager.userID = profile.userID
+        UserInfoManager.myProfile = profile.myProfile
+        UserInfoManager.name = profile.name
         UserInfoManager.introduction = profile.introduction ?? ""
         UserInfoManager.portFolioURL = profile.portFolioURL ?? ""
-        UserInfoManager.followingNumber = Int(profile.followingNumber ?? "0")!
-        UserInfoManager.followerNumber = Int(profile.followerNumber ?? "0")!
+        UserInfoManager.followingNumber = Int(profile.followingNumber )!
+        UserInfoManager.followerNumber = Int(profile.followerNumber )!
         UserInfoManager.imageURL = profile.imageURL ?? ""
         UserInfoManager.univ = profile.univ ?? ""
         UserInfoManager.categoryLike = profile.categoryLike ?? ""
-        UserInfoManager.certUni = profile.certUni ?? false
-        UserInfoManager.certAuthor = profile.certAuthor ?? false
-        UserInfoManager.follow = profile.follow ?? false
+        UserInfoManager.certUni = profile.certUni
+        UserInfoManager.certAuthor = profile.certAuthor
+        UserInfoManager.follow = profile.follow
         
         UserInfoManager.shared.products = userInfo.products ?? []
         UserInfoManager.shared.works = userInfo.works ?? []
