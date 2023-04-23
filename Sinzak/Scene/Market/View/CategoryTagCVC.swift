@@ -27,7 +27,7 @@ final class CategoryTagCVC: UICollectionViewCell {
     
     // MARK: - Property
     
-    var isChecked: Bool {
+    override var isSelected: Bool {
         willSet {
             if newValue {
                 setColor(kind: .selected)
@@ -76,7 +76,6 @@ final class CategoryTagCVC: UICollectionViewCell {
     
     // MARK: - Init
     override init(frame: CGRect) {
-        self.isChecked = false
         super.init(frame: frame)
         setupUI()
         setConstraints()
