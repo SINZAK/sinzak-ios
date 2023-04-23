@@ -410,6 +410,7 @@
 		ED74A07A29F4F8F200F44AA2 /* AppleAuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleAuthAPI.swift; sourceTree = "<group>"; };
 		ED74A07F29F4FABB00F44AA2 /* AppleAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleAuthManager.swift; sourceTree = "<group>"; };
 		ED74A08129F4FB7300F44AA2 /* AppleToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleToken.swift; sourceTree = "<group>"; };
+		ED74A08329F520CF00F44AA2 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		ED75587F29E546F700A15977 /* DoubleCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleCheckButton.swift; sourceTree = "<group>"; };
 		ED75588229E7173900A15977 /* UniversityInfoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoVM.swift; sourceTree = "<group>"; };
 		ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginDTO.swift; sourceTree = "<group>"; };
@@ -1046,6 +1047,7 @@
 			children = (
 				A2806120292F50FA005AE0B3 /* .swiftlint.yml */,
 				A23415C52927D7A9007DADE7 /* .gitignore */,
+				ED74A08329F520CF00F44AA2 /* TODO.md */,
 				A23415B02927D776007DADE7 /* Sinzak */,
 				A2F07847298AB0A7004A2B3F /* SinzakTests */,
 				A23415AF2927D776007DADE7 /* Products */,
