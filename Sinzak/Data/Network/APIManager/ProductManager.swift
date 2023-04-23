@@ -22,7 +22,10 @@ protocol ProductManagerType {
 class ProductsManager: ProductManagerType {
     private init () {}
     static let shared = ProductsManager()
-    let provider = MoyaProvider<ProductsAPI>()
+    let provider = MoyaProvider<ProductsAPI>(
+        callbackQueue: .global(),
+        plugins: [MoyaLoggerPlugin.shared]
+    )
     private let disposeBag = DisposeBag()
     
     func fetchProducts(
@@ -39,26 +42,14 @@ class ProductsManager: ProductManagerType {
             category: category.map { $0.rawValue },
             sale: sale
         ))
-        .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
-        .map { response in
-            Log.debug("Thread: \(Thread.current)")
-            if !(200..<300 ~= response.statusCode) {
-                throw APIError.badStatus(code: response.statusCode)
+        .filterSuccessfulStatusCodes()
+        .map(MarketProductsResponseDTO.self)
+        .map({ productsResponseDTO in
+            guard let productsDTO = productsResponseDTO.content else {
+                throw APIError.noContent
             }
-            Log.debug(response.request?.url ?? "")
-            
-            do {
-                let productsResponseDTO = try JSONDecoder().decode(
-                    MarketProductsResponseDTO.self,
-                    from: response.data
-                )
-                guard let productsDTO = productsResponseDTO.content else {
-                    throw APIError.noContent
-                }
-                return productsDTO.map { $0.toDomain() }
-            } catch {
-                throw APIError.decodingError
-            }
-        }
+            return productsDTO.map { $0.toDomain() }
+        })
+        .retry(2)
     }
 }
