@@ -30,7 +30,6 @@ final class SignupNameView: SZView {
         $0.font = .body_B
         $0.textColor = CustomColor.black
         $0.clearButtonMode = .whileEditing
-        $0.becomeFirstResponder()
     }
     let checkButton = DoubleCheckButton().then {
         $0.setTitle("중복확인", for: .normal)
