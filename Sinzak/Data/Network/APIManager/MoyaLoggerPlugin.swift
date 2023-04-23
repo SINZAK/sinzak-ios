@@ -7,14 +7,20 @@
 
 import Foundation
 import Moya
+import RxSwift
 
 final class MoyaLoggerPlugin: PluginType {
+    
+    static var shared = MoyaLoggerPlugin()
+    private init() {}
+    let disposeBag = DisposeBag()
     
     func willSend(_ request: RequestType, target: TargetType) {
         guard let httpRequest = request.request else {
             Log.error("유효하지 않은 요청입니다.")
             return
         }
+  
         let url = httpRequest.url?.description ?? ""
         let method = httpRequest.method?.rawValue ?? ""
         var log = "----------------------- ✨ API Log ✨ -----------------------\n"
@@ -38,7 +44,6 @@ final class MoyaLoggerPlugin: PluginType {
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         switch result {
         case let .success(response):
-            // TODO: 토큰 리프레쉬 작업 추가
             onSucceed(response, target: target)
         case let .failure(error):
             onFail(error, target: target)
@@ -55,7 +60,7 @@ private extension MoyaLoggerPlugin {
         
         let log = """
             ----------------------- ✨ API Log ✨ -----------------------
-            [Did Receive - Success] 
+            [Did Receive - Success]
             ✨ API: \(target)
             ✨ URL: \(url)
             ✨ STATUS CODE: \(statusCode)
@@ -72,16 +77,15 @@ private extension MoyaLoggerPlugin {
         let errorDescription = error.errorDescription ?? ""
         
         let log = """
-            ----------------------- ✨ API Log ✨ -----------------------
+            ----------------------- 🚨 API Log 🚨 -----------------------
             [Did Receive - Failure]
-            ✨ API: \(target)
-            ✨ URL: \(url)
-            ✨ STATUS CODE: \(statusCode)
-            ✨ ERROR: \(error)
-            ✨ ERROR Description: \(errorDescription)
-            ----------------------- ✨ End Log ✨ -----------------------
+            🚨 API: \(target)
+            🚨 URL: \(url)
+            🚨 STATUS CODE: \(statusCode)
+            🚨 ERROR: \(error)
+            🚨 ERROR Description: \(errorDescription)
+            ----------------------- 🚨 End Log 🚨 -----------------------
             """
         print(log)
     }
-    
 }

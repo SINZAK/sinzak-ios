@@ -192,6 +192,8 @@
 		ED74A07329F4F27C00F44AA2 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ED74A07229F4F27C00F44AA2 /* Config.xcconfig */; };
 		ED74A07B29F4F8F200F44AA2 /* AppleAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A07A29F4F8F200F44AA2 /* AppleAuthAPI.swift */; };
 		ED74A07E29F4F9F000F44AA2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = ED74A07D29F4F9F000F44AA2 /* SwiftKeychainWrapper */; };
+		ED74A08029F4FABB00F44AA2 /* AppleAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A07F29F4FABB00F44AA2 /* AppleAuthManager.swift */; };
+		ED74A08229F4FB7300F44AA2 /* AppleToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A08129F4FB7300F44AA2 /* AppleToken.swift */; };
 		ED75588029E546F700A15977 /* DoubleCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75587F29E546F700A15977 /* DoubleCheckButton.swift */; };
 		ED75588329E7173900A15977 /* UniversityInfoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75588229E7173900A15977 /* UniversityInfoVM.swift */; };
 		ED7F92D129DB0F2A00C55FBF /* SNSLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */; };
@@ -406,6 +408,8 @@
 		ED74A07229F4F27C00F44AA2 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		ED74A07829F4F45A00F44AA2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED74A07A29F4F8F200F44AA2 /* AppleAuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleAuthAPI.swift; sourceTree = "<group>"; };
+		ED74A07F29F4FABB00F44AA2 /* AppleAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleAuthManager.swift; sourceTree = "<group>"; };
+		ED74A08129F4FB7300F44AA2 /* AppleToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleToken.swift; sourceTree = "<group>"; };
 		ED75587F29E546F700A15977 /* DoubleCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleCheckButton.swift; sourceTree = "<group>"; };
 		ED75588229E7173900A15977 /* UniversityInfoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoVM.swift; sourceTree = "<group>"; };
 		ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginDTO.swift; sourceTree = "<group>"; };
@@ -1561,6 +1565,7 @@
 		A2DEC35929B44E1D00CF0794 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ED74A08129F4FB7300F44AA2 /* AppleToken.swift */,
 				A2DEC35A29B44E2E00CF0794 /* SNSLogin.swift */,
 				ED2A582A29F2F3C8002CE83E /* Reissue.swift */,
 				ED2A582C29F306F9002CE83E /* UserInfo.swift */,
@@ -1698,6 +1703,7 @@
 				A2F6EAE4298776F300DE754F /* HomeManager.swift */,
 				A2DEC35729B4441100CF0794 /* SNSLoginManager.swift */,
 				A254E13929BCF897001047FD /* ProductManager.swift */,
+				ED74A07F29F4FABB00F44AA2 /* AppleAuthManager.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -2115,6 +2121,7 @@
 				A216BD56297FD61D008964BC /* ChatListVC.swift in Sources */,
 				A216BD4C297FCBD1008964BC /* FollowNotiVC.swift in Sources */,
 				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,
+				ED74A08229F4FB7300F44AA2 /* AppleToken.swift in Sources */,
 				A2DEC35829B4441100CF0794 /* SNSLoginManager.swift in Sources */,
 				A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */,
 				A20E4A4E29990064009C1340 /* MyProfileView.swift in Sources */,
@@ -2196,6 +2203,7 @@
 				ED2A583029F30C3E002CE83E /* UserInfoManager.swift in Sources */,
 				A233891029B066EC00688FD8 /* EditProfileView.swift in Sources */,
 				A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */,
+				ED74A08029F4FABB00F44AA2 /* AppleAuthManager.swift in Sources */,
 				ED47113F29E03C6200708562 /* SignupNameVM.swift in Sources */,
 				A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */,
 				A2420F8229A7B9E8007D8937 /* WriteCategoryTagCVC.swift in Sources */,
