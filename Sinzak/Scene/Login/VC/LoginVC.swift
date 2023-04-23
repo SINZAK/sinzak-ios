@@ -128,11 +128,6 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
                 viewModel.appleAuthorizationControl(token: strToken)
             }
             
-//            let fullName = appleIDCredential.fullName
-//            let email = appleIDCredential.email
-            // print("User Email : \(email ?? "")")
-            // print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            
         default:
             break
         }
