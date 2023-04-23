@@ -12,10 +12,7 @@ target 'Sinzak' do
 
   # Auth
   pod 'naveridlogin-sdk-ios', '4.1.5'			
-
-  # Rx
-	pod 'RxSwift', '~> 6.5.0'
-	pod 'RxCocoa', '~> 6.5.0'		
+ 
  
   pod 'lottie-ios', '3.4.2'
   pod 'SwiftConfettiView', '0.1.0'
@@ -28,8 +25,6 @@ target 'Sinzak' do
     pod 'Firebase/Core', '9.5.0'
     pod 'Firebase/Database', '9.5.0'
     pod 'Firebase/Messaging', '9.5.0'
-    pod 'RxBlocking', '6.5.0'
-    pod 'RxTest', '6.5.0'
   end
 
 end
