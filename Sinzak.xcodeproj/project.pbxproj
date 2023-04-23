@@ -190,6 +190,8 @@
 		ED47114129E06CFF00708562 /* MarketSkeletonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47114029E06CFF00708562 /* MarketSkeletonVC.swift */; };
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
 		ED74A07329F4F27C00F44AA2 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ED74A07229F4F27C00F44AA2 /* Config.xcconfig */; };
+		ED74A07B29F4F8F200F44AA2 /* AppleAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A07A29F4F8F200F44AA2 /* AppleAuthAPI.swift */; };
+		ED74A07E29F4F9F000F44AA2 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = ED74A07D29F4F9F000F44AA2 /* SwiftKeychainWrapper */; };
 		ED75588029E546F700A15977 /* DoubleCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75587F29E546F700A15977 /* DoubleCheckButton.swift */; };
 		ED75588329E7173900A15977 /* UniversityInfoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75588229E7173900A15977 /* UniversityInfoVM.swift */; };
 		ED7F92D129DB0F2A00C55FBF /* SNSLoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */; };
@@ -403,6 +405,7 @@
 		ED47114029E06CFF00708562 /* MarketSkeletonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSkeletonVC.swift; sourceTree = "<group>"; };
 		ED74A07229F4F27C00F44AA2 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		ED74A07829F4F45A00F44AA2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED74A07A29F4F8F200F44AA2 /* AppleAuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleAuthAPI.swift; sourceTree = "<group>"; };
 		ED75587F29E546F700A15977 /* DoubleCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleCheckButton.swift; sourceTree = "<group>"; };
 		ED75588229E7173900A15977 /* UniversityInfoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoVM.swift; sourceTree = "<group>"; };
 		ED7F92D029DB0F2A00C55FBF /* SNSLoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSLoginDTO.swift; sourceTree = "<group>"; };
@@ -449,6 +452,7 @@
 				EDE5EC5529D669EC00BB211F /* RxDataSources in Frameworks */,
 				ED15160D29DCBE8F00227CC8 /* RxKakaoSDKAuth in Frameworks */,
 				0BAC9C712210229EF1C827EA /* Pods_Sinzak.framework in Frameworks */,
+				ED74A07E29F4F9F000F44AA2 /* SwiftKeychainWrapper in Frameworks */,
 				0961FB4229DCBDCB00B55EF3 /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1681,6 +1685,7 @@
 				A254E13D29BD032D001047FD /* WorksAPI.swift */,
 				A254E13F29BD0427001047FD /* UserAPI.swift */,
 				A254E14129BD0571001047FD /* ChatAPI.swift */,
+				ED74A07A29F4F8F200F44AA2 /* AppleAuthAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1832,6 +1837,7 @@
 				ED15160C29DCBE8F00227CC8 /* RxKakaoSDKAuth */,
 				ED15160E29DCBE8F00227CC8 /* RxKakaoSDKCommon */,
 				ED15161029DCBE8F00227CC8 /* RxKakaoSDKUser */,
+				ED74A07D29F4F9F000F44AA2 /* SwiftKeychainWrapper */,
 			);
 			productName = Sinzak;
 			productReference = A23415AE2927D776007DADE7 /* Sinzak.app */;
@@ -1899,6 +1905,7 @@
 				ED518CD329D7FD3F003342B9 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				0961FB4029DCBDCB00B55EF3 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				ED15160B29DCBE8F00227CC8 /* XCRemoteSwiftPackageReference "kakao-ios-sdk-rx" */,
+				ED74A07C29F4F9F000F44AA2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = A23415AF2927D776007DADE7 /* Products */;
 			projectDirPath = "";
@@ -2150,6 +2157,7 @@
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				ED2A582B29F2F3C8002CE83E /* Reissue.swift in Sources */,
 				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
+				ED74A07B29F4F8F200F44AA2 /* AppleAuthAPI.swift in Sources */,
 				A254E14229BD0571001047FD /* ChatAPI.swift in Sources */,
 				A2B38580295D895800E5EB7C /* StudentAuthVC.swift in Sources */,
 				A254E13C29BCFA18001047FD /* MarketProduct.swift in Sources */,
@@ -2633,6 +2641,14 @@
 				minimumVersion = 1.30.0;
 			};
 		};
+		ED74A07C29F4F9F000F44AA2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = exactVersion;
+				version = 4.0.1;
+			};
+		};
 		EDE5EC5129D669EB00BB211F /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
@@ -2729,6 +2745,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED518CD329D7FD3F003342B9 /* XCRemoteSwiftPackageReference "SkeletonView" */;
 			productName = SkeletonView;
+		};
+		ED74A07D29F4F9F000F44AA2 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED74A07C29F4F9F000F44AA2 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
 		};
 		EDE5EC5229D669EC00BB211F /* Differentiator */ = {
 			isa = XCSwiftPackageProductDependency;
