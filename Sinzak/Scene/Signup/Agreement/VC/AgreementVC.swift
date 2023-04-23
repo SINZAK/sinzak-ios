@@ -158,6 +158,12 @@ final class AgreementVC: SZVC {
             } else {
                 self.mainView.confirmButton.isEnabled = false
             }
+            
+            if older && service && privacy && marketing {
+                self.mainView.fullCheckButton.isSelected = true
+            } else {
+                self.mainView.fullCheckButton.isSelected = false
+            }
         })
         .disposed(by: disposeBag)
         
