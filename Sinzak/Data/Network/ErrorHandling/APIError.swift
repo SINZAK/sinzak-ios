@@ -16,6 +16,7 @@ enum APIError: Error {
     case badStatus(code: Int)
     case unknown(_ error: Error?)
     case errorMessage(_ message: String)
+    case appleAuthError
     
     var info: String {
         switch self {
@@ -27,6 +28,7 @@ enum APIError: Error {
         case let .badStatus(code):          return "에러 상태코드: \(code)"
         case .unknown(let error):           return "알 수 없는 에러입니다.\n\(String(describing: error))"
         case .errorMessage(let message):    return "\(message)"
+        case .appleAuthError:               return "apple 인증 오류"
         }
     }
     
