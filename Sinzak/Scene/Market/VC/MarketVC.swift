@@ -96,11 +96,11 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
-        mainView.productCollectionView.refreshControl?.rx.controlEvent(.valueChanged)
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.refresh()
-            })
-            .disposed(by: disposeBag)
+//        mainView.productCollectionView.refreshControl?.rx.controlEvent(.valueChanged)
+//            .subscribe(onNext: { [weak self] in
+//                self?.viewModel.refresh()
+//            })
+//            .disposed(by: disposeBag)
         
         viewModel.selectedCategory
             .observe(on: backgroundScheduler)
@@ -124,15 +124,71 @@ extension MarketVC {
             .disposed(by: disposeBag)
         
         mainView.categoryCollectionView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                self?.selectCategory(with: indexPath)
-//                self?.mainView.categoryCollectionView.selected
+            .subscribe(with: self, onNext: { owner, indexPath in
+                
+                let firstCell = owner.getCategoryCell(at: [0, 0])
+                
+                // 전체 선택된 상태에서 다른 카테고리 선택시 전체 deselect
+                if firstCell.isSelected && indexPath != [0, 0] {
+                    owner.mainView.categoryCollectionView.deselectItem(at: [0, 0], animated: false)
+                }
+                    
+                // 전체 선택시 나머지 deselect
+                if indexPath == [0, 0] {
+                    Array(1..<Category.allCases.count)
+                        .filter { owner.getCategoryCell(at: [0, $0]).isSelected }
+                        .forEach { owner
+                            .mainView
+                            .categoryCollectionView
+                            .deselectItem(at: [0, $0], animated: false)
+                        }
+                }
+                
+                guard let selectedIndexPathes = owner
+                    .mainView
+                    .categoryCollectionView
+                    .indexPathsForSelectedItems else { return }
+                
+                if selectedIndexPathes.count == 4 {
+                    owner
+                        .mainView
+                        .categoryCollectionView
+                        .deselectItem(at: indexPath, animated: false)
+                } else {
+                    let selectedCategory: [Category] = indexPath == [0, 0] ?
+                    [] :
+                    selectedIndexPathes.map {
+                        Category.allCases[$0.item]
+                    }
+                    Log.debug(selectedCategory)
+                    owner.viewModel.selectedCategory.accept(selectedCategory)
+                }
             })
             .disposed(by: disposeBag)
-        
+    
         mainView.categoryCollectionView.rx.itemDeselected
-            .subscribe(onNext: { [weak self] indexPath in
-                self?.selectCategory(with: indexPath)
+            .subscribe(with: self, onNext: { owner, _ in
+                
+                guard let selectedIndexPathes = owner
+                    .mainView
+                    .categoryCollectionView
+                    .indexPathsForSelectedItems else { return }
+                
+                if selectedIndexPathes.count == 0 {
+                    
+                    owner
+                        .mainView
+                        .categoryCollectionView
+                        .selectItem(at: [0, 0], animated: false, scrollPosition: .left)
+                    
+                } else {
+                    let selectedCategory: [Category] = selectedIndexPathes.map {
+                        Category.allCases[$0.item]
+                    }
+                    Log.debug(selectedCategory)
+                    owner.viewModel.selectedCategory.accept(selectedCategory)
+                }
+                
             })
             .disposed(by: disposeBag)
     }
@@ -166,9 +222,9 @@ extension MarketVC {
         viewModel.presentSkeleton
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] vc in
-                let nav = UINavigationController(rootViewController: vc)
-                nav.modalPresentationStyle = .fullScreen
-                self?.present(nav, animated: false)
+//                let nav = UINavigationController(rootViewController: vc)
+//                nav.modalPresentationStyle = .fullScreen
+//                self?.present(nav, animated: false)
             })
             .disposed(by: disposeBag)
             
@@ -202,17 +258,17 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
 
-        viewModel.endRefresh
-            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
-            .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: false)
-            .drive(onNext: { [weak self] in
-                if $0 {
-                    self?.mainView.productCollectionView.refreshControl?.endRefreshing()
-                    self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
-                }
-            })
-            .disposed(by: disposeBag)
+//        viewModel.endRefresh
+//            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
+//            .distinctUntilChanged()
+//            .asDriver(onErrorJustReturn: false)
+//            .drive(onNext: { [weak self] in
+//                if $0 {
+//                    self?.mainView.productCollectionView.refreshControl?.endRefreshing()
+//                    self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
+//                }
+//            })
+//            .disposed(by: disposeBag)
     }
 }
 
@@ -228,7 +284,11 @@ private extension MarketVC {
                     for: indexPath
                 ) as? CategoryTagCVC else { return UICollectionViewCell() }
                 if self.viewModel.selectedCategory.value.isEmpty && item.category == .all {
-                    cell.isChecked = true
+                    self.mainView.categoryCollectionView.selectItem(
+                        at: indexPath,
+                        animated: false,
+                        scrollPosition: .left
+                    )
                 }
                 cell.updateCell(category: item.category)
                 
@@ -267,43 +327,6 @@ extension MarketVC: UIViewControllerTransitioningDelegate {
 // MARK: - Private Method
 
 private extension MarketVC {
-    
-    func selectCategory(with indexPath: IndexPath) {
-        Log.debug("before: \(viewModel.selectedCategory.value)")
-        var currentCategories: [Category] = viewModel.selectedCategory.value
-        let selectedCell = getCategoryCell(at: indexPath)
-        
-        if selectedCell.category == .all {
-            if selectedCell.isChecked { return }
-            (1..<Category.allCases.count)
-                .forEach {
-                    let notAllCell = getCategoryCell(at: IndexPath(item: $0, section: 0))
-                    notAllCell.isChecked = false
-                    currentCategories = []
-                }
-        } else {
-           
-            if selectedCell.isChecked {
-                currentCategories.remove(at: currentCategories.firstIndex(of: selectedCell.category!)!)
-                if currentCategories.isEmpty {
-                    let firstCell = getCategoryCell(at: IndexPath(item: 0, section: 0))
-                    firstCell.isChecked = true
-                }
-            } else {
-                guard currentCategories.count <= 2 else { return }
-                guard let firstCell = mainView
-                    .categoryCollectionView
-                    .cellForItem(at: IndexPath(item: 0, section: 0)) as? CategoryTagCVC else { return }
-                firstCell.isChecked = false
-                currentCategories.append(selectedCell.category ?? .all)
-            }
-        }
-        
-        Log.debug("after: \(currentCategories)")
-        viewModel.selectedCategory.accept(currentCategories)
-        selectedCell.isChecked = !selectedCell.isChecked
-    }
-    
     func getCategoryCell(at indexPath: IndexPath) -> CategoryTagCVC {
         guard let cell = mainView
             .categoryCollectionView

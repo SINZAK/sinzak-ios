@@ -22,7 +22,7 @@ final class UserInfoManager {
     
     static var shared = UserInfoManager()
     
-    var profile: Profile {
+    var profile: Profile? {
         get {
             return Profile(
                 userID: UserInfoManager.userID,
@@ -125,16 +125,21 @@ extension UserInfoManager {
     }
     
     func logUserInfo() {
-        let log = """
         
+        if let profile = UserInfoManager.shared.profile {
+            
+            let log = """
         -------------------- ✨ User Info Log ✨ --------------------
-        Profile: \(UserInfoManager.shared.profile)
+        Profile: \(profile)
         Products: \(UserInfoManager.shared.products)
         Works: \(UserInfoManager.shared.works)
         Work Employs: \(UserInfoManager.shared.workEmploys)
         ----------------------- ✨ End Log ✨ -----------------------
         """
-        Log.debug(log)
+            Log.debug(log)
+        } else {
+            Log.debug("로그인된 유저가 없습니다.")
+        }
     }
 
 }

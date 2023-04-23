@@ -13,12 +13,14 @@ import SkeletonView
 final class MarketView: SZView {
     // MARK: - Properties
     lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        $0.showsVerticalScrollIndicator = false
         $0.register(
             CategoryTagCVC.self,
             forCellWithReuseIdentifier: CategoryTagCVC.identifier
         )
         $0.collectionViewLayout = setCategoryLayout()
         $0.backgroundColor = .clear
+        $0.allowsMultipleSelection = true
         $0.isSkeletonable = true
     }
     
@@ -65,9 +67,9 @@ final class MarketView: SZView {
             viewOptionButton, alignButton,
             productCollectionView, writeButton
         )
-        let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = .black
-        productCollectionView.refreshControl = refreshControl
+//        let refreshControl = UIRefreshControl()
+//        refreshControl.tintColor = .black
+//        productCollectionView.refreshControl = refreshControl
     }
     
     override func setLayout() {
@@ -137,7 +139,7 @@ extension MarketView {
                 )
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(276)
+                    heightDimension: .estimated(260)
                 )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets.leading = 8
@@ -145,7 +147,7 @@ extension MarketView {
                 item.contentInsets.bottom = 16
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.top = 10
+                section.contentInsets.top = -10
                 section.contentInsets.leading = 8
                 section.contentInsets.trailing = 8
                 section.contentInsets.bottom = 72

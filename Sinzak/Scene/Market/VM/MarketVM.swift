@@ -46,11 +46,11 @@ final class DefaultMarketVM: MarketVM {
     
     func viewDidLoad() {
         fetchMarketProducts(
-            align: .recommend,
+            align: currentAlign.value,
             category: selectedCategory.value,
             page: 0,
             size: 15,
-            sale: false
+            sale: isSaling.value
         )
     }
     
