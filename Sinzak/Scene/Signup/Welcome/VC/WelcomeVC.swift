@@ -14,6 +14,10 @@ final class WelcomeVC: SZVC {
     override func loadView() {
         view = mainView
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+    }
     // MARK: - Actions
     @objc func letsGoButtonTapped(_ sender: UIButton) {
         let vc = TabBarVC()
