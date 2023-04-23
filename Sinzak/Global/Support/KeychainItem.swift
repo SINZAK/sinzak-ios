@@ -21,6 +21,12 @@ enum TokenKind {
     }
 }
 
+enum AppleAuth: String {
+    case appleID
+    case appleAuthCode
+    case refresh
+}
+
 /// 제네릭 패스워드 키체인 아이템에 접근하기 위한 구조체
 struct KeychainItem {
     // MARK: - Types
@@ -67,6 +73,7 @@ struct KeychainItem {
         
         return password
     }
+    
     /// 아이템 저장하기
     func saveItem(_ password: String) throws {
         // 비밀번호를 Data Object로 인코딩
@@ -93,6 +100,7 @@ struct KeychainItem {
             guard status == noErr else { throw KeychainError.unhandledError }
         }
     }
+    
     /// 아이템 제거
     func deleteItem() throws {
         // 기존 아이템을 키체인에서 제거
@@ -182,5 +190,39 @@ extension KeychainItem {
      */
     static var isLoggedIn: Bool {
         return !currentAccessToken.isEmpty
+    }
+    
+    /**
+     apple id 저장
+     */
+    static func saveAppleID(id: String) {
+        do {
+            try KeychainItem(account: AppleAuth.appleID.rawValue).saveItem(id)
+        } catch {
+            Log.error("apple ID 저장 실패")
+        }
+    }
+    
+    /**
+     apple id 읽어오기
+     */
+    static var currentAppleID: String {
+        do {
+            let id = try KeychainItem(account: AppleAuth.appleID.rawValue).readItem()
+            return id
+        } catch {
+            return ""
+        }
+    }
+    
+    /**
+     apple id 삭제
+     */
+    static func deleteAppleID() {
+        do {
+            try KeychainItem(account: AppleAuth.appleID.rawValue).deleteItem()
+        } catch {
+            Log.error("apple ID 삭제 실패")
+        }
     }
 }
