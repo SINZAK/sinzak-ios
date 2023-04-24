@@ -134,7 +134,7 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
-        viewModel.currentAlign
+        viewModel.selectedCurrentAlign
             .skip(1)
             .observe(on: backgroundScheduler)
             .subscribe(onNext: { [weak self] _ in
@@ -264,7 +264,7 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
-        viewModel.currentAlign
+        viewModel.selectedCurrentAlign
             .asDriver(onErrorJustReturn: .recommend)
             .drive(onNext: { [weak self] alignOption in
                 guard let self = self else { return }
