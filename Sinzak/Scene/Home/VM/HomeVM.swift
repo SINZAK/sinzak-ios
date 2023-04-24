@@ -29,10 +29,6 @@ protocol HomeVM: HomeVMInput, HomeVMOutput {}
 
 final class DefaultHomeVM: HomeVM {
     
-    private let provider = MoyaProvider<HomeAPI>(
-        callbackQueue: .global(),
-        plugins: [MoyaLoggerPlugin.shared]
-    )
     private let disposeBag = DisposeBag()
     
     init(isLogin: Bool) {
@@ -65,14 +61,7 @@ private extension DefaultHomeVM {
     func fetchSections() {
         showSkeleton.accept(true)
 
-        let bannerObservable = provider.rx.request(.banner)
-            .do(onSuccess: {
-                Log.debug($0.request?.url ?? "")
-            })
-            .filterSuccessfulStatusCodes()
-            .map(BannerList.self)
-            .map { $0.data }
-            .asObservable()
+        let bannerObservable = HomeManager.shared.getBannerInfo().asObservable()
                 
         if isLogin {
             let loggedInProductsObservable = HomeManager.shared.getHomeProductLoggedIn().asObservable()
@@ -83,7 +72,7 @@ private extension DefaultHomeVM {
                     // TODO: ~~~님을 위한 맞춤 거래 추가해야함
                     let productSections: [HomeSection] = zip(
                         HomeLoggedInType.allCases.map { $0.title },
-                        [products.recommend, products.new, products.following]
+                        [products.new, products.recommend, products.following]
                     )
                         .filter { !$0.1.isEmpty }
                         .map { .productSection(
@@ -98,7 +87,7 @@ private extension DefaultHomeVM {
                     self?.homeSectionModel.accept(sectionModel)
                 })
                 .delay(
-                    .milliseconds(1000),
+                    .milliseconds(500),
                     scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
                 )
                 .subscribe(
@@ -133,7 +122,7 @@ private extension DefaultHomeVM {
                     self?.homeSectionModel.accept(sectionModel)
                 })
                 .delay(
-                    .milliseconds(1000),
+                    .milliseconds(500),
                     scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
                 )
                 .subscribe(
