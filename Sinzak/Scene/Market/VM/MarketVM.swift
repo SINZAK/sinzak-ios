@@ -31,9 +31,7 @@ protocol MarketVMOutput {
     var isSaling: BehaviorRelay<Bool> { get }
     var currentAlign: BehaviorRelay<AlignOption> { get }
     
-//    var endRefresh: PublishRelay<Bool> { get }
-    
-    var presentSkeleton: PublishRelay<MarketSkeletonVC> { get }
+    var showSkeleton: BehaviorRelay<Bool> { get }
 }
 
 protocol MarketVM: MarketVMInput, MarketVMOutput {}
@@ -98,7 +96,7 @@ final class DefaultMarketVM: MarketVM {
     
     var endRefresh: PublishRelay<Bool> = PublishRelay()
     
-    var presentSkeleton: PublishRelay<MarketSkeletonVC> = .init()
+    var showSkeleton: BehaviorRelay<Bool> = .init(value: false)
 }
 
 private extension DefaultMarketVM {
@@ -109,6 +107,7 @@ private extension DefaultMarketVM {
         size: Int,
         sale: Bool
     ) {
+        showSkeleton.accept(true)
         ProductsManager.shared.fetchProducts(
             align: align,
             category: category,
@@ -117,15 +116,25 @@ private extension DefaultMarketVM {
             sale: sale
         )
         .map { return [MarketProductDataSection(items: $0)] }
+        .delay(
+            .milliseconds(500),
+            scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
+        )
         .subscribe(on: SerialDispatchQueueScheduler(
             queue: .global(),
             internalSerialQueueName: "productSection")
         )
-        .subscribe(with: self, onSuccess: { owner, productSection in
-            owner.productSections.accept(productSection)
-        }, onFailure: { _, error in
-            Log.error(error)
-        })
+        .subscribe(
+            with: self,
+            onSuccess: { owner, productSection in
+                owner.productSections.accept(productSection)
+            },
+            onFailure: { _, error in
+                Log.error(error)
+            },
+            onDisposed: { owner in
+                owner.showSkeleton.accept(false)
+            })
         .disposed(by: disposeBag)
     }
 }

@@ -21,7 +21,6 @@ final class MarketView: SZView {
         $0.collectionViewLayout = setCategoryLayout()
         $0.backgroundColor = .clear
         $0.allowsMultipleSelection = true
-        $0.isSkeletonable = true
     }
     
     lazy var productCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
@@ -32,7 +31,6 @@ final class MarketView: SZView {
         $0.collectionViewLayout = setProductLayout()
         $0.allowsMultipleSelection = true
         $0.backgroundColor = .clear
-        $0.isSkeletonable = true
     }
     
     let viewOptionButton = UIButton().then {
@@ -41,7 +39,6 @@ final class MarketView: SZView {
         $0.titleLabel?.font = .caption_M
         $0.setTitleColor(CustomColor.gray80, for: .normal)
         $0.tintColor = CustomColor.gray80
-        $0.isSkeletonable = true
     }
     
     let alignButton = UIButton().then {
@@ -50,7 +47,6 @@ final class MarketView: SZView {
         $0.titleLabel?.font = .caption_B
         $0.setTitleColor(CustomColor.gray80, for: .normal)
         $0.tintColor = CustomColor.gray80
-        $0.isSkeletonable = true
     }
     
     let writeButton = UIButton().then {
@@ -60,16 +56,16 @@ final class MarketView: SZView {
         $0.setImage(UIImage(named: "plus"), for: .normal)
     }
     
+    let marketSkeletonView: MarketSkeletonView = MarketSkeletonView()
+    
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
             categoryCollectionView,
             viewOptionButton, alignButton,
-            productCollectionView, writeButton
+            productCollectionView, writeButton,
+            marketSkeletonView
         )
-//        let refreshControl = UIRefreshControl()
-//        refreshControl.tintColor = .black
-//        productCollectionView.refreshControl = refreshControl
     }
     
     override func setLayout() {
@@ -103,13 +99,19 @@ final class MarketView: SZView {
             make.bottom.equalTo(safeAreaLayoutGuide).inset(7)
             make.trailing.equalToSuperview().inset(11)
         }
+        
+        marketSkeletonView.snp.makeConstraints {
+            $0.trailing.leading.equalToSuperview()
+            $0.top.equalTo(alignButton.snp.bottom).offset(8.0)
+            $0.bottom.equalTo(safeAreaLayoutGuide)
+        }
     }
 }
 
 // MARK: - 컴포지셔널 레이아웃
 extension MarketView {
     
-    // TODO: View 수직 스크롤 끄기
+    // TODO: trailing inset 안맞음
     func setCategoryLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
                 let itemSize = NSCollectionLayoutSize(
@@ -117,8 +119,8 @@ extension MarketView {
                     heightDimension: .estimated(32))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(3.0),
-                    heightDimension: .estimated(64.0))
+                    widthDimension: .fractionalWidth(2),
+                    heightDimension: .fractionalHeight(1))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 group.interItemSpacing = .fixed(10)
                 let section = NSCollectionLayoutSection(group: group)

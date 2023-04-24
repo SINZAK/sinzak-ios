@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import SkeletonView
 
 final class MarketVC: SZVC {
     // MARK: - Properties
@@ -60,6 +61,8 @@ final class MarketVC: SZVC {
     }
     override func configure() {
         bind()
+        mainView.marketSkeletonView.productCollectionView.dataSource = self
+        view.isSkeletonable = true
     }
 }
 
@@ -96,11 +99,23 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
-//        mainView.productCollectionView.refreshControl?.rx.controlEvent(.valueChanged)
-//            .subscribe(onNext: { [weak self] in
-//                self?.viewModel.refresh()
-//            })
-//            .disposed(by: disposeBag)
+        mainView.productCollectionView.refreshControl?.rx.controlEvent(.valueChanged)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                let offset = 8.0 + (owner
+                    .mainView
+                    .productCollectionView
+                    .refreshControl?
+                    .frame
+                    .height ?? 0)
+                owner.viewModel.refresh()
+                owner.mainView.marketSkeletonView.snp.remakeConstraints {
+                        $0.trailing.leading.equalToSuperview()
+                    $0.top.equalTo(owner.mainView.alignButton.snp.bottom).offset(offset)
+                    $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
+                }
+            })
+            .disposed(by: disposeBag)
         
         viewModel.selectedCategory
             .skip(1)
@@ -221,17 +236,6 @@ extension MarketVC {
                 self?.present(vc, animated: true)
             })
             .disposed(by: disposeBag)
-        
-        viewModel.presentSkeleton
-            .observe(on: MainScheduler.instance)
-            .withUnretained(self)
-            .subscribe(onNext: { owner, vc in
-//                let nav = UINavigationController(rootViewController: vc)
-//                nav.modalPresentationStyle = .fullScreen
-//                self?.present(nav, animated: false)
-                
-            })
-            .disposed(by: disposeBag)
             
         // MARK: - Collection View Section
         viewModel.categorySections
@@ -263,17 +267,30 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
 
-//        viewModel.endRefresh
-//            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
-//            .distinctUntilChanged()
-//            .asDriver(onErrorJustReturn: false)
-//            .drive(onNext: { [weak self] in
-//                if $0 {
-//                    self?.mainView.productCollectionView.refreshControl?.endRefreshing()
-//                    self?.mainView.productCollectionView.setContentOffset(.zero, animated: false)
-//                }
-//            })
-//            .disposed(by: disposeBag)
+        viewModel.showSkeleton
+            .asDriver(onErrorJustReturn: false)
+            .drive(
+                with: self,
+                onNext: { owner, showSkeleton in
+                    if showSkeleton {
+                        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                        owner.mainView.marketSkeletonView.isHidden = false
+                        owner.view.showAnimatedSkeleton()
+                    } else {
+                        owner.view.hideSkeleton()
+                        owner.mainView.marketSkeletonView.isHidden = true
+                        
+                        if owner.mainView.productCollectionView.refreshControl?.isRefreshing ?? false {
+                            owner.mainView.marketSkeletonView.snp.makeConstraints {
+                                $0.trailing.leading.equalToSuperview()
+                                $0.top.equalTo(owner.mainView.alignButton.snp.bottom).offset(8.0)
+                                $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
+                            }
+                            owner.mainView.productCollectionView.refreshControl?.endRefreshing()
+                        }
+                    }
+                })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -336,6 +353,48 @@ private extension MarketVC {
         guard let cell = mainView
             .categoryCollectionView
             .cellForItem(at: indexPath) as? CategoryTagCVC else { return CategoryTagCVC() }
+        return cell
+    }
+}
+
+// MARK: - Configure Skeleton View
+
+extension MarketVC: SkeletonCollectionViewDataSource {
+    func collectionSkeletonView(
+        _ skeletonView: UICollectionView,
+        cellIdentifierForItemAt indexPath: IndexPath
+    ) -> SkeletonView.ReusableCellIdentifier {
+        return ArtCVC.identifier
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return 6
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell: ArtCVC = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ArtCVC.identifier,
+            for: indexPath
+        ) as? ArtCVC else { return UICollectionViewCell() }
+        cell.setSkeleton()
+        return cell
+    }
+    
+    func collectionSkeletonView(
+        _ skeletonView: UICollectionView,
+        skeletonCellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell? {
+        guard let cell = skeletonView.dequeueReusableCell(
+            withReuseIdentifier: ArtCVC.identifier,
+            for: indexPath
+        ) as? ArtCVC else { return UICollectionViewCell() }
+        cell.setSkeleton()
         return cell
     }
 }
