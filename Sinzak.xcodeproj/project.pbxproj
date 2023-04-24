@@ -187,7 +187,7 @@
 		ED47113829E01B3700708562 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113729E01B3700708562 /* CheckButton.swift */; };
 		ED47113C29E0363000708562 /* SZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113B29E0363000708562 /* SZButton.swift */; };
 		ED47113F29E03C6200708562 /* SignupNameVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113E29E03C6200708562 /* SignupNameVM.swift */; };
-		ED47114129E06CFF00708562 /* MarketSkeletonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47114029E06CFF00708562 /* MarketSkeletonVC.swift */; };
+		ED47114129E06CFF00708562 /* MarketSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47114029E06CFF00708562 /* MarketSkeletonView.swift */; };
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
 		ED74A07329F4F27C00F44AA2 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ED74A07229F4F27C00F44AA2 /* Config.xcconfig */; };
 		ED74A07B29F4F8F200F44AA2 /* AppleAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED74A07A29F4F8F200F44AA2 /* AppleAuthAPI.swift */; };
@@ -404,7 +404,7 @@
 		ED47113729E01B3700708562 /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		ED47113B29E0363000708562 /* SZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZButton.swift; sourceTree = "<group>"; };
 		ED47113E29E03C6200708562 /* SignupNameVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameVM.swift; sourceTree = "<group>"; };
-		ED47114029E06CFF00708562 /* MarketSkeletonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSkeletonVC.swift; sourceTree = "<group>"; };
+		ED47114029E06CFF00708562 /* MarketSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSkeletonView.swift; sourceTree = "<group>"; };
 		ED74A07229F4F27C00F44AA2 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		ED74A07829F4F45A00F44AA2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED74A07A29F4F8F200F44AA2 /* AppleAuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleAuthAPI.swift; sourceTree = "<group>"; };
@@ -1440,7 +1440,7 @@
 				ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */,
 				ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */,
 				ED86969329D936A8001A1A9F /* SelectAlignVC.swift */,
-				ED47114029E06CFF00708562 /* MarketSkeletonVC.swift */,
+				ED47114029E06CFF00708562 /* MarketSkeletonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2154,7 +2154,7 @@
 				A2DEC35629B4417F00CF0794 /* SNSLoginAPI.swift in Sources */,
 				A280AB4029A7400100C1729C /* UIViewController+Extension.swift in Sources */,
 				A2180DB629AA3C1A00BBC74A /* ArtworkSizeView.swift in Sources */,
-				ED47114129E06CFF00708562 /* MarketSkeletonVC.swift in Sources */,
+				ED47114129E06CFF00708562 /* MarketSkeletonView.swift in Sources */,
 				A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */,
 				A2180DAD29AA38EE00BBC74A /* RequestContentVC.swift in Sources */,
 				A254E14729BDA193001047FD /* WorkBuild.swift in Sources */,
