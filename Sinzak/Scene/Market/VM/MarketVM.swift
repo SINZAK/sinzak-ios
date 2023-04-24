@@ -31,7 +31,7 @@ protocol MarketVMOutput {
     var isSaling: BehaviorRelay<Bool> { get }
     var currentAlign: BehaviorRelay<AlignOption> { get }
     
-    var endRefresh: PublishRelay<Bool> { get }
+//    var endRefresh: PublishRelay<Bool> { get }
     
     var presentSkeleton: PublishRelay<MarketSkeletonVC> { get }
 }
@@ -55,19 +55,13 @@ final class DefaultMarketVM: MarketVM {
     }
     
     func refresh() {
-        endRefresh.accept(false)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            let skeletonVC = MarketSkeletonVC(
-                productSections: self.productSections,
-                align: self.currentAlign.value,
-                category: self.selectedCategory.value,
-                page: 0,
-                size: 15,
-                sale: self.isSaling.value
-            )
-            self.presentSkeleton.accept(skeletonVC)
-        }
+        fetchMarketProducts(
+            align: currentAlign.value,
+            category: selectedCategory.value,
+            page: 0,
+            size: 15,
+            sale: isSaling.value
+        )
     }
     
     func writeButtonTapped() {
@@ -122,58 +116,16 @@ private extension DefaultMarketVM {
             size: size,
             sale: sale
         )
-        .subscribe(
-            onSuccess: { [weak self] products in
-                guard let self = self else { return }
-                var currentSectionModel = self.productSections.value
-                let newSectionModel: [MarketProductDataSection] = [
-                    MarketProductDataSection(items: products)
-                ]
-                
-                currentSectionModel.append(contentsOf: newSectionModel)
-                self.productSections.accept(currentSectionModel)
-            },
-            onFailure: { error in
-                if error is APIError {
-                    let apiError = error as? APIError
-                    Log.error(apiError?.info ?? "")
-                }
-            }
+        .map { return [MarketProductDataSection(items: $0)] }
+        .subscribe(on: SerialDispatchQueueScheduler(
+            queue: .global(),
+            internalSerialQueueName: "productSection")
         )
-        .disposed(by: disposeBag)
-    }
-    
-    func refreshMarketProducts(
-        align: AlignOption,
-        category: [Category],
-        page: Int,
-        size: Int,
-        sale: Bool
-    ) {
-        ProductsManager.shared.fetchProducts(
-            align: align,
-            category: category,
-            page: page,
-            size: size,
-            sale: sale
-        )
-        .subscribe(
-            onSuccess: { [weak self] products in
-                
-                guard let self = self else { return }
-                let newSectionModel: [MarketProductDataSection] = [
-                    MarketProductDataSection(items: products)
-                ]
-                self.productSections.accept(newSectionModel)
-            },
-            onFailure: { error in
-                if error is APIError {
-                    let apiError = error as? APIError
-                    Log.error(apiError?.info ?? "")
-                }
-                
-            }
-        )
+        .subscribe(with: self, onSuccess: { owner, productSection in
+            owner.productSections.accept(productSection)
+        }, onFailure: { _, error in
+            Log.error(error)
+        })
         .disposed(by: disposeBag)
     }
 }
