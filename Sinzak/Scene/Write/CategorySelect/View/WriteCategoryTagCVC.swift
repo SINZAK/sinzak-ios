@@ -31,7 +31,7 @@ final class WriteCategoryTagCVC: UICollectionViewCell {
         categoryLabel.textColor = kind.fontColor
         tagBackgroundView.backgroundColor = kind.bgcolor
     }
-    func updateCell(kind: Category) {
+    func updateCell(kind: CategoryType) {
         categoryLabel.text = kind.text
     }
     func updateCell(kind: WorksCategory) {
@@ -71,4 +71,3 @@ final class WriteCategoryTagCVC: UICollectionViewCell {
         }
     }
 }
-

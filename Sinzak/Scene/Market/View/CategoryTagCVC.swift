@@ -37,7 +37,7 @@ final class CategoryTagCVC: UICollectionViewCell {
         }
     }
     
-    var category: Category?
+    var category: CategoryType?
     
     // MARK: - UI
     
@@ -69,7 +69,7 @@ final class CategoryTagCVC: UICollectionViewCell {
         tagBackgroundView.layer.borderColor = color.cgColor
     }
     
-    func updateCell(category: Category) {
+    func updateCell(category: CategoryType) {
         self.category = category
         categoryLabel.text = category.text
     }

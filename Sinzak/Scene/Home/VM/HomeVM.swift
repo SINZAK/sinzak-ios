@@ -14,6 +14,11 @@ import Moya
 protocol HomeVMInput {
     func fetchData()
     func tapProductsCell(products: Products)
+    
+    var selectedCategory: BehaviorRelay<[CategoryType]> { get }
+    var selectedAlign: BehaviorRelay<AlignOption> { get }
+    var isSaling: BehaviorRelay<Bool> { get }
+    var doRefreshRelay: PublishRelay<Bool> { get }
 }
 
 protocol HomeVMOutput {
@@ -56,7 +61,7 @@ final class DefaultHomeVM: HomeVM {
     
     var pushProductsDetailView: PublishRelay<ProductsDetailVC> = .init()
     
-    private lazy var categories = Category.allCases[1..<7]
+    private lazy var categories = CategoryType.allCases[1..<7]
     private lazy var categorySectionItems: [HomeSectionItem] = categories.map { HomeSectionItem.categoryItem(category: $0) }
     private lazy var categorySections: [HomeSection] = [
         .categorySection(
