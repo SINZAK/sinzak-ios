@@ -29,7 +29,7 @@ protocol MarketVMOutput {
     var productSections: BehaviorRelay<[MarketProductDataSection]> { get }
     
     var isSaling: BehaviorRelay<Bool> { get }
-    var currentAlign: BehaviorRelay<AlignOption> { get }
+    var selectedCurrentAlign: BehaviorRelay<AlignOption> { get }
     
     var showSkeleton: BehaviorRelay<Bool> { get }
 }
@@ -44,7 +44,7 @@ final class DefaultMarketVM: MarketVM {
     
     func viewDidLoad() {
         fetchMarketProducts(
-            align: currentAlign.value,
+            align: selectedCurrentAlign.value,
             category: selectedCategory.value,
             page: 0,
             size: 15,
@@ -54,7 +54,7 @@ final class DefaultMarketVM: MarketVM {
     
     func refresh() {
         fetchMarketProducts(
-            align: currentAlign.value,
+            align: selectedCurrentAlign.value,
             category: selectedCategory.value,
             page: 0,
             size: 15,
@@ -73,7 +73,7 @@ final class DefaultMarketVM: MarketVM {
     }
     
     func alignButtonTapped() {
-        let vc = SelectAlignVC(with: currentAlign)
+        let vc = SelectAlignVC(with: selectedCurrentAlign)
         presentSelectAlignVC.accept(vc)
     }
     
@@ -92,7 +92,7 @@ final class DefaultMarketVM: MarketVM {
     ])
     
     var isSaling: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    var currentAlign: BehaviorRelay<AlignOption> = .init(value: .recommend)
+    var selectedCurrentAlign: BehaviorRelay<AlignOption> = .init(value: .recommend)
     
     var endRefresh: PublishRelay<Bool> = PublishRelay()
     
