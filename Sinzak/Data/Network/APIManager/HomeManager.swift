@@ -12,7 +12,10 @@ import RxSwift
 class HomeManager {
     private init () {}
     static let shared = HomeManager()
-    let provider = MoyaProvider<HomeAPI>()
+    let provider = MoyaProvider<HomeAPI>(
+        callbackQueue: .global(),
+        plugins: [MoyaLoggerPlugin.shared]
+    )
     
     func getHomeProductLoggedIn() -> Single<HomeLoggedInProducts> {
         return provider.rx.request(.homeLogined)
