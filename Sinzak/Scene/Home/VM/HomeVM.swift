@@ -36,8 +36,19 @@ final class DefaultHomeVM: HomeVM {
     
     private let disposeBag = DisposeBag()
     
-    init(isLogin: Bool) {
-        self.isLogin = isLogin
+    let doRefreshRelay: PublishRelay<Bool>
+    
+    init(
+        _ selectedCategory: BehaviorRelay<[CategoryType]>,
+        _ selectedAlign: BehaviorRelay<AlignOption>,
+        _ isSaling: BehaviorRelay<Bool>,
+        _ doRefreshRelay: PublishRelay<Bool>
+    ) {
+        self.isLogin = UserInfoManager.isLoggedIn
+        self.selectedCategory = selectedCategory
+        self.selectedAlign = selectedAlign
+        self.isSaling = isSaling
+        self.doRefreshRelay = doRefreshRelay
     }
     
     // MARK: - Input
@@ -51,6 +62,10 @@ final class DefaultHomeVM: HomeVM {
         vc.mainView.setData(products)
         pushProductsDetailView.accept(vc)
     }
+    
+    var selectedCategory: BehaviorRelay<[CategoryType]>
+    var selectedAlign: BehaviorRelay<AlignOption>
+    var isSaling: BehaviorRelay<Bool>
     
     // MARK: - Output
     

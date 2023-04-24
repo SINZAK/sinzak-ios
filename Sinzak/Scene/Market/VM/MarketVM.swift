@@ -40,6 +40,28 @@ final class DefaultMarketVM: MarketVM {
     
     private let disposeBag = DisposeBag()
     
+    var doRefreshRelay: PublishRelay<Bool>
+        
+    // MARK: - Init
+    
+    init(
+        _ selectedCategory: BehaviorRelay<[CategoryType]>,
+        _ selectedAlign: BehaviorRelay<AlignOption>,
+        _ isSaling: BehaviorRelay<Bool>,
+        _ doRefreshRelay: PublishRelay<Bool>
+    ) {
+        self.selectedCategory = selectedCategory
+        self.selectedAlign = selectedAlign
+        self.isSaling = isSaling
+        self.doRefreshRelay = doRefreshRelay
+    
+        doRefreshRelay
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.refresh()
+            })
+            .disposed(by: disposeBag)
+    }
+    
     // MARK: - Input
     
     func viewDidLoad() {
@@ -85,7 +107,13 @@ final class DefaultMarketVM: MarketVM {
     var presentSelectAlignVC: PublishRelay<SelectAlignVC> = PublishRelay<SelectAlignVC>()
     
     let categorySections: BehaviorRelay<[CategoryDataSection]> = BehaviorRelay(value: [
-        CategoryDataSection(items: Category.allCases.map { CategoryData(category: $0) })    
+        CategoryDataSection(items: CategoryType.allCases.map {
+            let category = $0 == .all ?
+            Category(type: $0, isSelected: true) :
+            Category(type: $0, isSelected: false)
+            
+            return CategoryData(category: category)
+        })
     ])
     let productSections: BehaviorRelay<[MarketProductDataSection]> = BehaviorRelay(value: [
         MarketProductDataSection(items: [])
