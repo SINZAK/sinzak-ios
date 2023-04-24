@@ -75,14 +75,20 @@ final class HomeVC: SZVC {
             .withUnretained(self)
             .subscribe(onNext: { owner, indexPath in
                 
-                if indexPath.section == 0 {
-                    Log.debug("배너 탭!")
-                    return
-                }
+                let sectionCount = owner.viewModel.homeSectionModel.value.count
                 
-                guard let cell = owner.mainView.homeCollectionView.cellForItem(at: indexPath) as? ArtCVC else { return }
-                guard let products = cell.products else { return }
-                owner.viewModel.tapProductsCell(products: products)
+                switch indexPath.section {
+                case 0:
+                    if indexPath.section == 0 {
+                        Log.debug("배너 탭!")
+                    }
+                case 1..<sectionCount-1:
+                    guard let cell = owner.mainView.homeCollectionView.cellForItem(at: indexPath) as? ArtCVC else { return }
+                    guard let products = cell.products else { return }
+                    owner.viewModel.tapProductsCell(products: products)
+                default:
+                    owner.tabBarController?.selectedIndex = 1
+                }
             })
             .disposed(by: disposeBag)
         
@@ -177,10 +183,18 @@ extension HomeVC {
                     ) as? ArtCVC else { return UICollectionViewCell() }
                     cell.setData(product)
                     return cell
+
+                case .categoryItem(category: let category):
+                    guard let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: HomeCategoryCVC.identifier,
+                        for: indexPath
+                    ) as? HomeCategoryCVC else { return UICollectionViewCell() }
+                    
+                    cell.configureCell(with: category.image)
+                    return cell
                 }
             },
             configureSupplementaryView: { dataSoure, collectionView, kind, indexPath in
-                
                 guard let header = collectionView.dequeueReusableSupplementaryView(
                     ofKind: kind,
                     withReuseIdentifier: HomeHeader.identifier,
@@ -198,30 +212,35 @@ extension HomeVC {
 extension HomeVC {
     /// 컴포지셔널 레이아웃 세팅
     func setLayout() -> UICollectionViewCompositionalLayout {
+        lazy var sectionCount = viewModel.homeSectionModel.value.count
         return UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
             // 배너일 경우
-            if sectionNumber == HomeType.banner.rawValue {
+            
+            switch sectionNumber {
+            case 0:
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets.leading = 16
                 item.contentInsets.trailing = 16
+                
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .estimated(160))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets.top = 40
                 section.contentInsets.bottom = 32
                 section.orthogonalScrollingBehavior = .paging
                 return section
-            } else { // 배너가 아닐 경우
+                
+            case 1..<sectionCount-1:
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .estimated(165),
                     heightDimension: .estimated(248)
                 )
-                
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = .init(top: 0, leading: 40, bottom: 0, trailing: 0)
                 
@@ -234,6 +253,7 @@ extension HomeVC {
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets.leading = 0
+                section.contentInsets.trailing = 40.0
                 section.contentInsets.bottom = 32
                 
                 // 헤더 설정
@@ -243,6 +263,41 @@ extension HomeVC {
                 let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
                 section.boundarySupplementaryItems = [headerItem]
                 section.orthogonalScrollingBehavior = .continuous
+                return section
+                
+            default:
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .absolute(80.0),
+                    heightDimension: .absolute(80.0)
+                )
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets.trailing = 16.0
+                
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .estimated(800),
+                    heightDimension: .estimated(80.0)
+                )
+                let group = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: groupSize,
+                    subitems: [item]
+                )
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets.leading = 40.0
+                section.contentInsets.trailing = 40.0
+                section.contentInsets.bottom = 40.0
+                section.interGroupSpacing = 16.0
+                
+                let headerItemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(40))
+                
+                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
+                
+                headerItem.contentInsets.leading = -40.0
+                section.boundarySupplementaryItems = [headerItem]
+                section.orthogonalScrollingBehavior = .continuous
+                
                 return section
             }
         }

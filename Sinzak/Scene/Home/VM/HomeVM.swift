@@ -55,6 +55,15 @@ final class DefaultHomeVM: HomeVM {
     var homeSectionModel: BehaviorRelay<[HomeSection]> = .init(value: [])
     
     var pushProductsDetailView: PublishRelay<ProductsDetailVC> = .init()
+    
+    private lazy var categories = Category.allCases[1..<7]
+    private lazy var categorySectionItems: [HomeSectionItem] = categories.map { HomeSectionItem.categoryItem(category: $0) }
+    private lazy var categorySections: [HomeSection] = [
+        .categorySection(
+            title: "장르별 작품",
+            items: categorySectionItems
+        )
+    ]
 }
 
 private extension DefaultHomeVM {
@@ -62,14 +71,14 @@ private extension DefaultHomeVM {
         showSkeleton.accept(true)
 
         let bannerObservable = HomeManager.shared.getBannerInfo().asObservable()
-                
+    
         if isLogin {
             let loggedInProductsObservable = HomeManager.shared.getHomeProductLoggedIn().asObservable()
             
             Observable.zip(bannerObservable, loggedInProductsObservable)
                 .map({ [weak self] banners, products in
+                    guard let self = self else { return }
                     
-                    // TODO: ~~~님을 위한 맞춤 거래 추가해야함
                     let productSections: [HomeSection] = zip(
                         HomeLoggedInType.allCases.map { $0.title },
                         [products.new, products.recommend, products.following]
@@ -82,9 +91,9 @@ private extension DefaultHomeVM {
                     
                     let sectionModel: [HomeSection] = [
                         .bannerSection(items: banners.map { .bannerSectionItem(banner: $0) })
-                    ] + productSections
+                    ] + productSections + self.categorySections
                     
-                    self?.homeSectionModel.accept(sectionModel)
+                    self.homeSectionModel.accept(sectionModel)
                 })
                 .delay(
                     .milliseconds(500),
@@ -104,6 +113,7 @@ private extension DefaultHomeVM {
             
             Observable.zip(bannerObservable, notLoggedInProductsObservable)
                 .map({ [weak self] banners, products in
+                    guard let self = self else { return }
                     
                     let productSections: [HomeSection] = zip(
                         HomeNotLoggedInType.allCases.map { $0.title },
@@ -117,9 +127,9 @@ private extension DefaultHomeVM {
                     
                     let sectionModel: [HomeSection] = [
                         .bannerSection(items: banners.map { .bannerSectionItem(banner: $0) })
-                    ] + productSections
+                    ] + productSections + self.categorySections
                     
-                    self?.homeSectionModel.accept(sectionModel)
+                    self.homeSectionModel.accept(sectionModel)
                 })
                 .delay(
                     .milliseconds(500),
