@@ -139,7 +139,7 @@ extension MarketView {
                 )
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(260)
+                    heightDimension: .estimated(264)
                 )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets.leading = 8
@@ -147,7 +147,7 @@ extension MarketView {
                 item.contentInsets.bottom = 16
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.top = -10
+                section.contentInsets.top = 10
                 section.contentInsets.leading = 8
                 section.contentInsets.trailing = 8
                 section.contentInsets.bottom = 72
