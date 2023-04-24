@@ -6,8 +6,19 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class TabBarVC: UITabBarController {
+    
+    // MARK: - Property
+    
+    // 홈화면 & 마켓화면에서 공유
+    let selectedCategory: BehaviorRelay<[CategoryType]> = .init(value: [])
+    let selectedAlign: BehaviorRelay<AlignOption> = .init(value: .recommend)
+    let isSaling: BehaviorRelay<Bool> = .init(value: false)
+    let doRefresh: PublishRelay<Bool> = .init()
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +35,12 @@ final class TabBarVC: UITabBarController {
     private func setTabBarController() {
         // 홈
                 
-        let homeVM = UserInfoManager.isLoggedIn ?
-        DefaultHomeVM(isLogin: true) :
-        DefaultHomeVM(isLogin: false)
+        let homeVM = DefaultHomeVM(
+            selectedCategory,
+            selectedAlign,
+            isSaling,
+            doRefresh
+        )
         
         let homeVC = UINavigationController(rootViewController: HomeVC(viewModel: homeVM))
         
@@ -34,7 +48,12 @@ final class TabBarVC: UITabBarController {
                                          image: UIImage(named: "home"),
                                          selectedImage: UIImage(named: "home-selected"))
         // 마켓
-        let marketVM = DefaultMarketVM()
+        let marketVM = DefaultMarketVM(
+            selectedCategory,
+            selectedAlign,
+            isSaling,
+            doRefresh
+        )
         let marketVC = UINavigationController(rootViewController: MarketVC(viewModel: marketVM))
         marketVC.tabBarItem = UITabBarItem(title: I18NStrings.Market,
                                          image: UIImage(named: "market"),
