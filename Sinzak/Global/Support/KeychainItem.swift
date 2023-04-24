@@ -188,9 +188,9 @@ extension KeychainItem {
     /**
      Access Token 사용해 로그인 여부 확인
      */
-    static var isLoggedIn: Bool {
-        return !currentAccessToken.isEmpty
-    }
+//    static var isLoggedIn: Bool {
+//        return !currentAccessToken.isEmpty
+//    }
     
     /**
      apple id 저장

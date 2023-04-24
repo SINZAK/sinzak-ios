@@ -71,7 +71,7 @@ private extension MoyaLoggerPlugin {
         // 토큰이 만료된경우 reissue
         do {
             let message = try JSONDecoder().decode(ShortMessageResult.self, from: response.data)
-            if KeychainItem.isLoggedIn && !message.success && message.message == "로그인이 필요한 작업입니다." {
+            if UserInfoManager.isLoggedIn && !message.success && message.message == "로그인이 필요한 작업입니다." {
                 AuthManager.shared.reissueForPlugin()
             }
         } catch {
