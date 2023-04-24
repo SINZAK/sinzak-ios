@@ -15,7 +15,7 @@ struct MarketBuild: Codable {
     let suggest: Bool
     let price: Int
     
-    init(category: Category, title: String, content: String, height: Int, vertical: Int, width: Int, suggest: Bool, price: Int) {
+    init(category: CategoryType, title: String, content: String, height: Int, vertical: Int, width: Int, suggest: Bool, price: Int) {
         self.category = category.rawValue
         self.title = title
         self.content = content

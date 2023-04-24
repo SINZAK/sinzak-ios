@@ -17,7 +17,7 @@ protocol MarketVMInput {
     func alignButtonTapped()
     func refresh()
     
-    var selectedCategory: BehaviorRelay<[Category]> { get }
+    var selectedCategory: BehaviorRelay<[CategoryType]> { get }
 }
 
 protocol MarketVMOutput {
@@ -29,7 +29,7 @@ protocol MarketVMOutput {
     var productSections: BehaviorRelay<[MarketProductDataSection]> { get }
     
     var isSaling: BehaviorRelay<Bool> { get }
-    var selectedCurrentAlign: BehaviorRelay<AlignOption> { get }
+    var selectedAlign: BehaviorRelay<AlignOption> { get }
     
     var showSkeleton: BehaviorRelay<Bool> { get }
 }
@@ -44,7 +44,7 @@ final class DefaultMarketVM: MarketVM {
     
     func viewDidLoad() {
         fetchMarketProducts(
-            align: selectedCurrentAlign.value,
+            align: selectedAlign.value,
             category: selectedCategory.value,
             page: 0,
             size: 15,
@@ -54,7 +54,7 @@ final class DefaultMarketVM: MarketVM {
     
     func refresh() {
         fetchMarketProducts(
-            align: selectedCurrentAlign.value,
+            align: selectedAlign.value,
             category: selectedCategory.value,
             page: 0,
             size: 15,
@@ -73,11 +73,11 @@ final class DefaultMarketVM: MarketVM {
     }
     
     func alignButtonTapped() {
-        let vc = SelectAlignVC(with: selectedCurrentAlign)
+        let vc = SelectAlignVC(with: selectedAlign, doRefreshRelay)
         presentSelectAlignVC.accept(vc)
     }
     
-    var selectedCategory: BehaviorRelay<[Category]> = .init(value: [])
+    var selectedCategory: BehaviorRelay<[CategoryType]>
     
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
@@ -91,8 +91,8 @@ final class DefaultMarketVM: MarketVM {
         MarketProductDataSection(items: [])
     ])
     
-    var isSaling: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    var selectedCurrentAlign: BehaviorRelay<AlignOption> = .init(value: .recommend)
+    var isSaling: BehaviorRelay<Bool>
+    var selectedAlign: BehaviorRelay<AlignOption>
     
     var endRefresh: PublishRelay<Bool> = PublishRelay()
     
@@ -102,7 +102,7 @@ final class DefaultMarketVM: MarketVM {
 private extension DefaultMarketVM {
     func fetchMarketProducts(
         align: AlignOption,
-        category: [Category],
+        category: [CategoryType],
         page: Int,
         size: Int,
         sale: Bool

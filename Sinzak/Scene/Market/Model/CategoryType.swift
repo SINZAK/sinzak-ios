@@ -9,7 +9,7 @@ import Foundation
 import RxDataSources
 import UIKit
 
-enum Category: String, CaseIterable {
+enum CategoryType: String, CaseIterable {
     case all
     case painting
     case orient
@@ -32,16 +32,24 @@ enum Category: String, CaseIterable {
     
     var image: UIImage? {
         switch self {
-        case .painting:      return UIImage(named: "category-painting")
-        case .orient:        return UIImage(named: "category-orient")
-        case .sculpture:     return UIImage(named: "category-sculpture")
-        case .print:         return UIImage(named: "category-print")
-        case .craft:         return UIImage(named: "category-craft")
-        case .other:         return UIImage(named: "category-other")
-        default:             return UIImage()
+        case .painting:         return UIImage(named: "category-painting")
+        case .orient:           return UIImage(named: "category-orient")
+        case .sculpture:        return UIImage(named: "category-sculpture")
+        case .print:            return UIImage(named: "category-print")
+        case .craft:            return UIImage(named: "category-craft")
+        case .other:            return UIImage(named: "category-other")
+        default:                return UIImage()
         }
         
     }
+}
+
+struct Category {
+    let type: CategoryType
+    var text: String {
+        return type.text
+    }
+    var isSelected: Bool
 }
 
 struct CategoryData {

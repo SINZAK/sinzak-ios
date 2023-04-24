@@ -155,7 +155,7 @@ extension MarketVC {
                     
                 // 전체 선택시 나머지 deselect
                 if indexPath == [0, 0] {
-                    Array(1..<Category.allCases.count)
+                    Array(1..<CategoryType.allCases.count)
                         .filter { owner.getCategoryCell(at: [0, $0]).isSelected }
                         .forEach { owner
                             .mainView
@@ -179,7 +179,7 @@ extension MarketVC {
                     let selectedCategory: [Category] = indexPath == [0, 0] ?
                     [] :
                     selectedIndexPathes.map {
-                        Category.allCases[$0.item]
+                        CategoryType.allCases[$0.item]
                     }
                     Log.debug(selectedCategory)
                     owner.viewModel.selectedCategory.accept(selectedCategory)
@@ -203,13 +203,15 @@ extension MarketVC {
                         .categoryCollectionView
                         .selectItem(at: [0, 0], animated: true, scrollPosition: .centeredVertically)
                     owner.viewModel.selectedCategory.accept([])
+                    owner.viewModel.refresh()
                 } else {
                     owner.mainView.categoryCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-                    let selectedCategory: [Category] = selectedIndexPathes.map {
-                        Category.allCases[$0.item]
+                    let selectedCategory: [CategoryType] = selectedIndexPathes.map {
+                        CategoryType.allCases[$0.item]
                     }
                     Log.debug(selectedCategory)
                     owner.viewModel.selectedCategory.accept(selectedCategory)
+                    owner.viewModel.refresh()
                 }
                 
             })
@@ -264,7 +266,8 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
         
-        viewModel.selectedCurrentAlign
+        viewModel.selectedAlign
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .recommend)
             .drive(onNext: { [weak self] alignOption in
                 guard let self = self else { return }
@@ -273,6 +276,7 @@ extension MarketVC {
             .disposed(by: disposeBag)
 
         viewModel.showSkeleton
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
             .drive(
                 with: self,
@@ -296,6 +300,31 @@ extension MarketVC {
                     }
                 })
             .disposed(by: disposeBag)
+        
+        viewModel.selectedCategory
+            .withUnretained(self)
+            .subscribe(onNext: { owner, categories in
+                
+                if categories.isEmpty { return }
+                if owner.isCurrentMarketView { return }
+                
+                guard let indexPathsForSelectedItems = owner
+                    .mainView
+                    .categoryCollectionView
+                    .indexPathsForSelectedItems else { return }
+                
+                indexPathsForSelectedItems
+                    .forEach {
+                        owner
+                            .mainView
+                            .categoryCollectionView
+                            .deselectItem(at: $0, animated: false)
+                    }
+                
+                let idx: Int = CategoryType.allCases.firstIndex(of: categories[0]) ?? 0
+                owner.mainView.categoryCollectionView.selectItem(at: [0, idx], animated: true, scrollPosition: .centeredHorizontally)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -311,11 +340,7 @@ private extension MarketVC {
                     for: indexPath
                 ) as? CategoryTagCVC else { return UICollectionViewCell() }
                 
-                // view did load 시 product default select
-                let defaultSelectedCell: Category = self.viewModel.selectedCategory.value.isEmpty ?
-                    .all :
-                self.viewModel.selectedCategory.value[0]
-                if self.viewModel.selectedCategory.value.isEmpty && item.category == defaultSelectedCell && self.isViewDidLoad {
+                if item.category.isSelected && self.isViewDidLoad {
                     self.mainView.categoryCollectionView.selectItem(
                         at: indexPath,
                         animated: false,
@@ -323,7 +348,7 @@ private extension MarketVC {
                     )
                     self.isViewDidLoad = false
                 }
-                cell.updateCell(category: item.category)
+                cell.updateCell(category: item.category.type)
                 return cell
             })
     }

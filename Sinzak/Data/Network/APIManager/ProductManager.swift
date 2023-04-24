@@ -12,7 +12,7 @@ import Moya
 protocol ProductManagerType {
     func fetchProducts(
         align: AlignOption,
-        category: [Category],
+        category: [CategoryType],
         page: Int,
         size: Int,
         sale: Bool
@@ -30,7 +30,7 @@ class ProductsManager: ProductManagerType {
     
     func fetchProducts(
         align: AlignOption,
-        category: [Category],
+        category: [CategoryType],
         page: Int,
         size: Int,
         sale: Bool
