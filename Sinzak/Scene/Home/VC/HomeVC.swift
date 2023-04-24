@@ -87,7 +87,13 @@ final class HomeVC: SZVC {
                     guard let products = cell.products else { return }
                     owner.viewModel.tapProductsCell(products: products)
                 default:
+                    
+                    let category: CategoryType = CategoryType.allCases[indexPath.item + 1]
+                    owner.viewModel.selectedCategory.accept([category])
+                    owner.viewModel.selectedAlign.accept(.recommend)
+                    owner.viewModel.isSaling.accept(false)
                     owner.tabBarController?.selectedIndex = 1
+                    owner.viewModel.doRefreshRelay.accept(true)
                 }
             })
             .disposed(by: disposeBag)
