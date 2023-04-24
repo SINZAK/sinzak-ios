@@ -16,7 +16,9 @@ final class MarketVC: SZVC {
     private let viewModel: MarketVM!
     private let mainView = MarketView()
     let backgroundScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
+    
     var isViewDidLoad: Bool = true
+    var isCurrentMarketView: Bool = false
     
     let searchBarButton = UIBarButtonItem(
         image: UIImage(named: "search"),
@@ -51,7 +53,13 @@ final class MarketVC: SZVC {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
         
-        Log.debug("viewWillAppear selectCategory \(viewModel.selectedCategory.value)")
+        isCurrentMarketView = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        isCurrentMarketView = false
     }
 
     // MARK: - Helpers
@@ -91,6 +99,7 @@ extension MarketVC {
             .subscribe(onNext: { [weak self] _ in
                 let current = self?.viewModel.isSaling.value ?? false
                 self?.viewModel.isSaling.accept(!current)
+                self?.viewModel.refresh()
             })
             .disposed(by: disposeBag)
         
@@ -111,42 +120,16 @@ extension MarketVC {
                     .height ?? 0)
                 owner.viewModel.refresh()
                 owner.mainView.marketSkeletonView.snp.remakeConstraints {
-                        $0.trailing.leading.equalToSuperview()
+                    $0.trailing.leading.equalToSuperview()
                     $0.top.equalTo(owner.mainView.alignButton.snp.bottom).offset(offset)
                     $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
                 }
             })
             .disposed(by: disposeBag)
         
-        viewModel.selectedCategory
-            .skip(1)
-            .observe(on: backgroundScheduler)
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.refresh()
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.isSaling
-            .skip(1)
-            .observe(on: backgroundScheduler)
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.refresh()
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.selectedCurrentAlign
-            .skip(1)
-            .observe(on: backgroundScheduler)
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.refresh()
-            })
-            .disposed(by: disposeBag)
-        
         mainView.categoryCollectionView.rx.itemSelected
             .observe(on: MainScheduler.instance)
             .subscribe(with: self, onNext: { owner, indexPath in
-                
-                owner.mainView.categoryCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                 
                 // 다른 카테고리 선택시 전체 deselect
                 if indexPath != [0, 0] {
@@ -175,14 +158,19 @@ extension MarketVC {
                         .categoryCollectionView
                         .deselectItem(at: indexPath, animated: false)
                 } else {
-                    owner.mainView.categoryCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-                    let selectedCategory: [Category] = indexPath == [0, 0] ?
+                    owner.mainView.categoryCollectionView.scrollToItem(
+                        at: indexPath,
+                        at: .centeredHorizontally,
+                        animated: true
+                    )
+                    let selectedCategory: [CategoryType] = indexPath == [0, 0] ?
                     [] :
                     selectedIndexPathes.map {
                         CategoryType.allCases[$0.item]
                     }
                     Log.debug(selectedCategory)
                     owner.viewModel.selectedCategory.accept(selectedCategory)
+                    owner.viewModel.refresh()
                 }
             })
             .disposed(by: disposeBag)

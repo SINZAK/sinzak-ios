@@ -19,6 +19,7 @@ final class SelectAlignVC: SZVC {
     private var hasSetPointOrigin = false
     private var pointOrigin: CGPoint?
     private var currnetAlign: BehaviorRelay<AlignOption>
+    private let doRefreshRelay: PublishRelay<Bool>
     
     // MARK: - Sections
     private let alignOptionSections: BehaviorRelay<[AlignOptionDataSection]> = BehaviorRelay(value: [
@@ -77,8 +78,12 @@ final class SelectAlignVC: SZVC {
     
     // MARK: - Init
     
-    init(with currentAlign: BehaviorRelay<AlignOption>) {
+    init(
+        with currentAlign: BehaviorRelay<AlignOption>,
+        _ doRefreshRelay: PublishRelay<Bool>
+    ) {
         self.currnetAlign = currentAlign
+        self.doRefreshRelay = doRefreshRelay
         
         super.init(nibName: nil, bundle: nil)
         
@@ -193,6 +198,7 @@ private extension SelectAlignVC {
                 cell.checkImageView.isHidden = true
             }
         }
+        doRefreshRelay.accept(true)
         dismiss(animated: true)
     }
     
