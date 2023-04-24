@@ -16,6 +16,7 @@ final class MarketVC: SZVC {
     private let viewModel: MarketVM!
     private let mainView = MarketView()
     let backgroundScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
+    var isViewDidLoad: Bool = true
     
     let searchBarButton = UIBarButtonItem(
         image: UIImage(named: "search"),
@@ -142,12 +143,13 @@ extension MarketVC {
             .disposed(by: disposeBag)
         
         mainView.categoryCollectionView.rx.itemSelected
+            .observe(on: MainScheduler.instance)
             .subscribe(with: self, onNext: { owner, indexPath in
                 
-                let firstCell = owner.getCategoryCell(at: [0, 0])
+                owner.mainView.categoryCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                 
-                // 전체 선택된 상태에서 다른 카테고리 선택시 전체 deselect
-                if firstCell.isSelected && indexPath != [0, 0] {
+                // 다른 카테고리 선택시 전체 deselect
+                if indexPath != [0, 0] {
                     owner.mainView.categoryCollectionView.deselectItem(at: [0, 0], animated: false)
                 }
                     
@@ -166,13 +168,14 @@ extension MarketVC {
                     .mainView
                     .categoryCollectionView
                     .indexPathsForSelectedItems else { return }
-                
+                                
                 if selectedIndexPathes.count == 4 {
                     owner
                         .mainView
                         .categoryCollectionView
                         .deselectItem(at: indexPath, animated: false)
                 } else {
+                    owner.mainView.categoryCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                     let selectedCategory: [Category] = indexPath == [0, 0] ?
                     [] :
                     selectedIndexPathes.map {
@@ -185,7 +188,8 @@ extension MarketVC {
             .disposed(by: disposeBag)
     
         mainView.categoryCollectionView.rx.itemDeselected
-            .subscribe(with: self, onNext: { owner, _ in
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self, onNext: { owner, indexPath in
                 
                 guard let selectedIndexPathes = owner
                     .mainView
@@ -197,9 +201,10 @@ extension MarketVC {
                     owner
                         .mainView
                         .categoryCollectionView
-                        .selectItem(at: [0, 0], animated: false, scrollPosition: .left)
+                        .selectItem(at: [0, 0], animated: true, scrollPosition: .centeredVertically)
                     owner.viewModel.selectedCategory.accept([])
                 } else {
+                    owner.mainView.categoryCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                     let selectedCategory: [Category] = selectedIndexPathes.map {
                         Category.allCases[$0.item]
                     }
@@ -305,15 +310,20 @@ private extension MarketVC {
                     withReuseIdentifier: CategoryTagCVC.identifier,
                     for: indexPath
                 ) as? CategoryTagCVC else { return UICollectionViewCell() }
-                if self.viewModel.selectedCategory.value.isEmpty && item.category == .all {
+                
+                // view did load 시 product default select
+                let defaultSelectedCell: Category = self.viewModel.selectedCategory.value.isEmpty ?
+                    .all :
+                self.viewModel.selectedCategory.value[0]
+                if self.viewModel.selectedCategory.value.isEmpty && item.category == defaultSelectedCell && self.isViewDidLoad {
                     self.mainView.categoryCollectionView.selectItem(
                         at: indexPath,
                         animated: false,
-                        scrollPosition: .left
+                        scrollPosition: .centeredVertically
                     )
+                    self.isViewDidLoad = false
                 }
                 cell.updateCell(category: item.category)
-                
                 return cell
             })
     }
