@@ -47,7 +47,7 @@ final class ConciergeVC: UIViewController {
     }
     
     func getNextVC() {
-        if KeychainItem.isLoggedIn {
+        if UserInfoManager.isLoggedIn {
             AuthManager.shared.reissue()
                 .observe(on: MainScheduler.instance)
                 .subscribe(with: self, onSuccess: { owner, _ in

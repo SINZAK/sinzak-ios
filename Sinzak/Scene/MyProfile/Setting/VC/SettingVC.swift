@@ -111,7 +111,6 @@ extension SettingVC: UICollectionViewDelegate {
         
         if indexPath == [2, 1] {
             UserInfoManager.shared.logout()
-            KeychainItem.deleteTokenInKeychain()
             NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
             
             UserApi.shared.logout {(error) in
@@ -125,7 +124,6 @@ extension SettingVC: UICollectionViewDelegate {
         
         if indexPath == [2, 0] {
             UserInfoManager.shared.logout()
-            KeychainItem.deleteTokenInKeychain()
             NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
             
             UserApi.shared.logout {(error) in

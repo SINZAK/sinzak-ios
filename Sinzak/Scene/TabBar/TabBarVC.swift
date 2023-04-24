@@ -24,7 +24,7 @@ final class TabBarVC: UITabBarController {
     private func setTabBarController() {
         // 홈
                 
-        let homeVM = KeychainItem.isLoggedIn ?
+        let homeVM = UserInfoManager.isLoggedIn ?
         DefaultHomeVM(isLogin: true) :
         DefaultHomeVM(isLogin: false)
         

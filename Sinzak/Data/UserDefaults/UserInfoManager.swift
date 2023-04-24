@@ -122,6 +122,7 @@ extension UserInfoManager {
         UserInfoManager.shared.products = []
         UserInfoManager.shared.works = []
         UserInfoManager.shared.workEmploys = []
+        KeychainItem.deleteTokenInKeychain()
     }
     
     func logUserInfo() {
@@ -129,7 +130,7 @@ extension UserInfoManager {
         if let profile = UserInfoManager.shared.profile {
             
             let log = """
-        -------------------- ✨ User Info Log ✨ --------------------
+        \n-------------------- ✨ User Info Log ✨ --------------------
         Profile: \(profile)
         Products: \(UserInfoManager.shared.products)
         Works: \(UserInfoManager.shared.works)
@@ -142,6 +143,9 @@ extension UserInfoManager {
         }
     }
 
+    static var isLoggedIn: Bool {
+        return UserInfoManager.userID == -1 ? false : true
+    }
 }
 
 enum UserManagerKey: String, CaseIterable {
