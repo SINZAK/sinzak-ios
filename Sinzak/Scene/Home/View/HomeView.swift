@@ -25,16 +25,21 @@ class HomeView: SZView {
             forCellWithReuseIdentifier: BannerCVC.identifier
         )
         $0.register(
-            ArtCVC.self,
-            forCellWithReuseIdentifier: ArtCVC.identifier)
-        $0.register(
-            SeeMoreCVC.self,
-            forCellWithReuseIdentifier: SeeMoreCVC.identifier
-        )
-        $0.register(
             HomeHeader.self,
             forSupplementaryViewOfKind: "header",
             withReuseIdentifier: HomeHeader.identifier
+        )
+        $0.register(
+            ArtCVC.self,
+            forCellWithReuseIdentifier: ArtCVC.identifier
+        )
+        $0.register(
+            HomeCategoryCVC.self,
+            forCellWithReuseIdentifier: HomeCategoryCVC.identifier
+        )
+        $0.register(
+            SeeMoreCVC.self,
+            forCellWithReuseIdentifier: SeeMoreCVC.identifier
         )
     }
     
