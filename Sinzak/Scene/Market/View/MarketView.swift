@@ -13,6 +13,7 @@ import SkeletonView
 final class MarketView: SZView {
     // MARK: - Properties
     lazy var categoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        $0.alwaysBounceVertical = false
         $0.showsVerticalScrollIndicator = false
         $0.register(
             CategoryTagCVC.self,
@@ -24,6 +25,9 @@ final class MarketView: SZView {
     }
     
     lazy var productCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = CustomColor.black
+        $0.refreshControl = refreshControl
         $0.register(
             ArtCVC.self,
             forCellWithReuseIdentifier: ArtCVC.identifier
