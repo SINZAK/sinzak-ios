@@ -103,6 +103,7 @@ extension MarketVC {
 //            .disposed(by: disposeBag)
         
         viewModel.selectedCategory
+            .skip(1)
             .observe(on: backgroundScheduler)
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.refresh()
@@ -110,6 +111,7 @@ extension MarketVC {
             .disposed(by: disposeBag)
         
         viewModel.isSaling
+            .skip(1)
             .observe(on: backgroundScheduler)
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.refresh()
@@ -117,6 +119,7 @@ extension MarketVC {
             .disposed(by: disposeBag)
         
         viewModel.currentAlign
+            .skip(1)
             .observe(on: backgroundScheduler)
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel.refresh()
@@ -180,7 +183,7 @@ extension MarketVC {
                         .mainView
                         .categoryCollectionView
                         .selectItem(at: [0, 0], animated: false, scrollPosition: .left)
-                    
+                    owner.viewModel.selectedCategory.accept([])
                 } else {
                     let selectedCategory: [Category] = selectedIndexPathes.map {
                         Category.allCases[$0.item]
@@ -221,10 +224,12 @@ extension MarketVC {
         
         viewModel.presentSkeleton
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] vc in
+            .withUnretained(self)
+            .subscribe(onNext: { owner, vc in
 //                let nav = UINavigationController(rootViewController: vc)
 //                nav.modalPresentationStyle = .fullScreen
 //                self?.present(nav, animated: false)
+                
             })
             .disposed(by: disposeBag)
             
