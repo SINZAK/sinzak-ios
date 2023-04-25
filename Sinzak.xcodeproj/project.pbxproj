@@ -216,6 +216,11 @@
 		EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501C29EDAE7C001733C6 /* Setting.swift */; };
 		EDF4502129EEC1CB001733C6 /* HomeSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4502029EEC1CB001733C6 /* HomeSectionModel.swift */; };
 		EDF76FEC29F7994D00F33146 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FEB29F7994D00F33146 /* LikeView.swift */; };
+		EDF76FEE29F7BB4C00F33146 /* LikeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */; };
+		EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */; };
+		EDF76FF329F7BE2900F33146 /* ProductsDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */; };
+		EDF76FF729F7DAAE00F33146 /* DTODataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF629F7DAAE00F33146 /* DTODataType.swift */; };
+		EDF76FFB29F7DFD900F33146 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -432,6 +437,11 @@
 		EDF4501C29EDAE7C001733C6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		EDF4502029EEC1CB001733C6 /* HomeSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionModel.swift; sourceTree = "<group>"; };
 		EDF76FEB29F7994D00F33146 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
+		EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeResponseDTO.swift; sourceTree = "<group>"; };
+		EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetail.swift; sourceTree = "<group>"; };
+		EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailDTO.swift; sourceTree = "<group>"; };
+		EDF76FF629F7DAAE00F33146 /* DTODataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTODataType.swift; sourceTree = "<group>"; };
+		EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1536,6 +1546,7 @@
 		A2B969DE29ABA645006119B1 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				EDF76FEF29F7BCF400F33146 /* Model */,
 				A226CC4E29AE0FA2000161E8 /* ReceivePriceOffer */,
 				A226CC4729ADF84B000161E8 /* SendPriceOffer */,
 				A226CC4629ADF809000161E8 /* Detail */,
@@ -1773,6 +1784,10 @@
 				EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */,
 				EDEEFFB129F3A38600C828B9 /* ReissueDTO.swift */,
 				EDEEFFB329F3A4AC00C828B9 /* UserInfoDTO.swift */,
+				EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */,
+				EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */,
+				EDF76FF629F7DAAE00F33146 /* DTODataType.swift */,
+				EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1797,6 +1812,14 @@
 			isa = PBXGroup;
 			children = (
 				EDF4501C29EDAE7C001733C6 /* Setting.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EDF76FEF29F7BCF400F33146 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2060,6 +2083,8 @@
 				A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */,
 				A2121AD029D075AE008F5406 /* UnivCertify.swift in Sources */,
 				A233892429B3772800688FD8 /* Message.swift in Sources */,
+				EDF76FEE29F7BB4C00F33146 /* LikeResponseDTO.swift in Sources */,
+				EDF76FF729F7DAAE00F33146 /* DTODataType.swift in Sources */,
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A280AB4229A7442300C1729C /* SearchResultHeader.swift in Sources */,
 				A233891C29B088E800688FD8 /* SettingVC.swift in Sources */,
@@ -2115,6 +2140,7 @@
 				A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */,
 				A2947A2A298017A200EE2A96 /* MyChatBubbleCVC.swift in Sources */,
 				ED2A581F29F11FC7002CE83E /* HomeSkeletonView.swift in Sources */,
+				EDF76FF329F7BE2900F33146 /* ProductsDetailDTO.swift in Sources */,
 				A216BD56297FD61D008964BC /* ChatListVC.swift in Sources */,
 				A216BD4C297FCBD1008964BC /* FollowNotiVC.swift in Sources */,
 				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,
@@ -2166,6 +2192,7 @@
 				A2B38580295D895800E5EB7C /* StudentAuthVC.swift in Sources */,
 				A2100F6A29865E8800C85ADF /* AlignOption.swift in Sources */,
 				A226537D29705F8100605697 /* BannerCVC.swift in Sources */,
+				EDF76FFB29F7DFD900F33146 /* BaseDTO.swift in Sources */,
 				A280AB4529A7634C00C1729C /* WriteCategoryView.swift in Sources */,
 				A2100F742986939A00C85ADF /* WorksVC.swift in Sources */,
 				A2B969E429ABA699006119B1 /* ProductsDetailVC.swift in Sources */,
@@ -2216,6 +2243,7 @@
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 				A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */,
 				A280AB5329A7A5E600C1729C /* WriteCategoryHeaderKind.swift in Sources */,
+				EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */,
 				A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */,
 				ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */,
 				A20E4A4B2998FA26009C1340 /* NotLoginedVC.swift in Sources */,
