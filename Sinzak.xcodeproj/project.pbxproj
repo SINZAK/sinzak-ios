@@ -97,7 +97,6 @@
 		A24E909E29B7246E006B3347 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24E909D29B7246E006B3347 /* HomeSection.swift */; };
 		A254E13829BCF6EB001047FD /* ProductsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E13729BCF6EB001047FD /* ProductsAPI.swift */; };
 		A254E13A29BCF897001047FD /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E13929BCF897001047FD /* ProductManager.swift */; };
-		A254E13C29BCFA18001047FD /* MarketProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E13B29BCFA18001047FD /* MarketProduct.swift */; };
 		A254E13E29BD032D001047FD /* WorksAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E13D29BD032D001047FD /* WorksAPI.swift */; };
 		A254E14029BD0427001047FD /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E13F29BD0427001047FD /* UserAPI.swift */; };
 		A254E14229BD0571001047FD /* ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A254E14129BD0571001047FD /* ChatAPI.swift */; };
@@ -216,6 +215,7 @@
 		EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */; };
 		EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501C29EDAE7C001733C6 /* Setting.swift */; };
 		EDF4502129EEC1CB001733C6 /* HomeSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4502029EEC1CB001733C6 /* HomeSectionModel.swift */; };
+		EDF76FEC29F7994D00F33146 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FEB29F7994D00F33146 /* FavoriteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -317,7 +317,6 @@
 		A24E909D29B7246E006B3347 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
 		A254E13729BCF6EB001047FD /* ProductsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAPI.swift; sourceTree = "<group>"; };
 		A254E13929BCF897001047FD /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
-		A254E13B29BCFA18001047FD /* MarketProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketProduct.swift; sourceTree = "<group>"; };
 		A254E13D29BD032D001047FD /* WorksAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksAPI.swift; sourceTree = "<group>"; };
 		A254E13F29BD0427001047FD /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		A254E14129BD0571001047FD /* ChatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPI.swift; sourceTree = "<group>"; };
@@ -432,6 +431,7 @@
 		EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultMessageDTO.swift; sourceTree = "<group>"; };
 		EDF4501C29EDAE7C001733C6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		EDF4502029EEC1CB001733C6 /* HomeSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionModel.swift; sourceTree = "<group>"; };
+		EDF76FEB29F7994D00F33146 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -771,7 +771,6 @@
 			children = (
 				A222F07E298382DF007806D0 /* CategoryType.swift */,
 				A2100F6929865E8800C85ADF /* AlignOption.swift */,
-				A254E13B29BCFA18001047FD /* MarketProduct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -792,6 +791,7 @@
 			children = (
 				A2265371296D7E5600605697 /* HomeView.swift */,
 				ED2A581E29F11FC7002CE83E /* HomeSkeletonView.swift */,
+				EDF76FEB29F7994D00F33146 /* FavoriteView.swift */,
 				A226537A29705A4400605697 /* ArtCVC.swift */,
 				A226537C29705F8100605697 /* BannerCVC.swift */,
 				A257C36A297F99B100266E74 /* SeeMoreCVC.swift */,
@@ -2164,7 +2164,6 @@
 				ED74A07B29F4F8F200F44AA2 /* AppleAuthAPI.swift in Sources */,
 				A254E14229BD0571001047FD /* ChatAPI.swift in Sources */,
 				A2B38580295D895800E5EB7C /* StudentAuthVC.swift in Sources */,
-				A254E13C29BCFA18001047FD /* MarketProduct.swift in Sources */,
 				A2100F6A29865E8800C85ADF /* AlignOption.swift in Sources */,
 				A226537D29705F8100605697 /* BannerCVC.swift in Sources */,
 				A280AB4529A7634C00C1729C /* WriteCategoryView.swift in Sources */,
@@ -2224,6 +2223,7 @@
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,
 				A2DEC36429B4684100CF0794 /* School.swift in Sources */,
 				A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */,
+				EDF76FEC29F7994D00F33146 /* FavoriteView.swift in Sources */,
 				A280AB4D29A79E8A00C1729C /* WriteCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
