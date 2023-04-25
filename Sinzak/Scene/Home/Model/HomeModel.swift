@@ -6,30 +6,26 @@
 //
 
 import Foundation
+import RxDataSources
 
-// MARK: - HomeNotLogined
 struct HomeNotLoggedInProductsResponse: Codable {
     let data: HomeNotLoggedInProducts
     let success: Bool
 }
 
-// MARK: - Data - HomeNotLogined
 struct HomeNotLoggedInProducts: Codable {
     let trading, new, hot: [Products]
 }
 
-// MARK: - HomeLogined
 struct HomeLoggedInProductsResponse: Codable {
     let data: HomeLoggedInProducts
     let success: Bool
 }
 
-// MARK: - Data - HomeLogined
 struct HomeLoggedInProducts: Codable {
     let new, following, recommend: [Products]
 }
 
-// MARK: - Hot
 struct Products: Codable {
     let id: Int
     let title, content, author: String
@@ -41,4 +37,17 @@ struct Products: Codable {
     let complete: Bool
     let popularity: Int
     let like: Bool
+}
+
+struct MarketProductDataSection {
+    var items: [Products]
+}
+
+extension MarketProductDataSection: SectionModelType {
+    typealias Itemt = Products
+    
+    init(original: MarketProductDataSection, items: [Products]) {
+        self = original
+        self.items = items
+    }
 }

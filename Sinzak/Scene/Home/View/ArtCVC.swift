@@ -23,25 +23,19 @@ final class ArtCVC: UICollectionViewCell {
         $0.image = UIImage(named: "emptySquare")
         $0.isSkeletonable = true
     }
-    private let favoriteBackground = UIView().then {
-        $0.backgroundColor = CustomColor.onlyGray80!.withAlphaComponent(0.4)
-        $0.layer.cornerRadius = 16
-    }
-    private let favoriteCountLabel = UILabel().then {
-        $0.text = "1.3K"
-        $0.font = .buttonText_R
-        $0.textAlignment = .center
-        $0.textColor = CustomColor.white
-    }
-    private let favoriteButton = UIButton().then {
-        $0.setImage(UIImage(named: "favorite"), for: .normal) // 눌리면 "favorite-fill"
-    }
+    
+    private let favoriteView: FavoriteView = {
+        let view = FavoriteView()
+        view.layer.cornerRadius = 16.0
+        
+        return view
+    }()
+    
     private let titleLabel = UILabel().then {
         $0.textColor = CustomColor.label
         $0.font = .body_M
         $0.text = "Flower Garden"
         $0.isSkeletonable = true
-
     }
     private let labelStack = UIStackView().then {
         $0.spacing = 2
@@ -78,13 +72,13 @@ final class ArtCVC: UICollectionViewCell {
         $0.isSkeletonable = true
     }
     
-    private let productForSkeleton = MarketProduct(
+    private let productForSkeleton = Products(
         id: 0, title: "      ",
         content: "", author: "             ",
         price: 30000, thumbnail: "skeleton",
         date: "       ", suggest: false,
-        like: false, likesCnt: 100,
-        complete: false, popularity: 0
+        likesCnt: 100, complete: false,
+        popularity: 100, like: false
     )
     
     // MARK: - Init
@@ -111,17 +105,8 @@ final class ArtCVC: UICollectionViewCell {
         authorLabel.text = data.author
         uploadTimeLabel.text = data.date.toDate().toRelativeString()
         priceLabel.text = "\(data.price)"
-        favoriteCountLabel.text = "\(data.likesCnt)"
-    }
-    
-    func setData(_ data: MarketProduct) {
-        let url = URL(string: data.thumbnail)
-        imageView.kf.setImage(with: url)
-        titleLabel.text = data.title
-        authorLabel.text = data.author
-        uploadTimeLabel.text = data.date.toDate().toRelativeString()
-        priceLabel.text = "\(data.price)"
-        favoriteCountLabel.text = "\(data.likesCnt)"
+        favoriteView.likesCount = data.likesCnt
+        favoriteView.isSelected = data.like
     }
     
     func setSkeleton() {
@@ -149,10 +134,8 @@ final class ArtCVC: UICollectionViewCell {
         labelStack.addArrangedSubviews(
             isDealing, priceLabel
         )
-        favoriteBackground.addSubviews(
-            favoriteButton, favoriteCountLabel
-        )
     }
+    
     func setConstraints() {
         imageView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
@@ -171,6 +154,7 @@ final class ArtCVC: UICollectionViewCell {
             make.centerX.equalToSuperview()
             make.top.equalTo(favoriteButton.snp.bottom).offset(1)
         }
+
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(7)
             make.top.equalTo(imageView.snp.bottom).offset(10)
@@ -207,6 +191,7 @@ final class ArtCVC: UICollectionViewCell {
         authorLabel.text = nil
         uploadTimeLabel.text = nil
         priceLabel.text = nil
-        favoriteCountLabel.text = nil
+        favoriteView.favoriteImageView.image = nil
+        favoriteView.favoriteCountLabel.text = nil
     }
 }
