@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class WorksVC: SZVC {
     // MARK: - Properties
@@ -75,14 +77,18 @@ extension WorksVC: UICollectionViewDelegate, UICollectionViewDataSource {
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell() }
             let item = worksitem[indexPath.item]
-            cell.setData(item)
+            cell.setData(item, PublishRelay<Bool>())
             return cell
         }
     }
     // 헤더
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if indexPath.section == SectionKind.category.rawValue {
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: WorksHeader.self), for: indexPath) as? WorksHeader else { return UICollectionReusableView() }
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: String(describing: WorksHeader.self),
+                for: indexPath
+            ) as? WorksHeader else { return UICollectionReusableView() }
             return header
         } else {
             return UICollectionReusableView()

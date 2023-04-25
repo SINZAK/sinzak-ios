@@ -18,6 +18,8 @@ protocol MarketVMInput {
     func refresh()
     
     var selectedCategory: BehaviorRelay<[CategoryType]> { get }
+    
+    var needLoginAlert: PublishRelay<Bool> { get }
 }
 
 protocol MarketVMOutput {
@@ -100,6 +102,8 @@ final class DefaultMarketVM: MarketVM {
     }
     
     var selectedCategory: BehaviorRelay<[CategoryType]>
+    
+    var needLoginAlert: PublishRelay<Bool> = .init()
     
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()

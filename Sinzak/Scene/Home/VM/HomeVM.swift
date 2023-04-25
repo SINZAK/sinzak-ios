@@ -19,6 +19,8 @@ protocol HomeVMInput {
     var selectedAlign: BehaviorRelay<AlignOption> { get }
     var isSaling: BehaviorRelay<Bool> { get }
     var doRefreshRelay: PublishRelay<Bool> { get }
+    
+    var needLoginAlert: PublishRelay<Bool> { get }
 }
 
 protocol HomeVMOutput {
@@ -66,6 +68,8 @@ final class DefaultHomeVM: HomeVM {
     var selectedCategory: BehaviorRelay<[CategoryType]>
     var selectedAlign: BehaviorRelay<AlignOption>
     var isSaling: BehaviorRelay<Bool>
+    
+    var needLoginAlert: PublishRelay<Bool> = .init()
     
     // MARK: - Output
     

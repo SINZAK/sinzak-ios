@@ -58,10 +58,10 @@ final class ConciergeVC: UIViewController {
                 })
                 .disposed(by: disposeBag)
         } else {
-//            let root = LoginVC(viewModel: DefaultLoginVM())
-//            let vc = UINavigationController(rootViewController: root)
+            let root = LoginVC(viewModel: DefaultLoginVM())
+            let vc = UINavigationController(rootViewController: root)
             
-            let vc = TabBarVC()
+//            let vc = TabBarVC()
             nextVC.accept(vc)
         }
     }

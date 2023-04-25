@@ -11,9 +11,8 @@ final class LikeView: UIView {
     
     // MARK: - Properties
     
-    var isSelected: Bool? {
+    var isSelected: Bool = false {
         willSet {
-            let newValue = newValue ?? false
             if newValue {
                 likeImageView.image = UIImage(named: "favorite-fill")!
                     .withTintColor(CustomColor.red!, renderingMode: .alwaysOriginal)
@@ -24,9 +23,8 @@ final class LikeView: UIView {
         }
     }
     
-    var likesCount: Int? {
+    var likesCount: Int = 0 {
         willSet {
-            let newValue = newValue ?? 0
             if newValue < 1000 {
                 likeCountLabel.text = "\(newValue)"
             } else if newValue < 1000000 {
