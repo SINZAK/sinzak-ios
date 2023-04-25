@@ -42,9 +42,9 @@ extension HomeAPI: TargetType {
             return .requestPlain
         }
     }
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         let header = [
-            "Content-type": "application/json",
+            "Content-type": "application/json"
         ]
         let accessToken = KeychainItem.currentAccessToken
         switch self {
