@@ -18,6 +18,7 @@ class HomeView: SZView {
     }()
     
     lazy var homeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        $0.showsVerticalScrollIndicator = false
         $0.refreshControl = refreshControl
         $0.backgroundColor = .clear
         $0.register(

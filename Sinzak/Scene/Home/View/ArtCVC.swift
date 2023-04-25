@@ -24,8 +24,8 @@ final class ArtCVC: UICollectionViewCell {
         $0.isSkeletonable = true
     }
     
-    private let favoriteView: FavoriteView = {
-        let view = FavoriteView()
+    private let likeView: LikeView = {
+        let view = LikeView()
         view.layer.cornerRadius = 16.0
         
         return view
@@ -94,26 +94,23 @@ final class ArtCVC: UICollectionViewCell {
     }
     // MARK: - Setter
     func setData(_ data: Products) {
-        
         self.products = data
-        
         if let thumbnail = data.thumbnail {
             let url = URL(string: thumbnail)
             imageView.kf.setImage(with: url)
+        } else {
+            imageView.image = UIImage(named: "emptySquare")
         }
         titleLabel.text = data.title
         authorLabel.text = data.author
         uploadTimeLabel.text = data.date.toDate().toRelativeString()
         priceLabel.text = "\(data.price)"
-        favoriteView.likesCount = data.likesCnt
-        favoriteView.isSelected = data.like
+        likeView.likesCount = data.likesCnt
+        likeView.isSelected = data.like
     }
     
     func setSkeleton() {
-//        self.setData(productForSkeleton)
-        favoriteBackground.isHidden = true
-        favoriteButton.isHidden = true
-        favoriteCountLabel.isHidden = true
+        likeView.isHidden = true
         middlePointLabel.isHidden = true
         uploadTimeLabel.isHidden = true
         imageView.image = nil
@@ -127,7 +124,7 @@ final class ArtCVC: UICollectionViewCell {
         contentView.isSkeletonable = true
         contentView.backgroundColor = .clear
         contentView.addSubviews(
-            imageView, favoriteBackground,
+            imageView, likeView,
             titleLabel, labelStack,
             authorLabel, middlePointLabel, uploadTimeLabel
         )
@@ -141,18 +138,10 @@ final class ArtCVC: UICollectionViewCell {
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(imageView.snp.width)
         }
-        favoriteBackground.snp.makeConstraints { make in
-            make.trailing.bottom.equalTo(imageView).inset(10)
-            make.width.height.equalTo(32)
-        }
-        favoriteButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(1)
-            make.width.height.equalTo(16)
-        }
-        favoriteCountLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(favoriteButton.snp.bottom).offset(1)
+        
+        likeView.snp.makeConstraints {
+            $0.trailing.bottom.equalTo(imageView).inset(10)
+            $0.width.height.equalTo(32)
         }
 
         titleLabel.snp.makeConstraints { make in
@@ -191,7 +180,7 @@ final class ArtCVC: UICollectionViewCell {
         authorLabel.text = nil
         uploadTimeLabel.text = nil
         priceLabel.text = nil
-        favoriteView.favoriteImageView.image = nil
-        favoriteView.favoriteCountLabel.text = nil
+        likeView.likeImageView.image = nil
+        likeView.likeCountLabel.text = nil
     }
 }

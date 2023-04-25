@@ -215,7 +215,7 @@
 		EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */; };
 		EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501C29EDAE7C001733C6 /* Setting.swift */; };
 		EDF4502129EEC1CB001733C6 /* HomeSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4502029EEC1CB001733C6 /* HomeSectionModel.swift */; };
-		EDF76FEC29F7994D00F33146 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FEB29F7994D00F33146 /* FavoriteView.swift */; };
+		EDF76FEC29F7994D00F33146 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FEB29F7994D00F33146 /* LikeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -431,7 +431,7 @@
 		EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultMessageDTO.swift; sourceTree = "<group>"; };
 		EDF4501C29EDAE7C001733C6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		EDF4502029EEC1CB001733C6 /* HomeSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionModel.swift; sourceTree = "<group>"; };
-		EDF76FEB29F7994D00F33146 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		EDF76FEB29F7994D00F33146 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -791,7 +791,7 @@
 			children = (
 				A2265371296D7E5600605697 /* HomeView.swift */,
 				ED2A581E29F11FC7002CE83E /* HomeSkeletonView.swift */,
-				EDF76FEB29F7994D00F33146 /* FavoriteView.swift */,
+				EDF76FEB29F7994D00F33146 /* LikeView.swift */,
 				A226537A29705A4400605697 /* ArtCVC.swift */,
 				A226537C29705F8100605697 /* BannerCVC.swift */,
 				A257C36A297F99B100266E74 /* SeeMoreCVC.swift */,
@@ -2223,7 +2223,7 @@
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,
 				A2DEC36429B4684100CF0794 /* School.swift in Sources */,
 				A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */,
-				EDF76FEC29F7994D00F33146 /* FavoriteView.swift in Sources */,
+				EDF76FEC29F7994D00F33146 /* LikeView.swift in Sources */,
 				A280AB4D29A79E8A00C1729C /* WriteCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
