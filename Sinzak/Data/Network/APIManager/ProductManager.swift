@@ -28,6 +28,7 @@ class ProductsManager: ProductManagerType {
     )
     private let disposeBag = DisposeBag()
     
+    /// 상품들 가져올때 사용
     func fetchProducts(
         align: AlignOption,
         category: [CategoryType],
@@ -51,5 +52,42 @@ class ProductsManager: ProductManagerType {
             return productsDTO.map { $0.toDomain() }
         })
         .retry(2)
+    }
+    
+    func fetchProductsDetail(id: Int) -> Single<ProductsDetail> {
+        return provider.rx.request(.productDetail(id: id))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<ProductsDetailDTO>.self)
+            .map { result in
+                if !result.success {
+                    throw APIError.errorMessage(result.message ?? "")
+                }
+                
+                guard let data = result.data?.toDomain() else {
+                    throw APIError.noContent
+                }
+                
+                return data
+            }
+            
+    }
+    
+    func likeProducts(id: Int, mode: Bool) -> Single<Bool> {
+        return provider.rx.request(.like(id: id, mode: mode))
+            .filterSuccessfulStatusCodes()
+            .map(LikeResponseDTO.self)
+            .map { response in
+                Log.debug(response)
+                Log.debug(response)
+                Log.debug(response)
+                Log.debug(response)
+                Log.debug(response)
+                if !response.success {
+                    throw APIError.errorMessage("like error")
+                }
+                
+                
+                return response.success
+            }
     }
 }
