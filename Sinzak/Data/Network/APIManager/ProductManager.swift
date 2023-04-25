@@ -16,7 +16,7 @@ protocol ProductManagerType {
         page: Int,
         size: Int,
         sale: Bool
-    ) -> Single<[MarketProduct]>
+    ) -> Single<[Products]>
 }
 
 class ProductsManager: ProductManagerType {
@@ -34,7 +34,7 @@ class ProductsManager: ProductManagerType {
         page: Int,
         size: Int,
         sale: Bool
-    ) -> Single<[MarketProduct]> {
+    ) -> Single<[Products]> {
         return provider.rx.request(.products(
             align: align.rawValue,
             page: page,

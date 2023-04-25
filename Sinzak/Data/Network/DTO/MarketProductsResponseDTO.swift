@@ -41,20 +41,20 @@ struct Sort: Codable {
 }
 
 extension MarketProductResponseDTO {
-    func toDomain() -> MarketProduct {
-        MarketProduct(
+    func toDomain() -> Products {
+        Products(
             id: id ?? 0,
             title: title ?? "",
             content: content ?? "",
             author: author ?? "",
             price: price ?? 0,
-            thumbnail: thumbnail ?? "",
+            thumbnail: thumbnail,
             date: date ?? "",
             suggest: suggest ?? false,
-            like: like ?? false,
             likesCnt: likesCnt ?? 0,
             complete: complete ?? false,
-            popularity: popularity ?? 0
+            popularity: popularity ?? 0,
+            like: like ?? false
         )
     }
 }

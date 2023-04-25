@@ -14,7 +14,7 @@ final class WorksVC: SZVC {
         case category = 0
         case art
     }
-    var worksitem: [MarketProduct] = []
+    var worksitem: [Products] = []
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView

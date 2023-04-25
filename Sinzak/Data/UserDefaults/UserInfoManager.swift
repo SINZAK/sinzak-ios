@@ -42,9 +42,9 @@ final class UserInfoManager {
         }
     }
     
-    var works: [MarketProduct] = []
-    var workEmploys: [MarketProduct] = []
-    var products: [MarketProduct] = []
+    var works: [Products] = []
+    var workEmploys: [Products] = []
+    var products: [Products] = []
     
     private init() {}
     

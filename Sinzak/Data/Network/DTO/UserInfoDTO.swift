@@ -20,9 +20,9 @@ struct UserInfoResponseDTO: Codable {
 // MARK: - DataClass
 struct UserInfoDTO: Codable {
     let profile: ProfileDTO?
-    let products: [MarketProduct]?
-    let works: [MarketProduct]?
-    let workEmploys: [MarketProduct]?
+    let products: [Products]?
+    let works: [Products]?
+    let workEmploys: [Products]?
 
     enum CodingKeys: String, CodingKey {
         case profile
