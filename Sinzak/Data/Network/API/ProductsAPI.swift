@@ -96,7 +96,7 @@ extension ProductsAPI: TargetType {
                 let encoder = JSONEncoder()
                 let data = try encoder.encode(post)
                 let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
-                return .requestParameters(parameters: dictionary, encoding: URLEncoding.queryString)
+                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
             } catch {
                 print("Error encoding userInfo: \(error)")
                 return .requestPlain
@@ -106,7 +106,7 @@ extension ProductsAPI: TargetType {
                 let encoder = JSONEncoder()
                 let data = try encoder.encode(editPost)
                 let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
-                return .requestParameters(parameters: dictionary, encoding: URLEncoding.queryString)
+                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
             } catch {
                 print("Error encoding userInfo: \(error)")
                 return .requestPlain
@@ -115,7 +115,7 @@ extension ProductsAPI: TargetType {
             let param: [String: Any] = [
                 "url": url
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
         case .imageUpload(_, let images):
             var formData: [MultipartFormData] = []
             for image in images {
@@ -134,19 +134,19 @@ extension ProductsAPI: TargetType {
                 "id": id,
                 "mode": mode
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
             
         case .sell(let postId):
             let param: [String: Any] = [
                 "postId": postId
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
         case .priceSuggest(let id, let price):
             let param: [String: Any] = [
                 "id": id,
                 "price": price
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
             
         case .productDetail, .homeProducts, .homeFollowing, .homeRecommend, .delete:
             return .requestPlain
