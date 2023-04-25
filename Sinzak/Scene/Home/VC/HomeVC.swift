@@ -171,6 +171,7 @@ final class HomeVC: SZVC {
 extension HomeVC {
     
     func getHomeDataSource() -> RxCollectionViewSectionedReloadDataSource<HomeSection> {
+        let relay = viewModel.needLoginAlert
         return RxCollectionViewSectionedReloadDataSource<HomeSection>(
             configureCell: { dataSource, collectionView, indexPath, _ in
                 switch dataSource[indexPath] {
@@ -187,7 +188,7 @@ extension HomeVC {
                         withReuseIdentifier: ArtCVC.identifier,
                         for: indexPath
                     ) as? ArtCVC else { return UICollectionViewCell() }
-                    cell.setData(product)
+                    cell.setData(product, relay)
                     return cell
 
                 case .categoryItem(category: let category):

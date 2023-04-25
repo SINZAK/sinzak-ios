@@ -10,11 +10,17 @@ import SnapKit
 import Then
 import Kingfisher
 import SkeletonView
+import RxSwift
+import RxCocoa
 
 final class ArtCVC: UICollectionViewCell {
     // MARK: - Properties
     
     var products: Products?
+    var needLoginAlert: PublishRelay<Bool>?
+    var disposeBag = DisposeBag()
+
+    // MARK: - UI
     
     private let imageView = UIImageView().then {
         $0.clipsToBounds = true
@@ -93,8 +99,13 @@ final class ArtCVC: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Setter
-    func setData(_ data: Products) {
+    func setData(_ data: Products, _ relay: PublishRelay<Bool>) {
         self.products = data
+        self.needLoginAlert = relay
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
         if let thumbnail = data.thumbnail {
             let url = URL(string: thumbnail)
             imageView.kf.setImage(with: url)
@@ -104,7 +115,7 @@ final class ArtCVC: UICollectionViewCell {
         titleLabel.text = data.title
         authorLabel.text = data.author
         uploadTimeLabel.text = data.date.toDate().toRelativeString()
-        priceLabel.text = "\(data.price)"
+        priceLabel.text = (numberFormatter.string(from: NSNumber(value: Int(data.price))) ?? "0") + "원"
         likeView.likesCount = data.likesCnt
         likeView.isSelected = data.like
     }
@@ -119,8 +130,9 @@ final class ArtCVC: UICollectionViewCell {
         priceLabel.text = "fdffd"
         authorLabel.text = "fdfddddd"
     }
+    
     // MARK: - Design Helpers
-    func setupUI() {
+    private func setupUI() {
         contentView.isSkeletonable = true
         contentView.backgroundColor = .clear
         contentView.addSubviews(
@@ -128,12 +140,19 @@ final class ArtCVC: UICollectionViewCell {
             titleLabel, labelStack,
             authorLabel, middlePointLabel, uploadTimeLabel
         )
+        
         labelStack.addArrangedSubviews(
             isDealing, priceLabel
         )
+        
+        let tapLikeView = UITapGestureRecognizer(
+            target: self,
+            action: #selector(tapLikeView)
+        )
+        likeView.addGestureRecognizer(tapLikeView)
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         imageView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(imageView.snp.width)
@@ -182,5 +201,35 @@ final class ArtCVC: UICollectionViewCell {
         priceLabel.text = nil
         likeView.likeImageView.image = nil
         likeView.likeCountLabel.text = nil
+    }
+}
+
+private extension ArtCVC {
+    
+    @objc
+    func tapLikeView() {
+        if !likeView.isSelected {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        }
+        
+        ProductsManager.shared.likeProducts(
+            id: products?.id ?? 1,
+            mode: !likeView.isSelected
+        )
+        .observe(on: MainScheduler.instance)
+        .subscribe(
+            with: self,
+            onSuccess: { owner, _ in
+                owner.likeView.isSelected.toggle()
+                if owner.likeView.isSelected {
+                    owner.likeView.likesCount += 1
+                } else {
+                    owner.likeView.likesCount -= 1
+                }
+            }, onFailure: { _, error  in
+                Log.error(error)
+            })
+        .disposed(by: disposeBag)
+        
     }
 }

@@ -342,13 +342,14 @@ private extension MarketVC {
     }
     
     func getProductDataSource() -> RxCollectionViewSectionedReloadDataSource<MarketProductDataSection> {
+        let relay = viewModel.needLoginAlert
         return RxCollectionViewSectionedReloadDataSource<MarketProductDataSection>(
             configureCell: { _, collectionView, indexPath, item in
                 guard let cell: ArtCVC = collectionView.dequeueReusableCell(
                     withReuseIdentifier: ArtCVC.identifier,
                     for: indexPath
                 ) as? ArtCVC else { return UICollectionViewCell() }
-                cell.setData(item)
+                cell.setData(item, relay)
                 return cell
             })
     }
