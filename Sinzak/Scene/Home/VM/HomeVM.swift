@@ -15,6 +15,8 @@ protocol HomeVMInput {
     func fetchData()
     func tapProductsCell(products: Products)
     
+    var bannerIndex: BehaviorRelay<Int> { get }
+    
     var selectedCategory: BehaviorRelay<[CategoryType]> { get }
     var selectedAlign: BehaviorRelay<AlignOption> { get }
     var isSaling: BehaviorRelay<Bool> { get }
@@ -28,6 +30,8 @@ protocol HomeVMOutput {
     
     var showSkeleton: BehaviorRelay<Bool> { get }
     var homeSectionModel: BehaviorRelay<[HomeSection]> { get }
+    
+    var bannerTotalIndex: BehaviorRelay<Int> { get }
     
     var pushProductsDetailView: PublishRelay<ProductsDetailVC> { get }
 }
@@ -65,9 +69,13 @@ final class DefaultHomeVM: HomeVM {
         pushProductsDetailView.accept(vc)
     }
     
+    var bannerIndex: BehaviorRelay<Int> = .init(value: 0)
+    
     var selectedCategory: BehaviorRelay<[CategoryType]>
     var selectedAlign: BehaviorRelay<AlignOption>
     var isSaling: BehaviorRelay<Bool>
+    
+    var bannerTotalIndex: BehaviorRelay<Int> = .init(value: 3)
     
     var needLoginAlert: PublishRelay<Bool> = .init()
     
@@ -102,6 +110,8 @@ private extension DefaultHomeVM {
             Observable.zip(bannerObservable, loggedInProductsObservable)
                 .map({ [weak self] banners, products in
                     guard let self = self else { return }
+                    
+                    self.bannerTotalIndex.accept(banners.count)
                     
                     let productSections: [HomeSection] = zip(
                         HomeLoggedInType.allCases.map { $0.title },
@@ -138,6 +148,8 @@ private extension DefaultHomeVM {
             Observable.zip(bannerObservable, notLoggedInProductsObservable)
                 .map({ [weak self] banners, products in
                     guard let self = self else { return }
+                    
+                    self.bannerTotalIndex.accept(banners.count)
                     
                     let productSections: [HomeSection] = zip(
                         HomeNotLoggedInType.allCases.map { $0.title },
