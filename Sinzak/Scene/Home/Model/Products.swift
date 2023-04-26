@@ -1,5 +1,5 @@
 //
-//  HomeModel.swift
+//  Products.swift
 //  Sinzak
 //
 //  Created by Doy Kim on 2023/02/28.
@@ -28,7 +28,9 @@ struct HomeLoggedInProducts: Codable {
 
 struct Products: Codable {
     let id: Int
-    let title, content, author: String
+    let title: String
+    let content: String
+    let author: String
     let price: Int
     let thumbnail: String?
     let date: String
