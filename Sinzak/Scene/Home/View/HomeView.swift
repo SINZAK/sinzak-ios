@@ -26,6 +26,11 @@ class HomeView: SZView {
             forCellWithReuseIdentifier: BannerCVC.identifier
         )
         $0.register(
+            BannerFooter.self,
+            forSupplementaryViewOfKind: "footer",
+            withReuseIdentifier: BannerFooter.identifier
+        )
+        $0.register(
             HomeHeader.self,
             forSupplementaryViewOfKind: "header",
             withReuseIdentifier: HomeHeader.identifier
