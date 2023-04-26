@@ -349,7 +349,7 @@ private extension MarketVC {
                     withReuseIdentifier: ArtCVC.identifier,
                     for: indexPath
                 ) as? ArtCVC else { return UICollectionViewCell() }
-                cell.setData(item, relay)
+                cell.setData(item, .products, relay)
                 return cell
             })
     }

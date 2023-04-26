@@ -70,7 +70,6 @@ final class HomeVC: SZVC {
             })
             .disposed(by: disposeBag)
         
-        // TODO: 아이디 전달해서 상세 조회 하게 수정해야함
         mainView.homeCollectionView.rx.itemSelected
             .withUnretained(self)
             .subscribe(onNext: { owner, indexPath in
@@ -188,7 +187,7 @@ extension HomeVC {
                         withReuseIdentifier: ArtCVC.identifier,
                         for: indexPath
                     ) as? ArtCVC else { return UICollectionViewCell() }
-                    cell.setData(product, relay)
+                    cell.setData(product, .products, relay)
                     return cell
 
                 case .categoryItem(category: let category):
