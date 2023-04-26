@@ -13,10 +13,16 @@ import SkeletonView
 import RxSwift
 import RxCocoa
 
+enum ArtCellKind {
+    case products
+    case work
+}
+
 final class ArtCVC: UICollectionViewCell {
     // MARK: - Properties
     
     var products: Products?
+    var kind: ArtCellKind?
     var needLoginAlert: PublishRelay<Bool>?
     var disposeBag = DisposeBag()
 
@@ -94,13 +100,15 @@ final class ArtCVC: UICollectionViewCell {
         setConstraints()
         isSkeletonable = true
         contentView.isSkeletonable = true
+        bind()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Setter
-    func setData(_ data: Products, _ relay: PublishRelay<Bool>) {
+    func setData(_ data: Products, _ kind: ArtCellKind, _ relay: PublishRelay<Bool>) {
         self.products = data
+        self.kind = kind
         self.needLoginAlert = relay
         
         let numberFormatter = NumberFormatter()
@@ -226,10 +234,40 @@ private extension ArtCVC {
                 } else {
                     owner.likeView.likesCount -= 1
                 }
+                
+                // 홈, 마켓 화면에서 같은 셀 좋아요 상태 업데이트
+                if owner.kind == .products {
+                    NotificationCenter.default.post(
+                        name: .cellLikeUpdate,
+                        object: nil,
+                        userInfo: [
+                            "id": owner.products?.id ?? 1,
+                            "isSelected": owner.likeView.isSelected,
+                            "likeCount": owner.likeView.likesCount
+                        ]
+                    )
+                }
             }, onFailure: { _, error  in
                 Log.error(error)
             })
         .disposed(by: disposeBag)
-        
+    }
+    
+    func bind() {
+        NotificationCenter.default.rx.notification(.cellLikeUpdate)
+            .distinctUntilChanged()
+            .asDriver(onErrorRecover: { _ in .never() })
+            .drive(with: self, onNext: { owner, notification in
+                guard let info = notification.userInfo else { return }
+                let id = info["id"] as? Int ?? 0
+                let isSelected = info["isSelected"] as? Bool ?? false
+                let likeCount = info["likeCount"] as? Int ?? 0
+                
+                if owner.products?.id == id {
+                    owner.likeView.isSelected = isSelected
+                    owner.likeView.likesCount = likeCount
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }

@@ -221,6 +221,7 @@
 		EDF76FF329F7BE2900F33146 /* ProductsDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */; };
 		EDF76FF729F7DAAE00F33146 /* DTODataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF629F7DAAE00F33146 /* DTODataType.swift */; };
 		EDF76FFB29F7DFD900F33146 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */; };
+		EDF76FFD29F8D6D800F33146 /* NSNotification-Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -442,6 +443,7 @@
 		EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailDTO.swift; sourceTree = "<group>"; };
 		EDF76FF629F7DAAE00F33146 /* DTODataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTODataType.swift; sourceTree = "<group>"; };
 		EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
+		EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSNotification-Name+Extension.swift"; path = "../../../../NSNotification-Name+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -520,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				A2DEC37229B6495000CF0794 /* Date+Extension.swift */,
+				EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */,
 				A20CBD6F29478BCF0012FF32 /* String+Extension.swift */,
 				A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */,
 				A280AB3F29A7400100C1729C /* UIViewController+Extension.swift */,
@@ -2170,6 +2173,7 @@
 				A226CC5529AE0FDD000161E8 /* ReceivePriceOfferVC.swift in Sources */,
 				A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */,
 				A20E4A5229990091009C1340 /* MyProfileVC.swift in Sources */,
+				EDF76FFD29F8D6D800F33146 /* NSNotification-Name+Extension.swift in Sources */,
 				A254E15129BDFD84001047FD /* WebVC.swift in Sources */,
 				A2100F77298695A100C85ADF /* WorksCategory.swift in Sources */,
 				A2DEC35629B4417F00CF0794 /* SNSLoginAPI.swift in Sources */,

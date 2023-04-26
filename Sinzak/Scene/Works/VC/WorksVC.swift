@@ -77,7 +77,7 @@ extension WorksVC: UICollectionViewDelegate, UICollectionViewDataSource {
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ArtCVC.self), for: indexPath) as? ArtCVC else { return UICollectionViewCell() }
             let item = worksitem[indexPath.item]
-            cell.setData(item, PublishRelay<Bool>())
+            cell.setData(item, .work ,PublishRelay<Bool>())
             return cell
         }
     }

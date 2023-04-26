@@ -77,16 +77,9 @@ class ProductsManager: ProductManagerType {
             .filterSuccessfulStatusCodes()
             .map(LikeResponseDTO.self)
             .map { response in
-                Log.debug(response)
-                Log.debug(response)
-                Log.debug(response)
-                Log.debug(response)
-                Log.debug(response)
                 if !response.success {
                     throw APIError.errorMessage("like error")
                 }
-                
-                
                 return response.success
             }
     }
