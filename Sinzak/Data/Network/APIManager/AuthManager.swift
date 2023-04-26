@@ -98,6 +98,9 @@ class AuthManager {
     func reissue() -> Single<Reissue> {
         return provider.rx.request(.reissue)
             .filterSuccessfulStatusCodes()
+            .do(onSuccess: { response in
+                Log.debug("reissue log - \(String(bytes: response.data, encoding: String.Encoding.utf8) ?? "")")
+            })
             .map(ReissueDTO.self)
             .map { $0.toDomain() }
             .do(onSuccess: { reissue in
@@ -132,24 +135,32 @@ class AuthManager {
     }
     
     /// 프로필 정보 가져와 저장
-    func fetchMyProfile() {
-            provider.rx.request(.myProfile)
+    func fetchMyProfile() -> Single<Bool> {
+        return provider.rx.request(.myProfile)
             .filterSuccessfulStatusCodes()
-            .do(onSuccess: { response in
-                Log.debug("reissue log - \(String(bytes: response.data, encoding: String.Encoding.utf8) ?? "")")
-            })
             .map(UserInfoResponseDTO.self)
-            .subscribe(onSuccess: { responseDTO in
+            .map({ responseDTO in
                 do {
                     guard let response = try responseDTO.data?.toDomain() else { throw APIError.noContent }
                     UserInfoManager.shared.saveUserInfo(with: response)
+                    return true
                 } catch {
-                    Log.error(error)
+                    throw APIError.noContent
                 }
-            }, onFailure: { error in
-                Log.error(error)
             })
-            .disposed(by: disposeBag)
+            
+        
+//            .subscribe(onSuccess: { responseDTO in
+//                do {
+//                    guard let response = try responseDTO.data?.toDomain() else { throw APIError.noContent }
+//                    UserInfoManager.shared.saveUserInfo(with: response)
+//                } catch {
+//                    Log.error(error)
+//                }
+//            }, onFailure: { error in
+//                Log.error(error)
+//            })
+//            .disposed(by: disposeBag)
     }
     
     /// 회원정보 추가, 편집
