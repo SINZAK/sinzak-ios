@@ -47,12 +47,20 @@ final class ConciergeVC: UIViewController {
     }
     
     func getNextVC() {
+        UserInfoManager.shared.logUserInfo()
         if UserInfoManager.isLoggedIn {
             AuthManager.shared.reissue()
                 .observe(on: MainScheduler.instance)
                 .subscribe(with: self, onSuccess: { owner, _ in
                     AuthManager.shared.fetchMyProfile()
-                    owner.nextVC.accept(TabBarVC())
+                        .observe(on: MainScheduler.instance)
+                        .subscribe(
+                            onSuccess: { _ in
+                                owner.nextVC.accept(TabBarVC())
+                            }, onFailure: { error in
+                                Log.error(error)
+                            })
+                        .disposed(by: owner.disposeBag)
                 }, onFailure: { _, error in
                     Log.error(error)
                 })

@@ -58,9 +58,16 @@ final class DefaultSignupGenreVM: SignupGenreVM {
                     let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
                     owner.pushUniversityInfoView.accept(vc)
                     AuthManager.shared.fetchMyProfile()
-                    Log.debug("회원가입 성공, \(join)")
-                    Log.debug("Access Token - \(KeychainItem.currentAccessToken)")
-                    Log.debug("Refresh Token - \(KeychainItem.currentRefreshToken)")
+                        .subscribe(
+                            onSuccess: { _ in
+                                Log.debug("회원가입 성공, \(join)")
+                                Log.debug("Access Token - \(KeychainItem.currentAccessToken)")
+                                Log.debug("Refresh Token - \(KeychainItem.currentRefreshToken)")
+                            }, onFailure: { error in
+                                Log.error(error)
+                            })
+                        .disposed(by: owner.disposeBag)
+                    
                 },
                 onFailure: { _, error in
                     APIError.logError(error)

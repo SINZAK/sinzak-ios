@@ -163,10 +163,17 @@ private extension DefaultLoginVM {
             refreshToken: refreshToken
         )
         AuthManager.shared.fetchMyProfile()
-        DispatchQueue.main.async { [weak self] in
-            let vc = TabBarVC()
-            self?.changeRootTabBar.accept(vc)
-        }
+            .observe(on: MainScheduler.instance)
+            .subscribe(
+                with: self,
+                onSuccess: { owner, _ in
+                    let vc = TabBarVC()
+                    owner.changeRootTabBar.accept(vc)
+                },
+                onFailure: { _, error in
+                    Log.error(error)
+                })
+            .disposed(by: disposeBag)
     }
     
     func goSignUp(accessToken: String, refreshToken: String) {
