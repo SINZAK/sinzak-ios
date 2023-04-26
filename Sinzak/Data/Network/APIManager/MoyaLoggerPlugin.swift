@@ -72,6 +72,7 @@ private extension MoyaLoggerPlugin {
             ✨ METHOD: \(response.request?.method?.rawValue ?? "")
             ✨ HEADER: \(headerStr)
             ✨ BODY: \(String(bytes: response.request?.httpBody ?? Data(), encoding: String.Encoding.utf8) ?? "")
+            ✨ RESPONSE: \(String(bytes: response.data, encoding: String.Encoding.utf8) ?? "")
             ✨ STATUS CODE: \(statusCode)
             ----------------------- ✨ End Log ✨ -----------------------
             """

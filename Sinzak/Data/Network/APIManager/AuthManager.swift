@@ -135,6 +135,9 @@ class AuthManager {
     func fetchMyProfile() {
             provider.rx.request(.myProfile)
             .filterSuccessfulStatusCodes()
+            .do(onSuccess: { response in
+                Log.debug("reissue log - \(String(bytes: response.data, encoding: String.Encoding.utf8) ?? "")")
+            })
             .map(UserInfoResponseDTO.self)
             .subscribe(onSuccess: { responseDTO in
                 do {
