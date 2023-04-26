@@ -11,6 +11,14 @@ final class LikeView: UIView {
     
     // MARK: - Properties
     
+    let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.roundingMode = .floor
+        formatter.maximumSignificantDigits = 2
+        
+        return formatter
+    }()
+
     var isSelected: Bool = false {
         willSet {
             if newValue {
@@ -30,12 +38,12 @@ final class LikeView: UIView {
             } else if newValue < 1000000 {
                 let count: Double = Double(newValue) / 1000
                 likeCountLabel.text = newValue < 10000 ?
-                String(format: "%.1f", count) + "K" :
+                (numberFormatter.string(from: count as NSNumber) ?? "") + "K" :
                 "\(Int(count))"+"K"
             } else {
                 let count: Double = Double(newValue) / 1000000
                 likeCountLabel.text = newValue < 10000000 ?
-                String(format: "%.1f", count) + "M" :
+                (numberFormatter.string(from: count as NSNumber) ?? "") + "M" :
                 "\(Int(count))"+"M"
             }
         }
@@ -72,7 +80,7 @@ final class LikeView: UIView {
         
         likeImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(2)
+            $0.top.equalToSuperview().inset(3)
             $0.width.height.equalTo(16.0)
         }
         
