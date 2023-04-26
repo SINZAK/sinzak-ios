@@ -44,7 +44,7 @@ final class BannerCVC: UICollectionViewCell {
         imageView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalToSuperview()
-            make.height.equalTo(imageView.snp.width).multipliedBy(0.39)
+            make.height.equalTo(imageView.snp.width).multipliedBy(Double(608.0) / Double(1368.0))
         }
     }
     
