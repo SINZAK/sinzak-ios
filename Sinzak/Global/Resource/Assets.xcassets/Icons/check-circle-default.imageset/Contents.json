@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "check-circle-default@1x.png",
+      "filename" : "on=off@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "check-circle-default@2x.png",
+      "filename" : "on=off@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "check-circle-default@3x.png",
+      "filename" : "on=off@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

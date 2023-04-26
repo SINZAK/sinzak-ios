@@ -223,6 +223,7 @@
 		EDF76FFB29F7DFD900F33146 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */; };
 		EDF76FFD29F8D6D800F33146 /* NSNotification-Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */; };
 		EDF76FFF29F8F32300F33146 /* BannerFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFE29F8F32300F33146 /* BannerFooter.swift */; };
+		EDF7700129F93F9400F33146 /* SoldOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7700029F93F9400F33146 /* SoldOutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -446,6 +447,7 @@
 		EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
 		EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSNotification-Name+Extension.swift"; path = "../../../../NSNotification-Name+Extension.swift"; sourceTree = "<group>"; };
 		EDF76FFE29F8F32300F33146 /* BannerFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerFooter.swift; sourceTree = "<group>"; };
+		EDF7700029F93F9400F33146 /* SoldOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoldOutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -807,6 +809,7 @@
 				A2265371296D7E5600605697 /* HomeView.swift */,
 				ED2A581E29F11FC7002CE83E /* HomeSkeletonView.swift */,
 				EDF76FEB29F7994D00F33146 /* LikeView.swift */,
+				EDF7700029F93F9400F33146 /* SoldOutView.swift */,
 				A226537A29705A4400605697 /* ArtCVC.swift */,
 				A226537C29705F8100605697 /* BannerCVC.swift */,
 				A257C36A297F99B100266E74 /* SeeMoreCVC.swift */,
@@ -2191,6 +2194,7 @@
 				ED2A582D29F306F9002CE83E /* UserInfo.swift in Sources */,
 				ED86969229D9359D001A1A9F /* UIView+Extension.swift in Sources */,
 				A226537B29705A4400605697 /* ArtCVC.swift in Sources */,
+				EDF7700129F93F9400F33146 /* SoldOutView.swift in Sources */,
 				A20CBD5C294787C10012FF32 /* setFont.swift in Sources */,
 				ED2A582B29F2F3C8002CE83E /* Reissue.swift in Sources */,
 				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
@@ -2374,7 +2378,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2430,7 +2434,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
