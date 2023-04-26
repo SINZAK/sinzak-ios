@@ -80,13 +80,13 @@ final class LikeView: UIView {
         
         likeImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(3)
+            $0.top.equalToSuperview().inset(1.5)
             $0.width.height.equalTo(16.0)
         }
         
         likeCountLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(likeImageView.snp.bottom).offset(-2)
+            $0.top.equalTo(likeImageView.snp.bottom)
         }
     }
 }

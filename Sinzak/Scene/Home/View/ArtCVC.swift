@@ -133,8 +133,10 @@ final class ArtCVC: UICollectionViewCell {
         priceLabel.text = (numberFormatter.string(from: NSNumber(value: Int(data.price))) ?? "0") + "원"
         likeView.likesCount = data.likesCnt
         likeView.isSelected = data.like
+        likeView.isHidden = data.complete
         soldOutView.kind = kind
         soldOutView.isHidden = !data.complete
+        
     }
     
     func setSkeleton() {
