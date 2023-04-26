@@ -15,33 +15,33 @@ public enum ScrollDirection {
 
 public extension UIScrollView {
 
-    func scroll(to direction: ScrollDirection) {
+    func scroll(to direction: ScrollDirection, animated: Bool = true) {
 
         DispatchQueue.main.async {
             switch direction {
             case .top:
-                self.scrollToTop()
+                self.scrollToTop(animated: animated)
             case .center:
-                self.scrollToCenter()
+                self.scrollToCenter(animated: animated)
             case .bottom:
-                self.scrollToBottom()
+                self.scrollToBottom(animated: animated)
             }
         }
     }
 
-    private func scrollToTop() {
-        setContentOffset(.zero, animated: true)
+    private func scrollToTop(animated: Bool = true) {
+        setContentOffset(.zero, animated: animated)
     }
 
-    private func scrollToCenter() {
+    private func scrollToCenter(animated: Bool = true) {
         let centerOffset = CGPoint(x: 0, y: (contentSize.height - bounds.size.height) / 2)
-        setContentOffset(centerOffset, animated: true)
+        setContentOffset(centerOffset, animated: animated)
     }
 
-    private func scrollToBottom() {
+    private func scrollToBottom(animated: Bool = true) {
         let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height + contentInset.bottom)
         if bottomOffset.y > 0 {
-            setContentOffset(bottomOffset, animated: true)
+            setContentOffset(bottomOffset, animated: animated)
         }
     }
 }
