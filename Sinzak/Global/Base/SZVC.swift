@@ -27,7 +27,10 @@ class SZVC: UIViewController {
                 target: self,
                 action: #selector(backButtonTapped) )
             navigationItem.leftBarButtonItem = customBackButton
+            
         }
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     @objc
     func backButtonTapped(_ sender: UIBarButtonItem) {
@@ -37,4 +40,10 @@ class SZVC: UIViewController {
     func configure() {
     }
     let disposeBag = DisposeBag()
+}
+
+extension SZVC: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return navigationController?.viewControllers.count ?? 0 > 1
+    }
 }
