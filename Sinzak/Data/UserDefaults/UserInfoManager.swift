@@ -135,6 +135,8 @@ extension UserInfoManager {
         Products: \(UserInfoManager.shared.products)
         Works: \(UserInfoManager.shared.works)
         Work Employs: \(UserInfoManager.shared.workEmploys)
+        Access Token: \(KeychainItem.currentAccessToken)
+        Refresh Token: \(KeychainItem.currentRefreshToken)
         ----------------------- ✨ End Log ✨ -----------------------
         """
             Log.debug(log)
