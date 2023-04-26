@@ -84,6 +84,13 @@ final class ArtCVC: UICollectionViewCell {
         $0.isSkeletonable = true
     }
     
+    private let soldOutView: SoldOutView = {
+        let view = SoldOutView()
+        view.layer.cornerRadius = 12
+        
+        return view
+    }()
+    
     private let productForSkeleton = Products(
         id: 0, title: "      ",
         content: "", author: "             ",
@@ -126,6 +133,8 @@ final class ArtCVC: UICollectionViewCell {
         priceLabel.text = (numberFormatter.string(from: NSNumber(value: Int(data.price))) ?? "0") + "원"
         likeView.likesCount = data.likesCnt
         likeView.isSelected = data.like
+        soldOutView.kind = kind
+        soldOutView.isHidden = !data.complete
     }
     
     func setSkeleton() {
@@ -144,9 +153,11 @@ final class ArtCVC: UICollectionViewCell {
         contentView.isSkeletonable = true
         contentView.backgroundColor = .clear
         contentView.addSubviews(
-            imageView, likeView,
+            imageView,
             titleLabel, labelStack,
-            authorLabel, middlePointLabel, uploadTimeLabel
+            authorLabel, middlePointLabel, uploadTimeLabel,
+            soldOutView,
+            likeView
         )
         
         labelStack.addArrangedSubviews(
@@ -170,7 +181,7 @@ final class ArtCVC: UICollectionViewCell {
             $0.trailing.bottom.equalTo(imageView).inset(10)
             $0.width.height.equalTo(32)
         }
-
+        
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(7)
             make.top.equalTo(imageView.snp.bottom).offset(10)
@@ -198,6 +209,11 @@ final class ArtCVC: UICollectionViewCell {
             make.centerY.equalTo(middlePointLabel)
             make.leading.equalTo(middlePointLabel.snp.trailing)
             make.trailing.lessThanOrEqualToSuperview().inset(7)
+        }
+        
+        soldOutView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.width.height.equalTo(imageView)
         }
     }
     
