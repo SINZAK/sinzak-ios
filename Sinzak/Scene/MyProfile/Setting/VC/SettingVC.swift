@@ -113,7 +113,7 @@ extension SettingVC: UICollectionViewDelegate {
             UserInfoManager.shared.logout()
             
             UserInfoManager.shared.logUserInfo()
-            NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
+            NaverThirdPartyLoginConnection.getSharedInstance()?.resetToken()
             
             UserApi.shared.logout {(error) in
                 if let error = error {
