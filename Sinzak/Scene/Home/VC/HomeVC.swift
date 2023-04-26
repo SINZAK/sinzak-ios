@@ -102,6 +102,7 @@ final class HomeVC: SZVC {
     func bindOutput() {
         
         viewModel.showSkeleton
+            .skip(1)
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: false)
             .drive(with: self, onNext: { owner, showSkeleton in
@@ -117,6 +118,19 @@ final class HomeVC: SZVC {
                         $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
                     }
                     owner.mainView.homeCollectionView.refreshControl?.endRefreshing()
+
+                    Array(0..<owner.viewModel.homeSectionModel.value.count)
+                        .forEach {
+                            owner
+                                .mainView
+                                .homeCollectionView
+                                .scrollToItem(
+                                    at: IndexPath(item: 0, section: $0),
+                                    at: .left,
+                                    animated: false
+                                )
+                        }
+                    owner.mainView.homeCollectionView.scroll(to: .top, animated: false)
                 }})
             .disposed(by: disposeBag)
         
@@ -200,18 +214,35 @@ extension HomeVC {
                     return cell
                 }
             },
-            configureSupplementaryView: { dataSoure, collectionView, kind, indexPath in
-                guard let header = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    withReuseIdentifier: HomeHeader.identifier,
-                    for: indexPath
-                ) as? HomeHeader else { return UICollectionReusableView() }
+            configureSupplementaryView: { [weak self] dataSoure, collectionView, kind, indexPath in
+                guard let self = self else { return UICollectionReusableView() }
                 
-                header.titleLabel.text = dataSoure.sectionModels[indexPath.section].title ?? ""
+                switch indexPath.section {
+                case 0:
+                    guard let footer = collectionView.dequeueReusableSupplementaryView(
+                        ofKind: kind,
+                        withReuseIdentifier: BannerFooter.identifier,
+                        for: indexPath
+                    ) as? BannerFooter else { return UICollectionReusableView() }
+                    footer.configFooter(
+                        self.viewModel.bannerIndex,
+                        self.viewModel.bannerTotalIndex
+                    )
+                    return footer
+                default:
+                    guard let header = collectionView.dequeueReusableSupplementaryView(
+                        ofKind: kind,
+                        withReuseIdentifier: HomeHeader.identifier,
+                        for: indexPath
+                    ) as? HomeHeader else { return UICollectionReusableView() }
+                    
+                    header.titleLabel.text = dataSoure.sectionModels[indexPath.section].title ?? ""
+                    
+                    return header
+                }
                 
-                return header
-            })
-    }
+            }
+    )}
 }
 
 // 컴포지셔널 레이아웃
@@ -224,22 +255,41 @@ extension HomeVC {
             
             switch sectionNumber {
             case 0:
+                let height = (UIScreen.main.bounds.width - 32) * (Double(608.0) / Double(1368.0))
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .fractionalHeight(1.0))
+                    heightDimension: .absolute(height))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets.leading = 16
                 item.contentInsets.trailing = 16
                 
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(160))
+                    heightDimension: .absolute(height))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets.top = 40
-                section.contentInsets.bottom = 32
+                section.contentInsets.bottom = 24
                 section.orthogonalScrollingBehavior = .paging
+                
+                let footerItemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(8)
+                )
+                let footerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerItemSize, elementKind: "footer", alignment: .bottom)
+                
+                section.boundarySupplementaryItems = [footerItem]
+                
+                section.visibleItemsInvalidationHandler = { [weak self] _, contentOffset, environment in
+                    guard let self = self else { return }
+                    
+                    let bannerIndex = Int(max(
+                        0,
+                        round(contentOffset.x / environment.container.contentSize.width)
+                    ))
+                    self.viewModel.bannerIndex.accept(bannerIndex)
+                }
                 return section
                 
             case 1..<sectionCount-1:
@@ -248,7 +298,7 @@ extension HomeVC {
                     heightDimension: .estimated(248)
                 )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = .init(top: 0, leading: 40, bottom: 0, trailing: 0)
+                item.contentInsets.trailing = 40.0
                 
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .estimated(205),
@@ -258,8 +308,7 @@ extension HomeVC {
                 group.interItemSpacing = .fixed(28)
                 
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.leading = 0
-                section.contentInsets.trailing = 40.0
+                section.contentInsets.leading = 40.0
                 section.contentInsets.bottom = 32
                 
                 // 헤더 설정
@@ -267,6 +316,7 @@ extension HomeVC {
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .estimated(40))
                 let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
+                headerItem.contentInsets.leading = -40.0
                 section.boundarySupplementaryItems = [headerItem]
                 section.orthogonalScrollingBehavior = .continuous
                 return section
