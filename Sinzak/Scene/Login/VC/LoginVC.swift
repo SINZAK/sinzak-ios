@@ -29,16 +29,7 @@ final class LoginVC: SZVC {
         super.viewDidLoad()
         naverLoginInstance?.delegate = self
         
-        naverLoginInstance?.requestDeleteToken()
-        
-        UserApi.shared.logout {(error) in
-            if let error = error {
-                Log.error(error)
-            } else {
-                Log.debug("Kakao logout() success.")
-            }
-        }
-        
+        cleanUserInfo()
     }
     
     init(viewModel: LoginVM!) {
@@ -157,5 +148,35 @@ extension LoginVC: NaverThirdPartyLoginConnectionDelegate {
     
     func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
         Log.error("에러 = \(error.localizedDescription)")
+    }
+}
+
+private extension LoginVC {
+    
+    /// 유저 정보 남아있는 경우 대비해서 비워주기
+    func cleanUserInfo() {
+        if let snsKind = UserInfoManager.snsKind {
+            let snsKind = SNS(rawValue: snsKind)
+            switch snsKind {
+            case .kakao:
+                UserApi.shared.logout {(error) in
+                    if let error = error {
+                        Log.error(error)
+                    } else {
+                        Log.debug("Kakao logout() success.")
+                    }
+                }
+                
+            case .naver:
+                naverLoginInstance?.resetToken()
+                
+            case .apple:
+                break
+            case .none:
+                break
+            }
+        }
+        
+        UserInfoManager.shared.logout()
     }
 }
