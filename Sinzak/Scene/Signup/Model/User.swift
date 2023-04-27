@@ -10,8 +10,8 @@ import Foundation
 /// 로그인용 SNS
 enum SNS: String {
     case kakao
+    case naver
     case apple
-    case google
 }
 // MARK: - 회원가입 모델
 
