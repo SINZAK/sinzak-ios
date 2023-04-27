@@ -92,7 +92,7 @@ final class UserInfoManager {
     static var follow: Bool?
     
     @UserDefault(key: UserManagerKey.snsKind.rawValue)
-    static var snsKind: SNS?
+    static var snsKind: String?
     
     }
 
@@ -136,7 +136,7 @@ extension UserInfoManager {
         let log = """
         \n-------------------- ✨ User Info Log ✨ --------------------
         Profile: \(profile)
-        SNS: \(String(describing: UserInfoManager.snsKind))
+        SNS: \(UserInfoManager.snsKind ?? "nil")
         Products: \(UserInfoManager.shared.products)
         Works: \(UserInfoManager.shared.works)
         Work Employs: \(UserInfoManager.shared.workEmploys)
