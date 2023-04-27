@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BaseDTO<D: DTODataType>: Codable {
+struct BaseDTO<D: Codable>: Codable {
     var data: D?
     var success: Bool
     var message: String?
