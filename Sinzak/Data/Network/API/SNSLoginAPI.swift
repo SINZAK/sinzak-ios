@@ -12,6 +12,7 @@ enum SNSLoginAPI {
     case apple(idToken: String)
     case kakao(accessToken: String)
     case naver(accessToken: String)
+    case appleClientSecret
 }
 
 extension SNSLoginAPI: TargetType {
@@ -22,11 +23,15 @@ extension SNSLoginAPI: TargetType {
         switch self {
         case .apple, .kakao, .naver:
             return "/oauth/get"
+            
+        case .appleClientSecret:
+            return "/client_secret"
         }
     }
     var method: Moya.Method {
         switch self {
         case .apple, .kakao, .naver: return .post
+        case .appleClientSecret:     return .get
         }
     }
     var task: Task {
@@ -49,12 +54,15 @@ extension SNSLoginAPI: TargetType {
                 "origin": "naver"
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+            
+        case .appleClientSecret:
+            return .requestPlain
         }
     
     }
     var headers: [String: String]? {
         switch self {
-        case .apple, .kakao, .naver:
+        default:
             return ["Content-type": "application/json"]
         }
     }
