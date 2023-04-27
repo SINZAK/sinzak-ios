@@ -109,6 +109,7 @@ final class DefaultLoginVM: LoginVM {
                     UserInfoManager.snsKind = SNS.apple.rawValue
                     Log.debug("Access Token: \(snsLoginGrant.accessToken)")
                     Log.debug("Refresh Token: \(snsLoginGrant.refreshToken)")
+                    SNSLoginManager.shared.getAppleClientSecret()
                     if snsLoginGrant.joined {
                         owner.goTabBar(
                             accessToken: snsLoginGrant.accessToken,
