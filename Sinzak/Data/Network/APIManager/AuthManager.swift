@@ -148,19 +148,6 @@ class AuthManager {
                     throw APIError.noContent
                 }
             })
-            
-        
-//            .subscribe(onSuccess: { responseDTO in
-//                do {
-//                    guard let response = try responseDTO.data?.toDomain() else { throw APIError.noContent }
-//                    UserInfoManager.shared.saveUserInfo(with: response)
-//                } catch {
-//                    Log.error(error)
-//                }
-//            }, onFailure: { error in
-//                Log.error(error)
-//            })
-//            .disposed(by: disposeBag)
     }
     
     /// 회원정보 추가, 편집
