@@ -8,6 +8,7 @@
 import UIKit
 import NaverThirdPartyLogin
 import KakaoSDKUser
+import RxSwift
 
 final class SettingVC: SZVC {
     // MARK: - Properties
@@ -109,43 +110,84 @@ extension SettingVC: UICollectionViewDelegate {
         // 내용별로 하기
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        if indexPath == [2, 1] {
-            UserInfoManager.shared.logout()
-            
-            UserInfoManager.shared.logUserInfo()
-            NaverThirdPartyLoginConnection.getSharedInstance()?.resetToken()
-            
-            UserApi.shared.logout {(error) in
-                if let error = error {
-                    Log.error(error)
-                } else {
-                    Log.debug("Kakao logout() success.")
-                }
-            }
+        if indexPath == [2, 0] { // 회원 탈퇴
+            signout()
         }
         
-        if indexPath == [2, 0] {
-            UserInfoManager.shared.logout()
-            
-            UserInfoManager.shared.logUserInfo()
-            NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
-            
-            UserApi.shared.logout {(error) in
+        if indexPath == [2, 1] { // 로그 아웃
+            logout()
+        }
+    }
+}
+
+private extension SettingVC {
+    
+    func logout() {
+        let snsKind = SNS(rawValue: UserInfoManager.snsKind ?? "")
+        switch snsKind {
+        case .kakao:
+            UserApi.shared.logout { error in
                 if let error = error {
                     Log.error(error)
                 } else {
                     Log.debug("Kakao logout() success.")
                 }
             }
-
-            AuthManager.shared.resign()
-                .subscribe(
-                    onSuccess: { _ in
-                        Log.debug("회원 탈퇴 성공")
-                    }, onFailure: { error in
-                        APIError.logError(error)
-                    })
-                .disposed(by: disposeBag)
+            
+        case .naver:
+            NaverThirdPartyLoginConnection.getSharedInstance()?.resetToken()
+            
+        case .apple:
+            break
+            
+        default:
+            Log.error("SNS 로그아웃 오류")
         }
+        
+        UserInfoManager.shared.logout(completion: {
+            let vc = TabBarVC()
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                .changeRootVC(vc, animated: false)
+        })
+    }
+    
+    func signout() {
+        let snsKind = SNS(rawValue: UserInfoManager.snsKind ?? "")
+        switch snsKind {
+        case .kakao:
+            UserApi.shared.unlink { error in
+                if let error = error {
+                    Log.error(error)
+                } else {
+                    Log.debug("Kakao unlink() success.")
+                }
+            }
+            
+        case .naver:
+            NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
+            
+        case .apple:
+            AppleAuthManager.shared.revokeAppleToken()
+            
+        case .none:
+            Log.error("SNS 회원 탈퇴 오류")
+        }
+    
+        AuthManager.shared.resign()
+            .observe(on: MainScheduler.instance)
+            .subscribe(
+                onSuccess: { _ in
+                    Log.debug("회원 탈퇴 성공")
+                    
+                    UserInfoManager.shared.logout(completion: {
+                        let vc = TabBarVC()
+                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+                            .changeRootVC(vc, animated: false)
+                    })
+                    
+                }, onFailure: { error in
+                    APIError.logError(error)
+                })
+            .disposed(by: disposeBag)
     }
 }
