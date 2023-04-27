@@ -219,12 +219,10 @@
 		EDF76FEE29F7BB4C00F33146 /* LikeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */; };
 		EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */; };
 		EDF76FF329F7BE2900F33146 /* ProductsDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */; };
-		EDF76FF729F7DAAE00F33146 /* DTODataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF629F7DAAE00F33146 /* DTODataType.swift */; };
 		EDF76FFB29F7DFD900F33146 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */; };
 		EDF76FFD29F8D6D800F33146 /* NSNotification-Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */; };
 		EDF76FFF29F8F32300F33146 /* BannerFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFE29F8F32300F33146 /* BannerFooter.swift */; };
 		EDF7700129F93F9400F33146 /* SoldOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7700029F93F9400F33146 /* SoldOutView.swift */; };
-		EDF7700329FA640500F33146 /* ClientSecretDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7700229FA640500F33146 /* ClientSecretDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -444,12 +442,10 @@
 		EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeResponseDTO.swift; sourceTree = "<group>"; };
 		EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetail.swift; sourceTree = "<group>"; };
 		EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailDTO.swift; sourceTree = "<group>"; };
-		EDF76FF629F7DAAE00F33146 /* DTODataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTODataType.swift; sourceTree = "<group>"; };
 		EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
 		EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSNotification-Name+Extension.swift"; path = "../../../../NSNotification-Name+Extension.swift"; sourceTree = "<group>"; };
 		EDF76FFE29F8F32300F33146 /* BannerFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerFooter.swift; sourceTree = "<group>"; };
 		EDF7700029F93F9400F33146 /* SoldOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoldOutView.swift; sourceTree = "<group>"; };
-		EDF7700229FA640500F33146 /* ClientSecretDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSecretDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1797,9 +1793,7 @@
 				EDEEFFB329F3A4AC00C828B9 /* UserInfoDTO.swift */,
 				EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */,
 				EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */,
-				EDF76FF629F7DAAE00F33146 /* DTODataType.swift */,
 				EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */,
-				EDF7700229FA640500F33146 /* ClientSecretDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -2096,7 +2090,6 @@
 				A2121AD029D075AE008F5406 /* UnivCertify.swift in Sources */,
 				A233892429B3772800688FD8 /* Message.swift in Sources */,
 				EDF76FEE29F7BB4C00F33146 /* LikeResponseDTO.swift in Sources */,
-				EDF76FF729F7DAAE00F33146 /* DTODataType.swift in Sources */,
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
 				A280AB4229A7442300C1729C /* SearchResultHeader.swift in Sources */,
 				A233891C29B088E800688FD8 /* SettingVC.swift in Sources */,
@@ -2144,7 +2137,6 @@
 				A2646BED299204B40004F4CE /* User.swift in Sources */,
 				A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */,
 				A233892629B37B1F00688FD8 /* Leave.swift in Sources */,
-				EDF7700329FA640500F33146 /* ClientSecretDTO.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				A2A2C4E329C20D8500F0CFC6 /* HTTPHeaderField.swift in Sources */,
 				EDE5EC5729D6EB3200BB211F /* Log.swift in Sources */,

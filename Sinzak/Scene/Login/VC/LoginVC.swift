@@ -11,6 +11,7 @@ import KakaoSDKUser
 import NaverThirdPartyLogin
 import Alamofire
 import RxSwift
+import SwiftKeychainWrapper
 
 final class LoginVC: SZVC {
     // MARK: - Properties
@@ -118,6 +119,12 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
                 let strToken = String(decoding: idToken, as: UTF8.self)
                 viewModel.appleAuthorizationControl(token: strToken)
             }
+            let code = String(
+                decoding: appleIDCredential.authorizationCode ?? Data(),
+                as: UTF8.self
+            )
+            Log.debug(code)
+            KeychainWrapper.standard.set(code, forKey: AppleAuth.appleAuthCode.rawValue)
             
         default:
             break
@@ -171,12 +178,13 @@ private extension LoginVC {
                 naverLoginInstance?.resetToken()
                 
             case .apple:
-                break
+                KeychainWrapper.standard.removeObject(forKey: AppleAuth.appleAuthCode.rawValue)
+                KeychainWrapper.standard.removeObject(forKey: AppleAuth.refresh.rawValue)
             case .none:
                 break
             }
         }
         
-        UserInfoManager.shared.logout()
+        UserInfoManager.shared.logout(completion: {})
     }
 }
