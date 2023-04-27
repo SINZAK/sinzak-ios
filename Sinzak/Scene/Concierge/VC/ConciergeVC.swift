@@ -59,6 +59,9 @@ final class ConciergeVC: UIViewController {
                                 owner.nextVC.accept(TabBarVC())
                             }, onFailure: { error in
                                 Log.error(error)
+                                let root = LoginVC(viewModel: DefaultLoginVM())
+                                let vc = UINavigationController(rootViewController: root)
+                                owner.nextVC.accept(vc)
                             })
                         .disposed(by: owner.disposeBag)
                 }, onFailure: { _, error in
