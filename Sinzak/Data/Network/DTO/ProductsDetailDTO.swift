@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProductsDetailDTO: DTODataType {
+struct ProductsDetailDTO: Codable {
     let id: Int?
     let userID: Int?
     let author: String?
