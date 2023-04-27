@@ -10,19 +10,19 @@ import Moya
 import SwiftKeychainWrapper
 
 enum AppleAuthAPI {
-    case refreshToken(accessToken: String)
+    case refreshToken(authCode: String)
     case revoke
 }
 
 extension AppleAuthAPI: TargetType {
     var baseURL: URL {
-        return URL(string: "https://appleid.apple.com")!
+        return URL(string: "https://appleid.apple.com/auth")!
     }
     
     var path: String {
         switch self {
-        case .refreshToken:        return "/auth/token"
-        case .revoke:              return "/auth/revoke"
+        case .refreshToken:        return "/token"
+        case .revoke:              return "/revoke"
         }
     }
     
@@ -34,15 +34,15 @@ extension AppleAuthAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .refreshToken:
+        case let .refreshToken(authCode):
             let code = KeychainWrapper.standard.string(forKey: AppleAuth.appleAuthCode.rawValue) ?? ""
             let parameters: [String: Any] = [
-                "client_id": "net.sinzak.ios",
-                "client_secret": KeychainItem.currentAccessToken,
+                "client_id": "net.sinzak.ios-service",
+                "client_secret": authCode,
                 "code": code,
                 "grant_type": "authorization_code"
             ]
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         case .revoke:
             let token = KeychainWrapper.standard.string(forKey: AppleAuth.refresh.rawValue) ?? ""
             let parameters: [String: Any] = [
@@ -50,7 +50,7 @@ extension AppleAuthAPI: TargetType {
                 "client_secret": KeychainItem.currentAccessToken,
                 "token": token
             ]
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }
     }
     
