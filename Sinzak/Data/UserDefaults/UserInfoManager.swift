@@ -121,7 +121,7 @@ extension UserInfoManager {
         logUserInfo()
     }
     
-    func logout() {
+    func logout(completion: @escaping () -> Void) {
         UserManagerKey.allCases.forEach {
             UserDefaults.standard.removeObject(forKey: $0.rawValue)
         }
@@ -129,6 +129,8 @@ extension UserInfoManager {
         UserInfoManager.shared.works = []
         UserInfoManager.shared.workEmploys = []
         KeychainItem.deleteTokenInKeychain()
+        
+        completion()
     }
     
     func logUserInfo() {
