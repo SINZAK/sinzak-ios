@@ -14,6 +14,8 @@ struct ReissueDTO: Codable {
     let accessTokenExpireDate: Int?
     let joined: Bool?
     let origin: String?
+    let success: Bool?
+    let message: String?
     
     func toDomain() -> Reissue {
         Reissue(

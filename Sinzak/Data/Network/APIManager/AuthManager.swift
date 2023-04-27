@@ -24,7 +24,6 @@ class AuthManager {
     func checkNickname(for nickNmae: String) async throws -> Bool {
         do {
             let response = try await provider.rx.request(.nicknameCheck(nickname: nickNmae)).value
-            Log.debug(response.request?.url ?? "")
             
             if !(200..<300 ~= response.statusCode) {
                 throw APIError.badStatus(code: response.statusCode)
@@ -52,7 +51,6 @@ class AuthManager {
         return provider.rx.request(.join(joinInfo: joinInfo))
             .map({ response in
                 
-                Log.debug(response.request?.url ?? "")
                 if !(200..<300 ~= response.statusCode) {
                     throw APIError.badStatus(code: response.statusCode)
                 }
@@ -69,6 +67,7 @@ class AuthManager {
                 }
                 return result.success ?? false
             })
+            .retry(2)
     }
     
     /// 회원 탈퇴
@@ -76,7 +75,6 @@ class AuthManager {
         return provider.rx.request(.resign)
             .map({ response in
                 
-                Log.debug(response.request?.url ?? "")
                 if !(200..<300 ~= response.statusCode) {
                     throw APIError.badStatus(code: response.statusCode)
                 }
@@ -92,19 +90,21 @@ class AuthManager {
                     throw APIError.errorMessage(message)
                 }
             })
+            .retry(2)
     }
     
     /// reissue 토큰 재발급(Concierge View에서 로그인용으로 사용)
     func reissue() -> Single<Reissue> {
         return provider.rx.request(.reissue)
             .filterSuccessfulStatusCodes()
-            .do(onSuccess: { response in
-                Log.debug("reissue log - \(String(bytes: response.data, encoding: String.Encoding.utf8) ?? "")")
-            })
             .map(ReissueDTO.self)
-            .map { $0.toDomain() }
+            .map { reissueDTO in
+                if let success = reissueDTO.success, !success {
+                    throw APIError.errorMessage(reissueDTO.message ?? "")
+                }
+                return reissueDTO.toDomain()
+            }
             .do(onSuccess: { reissue in
-                Log.debug(reissue)
                 KeychainItem.saveTokenInKeychain(
                     accessToken: reissue.accessToken,
                     refreshToken: reissue.refreshToken
@@ -119,8 +119,13 @@ class AuthManager {
         provider.rx.request(.reissue)
             .filterSuccessfulStatusCodes()
             .map(ReissueDTO.self)
-            .map { $0.toDomain() }
-            .retry(1)
+            .map { reissueDTO in
+                if let success = reissueDTO.success, !success {
+                    throw APIError.errorMessage(reissueDTO.message ?? "")
+                }
+                return reissueDTO.toDomain()
+            }
+            .retry(2)
             .subscribe(
                 onSuccess: { reissue in
                     Log.debug("Success Reissue: \(reissue)")
@@ -148,6 +153,7 @@ class AuthManager {
                     throw APIError.noContent
                 }
             })
+            .retry(2)
     }
     
     /// 회원정보 추가, 편집
