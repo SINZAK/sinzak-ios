@@ -64,6 +64,31 @@ class SNSLoginManager {
             .retry(2)
     }
     
+    func getAppleClientSecret() {
+        provider.rx.request(.appleClientSecret)
+            .map(BaseDTO<String>.self)
+            .map({ secretDTO -> String in
+                
+                if !secretDTO.success {
+                    throw APIError.errorMessage(secretDTO.message ?? "")
+                }
+                
+                guard let clientSecret: String = secretDTO.data else {
+                    throw APIError.noContent
+                }
+                
+                return clientSecret
+            })
+            .subscribe(
+                onSuccess: { clientSecret in
+                    AppleAuthManager.shared.getAppleRefreshToken(authCode: clientSecret)
+                    
+                }, onFailure: { error in
+                    Log.error(error)
+                })
+            .disposed(by: disposeBag)
+    }
+    
     /// kakao 로그인
     func doKakaoLogin(accessToken: String) async throws -> SNSLoginGrant {
         var response: Response
