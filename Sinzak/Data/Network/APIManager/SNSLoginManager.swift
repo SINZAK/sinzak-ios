@@ -12,8 +12,12 @@ import RxSwift
 class SNSLoginManager {
     private init () {}
     static let shared = SNSLoginManager()
-    let provider = MoyaProvider<SNSLoginAPI>()
+    let provider = MoyaProvider<SNSLoginAPI>(
+        callbackQueue: .global(),
+        plugins: [MoyaLoggerPlugin.shared]
+    )
     let disposeBag = DisposeBag()
+    
     /// 애플로그인
     func doAppleLogin(idToken: String, origin: String = "apple", completion: @escaping ((Result<SNSLoginResult, Error>) -> Void) ) {
         provider.request(.apple(idToken: idToken)) { (result) in
@@ -35,7 +39,6 @@ class SNSLoginManager {
     
     func doAppleLogin(idToken: String) -> Single<SNSLoginGrant> {
         return provider.rx.request(.apple(idToken: idToken))
-            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map { response in
                 
                 Log.debug(response.request?.url ?? "")
@@ -58,6 +61,7 @@ class SNSLoginManager {
                     throw APIError.decodingError
                 }
             }
+            .retry(2)
     }
     
     /// kakao 로그인
@@ -113,7 +117,6 @@ class SNSLoginManager {
     /// naver 로그인
     func doNaverLogin(accessToken: String) -> Single<SNSLoginGrant> {
         return provider.rx.request(.naver(accessToken: accessToken))
-            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map { response in
     
                 Log.debug(response.request?.url ?? "")
@@ -136,5 +139,6 @@ class SNSLoginManager {
                     throw APIError.decodingError
                 }
             }
+            .retry(2)
     }
 }
