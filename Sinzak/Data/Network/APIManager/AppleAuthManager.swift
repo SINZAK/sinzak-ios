@@ -19,8 +19,8 @@ class AppleAuthManager {
     )
     let disposeBag = DisposeBag()
     
-    func getAppleRefreshToken(accessToken: String) {
-        provider.rx.request(.refreshToken(accessToken: accessToken))
+    func getAppleRefreshToken(authCode: String) {
+        provider.rx.request(.refreshToken(authCode: authCode))
             .filterSuccessfulStatusCodes()
             .map(AppleToken.self)
             .retry(2)
@@ -38,9 +38,10 @@ class AppleAuthManager {
             .filterSuccessfulStatusCodes()
             .retry(2)
             .subscribe(
-                onSuccess: { response in
-                    let _ = response
+                onSuccess: { _ in
                     // 애플 관련된거 삭제
+                    KeychainWrapper.standard.removeObject(forKey: AppleAuth.refresh.rawValue)
+                    
                 }, onFailure: { error in
                     Log.error(error)
                 })
