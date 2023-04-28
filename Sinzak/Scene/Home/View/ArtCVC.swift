@@ -136,7 +136,6 @@ final class ArtCVC: UICollectionViewCell {
         likeView.isHidden = data.complete
         soldOutView.kind = kind
         soldOutView.isHidden = !data.complete
-        
     }
     
     func setSkeleton() {
@@ -144,6 +143,7 @@ final class ArtCVC: UICollectionViewCell {
         middlePointLabel.isHidden = true
         uploadTimeLabel.isHidden = true
         imageView.image = nil
+        soldOutView.isHidden = true
         [titleLabel, priceLabel, authorLabel].forEach { $0.textColor = .clear }
         titleLabel.text = "dfdfdfdfdfhdd"
         priceLabel.text = "fdffd"
@@ -176,7 +176,7 @@ final class ArtCVC: UICollectionViewCell {
     private func setConstraints() {
         imageView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(imageView.snp.width)
+            make.width.height.equalTo(164.0)
         }
         
         likeView.snp.makeConstraints {
