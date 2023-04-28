@@ -178,8 +178,11 @@ private extension LoginVC {
                 naverLoginInstance?.resetToken()
                 
             case .apple:
-                KeychainWrapper.standard.removeObject(forKey: AppleAuth.appleAuthCode.rawValue)
-                KeychainWrapper.standard.removeObject(forKey: AppleAuth.refresh.rawValue)
+                AppleAuth
+                    .allCases
+                    .map { $0.rawValue }
+                    .forEach { KeychainWrapper.standard.removeObject(forKey: $0)}
+                
             case .none:
                 break
             }
