@@ -144,10 +144,15 @@ private extension SettingVC {
             Log.error("SNS 로그아웃 오류")
         }
         
-        UserInfoManager.shared.logout(completion: {
+        UserInfoManager.shared.logout(completion: { [weak self] in
             let vc = TabBarVC()
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-                .changeRootVC(vc, animated: false)
+            vc.modalPresentationStyle = .fullScreen
+            self?.present(vc, animated: true, completion: {
+                self?.navigationController?.popToRootViewController(animated: false)
+            })
+            
+//            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+//                .changeRootVC(vc, animated: true)
         })
     }
     
@@ -176,16 +181,22 @@ private extension SettingVC {
         AuthManager.shared.resign()
             .observe(on: MainScheduler.instance)
             .subscribe(
-                onSuccess: { _ in
+                with: self,
+                onSuccess: { owner, _ in
                     Log.debug("회원 탈퇴 성공")
                     
                     UserInfoManager.shared.logout(completion: {
                         let vc = TabBarVC()
-                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
-                            .changeRootVC(vc, animated: false)
+                        vc.modalPresentationStyle = .fullScreen
+                        owner.present(vc, animated: true, completion: {
+                            owner.navigationController?.popToRootViewController(animated: false)                            
+                        })
+//                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?
+//                            .changeRootVC(vc, animated: true)
+                        
                     })
                     
-                }, onFailure: { error in
+                }, onFailure: { _, error in
                     APIError.logError(error)
                 })
             .disposed(by: disposeBag)

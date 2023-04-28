@@ -37,7 +37,7 @@ extension AppleAuthAPI: TargetType {
         case let .refreshToken(authCode):
             let code = KeychainWrapper.standard.string(forKey: AppleAuth.appleAuthCode.rawValue) ?? ""
             let parameters: [String: Any] = [
-                "client_id": "net.sinzak.ios-service",
+                "client_id": "net.sinzak.ios",
                 "client_secret": authCode,
                 "code": code,
                 "grant_type": "authorization_code"
@@ -45,9 +45,10 @@ extension AppleAuthAPI: TargetType {
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         case .revoke:
             let token = KeychainWrapper.standard.string(forKey: AppleAuth.refresh.rawValue) ?? ""
+            let clientSecret = KeychainWrapper.standard.string(forKey: AppleAuth.clientSecret.rawValue) ?? ""
             let parameters: [String: Any] = [
                 "client_id": "net.sinzak.ios",
-                "client_secret": KeychainItem.currentAccessToken,
+                "client_secret": clientSecret,
                 "token": token
             ]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
