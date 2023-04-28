@@ -138,7 +138,6 @@ final class HomeVC: SZVC {
                 if showSkeleton {
                     owner.view.showAnimatedSkeleton()
                     owner.mainView.skeletonView.isHidden = false
-                } else {
                     Array(0..<owner.viewModel.homeSectionModel.value.count)
                         .reversed()
                         .forEach {
@@ -151,17 +150,17 @@ final class HomeVC: SZVC {
                                     animated: false
                                 )
                         }
+                    owner.mainView.homeCollectionView.scroll(to: .top, animated: false)
                     
-                    owner.mainView.homeCollectionView.scroll(to: .top, animated: false, completion: {
-                        owner.view.hideSkeleton()
-                        owner.mainView.skeletonView.isHidden = true
-                        owner.mainView.skeletonView.snp.remakeConstraints {
-                            $0.trailing.leading.equalToSuperview()
-                            $0.top.equalTo(owner.view.safeAreaLayoutGuide)
-                            $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
-                        }
-                        owner.mainView.homeCollectionView.refreshControl?.endRefreshing()
-                    })
+                } else {
+                    owner.view.hideSkeleton()
+                    owner.mainView.skeletonView.isHidden = true
+                    owner.mainView.skeletonView.snp.remakeConstraints {
+                        $0.trailing.leading.equalToSuperview()
+                        $0.top.equalTo(owner.view.safeAreaLayoutGuide)
+                        $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
+                    }
+                    owner.mainView.homeCollectionView.refreshControl?.endRefreshing()
                 }})
             .disposed(by: disposeBag)
         
