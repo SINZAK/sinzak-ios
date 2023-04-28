@@ -42,6 +42,11 @@ class AppleAuthManager {
                     // 애플 관련된거 삭제
                     KeychainWrapper.standard.removeObject(forKey: AppleAuth.refresh.rawValue)
                     
+                    AppleAuth
+                        .allCases
+                        .map { $0.rawValue }
+                        .forEach { KeychainWrapper.standard.removeObject(forKey: $0)}
+                    
                 }, onFailure: { error in
                     Log.error(error)
                 })
