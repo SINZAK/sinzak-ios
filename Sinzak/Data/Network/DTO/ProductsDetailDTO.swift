@@ -33,9 +33,9 @@ struct ProductsDetailDTO: Codable {
     let chatCnt: Int?
     let myPost: Bool?
     let complete: Bool?
-    let width: Int?
+    let width: Double?
     let vertical: Int?
-    let height: Int?
+    let height: Double?
 
     enum CodingKeys: String, CodingKey {
         case id
