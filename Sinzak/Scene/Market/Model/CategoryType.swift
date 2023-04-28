@@ -49,7 +49,7 @@ struct Category {
     var text: String {
         return type.text
     }
-    var isSelected: Bool
+    var needSelect: Bool
 }
 
 struct CategoryData {
