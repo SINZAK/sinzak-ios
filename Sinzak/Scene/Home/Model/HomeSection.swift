@@ -32,7 +32,7 @@ enum HomeLoggedInType: Int, CaseIterable {
         case .new:
             return I18NStrings.sectionNew
         case .recommend:
-            return "\(UserInfoManager.name) "+I18NStrings.sectionRecommend
+            return "\(UserInfoManager.name ?? "") "+I18NStrings.sectionRecommend
         case .following:
             return I18NStrings.sectionFollowing
         }
