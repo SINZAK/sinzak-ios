@@ -28,7 +28,7 @@ final class UserInfoManager {
     var profile: Profile {
         get {
             return Profile(
-                userID: UserInfoManager.userID ?? -1,
+                userID: UserInfoManager.userID ?? -404,
                 myProfile: UserInfoManager.myProfile ?? false,
                 name: UserInfoManager.name ?? "",
                 introduction: UserInfoManager.introduction ?? "",
