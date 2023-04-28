@@ -21,9 +21,9 @@ enum TokenKind {
     }
 }
 
-enum AppleAuth: String {
-    case appleID
+enum AppleAuth: String, CaseIterable {
     case appleAuthCode
+    case clientSecret
     case refresh
 }
 
@@ -195,34 +195,35 @@ extension KeychainItem {
     /**
      apple id 저장
      */
-    static func saveAppleID(id: String) {
-        do {
-            try KeychainItem(account: AppleAuth.appleID.rawValue).saveItem(id)
-        } catch {
-            Log.error("apple ID 저장 실패")
-        }
-    }
-    
-    /**
-     apple id 읽어오기
-     */
-    static var currentAppleID: String {
-        do {
-            let id = try KeychainItem(account: AppleAuth.appleID.rawValue).readItem()
-            return id
-        } catch {
-            return ""
-        }
-    }
-    
-    /**
-     apple id 삭제
-     */
-    static func deleteAppleID() {
-        do {
-            try KeychainItem(account: AppleAuth.appleID.rawValue).deleteItem()
-        } catch {
-            Log.error("apple ID 삭제 실패")
-        }
-    }
+//
+//    static func saveAppleID(id: String) {
+//        do {
+//            try KeychainItem(account: AppleAuth.appleID.rawValue).saveItem(id)
+//        } catch {
+//            Log.error("apple ID 저장 실패")
+//        }
+//    }
+//
+//    /**
+//     apple id 읽어오기
+//     */
+//    static var currentAppleID: String {
+//        do {
+//            let id = try KeychainItem(account: AppleAuth.appleID.rawValue).readItem()
+//            return id
+//        } catch {
+//            return ""
+//        }
+//    }
+//
+//    /**
+//     apple id 삭제
+//     */
+//    static func deleteAppleID() {
+//        do {
+//            try KeychainItem(account: AppleAuth.appleID.rawValue).deleteItem()
+//        } catch {
+//            Log.error("apple ID 삭제 실패")
+//        }
+//    }
 }
