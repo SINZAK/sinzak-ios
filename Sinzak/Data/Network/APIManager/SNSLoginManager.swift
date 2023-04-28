@@ -8,6 +8,7 @@
 import Foundation
 import Moya
 import RxSwift
+import SwiftKeychainWrapper
 
 class SNSLoginManager {
     private init () {}
@@ -77,6 +78,7 @@ class SNSLoginManager {
                     throw APIError.noContent
                 }
                 
+                KeychainWrapper.standard.set(clientSecret, forKey: AppleAuth.clientSecret.rawValue)
                 return clientSecret
             })
             .subscribe(
