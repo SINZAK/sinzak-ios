@@ -23,6 +23,10 @@ final class ProductsDetailView: SZView {
     }
     // 상단 이미지 페이저 콜렉션 뷰
     let imagePagerCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        $0.register(
+            PhotoCVC.self,
+            forCellWithReuseIdentifier: PhotoCVC.identifier
+        )
         $0.backgroundColor = CustomColor.gray10
     }
     let pagerControl = UIPageControl().then {
