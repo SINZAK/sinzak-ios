@@ -139,8 +139,18 @@ final class ProductsDetailVC: SZVC {
     func bind() {
         bindInput()
         bindOutput()
-        
-        mainView.imagePagerCollectionView.rx.setDelegate(self)
+
+        mainView.imagePagerCollectionView.rx.didScroll
+            .asDriver()
+            .map { [weak self] _ -> Int in
+                let width = UIScreen.main.bounds.width
+                let currentPage = round((self?.mainView.imagePagerCollectionView.contentOffset.x ?? 0) / width)
+                
+                return Int(currentPage)
+            }
+            .distinctUntilChanged()
+            .drive(mainView.pagerControl.rx.currentPage)
+            .disposed(by: disposeBag)
     }
     
     func bindInput() {
@@ -180,13 +190,5 @@ private extension ProductsDetailVC {
                 cell.setImage(item)
                 return cell
             })
-    }
-}
-
-extension ProductsDetailVC: UICollectionViewDelegate {
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let width = UIScreen.main.bounds.width
-        let nowPage = Int(scrollView.contentOffset.x) / Int(width)
-        Log.debug(nowPage)
     }
 }
