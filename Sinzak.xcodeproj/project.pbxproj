@@ -223,6 +223,7 @@
 		EDF76FFD29F8D6D800F33146 /* NSNotification-Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */; };
 		EDF76FFF29F8F32300F33146 /* BannerFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFE29F8F32300F33146 /* BannerFooter.swift */; };
 		EDF7700129F93F9400F33146 /* SoldOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7700029F93F9400F33146 /* SoldOutView.swift */; };
+		EDF7700629FBC1D500F33146 /* ProductsDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7700529FBC1D500F33146 /* ProductsDetailVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -446,6 +447,7 @@
 		EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSNotification-Name+Extension.swift"; path = "../../../../NSNotification-Name+Extension.swift"; sourceTree = "<group>"; };
 		EDF76FFE29F8F32300F33146 /* BannerFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerFooter.swift; sourceTree = "<group>"; };
 		EDF7700029F93F9400F33146 /* SoldOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoldOutView.swift; sourceTree = "<group>"; };
+		EDF7700529FBC1D500F33146 /* ProductsDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -846,8 +848,9 @@
 		A226CC4629ADF809000161E8 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				A2B969E229ABA68C006119B1 /* VC */,
 				A2B969DF29ABA64E006119B1 /* View */,
+				A2B969E229ABA68C006119B1 /* VC */,
+				EDF7700429FBC1B200F33146 /* VM */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1830,6 +1833,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		EDF7700429FBC1B200F33146 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				EDF7700529FBC1D500F33146 /* ProductsDetailVM.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2095,6 +2106,7 @@
 				A233891C29B088E800688FD8 /* SettingVC.swift in Sources */,
 				A26F0AAA2948BE05001CB2AA /* ConciergeView.swift in Sources */,
 				A22BE595296AEB4300D9815C /* AuthAPI.swift in Sources */,
+				EDF7700629FBC1D500F33146 /* ProductsDetailVM.swift in Sources */,
 				A2F6EAE32987758C00DE754F /* HomeAPI.swift in Sources */,
 				ED75588329E7173900A15977 /* UniversityInfoVM.swift in Sources */,
 				A26F0AB12948C818001CB2AA /* SZView.swift in Sources */,
