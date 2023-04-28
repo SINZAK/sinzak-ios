@@ -43,8 +43,8 @@ final class ProductsDetailView: SZView {
         $0.backgroundColor = CustomColor.gray10
     }
     let pagerControl = UIPageControl().then {
-        $0.numberOfPages = 4
-        $0.currentPage = 1
+        $0.currentPageIndicatorTintColor = CustomColor.red
+        $0.pageIndicatorTintColor = CustomColor.gray60
     }
     // 작품 이름, 소개 뷰
     let titleView = UIView().then {
@@ -242,6 +242,8 @@ final class ProductsDetailView: SZView {
     }
     // MARK: - Setter
     func setData(_ data: ProductsDetail) {
+        pagerControl.numberOfPages = (data.images ?? []).count
+        pagerControl.currentPage = 0
         titleNameLabel.text = data.title
         priceLabel.text = "\(data.price)"
         authorNameLabel.text = data.author
