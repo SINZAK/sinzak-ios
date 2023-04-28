@@ -21,8 +21,21 @@ final class ProductsDetailView: SZView {
         $0.axis = .vertical
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    let layout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        let width = UIScreen.main.bounds.width
+        layout.itemSize = CGSize(width: width, height: width)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+        
+        return layout
+    }()
+    
     // 상단 이미지 페이저 콜렉션 뷰
-    let imagePagerCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+    lazy var imagePagerCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).then {
+        $0.isPagingEnabled = true
+        $0.showsHorizontalScrollIndicator = false
         $0.register(
             PhotoCVC.self,
             forCellWithReuseIdentifier: PhotoCVC.identifier
@@ -228,14 +241,14 @@ final class ProductsDetailView: SZView {
         $0.titleLabel?.font = .caption_B
     }
     // MARK: - Setter
-    func setData(_ data: Products) {
+    func setData(_ data: ProductsDetail) {
         titleNameLabel.text = data.title
         priceLabel.text = "\(data.price)"
         authorNameLabel.text = data.author
         timeLabel.text = data.date
         contentLabel.text = data.content
         scrapCountLabel.text = "\(data.likesCnt)"
-        viewCountLabel.text = "\(data.popularity)"
+        viewCountLabel.text = "\(data.views)"
     }
     // MARK: - Design Helpers
     override func setView() {

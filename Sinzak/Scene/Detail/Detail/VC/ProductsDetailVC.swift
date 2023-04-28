@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 enum DetailOwner {
     case mine
@@ -33,20 +36,40 @@ enum DetailType {
 }
 final class ProductsDetailVC: SZVC {
     // MARK: - Properties
+    let id: Int
+    
     let mainView = ProductsDetailView()
+    let viewModel: ProductsDetailVM
+    
     var owner: DetailOwner?
     var type: DetailType?
+    
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.fetchProductsDetail(id: id)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
     }
+    
+    // MARK: - Init
+    init(id: Int, type: DetailType, viewModel: ProductsDetailVM) {
+        self.id = id
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Actions
     @objc func menuButtonTapped(_ sender: UIBarButtonItem) {
         // ActionSheet 띄우기
@@ -102,10 +125,68 @@ final class ProductsDetailVC: SZVC {
     // MARK: - Helpers
     override func configure() {
         mainView.priceOfferButton.addTarget(self, action: #selector(priceOfferButtonTapped), for: .touchUpInside)
+        
+        bind()
     }
     override func setNavigationBar() {
         super.setNavigationBar()
         let menu = UIBarButtonItem(image: UIImage(named: "chatMenu"), style: .plain, target: self, action: #selector(menuButtonTapped))
         navigationItem.rightBarButtonItem = menu
+    }
+    
+    // MARK: - bind
+    
+    func bind() {
+        bindInput()
+        bindOutput()
+        
+        mainView.imagePagerCollectionView.rx.setDelegate(self)
+    }
+    
+    func bindInput() {
+
+    }
+    
+    func bindOutput() {
+        viewModel.fetchedData
+            .observe(on: MainScheduler.instance)
+            .subscribe(
+                with: self,
+                onNext: { owner, data in
+                    owner.owner = data.id == UserInfoManager.userID ? .mine : .other
+                    
+                    owner.mainView.setData(data)
+                    
+                })
+            .disposed(by: disposeBag)
+        
+        viewModel.imageSections
+            .asDriver(onErrorJustReturn: [])
+            .drive(mainView.imagePagerCollectionView.rx.items(dataSource: getImageDataSource()))
+            .disposed(by: disposeBag)
+    }
+}
+
+private extension ProductsDetailVC {
+    
+    func getImageDataSource() -> RxCollectionViewSectionedReloadDataSource<ImageSection> {
+        return RxCollectionViewSectionedReloadDataSource<ImageSection>(
+            configureCell: { _, collectionView, indexPath, item in
+                
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: PhotoCVC.identifier,
+                    for: indexPath
+                ) as? PhotoCVC else { return UICollectionViewCell() }
+                cell.setImage(item)
+                return cell
+            })
+    }
+}
+
+extension ProductsDetailVC: UICollectionViewDelegate {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let width = UIScreen.main.bounds.width
+        let nowPage = Int(scrollView.contentOffset.x) / Int(width)
+        Log.debug(nowPage)
     }
 }
