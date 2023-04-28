@@ -203,6 +203,8 @@ final class ArtCVC: UICollectionViewCell {
             make.leading.equalTo(titleLabel)
             make.top.equalTo(labelStack.snp.bottom).offset(5)
         }
+        authorLabel.setContentCompressionResistancePriority(.init(250), for: .horizontal)
+        
         middlePointLabel.snp.makeConstraints { make in
             make.centerY.equalTo(authorLabel)
             make.leading.equalTo(authorLabel.snp.trailing)
@@ -212,6 +214,7 @@ final class ArtCVC: UICollectionViewCell {
             make.leading.equalTo(middlePointLabel.snp.trailing)
             make.trailing.lessThanOrEqualToSuperview().inset(7)
         }
+        uploadTimeLabel.setContentCompressionResistancePriority(.init(750), for: .horizontal)
         
         soldOutView.snp.makeConstraints {
             $0.top.equalToSuperview()
