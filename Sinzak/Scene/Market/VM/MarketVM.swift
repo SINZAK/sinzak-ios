@@ -34,6 +34,7 @@ protocol MarketVMOutput {
     var selectedAlign: BehaviorRelay<AlignOption> { get }
     
     var showSkeleton: BehaviorRelay<Bool> { get }
+    var needRefresh: BehaviorRelay<Bool> { get }
 }
 
 protocol MarketVM: MarketVMInput, MarketVMOutput {}
@@ -42,26 +43,18 @@ final class DefaultMarketVM: MarketVM {
     
     private let disposeBag = DisposeBag()
     
-    var doRefreshRelay: PublishRelay<Bool>
-        
     // MARK: - Init
     
     init(
         _ selectedCategory: BehaviorRelay<[CategoryType]>,
         _ selectedAlign: BehaviorRelay<AlignOption>,
         _ isSaling: BehaviorRelay<Bool>,
-        _ doRefreshRelay: PublishRelay<Bool>
+        _ needRefresh: BehaviorRelay<Bool>
     ) {
         self.selectedCategory = selectedCategory
         self.selectedAlign = selectedAlign
         self.isSaling = isSaling
-        self.doRefreshRelay = doRefreshRelay
-    
-        doRefreshRelay
-            .subscribe(with: self, onNext: { owner, _ in
-                owner.refresh()
-            })
-            .disposed(by: disposeBag)
+        self.needRefresh = needRefresh
     }
     
     // MARK: - Input
@@ -97,7 +90,7 @@ final class DefaultMarketVM: MarketVM {
     }
     
     func alignButtonTapped() {
-        let vc = SelectAlignVC(with: selectedAlign, doRefreshRelay)
+        let vc = SelectAlignVC(with: selectedAlign, refresh)
         presentSelectAlignVC.accept(vc)
     }
     
@@ -110,14 +103,18 @@ final class DefaultMarketVM: MarketVM {
     var pushSerachVC: PublishRelay<SearchVC> = PublishRelay()
     var presentSelectAlignVC: PublishRelay<SelectAlignVC> = PublishRelay<SelectAlignVC>()
     
-    let categorySections: BehaviorRelay<[CategoryDataSection]> = BehaviorRelay(value: [
-        CategoryDataSection(items: CategoryType.allCases.map {
-            let category = $0 == .all ?
-            Category(type: $0, isSelected: true) :
-            Category(type: $0, isSelected: false)
-            
-            return CategoryData(category: category)
-        })
+    lazy var categorySections: BehaviorRelay<[CategoryDataSection]> = BehaviorRelay(value: [
+        CategoryDataSection(items: CategoryType.allCases
+            .map {
+                let selected = selectedCategory.value
+                let needSelect: CategoryType = selected.isEmpty ? .all : selected[0]
+                
+                let category = $0 == needSelect ?
+                Category(type: $0, needSelect: true) :
+                Category(type: $0, needSelect: false)
+                
+                return CategoryData(category: category)
+            })
     ])
     let productSections: BehaviorRelay<[MarketProductDataSection]> = BehaviorRelay(value: [
         MarketProductDataSection(items: [])
@@ -125,10 +122,12 @@ final class DefaultMarketVM: MarketVM {
     
     var isSaling: BehaviorRelay<Bool>
     var selectedAlign: BehaviorRelay<AlignOption>
+    var needRefresh: BehaviorRelay<Bool>
     
     var endRefresh: PublishRelay<Bool> = PublishRelay()
     
     var showSkeleton: BehaviorRelay<Bool> = .init(value: false)
+    
 }
 
 private extension DefaultMarketVM {

@@ -17,7 +17,7 @@ final class TabBarVC: UITabBarController {
     let selectedCategory: BehaviorRelay<[CategoryType]> = .init(value: [])
     let selectedAlign: BehaviorRelay<AlignOption> = .init(value: .recommend)
     let isSaling: BehaviorRelay<Bool> = .init(value: false)
-    let doRefresh: PublishRelay<Bool> = .init()
+    let needRefresh: BehaviorRelay<Bool> = .init(value: true)
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ final class TabBarVC: UITabBarController {
             selectedCategory,
             selectedAlign,
             isSaling,
-            doRefresh
+            needRefresh
         )
         
         let homeVC = UINavigationController(rootViewController: HomeVC(viewModel: homeVM))
@@ -52,7 +52,7 @@ final class TabBarVC: UITabBarController {
             selectedCategory,
             selectedAlign,
             isSaling,
-            doRefresh
+            needRefresh
         )
         let marketVC = UINavigationController(rootViewController: MarketVC(viewModel: marketVM))
         marketVC.tabBarItem = UITabBarItem(title: I18NStrings.Market,
