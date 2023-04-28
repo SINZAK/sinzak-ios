@@ -224,6 +224,7 @@
 		EDF76FFF29F8F32300F33146 /* BannerFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFE29F8F32300F33146 /* BannerFooter.swift */; };
 		EDF7700129F93F9400F33146 /* SoldOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7700029F93F9400F33146 /* SoldOutView.swift */; };
 		EDF7700629FBC1D500F33146 /* ProductsDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7700529FBC1D500F33146 /* ProductsDetailVM.swift */; };
+		EDF7700829FBDF3E00F33146 /* PhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7700729FBDF3E00F33146 /* PhotoCVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -448,6 +449,7 @@
 		EDF76FFE29F8F32300F33146 /* BannerFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerFooter.swift; sourceTree = "<group>"; };
 		EDF7700029F93F9400F33146 /* SoldOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoldOutView.swift; sourceTree = "<group>"; };
 		EDF7700529FBC1D500F33146 /* ProductsDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailVM.swift; sourceTree = "<group>"; };
+		EDF7700729FBDF3E00F33146 /* PhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1568,6 +1570,7 @@
 			isa = PBXGroup;
 			children = (
 				A2B969E029ABA661006119B1 /* ProductsDetailView.swift */,
+				EDF7700729FBDF3E00F33146 /* PhotoCVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2150,6 +2153,7 @@
 				A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */,
 				A233892629B37B1F00688FD8 /* Leave.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
+				EDF7700829FBDF3E00F33146 /* PhotoCVC.swift in Sources */,
 				A2A2C4E329C20D8500F0CFC6 /* HTTPHeaderField.swift in Sources */,
 				EDE5EC5729D6EB3200BB211F /* Log.swift in Sources */,
 				EDC5147129DBB48F0015C3B5 /* LoginVM.swift in Sources */,
