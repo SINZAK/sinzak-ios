@@ -16,9 +16,9 @@ enum HomeNotLoggedInType: Int, CaseIterable {
         case .trading:
             return I18NStrings.sectionTrading
         case .new:
-            return I18NStrings.sectionHot
-        case .hot:
             return I18NStrings.sectionNew
+        case .hot:
+            return I18NStrings.sectionHot
         }
     }
 }
