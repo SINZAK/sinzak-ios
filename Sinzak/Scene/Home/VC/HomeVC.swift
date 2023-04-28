@@ -48,6 +48,8 @@ final class HomeVC: SZVC {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Bind
+    
     func bind() {
         bindInput()
         bindOutput()
@@ -124,14 +126,6 @@ final class HomeVC: SZVC {
                 }
             })
             .disposed(by: disposeBag)
-        
-        viewModel.moveTab
-            .withUnretained(self)
-            .subscribe(onNext: { owner, tab in
-                owner.tabBarController?.selectedIndex = tab
-            })
-            .disposed(by: disposeBag)
-        
     }
     
     func bindOutput() {
