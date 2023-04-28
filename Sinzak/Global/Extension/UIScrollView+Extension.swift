@@ -15,7 +15,7 @@ public enum ScrollDirection {
 
 public extension UIScrollView {
 
-    func scroll(to direction: ScrollDirection, animated: Bool = true) {
+    func scroll(to direction: ScrollDirection, animated: Bool = true, completion: (() -> Void)? = nil) {
 
         DispatchQueue.main.async {
             switch direction {
@@ -26,6 +26,9 @@ public extension UIScrollView {
             case .bottom:
                 self.scrollToBottom(animated: animated)
             }
+            
+            guard let completion = completion else { return }
+            completion()
         }
     }
 
