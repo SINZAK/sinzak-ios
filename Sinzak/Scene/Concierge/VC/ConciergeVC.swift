@@ -51,28 +51,35 @@ final class ConciergeVC: UIViewController {
         if UserInfoManager.isLoggedIn {
             AuthManager.shared.reissue()
                 .observe(on: MainScheduler.instance)
-                .subscribe(with: self, onSuccess: { owner, _ in
-                    AuthManager.shared.fetchMyProfile()
-                        .observe(on: MainScheduler.instance)
-                        .subscribe(
-                            onSuccess: { _ in
-                                owner.nextVC.accept(TabBarVC())
-                            }, onFailure: { error in
-                                Log.error(error)
-                                let root = LoginVC(viewModel: DefaultLoginVM())
-                                let vc = UINavigationController(rootViewController: root)
-                                owner.nextVC.accept(vc)
-                            })
-                        .disposed(by: owner.disposeBag)
-                }, onFailure: { _, error in
-                    Log.error(error)
-                })
+                .subscribe(
+                    with: self,
+                    onSuccess: { owner, _ in
+                        AuthManager.shared.fetchMyProfile()
+                            .observe(on: MainScheduler.instance)
+                            .subscribe(
+                                onSuccess: { _ in
+                                    owner.nextVC.accept(TabBarVC())
+                                }, onFailure: { error in
+                                    Log.error(error)
+                                    let root = LoginVC(viewModel: DefaultLoginVM())
+                                    let vc = UINavigationController(rootViewController: root)
+                                    owner.nextVC.accept(vc)
+                                })
+                            .disposed(by: owner.disposeBag)
+                    },
+                    onFailure: { owner, error in
+                        let root = LoginVC(viewModel: DefaultLoginVM())
+                        let vc = UINavigationController(rootViewController: root)
+                        owner.nextVC.accept(vc)
+                        Log.error(error)
+                    }
+                )
                 .disposed(by: disposeBag)
         } else {
             let root = LoginVC(viewModel: DefaultLoginVM())
             let vc = UINavigationController(rootViewController: root)
             
-//            let vc = TabBarVC()
+            //            let vc = TabBarVC()
             nextVC.accept(vc)
         }
     }
