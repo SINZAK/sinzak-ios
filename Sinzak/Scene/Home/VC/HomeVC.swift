@@ -250,9 +250,8 @@ extension HomeVC {
     /// 컴포지셔널 레이아웃 세팅
     func setLayout() -> UICollectionViewCompositionalLayout {
         lazy var sectionCount = viewModel.homeSectionModel.value.count
-        return UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
+        return UICollectionViewCompositionalLayout { [weak self] (sectionNumber, _) -> NSCollectionLayoutSection? in
             // 배너일 경우
-            
             switch sectionNumber {
             case 0:
                 let height = (UIScreen.main.bounds.width - 32) * (Double(608.0) / Double(1368.0))
@@ -293,22 +292,42 @@ extension HomeVC {
                 return section
                 
             case 1..<sectionCount-1:
+                let numberOfItems = self?.mainView.homeCollectionView.numberOfItems(inSection: sectionNumber) ?? 1
                 let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .estimated(165),
-                    heightDimension: .estimated(248)
-                )
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets.trailing = 40.0
-                
-                let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .estimated(205),
+                    widthDimension: .absolute(164.0),
                     heightDimension: .estimated(256)
                 )
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-                group.interItemSpacing = .fixed(28)
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let section = NSCollectionLayoutSection(group: group)
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .absolute(164.0 * CGFloat(numberOfItems-1) + 40.0 * CGFloat(numberOfItems-2)),
+                    heightDimension: .estimated(256)
+                )
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: numberOfItems - 1)
+                group.contentInsets.leading = 0
+                group.contentInsets.trailing = 0
+                group.interItemSpacing = .fixed(40.0)
+                
+                let seeMoreItemSize = NSCollectionLayoutSize(
+                    widthDimension: .absolute(24.0),
+                    heightDimension: .estimated(248.0)
+                )
+                let seeMoreItem = NSCollectionLayoutItem(layoutSize: seeMoreItemSize)
+                seeMoreItem.contentInsets.leading = 8.0
+                
+                let nestGroupSize = NSCollectionLayoutSize(
+                    widthDimension: .estimated(164.0 * CGFloat(numberOfItems-1) + 40.0 * CGFloat(numberOfItems-2) + 24.0),
+                    heightDimension: .estimated(256.0)
+                )
+                let nestGroup = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: nestGroupSize,
+                    subitems: [group, seeMoreItem]
+                )
+                
+                let section = NSCollectionLayoutSection(group: nestGroup)
+                section.interGroupSpacing = 0
                 section.contentInsets.leading = 40.0
+                section.contentInsets.trailing = 40.0
                 section.contentInsets.bottom = 32
                 
                 // 헤더 설정
