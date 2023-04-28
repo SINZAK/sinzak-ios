@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import Kingfisher
 
-final class PhotoCVC: UICollectionReusableView {
+final class PhotoCVC: UICollectionViewCell {
+    
+    var imageURL: String?
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         return imageView
     }()
@@ -26,11 +30,20 @@ final class PhotoCVC: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureLayout() {
+    func setImage(_ url: String) {
+        imageURL = url
+        imageView.kf.setImage(with: URL(string: url), placeholder: UIImage(named: "emptySquare"))
+    }
+    
+    private func configureLayout() {
         addSubview(imageView)
         
         imageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+    
+    override func prepareForReuse() {
+        imageView.image = nil
     }
 }
