@@ -20,7 +20,8 @@ protocol HomeVMInput {
     var selectedCategory: BehaviorRelay<[CategoryType]> { get }
     var selectedAlign: BehaviorRelay<AlignOption> { get }
     var isSaling: BehaviorRelay<Bool> { get }
-    var doRefreshRelay: PublishRelay<Bool> { get }
+    var needRefresh: BehaviorRelay<Bool> { get }
+    var moveTab: PublishRelay<Int> { get }
     
     var needLoginAlert: PublishRelay<Bool> { get }
 }
@@ -34,6 +35,8 @@ protocol HomeVMOutput {
     var bannerTotalIndex: BehaviorRelay<Int> { get }
     
     var pushProductsDetailView: PublishRelay<ProductsDetailVC> { get }
+    
+    var moreCell: [(AlignOption, Int)] { get }
 }
 
 protocol HomeVM: HomeVMInput, HomeVMOutput {}
@@ -42,19 +45,19 @@ final class DefaultHomeVM: HomeVM {
     
     private let disposeBag = DisposeBag()
     
-    let doRefreshRelay: PublishRelay<Bool>
+    let needRefresh: BehaviorRelay<Bool>
     
     init(
         _ selectedCategory: BehaviorRelay<[CategoryType]>,
         _ selectedAlign: BehaviorRelay<AlignOption>,
         _ isSaling: BehaviorRelay<Bool>,
-        _ doRefreshRelay: PublishRelay<Bool>
+        _ needRefresh: BehaviorRelay<Bool>
     ) {
         self.isLogin = UserInfoManager.isLoggedIn
         self.selectedCategory = selectedCategory
         self.selectedAlign = selectedAlign
         self.isSaling = isSaling
-        self.doRefreshRelay = doRefreshRelay
+        self.needRefresh = needRefresh
     }
     
     // MARK: - Input
@@ -74,6 +77,7 @@ final class DefaultHomeVM: HomeVM {
     var selectedCategory: BehaviorRelay<[CategoryType]>
     var selectedAlign: BehaviorRelay<AlignOption>
     var isSaling: BehaviorRelay<Bool>
+    var moveTab: PublishRelay<Int> = .init()
     
     var bannerTotalIndex: BehaviorRelay<Int> = .init(value: 3)
     
@@ -96,6 +100,8 @@ final class DefaultHomeVM: HomeVM {
             items: categorySectionItems
         )
     ]
+    
+    var moreCell: [(AlignOption, Int)] = []
 }
 
 private extension DefaultHomeVM {
@@ -103,6 +109,7 @@ private extension DefaultHomeVM {
         showSkeleton.accept(true)
 
         let bannerObservable = HomeManager.shared.getBannerInfo().asObservable()
+        moreCell = []
     
         if isLogin {
             let loggedInProductsObservable = HomeManager.shared.getHomeProductLoggedIn().asObservable()
@@ -114,14 +121,26 @@ private extension DefaultHomeVM {
                     self.bannerTotalIndex.accept(banners.count)
                     
                     let productSections: [HomeSection] = zip(
-                        HomeLoggedInType.allCases.map { $0.title },
-                        [products.new, products.recommend, products.following]
+                        [HomeLoggedInType.new.title, HomeLoggedInType.recommend.title, HomeLoggedInType.following.title ],
+                        [(products.new, AlignOption.recent), (products.recommend, AlignOption.recommend), (products.following, AlignOption.popular)]
                     )
-                        .filter { !$0.1.isEmpty }
-                        .map { .productSection(
-                            title: $0.0,
-                            items: $0.1.map { .productSectionItem(product: $0) }
-                        )}
+                        .filter { !$0.1.0.isEmpty }
+                        .map {
+                            let moreCell = Products(
+                                id: -1, title: "",
+                                content: "", author: "",
+                                price: 0, thumbnail: "moreCell",
+                                date: "", suggest: false,
+                                likesCnt: 0, complete: false,
+                                popularity: 0, like: false
+                            )
+                            let items: [HomeSectionItem] = ($0.1.0 + [moreCell]).map { .productSectionItem(product: $0) }
+                            self.moreCell.append(($0.1.1, items.count))
+                            
+                            return .productSection(
+                                title: $0.0,
+                                items: items
+                            )}
                     
                     let sectionModel: [HomeSection] = [
                         .bannerSection(items: banners.map { .bannerSectionItem(banner: $0) })
@@ -152,13 +171,25 @@ private extension DefaultHomeVM {
                     self.bannerTotalIndex.accept(banners.count)
                     
                     let productSections: [HomeSection] = zip(
-                        HomeNotLoggedInType.allCases.map { $0.title },
-                        [products.new, products.hot, products.trading]
+                        [HomeNotLoggedInType.new.title, HomeNotLoggedInType.hot.title, HomeNotLoggedInType.trading.title],
+                        [(products.new, AlignOption.recent), (products.hot, AlignOption.popular), (products.trading, AlignOption.high)]
                     )
-                        .filter { !$0.1.isEmpty }
-                        .map { .productSection(
+                    .filter { !$0.1.0.isEmpty }
+                    .map {
+                        let moreCell = Products(
+                            id: -1, title: "",
+                            content: "", author: "",
+                            price: 0, thumbnail: "moreCell",
+                            date: "", suggest: false,
+                            likesCnt: 0, complete: false,
+                            popularity: 0, like: false
+                        )
+                        let items: [HomeSectionItem] = ($0.1.0 + [moreCell]).map { .productSectionItem(product: $0) }
+                        self.moreCell.append(($0.1.1, items.count))
+                        
+                        return .productSection(
                             title: $0.0,
-                            items: $0.1.map { .productSectionItem(product: $0) }
+                            items: items
                         )}
                     
                     let sectionModel: [HomeSection] = [

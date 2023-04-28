@@ -74,6 +74,34 @@ final class HomeVC: SZVC {
             .withUnretained(self)
             .subscribe(onNext: { owner, indexPath in
                 
+                for (i, zip) in owner.viewModel.moreCell.enumerated() where indexPath == [i+1, zip.1 - 1] {
+                    
+                    guard let cell = owner.mainView.homeCollectionView.cellForItem(at: indexPath) as? SeeMoreCVC else { return }
+                    
+                    let alignOption = cell.alignOption
+                    
+                    // 로그인 상태, 팔로우 보여주는 섹션은 액션 없어야함
+                    if owner.viewModel.isLogin && alignOption == .popular { return }
+                    
+                    if !owner.viewModel.isLogin && alignOption == .high {
+                        owner.viewModel.selectedCategory.accept([])
+                        owner.viewModel.selectedAlign.accept(.recommend)
+                        owner.viewModel.isSaling.accept(true)
+                        owner.viewModel.needRefresh.accept(true)
+                        owner.tabBarController?.selectedIndex = 1
+                        
+                        return
+                    }
+                    
+                    owner.viewModel.selectedCategory.accept([])
+                    owner.viewModel.selectedAlign.accept(zip.0)
+                    owner.viewModel.isSaling.accept(false)
+                    owner.viewModel.needRefresh.accept(true)
+                    owner.tabBarController?.selectedIndex = 1
+                    
+                    return
+                }
+                
                 let sectionCount = owner.viewModel.homeSectionModel.value.count
                 
                 switch indexPath.section {
@@ -91,9 +119,16 @@ final class HomeVC: SZVC {
                     owner.viewModel.selectedCategory.accept([category])
                     owner.viewModel.selectedAlign.accept(.recommend)
                     owner.viewModel.isSaling.accept(false)
+                    owner.viewModel.needRefresh.accept(true)
                     owner.tabBarController?.selectedIndex = 1
-                    owner.viewModel.doRefreshRelay.accept(true)
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.moveTab
+            .withUnretained(self)
+            .subscribe(onNext: { owner, tab in
+                owner.tabBarController?.selectedIndex = tab
             })
             .disposed(by: disposeBag)
         
@@ -186,7 +221,9 @@ extension HomeVC {
     func getHomeDataSource() -> RxCollectionViewSectionedReloadDataSource<HomeSection> {
         let relay = viewModel.needLoginAlert
         return RxCollectionViewSectionedReloadDataSource<HomeSection>(
-            configureCell: { dataSource, collectionView, indexPath, _ in
+            configureCell: { [weak self] dataSource, collectionView, indexPath, _ in
+                guard let self = self else { return UICollectionViewCell() }
+                
                 switch dataSource[indexPath] {
                 case .bannerSectionItem(banner: let banner):
                     guard let cell = collectionView.dequeueReusableCell(
@@ -197,13 +234,27 @@ extension HomeVC {
                     return cell
                     
                 case .productSectionItem(product: let product):
-                    guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: ArtCVC.identifier,
-                        for: indexPath
-                    ) as? ArtCVC else { return UICollectionViewCell() }
-                    cell.setData(product, .products, relay)
-                    return cell
-
+                    if product.thumbnail == "moreCell" {
+                        guard let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: SeeMoreCVC.identifier,
+                            for: indexPath
+                        ) as? SeeMoreCVC else { return UICollectionViewCell() }
+                        
+                        cell.alignOption = self.viewModel.moreCell[indexPath.section-1].0
+                        
+                        return cell
+                        
+                    } else {
+                        
+                        guard let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: ArtCVC.identifier,
+                            for: indexPath
+                        ) as? ArtCVC else { return UICollectionViewCell() }
+                        cell.setData(product, .products, relay)
+                        
+                        return cell
+                    }
+                    
                 case .categoryItem(category: let category):
                     guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: HomeCategoryCVC.identifier,

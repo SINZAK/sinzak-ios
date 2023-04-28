@@ -46,7 +46,6 @@ final class MarketVC: SZVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,12 +53,16 @@ final class MarketVC: SZVC {
         tabBarController?.tabBar.isHidden = false
         
         isCurrentMarketView = true
+        if viewModel.needRefresh.value {
+            viewModel.refresh()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         isCurrentMarketView = false
+        viewModel.needRefresh.accept(false)
     }
 
     // MARK: - Helpers
@@ -189,7 +192,7 @@ extension MarketVC {
                     owner
                         .mainView
                         .categoryCollectionView
-                        .selectItem(at: [0, 0], animated: true, scrollPosition: .centeredVertically)
+                        .selectItem(at: [0, 0], animated: true, scrollPosition: .centeredHorizontally)
                     owner.viewModel.selectedCategory.accept([])
                     owner.viewModel.refresh()
                 } else {
@@ -293,7 +296,6 @@ extension MarketVC {
             .withUnretained(self)
             .subscribe(onNext: { owner, categories in
                 
-                if categories.isEmpty { return }
                 if owner.isCurrentMarketView { return }
                 
                 guard let indexPathsForSelectedItems = owner
@@ -309,8 +311,21 @@ extension MarketVC {
                             .deselectItem(at: $0, animated: false)
                     }
                 
+                if categories.isEmpty {
+                    owner.mainView.categoryCollectionView.selectItem(
+                        at: [0, 0],
+                        animated: true,
+                        scrollPosition: .centeredHorizontally
+                    )
+                    return
+                }
+                
                 let idx: Int = CategoryType.allCases.firstIndex(of: categories[0]) ?? 0
-                owner.mainView.categoryCollectionView.selectItem(at: [0, idx], animated: true, scrollPosition: .centeredHorizontally)
+                owner.mainView.categoryCollectionView.selectItem(
+                    at: [0, idx],
+                    animated: true,
+                    scrollPosition: .centeredHorizontally
+                )
             })
             .disposed(by: disposeBag)
     }
@@ -328,11 +343,11 @@ private extension MarketVC {
                     for: indexPath
                 ) as? CategoryTagCVC else { return UICollectionViewCell() }
                 
-                if item.category.isSelected && self.isViewDidLoad {
+                if item.category.needSelect && self.isViewDidLoad {
                     self.mainView.categoryCollectionView.selectItem(
                         at: indexPath,
                         animated: false,
-                        scrollPosition: .centeredVertically
+                        scrollPosition: .centeredHorizontally
                     )
                     self.isViewDidLoad = false
                 }
