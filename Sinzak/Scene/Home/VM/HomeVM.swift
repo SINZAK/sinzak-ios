@@ -21,7 +21,6 @@ protocol HomeVMInput {
     var selectedAlign: BehaviorRelay<AlignOption> { get }
     var isSaling: BehaviorRelay<Bool> { get }
     var needRefresh: BehaviorRelay<Bool> { get }
-    var moveTab: PublishRelay<Int> { get }
     
     var needLoginAlert: PublishRelay<Bool> { get }
 }
@@ -77,7 +76,6 @@ final class DefaultHomeVM: HomeVM {
     var selectedCategory: BehaviorRelay<[CategoryType]>
     var selectedAlign: BehaviorRelay<AlignOption>
     var isSaling: BehaviorRelay<Bool>
-    var moveTab: PublishRelay<Int> = .init()
     
     var bannerTotalIndex: BehaviorRelay<Int> = .init(value: 3)
     
