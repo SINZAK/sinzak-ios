@@ -98,7 +98,7 @@ final class ArtFullWidthCVC: UICollectionViewCell {
         imageView.snp.makeConstraints { make in
             make.centerX.top.equalToSuperview()
             make.width.equalToSuperview()
-            make.height.equalTo(165)
+            make.height.equalTo(164.0)
         }
         favoriteBackground.snp.makeConstraints { make in
             make.trailing.equalTo(imageView).inset(12)

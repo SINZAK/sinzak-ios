@@ -40,7 +40,7 @@ class HomeSkeletonView: SZView {
     lazy var flowLayout: UICollectionViewLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = CGSize(width: 165, height: 240)
+        layout.estimatedItemSize = CGSize(width: 164.0, height: 240)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0)
         layout.minimumLineSpacing = 40.0
         
