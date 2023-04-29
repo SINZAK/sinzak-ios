@@ -125,7 +125,9 @@ final class ArtCVC: UICollectionViewCell {
             let url = URL(string: thumbnail)
             imageView.kf.setImage(with: url)
         } else {
-            imageView.image = UIImage(named: "emptySquare")
+            imageView.image = UIImage(named: "nothing")?.withTintColor(CustomColor.gray60!, renderingMode: .alwaysOriginal)
+            imageView.backgroundColor = CustomColor.gray10
+            imageView.contentMode = .center
         }
         titleLabel.text = data.title
         authorLabel.text = data.author
@@ -230,6 +232,7 @@ final class ArtCVC: UICollectionViewCell {
         priceLabel.text = nil
         likeView.likeImageView.image = nil
         likeView.likeCountLabel.text = nil
+        imageView.contentMode = .scaleAspectFill
     }
 }
 
