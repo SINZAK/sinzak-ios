@@ -31,6 +31,13 @@ final class PhotoCVC: UICollectionViewCell {
     }
     
     func setImage(_ url: String) {
+        if url == "empty" {
+            imageView.image = UIImage(named: "nothing")?.withTintColor(CustomColor.gray60!, renderingMode: .alwaysOriginal)
+            imageView.contentMode = .center
+            self.backgroundColor = CustomColor.gray10
+            return
+        }
+        
         imageURL = url
         imageView.kf.setImage(with: URL(string: url), placeholder: UIImage(named: "emptySquare"))
     }
