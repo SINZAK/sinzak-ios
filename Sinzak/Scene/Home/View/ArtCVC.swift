@@ -120,12 +120,13 @@ final class ArtCVC: UICollectionViewCell {
         
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
+        let nothingImage = UIImage(named: "nothing")?.withTintColor(CustomColor.gray60!, renderingMode: .alwaysOriginal)
         
         if let thumbnail = data.thumbnail {
             let url = URL(string: thumbnail)
-            imageView.kf.setImage(with: url)
+            imageView.kf.setImage(with: url, placeholder: nothingImage)
         } else {
-            imageView.image = UIImage(named: "nothing")?.withTintColor(CustomColor.gray60!, renderingMode: .alwaysOriginal)
+            imageView.image = nothingImage
             imageView.backgroundColor = CustomColor.gray10
             imageView.contentMode = .center
         }
