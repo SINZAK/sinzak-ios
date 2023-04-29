@@ -34,6 +34,6 @@ struct ProductsDetail {
     let myPost: Bool
     let complete: Bool
     let width: Double
-    let vertical: Int
+    let vertical: Double
     let height: Double
 }
