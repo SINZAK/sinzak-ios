@@ -37,13 +37,13 @@ struct Profile: Codable {
     let userID: Int
     let myProfile: Bool
     let name: String
-    let introduction: String?
-    let portFolioURL: String?
+    let introduction: String
+    let portFolioURL: String
     let followingNumber: String
     let followerNumber: String
-    let imageURL: String?
-    let univ: String?
-    let categoryLike: String?
+    let imageURL: String
+    let univ: String
+    let categoryLike: String
     let certUni: Bool
     let certAuthor: Bool
     let follow: Bool

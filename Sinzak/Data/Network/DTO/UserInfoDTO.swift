@@ -20,9 +20,9 @@ struct UserInfoResponseDTO: Codable {
 // MARK: - DataClass
 struct UserInfoDTO: Codable {
     let profile: ProfileDTO?
-    let products: [Products]?
-    let works: [Products]?
-    let workEmploys: [Products]?
+    let products: [MarketProductResponseDTO]?
+    let works: [MarketProductResponseDTO]?
+    let workEmploys: [MarketProductResponseDTO]?
 
     enum CodingKeys: String, CodingKey {
         case profile
@@ -35,9 +35,9 @@ struct UserInfoDTO: Codable {
         guard let profile = profile?.toDomain() else { throw APIError.noContent }
         return UserInfo(
             profile: profile,
-            products: self.products,
-            works: self.works,
-            workEmploys: self.workEmploys
+            products: (products ?? []).map { Products(with: $0) },
+            works: (works ?? []).map { Products(with: $0) },
+            workEmploys: (workEmploys ?? []).map { Products(with: $0) }
         )
     }
 }
@@ -79,13 +79,13 @@ struct ProfileDTO: Codable {
             userID: self.userID ?? 0,
             myProfile: self.myProfile ?? false,
             name: self.name ?? "",
-            introduction: self.introduction,
-            portFolioURL: self.portFolioURL,
+            introduction: self.introduction ?? "",
+            portFolioURL: self.portFolioURL ?? "",
             followingNumber: self.followingNumber ?? "",
             followerNumber: self.followerNumber ?? "",
-            imageURL: self.imageURL,
-            univ: self.univ,
-            categoryLike: self.categoryLike,
+            imageURL: self.imageURL ?? "",
+            univ: self.univ ?? "",
+            categoryLike: self.categoryLike ?? "",
             certUni: self.certUni ?? false,
             certAuthor: self.certAuthor ?? false,
             follow: self.follow ?? false

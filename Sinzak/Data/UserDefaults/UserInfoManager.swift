@@ -37,7 +37,7 @@ final class UserInfoManager {
                 followerNumber: String(UserInfoManager.followerNumber ?? -1),
                 imageURL: UserInfoManager.imageURL ?? "",
                 univ: UserInfoManager.univ ?? "",
-                categoryLike: UserInfoManager.categoryLike,
+                categoryLike: UserInfoManager.categoryLike ?? "",
                 certUni: UserInfoManager.certUni ?? false,
                 certAuthor: UserInfoManager.certAuthor ?? false,
                 follow: UserInfoManager.follow ?? false
@@ -103,13 +103,13 @@ extension UserInfoManager {
         UserInfoManager.userID = profile.userID
         UserInfoManager.myProfile = profile.myProfile
         UserInfoManager.name = profile.name
-        UserInfoManager.introduction = profile.introduction ?? ""
-        UserInfoManager.portFolioURL = profile.portFolioURL ?? ""
+        UserInfoManager.introduction = profile.introduction
+        UserInfoManager.portFolioURL = profile.portFolioURL
         UserInfoManager.followingNumber = Int(profile.followingNumber )!
         UserInfoManager.followerNumber = Int(profile.followerNumber )!
-        UserInfoManager.imageURL = profile.imageURL ?? ""
-        UserInfoManager.univ = profile.univ ?? ""
-        UserInfoManager.categoryLike = profile.categoryLike ?? ""
+        UserInfoManager.imageURL = profile.imageURL
+        UserInfoManager.univ = profile.univ
+        UserInfoManager.categoryLike = profile.categoryLike
         UserInfoManager.certUni = profile.certUni
         UserInfoManager.certAuthor = profile.certAuthor
         UserInfoManager.follow = profile.follow
