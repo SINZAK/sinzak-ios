@@ -36,9 +36,15 @@ final class DefaultProductsDetailVM: ProductsDetailVM {
                 onSuccess: { owner, productsDetail in
                     owner.fetchedData.accept(productsDetail)
                     
-                    owner.imageSections.accept(
-                        [ImageSection(model: Void(), items: productsDetail.images ?? [])]
-                    )
+                    if let images = productsDetail.images, images.isEmpty {
+                        owner.imageSections.accept(
+                            [ImageSection(model: Void(), items: ["empty"])]
+                        )
+                    } else if let images = productsDetail.images, !images.isEmpty {
+                        owner.imageSections.accept(
+                            [ImageSection(model: Void(), items: productsDetail.images ?? [])]
+                        )
+                    }
                 }, onFailure: { _, error in
                     Log.debug(error)
                 })
