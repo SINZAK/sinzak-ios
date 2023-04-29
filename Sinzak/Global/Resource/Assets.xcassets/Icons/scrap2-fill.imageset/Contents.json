@@ -1,14 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "filled=on.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "filled=on@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "filled=on@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
