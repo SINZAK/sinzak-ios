@@ -39,7 +39,38 @@ struct Products: Codable {
     let complete: Bool
     let popularity: Int
     let like: Bool
+    
+    init(id: Int, title: String, content: String, author: String, price: Int, thumbnail: String, date: String, suggest: Bool, likesCnt: Int, complete: Bool, popularity: Int, like: Bool) {
+        self.id = id
+        self.title = title
+        self.content = content
+        self.author = author
+        self.price = price
+        self.thumbnail = thumbnail
+        self.date = date
+        self.suggest = suggest
+        self.likesCnt = likesCnt
+        self.complete = complete
+        self.popularity = popularity
+        self.like = like
+    }
+    
+    init(with productResponse: MarketProductResponseDTO) {
+        self.id = productResponse.id ?? -404
+        self.title = productResponse.title ?? ""
+        self.content = productResponse.content ?? ""
+        self.author = productResponse.author ?? ""
+        self.price = productResponse.price ?? 0
+        self.thumbnail = productResponse.thumbnail ?? ""
+        self.date = productResponse.date ?? ""
+        self.suggest = productResponse.suggest ?? false
+        self.likesCnt = productResponse.likesCnt ?? 0
+        self.complete = productResponse.complete ?? false
+        self.popularity = productResponse.popularity ?? 0
+        self.like = productResponse.like ?? false
+    }
 }
+
 
 struct MarketProductDataSection {
     var items: [Products]
