@@ -34,7 +34,7 @@ struct ProductsDetailDTO: Codable {
     let myPost: Bool?
     let complete: Bool?
     let width: Double?
-    let vertical: Int?
+    let vertical: Double?
     let height: Double?
 
     enum CodingKeys: String, CodingKey {
@@ -95,9 +95,9 @@ struct ProductsDetailDTO: Codable {
             chatCnt: chatCnt ?? -1,
             myPost: myPost ?? false,
             complete: complete ?? false,
-            width: width ?? -1,
-            vertical: vertical ?? -1,
-            height: height ?? -1
+            width: width ?? 0,
+            vertical: vertical ?? 0,
+            height: height ?? 0
         )
     }
 }
