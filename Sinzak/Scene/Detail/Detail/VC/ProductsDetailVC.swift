@@ -181,7 +181,13 @@ private extension ProductsDetailVC {
     
     func getImageDataSource() -> RxCollectionViewSectionedReloadDataSource<ImageSection> {
         return RxCollectionViewSectionedReloadDataSource<ImageSection>(
-            configureCell: { _, collectionView, indexPath, item in
+            configureCell: { [weak self] _, collectionView, indexPath, item in
+                guard let self = self else { return UICollectionViewCell() }
+                
+                if item == "empty" {
+                    Log.debug("empty")
+                    self.mainView.pageControl.isHidden = true
+                }
                 
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: PhotoCVC.identifier,
