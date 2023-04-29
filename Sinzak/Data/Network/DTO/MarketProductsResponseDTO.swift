@@ -48,7 +48,7 @@ extension MarketProductResponseDTO {
             content: content ?? "",
             author: author ?? "",
             price: price ?? 0,
-            thumbnail: thumbnail,
+            thumbnail: thumbnail ?? "",
             date: date ?? "",
             suggest: suggest ?? false,
             likesCnt: likesCnt ?? 0,
