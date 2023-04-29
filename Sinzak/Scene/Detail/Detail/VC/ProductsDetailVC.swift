@@ -50,8 +50,8 @@ final class ProductsDetailVC: SZVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.showAnimatedSkeleton(transition: .none)
         viewModel.fetchProductsDetail(id: id)
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -124,8 +124,9 @@ final class ProductsDetailVC: SZVC {
     }
     // MARK: - Helpers
     override func configure() {
-        mainView.priceOfferButton.addTarget(self, action: #selector(priceOfferButtonTapped), for: .touchUpInside)
+        view.isSkeletonable = true
         
+        mainView.priceOfferButton.addTarget(self, action: #selector(priceOfferButtonTapped), for: .touchUpInside)
         bind()
     }
     override func setNavigationBar() {
@@ -159,13 +160,18 @@ final class ProductsDetailVC: SZVC {
     
     func bindOutput() {
         viewModel.fetchedData
+            .delay(
+                .milliseconds(500),
+                scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
+            )
             .observe(on: MainScheduler.instance)
             .subscribe(
                 with: self,
                 onNext: { owner, data in
                     owner.owner = data.myPost ? .mine : .other
                     owner.mainView.setData(data, owner.type)
-                    
+                    owner.view.hideSkeleton()
+                    owner.mainView.skeletonView.isHidden = true
                 })
             .disposed(by: disposeBag)
         

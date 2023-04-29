@@ -505,6 +505,8 @@ final class ProductsDetailView: SZView {
         $0.titleLabel?.font = .caption_B
     }
     
+    let skeletonView = ProductsDetailSkeletonView()
+    
     // MARK: - Setter
     func setData(_ data: ProductsDetail, _ type: DetailType?) {
         let numberFormatter = NumberFormatter()
@@ -565,10 +567,12 @@ final class ProductsDetailView: SZView {
     }
     // MARK: - Design Helpers
     override func setView() {
+        isSkeletonable = true
         addSubviews(
             scrollView,
             pageControl,
-            bottomActionView
+            bottomActionView,
+            skeletonView
         )
         bottomActionView.addSubviews(
             likeButton, verticalDivider, scrapButton,
@@ -810,6 +814,11 @@ final class ProductsDetailView: SZView {
         chatCountLabel.snp.makeConstraints { make in
             make.centerY.equalTo(chatIcon)
             make.leading.equalTo(chatIcon.snp.trailing)
+        }
+        
+        skeletonView.snp.makeConstraints {
+            $0.top.bottom.equalTo(safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
         }
     }
 }
