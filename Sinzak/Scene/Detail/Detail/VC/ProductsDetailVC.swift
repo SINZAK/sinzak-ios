@@ -149,7 +149,7 @@ final class ProductsDetailVC: SZVC {
                 return Int(currentPage)
             }
             .distinctUntilChanged()
-            .drive(mainView.pagerControl.rx.currentPage)
+            .drive(mainView.pageControl.rx.currentPage)
             .disposed(by: disposeBag)
     }
     
@@ -163,9 +163,8 @@ final class ProductsDetailVC: SZVC {
             .subscribe(
                 with: self,
                 onNext: { owner, data in
-                    owner.owner = data.id == UserInfoManager.userID ? .mine : .other
-                    
-                    owner.mainView.setData(data)
+                    owner.owner = data.myPost ? .mine : .other
+                    owner.mainView.setData(data, owner.type)
                     
                 })
             .disposed(by: disposeBag)
