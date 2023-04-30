@@ -16,7 +16,7 @@ final class PopUpAlertController: UIViewController {
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = CustomColor.background
+        view.backgroundColor = CustomColor.alertSheetBackground
         view.layer.cornerRadius = 30.0
         view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         
@@ -206,57 +206,5 @@ extension PopUpAlertController: UIGestureRecognizerDelegate {
         let tap = touch.location(in: self.view)
         if containerView.frame.contains(tap) { return false }
         else { return true }
-    }
-}
-
-extension UIViewController {
-    func showPopUpAlert(
-        message: String,
-        leftActionTitle: String,
-        rightActionTitle: String,
-        leftActionCompletion: (() -> Void)? = nil,
-        rightActionCompletion: (() -> Void)? = nil
-    ) {
-        let popUpAlertController = PopUpAlertController(messageText: message)
-        showPopUp(
-            popUpViewController: popUpAlertController,
-            leftActionTitle: leftActionTitle,
-            rightActionTitle: rightActionTitle,
-            leftActionCompletion: leftActionCompletion,
-            rightActionCompletion: rightActionCompletion
-        )
-    }
-    
-    private func showPopUp(
-        popUpViewController: PopUpAlertController,
-        leftActionTitle: String?,
-        rightActionTitle: String,
-        leftActionCompletion: (() -> Void)?,
-        rightActionCompletion: (() -> Void)?
-    ) {
-        
-        popUpViewController.addActionToButton(
-            title: leftActionTitle,
-            titleColor: CustomColor.purple,
-            backgroundColor: CustomColor.gray10,
-            completion: {
-                popUpViewController.dismiss(
-                    animated: false,
-                    completion: leftActionCompletion
-                )
-            }
-        )
-        popUpViewController.addActionToButton(
-            title: rightActionTitle,
-            titleColor: CustomColor.white,
-            backgroundColor: CustomColor.purple,
-            completion: {
-                popUpViewController.dismiss(
-                    animated: false,
-                    completion: rightActionCompletion
-                )
-            }
-        )
-        present(popUpViewController, animated: false)
     }
 }
