@@ -370,21 +370,6 @@ private extension MarketVC {
     }
 }
 
-// MARK: - ViewControllerTransitioning
-
-extension MarketVC: UIViewControllerTransitioningDelegate {
-    func presentationController(
-        forPresented presented: UIViewController,
-        presenting: UIViewController?,
-        source: UIViewController
-    ) -> UIPresentationController? {
-        SelectAlignPC(
-            presentedViewController: presented,
-            presenting: presenting
-        )
-    }
-}
-
 // MARK: - Private Method
 
 private extension MarketVC {
