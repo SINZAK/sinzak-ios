@@ -218,6 +218,10 @@
 		EDF5089029FD624600FDC2E2 /* ProductsDetailSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5088F29FD624600FDC2E2 /* ProductsDetailSkeletonView.swift */; };
 		EDF5089329FD8F8E00FDC2E2 /* PopUpAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5089229FD8F8E00FDC2E2 /* PopUpAlertController.swift */; };
 		EDF5089529FE505500FDC2E2 /* UIControl+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5089429FE505500FDC2E2 /* UIControl+Extension.swift */; };
+		EDF5089729FE533000FDC2E2 /* SingleAlertSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5089629FE533000FDC2E2 /* SingleAlertSheetController.swift */; };
+		EDF5089929FE727F00FDC2E2 /* AlertPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5089829FE727F00FDC2E2 /* AlertPC.swift */; };
+		EDF5089B29FE7E5000FDC2E2 /* DoubleAlertSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5089A29FE7E5000FDC2E2 /* DoubleAlertSheetController.swift */; };
+		EDF5089D29FE8D6D00FDC2E2 /* TripleAlertSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5089C29FE8D6D00FDC2E2 /* TripleAlertSheetController.swift */; };
 		EDF76FEC29F7994D00F33146 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FEB29F7994D00F33146 /* LikeView.swift */; };
 		EDF76FEE29F7BB4C00F33146 /* LikeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */; };
 		EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */; };
@@ -446,6 +450,10 @@
 		EDF5088F29FD624600FDC2E2 /* ProductsDetailSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailSkeletonView.swift; sourceTree = "<group>"; };
 		EDF5089229FD8F8E00FDC2E2 /* PopUpAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAlertController.swift; sourceTree = "<group>"; };
 		EDF5089429FE505500FDC2E2 /* UIControl+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Extension.swift"; sourceTree = "<group>"; };
+		EDF5089629FE533000FDC2E2 /* SingleAlertSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAlertSheetController.swift; sourceTree = "<group>"; };
+		EDF5089829FE727F00FDC2E2 /* AlertPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPC.swift; sourceTree = "<group>"; };
+		EDF5089A29FE7E5000FDC2E2 /* DoubleAlertSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleAlertSheetController.swift; sourceTree = "<group>"; };
+		EDF5089C29FE8D6D00FDC2E2 /* TripleAlertSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripleAlertSheetController.swift; sourceTree = "<group>"; };
 		EDF76FEB29F7994D00F33146 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
 		EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeResponseDTO.swift; sourceTree = "<group>"; };
 		EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetail.swift; sourceTree = "<group>"; };
@@ -1840,6 +1848,10 @@
 			isa = PBXGroup;
 			children = (
 				EDF5089229FD8F8E00FDC2E2 /* PopUpAlertController.swift */,
+				EDF5089629FE533000FDC2E2 /* SingleAlertSheetController.swift */,
+				EDF5089A29FE7E5000FDC2E2 /* DoubleAlertSheetController.swift */,
+				EDF5089C29FE8D6D00FDC2E2 /* TripleAlertSheetController.swift */,
+				EDF5089829FE727F00FDC2E2 /* AlertPC.swift */,
 				EDF5089429FE505500FDC2E2 /* UIControl+Extension.swift */,
 			);
 			path = CustomAlert;
@@ -2142,13 +2154,16 @@
 				EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */,
 				A216BD53297FD60E008964BC /* ChatListView.swift in Sources */,
 				A2B0F6112980233900EC5C78 /* MarketVC.swift in Sources */,
+				EDF5089929FE727F00FDC2E2 /* AlertPC.swift in Sources */,
 				A24E909E29B7246E006B3347 /* HomeSection.swift in Sources */,
 				A280AB4F29A7A21C00C1729C /* WriteCategoryCVC.swift in Sources */,
 				A226CC5E29AE3E00000161E8 /* Products.swift in Sources */,
 				A2B3857A295D893300E5EB7C /* UniversityInfoView.swift in Sources */,
+				EDF5089D29FE8D6D00FDC2E2 /* TripleAlertSheetController.swift in Sources */,
 				A2265374296D7E5E00605697 /* HomeVC.swift in Sources */,
 				A2B3857C295D893A00E5EB7C /* UniversityInfoVC.swift in Sources */,
 				A2265379296D80DC00605697 /* TabBarVC.swift in Sources */,
+				EDF5089729FE533000FDC2E2 /* SingleAlertSheetController.swift in Sources */,
 				A2100F79298696D800C85ADF /* WorksHeader.swift in Sources */,
 				A233891929B088D400688FD8 /* SettingView.swift in Sources */,
 				A20E4A482998F796009C1340 /* NotLoginedView.swift in Sources */,
@@ -2284,6 +2299,7 @@
 				EDF76FFF29F8F32300F33146 /* BannerFooter.swift in Sources */,
 				A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
+				EDF5089B29FE7E5000FDC2E2 /* DoubleAlertSheetController.swift in Sources */,
 				A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */,
 				A280AB5329A7A5E600C1729C /* WriteCategoryHeaderKind.swift in Sources */,
 				EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */,
