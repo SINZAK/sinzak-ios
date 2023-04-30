@@ -24,4 +24,10 @@ enum CustomColor {
     static let gray10 = UIColor(named: "customGray10")!
     static let onlyGray80 = UIColor(named: "onlyCustomGray80")!
     static let refreshControl = UIColor(named: "refreshControl")!
+    
+    // etc
+    static let alertSheetBackground = UIColor(named: "alertSheetBackground")!
+    static let alertCancel = UIColor(named: "alertCancel")!
+    static let alertTint1 = UIColor(named: "alertTint1")!
+    static let alertTint2 = UIColor(named: "alertTint2")!
 }
