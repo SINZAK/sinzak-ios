@@ -11,7 +11,7 @@ class SZTextField: UITextField {
     // MARK: - Properties
     let insets: UIEdgeInsets
     // MARK: - Initialiser
-    init(insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 22), cursorColor: UIColor = CustomColor.red!) {
+    init(insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 22), cursorColor: UIColor = CustomColor.red) {
         self.insets = insets
         super.init(frame: .zero)
         self.tintColor = cursorColor

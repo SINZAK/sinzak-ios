@@ -26,7 +26,7 @@ final class SelectAlignTVC: UITableViewCell {
         let button = UIButton()
         let infoIcon = UIImage(named: "info")?
             .withTintColor(
-                CustomColor.gray80!,
+                CustomColor.gray80,
                 renderingMode: .alwaysOriginal
             )
         button.setImage(infoIcon, for: .normal)
@@ -39,7 +39,7 @@ final class SelectAlignTVC: UITableViewCell {
         let imageView = UIImageView()
         let checkIcon = UIImage(named: "checkmark")?
             .withTintColor(
-                CustomColor.label!,
+                CustomColor.label,
                 renderingMode: .alwaysOriginal
             )
         imageView.image = checkIcon

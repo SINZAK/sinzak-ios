@@ -35,7 +35,7 @@ final class AddPhotosView: SZView {
     let thumbnailMarkSquare = UIView().then {
         $0.backgroundColor = .clear
         $0.layer.cornerRadius = 12
-        $0.layer.borderColor = CustomColor.red50!.cgColor
+        $0.layer.borderColor = CustomColor.red50.cgColor
         $0.layer.borderWidth = 2.0
     }
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
@@ -47,7 +47,7 @@ final class AddPhotosView: SZView {
         $0.setTitle(I18NStrings.uploadPhotos, for: .normal)
         $0.setTitleColor(CustomColor.purple, for: .normal)
         $0.titleLabel?.font = .body_B
-        $0.layer.borderColor = CustomColor.purple!.cgColor
+        $0.layer.borderColor = CustomColor.purple.cgColor
         $0.layer.borderWidth = 1.0
     }
     // MARK: - Design Helpers

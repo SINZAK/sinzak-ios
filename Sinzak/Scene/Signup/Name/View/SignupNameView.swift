@@ -35,7 +35,7 @@ final class SignupNameView: SZView {
         $0.setTitle("중복확인", for: .normal)
         $0.setTitleColor(CustomColor.gray60, for: .normal)
         $0.titleLabel?.font = .caption_B
-        $0.layer.borderColor = CustomColor.gray60?.cgColor
+        $0.layer.borderColor = CustomColor.gray60.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 19
     }

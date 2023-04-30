@@ -98,11 +98,11 @@ final class ProductsDetailView: SZView {
         willSet {
             if newValue {
                 likeButton.configuration?.image = UIImage(named: "favorite-fill")?
-                    .withTintColor(CustomColor.red!, renderingMode: .alwaysOriginal)
+                    .withTintColor(CustomColor.red, renderingMode: .alwaysOriginal)
                 likeButton.configuration?.baseForegroundColor = CustomColor.red
             } else {
                 likeButton.configuration?.image = UIImage(named: "favorite")?
-                    .withTintColor(CustomColor.gray60!, renderingMode: .alwaysOriginal)
+                    .withTintColor(CustomColor.gray60, renderingMode: .alwaysOriginal)
                 likeButton.configuration?.baseForegroundColor = CustomColor.gray60
             }
         }
@@ -112,11 +112,11 @@ final class ProductsDetailView: SZView {
         willSet {
             if newValue {
                 scrapButton.configuration?.image = UIImage(named: "scrap2-fill")?
-                    .withTintColor(CustomColor.red!, renderingMode: .alwaysOriginal)
+                    .withTintColor(CustomColor.red, renderingMode: .alwaysOriginal)
                 scrapButton.configuration?.baseForegroundColor = CustomColor.red
             } else {
                 scrapButton.configuration?.image = UIImage(named: "scrap2-blank")?
-                    .withTintColor(CustomColor.gray60!, renderingMode: .alwaysOriginal)
+                    .withTintColor(CustomColor.gray60, renderingMode: .alwaysOriginal)
                 scrapButton.configuration?.baseForegroundColor = CustomColor.gray60
             }
         }
@@ -275,7 +275,7 @@ final class ProductsDetailView: SZView {
         $0.setTitleColor(CustomColor.red, for: .normal)
         $0.layer.cornerRadius = 16
         $0.layer.borderWidth = 1.5
-        $0.layer.borderColor = CustomColor.red?.cgColor
+        $0.layer.borderColor = CustomColor.red.cgColor
     }
     // 상세사이즈 뷰
     let detailSizeView = UIView().then {
@@ -461,7 +461,7 @@ final class ProductsDetailView: SZView {
         var titleAttr = AttributedString.init("11") // 숫자
         titleAttr.font = .caption_B
         config.attributedTitle = titleAttr
-        config.image = UIImage(named: "favorite")?.withTintColor(CustomColor.gray60!, renderingMode: .alwaysOriginal)
+        config.image = UIImage(named: "favorite")?.withTintColor(CustomColor.gray60, renderingMode: .alwaysOriginal)
         config.imagePadding = 6
         config.imagePlacement = .top
         config.baseForegroundColor = CustomColor.gray60
@@ -479,7 +479,7 @@ final class ProductsDetailView: SZView {
         var titleAttr = AttributedString.init(I18NStrings.scrap) // 숫자
         titleAttr.font = .caption_B
         config.attributedTitle = titleAttr
-        config.image = UIImage(named: "scrap2-blank")?.withTintColor(CustomColor.gray60!, renderingMode: .alwaysOriginal)
+        config.image = UIImage(named: "scrap2-blank")?.withTintColor(CustomColor.gray60, renderingMode: .alwaysOriginal)
         config.imagePadding = 6
         config.imagePlacement = .top
         config.baseForegroundColor = CustomColor.gray60

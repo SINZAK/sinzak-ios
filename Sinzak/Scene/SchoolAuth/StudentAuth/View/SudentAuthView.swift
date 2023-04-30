@@ -20,17 +20,17 @@ enum ButtonSelected {
     var foregroundColor: UIColor {
         switch self {
         case .selected:
-            return CustomColor.white!
+            return CustomColor.white
         case .not:
-            return CustomColor.label!
+            return CustomColor.label
         }
     }
     var backgroundColor: UIColor {
         switch self {
         case .selected:
-            return CustomColor.red!
+            return CustomColor.red
         case .not:
-            return CustomColor.gray10!
+            return CustomColor.gray10
         }
     }
     var image: UIImage {
@@ -154,7 +154,7 @@ final class StudentAuthView: SZView {
         $0.setTitleColor(CustomColor.purple, for: .normal)
         $0.setImage(UIImage(named: "camera"), for: .normal)
         $0.tintColor = CustomColor.purple
-        $0.layer.borderColor = CustomColor.purple!.cgColor
+        $0.layer.borderColor = CustomColor.purple.cgColor
         $0.titleLabel?.font = .body_B
         $0.layer.borderWidth = 2
         $0.layer.cornerRadius = 24
@@ -163,14 +163,14 @@ final class StudentAuthView: SZView {
     let uploadedPhotoView = UIView().then {
         $0.layer.cornerRadius = 24
         $0.clipsToBounds = true
-        $0.layer.borderColor = CustomColor.label!.cgColor
+        $0.layer.borderColor = CustomColor.label.cgColor
         $0.layer.borderWidth = 2
         $0.isHidden = true
     }
     let selectedPhoto: UIImageView = UIImageView().then {
         $0.layer.cornerRadius = 24
         $0.clipsToBounds = true
-        $0.layer.borderColor = CustomColor.gray40!.cgColor
+        $0.layer.borderColor = CustomColor.gray40.cgColor
         $0.layer.borderWidth = 2
         $0.isHidden = true
         $0.contentMode = .scaleAspectFill

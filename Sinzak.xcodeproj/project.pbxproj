@@ -216,6 +216,8 @@
 		EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501C29EDAE7C001733C6 /* Setting.swift */; };
 		EDF4502129EEC1CB001733C6 /* HomeSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4502029EEC1CB001733C6 /* HomeSectionModel.swift */; };
 		EDF5089029FD624600FDC2E2 /* ProductsDetailSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5088F29FD624600FDC2E2 /* ProductsDetailSkeletonView.swift */; };
+		EDF5089329FD8F8E00FDC2E2 /* PopUpAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5089229FD8F8E00FDC2E2 /* PopUpAlertController.swift */; };
+		EDF5089529FE505500FDC2E2 /* UIControl+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5089429FE505500FDC2E2 /* UIControl+Extension.swift */; };
 		EDF76FEC29F7994D00F33146 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FEB29F7994D00F33146 /* LikeView.swift */; };
 		EDF76FEE29F7BB4C00F33146 /* LikeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */; };
 		EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */; };
@@ -442,6 +444,8 @@
 		EDF4501C29EDAE7C001733C6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		EDF4502029EEC1CB001733C6 /* HomeSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionModel.swift; sourceTree = "<group>"; };
 		EDF5088F29FD624600FDC2E2 /* ProductsDetailSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailSkeletonView.swift; sourceTree = "<group>"; };
+		EDF5089229FD8F8E00FDC2E2 /* PopUpAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAlertController.swift; sourceTree = "<group>"; };
+		EDF5089429FE505500FDC2E2 /* UIControl+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Extension.swift"; sourceTree = "<group>"; };
 		EDF76FEB29F7994D00F33146 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
 		EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeResponseDTO.swift; sourceTree = "<group>"; };
 		EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetail.swift; sourceTree = "<group>"; };
@@ -1296,6 +1300,7 @@
 		A2806123292F5495005AE0B3 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				EDF5089129FD8F6200FDC2E2 /* CustomAlert */,
 				A2289D4929869FA80017969C /* Protocol */,
 				A26F0AAF2948C7FB001CB2AA /* Base */,
 				A20CBD6E29478BB90012FF32 /* Extension */,
@@ -1831,6 +1836,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		EDF5089129FD8F6200FDC2E2 /* CustomAlert */ = {
+			isa = PBXGroup;
+			children = (
+				EDF5089229FD8F8E00FDC2E2 /* PopUpAlertController.swift */,
+				EDF5089429FE505500FDC2E2 /* UIControl+Extension.swift */,
+			);
+			path = CustomAlert;
+			sourceTree = "<group>";
+		};
 		EDF76FEF29F7BCF400F33146 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2105,6 +2119,7 @@
 				A2DEC36E29B5BD4E00CF0794 /* CertifiedAuthorView.swift in Sources */,
 				A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */,
 				A2121AD029D075AE008F5406 /* UnivCertify.swift in Sources */,
+				EDF5089329FD8F8E00FDC2E2 /* PopUpAlertController.swift in Sources */,
 				A233892429B3772800688FD8 /* Message.swift in Sources */,
 				EDF76FEE29F7BB4C00F33146 /* LikeResponseDTO.swift in Sources */,
 				A2B385642959A8F000E5EB7C /* UIView+UIStackView+Extension.swift in Sources */,
@@ -2149,6 +2164,7 @@
 				ED19B0CB29EAE24500C951D1 /* SchoolAuthButton.swift in Sources */,
 				A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */,
 				ED7F92D129DB0F2A00C55FBF /* SNSLoginDTO.swift in Sources */,
+				EDF5089529FE505500FDC2E2 /* UIControl+Extension.swift in Sources */,
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
 				A280AB5129A7A5BB00C1729C /* WriteCategoryHeader.swift in Sources */,
 				A2DEC37329B6495000CF0794 /* Date+Extension.swift in Sources */,

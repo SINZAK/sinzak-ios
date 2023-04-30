@@ -16,9 +16,9 @@ enum ColorKind {
     var color: UIColor {
         switch self {
         case .base:
-            return CustomColor.gray60!
+            return CustomColor.gray60
         case .selected:
-            return CustomColor.red!
+            return CustomColor.red
         }
     }
 }
@@ -58,7 +58,7 @@ final class CategoryTagCVC: UICollectionViewCell {
         $0.layer.cornerRadius = 15
         $0.backgroundColor = CustomColor.background
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = CustomColor.gray60?.cgColor
+        $0.layer.borderColor = CustomColor.gray60.cgColor
         $0.isSkeletonable = true
     }
     

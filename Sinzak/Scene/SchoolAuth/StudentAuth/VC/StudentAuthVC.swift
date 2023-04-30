@@ -125,7 +125,7 @@ final class StudentAuthVC: SZVC {
             .withUnretained(self)
             .bind { (vc, bool) in
                 let text: String = bool ? "엔터를 눌러 인증메일을 전송해주세요" : I18NStrings.enterYourEmailInCorrectFormat
-                let color: UIColor = bool  ? CustomColor.purple! : CustomColor.red!
+                let color: UIColor = bool  ? CustomColor.purple : CustomColor.red
                 vc.mainView.webmailValidationLabel.textColor = color
                 vc.mainView.webmailValidationLabel.text = text
             }
@@ -149,7 +149,7 @@ final class StudentAuthVC: SZVC {
             .withUnretained(self)
             .bind { (vc, bool) in
                 let text: String = bool ? "" :  I18NStrings.pleaseEnterAgain
-                let color: UIColor = bool  ? CustomColor.purple! : CustomColor.red!
+                let color: UIColor = bool  ? CustomColor.purple : CustomColor.red
                 vc.mainView.authCodeValidationLabel.textColor = color
                 vc.mainView.authCodeValidationLabel.text = text
                 vc.mainView.layoutIfNeeded()

@@ -19,7 +19,7 @@ final class SeeMoreCVC: UICollectionViewCell {
                 imageView.image = nil
             } else {
                 imageView.image = UIImage(named: "moreCell")?
-                    .withTintColor(CustomColor.label!, renderingMode: .alwaysOriginal)
+                    .withTintColor(CustomColor.label, renderingMode: .alwaysOriginal)
             }
         }
     }
@@ -27,7 +27,7 @@ final class SeeMoreCVC: UICollectionViewCell {
     let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "moreCell")?
-            .withTintColor(CustomColor.label!, renderingMode: .alwaysOriginal)
+            .withTintColor(CustomColor.label, renderingMode: .alwaysOriginal)
     }
     
     // MARK: - Init

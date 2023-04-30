@@ -22,7 +22,7 @@ class SZVC: UIViewController {
         // 루트뷰가 아닐 경우 백버튼
         if self != navigationController?.viewControllers.first {
             let customBackButton = UIBarButtonItem(
-                image: UIImage(named: "back")?.withTintColor(CustomColor.label ?? .label, renderingMode: .alwaysOriginal),
+                image: UIImage(named: "back")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal),
                 style: .plain,
                 target: self,
                 action: #selector(backButtonTapped) )

@@ -13,17 +13,17 @@ enum WriteCategoryColor {
     var bgcolor: UIColor {
         switch self {
         case .base:
-            return CustomColor.gray10!
+            return CustomColor.gray10
         case .selected:
-            return CustomColor.red!
+            return CustomColor.red
         }
     }
     var fontColor: UIColor {
         switch self {
         case .base:
-            return CustomColor.black!
+            return CustomColor.black
         case .selected:
-            return CustomColor.white!
+            return CustomColor.white
         }
     }
 }
