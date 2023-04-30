@@ -31,6 +31,9 @@ class SZVC: UIViewController {
     func setNavigationBar() {
         // 색상 설정
         navigationController?.navigationBar.tintColor = CustomColor.label
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.body_B
+        ]
         // 루트뷰가 아닐 경우 백버튼
         if self != navigationController?.viewControllers.first {
             let customBackButton = UIBarButtonItem(
