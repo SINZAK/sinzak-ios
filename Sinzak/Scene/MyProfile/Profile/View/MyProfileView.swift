@@ -111,7 +111,7 @@ final class MyProfileView: SZView {
         $0.titleLabel?.font = .body_M
         $0.layer.cornerRadius = 21
         $0.clipsToBounds = true
-        $0.layer.borderColor = CustomColor.black?.cgColor
+        $0.layer.borderColor = CustomColor.black.cgColor
         $0.layer.borderWidth = 1
     }
     // 2. 스크랩목록
@@ -158,7 +158,7 @@ final class MyProfileView: SZView {
         $0.image = UIImage(named: "empty-face-image")
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.black?.withAlphaComponent(0.25).cgColor
+        $0.layer.shadowColor = CustomColor.black.withAlphaComponent(0.25).cgColor
         $0.layer.shadowRadius = 8
         $0.layer.shadowOffset = CGSize(width: 4, height: 2)
     }
@@ -167,7 +167,7 @@ final class MyProfileView: SZView {
         $0.image = UIImage(named: "empty-face-image")
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.black?.withAlphaComponent(0.25).cgColor
+        $0.layer.shadowColor = CustomColor.black.withAlphaComponent(0.25).cgColor
         $0.layer.shadowRadius = 8
         $0.layer.shadowOffset = CGSize(width: 4, height: 2)
     }
@@ -188,7 +188,7 @@ final class MyProfileView: SZView {
         $0.image = UIImage(named: "emptySquare")
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.black?.withAlphaComponent(0.25).cgColor
+        $0.layer.shadowColor = CustomColor.black.withAlphaComponent(0.25).cgColor
         $0.layer.shadowRadius = 8
         $0.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
@@ -197,7 +197,7 @@ final class MyProfileView: SZView {
         $0.image = UIImage(named: "emptySquare")
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.black?.withAlphaComponent(0.25).cgColor
+        $0.layer.shadowColor = CustomColor.black.withAlphaComponent(0.25).cgColor
         $0.layer.shadowRadius = 8
         $0.layer.shadowOffset = CGSize(width: 0, height: 2)
     }

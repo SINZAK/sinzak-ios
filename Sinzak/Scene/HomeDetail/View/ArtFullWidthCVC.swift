@@ -18,7 +18,7 @@ final class ArtFullWidthCVC: UICollectionViewCell {
         $0.image = UIImage(named: "emptyRectangle")
     }
     private let favoriteBackground = UIView().then {
-        $0.backgroundColor = CustomColor.gray80!.withAlphaComponent(0.4)
+        $0.backgroundColor = CustomColor.gray80.withAlphaComponent(0.4)
         $0.layer.cornerRadius = 16
     }
     let favoriteCountLabel = UILabel().then {

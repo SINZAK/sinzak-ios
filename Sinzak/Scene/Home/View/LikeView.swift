@@ -23,7 +23,7 @@ final class LikeView: UIView {
         willSet {
             if newValue {
                 likeImageView.image = UIImage(named: "favorite-fill")!
-                    .withTintColor(CustomColor.red!, renderingMode: .alwaysOriginal)
+                    .withTintColor(CustomColor.red, renderingMode: .alwaysOriginal)
             } else {
                 likeImageView.image = UIImage(named: "favorite")!
                     .withTintColor(.white, renderingMode: .alwaysOriginal)
@@ -74,7 +74,7 @@ final class LikeView: UIView {
     }
     
     func configureLayout() {
-        backgroundColor = CustomColor.onlyGray80?.withAlphaComponent(0.4)
+        backgroundColor = CustomColor.onlyGray80.withAlphaComponent(0.4)
         
         addSubviews(likeImageView, likeCountLabel)
         

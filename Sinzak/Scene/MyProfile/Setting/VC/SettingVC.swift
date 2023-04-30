@@ -37,7 +37,7 @@ final class SettingVC: SZVC {
 extension SettingVC {
     private func createLayout() -> UICollectionViewLayout {
         var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        config.backgroundColor = CustomColor.white!
+        config.backgroundColor = CustomColor.white
         config.headerMode = .supplementary
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         return layout
@@ -70,7 +70,7 @@ extension SettingVC {
             configuration.text = headerItem.text
             // Customize header appearance to make it more eye-catching
             configuration.textProperties.font = .body_B
-            configuration.textProperties.color = CustomColor.black!
+            configuration.textProperties.color = CustomColor.black
             configuration.directionalLayoutMargins = .init(top: 20.0, leading: 0.0, bottom: 14.0, trailing: 0.0)
             // Apply the configuration to header view
             headerView.contentConfiguration = configuration
