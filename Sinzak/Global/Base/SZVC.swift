@@ -7,13 +7,25 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class SZVC: UIViewController {
+    
+    let disposeBag = DisposeBag()
+    let needLogIn: PublishRelay<Bool> = .init()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
         configure()
         view.backgroundColor = CustomColor.background
+        
+        needLogIn
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.showNeedLogIn()
+            })
+            .disposed(by: disposeBag)
     }
     /// 네비게이션 바 설정.
     func setNavigationBar() {
@@ -39,7 +51,6 @@ class SZVC: UIViewController {
     /// VC에서 실행할 메서드
     func configure() {
     }
-    let disposeBag = DisposeBag()
 }
 
 extension SZVC: UIGestureRecognizerDelegate {
@@ -50,6 +61,19 @@ extension SZVC: UIGestureRecognizerDelegate {
 
 // MARK: - Popup Alert
 extension UIViewController {
+    
+    func showNeedLogIn() {
+        showPopUpAlert(
+            message: "로그인 후 이용가능합니다.",
+            rightActionTitle: "로그인하기",
+            rightActionCompletion: { [weak self] in
+                let vm = DefaultLoginVM()
+                let vc = LoginVC(viewModel: vm)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        )
+    }
+    
     func showPopUpAlert(
         message: String,
         leftActionTitle: String = "아니요",
