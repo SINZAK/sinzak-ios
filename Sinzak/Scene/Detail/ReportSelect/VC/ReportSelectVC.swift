@@ -16,8 +16,9 @@ final class ReportSelectVC: SZVC {
     
     typealias ReportSection = SectionModel<Void, String>
     
+    let userID: Int
     private let mainView: ReportSelectView
-
+    
     private let sections = [
         ReportSection(
             model: Void(),
@@ -42,7 +43,10 @@ final class ReportSelectVC: SZVC {
         super.viewDidLoad()
     }
     
-    init(userName: String) {
+    // MARK: - Init
+    
+    init(userID: Int, userName: String) {
+        self.userID = userID
         self.mainView = ReportSelectView(name: userName)
         super.init(nibName: nil, bundle: nil)
     }
@@ -71,8 +75,9 @@ final class ReportSelectVC: SZVC {
             .subscribe(onNext: { owner, item in
                 owner.mainView.tableView.deselectRow(at: item, animated: true)
                 
-//                let name = sections[0].items[0]
-//                Log.debug(name)
+                let type = owner.sections[item.section].items[item.item]
+                let vc = ReportVC(userID: owner.userID, type: type)
+                owner.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
     }
