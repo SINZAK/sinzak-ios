@@ -25,17 +25,14 @@ final class ReportSelectView: SZView {
             사용자를 신고하는 이유를 선택해주세요.
             """
         label.numberOfLines = 2
+        label.addInterlineSpacing()
 
         return label
     }()
     
     let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.separatorInset = UIEdgeInsets(
-            top: 0, left: 16.0,
-            bottom: 0, right: 16.0
-        )
-        tableView.separatorColor = CustomColor.gray60
+        tableView.separatorStyle = .none
         tableView.register(
             SelectTableViewCell.self,
             forCellReuseIdentifier: SelectTableViewCell.identifier

@@ -30,6 +30,13 @@ final class SelectTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    private let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = CustomColor.gray60
+        
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -48,7 +55,8 @@ final class SelectTableViewCell: UITableViewCell {
         backgroundColor = CustomColor.background
         addSubviews(
             label,
-            iconView
+            iconView,
+            separator
         )
         
         label.snp.makeConstraints {
@@ -60,6 +68,12 @@ final class SelectTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().inset(32.0)
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(24.0)
+        }
+        
+        separator.snp.makeConstraints {
+            $0.centerY.equalTo(contentView.snp.bottom)
+            $0.leading.trailing.equalToSuperview().inset(16.0)
+            $0.height.equalTo(0.5)
         }
     }
 }
