@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "ing-5.png",
+      "filename" : "ing-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "ing-5 1.png",
+      "filename" : "ing-2 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -27,7 +27,7 @@
       "scale" : "1x"
     },
     {
-      "filename" : "ing@2x-5.png",
+      "filename" : "ing@2x-2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -38,7 +38,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "ing@2x-5 1.png",
+      "filename" : "ing@2x-2 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -53,7 +53,7 @@
       "scale" : "2x"
     },
     {
-      "filename" : "ing@3x-5.png",
+      "filename" : "ing@3x-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -64,7 +64,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "ing@3x-5 1.png",
+      "filename" : "ing@3x-2 1.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
