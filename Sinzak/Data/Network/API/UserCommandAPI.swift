@@ -1,5 +1,5 @@
 //
-//  UserAPI.swift
+//  UserCommandAPI.swift
 //  Sinzak
 //
 //  Created by Doy Kim on 2023/03/01.
@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 
-enum UserAPI {
+enum UserCommandAPI {
     // 모든 사용자보기
     // case allUsers
     // 사용자
@@ -20,9 +20,11 @@ enum UserAPI {
     case otherProfile(userId: Int)
     case otherFollowing(userId: Int)
     case otherFollower(userId: Int)
+    
+    case report(userId: Int, reason: String) // 신고
 }
 
-extension UserAPI: TargetType {
+extension UserCommandAPI: TargetType {
     var baseURL: URL {
         return URL(string: Endpoint.baseURL)!
     }
@@ -42,23 +44,33 @@ extension UserAPI: TargetType {
             return "/users/\(userId)/followings"
         case .otherFollower(let userId):
             return "/users/\(userId)/followers"
+        case .report(userId: _, reason: _):
+            return "/users/report"
         }
     }
     var method: Moya.Method {
         switch self {
+        case .report(userId: _, reason: _):
+            return .post
         default:
             return .get
         }
     }
     var task: Moya.Task {
         switch self {
+        case let .report(userId, reason):
+            let params: [String: Any] = [
+                "userId": userId,
+                "reason": reason
+            ]
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }
     }
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         let header = [
-            "Content-type": "application/json",
+            "Content-type": "application/json"
         ]
         let accessToken = KeychainItem.currentAccessToken
         switch self {
