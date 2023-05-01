@@ -8,6 +8,7 @@ disabled_rules:
   - empty_enum_arguments
   - implicit_getter
   - type_body_length
+  - line_length
 opt_in_rules:
 
 included:
