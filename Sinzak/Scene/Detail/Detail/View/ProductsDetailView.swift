@@ -34,28 +34,26 @@ final class ProductsDetailView: SZView {
         }
     }
     
-    var complete: Bool = false {
+    var isComplete: Bool = false {
         willSet {
             switch (owner, type, newValue) {
             case (.mine, .purchase, false):
                 isCompleteButton.setImage(UIImage(named: "mine-purchase-false"), for: .normal)
                 
             case (.mine, .purchase, true):
-                isCompleteButton.setImage(UIImage(named: "mine-purchase-true"), for: .normal)
+                isCompleteButton.setImage(UIImage(named: "other-purchase-true"), for: .normal)
 
             case (.mine, .request, false):
                 isCompleteButton.setImage(UIImage(named: "mine-request-false"), for: .normal)
                 
             case (.mine, .request, true):
-                isCompleteButton.setImage(UIImage(named: "mine-request-true"), for: .normal)
+                isCompleteButton.setImage(UIImage(named: "other-request-true"), for: .normal)
 
             case (.other, .purchase, false):
                 isCompleteButton.setImage(UIImage(named: "other-purchase-false"), for: .normal)
-                isCompleteButton.isEnabled = false
                 
             case (.other, .purchase, true):
                 isCompleteButton.setImage(UIImage(named: "other-purchase-true"), for: .normal)
-                isCompleteButton.isEnabled = false
                 
                 askDealButtton.isEnabled = false
                 askDealButtton.setTitle("거래완료", for: .normal)
@@ -65,11 +63,9 @@ final class ProductsDetailView: SZView {
                 
             case (.other, .request, false):
                 isCompleteButton.setImage(UIImage(named: "other-request-false"), for: .normal)
-                isCompleteButton.isEnabled = false
                 
             case (.other, .request, true):
                 isCompleteButton.setImage(UIImage(named: "other-request-true"), for: .normal)
-                isCompleteButton.isEnabled = false
                 
                 askDealButtton.isEnabled = false
                 askDealButtton.setTitle("모집완료", for: .normal)
@@ -520,7 +516,7 @@ final class ProductsDetailView: SZView {
         titleNameLabel.text = data.title
         categoryLabel.text = CategoryType(rawValue: data.category)?.text
 
-        self.complete = data.complete
+        self.isComplete = data.complete
         priceLabel.text = data.price.toMoenyFormat()
         timeLabel.text = data.date.toDate().toRelativeString()
         
