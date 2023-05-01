@@ -39,7 +39,7 @@ struct ProductsDetailDTO: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
-        case userID = "uerId"
+        case userID = "userId"
         case author
         case authorPicture = "author_picture"
         case univ
