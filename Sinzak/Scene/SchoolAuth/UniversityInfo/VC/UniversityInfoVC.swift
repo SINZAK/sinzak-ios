@@ -14,6 +14,8 @@ final class UniversityInfoVC: SZVC {
     // MARK: - Properties
     private let mainView = UniversityInfoView()
     var viewModel: UniversityInfoVM!
+    
+    private let disposeBag = DisposeBag()
        
     // MARK: - Lifecycle
     override func loadView() {

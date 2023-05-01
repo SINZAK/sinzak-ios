@@ -45,6 +45,8 @@ final class ProductsDetailVC: SZVC {
     var type: DetailType?
     var productsDetail: ProductsDetail?
     
+    private let disposeBag = DisposeBag()
+    
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView

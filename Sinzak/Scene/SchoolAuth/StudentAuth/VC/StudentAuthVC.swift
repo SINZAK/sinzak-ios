@@ -17,6 +17,9 @@ final class StudentAuthVC: SZVC {
     var authType = SchoolAuthType.webmail
     var viewModel = SchoolAuthViewModel()
     var schoolcardImage: UIImage? = UIImage()
+    
+    private let disposeBag = DisposeBag()
+    
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView

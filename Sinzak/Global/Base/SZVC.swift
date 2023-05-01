@@ -11,7 +11,7 @@ import RxCocoa
 
 class SZVC: UIViewController {
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     let needLogIn: PublishRelay<Bool> = .init()
         
     override func viewDidLoad() {

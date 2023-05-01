@@ -14,6 +14,9 @@ final class SignupNameVC: SZVC {
     // MARK: - Properties
     let mainView = SignupNameView()
     var viewModel: SignupNameVM
+    
+    private let disposeBag = DisposeBag()
+    
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView

@@ -21,6 +21,9 @@ final class LoginVC: SZVC {
     // 네이버로그인 인스턴스
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
+    private let disposeBag = DisposeBag()
+
+    
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView

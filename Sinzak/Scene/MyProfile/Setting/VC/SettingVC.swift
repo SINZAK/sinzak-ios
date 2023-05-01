@@ -14,6 +14,7 @@ final class SettingVC: SZVC {
     // MARK: - Properties
     private let mainView = SettingView()
     private var dataSource: UICollectionViewDiffableDataSource<Setting, String>!
+    private let disposeBag = DisposeBag()
 
     // MARK: - Lifecycle
     override func loadView() {

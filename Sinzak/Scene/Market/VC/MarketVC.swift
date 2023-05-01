@@ -17,6 +17,8 @@ final class MarketVC: SZVC {
     private let mainView = MarketView()
     let backgroundScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
     
+    private let disposeBag = DisposeBag()
+    
     var isViewDidLoad: Bool = true
     var isCurrentMarketView: Bool = false
     
