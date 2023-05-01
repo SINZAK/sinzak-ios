@@ -509,11 +509,6 @@ final class ProductsDetailView: SZView {
     
     // MARK: - Setter
     func setData(_ data: ProductsDetail, _ type: DetailType?) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
         
         self.products = data
         self.type = type ?? .purchase
@@ -526,7 +521,7 @@ final class ProductsDetailView: SZView {
         categoryLabel.text = CategoryType(rawValue: data.category)?.text
 
         self.complete = data.complete
-        priceLabel.text = (numberFormatter.string(from: NSNumber(value: Int(data.price))) ?? "0") + "원"
+        priceLabel.text = data.price.toMoenyFormat()
         timeLabel.text = data.date.toDate().toRelativeString()
         
         authorImageView.kf.setImage(with: URL(string: data.authorPicture))

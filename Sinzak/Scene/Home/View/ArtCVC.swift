@@ -118,8 +118,6 @@ final class ArtCVC: UICollectionViewCell {
         self.kind = kind
         self.needLoginAlert = relay
         
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
         let nothingImage = UIImage(named: "nothing")?.withTintColor(CustomColor.gray60, renderingMode: .alwaysOriginal)
         
         if let thumbnail = data.thumbnail {
@@ -133,7 +131,7 @@ final class ArtCVC: UICollectionViewCell {
         titleLabel.text = data.title
         authorLabel.text = data.author
         uploadTimeLabel.text = data.date.toDate().toRelativeString()
-        priceLabel.text = (numberFormatter.string(from: NSNumber(value: Int(data.price))) ?? "0") + "원"
+        priceLabel.text = data.price.toMoenyFormat()
         likeView.likesCount = data.likesCnt
         likeView.isSelected = data.like
         likeView.isHidden = data.complete
