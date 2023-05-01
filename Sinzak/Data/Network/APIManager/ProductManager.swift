@@ -83,4 +83,19 @@ class ProductsManager: ProductManagerType {
                 return response.success
             }
     }
+    
+    func deleteProducts(id: Int) -> Single<Bool> {
+        return provider.rx.request(.delete(id: id))
+            .map(BaseDTO<String>.self)
+            .map { response in
+                if !response.success {
+                    if let message = response.message {
+                        throw APIError.errorMessage(message)
+                    } else {
+                        throw APIError.unknown(nil)
+                    }
+                }
+                return true
+            }
+    }
 }
