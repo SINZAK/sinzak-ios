@@ -253,6 +253,13 @@ private extension ArtCVC {
             onSuccess: { owner, _ in
                 owner.likeView.isSelected.toggle()
                 if owner.likeView.isSelected {
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
+                        owner.likeView.likeImageView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                    }, completion: { _ in
+                        UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
+                            owner.likeView.likeImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                        })
+                    })
                     owner.likeView.likesCount += 1
                 } else {
                     owner.likeView.likesCount -= 1
