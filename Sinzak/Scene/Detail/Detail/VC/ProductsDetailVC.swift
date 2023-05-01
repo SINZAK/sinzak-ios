@@ -72,53 +72,7 @@ final class ProductsDetailVC: SZVC {
     }
     
     // MARK: - Actions
-    @objc func menuButtonTapped(_ sender: UIBarButtonItem) {
-        // ActionSheet 띄우기
-//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//        let writerName = "신작" // 글작성자 이름
-//        owner = DetailOwner.other
-//        guard let owner = owner else { return }
-//        switch owner {
-//        case .mine:
-//            let edit = UIAlertAction(title: I18NStrings.edit, style: .default) { [weak self] _ in
-//                self?.editPost()
-//            }
-//            let remove = UIAlertAction(title: I18NStrings.remove, style: .default) { [weak self] _ in
-//                self?.removePost()
-//            }
-//            alert.addAction(edit)
-//            alert.addAction(remove)
-//        case .other:
-//            let report = UIAlertAction(title: I18NStrings.report, style: .default) { [weak self] _ in
-//                self?.reportUser()
-//            }
-//            let block = UIAlertAction(title: writerName + I18NStrings.blockUser, style: .default) { [weak self] _ in
-//                self?.blockUser()
-//            }
-//            alert.addAction(report)
-//            alert.addAction(block)
-//        }
-//        let cancel = UIAlertAction(title: I18NStrings.cancel, style: .cancel)
-//        alert.addAction(cancel)
-//        present(alert, animated: true)
-        
-//        let popupAlert = PopUpAlertController(messageText: "정말 게시글을 삭제할까요?")
-//        popupAlert.addActionToButton(title: "아니요", titleColor: CustomColor.purple!, backgroundColor: CustomColor.gray10!, completion: #selector(removePost))
-//        popupAlert.addActionToButton(title: "아니요", titleColor: CustomColor.purple!, backgroundColor: CustomColor.gray10!, completion: #selector(removePost))
-        
-//        self.showPopUpAlert(message: "정말 게시글을 삭제할까요?", leftActionTitle: "아니요", rightActionTitle: "네, 삭제할게요")
-//        Log.debug("tap")
-//        let vc = SingleAlertSheetController()
-//        present(vc, animated: false)
-        
-//        showSingleAlertSheet(cancelTitle: "취소", actionTitle: "신고하기")
-//        showDoubleAlertSheet(firstActionText: "신고하기", secondActionText: "채팅방 나가기")
-//        showPopUpAlert(message: "정말 게시글을 삭제할까요?", leftActionTitle: "아니요", rightActionTitle: "네, 삭제할게요")
-        
-//        showTripleAlertSheet(firstActionText: "teteete", secondActionText: "tetee", thirdActionText: "tetet")
-        showSinglePopUpAlert(message: "teteet")
-    }
-    
+ 
     /// 글 수정
     func editPost() {
         print("글 수정")
@@ -234,6 +188,19 @@ final class ProductsDetailVC: SZVC {
         viewModel.imageSections
             .asDriver(onErrorJustReturn: [])
             .drive(mainView.imagePagerCollectionView.rx.items(dataSource: getImageDataSource()))
+            .disposed(by: disposeBag)
+        
+        viewModel.deletedPost
+            .asDriver(onErrorJustReturn: "")
+            .drive(
+                with: self,
+                onNext: { owner, message in
+                    
+                owner.showSinglePopUpAlert(message: message, actionCompletion: {
+                    owner.navigationController?.popViewController(animated: true)
+                    owner.viewModel.refresh()
+                })
+            })
             .disposed(by: disposeBag)
     }
 }
