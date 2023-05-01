@@ -228,6 +228,7 @@
 		EDF508AB29FECF6600FDC2E2 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF508AA29FECF6600FDC2E2 /* ReportView.swift */; };
 		EDF508AD29FED50400FDC2E2 /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF508AC29FED50400FDC2E2 /* ReportVC.swift */; };
 		EDF508AF29FEECD000FDC2E2 /* UserCommandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF508AE29FEECD000FDC2E2 /* UserCommandManager.swift */; };
+		EDF508B329FF8E2200FDC2E2 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF508B229FF8E2200FDC2E2 /* Int+Extension.swift */; };
 		EDF76FEC29F7994D00F33146 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FEB29F7994D00F33146 /* LikeView.swift */; };
 		EDF76FEE29F7BB4C00F33146 /* LikeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */; };
 		EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */; };
@@ -466,6 +467,7 @@
 		EDF508AA29FECF6600FDC2E2 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		EDF508AC29FED50400FDC2E2 /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 		EDF508AE29FEECD000FDC2E2 /* UserCommandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCommandManager.swift; sourceTree = "<group>"; };
+		EDF508B229FF8E2200FDC2E2 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		EDF76FEB29F7994D00F33146 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
 		EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeResponseDTO.swift; sourceTree = "<group>"; };
 		EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetail.swift; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				A2DEC37229B6495000CF0794 /* Date+Extension.swift */,
 				EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */,
 				A20CBD6F29478BCF0012FF32 /* String+Extension.swift */,
+				EDF508B229FF8E2200FDC2E2 /* Int+Extension.swift */,
 				A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */,
 				A280AB3F29A7400100C1729C /* UIViewController+Extension.swift */,
 				A226CC4429ADAD88000161E8 /* UILabel+Extension.swift */,
@@ -2299,6 +2302,7 @@
 				A2DEC35629B4417F00CF0794 /* SNSLoginAPI.swift in Sources */,
 				A280AB4029A7400100C1729C /* UIViewController+Extension.swift in Sources */,
 				A2180DB629AA3C1A00BBC74A /* ArtworkSizeView.swift in Sources */,
+				EDF508B329FF8E2200FDC2E2 /* Int+Extension.swift in Sources */,
 				ED47114129E06CFF00708562 /* MarketSkeletonView.swift in Sources */,
 				A2289D4B2986A03E0017969C /* ViewModelType.swift in Sources */,
 				A2180DAD29AA38EE00BBC74A /* RequestContentVC.swift in Sources */,
