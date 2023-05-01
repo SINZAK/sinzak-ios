@@ -26,7 +26,6 @@ enum AuthAPI {
     case follow(userId: String)
     case unfollow(userId: String)
     // 신고
-    case report(reason: String, userId: String) // 신고
     case cancelReport(userId: String) // 신고 취소
     case reportList // 신고목록 보기
     // 탈퇴
@@ -64,8 +63,6 @@ extension AuthAPI: TargetType {
             return "/users/follow"
         case .unfollow:
             return "/users/unfollow"
-        case .report:
-            return "/users/report"
         case .cancelReport:
             return "/users/report/cancel"
         case .reportList:
@@ -142,12 +139,6 @@ extension AuthAPI: TargetType {
             
         case .follow(let userId), .unfollow(let userId):
             let params: [String: Any] = [
-                "userId": userId
-            ]
-            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
-        case .report(let reason, let userId):
-            let params: [String: Any] = [
-                "reason": reason,
                 "userId": userId
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
