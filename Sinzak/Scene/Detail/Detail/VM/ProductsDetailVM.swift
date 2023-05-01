@@ -14,18 +14,26 @@ typealias ImageSection = SectionModel<Void, String>
 
 protocol ProductsDetailVMInput {
     func fetchProductsDetail(id: Int)
+    var refresh: () -> Void { get }
 }
 
 protocol ProductsDetailVMOutput {
     var fetchedData: PublishRelay<ProductsDetail> { get }
     var imageSections: PublishRelay<[ImageSection]> { get }
+    
+    var deletedPost: PublishRelay<String> { get }
 }
 
 protocol ProductsDetailVM: ProductsDetailVMInput, ProductsDetailVMOutput {}
 
 final class DefaultProductsDetailVM: ProductsDetailVM {
     
+    
     private let disposeBag = DisposeBag()
+    
+    init(refresh: @escaping () -> Void) {
+        self.refresh = refresh
+    }
     
     // MARK: - Input
     
@@ -45,15 +53,28 @@ final class DefaultProductsDetailVM: ProductsDetailVM {
                             [ImageSection(model: Void(), items: productsDetail.images ?? [])]
                         )
                     }
-                }, onFailure: { _, error in
-                    Log.debug(error)
+                }, onFailure: { owner, error in
+                    if error is APIError {
+                        let error = error as! APIError
+                        switch error {
+                        case .errorMessage(let message):
+                                owner.deletedPost.accept(message)
+                        default:
+                            Log.error(error)
+                        }
+                    } else {
+                        Log.error(error)
+                    }
                 })
             .disposed(by: disposeBag)
     }
     
+    var refresh: () -> Void
+
     // MARK: - Output
     
     var fetchedData: PublishRelay<ProductsDetail> = .init()
     var imageSections: PublishRelay<[ImageSection]> = .init()
     
+    var deletedPost: PublishRelay<String> = .init()
 }

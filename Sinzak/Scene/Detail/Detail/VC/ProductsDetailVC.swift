@@ -145,7 +145,24 @@ final class ProductsDetailVC: SZVC {
                 if owner.owner == .mine {
                     owner.showDoubleAlertSheet(
                         firstActionText: "수정하기",
-                        secondActionText: "삭제하기"
+                        secondActionText: "삭제하기",
+                        firstCompletion: {
+                            // TODO: 수정 화면으로 이동
+                        },
+                        secondCompletion: {
+                    
+                            owner.showPopUpAlert(message: "정말 게시글을 삭제할까요?", rightActionTitle: "네, 삭제할게요", rightActionCompletion: {
+                                ProductsManager.shared.deleteProducts(id: owner.id)
+                                    .observe(on: MainScheduler.instance)
+                                    .subscribe(onSuccess: { _ in
+                                        
+                                        owner.navigationController?.popViewController(animated: true)
+                                        owner.viewModel.refresh()
+                                    })
+                                    .disposed(by: owner.disposeBag)
+
+                            })
+                        }
                     )
                                         
                 }
