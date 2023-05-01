@@ -13,6 +13,8 @@ final class SignupGenreVC: SZVC {
     // MARK: - Properties
     let mainView = SignupGenreView()
     var viewModel: SignupGenreVM
+    
+    private let disposeBag = DisposeBag()
 
     // MARK: - Lifecycle
     override func loadView() {

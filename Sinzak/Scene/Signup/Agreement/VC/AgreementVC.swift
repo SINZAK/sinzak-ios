@@ -13,6 +13,8 @@ final class AgreementVC: SZVC {
     let mainView = AgreementView()
     var viewModel: AgreementVM
     
+    private let disposeBag = DisposeBag()
+    
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView

@@ -21,6 +21,8 @@ final class SelectAlignVC: SZVC {
     private var currnetAlign: BehaviorRelay<AlignOption>
     private let refresh: () -> Void
     
+    private let disposeBag = DisposeBag()
+    
     // MARK: - Sections
     private let alignOptionSections: BehaviorRelay<[AlignOptionDataSection]> = BehaviorRelay(value: [
         AlignOptionDataSection(items: AlignOption.allCases.map {

@@ -33,6 +33,8 @@ final class ReportSelectVC: SZVC {
         )
     ]
     
+    private let disposeBag = DisposeBag()
+    
     override func loadView() {
         view = mainView
     }

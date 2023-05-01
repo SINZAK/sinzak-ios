@@ -15,6 +15,8 @@ final class ReportVC: SZVC {
     let type: String
     let mainView: ReportView
     
+    private let disposeBag = DisposeBag()
+    
     override func loadView() {
         view = mainView
     }
