@@ -62,6 +62,13 @@ class ProductsManager: ManagerType {
             .map { $0.success }
     }
     
+    func wishProducts(id: Int, mode: Bool) -> Single<Bool> {
+        return provider.rx.request(.wish(id: id, mode: mode))
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
+    }
+    
     func deleteProducts(id: Int) -> Single<Bool> {
         return provider.rx.request(.delete(id: id))
             .map(BaseDTO<String>.self)
