@@ -177,8 +177,8 @@ final class ProductsDetailVC: SZVC {
                         actionTitle: "신고하기",
                         completion: {
                             let vc = ReportSelectVC(
-                                userID: owner.productsDetail?.userID ?? 0,
-                                userName: owner.productsDetail?.author ?? ""
+                                userID: owner.mainView.products?.userID ?? 0,
+                                userName: owner.mainView.products?.author ?? ""
                             )
                             owner.navigationController?.pushViewController(vc, animated: true)
                         })
