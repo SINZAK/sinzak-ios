@@ -64,6 +64,7 @@ final class ProductsDetailVC: SZVC {
     // MARK: - Init
     init(id: Int, type: DetailType, viewModel: ProductsDetailVM) {
         self.id = id
+        self.type = type
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -154,19 +155,19 @@ final class ProductsDetailVC: SZVC {
                         secondCompletion: {
                     
                             owner.showPopUpAlert(message: "정말 게시글을 삭제할까요?", rightActionTitle: "네, 삭제할게요", rightActionCompletion: {
+                                owner.showLoading()
                                 ProductsManager.shared.deleteProducts(id: owner.id)
                                     .observe(on: MainScheduler.instance)
                                     .subscribe(onSuccess: { _ in
                                         
                                         owner.navigationController?.popViewController(animated: true)
+                                        owner.hideLoading()
                                         owner.viewModel.refresh()
                                     })
                                     .disposed(by: owner.disposeBag)
-
                             })
                         }
                     )
-                                        
                 }
                 
                 if owner.owner == .other {
@@ -184,6 +185,54 @@ final class ProductsDetailVC: SZVC {
             })
             .disposed(by: disposeBag)
         
+        mainView.isCompleteButton.rx.tap
+            .asDriver()
+            .drive(
+                with: self,
+                onNext: { owner, _ in
+
+                    if owner.owner == .other || owner.mainView.isComplete { return }
+                    
+                    switch owner.type {
+                    case .purchase:
+                        owner.showNoTintSingleAlertSheet(actionTitle: "거래 완료", completion: {
+                            ProductsManager.shared.completeProducts(id: owner.id)
+                                .observe(on: MainScheduler.instance)
+                                .subscribe(onSuccess: { _ in
+                                    owner.mainView.isComplete = true
+                                    NotificationCenter.default.post(
+                                        name: .cellIsCompleteUpdate,
+                                        object: nil,
+                                        userInfo: ["id": owner.id, "isComplete": true]
+                                    )
+                                }, onFailure: { error in
+                                    Log.error(error)
+                                })
+                                .disposed(by: owner.disposeBag)
+                        })
+                        
+                    case .request:
+                        owner.showNoTintSingleAlertSheet(actionTitle: "모집 완료", completion: {
+                            ProductsManager.shared.completeProducts(id: owner.id)
+                                .observe(on: MainScheduler.instance)
+                                .subscribe(onSuccess: { _ in
+                                    owner.mainView.isComplete = true
+                                    NotificationCenter.default.post(
+                                        name: .cellIsCompleteUpdate,
+                                        object: nil,
+                                        userInfo: ["id": owner.id, "isComplete": true]
+                                    )
+                                }, onFailure: { error in
+                                    Log.error(error)
+                                })
+                                .disposed(by: owner.disposeBag)
+                        })
+                        
+                    default:
+                        break
+                    }
+                })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
