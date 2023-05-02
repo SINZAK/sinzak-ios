@@ -253,7 +253,7 @@ private extension ArtCVC {
             onSuccess: { owner, _ in
                 owner.likeView.isSelected.toggle()
                 if owner.likeView.isSelected {
-                    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
+                    UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
                         owner.likeView.likeImageView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
                     }, completion: { _ in
                         UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
@@ -272,6 +272,7 @@ private extension ArtCVC {
                         object: nil,
                         userInfo: [
                             "id": owner.products?.id ?? 1,
+                            "kind": ArtCellKind.products,
                             "isSelected": owner.likeView.isSelected,
                             "likeCount": owner.likeView.likesCount
                         ]
@@ -290,10 +291,11 @@ private extension ArtCVC {
             .drive(with: self, onNext: { owner, notification in
                 guard let info = notification.userInfo else { return }
                 let id = info["id"] as? Int ?? 0
+                let kind = info["kind"] as? ArtCellKind ?? .products
                 let isSelected = info["isSelected"] as? Bool ?? false
                 let likeCount = info["likeCount"] as? Int ?? 0
                 
-                if owner.products?.id == id {
+                if owner.products?.id == id && owner.kind == kind {
                     owner.likeView.isSelected = isSelected
                     owner.likeView.likesCount = likeCount
                 }
@@ -307,9 +309,10 @@ private extension ArtCVC {
                 guard let info = notification.userInfo else { return }
                 
                 let id = info["id"] as? Int ?? 0
+                let kind = info["kind"] as? ArtCellKind ?? .work
                 let isComplete = info["isComplete"] as? Bool ?? false
                 
-                if owner.products?.id == id {
+                if owner.products?.id == id, owner.kind == kind {
                     owner.soldOutView.isHidden = !isComplete
                 }
             })
