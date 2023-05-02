@@ -22,9 +22,7 @@ enum AuthAPI {
     // 검색기록 삭제
     case deleteSearchHistory // 검색기록 전체 삭제
     case deleteOneHistory(id: Int) // 검색기록 한 개 삭제
-    // 팔로우
-    case follow(userId: String)
-    case unfollow(userId: String)
+
     // 신고
     case cancelReport(userId: String) // 신고 취소
     case reportList // 신고목록 보기
@@ -59,10 +57,6 @@ extension AuthAPI: TargetType {
             return "/users/deletehistories"
         case .deleteOneHistory:
             return "/users/history"
-        case .follow:
-            return "/users/follow"
-        case .unfollow:
-            return "/users/unfollow"
         case .cancelReport:
             return "/users/report/cancel"
         case .reportList:
@@ -136,13 +130,6 @@ extension AuthAPI: TargetType {
                 "id": id
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
-            
-        case .follow(let userId), .unfollow(let userId):
-            let params: [String: Any] = [
-                "userId": userId
-            ]
-            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
-            
         case .cancelReport(let userId):
             let params: [String: Any] = [
                 "userId": userId
