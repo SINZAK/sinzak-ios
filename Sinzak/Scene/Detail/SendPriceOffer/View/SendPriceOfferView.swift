@@ -14,12 +14,12 @@ final class SendPriceOfferView: SZView {
     private let pleaseOfferLabel = UILabel().then {
         $0.text = I18NStrings.pleaseOfferPriceMatchesMarket
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     private let currentBestPriceLabel = UILabel().then {
         $0.text = I18NStrings.currentBestPrice
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     let priceLabel = UILabel().then {
         $0.text = "50,000"
@@ -29,15 +29,16 @@ final class SendPriceOfferView: SZView {
     private let wonLabel = UILabel().then {
         $0.text = I18NStrings.krw
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     let priceTextField = SZTextField(insets: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)).then {
+        $0.keyboardType = .numberPad
         $0.backgroundColor = CustomColor.gray10
         $0.layer.cornerRadius = 28
         $0.clipsToBounds = true
         $0.textAlignment = .center
         $0.font = .subtitle_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     private let wonBiggerLabel = UILabel().then {
         $0.text = I18NStrings.krw
@@ -45,11 +46,19 @@ final class SendPriceOfferView: SZView {
         $0.textColor = CustomColor.gray80
     }
     private let warningLabel =  UILabel().then {
-        $0.text = I18NStrings.canOnlyMakeOneSuggestionPerPost
+        
+        $0.textColor = CustomColor.label
+        let text = "게시글 당 1회만 제안이 가능해요"
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(
+            .foregroundColor,
+            value: CustomColor.red,
+            range: (text as NSString).range(of: "1회")
+        )
+        $0.attributedText = attributedString
         $0.font = .caption_M
-        $0.textColor = CustomColor.black
     }
-    let suggestButton = UIButton().then {
+    let suggestButton = SZButton().then {
         $0.setTitle(I18NStrings.suggest, for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.backgroundColor = CustomColor.red
@@ -104,7 +113,7 @@ final class SendPriceOfferView: SZView {
         suggestButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(65)
-            make.bottom.equalTo(safeAreaLayoutGuide).inset(12)
+            make.bottom.equalToSuperview().inset(24.0)
         }
     }
 }
