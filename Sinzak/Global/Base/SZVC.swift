@@ -45,6 +45,7 @@ class SZVC: UIViewController {
         
         needLogIn
             .withUnretained(self)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { owner, _ in
                 owner.showNeedLogIn()
             })
@@ -52,6 +53,7 @@ class SZVC: UIViewController {
         
         showSimpleErrorAlert
             .withUnretained(self)
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { owner, messags in
                 owner.showSinglePopUpAlert(message: messags)
             })
