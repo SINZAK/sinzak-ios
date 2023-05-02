@@ -50,12 +50,12 @@ final class ConciergeVC: UIViewController {
         UserInfoManager.shared.logUserInfo()
         if UserInfoManager.isLoggedIn {
             AuthManager.shared.reissue()
-                .observe(on: MainScheduler.instance)
+                .observe(on: MainScheduler.asyncInstance)
                 .subscribe(
                     with: self,
                     onSuccess: { owner, _ in
                         AuthManager.shared.fetchMyProfile()
-                            .observe(on: MainScheduler.instance)
+                            .observe(on: MainScheduler.asyncInstance)
                             .subscribe(
                                 onSuccess: { _ in
                                     owner.nextVC.accept(TabBarVC())
