@@ -72,36 +72,9 @@ final class ProductsDetailVC: SZVC {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Actions
- 
-    /// 글 수정
-    func editPost() {
-        print("글 수정")
-    }
-    /// 글 삭제
-    @objc
-    func removePost() {
-        print("글 삭제")
-    }
-    /// 글 작성자 신고하기
-    func reportUser() {
-        print("신고")
-    }
-    /// 글 작성자 차단하기
-    func blockUser() {
-        print("차단")
-    }
-    /// 가격 제안하기
-    @objc func priceOfferButtonTapped(_ sender: UIButton) {
-        let vc = SendPriceOfferVC()
-        navigationController?.pushViewController(vc, animated: true)
-    }
     // MARK: - Helpers
     override func configure() {
         view.isSkeletonable = true
-        
-        mainView.priceOfferButton.addTarget(self, action: #selector(priceOfferButtonTapped), for: .touchUpInside)
         bind()
     }
     override func setNavigationBar() {
@@ -135,7 +108,6 @@ final class ProductsDetailVC: SZVC {
     }
     
     func bindInput() {
-        
         navigationItem.rightBarButtonItem?.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
@@ -363,7 +335,19 @@ final class ProductsDetailVC: SZVC {
                     
                 })
             .disposed(by: disposeBag)
-
+        
+        // TODO: 채팅 연결
+        
+        mainView.priceOfferButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                let vc = SendPriceOfferVC(
+                    id: owner.id,
+                    topPrice: owner.mainView.products?.topPrice ?? -1
+                )
+                owner.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
