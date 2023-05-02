@@ -9,17 +9,8 @@ import Foundation
 import RxSwift
 import Moya
 
-protocol ProductManagerType {
-    func fetchProducts(
-        align: AlignOption,
-        category: [CategoryType],
-        page: Int,
-        size: Int,
-        sale: Bool
-    ) -> Single<[Products]>
-}
-
-class ProductsManager: ProductManagerType {
+class ProductsManager: ManagerType {
+    
     private init () {}
     static let shared = ProductsManager()
     let provider = MoyaProvider<ProductsAPI>(
@@ -58,44 +49,31 @@ class ProductsManager: ProductManagerType {
         return provider.rx.request(.productDetail(id: id))
             .filterSuccessfulStatusCodes()
             .map(BaseDTO<ProductsDetailDTO>.self)
-            .map { result in
-                if !result.success {
-                    throw APIError.errorMessage(result.message ?? "")
-                }
-                
-                guard let data = result.data?.toDomain() else {
-                    throw APIError.noContent
-                }
-                
-                return data
-            }
-            
+            .map(filterError)
+            .map(getData)
+            .map { $0.toDomain() }
     }
     
     func likeProducts(id: Int, mode: Bool) -> Single<Bool> {
         return provider.rx.request(.like(id: id, mode: mode))
             .filterSuccessfulStatusCodes()
-            .map(LikeResponseDTO.self)
-            .map { response in
-                if !response.success {
-                    throw APIError.errorMessage("like error")
-                }
-                return response.success
-            }
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
     }
     
     func deleteProducts(id: Int) -> Single<Bool> {
         return provider.rx.request(.delete(id: id))
             .map(BaseDTO<String>.self)
-            .map { response in
-                if !response.success {
-                    if let message = response.message {
-                        throw APIError.errorMessage(message)
-                    } else {
-                        throw APIError.unknown(nil)
-                    }
-                }
-                return true
-            }
+            .map(filterError)
+            .map { $0.success }
+    }
+    
+    /// 거래 완료, 의뢰 완료 처리
+    func completeProducts(id: Int) -> Single<Bool> {
+        return provider.rx.request(.sell(postId: id))
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
     }
 }
