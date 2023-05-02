@@ -71,13 +71,12 @@ struct Products: Codable {
     }
 }
 
-
 struct MarketProductDataSection {
     var items: [Products]
 }
 
 extension MarketProductDataSection: SectionModelType {
-    typealias Itemt = Products
+    typealias Item = Products
     
     init(original: MarketProductDataSection, items: [Products]) {
         self = original
