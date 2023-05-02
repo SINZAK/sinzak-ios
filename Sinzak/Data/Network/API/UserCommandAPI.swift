@@ -20,8 +20,12 @@ enum UserCommandAPI {
     case otherProfile(userId: Int)
     case otherFollowing(userId: Int)
     case otherFollower(userId: Int)
-    
+        
     case report(userId: Int, reason: String) // 신고
+    
+    // 팔로우
+    case follow(userId: Int)
+    case unfollow(userId: Int)
 }
 
 extension UserCommandAPI: TargetType {
@@ -46,11 +50,15 @@ extension UserCommandAPI: TargetType {
             return "/users/\(userId)/followers"
         case .report(userId: _, reason: _):
             return "/users/report"
+        case .follow:
+            return "/users/follow"
+        case .unfollow:
+            return "/users/unfollow"
         }
     }
     var method: Moya.Method {
         switch self {
-        case .report(userId: _, reason: _):
+        case .report(userId: _, reason: _), .follow(userId: _), .unfollow(userId: _):
             return .post
         default:
             return .get
@@ -62,6 +70,12 @@ extension UserCommandAPI: TargetType {
             let params: [String: Any] = [
                 "userId": userId,
                 "reason": reason
+            ]
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+            
+        case .follow(let userId), .unfollow(let userId):
+            let params: [String: Any] = [
+                "userId": userId
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         default:
