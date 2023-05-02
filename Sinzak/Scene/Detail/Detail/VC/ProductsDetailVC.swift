@@ -331,7 +331,39 @@ final class ProductsDetailVC: SZVC {
                     
                 })
             .disposed(by: disposeBag)
-            
+        
+        mainView.scrapButton.rx.tap
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    if !UserInfoManager.isLoggedIn {
+                        owner.needLogIn.accept(true)
+                        return
+                    }
+                    
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    
+                    ProductsManager.shared.wishProducts(
+                        id: owner.id,
+                        mode: !owner.mainView.isScrap
+                    )
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onSuccess: { _ in
+                        owner.mainView.isScrap.toggle()
+                        
+                        let currentCount = Int(owner.mainView.scrapCountLabel.text ?? "-1")!
+                        
+                        if owner.mainView.isScrap {
+                            owner.mainView.scrapCountLabel.text = "\(currentCount + 1)"
+                        } else {
+                            owner.mainView.scrapCountLabel.text = "\(currentCount - 1)"
+                        }
+                    })
+                    .disposed(by: owner.disposeBag)
+                    
+                })
+            .disposed(by: disposeBag)
+
     }
     
     func bindOutput() {
