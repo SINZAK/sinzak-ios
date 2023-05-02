@@ -43,7 +43,6 @@ final class ProductsDetailVC: SZVC {
     
     var owner: DetailOwner?
     var type: DetailType?
-    var productsDetail: ProductsDetail?
     
     private let disposeBag = DisposeBag()
     
@@ -153,19 +152,22 @@ final class ProductsDetailVC: SZVC {
                             // TODO: 수정 화면으로 이동
                         },
                         secondCompletion: {
-                    
-                            owner.showPopUpAlert(message: "정말 게시글을 삭제할까요?", rightActionTitle: "네, 삭제할게요", rightActionCompletion: {
-                                owner.showLoading()
-                                ProductsManager.shared.deleteProducts(id: owner.id)
-                                    .observe(on: MainScheduler.instance)
-                                    .subscribe(onSuccess: { _ in
-                                        
-                                        owner.navigationController?.popViewController(animated: true)
-                                        owner.hideLoading()
-                                        owner.viewModel.refresh()
-                                    })
-                                    .disposed(by: owner.disposeBag)
-                            })
+                            
+                            owner.showPopUpAlert(
+                                message: "정말 게시글을 삭제할까요?",
+                                rightActionTitle: "네, 삭제할게요",
+                                rightActionCompletion: {
+                                    owner.showLoading()
+                                    ProductsManager.shared.deleteProducts(id: owner.id)
+                                        .observe(on: MainScheduler.instance)
+                                        .subscribe(onSuccess: { _ in
+                                            
+                                            owner.navigationController?.popViewController(animated: true)
+                                            owner.hideLoading()
+                                            owner.viewModel.refresh()
+                                        })
+                                        .disposed(by: owner.disposeBag)
+                                })
                         }
                     )
                 }
@@ -246,7 +248,6 @@ final class ProductsDetailVC: SZVC {
                 with: self,
                 onNext: { owner, data in
                     owner.owner = data.myPost ? .mine : .other
-                    owner.productsDetail = data
                     owner.mainView.setData(data, owner.type)
                     owner.view.hideSkeleton()
                     owner.mainView.skeletonView.isHidden = true
