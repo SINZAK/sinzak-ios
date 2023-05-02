@@ -281,7 +281,57 @@ final class ProductsDetailVC: SZVC {
                     }
             })
             .disposed(by: disposeBag)
-
+        
+        mainView.likeButton.rx.tap
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    if !UserInfoManager.isLoggedIn {
+                        owner.needLogIn.accept(true)
+                        return
+                    }
+                    
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    
+                    ProductsManager.shared.likeProducts(
+                        id: owner.id,
+                        mode: !owner.mainView.isLike
+                    )
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onSuccess: { _ in
+                        owner.mainView.isLike.toggle()
+                        
+                        let currentCount = Int(owner.mainView.likeButton.titleLabel?.text ?? "-1")!
+                        
+                        if owner.mainView.isLike {
+                            owner.mainView.likeButton.setTitle(
+                                "\(currentCount + 1)",
+                                for: .normal
+                            )
+                        } else {
+                            owner.mainView.likeButton.setTitle(
+                                "\(currentCount - 1)",
+                                for: .normal
+                            )
+                        }
+                        
+                        let kind: ArtCellKind = owner.type == .purchase ? .products : .work
+                        NotificationCenter.default.post(
+                            name: .cellLikeUpdate,
+                            object: nil,
+                            userInfo: [
+                                "id": owner.mainView.products?.id ?? -1,
+                                "kind": kind,
+                                "isSelected": owner.mainView.isLike,
+                                "likeCount": Int(owner.mainView.likeButton.titleLabel?.text ?? "-1") ?? -2
+                            ]
+                        )
+                    })
+                    .disposed(by: owner.disposeBag)
+                    
+                })
+            .disposed(by: disposeBag)
+            
     }
     
     func bindOutput() {
