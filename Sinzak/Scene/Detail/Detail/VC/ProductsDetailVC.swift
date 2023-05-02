@@ -205,7 +205,11 @@ final class ProductsDetailVC: SZVC {
                                     NotificationCenter.default.post(
                                         name: .cellIsCompleteUpdate,
                                         object: nil,
-                                        userInfo: ["id": owner.id, "isComplete": true]
+                                        userInfo: [
+                                            "id": owner.id,
+                                            "kind": ArtCellKind.products,
+                                            "isComplete": true
+                                        ]
                                     )
                                 }, onFailure: { error in
                                     Log.error(error)
@@ -222,7 +226,11 @@ final class ProductsDetailVC: SZVC {
                                     NotificationCenter.default.post(
                                         name: .cellIsCompleteUpdate,
                                         object: nil,
-                                        userInfo: ["id": owner.id, "isComplete": true]
+                                        userInfo: [
+                                            "id": owner.id,
+                                            "kind": ArtCellKind.work,
+                                            "isComplete": true
+                                        ]
                                     )
                                 }, onFailure: { error in
                                     Log.error(error)
