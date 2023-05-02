@@ -235,6 +235,45 @@ final class ProductsDetailVC: SZVC {
                     }
                 })
             .disposed(by: disposeBag)
+        
+        mainView.followButton.rx.tap
+            .subscribe(
+                with: self,
+                onNext: { owner, _  in
+                    if !UserInfoManager.isLoggedIn {
+                        owner.needLogIn.accept(true)
+                        return
+                    }
+                    
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    if owner.mainView.isFollowing {
+                        UserCommandManager.shared.unfollow(userId: owner.mainView.products?.userID ?? -1)
+                            .observe(on: MainScheduler.instance)
+                            .subscribe(
+                                with: self,
+                                onSuccess: { owner, _ in
+                                    owner.mainView.isFollowing.toggle()
+                                },
+                                onFailure: { _, error  in
+                                    Log.error(error)
+                                })
+                            .disposed(by: owner.disposeBag)
+                    } else {
+                        UserCommandManager.shared.follow(userId: owner.mainView.products?.userID ?? -1)
+                            .observe(on: MainScheduler.instance)
+                            .subscribe(
+                                with: self,
+                                onSuccess: { owner, _ in
+                                    owner.mainView.isFollowing.toggle()
+                                },
+                                onFailure: { _, error  in
+                                    Log.error(error)
+                                })
+                            .disposed(by: owner.disposeBag)
+                    }
+            })
+            .disposed(by: disposeBag)
+
     }
     
     func bindOutput() {
