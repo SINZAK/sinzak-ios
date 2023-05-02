@@ -299,5 +299,20 @@ private extension ArtCVC {
                 }
             })
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.cellIsCompleteUpdate)
+            .distinctUntilChanged()
+            .asDriver(onErrorRecover: { _ in .never() })
+            .drive(with: self, onNext: { owner, notification in
+                guard let info = notification.userInfo else { return }
+                
+                let id = info["id"] as? Int ?? 0
+                let isComplete = info["isComplete"] as? Bool ?? false
+                
+                if owner.products?.id == id {
+                    owner.soldOutView.isHidden = !isComplete
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
