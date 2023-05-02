@@ -8,11 +8,34 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import JGProgressHUD
 
 class SZVC: UIViewController {
     
     private let disposeBag = DisposeBag()
+    
     let needLogIn: PublishRelay<Bool> = .init()
+    let showSimpleErrorAlert: PublishRelay<String> = .init()
+    
+    lazy var hud: JGProgressHUD = {
+        let loader = JGProgressHUD()
+                
+        return loader
+    }()
+    
+    func showLoading() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.hud.show(in: self.view, animated: true)
+        }
+    }
+    
+    func hideLoading() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.hud.dismiss(animated: true)
+        }
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +47,13 @@ class SZVC: UIViewController {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
                 owner.showNeedLogIn()
+            })
+            .disposed(by: disposeBag)
+        
+        showSimpleErrorAlert
+            .withUnretained(self)
+            .subscribe(onNext: { owner, messags in
+                owner.showSinglePopUpAlert(message: messags)
             })
             .disposed(by: disposeBag)
     }
@@ -174,6 +204,30 @@ extension SZVC: UIViewControllerTransitioningDelegate {
         present(singleAlertSheet, animated: true)
     }
     
+    func showNoTintSingleAlertSheet(
+        actionTitle: String,
+        cancelTitle: String = "취소",
+        completion: (() -> Void)? = nil,
+        cacelcompletion: (() -> Void)? = nil
+    ) {
+        let singleAlertSheet = SingleAlertSheetController(
+            actionText: actionTitle,
+            cancelText: cancelTitle
+        )
+        singleAlertSheet.actionButton.setTitleColor(CustomColor.label, for: .normal)
+        singleAlertSheet.addCompletionToButton(
+            actionCompletion: {
+                singleAlertSheet.dismiss(animated: true, completion: completion)
+            },
+            cancelCompletion: {
+                singleAlertSheet.dismiss(animated: true, completion: cacelcompletion)
+            }
+        )
+        singleAlertSheet.modalPresentationStyle = .custom
+        singleAlertSheet.transitioningDelegate = self
+        present(singleAlertSheet, animated: true)
+    }
+
     func showDoubleAlertSheet(
         firstActionText: String,
         secondActionText: String,
