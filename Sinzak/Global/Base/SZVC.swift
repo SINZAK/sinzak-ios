@@ -15,7 +15,12 @@ class SZVC: UIViewController {
     private let disposeBag = DisposeBag()
     
     let needLogIn: PublishRelay<Bool> = .init()
-    let showSimpleErrorAlert: PublishRelay<String> = .init()
+    
+    /**
+     에러 message가 있으면 alert로 보여줍니다.
+     message가 없으며 log로 보여줍니다.
+     */
+    let simpleErrorHandler: PublishRelay<Error> = .init()
     
     lazy var hud: JGProgressHUD = {
         let loader = JGProgressHUD()
@@ -51,11 +56,22 @@ class SZVC: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        showSimpleErrorAlert
+        simpleErrorHandler
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { owner, messags in
-                owner.showSinglePopUpAlert(message: messags)
+            .subscribe(onNext: { owner, error in
+                if error is APIError {
+                    let apiError = error as! APIError
+                    
+                    switch apiError {
+                    case .errorMessage(let message):
+                        owner.showSinglePopUpAlert(message: message)
+                    default:
+                        Log.error(apiError)
+                    }
+                } else {
+                    Log.error(error)
+                }
             })
             .disposed(by: disposeBag)
     }
