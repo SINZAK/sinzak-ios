@@ -28,7 +28,6 @@ protocol ProductsDetailVM: ProductsDetailVMInput, ProductsDetailVMOutput {}
 
 final class DefaultProductsDetailVM: ProductsDetailVM {
     
-    
     private let disposeBag = DisposeBag()
     
     init(refresh: @escaping () -> Void) {
