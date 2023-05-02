@@ -13,7 +13,7 @@ final class SingleAlertSheetController: UIViewController {
     let actionText: String
     let cancelText: String
     
-    private lazy var actionButton: UIButton = {
+    lazy var actionButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = CustomColor.alertSheetBackground
         button.layer.cornerRadius = 30.0
