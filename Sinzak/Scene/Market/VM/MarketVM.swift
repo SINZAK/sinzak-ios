@@ -18,6 +18,7 @@ protocol MarketVMInput {
     func fetchNextPage()
     
     var selectedCategory: BehaviorRelay<[CategoryType]> { get }
+    var searchText: BehaviorRelay<String> { get }
     
     var needLoginAlert: PublishRelay<Bool> { get }
 }
@@ -66,7 +67,8 @@ final class DefaultMarketVM: MarketVM {
             category: selectedCategory.value,
             page: 0,
             size: 15,
-            sale: isSaling.value
+            sale: isSaling.value,
+            search: searchText.value
         )
         currentPage = 0
     }
@@ -93,16 +95,17 @@ final class DefaultMarketVM: MarketVM {
             category: selectedCategory.value,
             page: currentPage,
             size: 15,
-            sale: isSaling.value
+            sale: isSaling.value,
+            search: searchText.value
         )
         .subscribe(
             with: self,
             onSuccess: { owner, products in
+                let current = owner.productSections.value[0].items
                 if products.isEmpty {
                     owner.currentPage -= 1
                     return
                 }
-                let current = owner.productSections.value[0].items
                 let newSection = MarketProductDataSection(items: current + products)
                 owner.productSections.accept([newSection])
             },
@@ -113,6 +116,7 @@ final class DefaultMarketVM: MarketVM {
 
     }
     
+    var searchText: BehaviorRelay<String> = .init(value: "")
     var selectedCategory: BehaviorRelay<[CategoryType]>
     
     var needLoginAlert: PublishRelay<Bool> = .init()
@@ -155,7 +159,8 @@ private extension DefaultMarketVM {
         category: [CategoryType],
         page: Int,
         size: Int,
-        sale: Bool
+        sale: Bool,
+        search: String
     ) {
         showSkeleton.accept(true)
         ProductsManager.shared.fetchProducts(
@@ -163,7 +168,8 @@ private extension DefaultMarketVM {
             category: category,
             page: page,
             size: size,
-            sale: sale
+            sale: sale,
+            search: search
         )
         .map { return [MarketProductDataSection(items: $0)] }
         .delay(
