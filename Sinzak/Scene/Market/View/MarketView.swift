@@ -33,7 +33,6 @@ final class MarketView: SZView {
             forCellWithReuseIdentifier: ArtCVC.identifier
         )
         $0.collectionViewLayout = setProductLayout()
-        $0.allowsMultipleSelection = true
         $0.backgroundColor = .clear
     }
     
