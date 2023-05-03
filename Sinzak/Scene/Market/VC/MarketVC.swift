@@ -81,12 +81,13 @@ final class MarketVC: SZVC {
 }
 
 // MARK: - Bind
-extension MarketVC {
+private extension MarketVC {
     func bind() {
         bindInput()
         bindOutput()
         
         mainView.productCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
     }
     
     func bindInput() {
@@ -233,8 +234,17 @@ extension MarketVC {
         
         viewModel.pushSerachVC
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] vc in
-                self?.navigationController?.pushViewController(vc, animated: true)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+//                self?.navigationController?.pushViewController(vc, animated: true)
+                let vm = DefaultMarketVM(
+                    owner.viewModel.selectedCategory,
+                    owner.viewModel.selectedAlign,
+                    owner.viewModel.isSaling,
+                    owner.viewModel.needRefresh
+                )
+                let vc = MarketVC(viewModel: vm)
+                owner.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
         
