@@ -42,6 +42,7 @@ protocol MarketVM: MarketVMInput, MarketVMOutput {}
 final class DefaultMarketVM: MarketVM {
     
     private let disposeBag = DisposeBag()
+    private var currentPage: Int = 0
     
     // MARK: - Init
     
@@ -67,6 +68,7 @@ final class DefaultMarketVM: MarketVM {
             size: 15,
             sale: isSaling.value
         )
+        currentPage = 0
     }
     
     func writeButtonTapped() {
@@ -82,6 +84,33 @@ final class DefaultMarketVM: MarketVM {
     func alignButtonTapped() {
         let vc = SelectAlignVC(with: selectedAlign, refresh)
         presentSelectAlignVC.accept(vc)
+    }
+    
+    func fetchNextPage() {
+        currentPage += 1
+        ProductsManager.shared.fetchProducts(
+            align: selectedAlign.value,
+            category: selectedCategory.value,
+            page: currentPage,
+            size: 15,
+            sale: isSaling.value
+        )
+        .subscribe(
+            with: self,
+            onSuccess: { owner, products in
+                if products.isEmpty {
+                    owner.currentPage -= 1
+                    return
+                }
+                let current = owner.productSections.value[0].items
+                let newSection = MarketProductDataSection(items: current + products)
+                owner.productSections.accept([newSection])
+            },
+            onFailure: { _, error in
+                Log.error(error)
+            })
+        .disposed(by: disposeBag)
+
     }
     
     var selectedCategory: BehaviorRelay<[CategoryType]>

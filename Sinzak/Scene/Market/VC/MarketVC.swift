@@ -85,6 +85,8 @@ extension MarketVC {
     func bind() {
         bindInput()
         bindOutput()
+        
+        mainView.productCollectionView.rx.setDelegate(self)
     }
     
     func bindInput() {
@@ -339,6 +341,21 @@ extension MarketVC {
             })
             .disposed(by: disposeBag)
     }
+}
+
+extension MarketVC: UICollectionViewDelegate {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        if indexPath.item == viewModel.productSections.value[0].items.count - 2 {
+            Log.debug("fetct")
+            viewModel.fetchNextPage()
+        }
+    }
+    
 }
 
 // MARK: - DataSouce
