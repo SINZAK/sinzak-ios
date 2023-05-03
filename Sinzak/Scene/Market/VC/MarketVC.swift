@@ -309,8 +309,17 @@ private extension MarketVC {
             .bind(to: mainView.categoryCollectionView.rx.items(dataSource: getCategoryDataSource()))
             .disposed(by: disposeBag)
         
-        viewModel.productSections
-            .bind(to: mainView.productCollectionView.rx.items(dataSource: getProductDataSource()))
+        let productSections = viewModel.productSections
+            .asDriver()
+        
+        productSections
+            .drive(mainView.productCollectionView.rx.items(dataSource: getProductDataSource()))
+            .disposed(by: disposeBag)
+        
+        productSections
+            .map { !$0[0].items.isEmpty }
+            .distinctUntilChanged()
+            .drive(mainView.nothingView.rx.isHidden)
             .disposed(by: disposeBag)
         
         // MARK: - 검색 옵션
