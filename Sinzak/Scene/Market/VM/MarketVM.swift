@@ -11,11 +11,11 @@ import RxCocoa
 import RxDataSources
 
 protocol MarketVMInput {
-    func viewDidLoad()
     func writeButtonTapped()
     func searchButtonTapped()
     func alignButtonTapped()
     func refresh()
+    func fetchNextPage()
     
     var selectedCategory: BehaviorRelay<[CategoryType]> { get }
     
@@ -58,16 +58,6 @@ final class DefaultMarketVM: MarketVM {
     }
     
     // MARK: - Input
-    
-    func viewDidLoad() {
-        fetchMarketProducts(
-            align: selectedAlign.value,
-            category: selectedCategory.value,
-            page: 0,
-            size: 15,
-            sale: isSaling.value
-        )
-    }
     
     func refresh() {
         fetchMarketProducts(
