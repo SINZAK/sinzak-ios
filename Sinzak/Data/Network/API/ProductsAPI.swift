@@ -10,7 +10,7 @@ import Moya
 
 enum ProductsAPI {
     // 조회
-    case products(align: String, page: Int, size: Int, category: [String], sale: Bool)
+    case products(align: String, page: Int, size: Int, category: [String], sale: Bool, search: String)
     case productDetail(id: Int)
     // 홈 섹션별
     case homeFollowing
@@ -74,20 +74,37 @@ extension ProductsAPI: TargetType {
     }
     var task: Moya.Task {
         switch self {
-        case .products(let align, let page, let size, let category, let sale):
-            let sale: String = sale ? "true" : "false"
-            let param: [String: Any] = category == ["all"] || category.isEmpty ? [
-                "align": align,
-                "page": page,
-                "sale": sale,
-                "size": size
-            ] : [
-                "align": align,
-                "categories": category.joined(separator: ","),
-                "page": page,
-                "sale": sale,
-                "size": size
-            ]
+        case .products(let align, let page, let size, let category, let sale, let search):
+            var param: [String: Any]
+            if search.isEmpty {
+                param = category == ["all"] || category.isEmpty ? [
+                    "align": align,
+                    "page": page,
+                    "sale": sale,
+                    "size": size
+                ] : [
+                    "align": align,
+                    "categories": category.joined(separator: ","),
+                    "page": page,
+                    "sale": sale,
+                    "size": size
+                ]
+            } else {
+                param = category == ["all"] || category.isEmpty ? [
+                    "align": align,
+                    "page": page,
+                    "sale": sale,
+                    "size": size,
+                    "search": search
+                ] : [
+                    "align": align,
+                    "categories": category.joined(separator: ","),
+                    "page": page,
+                    "sale": sale,
+                    "size": size,
+                    "search": search
+                ]
+            }
             
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
             
