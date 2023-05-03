@@ -209,6 +209,14 @@ extension MarketVC {
                 
             })
             .disposed(by: disposeBag)
+        
+        mainView.productCollectionView.rx.modelSelected(Products.self)
+            .bind(with: self, onNext: { owner, products in
+                let vm = DefaultProductsDetailVM(refresh: owner.viewModel.refresh)
+                let vc = ProductsDetailVC(id: products.id, type: .purchase, viewModel: vm)
+                owner.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
