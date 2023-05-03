@@ -170,10 +170,6 @@ private extension DefaultMarketVM {
             .milliseconds(500),
             scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
         )
-        .subscribe(on: SerialDispatchQueueScheduler(
-            queue: .global(),
-            internalSerialQueueName: "productSection")
-        )
         .subscribe(
             with: self,
             onSuccess: { owner, productSection in
