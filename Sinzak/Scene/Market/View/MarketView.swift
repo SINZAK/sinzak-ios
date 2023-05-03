@@ -59,6 +59,8 @@ final class MarketView: SZView {
         $0.setImage(UIImage(named: "plus"), for: .normal)
     }
     
+    let nothingView = NothingView()
+    
     let marketSkeletonView: MarketSkeletonView = MarketSkeletonView()
     
     // MARK: - Design Helpers
@@ -67,6 +69,7 @@ final class MarketView: SZView {
             categoryCollectionView,
             viewOptionButton, alignButton,
             productCollectionView, writeButton,
+            nothingView,
             marketSkeletonView
         )
     }
@@ -101,6 +104,11 @@ final class MarketView: SZView {
             make.width.height.equalTo(62)
             make.bottom.equalTo(safeAreaLayoutGuide).inset(7)
             make.trailing.equalToSuperview().inset(11)
+        }
+        
+        nothingView.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide).offset(196.0)
+            $0.centerX.equalToSuperview()
         }
         
         marketSkeletonView.snp.makeConstraints {
