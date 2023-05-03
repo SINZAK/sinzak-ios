@@ -15,7 +15,6 @@ final class MarketVC: SZVC {
     // MARK: - Properties
     private let viewModel: MarketVM!
     private let mainView = MarketView()
-    let backgroundScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
     
     private let disposeBag = DisposeBag()
     
