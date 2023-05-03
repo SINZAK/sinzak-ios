@@ -25,14 +25,16 @@ class ProductsManager: ManagerType {
         category: [CategoryType],
         page: Int,
         size: Int,
-        sale: Bool
+        sale: Bool,
+        search: String
     ) -> Single<[Products]> {
         return provider.rx.request(.products(
             align: align.rawValue,
             page: page,
             size: size,
             category: category.map { $0.rawValue },
-            sale: sale
+            sale: sale,
+            search: search
         ))
         .filterSuccessfulStatusCodes()
         .map(MarketProductsResponseDTO.self)
