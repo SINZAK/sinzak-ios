@@ -39,14 +39,16 @@ final class MarketSkeletonView: SZView {
     }
     
     override func setView() {
-        self.backgroundColor = CustomColor.background
+        self.backgroundColor = .clear
+        productCollectionView.backgroundColor = CustomColor.background
         self.isSkeletonable = true
         addSubview(productCollectionView)
     }
     
     override func setLayout() {
         productCollectionView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalToSuperview()
+            $0.top.equalToSuperview().inset(104)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
