@@ -25,7 +25,7 @@ protocol MarketVMInput {
 
 protocol MarketVMOutput {
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
-    var pushSerachVC: PublishRelay<SearchVC> { get }
+    var pushSerachVC: PublishRelay<MarketVC> { get }
     var presentSelectAlignVC: PublishRelay<SelectAlignVC> { get }
     
     var categorySections: BehaviorRelay<[CategoryDataSection]> { get }
@@ -79,7 +79,19 @@ final class DefaultMarketVM: MarketVM {
     }
     
     func searchButtonTapped() {
-        let vc = SearchVC()
+        let selectedCategory = BehaviorRelay(value: selectedCategory.value)
+        let selectedAlign = BehaviorRelay(value: selectedAlign.value)
+        let isSaling = BehaviorRelay(value: isSaling.value)
+        let needRefresh = BehaviorRelay(value: needRefresh.value)
+        
+        let vm = DefaultMarketVM(
+            selectedCategory,
+            selectedAlign,
+            isSaling,
+            needRefresh
+        )
+        let vc = MarketVC(viewModel: vm, mode: .search)
+        
         pushSerachVC.accept(vc)
     }
     
@@ -123,7 +135,7 @@ final class DefaultMarketVM: MarketVM {
     
     // MARK: - Output
     var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
-    var pushSerachVC: PublishRelay<SearchVC> = PublishRelay()
+    var pushSerachVC: PublishRelay<MarketVC> = PublishRelay()
     var presentSelectAlignVC: PublishRelay<SelectAlignVC> = PublishRelay<SelectAlignVC>()
     
     lazy var categorySections: BehaviorRelay<[CategoryDataSection]> = BehaviorRelay(value: [
