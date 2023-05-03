@@ -54,7 +54,7 @@ final class TabBarVC: UITabBarController {
             isSaling,
             needRefresh
         )
-        let marketVC = UINavigationController(rootViewController: MarketVC(viewModel: marketVM))
+        let marketVC = UINavigationController(rootViewController: MarketVC(viewModel: marketVM, mode: .watch))
         marketVC.tabBarItem = UITabBarItem(title: I18NStrings.Market,
                                          image: UIImage(named: "market"),
                                          selectedImage: UIImage(named: "market-selected"))

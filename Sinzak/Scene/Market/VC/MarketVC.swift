@@ -11,12 +11,19 @@ import RxCocoa
 import RxDataSources
 import SkeletonView
 
+enum MarketMode {
+    case watch
+    case search
+}
+
 final class MarketVC: SZVC {
     // MARK: - Properties
     private let viewModel: MarketVM!
     private let mainView = MarketView()
     
     private let disposeBag = DisposeBag()
+    
+    private var marketMode: MarketMode
     
     var isViewDidLoad: Bool = true
     var isCurrentMarketView: Bool = false
@@ -28,9 +35,17 @@ final class MarketVC: SZVC {
         action: nil
     )
     
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "작품 통합 검색"
+        
+        return searchBar
+    }()
+
     // MARK: - Init
-    init(viewModel: MarketVM) {
+    init(viewModel: MarketVM, mode: MarketMode) {
         self.viewModel = viewModel
+        self.marketMode = mode
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -47,6 +62,12 @@ final class MarketVC: SZVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if marketMode == .search {
+            self.navigationItem.titleView = searchBar
+            self.navigationItem.rightBarButtonItem = nil
+            viewModel.refresh()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -219,6 +240,27 @@ private extension MarketVC {
                 owner.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
+        
+        mainView.productCollectionView.rx.willBeginDragging
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.searchBar.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
+        searchBar.rx.searchButtonClicked
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                let text = owner.searchBar.text ?? ""
+                if text.count < 2 {
+                    owner.showSinglePopUpAlert(message: "2글자 이상 입력해 주세요.")
+                    return
+                }
+                owner.viewModel.searchText.accept(text)
+                owner.viewModel.refresh()
+                owner.searchBar.endEditing(true)
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
@@ -236,13 +278,19 @@ private extension MarketVC {
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
 //                self?.navigationController?.pushViewController(vc, animated: true)
+                
+                let selectedCategory = BehaviorRelay(value: owner.viewModel.selectedCategory.value)
+                let selectedAlign = BehaviorRelay(value: owner.viewModel.selectedAlign.value)
+                let isSaling = BehaviorRelay(value: owner.viewModel.isSaling.value)
+                let needRefresh = BehaviorRelay(value: owner.viewModel.needRefresh.value)
+                
                 let vm = DefaultMarketVM(
-                    owner.viewModel.selectedCategory,
-                    owner.viewModel.selectedAlign,
-                    owner.viewModel.isSaling,
-                    owner.viewModel.needRefresh
+                    selectedCategory,
+                    selectedAlign,
+                    isSaling,
+                    needRefresh
                 )
-                let vc = MarketVC(viewModel: vm)
+                let vc = MarketVC(viewModel: vm, mode: .search)
                 owner.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
@@ -298,6 +346,10 @@ private extension MarketVC {
                         owner.mainView.marketSkeletonView.isHidden = false
                         owner.view.showAnimatedSkeleton()
                     } else {
+                        owner.mainView.productCollectionView.scroll(
+                            to: .top,
+                            animated: false
+                        )
                         owner.view.hideSkeleton()
                         owner.mainView.marketSkeletonView.isHidden = true
                         
@@ -341,12 +393,24 @@ private extension MarketVC {
                     return
                 }
                 
-                let idx: Int = CategoryType.allCases.firstIndex(of: categories[0]) ?? 0
-                owner.mainView.categoryCollectionView.selectItem(
-                    at: [0, idx],
-                    animated: true,
-                    scrollPosition: .centeredHorizontally
-                )
+                if owner.marketMode == .watch {
+                    let idx: Int = CategoryType.allCases.firstIndex(of: categories[0]) ?? 0
+                    owner.mainView.categoryCollectionView.selectItem(
+                        at: [0, idx],
+                        animated: true,
+                        scrollPosition: .centeredHorizontally
+                    )
+                } else {
+                    categories.forEach {
+                        let idx: Int = CategoryType.allCases.firstIndex(of: $0) ?? 0
+                        owner.mainView.categoryCollectionView.selectItem(
+                            at: [0, idx],
+                            animated: true,
+                            scrollPosition: .centeredHorizontally
+                        )
+                    }
+                }
+                
             })
             .disposed(by: disposeBag)
     }
