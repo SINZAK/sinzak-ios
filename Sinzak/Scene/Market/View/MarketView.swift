@@ -113,7 +113,7 @@ final class MarketView: SZView {
         
         marketSkeletonView.snp.makeConstraints {
             $0.trailing.leading.equalToSuperview()
-            $0.top.equalTo(alignButton.snp.bottom).offset(8.0)
+            $0.top.equalTo(safeAreaLayoutGuide)
             $0.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
