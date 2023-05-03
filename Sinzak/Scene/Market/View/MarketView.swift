@@ -130,13 +130,14 @@ extension MarketView {
                     heightDimension: .estimated(32))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(2),
+                    widthDimension: .fractionalWidth(1.5),
                     heightDimension: .fractionalHeight(1))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 group.interItemSpacing = .fixed(10)
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets.top = 15
                 section.contentInsets.leading = 16
+            section.contentInsets.trailing = 16.0
                 section.contentInsets.bottom = 15
                 section.interGroupSpacing = 0
                 section.orthogonalScrollingBehavior = .continuous
