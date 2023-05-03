@@ -92,8 +92,8 @@ class SZVC: UIViewController {
             navigationItem.leftBarButtonItem = customBackButton
             
         }
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.delegate = self
     }
     @objc
     func backButtonTapped(_ sender: UIBarButtonItem) {
@@ -104,9 +104,12 @@ class SZVC: UIViewController {
     }
 }
 
-extension SZVC: UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return navigationController?.viewControllers.count ?? 0 > 1
+// MARK: - Navigation Pop Gesture
+extension SZVC: UIGestureRecognizerDelegate {}
+
+extension SZVC: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        navigationController.interactivePopGestureRecognizer?.isEnabled = navigationController.viewControllers.count > 1
     }
 }
 
