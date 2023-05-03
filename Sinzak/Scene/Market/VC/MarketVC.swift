@@ -147,7 +147,7 @@ private extension MarketVC {
                     .frame
                     .height ?? 0)
                 owner.viewModel.refresh()
-                owner.mainView.marketSkeletonView.snp.remakeConstraints {
+                owner.mainView.marketSkeletonView.productCollectionView.snp.remakeConstraints {
                     $0.trailing.leading.equalToSuperview()
                     $0.top.equalTo(owner.mainView.alignButton.snp.bottom).offset(offset)
                     $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
@@ -276,21 +276,7 @@ private extension MarketVC {
         viewModel.pushSerachVC
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-//                self?.navigationController?.pushViewController(vc, animated: true)
-                
-                let selectedCategory = BehaviorRelay(value: owner.viewModel.selectedCategory.value)
-                let selectedAlign = BehaviorRelay(value: owner.viewModel.selectedAlign.value)
-                let isSaling = BehaviorRelay(value: owner.viewModel.isSaling.value)
-                let needRefresh = BehaviorRelay(value: owner.viewModel.needRefresh.value)
-                
-                let vm = DefaultMarketVM(
-                    selectedCategory,
-                    selectedAlign,
-                    isSaling,
-                    needRefresh
-                )
-                let vc = MarketVC(viewModel: vm, mode: .search)
+            .subscribe(onNext: { owner, vc in
                 owner.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
@@ -354,16 +340,18 @@ private extension MarketVC {
                         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                         owner.mainView.marketSkeletonView.isHidden = false
                         owner.view.showAnimatedSkeleton()
-                    } else {
+                        owner.mainView.productCollectionView.isHidden = true
                         owner.mainView.productCollectionView.scroll(
                             to: .top,
                             animated: false
                         )
+                    } else {
+                        owner.mainView.productCollectionView.isHidden = false
                         owner.view.hideSkeleton()
                         owner.mainView.marketSkeletonView.isHidden = true
                         
                         if owner.mainView.productCollectionView.refreshControl?.isRefreshing ?? false {
-                            owner.mainView.marketSkeletonView.snp.makeConstraints {
+                            owner.mainView.marketSkeletonView.productCollectionView.snp.makeConstraints {
                                 $0.trailing.leading.equalToSuperview()
                                 $0.top.equalTo(owner.mainView.alignButton.snp.bottom).offset(8.0)
                                 $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
