@@ -10,7 +10,7 @@ import Moya
 
 enum WorksAPI {
     // 조회
-    case works(align: String, page: Int, size: Int, category: String, sale: Bool)
+    case works(employment: Bool, align: String, page: Int, size: Int, category: [String], sale: Bool, search: String)
     case worksDetail(id: Int)
     // 게시글 작성, 수정
     case build(post: WorkBuild)
@@ -64,14 +64,41 @@ extension WorksAPI: TargetType {
     }
     var task: Moya.Task {
         switch self {
-        case .works(let align, let page, let size, let category, let sale):
-            let param: [String: Any] = [
-                "align": align,
-                "categories": category,
-                "page": page,
-                "sale": sale,
-                "size": size
-            ]
+        case .works(let employment, let align, let page, let size, let category, let sale, let search):
+            var param: [String: Any]
+            if search.isEmpty {
+                param = category == ["all"] || category.isEmpty ? [
+                    "employment": employment,
+                    "align": align,
+                    "page": page,
+                    "sale": sale,
+                    "size": size
+                ] : [
+                    "employment": employment,
+                    "align": align,
+                    "categories": category.joined(separator: ","),
+                    "page": page,
+                    "sale": sale,
+                    "size": size
+                ]
+            } else {
+                param = category == ["all"] || category.isEmpty ? [
+                    "employment": employment,
+                    "align": align,
+                    "page": page,
+                    "sale": sale,
+                    "size": size,
+                    "search": search
+                ] : [
+                    "employment": employment,
+                    "align": align,
+                    "categories": category.joined(separator: ","),
+                    "page": page,
+                    "sale": sale,
+                    "size": size,
+                    "search": search
+                ]
+            }
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         case .build(let post):
             do {
