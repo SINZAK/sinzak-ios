@@ -19,7 +19,7 @@ final class MarketSkeletonView: SZView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.estimatedItemSize = CGSize(width: (width - 48.0) / 2, height: 264)
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 16.0, bottom: 0, right: 16.0)
+        layout.sectionInset = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0, right: 16.0)
         
         return layout
     }()
@@ -47,7 +47,7 @@ final class MarketSkeletonView: SZView {
     
     override func setLayout() {
         productCollectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(104)
+            $0.top.equalToSuperview().inset(96.0)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
