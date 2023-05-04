@@ -55,7 +55,7 @@ final class CategoryTagCVC: UICollectionViewCell {
     }
     let tagBackgroundView = UIView().then {
         $0.clipsToBounds = true
-        $0.layer.cornerRadius = 15
+        $0.layer.cornerRadius = 16
         $0.backgroundColor = CustomColor.background
         $0.layer.borderWidth = 1
         $0.layer.borderColor = CustomColor.gray60.cgColor
@@ -97,7 +97,7 @@ final class CategoryTagCVC: UICollectionViewCell {
     
     private func setConstraints() {
         categoryLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(tagBackgroundView)
             make.trailing.lessThanOrEqualToSuperview().inset(15)
             make.top.bottom.equalToSuperview().inset(9)
         }
@@ -111,8 +111,7 @@ final class CategoryTagCVC: UICollectionViewCell {
         
         tagBackgroundView.snp.makeConstraints { make in
             make.leading.equalTo(checkIcon).offset(-8)
-            make.top.equalTo(categoryLabel).offset(-9)
-            make.bottom.equalTo(categoryLabel).offset(9)
+            make.height.equalTo(32.0)
             make.trailing.equalTo(categoryLabel).offset(15)
         }
     }
