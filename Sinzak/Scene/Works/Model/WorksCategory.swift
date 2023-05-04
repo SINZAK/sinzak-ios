@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum WorksCategory: CaseIterable {
+enum WorksCategory: String, CaseIterable {
     case all, portrait, illust, logo
     case poster, design, editorial, label, other
     var text: String {
