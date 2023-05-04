@@ -59,7 +59,7 @@ final class TabBarVC: UITabBarController {
                                          image: UIImage(named: "market"),
                                          selectedImage: UIImage(named: "market-selected"))
         // 의뢰
-        let worksVC = UINavigationController(rootViewController: WorksVC())
+        let worksVC = UINavigationController(rootViewController: WorksContainerVC())
         worksVC.tabBarItem = UITabBarItem(title: I18NStrings.Outsourcing,
                                          image: UIImage(named: "outsourcing"),
                                          selectedImage: UIImage(named: "outsourcing-selected"))
