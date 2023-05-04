@@ -116,6 +116,13 @@ final class MarketView: SZView {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.bottom.equalTo(safeAreaLayoutGuide)
         }
+        
+        marketSkeletonView
+            .productCollectionView.snp.remakeConstraints {
+                $0.trailing.leading.equalToSuperview()
+                $0.top.equalTo(alignButton.snp.bottom).offset(8.0)
+                $0.bottom.equalTo(safeAreaLayoutGuide)
+            }
     }
 }
 
