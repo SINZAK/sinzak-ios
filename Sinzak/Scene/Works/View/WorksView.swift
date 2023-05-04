@@ -104,11 +104,11 @@ extension WorksView {
         return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(
                 widthDimension: .estimated(70.0),
-                heightDimension: .fractionalHeight(1.0))
+                heightDimension: .absolute(32.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(2.5),
-                heightDimension: .absolute(32.0))
+                widthDimension: .fractionalWidth(2.6),
+                heightDimension: .fractionalHeight(1.0))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             group.interItemSpacing = .fixed(10)
             let section = NSCollectionLayoutSection(group: group)
