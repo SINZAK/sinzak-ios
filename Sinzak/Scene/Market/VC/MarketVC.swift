@@ -147,11 +147,12 @@ private extension MarketVC {
                     .frame
                     .height ?? 0)
                 owner.viewModel.refresh()
-                owner.mainView.marketSkeletonView.productCollectionView.snp.remakeConstraints {
-                    $0.trailing.leading.equalToSuperview()
-                    $0.top.equalTo(owner.mainView.alignButton.snp.bottom).offset(offset)
-                    $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
-                }
+                owner
+                    .mainView
+                    .marketSkeletonView
+                    .productCollectionView.snp.updateConstraints {
+                        $0.top.equalTo(owner.mainView.alignButton.snp.bottom).offset(offset)
+                    }
             })
             .disposed(by: disposeBag)
         
@@ -235,7 +236,7 @@ private extension MarketVC {
         
         mainView.productCollectionView.rx.modelSelected(Products.self)
             .bind(with: self, onNext: { owner, products in
-                let vm = DefaultProductsDetailVM(refresh: owner.viewModel.refresh)
+                let vm = DefaultProductsDetailVM(type: .purchase, refresh: owner.viewModel.refresh)
                 let vc = ProductsDetailVC(id: products.id, type: .purchase, viewModel: vm)
                 owner.navigationController?.pushViewController(vc, animated: true)
             })
@@ -351,11 +352,12 @@ private extension MarketVC {
                         owner.mainView.marketSkeletonView.isHidden = true
                         
                         if owner.mainView.productCollectionView.refreshControl?.isRefreshing ?? false {
-                            owner.mainView.marketSkeletonView.productCollectionView.snp.makeConstraints {
-                                $0.trailing.leading.equalToSuperview()
-                                $0.top.equalTo(owner.mainView.alignButton.snp.bottom).offset(8.0)
-                                $0.bottom.equalTo(owner.view.safeAreaLayoutGuide)
-                            }
+                            owner
+                                .mainView
+                                .marketSkeletonView
+                                .productCollectionView.snp.updateConstraints {
+                                    $0.top.equalTo(owner.mainView.alignButton.snp.bottom)
+                                }
                             owner.mainView.productCollectionView.refreshControl?.endRefreshing()
                         }
                     }
