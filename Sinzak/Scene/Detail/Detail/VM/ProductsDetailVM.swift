@@ -30,14 +30,26 @@ final class DefaultProductsDetailVM: ProductsDetailVM {
     
     private let disposeBag = DisposeBag()
     
-    init(refresh: @escaping () -> Void) {
+    var type: DetailType
+
+    init(type: DetailType, refresh: @escaping () -> Void) {
+        self.type = type
         self.refresh = refresh
     }
     
     // MARK: - Input
     
     func fetchProductsDetail(id: Int) {
-        ProductsManager.shared.fetchProductsDetail(id: id)
+        let detail: Single<ProductsDetail>
+        
+        switch type {
+        case .purchase:
+            detail = ProductsManager.shared.fetchProductsDetail(id: id)
+        case .request:
+            detail = WorksManager.shared.fetchWorksDetail(id: id)
+        }
+        
+        detail
             .subscribe(
                 with: self,
                 onSuccess: { owner, productsDetail in
