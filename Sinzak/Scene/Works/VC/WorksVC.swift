@@ -353,6 +353,7 @@ private extension WorksVC {
                         animated: false,
                         scrollPosition: .centeredHorizontally
                     )
+                    self.isViewDidLoad = false
                 }
                 
                 cell.updateWorksCell(category: item)
