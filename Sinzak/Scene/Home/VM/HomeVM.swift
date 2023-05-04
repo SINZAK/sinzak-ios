@@ -66,7 +66,7 @@ final class DefaultHomeVM: HomeVM {
     }
     
     func tapProductsCell(products: Products) {
-        let vm = DefaultProductsDetailVM(refresh: fetchData)
+        let vm = DefaultProductsDetailVM(type: .purchase, refresh: fetchData)
         let vc = ProductsDetailVC(id: products.id, type: .purchase, viewModel: vm)
 //        vc.mainView.setData(products)
         pushProductsDetailView.accept(vc)
