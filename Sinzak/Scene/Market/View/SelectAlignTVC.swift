@@ -68,9 +68,9 @@ final class SelectAlignTVC: UITableViewCell {
     func configureCell(with alignOption: AlignOption) {
         self.alignOption = alignOption
         alignLabel.text = alignOption.text
-        if alignOption == .recommend || alignOption == .popular {
-            infoButton.isHidden = false
-        }
+//        if alignOption == .recommend || alignOption == .popular {
+//            infoButton.isHidden = false
+//        }
         if alignOption == .high {
             separateView.isHidden = true
         }
