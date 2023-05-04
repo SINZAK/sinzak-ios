@@ -124,48 +124,48 @@ extension MarketView {
     
     func setCategoryLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
-                let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .estimated(70),
-                    heightDimension: .absolute(32.0))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(2.0),
-                    heightDimension: .fractionalHeight(1.0))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                group.interItemSpacing = .fixed(10)
-                let section = NSCollectionLayoutSection(group: group)
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .estimated(70),
+                heightDimension: .absolute(32.0))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(2.0),
+                heightDimension: .fractionalHeight(1.0))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            group.interItemSpacing = .fixed(10)
+            let section = NSCollectionLayoutSection(group: group)
             section.contentInsets.top = 12.0
-                section.contentInsets.leading = 16
+            section.contentInsets.leading = 16
             section.contentInsets.trailing = 16.0
             section.contentInsets.bottom = 12.0
-                section.interGroupSpacing = 0
-                section.orthogonalScrollingBehavior = .continuous
-                return section
+            section.interGroupSpacing = 0
+            section.orthogonalScrollingBehavior = .continuous
+            return section
         }
     }
     
     func setProductLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
-                let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(0.5),
-                    heightDimension: .fractionalHeight(1.0)
-                )
-                let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(264)
-                )
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets.leading = 8
-                item.contentInsets.trailing = 8
-                item.contentInsets.bottom = 16
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.top = 0
-                section.contentInsets.leading = 8
-                section.contentInsets.trailing = 8
-                section.contentInsets.bottom = 72
-   
-                return section
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(0.5),
+                heightDimension: .fractionalHeight(1.0)
+            )
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .estimated(264)
+            )
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets.leading = 8
+            item.contentInsets.trailing = 8
+            item.contentInsets.bottom = 16
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets.top = 0
+            section.contentInsets.leading = 8
+            section.contentInsets.trailing = 8
+            section.contentInsets.bottom = 72
+            
+            return section
         }
     }
 }
