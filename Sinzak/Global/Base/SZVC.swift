@@ -343,6 +343,11 @@ extension SZVC: UIViewControllerTransitioningDelegate {
                 presentedViewController: presented,
                 presenting: presenting
             )
+        case is WorksSelectAlignVC:
+            return WorksSelectAlignPC(
+                presentedViewController: presented,
+                presenting: presenting
+            )
         default:
             return UIPresentationController(presentedViewController: presented, presenting: presenting)
         }
