@@ -122,23 +122,22 @@ final class MarketView: SZView {
 // MARK: - 컴포지셔널 레이아웃
 extension MarketView {
     
-    // TODO: trailing inset 안맞음
     func setCategoryLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (_, _) -> NSCollectionLayoutSection? in
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .estimated(70),
-                    heightDimension: .estimated(32))
+                    heightDimension: .absolute(32.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.5),
-                    heightDimension: .fractionalHeight(1))
+                    widthDimension: .fractionalWidth(2.0),
+                    heightDimension: .fractionalHeight(1.0))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 group.interItemSpacing = .fixed(10)
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.top = 15
+            section.contentInsets.top = 12.0
                 section.contentInsets.leading = 16
             section.contentInsets.trailing = 16.0
-                section.contentInsets.bottom = 15
+            section.contentInsets.bottom = 12.0
                 section.interGroupSpacing = 0
                 section.orthogonalScrollingBehavior = .continuous
                 return section
@@ -161,7 +160,7 @@ extension MarketView {
                 item.contentInsets.bottom = 16
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.top = 10
+                section.contentInsets.top = 0
                 section.contentInsets.leading = 8
                 section.contentInsets.trailing = 8
                 section.contentInsets.bottom = 72
