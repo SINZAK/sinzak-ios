@@ -86,4 +86,11 @@ final class WorksManager: ManagerType {
             .map(filterError)
             .map { $0.success }
     }
+    
+    func completeWorks(id: Int) -> Single<Bool> {
+        return provider.rx.request(.sell(postId: id))
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
+    }
 }
