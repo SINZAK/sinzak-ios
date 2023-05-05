@@ -25,8 +25,12 @@ final class MarketVC: SZVC {
     
     private var marketMode: MarketMode
     
+    var currentTappedCell: BehaviorRelay<Int> = .init(value: -1)
+    
     var isViewDidLoad: Bool = true
     var isCurrentMarketView: Bool = false
+    
+    var updateLikeOfDataSource: BehaviorRelay<(id: Int, isLike: Bool, likeCount: Int)> = .init(value: (id: -1, isLike: false, likeCount: -1))
     
     let searchBarButton = UIBarButtonItem(
         image: UIImage(named: "search"),
@@ -107,6 +111,52 @@ private extension MarketVC {
         bindOutput()
         
         mainView.productCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        updateLikeOfDataSource
+            .withUnretained(self)
+            .subscribe { owner, tuple in
+                let section = owner.viewModel.productSections.value[0]
+                
+                var newProducts: [Products] = []
+                for product in section.items {
+                    var product = product
+                    if product.id == tuple.id {
+                        product.like = tuple.isLike
+                        product.likesCnt = tuple.likeCount
+                    }
+                    newProducts.append(product)
+                }
+                
+                let newSections = [MarketProductDataSection(items: newProducts)]
+                owner.viewModel.productSections.accept(newSections)
+            }
+            .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.productsCellLikeUpdate)
+            .distinctUntilChanged()
+            .asDriver(onErrorRecover: { _ in .never() })
+            .drive(with: self, onNext: { owner, notification in
+                guard let info = notification.userInfo else { return }
+                let id = info["id"] as? Int ?? 0
+                let isLike = info["isSelected"] as? Bool ?? false
+                let likeCount = info["likeCount"] as? Int ?? 0
+
+                let section = owner.viewModel.productSections.value[0]
+                
+                var newProducts: [Products] = []
+                for product in section.items {
+                    var product = product
+                    if product.id == id {
+                        product.like = isLike
+                        product.likesCnt = likeCount
+                    }
+                    newProducts.append(product)
+                }
+                
+                let newSections = [MarketProductDataSection(items: newProducts)]
+                owner.viewModel.productSections.accept(newSections)
+            })
             .disposed(by: disposeBag)
     }
     
@@ -456,14 +506,19 @@ private extension MarketVC {
     }
     
     func getProductDataSource() -> RxCollectionViewSectionedReloadDataSource<MarketProductDataSection> {
-        let relay = viewModel.needLoginAlert
         return RxCollectionViewSectionedReloadDataSource<MarketProductDataSection>(
-            configureCell: { _, collectionView, indexPath, item in
+            configureCell: { [weak self] _, collectionView, indexPath, item in
+                guard let self = self else { return UICollectionViewCell() }
                 guard let cell: ArtCVC = collectionView.dequeueReusableCell(
                     withReuseIdentifier: ArtCVC.identifier,
                     for: indexPath
                 ) as? ArtCVC else { return UICollectionViewCell() }
-                cell.setData(item, .products, relay)
+                cell.setData(
+                    item,
+                    .products,
+                    self.needLogIn,
+                    self.currentTappedCell
+                )
                 return cell
             })
     }

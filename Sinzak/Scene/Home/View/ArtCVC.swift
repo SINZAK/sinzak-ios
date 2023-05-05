@@ -23,6 +23,7 @@ final class ArtCVC: UICollectionViewCell {
     
     var products: Products?
     var kind: ArtCellKind?
+    var currentTappedCell: BehaviorRelay<Int>?
     var needLoginAlert: PublishRelay<Bool>?
     var disposeBag = DisposeBag()
 
@@ -33,6 +34,7 @@ final class ArtCVC: UICollectionViewCell {
         $0.layer.cornerRadius = 12
         $0.contentMode = .scaleAspectFill
         $0.image = UIImage(named: "emptySquare")
+        $0.backgroundColor = CustomColor.background
         $0.isSkeletonable = true
     }
     
@@ -113,16 +115,16 @@ final class ArtCVC: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Setter
-    func setData(_ data: Products, _ kind: ArtCellKind, _ relay: PublishRelay<Bool>) {
+    func setData(_ data: Products, _ kind: ArtCellKind, _ needLoginAlert: PublishRelay<Bool>, _ currentTappedCell: BehaviorRelay<Int>) {
         self.products = data
         self.kind = kind
-        self.needLoginAlert = relay
+        self.needLoginAlert = needLoginAlert
         
         let nothingImage = UIImage(named: "nothing")?.withTintColor(CustomColor.gray60, renderingMode: .alwaysOriginal)
         
         if let thumbnail = data.thumbnail {
             let url = URL(string: thumbnail)
-            imageView.kf.setImage(with: url, placeholder: nothingImage)
+            imageView.kf.setImage(with: url)
         } else {
             imageView.image = nothingImage
             imageView.backgroundColor = CustomColor.gray10
@@ -137,6 +139,30 @@ final class ArtCVC: UICollectionViewCell {
         likeView.isHidden = data.complete
         soldOutView.kind = kind
         soldOutView.isHidden = !data.complete
+        
+        self.currentTappedCell = currentTappedCell
+        
+        if self.currentTappedCell?.value == products?.id && products?.like == true {
+            UIView.animate(
+                withDuration: 0.1,
+                delay: 0.0,
+                options: .curveEaseOut,
+                animations: { [weak self] in
+                    guard let self = self else { return }
+                    self.likeView.likeImageView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                },
+                completion: { _ in
+                    UIView.animate(withDuration: 0.1,
+                                   delay: 0.0,
+                                   options: .curveEaseOut,
+                                   animations: {
+                        self.likeView.likeImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                    },
+                                   completion: { _ in
+                        self.currentTappedCell?.accept(-1)
+                    })
+                })
+        }
     }
     
     func setSkeleton() {
@@ -232,6 +258,7 @@ final class ArtCVC: UICollectionViewCell {
         likeView.likeImageView.image = nil
         likeView.likeCountLabel.text = nil
         imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = CustomColor.background
     }
 }
 
@@ -239,6 +266,12 @@ private extension ArtCVC {
     
     @objc
     func tapLikeView() {
+        
+        guard UserInfoManager.isLoggedIn else {
+            needLoginAlert?.accept(true)
+            return
+        }
+        
         if !likeView.isSelected {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         }
@@ -251,33 +284,28 @@ private extension ArtCVC {
         .subscribe(
             with: self,
             onSuccess: { owner, _ in
-                owner.likeView.isSelected.toggle()
+                
+                var likeCount: Int
                 if owner.likeView.isSelected {
-                    UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
-                        owner.likeView.likeImageView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-                    }, completion: { _ in
-                        UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
-                            owner.likeView.likeImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                        })
-                    })
-                    owner.likeView.likesCount += 1
+                    likeCount = owner.likeView.likesCount - 1
                 } else {
-                    owner.likeView.likesCount -= 1
+                    likeCount = owner.likeView.likesCount + 1
                 }
                 
-                // 홈, 마켓 화면에서 같은 셀 좋아요 상태 업데이트
-                if owner.kind == .products {
-                    NotificationCenter.default.post(
-                        name: .cellLikeUpdate,
-                        object: nil,
-                        userInfo: [
-                            "id": owner.products?.id ?? 1,
-                            "kind": ArtCellKind.products,
-                            "isSelected": owner.likeView.isSelected,
-                            "likeCount": owner.likeView.likesCount
-                        ]
-                    )
-                }
+                owner.currentTappedCell?.accept(owner.products?.id ?? 0)
+                
+                let name: NSNotification.Name = owner.kind == .products ? .productsCellLikeUpdate :
+                    .worksCellLikeUpdate
+                
+                NotificationCenter.default.post(
+                    name: name,
+                    object: nil,
+                    userInfo: [
+                        "id": owner.products?.id ?? 1,
+                        "isSelected": !owner.likeView.isSelected,
+                        "likeCount": likeCount
+                    ]
+                )
             }, onFailure: { _, error  in
                 Log.error(error)
             })
@@ -285,23 +313,6 @@ private extension ArtCVC {
     }
     
     func bind() {
-        NotificationCenter.default.rx.notification(.cellLikeUpdate)
-            .distinctUntilChanged()
-            .asDriver(onErrorRecover: { _ in .never() })
-            .drive(with: self, onNext: { owner, notification in
-                guard let info = notification.userInfo else { return }
-                let id = info["id"] as? Int ?? 0
-                let kind = info["kind"] as? ArtCellKind ?? .products
-                let isSelected = info["isSelected"] as? Bool ?? false
-                let likeCount = info["likeCount"] as? Int ?? 0
-                
-                if owner.products?.id == id && owner.kind == kind {
-                    owner.likeView.isSelected = isSelected
-                    owner.likeView.likesCount = likeCount
-                }
-            })
-            .disposed(by: disposeBag)
-        
         NotificationCenter.default.rx.notification(.cellIsCompleteUpdate)
             .distinctUntilChanged()
             .asDriver(onErrorRecover: { _ in .never() })
