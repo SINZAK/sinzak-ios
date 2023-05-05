@@ -149,14 +149,14 @@ extension WorksAPI: TargetType {
             let param: [String: Any] = [
                 "postId": postId
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
             
         case .priceSuggest(let id, let price):
             let param: [String: Any] = [
                 "id": id,
                 "price": price
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
             
         case .worksDetail, .delete:
             return .requestPlain
