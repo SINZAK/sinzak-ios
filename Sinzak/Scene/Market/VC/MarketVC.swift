@@ -40,6 +40,7 @@ final class MarketVC: SZVC {
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "작품 통합 검색"
+        searchBar.tintColor = CustomColor.red
         
         return searchBar
     }()
