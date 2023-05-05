@@ -13,6 +13,8 @@ import RxKeyboard
 final class SendPriceOfferVC: SZVC {
     // MARK: - Properties
     let id: Int
+    let type: DetailType
+    let maxPrice: BehaviorRelay<Int>
     let mainView = SendPriceOfferView()
     let disposeBag = DisposeBag()
     
@@ -22,13 +24,11 @@ final class SendPriceOfferVC: SZVC {
     }
     
     // MARK: - Init
-    init(id: Int, topPrice: Int) {
+    init(id: Int, maxPrice: BehaviorRelay<Int>, type: DetailType) {
         self.id = id
+        self.maxPrice = maxPrice
+        self.type = type
         super.init(nibName: nil, bundle: nil)
-        
-        var text = topPrice.toMoenyFormat()
-        _ = text.removeLast()
-        self.mainView.priceLabel.text = text
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,6 +61,16 @@ final class SendPriceOfferVC: SZVC {
     }
     
     private func bind() {
+        
+        maxPrice
+            .asDriver()
+            .map { maxPrice in
+                var maxPrice = maxPrice.toMoenyFormat()
+                _ = maxPrice.popLast()
+                return maxPrice
+            }
+            .drive(mainView.priceLabel.rx.text)
+            .disposed(by: disposeBag)
         
         RxKeyboard.instance.visibleHeight
             .skip(1)
@@ -98,12 +108,24 @@ final class SendPriceOfferVC: SZVC {
                     return
                 }
                 
-                ProductsManager.shared.suggestPrice(id: owner.id, price: price)
+                var suggestPrice: Single<Bool>
+                
+                switch owner.type {
+                case .purchase:
+                    suggestPrice = ProductsManager.shared.suggestPrice(id: owner.id, price: price)
+                case .request:
+                    suggestPrice = WorksManager.shared.suggestPrice(id: owner.id, price: price)
+                }
+                
+                suggestPrice
                     .observe(on: MainScheduler.instance)
                     .subscribe(
                         onSuccess: { _ in
                             owner.showLoading()
                             owner.showSinglePopUpAlert(message: "제안 완료", actionCompletion: {
+                                if owner.maxPrice.value < price {
+                                    owner.maxPrice.accept(price)
+                                }
                                 owner.navigationController?.popViewController(animated: true)
                             })
                         },
