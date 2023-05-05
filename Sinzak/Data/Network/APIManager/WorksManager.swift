@@ -65,4 +65,18 @@ final class WorksManager: ManagerType {
             .map(filterError)
             .map { $0.success }
     }
+    
+    func wishWorks(id: Int, mode: Bool) -> Single<Bool> {
+        return provider.rx.request(.wish(id: id, mode: mode))
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
+    }
+    
+    func suggestPrice(id: Int, price: Int) -> Single<Bool> {
+        return provider.rx.request(.priceSuggest(id: id, price: price))
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
+    }
 }
