@@ -14,7 +14,6 @@ typealias WorksCategorySection = SectionModel<Void, WorksCategory>
 
 protocol WorksVMInput {
     func writeButtonTapped()
-    func searchButtonTapped()
     func alignButtonTapped()
     func refresh()
     func fetchNextPage()
@@ -50,6 +49,7 @@ final class DefaultWorksVM: WorksVM {
      */
     private let isEmployment: Bool
     private let alignInfoRelay: BehaviorRelay<(isEmployment: Bool, align: AlignOption)>
+    private let searchButtonTapped: BehaviorRelay<(isEmployment: Bool, text: String)>
     
     private let disposeBag = DisposeBag()
     private var currentPage: Int = 0
@@ -58,10 +58,12 @@ final class DefaultWorksVM: WorksVM {
     
     init(
         isEmployment: Bool,
-        alignInfoRelay: BehaviorRelay<(isEmployment: Bool, align: AlignOption)>
+        alignInfoRelay: BehaviorRelay<(isEmployment: Bool, align: AlignOption)>,
+        searchButtonTapped: BehaviorRelay<(isEmployment: Bool, text: String)>
     ) {
         self.isEmployment = isEmployment
         self.alignInfoRelay = alignInfoRelay
+        self.searchButtonTapped = searchButtonTapped
         
         alignInfoRelay
             .withUnretained(self)
@@ -73,6 +75,19 @@ final class DefaultWorksVM: WorksVM {
                 guard owner.selectedAlign.value != align else { return }
                 
                 owner.selectedAlign.accept(align)
+                owner.refresh()
+            })
+            .disposed(by: disposeBag)
+        
+        searchButtonTapped
+            .withUnretained(self)
+            .subscribe(onNext: { owner, zip in
+                let isEmployment = zip.isEmployment
+                let text = zip.text
+                
+                guard owner.isEmployment == isEmployment else { return }
+                
+                owner.searchText.accept(text)
                 owner.refresh()
             })
             .disposed(by: disposeBag)
@@ -95,23 +110,6 @@ final class DefaultWorksVM: WorksVM {
     func writeButtonTapped() {
         let vc = WriteCategoryVC()
         pushWriteCategoryVC.accept(vc)
-    }
-    
-    func searchButtonTapped() {
-//        let selectedCategory = BehaviorRelay(value: selectedCategory.value)
-//        let selectedAlign = BehaviorRelay(value: selectedAlign.value)
-//        let isSaling = BehaviorRelay(value: isSaling.value)
-//        let needRefresh = BehaviorRelay(value: needRefresh.value)
-//
-//        let vm = DefaultMarketVM(
-//            selectedCategory,
-//            selectedAlign,
-//            isSaling
-//            needRefresh
-//        )
-//        let vc = MarketVC(viewModel: vm, mode: .search)
-//
-//        pushSerachVC.accept(vc)
     }
     
     func alignButtonTapped() {
