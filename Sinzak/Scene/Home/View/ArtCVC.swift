@@ -327,6 +327,7 @@ private extension ArtCVC {
     }
     
     func bind() {
+        /*
         NotificationCenter.default.rx.notification(.cellIsCompleteUpdate)
             .distinctUntilChanged()
             .asDriver(onErrorRecover: { _ in .never() })
@@ -342,5 +343,6 @@ private extension ArtCVC {
                 }
             })
             .disposed(by: disposeBag)
+         */
     }
 }
