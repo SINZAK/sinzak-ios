@@ -35,10 +35,10 @@ struct Products: Codable {
     let thumbnail: String?
     let date: String
     let suggest: Bool
-    let likesCnt: Int
+    var likesCnt: Int
     let complete: Bool
     let popularity: Int
-    let like: Bool
+    var like: Bool
     
     init(id: Int, title: String, content: String, author: String, price: Int, thumbnail: String, date: String, suggest: Bool, likesCnt: Int, complete: Bool, popularity: Int, like: Bool) {
         self.id = id
