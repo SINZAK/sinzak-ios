@@ -63,6 +63,7 @@ final class ConciergeVC: UIViewController {
                                     Log.error(error)
                                     let root = LoginVC(viewModel: DefaultLoginVM())
                                     let vc = UINavigationController(rootViewController: root)
+//                                    let vc = TabBarVC()
                                     owner.nextVC.accept(vc)
                                 })
                             .disposed(by: owner.disposeBag)
@@ -70,16 +71,17 @@ final class ConciergeVC: UIViewController {
                     onFailure: { owner, error in
                         let root = LoginVC(viewModel: DefaultLoginVM())
                         let vc = UINavigationController(rootViewController: root)
+//                        let vc = TabBarVC()
                         owner.nextVC.accept(vc)
                         Log.error(error)
                     }
                 )
                 .disposed(by: disposeBag)
         } else {
-            let root = LoginVC(viewModel: DefaultLoginVM())
-            let vc = UINavigationController(rootViewController: root)
+//            let root = LoginVC(viewModel: DefaultLoginVM())
+//            let vc = UINavigationController(rootViewController: root)
             
-            //            let vc = TabBarVC()
+            let vc = TabBarVC()
             nextVC.accept(vc)
         }
     }
