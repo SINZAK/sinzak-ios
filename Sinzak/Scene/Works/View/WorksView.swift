@@ -26,7 +26,7 @@ final class WorksView: SZView {
     
     lazy var worksCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = CustomColor.black
+        refreshControl.tintColor = CustomColor.refreshControl
         $0.refreshControl = refreshControl
         $0.register(
             ArtCVC.self,
