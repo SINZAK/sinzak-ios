@@ -52,6 +52,7 @@ class SZVC: UIViewController {
             .withUnretained(self)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { owner, _ in
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred(intensity: 0.7)
                 owner.showNeedLogIn()
             })
             .disposed(by: disposeBag)
