@@ -63,13 +63,34 @@ final class TabBarVC: UITabBarController {
         worksVC.tabBarItem = UITabBarItem(title: I18NStrings.Outsourcing,
                                          image: UIImage(named: "outsourcing"),
                                          selectedImage: UIImage(named: "outsourcing-selected"))
+        
+        lazy var loginVC1: LoginVC = {
+            let vc = LoginVC(viewModel: DefaultLoginVM())
+            vc.configureNeedLoginLayout()
+            
+            return vc
+        }()
+        
+        lazy var loginVC2: LoginVC = {
+            let vc = LoginVC(viewModel: DefaultLoginVM())
+            vc.configureNeedLoginLayout()
+            
+            return vc
+        }()
+        
         // 채팅
-        let chatVC = UINavigationController(rootViewController: ChatListVC())
+        let chatVC = UserInfoManager.isLoggedIn ?
+        UINavigationController(rootViewController: ChatListVC()) :
+        UINavigationController(rootViewController: loginVC1)
+
         chatVC.tabBarItem = UITabBarItem(title: I18NStrings.Chat,
                                          image: UIImage(named: "chat"),
                                          selectedImage: UIImage(named: "chat-selected"))
         // 프로필
-        let profileVC = UINavigationController(rootViewController: MyProfileVC())
+        let profileVC = UserInfoManager.isLoggedIn ?
+        UINavigationController(rootViewController: MyProfileVC()) :
+        UINavigationController(rootViewController: loginVC2)
+        
         profileVC.tabBarItem = UITabBarItem(title: I18NStrings.Profile,
                                          image: UIImage(named: "profile"),
                                          selectedImage: UIImage(named: "profile-selected"))
