@@ -58,6 +58,13 @@ final class WorksManager: ManagerType {
             .map { $0.toDomain() }
     }
     
+    func deleteWorks(id: Int) -> Single<Bool> {
+        return provider.rx.request(.delete(id: id))
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
+    }
+    
     func likeWorks(id: Int, mode: Bool) -> Single<Bool> {
         return provider.rx.request(.like(id: id, mode: mode))
             .filterSuccessfulStatusCodes()
