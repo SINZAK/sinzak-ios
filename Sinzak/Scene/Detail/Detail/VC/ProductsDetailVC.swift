@@ -289,7 +289,7 @@ final class ProductsDetailVC: SZVC {
                         
                         let kind: ArtCellKind = owner.type == .purchase ? .products : .work
                         NotificationCenter.default.post(
-                            name: .cellLikeUpdate,
+                            name: .productsCellLikeUpdate,
                             object: nil,
                             userInfo: [
                                 "id": owner.mainView.products?.id ?? -1,

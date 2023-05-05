@@ -24,6 +24,8 @@ final class WorksVC: SZVC {
     private let disposeBag = DisposeBag()
     
     private var worksMode: WorksMode
+
+    var currentTappedCell: BehaviorRelay<Int> = .init(value: -1)
     
     var isViewDidLoad: Bool = true
     
@@ -362,14 +364,15 @@ private extension WorksVC {
     }
     
     func getProductDataSource() -> RxCollectionViewSectionedReloadDataSource<MarketProductDataSection> {
-        let relay = viewModel.needLoginAlert
         return RxCollectionViewSectionedReloadDataSource<MarketProductDataSection>(
-            configureCell: { _, collectionView, indexPath, item in
+            configureCell: { [weak self] _, collectionView, indexPath, item in
+                guard let self = self else { return UICollectionViewCell() }
+                
                 guard let cell: ArtCVC = collectionView.dequeueReusableCell(
                     withReuseIdentifier: ArtCVC.identifier,
                     for: indexPath
                 ) as? ArtCVC else { return UICollectionViewCell() }
-                cell.setData(item, .products, relay)
+                cell.setData(item, .products, self.needLogIn, self.currentTappedCell)
                 return cell
             })
     }

@@ -24,6 +24,8 @@ final class HomeVC: SZVC {
     let mainView = HomeView()
     var viewModel: HomeVM!
     
+    var currentTappedCell: BehaviorRelay<Int> = .init(value: -1)
+
     private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
@@ -55,6 +57,46 @@ final class HomeVC: SZVC {
     func bind() {
         bindInput()
         bindOutput()
+        
+        NotificationCenter.default.rx.notification(.productsCellLikeUpdate)
+            .distinctUntilChanged()
+            .asDriver(onErrorRecover: { _ in .never() })
+            .drive(with: self, onNext: { owner, notification in
+                guard let info = notification.userInfo else { return }
+                let id = info["id"] as? Int ?? 0
+                let isLike = info["isSelected"] as? Bool ?? false
+                let likeCount = info["likeCount"] as? Int ?? 0
+                
+                let currentSections: [HomeSection] = owner.viewModel.homeSectionModel.value
+                var newSections: [HomeSection] = []
+                
+                for section in currentSections {
+                    switch section {
+                    case .productSection(let title, let items):
+                        var products: [Products] = []
+                        for item in items {
+                            switch item {
+                            case .productSectionItem(let product):
+                                var product = product
+                                if product.id == id {
+                                    product.like = isLike
+                                    product.likesCnt = likeCount
+                                }
+                                products.append(product)
+                            default:
+                                break
+                            }
+                        }
+                        let items: [HomeSectionItem] = products.map { .productSectionItem(product: $0) }
+                        let section = HomeSection.productSection(title: title, items: items)
+                        newSections.append(section)
+                    default:
+                        newSections.append(section)
+                    }
+                }
+                owner.viewModel.homeSectionModel.accept(newSections)
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindInput() {
@@ -114,6 +156,7 @@ final class HomeVC: SZVC {
                         Log.debug("배너 탭!")
                     }
                 case 1..<sectionCount-1:
+                    owner.mainView.homeCollectionView.deselectItem(at: indexPath, animated: false)
                     guard let cell = owner.mainView.homeCollectionView.cellForItem(at: indexPath) as? ArtCVC else { return }
                     guard let products = cell.products else { return }
                     owner.viewModel.tapProductsCell(products: products)
@@ -183,14 +226,13 @@ final class HomeVC: SZVC {
     
     // MARK: - Actions
     @objc func didNotificitionButtonTapped(_ sender: UIBarButtonItem) {
-//        let vc = NotificationVC()
+        let vc = NotificationVC()
 //        navigationController?.pushViewController(vc, animated: true)
-        let ds = self.viewModel.homeSectionModel.value
+//        let ds = self.viewModel.homeSectionModel.value
         
-        viewModel.homeSectionModel.accept([])
-//        self.mainView.homeCollectionView.reloadData()
-//        self.viewModel.fetchData()
+        self.viewModel.fetchData()
     }
+    
     // MARK: - Helpers
     override func setNavigationBar() {
         let logotype = UIBarButtonItem(
@@ -220,7 +262,6 @@ final class HomeVC: SZVC {
 extension HomeVC {
     
     func getHomeDataSource() -> RxCollectionViewSectionedReloadDataSource<HomeSection> {
-        let relay = viewModel.needLoginAlert
         return RxCollectionViewSectionedReloadDataSource<HomeSection>(
             configureCell: { [weak self] dataSource, collectionView, indexPath, _ in
                 guard let self = self else { return UICollectionViewCell() }
@@ -251,7 +292,12 @@ extension HomeVC {
                             withReuseIdentifier: ArtCVC.identifier,
                             for: indexPath
                         ) as? ArtCVC else { return UICollectionViewCell() }
-                        cell.setData(product, .products, relay)
+                        cell.setData(
+                            product,
+                            .products,
+                            self.needLogIn,
+                            self.currentTappedCell
+                        )
                         
                         return cell
                     }
@@ -266,7 +312,7 @@ extension HomeVC {
                     return cell
                 }
             },
-            configureSupplementaryView: { [weak self] dataSoure, collectionView, kind, indexPath in
+            configureSupplementaryView: { [weak self] dataSource, collectionView, kind, indexPath in
                 guard let self = self else { return UICollectionReusableView() }
                 
                 switch indexPath.section {
@@ -288,7 +334,7 @@ extension HomeVC {
                         for: indexPath
                     ) as? HomeHeader else { return UICollectionReusableView() }
                     
-                    header.titleLabel.text = dataSoure.sectionModels[indexPath.section].title ?? ""
+                    header.titleLabel.text = dataSource.sectionModels[indexPath.section].title ?? ""
                     
                     return header
                 }
