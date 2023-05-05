@@ -277,11 +277,24 @@ private extension ArtCVC {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         }
         
-        ProductsManager.shared.likeProducts(
-            id: products?.id ?? 1,
-            mode: !likeView.isSelected
-        )
-        .observe(on: MainScheduler.instance)
+        var like: Single<Bool> = Observable<Bool>.just(false).asSingle()
+        
+        switch kind {
+        case .products:
+            like = ProductsManager.shared.likeProducts(
+                id: products?.id ?? 1,
+                mode: !likeView.isSelected
+            )
+        case .work:
+            like = WorksManager.shared.likeWorks(
+                id: products?.id ?? 1,
+                mode: !likeView.isSelected
+            )
+        default:
+            break
+        }
+        
+        like
         .subscribe(
             with: self,
             onSuccess: { owner, _ in
