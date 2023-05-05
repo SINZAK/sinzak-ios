@@ -33,11 +33,12 @@ final class MyProfileView: SZView {
         $0.layer.cornerRadius = 20
         $0.clipsToBounds = true
         $0.image = UIImage(named: "chat-thumbnail")
+        $0.isSkeletonable = true
     }
     // 이름, 뱃지
     let nameLabel = UILabel().then {
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = "김신작"
     }
     let badgeImage = UIImageView().then {
@@ -51,7 +52,7 @@ final class MyProfileView: SZView {
     // 학교, 인증
     let schoolNameLabel = UILabel().then {
         $0.font = .caption_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = "홍익대학교"
     }
     let verifiedLabel = UILabel().then {
@@ -66,22 +67,22 @@ final class MyProfileView: SZView {
     // 팔로워, 팔로잉
     let followerNumberLabel = UILabel().then {
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = "32"
     }
     private let followerLabel = UILabel().then {
         $0.font = .caption_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.follower
     }
     let followingNumberLabel = UILabel().then {
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = "25"
     }
     private let followingLabel = UILabel().then {
         $0.font = .caption_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.following
     }
     let followerStack = UIStackView().then {
@@ -99,7 +100,7 @@ final class MyProfileView: SZView {
     // 소개멘트
     let introduceLabel = UILabel().then {
         $0.font = .caption_R
-        $0.textColor = .black
+        $0.textColor = CustomColor.label
         $0.numberOfLines = 0
         $0.textAlignment = .center
         $0.text = "자유롭게 작업합니다\nInstagram @jiiiiho_0"
@@ -107,11 +108,11 @@ final class MyProfileView: SZView {
     // 프로필편집 버튼
     let profileEditButton = UIButton().then {
         $0.setTitle(I18NStrings.editProfile, for: .normal)
-        $0.setTitleColor(CustomColor.black, for: .normal)
+        $0.setTitleColor(CustomColor.label, for: .normal)
         $0.titleLabel?.font = .body_M
         $0.layer.cornerRadius = 21
         $0.clipsToBounds = true
-        $0.layer.borderColor = CustomColor.black.cgColor
+        $0.layer.borderColor = CustomColor.label.cgColor
         $0.layer.borderWidth = 1
     }
     // 2. 스크랩목록
@@ -120,11 +121,11 @@ final class MyProfileView: SZView {
     }
     private let scrapListLabel = UILabel().then {
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.scrapList
     }
     let scrapListButton = UIButton().then {
-        $0.setImage(UIImage(named: "right-chevron-big"), for: .normal)
+        $0.setImage(UIImage(named: "right-chevron-big")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal), for: .normal)
     }
     let scrapListSeperator = UIView().then {
         $0.backgroundColor = CustomColor.gray60
@@ -135,11 +136,11 @@ final class MyProfileView: SZView {
     }
     private let requestListLabel = UILabel().then {
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.requestList
     }
     let requestListButton = UIButton().then {
-        $0.setImage(UIImage(named: "right-chevron-big"), for: .normal)
+        $0.setImage(UIImage(named: "right-chevron-big")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal), for: .normal)
     }
     let requestListSeperator = UIView().then {
         $0.backgroundColor = CustomColor.gray60
@@ -150,7 +151,7 @@ final class MyProfileView: SZView {
     }
     private let salesListLabel = UILabel().then {
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.salesList
     }
     let salesListImage01 = UIImageView().then {
@@ -158,7 +159,7 @@ final class MyProfileView: SZView {
         $0.image = UIImage(named: "empty-face-image")
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.black.withAlphaComponent(0.25).cgColor
+        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
         $0.layer.shadowRadius = 8
         $0.layer.shadowOffset = CGSize(width: 4, height: 2)
     }
@@ -167,12 +168,15 @@ final class MyProfileView: SZView {
         $0.image = UIImage(named: "empty-face-image")
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.black.withAlphaComponent(0.25).cgColor
+        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
         $0.layer.shadowRadius = 8
         $0.layer.shadowOffset = CGSize(width: 4, height: 2)
     }
     let salesListButton = UIButton().then {
-        $0.setImage(UIImage(named: "right-chevron-big"), for: .normal)
+        $0.setImage(
+            UIImage(named: "right-chevron-big")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal),
+            for: .normal
+        )
     }
     // 5. 작업해요
     let workListView = UIView().then {
@@ -180,7 +184,7 @@ final class MyProfileView: SZView {
     }
     private let workListLabel = UILabel().then {
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.workList
     }
     let workListImage01 = UIImageView().then {
@@ -188,7 +192,7 @@ final class MyProfileView: SZView {
         $0.image = UIImage(named: "emptySquare")
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.black.withAlphaComponent(0.25).cgColor
+        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
         $0.layer.shadowRadius = 8
         $0.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
@@ -197,12 +201,15 @@ final class MyProfileView: SZView {
         $0.image = UIImage(named: "emptySquare")
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.black.withAlphaComponent(0.25).cgColor
+        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
         $0.layer.shadowRadius = 8
         $0.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
     let workListButton = UIButton().then {
-        $0.setImage(UIImage(named: "right-chevron-big"), for: .normal)
+        $0.setImage(
+            UIImage(named: "right-chevron-big")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal),
+            for: .normal
+        )
     }
     // MARK: - Design Helpers
     override func setView() {
@@ -377,7 +384,7 @@ final class MyProfileView: SZView {
         salesListButton.snp.makeConstraints { make in
             make.width.height.equalTo(24)
             make.centerY.equalTo(salesListImage02)
-            make.trailing.equalToSuperview().inset(11.5)
+            make.leading.equalTo(salesListImage02.snp.trailing).offset(8.5)
         }
         workListView.snp.makeConstraints { make in
             make.top.equalTo(salesListView.snp.bottom)
@@ -401,7 +408,7 @@ final class MyProfileView: SZView {
         workListButton.snp.makeConstraints { make in
             make.width.height.equalTo(24)
             make.centerY.equalTo(workListImage02)
-            make.trailing.equalToSuperview().inset(11.5)
+            make.leading.equalTo(workListImage02.snp.trailing).offset(8.5)
         }
     }
 }
