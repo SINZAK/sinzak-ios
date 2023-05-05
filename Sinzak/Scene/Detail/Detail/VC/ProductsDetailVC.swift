@@ -186,15 +186,6 @@ final class ProductsDetailVC: SZVC {
                                 .observe(on: MainScheduler.instance)
                                 .subscribe(onSuccess: { _ in
                                     owner.mainView.isComplete = true
-                                    NotificationCenter.default.post(
-                                        name: .cellIsCompleteUpdate,
-                                        object: nil,
-                                        userInfo: [
-                                            "id": owner.id,
-                                            "kind": ArtCellKind.products,
-                                            "isComplete": true
-                                        ]
-                                    )
                                 }, onFailure: { error in
                                     Log.error(error)
                                 })
@@ -203,19 +194,9 @@ final class ProductsDetailVC: SZVC {
                         
                     case .request:
                         owner.showNoTintSingleAlertSheet(actionTitle: "모집 완료", completion: {
-                            ProductsManager.shared.completeProducts(id: owner.id)
-                                .observe(on: MainScheduler.instance)
+                            WorksManager.shared.completeWorks(id: owner.id)                  .observe(on: MainScheduler.instance)
                                 .subscribe(onSuccess: { _ in
                                     owner.mainView.isComplete = true
-                                    NotificationCenter.default.post(
-                                        name: .cellIsCompleteUpdate,
-                                        object: nil,
-                                        userInfo: [
-                                            "id": owner.id,
-                                            "kind": ArtCellKind.work,
-                                            "isComplete": true
-                                        ]
-                                    )
                                 }, onFailure: { error in
                                     Log.error(error)
                                 })
