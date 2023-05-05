@@ -44,6 +44,8 @@ final class ProductsDetailVC: SZVC {
     var owner: DetailOwner?
     var type: DetailType
     
+    let maxPrice = BehaviorRelay<Int>(value: 0)
+    
     private let disposeBag = DisposeBag()
     
     // MARK: - Lifecycle
@@ -377,7 +379,8 @@ final class ProductsDetailVC: SZVC {
                 
                 let vc = SendPriceOfferVC(
                     id: owner.id,
-                    topPrice: owner.mainView.products?.topPrice ?? -1
+                    maxPrice: owner.maxPrice,
+                    type: owner.type
                 )
                 owner.navigationController?.pushViewController(vc, animated: true)
             })
@@ -396,6 +399,7 @@ final class ProductsDetailVC: SZVC {
                 onNext: { owner, data in
                     owner.owner = data.myPost ? .mine : .other
                     owner.mainView.setData(data, owner.type)
+                    owner.maxPrice.accept(data.price)
                     owner.view.hideSkeleton()
                     owner.mainView.skeletonView.isHidden = true
                 })
