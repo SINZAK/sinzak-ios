@@ -281,35 +281,35 @@ final class ProductsDetailVC: SZVC {
                     }
 
                     like
-                    .observe(on: MainScheduler.instance)
-                    .subscribe(onSuccess: { _ in
-                        owner.mainView.isLike.toggle()
-                        
-                        let currentCount = Int(owner.mainView.likeButton.titleLabel?.text ?? "-1") ?? -2
-                        
-                        var newCount: Int
-                        if owner.mainView.isLike {
-                            newCount = currentCount + 1
-                        } else {
-                            newCount = currentCount - 1
-                        }
-                        
-                        owner.mainView.likeButton.setTitle("\(newCount)", for: .normal)
-                        
-                        let name: NSNotification.Name = owner.type == .purchase ? .productsCellLikeUpdate :
-                            .worksCellLikeUpdate
-
-                        NotificationCenter.default.post(
-                            name: name,
-                            object: nil,
-                            userInfo: [
-                                "id": owner.mainView.products?.id ?? -1,
-                                "isSelected": owner.mainView.isLike,
-                                "likeCount": newCount
-                            ]
-                        )
-                    })
-                    .disposed(by: owner.disposeBag)
+                        .observe(on: MainScheduler.instance)
+                        .subscribe(onSuccess: { _ in
+                            owner.mainView.isLike.toggle()
+                            
+                            let currentCount = Int(owner.mainView.likeButton.titleLabel?.text ?? "-1") ?? -2
+                            
+                            var newCount: Int
+                            if owner.mainView.isLike {
+                                newCount = currentCount + 1
+                            } else {
+                                newCount = currentCount - 1
+                            }
+                            
+                            owner.mainView.likeButton.setTitle("\(newCount)", for: .normal)
+                            
+                            let name: NSNotification.Name = owner.type == .purchase ? .productsCellLikeUpdate :
+                                .worksCellLikeUpdate
+                            
+                            NotificationCenter.default.post(
+                                name: name,
+                                object: nil,
+                                userInfo: [
+                                    "id": owner.mainView.products?.id ?? -1,
+                                    "isSelected": owner.mainView.isLike,
+                                    "likeCount": newCount
+                                ]
+                            )
+                        })
+                        .disposed(by: owner.disposeBag)
                     
                 })
             .disposed(by: disposeBag)
