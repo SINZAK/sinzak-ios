@@ -265,37 +265,47 @@ final class ProductsDetailVC: SZVC {
                     
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     
-                    ProductsManager.shared.likeProducts(
-                        id: owner.id,
-                        mode: !owner.mainView.isLike
-                    )
+                    var like: Single<Bool>
+                    
+                    switch owner.type {
+                    case .purchase:
+                        like = ProductsManager.shared.likeProducts(
+                            id: owner.id,
+                            mode: !owner.mainView.isLike
+                        )
+                    case .request:
+                        like = WorksManager.shared.likeWorks(
+                            id: owner.id,
+                            mode: !owner.mainView.isLike
+                        )
+                    }
+
+                    like
                     .observe(on: MainScheduler.instance)
                     .subscribe(onSuccess: { _ in
                         owner.mainView.isLike.toggle()
                         
-                        let currentCount = Int(owner.mainView.likeButton.titleLabel?.text ?? "-1")!
+                        let currentCount = Int(owner.mainView.likeButton.titleLabel?.text ?? "-1") ?? -2
                         
+                        var newCount: Int
                         if owner.mainView.isLike {
-                            owner.mainView.likeButton.setTitle(
-                                "\(currentCount + 1)",
-                                for: .normal
-                            )
+                            newCount = currentCount + 1
                         } else {
-                            owner.mainView.likeButton.setTitle(
-                                "\(currentCount - 1)",
-                                for: .normal
-                            )
+                            newCount = currentCount - 1
                         }
                         
-                        let kind: ArtCellKind = owner.type == .purchase ? .products : .work
+                        owner.mainView.likeButton.setTitle("\(newCount)", for: .normal)
+                        
+                        let name: NSNotification.Name = owner.type == .purchase ? .productsCellLikeUpdate :
+                            .worksCellLikeUpdate
+
                         NotificationCenter.default.post(
-                            name: .productsCellLikeUpdate,
+                            name: name,
                             object: nil,
                             userInfo: [
                                 "id": owner.mainView.products?.id ?? -1,
-                                "kind": kind,
                                 "isSelected": owner.mainView.isLike,
-                                "likeCount": Int(owner.mainView.likeButton.titleLabel?.text ?? "-1") ?? -2
+                                "likeCount": newCount
                             ]
                         )
                     })
