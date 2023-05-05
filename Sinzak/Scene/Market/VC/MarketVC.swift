@@ -30,8 +30,6 @@ final class MarketVC: SZVC {
     var isViewDidLoad: Bool = true
     var isCurrentMarketView: Bool = false
     
-    var updateLikeOfDataSource: BehaviorRelay<(id: Int, isLike: Bool, likeCount: Int)> = .init(value: (id: -1, isLike: false, likeCount: -1))
-    
     let searchBarButton = UIBarButtonItem(
         image: UIImage(named: "search"),
         style: .plain,
@@ -111,26 +109,6 @@ private extension MarketVC {
         bindOutput()
         
         mainView.productCollectionView.rx.setDelegate(self)
-            .disposed(by: disposeBag)
-        
-        updateLikeOfDataSource
-            .withUnretained(self)
-            .subscribe { owner, tuple in
-                let section = owner.viewModel.productSections.value[0]
-                
-                var newProducts: [Products] = []
-                for product in section.items {
-                    var product = product
-                    if product.id == tuple.id {
-                        product.like = tuple.isLike
-                        product.likesCnt = tuple.likeCount
-                    }
-                    newProducts.append(product)
-                }
-                
-                let newSections = [MarketProductDataSection(items: newProducts)]
-                owner.viewModel.productSections.accept(newSections)
-            }
             .disposed(by: disposeBag)
         
         NotificationCenter.default.rx.notification(.productsCellLikeUpdate)
@@ -500,7 +478,7 @@ private extension MarketVC {
                     )
                     self.isViewDidLoad = false
                 }
-                cell.updateCell(category: item.category.type)
+                cell.updateProductsCell(category: item.category.type)
                 return cell
             })
     }
