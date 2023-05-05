@@ -45,6 +45,10 @@ final class LoginVC: SZVC {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configureNeedLoginLayout() {
+        mainView.configureNeedLoginLayout()
+    }
+    
     override func configure() {
         bind()
     }

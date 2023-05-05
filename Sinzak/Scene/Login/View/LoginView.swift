@@ -21,6 +21,19 @@ final class LoginView: SZView {
         $0.textColor = CustomColor.label
         $0.text = I18NStrings.logoText
     }
+    
+    private let needLoginLabel: UILabel = {
+        let label = UILabel()
+        label.text = "로그인 후에\n만나볼 수 있어요"
+        label.textColor = CustomColor.label
+        label.font = .title_B
+        label.isHidden = true
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
     private let startLabel = UILabel().then {
         $0.font = .caption_R
         $0.textColor = CustomColor.gray80
@@ -38,9 +51,16 @@ final class LoginView: SZView {
     let appleButton = UIButton().then {
         $0.setImage(UIImage(named: "apple_logo"), for: .normal)
     }
+    
+    func configureNeedLoginLayout() {
+        logotypeImage.isHidden = true
+        logoLabel.isHidden = true
+        needLoginLabel.isHidden = false
+    }
+    
     // MARK: - Design Helpers
     override func setView() {
-        addSubviews(logotypeImage, logoLabel, startLabel, stackView)
+        addSubviews(logotypeImage, logoLabel, startLabel, stackView, needLoginLabel)
         stackView.addArrangedSubviews(kakaoButton, naverButton, appleButton)
     }
     override func setLayout() {
@@ -71,6 +91,12 @@ final class LoginView: SZView {
             make.height.equalToSuperview()
             make.width.equalTo(appleButton.snp.height)
         }
+        
+        needLoginLabel.snp.makeConstraints {
+            $0.bottom.equalTo(startLabel.snp.top).offset(-188.0)
+            $0.centerX.equalToSuperview()
+        }
+        
         startLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(stackView.snp.top).offset(-17.8)
