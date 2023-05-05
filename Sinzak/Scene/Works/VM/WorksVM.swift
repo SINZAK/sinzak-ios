@@ -36,7 +36,7 @@ protocol WorksVMOutput {
     var isSaling: BehaviorRelay<Bool> { get }
     var selectedAlign: BehaviorRelay<AlignOption> { get }
     
-    var showSkeleton: BehaviorRelay<Bool> { get }
+    var showSkeleton: PublishRelay<Bool> { get }
 }
 
 protocol WorksVM: WorksVMInput, WorksVMOutput {}
@@ -176,7 +176,7 @@ final class DefaultWorksVM: WorksVM {
     
     var endRefresh: PublishRelay<Bool> = PublishRelay()
     
-    var showSkeleton: BehaviorRelay<Bool> = .init(value: false)
+    var showSkeleton: PublishRelay<Bool> = .init()
     
 }
 
