@@ -101,6 +101,32 @@ private extension WorksVC {
         
         mainView.worksCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.worksCellLikeUpdate)
+            .distinctUntilChanged()
+            .asDriver(onErrorRecover: { _ in .never() })
+            .drive(with: self, onNext: { owner, notification in
+                guard let info = notification.userInfo else { return }
+                let id = info["id"] as? Int ?? 0
+                let isLike = info["isSelected"] as? Bool ?? false
+                let likeCount = info["likeCount"] as? Int ?? 0
+
+                let section = owner.viewModel.worksSections.value[0]
+                
+                var newProducts: [Products] = []
+                for product in section.items {
+                    var product = product
+                    if product.id == id {
+                        product.like = isLike
+                        product.likesCnt = likeCount
+                    }
+                    newProducts.append(product)
+                }
+                
+                let newSections = [MarketProductDataSection(items: newProducts)]
+                owner.viewModel.worksSections.accept(newSections)
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindInput() {
@@ -372,7 +398,12 @@ private extension WorksVC {
                     withReuseIdentifier: ArtCVC.identifier,
                     for: indexPath
                 ) as? ArtCVC else { return UICollectionViewCell() }
-                cell.setData(item, .products, self.needLogIn, self.currentTappedCell)
+                cell.setData(
+                    item,
+                    .work,
+                    self.needLogIn,
+                    self.currentTappedCell
+                )
                 return cell
             })
     }
