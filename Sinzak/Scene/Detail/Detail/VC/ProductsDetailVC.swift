@@ -209,9 +209,6 @@ final class ProductsDetailVC: SZVC {
                                 })
                                 .disposed(by: owner.disposeBag)
                         })
-                        
-                    default:
-                        break
                     }
                 })
             .disposed(by: disposeBag)
@@ -325,24 +322,36 @@ final class ProductsDetailVC: SZVC {
                     
                     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     
-                    ProductsManager.shared.wishProducts(
-                        id: owner.id,
-                        mode: !owner.mainView.isScrap
-                    )
-                    .observe(on: MainScheduler.instance)
-                    .subscribe(onSuccess: { _ in
-                        owner.mainView.isScrap.toggle()
-                        
-                        let currentCount = Int(owner.mainView.scrapCountLabel.text ?? "-1")!
-                        
-                        if owner.mainView.isScrap {
-                            owner.mainView.scrapCountLabel.text = "\(currentCount + 1)"
-                        } else {
-                            owner.mainView.scrapCountLabel.text = "\(currentCount - 1)"
-                        }
-                    })
-                    .disposed(by: owner.disposeBag)
+                    var wish: Single<Bool>
                     
+                    switch owner.type {
+                    case .purchase:
+                        wish = ProductsManager.shared.wishProducts(
+                            id: owner.id,
+                            mode: !owner.mainView.isScrap
+                        )
+                    case .request:
+                        wish = WorksManager.shared.wishWorks(
+                            id: owner.id,
+                            mode: !owner.mainView.isScrap
+                        )
+                    }
+
+                    wish
+                        .observe(on: MainScheduler.instance)
+                        .subscribe(onSuccess: { _ in
+                            owner.mainView.isScrap.toggle()
+                            
+                            let currentCount = Int(owner.mainView.scrapCountLabel.text ?? "-1")!
+                            
+                            if owner.mainView.isScrap {
+                                owner.mainView.scrapCountLabel.text = "\(currentCount + 1)"
+                            } else {
+                                owner.mainView.scrapCountLabel.text = "\(currentCount - 1)"
+                            }
+                        })
+                        .disposed(by: owner.disposeBag)
+
                 })
             .disposed(by: disposeBag)
         
