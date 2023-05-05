@@ -9,6 +9,7 @@ disabled_rules:
   - implicit_getter
   - type_body_length
   - line_length
+  - cyclomatic_complexity
 opt_in_rules:
 
 included:
