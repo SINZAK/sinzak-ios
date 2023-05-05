@@ -201,9 +201,10 @@ final class ArtCVC: UICollectionViewCell {
     }
     
     private func setConstraints() {
+        let width = (UIScreen.main.bounds.width - 48.0) / 2
         imageView.snp.makeConstraints { make in
             make.leading.trailing.top.equalToSuperview()
-            make.width.height.equalTo(164.0)
+            make.width.height.equalTo(width)
         }
         
         likeView.snp.makeConstraints {
