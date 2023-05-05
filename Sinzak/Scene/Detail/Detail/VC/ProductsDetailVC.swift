@@ -132,7 +132,17 @@ final class ProductsDetailVC: SZVC {
                                 rightActionTitle: "네, 삭제할게요",
                                 rightActionCompletion: {
                                     owner.showLoading()
-                                    ProductsManager.shared.deleteProducts(id: owner.id)
+                                    
+                                    var delete: Single<Bool>
+                                    
+                                    switch owner.type {
+                                    case .purchase:
+                                        delete =                                     ProductsManager.shared.deleteProducts(id: owner.id)
+                                    case .request:
+                                        delete = WorksManager.shared.deleteWorks(id: owner.id)
+                                    }
+                                    
+                                    delete
                                         .observe(on: MainScheduler.instance)
                                         .subscribe(onSuccess: { _ in
                                             
