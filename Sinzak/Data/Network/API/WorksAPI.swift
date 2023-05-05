@@ -143,7 +143,7 @@ extension WorksAPI: TargetType {
                 "id": id,
                 "mode": mode
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
             
         case .sell(let postId):
             let param: [String: Any] = [
