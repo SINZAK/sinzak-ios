@@ -42,7 +42,7 @@ final class ProductsDetailVC: SZVC {
     let viewModel: ProductsDetailVM
     
     var owner: DetailOwner?
-    var type: DetailType?
+    var type: DetailType
     
     private let disposeBag = DisposeBag()
     
@@ -111,7 +111,7 @@ final class ProductsDetailVC: SZVC {
         navigationItem.rightBarButtonItem?.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                if !UserInfoManager.isLoggedIn {
+                guard UserInfoManager.isLoggedIn else {
                     owner.needLogIn.accept(true)
                     return
                 }
@@ -220,7 +220,7 @@ final class ProductsDetailVC: SZVC {
             .subscribe(
                 with: self,
                 onNext: { owner, _  in
-                    if !UserInfoManager.isLoggedIn {
+                    guard UserInfoManager.isLoggedIn else {
                         owner.needLogIn.accept(true)
                         return
                     }
@@ -258,7 +258,7 @@ final class ProductsDetailVC: SZVC {
             .subscribe(
                 with: self,
                 onNext: { owner, _ in
-                    if !UserInfoManager.isLoggedIn {
+                    guard UserInfoManager.isLoggedIn else {
                         owner.needLogIn.accept(true)
                         return
                     }
@@ -308,7 +308,7 @@ final class ProductsDetailVC: SZVC {
             .subscribe(
                 with: self,
                 onNext: { owner, _ in
-                    if !UserInfoManager.isLoggedIn {
+                    guard UserInfoManager.isLoggedIn else {
                         owner.needLogIn.accept(true)
                         return
                     }
@@ -337,10 +337,25 @@ final class ProductsDetailVC: SZVC {
             .disposed(by: disposeBag)
         
         // TODO: 채팅 연결
+        mainView.askDealButtton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                guard UserInfoManager.isLoggedIn else {
+                    owner.needLogIn.accept(true)
+                    return
+                }
+                
+            })
+            .disposed(by: disposeBag)
         
         mainView.priceOfferButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                guard UserInfoManager.isLoggedIn else {
+                    owner.needLogIn.accept(true)
+                    return
+                }
+                
                 let vc = SendPriceOfferVC(
                     id: owner.id,
                     topPrice: owner.mainView.products?.topPrice ?? -1
