@@ -27,21 +27,9 @@ final class WorksVC: SZVC {
 
     var currentTappedCell: BehaviorRelay<Int> = .init(value: -1)
     
+    var worksCollectionViewBeginDragging: PublishRelay<Bool>?
+
     var isViewDidLoad: Bool = true
-    
-    let searchBarButton = UIBarButtonItem(
-        image: UIImage(named: "search"),
-        style: .plain,
-        target: nil,
-        action: nil
-    )
-    
-    private lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "작품 통합 검색"
-        
-        return searchBar
-    }()
 
     // MARK: - Init
     init(viewModel: WorksVM, mode: WorksMode) {
@@ -49,6 +37,15 @@ final class WorksVC: SZVC {
         self.worksMode = mode
         
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    convenience init(
+        viewModel: WorksVM,
+        mode: WorksMode,
+        worksCollectionViewBeginDragging: PublishRelay<Bool>
+    ) {
+        self.init(viewModel: viewModel, mode: mode)
+        self.worksCollectionViewBeginDragging = worksCollectionViewBeginDragging
     }
     
     required init?(coder: NSCoder) {
@@ -64,12 +61,6 @@ final class WorksVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if worksMode == .search {
-            self.navigationItem.titleView = searchBar
-            self.navigationItem.rightBarButtonItem = nil
-            viewModel.refresh()
-        }
-        
         viewModel.refresh()
     }
     
@@ -83,8 +74,6 @@ final class WorksVC: SZVC {
     // MARK: - Helpers
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.title = "마켓"
-        navigationItem.rightBarButtonItem = searchBarButton
     }
     override func configure() {
         bind()
@@ -133,12 +122,6 @@ private extension WorksVC {
         mainView.writeButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.writeButtonTapped()
-            })
-            .disposed(by: disposeBag)
-        
-         searchBarButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.searchButtonTapped()
             })
             .disposed(by: disposeBag)
         
@@ -244,27 +227,14 @@ private extension WorksVC {
                 owner.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
-        
+    
         mainView.worksCollectionView.rx.willBeginDragging
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.searchBar.endEditing(true)
+                owner.worksCollectionViewBeginDragging?.accept(true)
             })
             .disposed(by: disposeBag)
-        
-        searchBar.rx.searchButtonClicked
-            .withUnretained(self)
-            .subscribe(onNext: { owner, _ in
-                let text = owner.searchBar.text ?? ""
-                if text.count < 2 {
-                    owner.showSinglePopUpAlert(message: "2글자 이상 입력해 주세요.")
-                    return
-                }
-                owner.viewModel.searchText.accept(text)
-                owner.viewModel.refresh()
-                owner.searchBar.endEditing(true)
-            })
-            .disposed(by: disposeBag)
+
     }
     
     func bindOutput() {
