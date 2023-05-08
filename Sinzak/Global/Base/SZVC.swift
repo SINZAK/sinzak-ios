@@ -124,7 +124,11 @@ extension UIViewController {
             rightActionCompletion: { [weak self] in
                 let vm = DefaultLoginVM()
                 let vc = LoginVC(viewModel: vm)
-                self?.navigationController?.pushViewController(vc, animated: true)
+                
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                
+                self?.present(nav, animated: true)
             }
         )
     }
