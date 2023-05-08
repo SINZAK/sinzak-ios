@@ -166,7 +166,7 @@ private extension DefaultLoginVM {
             accessToken: accessToken,
             refreshToken: refreshToken
         )
-        AuthManager.shared.fetchMyProfile()
+        UserQueryManager.shared.fetchMyProfile()
             .observe(on: MainScheduler.instance)
             .subscribe(
                 with: self,

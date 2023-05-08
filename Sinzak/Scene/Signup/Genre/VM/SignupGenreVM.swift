@@ -57,7 +57,7 @@ final class DefaultSignupGenreVM: SignupGenreVM {
                 onSuccess: { owner, _ in
                     let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
                     owner.pushUniversityInfoView.accept(vc)
-                    AuthManager.shared.fetchMyProfile()
+                    UserQueryManager.shared.fetchMyProfile()
                         .subscribe(
                             onSuccess: { _ in
                                 Log.debug("회원가입 성공, \(join)")
