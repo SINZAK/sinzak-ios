@@ -1047,6 +1047,7 @@
 		A233890D29B066BF00688FD8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				ED02CAA72A09247800E20F92 /* VM */,
 				A20E4A502999007C009C1340 /* VC */,
 				A20E4A4F29990071009C1340 /* View */,
 			);
@@ -1809,6 +1810,14 @@
 				ED00BF9D2A02B65500379E89 /* WorksVM.swift */,
 			);
 			path = VM;
+			sourceTree = "<group>";
+		};
+		ED02CAA72A09247800E20F92 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = VM;
+			path = "프";
 			sourceTree = "<group>";
 		};
 		ED2A582E29F30B8E002CE83E /* UserDefaults */ = {
