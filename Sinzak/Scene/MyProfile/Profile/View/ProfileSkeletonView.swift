@@ -48,6 +48,8 @@ final class ProfileSkeletonView: SZView {
         $0.text = "자유롭게작업합니다최대글자수최대글자수최대글자수 최대글자수최대글자수최대글자수최대글자수최대글자수 자유롭게작업합니다최대글자수최대글자수최대글자수"
         $0.numberOfLines = 0
         $0.isSkeletonable = true
+        $0.layer.cornerRadius = 12.0
+        $0.clipsToBounds = true
     }
     
     let profileEditButton = UIButton().then {
@@ -107,12 +109,12 @@ final class ProfileSkeletonView: SZView {
         }
         
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImage.snp.bottom).offset(16.0)
+            $0.top.equalTo(profileImage.snp.bottom).offset(12.0)
             $0.centerX.equalToSuperview()
         }
         
         schoolLabel.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom).offset(16.0)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(12.0)
             $0.leading.trailing.equalToSuperview().inset(128.0)
             $0.centerX.equalToSuperview()
         }
