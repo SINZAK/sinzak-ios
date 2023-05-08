@@ -178,6 +178,7 @@
 		ED00BFA72A03B23000379E89 /* WorksSelectAlignPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00BFA62A03B23000379E89 /* WorksSelectAlignPC.swift */; };
 		ED02CAA62A09177E00E20F92 /* ProfileSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02CAA52A09177E00E20F92 /* ProfileSkeletonView.swift */; };
 		ED02CAA92A092CA700E20F92 /* MyProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02CAA82A092CA700E20F92 /* MyProfileVM.swift */; };
+		ED02CAAB2A092DEC00E20F92 /* UserQueryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02CAAA2A092DEC00E20F92 /* UserQueryAPI.swift */; };
 		ED15160D29DCBE8F00227CC8 /* RxKakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ED15160C29DCBE8F00227CC8 /* RxKakaoSDKAuth */; };
 		ED15160F29DCBE8F00227CC8 /* RxKakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = ED15160E29DCBE8F00227CC8 /* RxKakaoSDKCommon */; };
 		ED15161129DCBE8F00227CC8 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = ED15161029DCBE8F00227CC8 /* RxKakaoSDKUser */; };
@@ -431,6 +432,7 @@
 		ED00BFA62A03B23000379E89 /* WorksSelectAlignPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksSelectAlignPC.swift; sourceTree = "<group>"; };
 		ED02CAA52A09177E00E20F92 /* ProfileSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSkeletonView.swift; sourceTree = "<group>"; };
 		ED02CAA82A092CA700E20F92 /* MyProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileVM.swift; sourceTree = "<group>"; };
+		ED02CAAA2A092DEC00E20F92 /* UserQueryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQueryAPI.swift; sourceTree = "<group>"; };
 		ED06B4F329DB4A930016F646 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ED15161229DCBEBF00227CC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED15161429DCBED000227CC8 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -1773,6 +1775,7 @@
 				A254E13729BCF6EB001047FD /* ProductsAPI.swift */,
 				A254E13D29BD032D001047FD /* WorksAPI.swift */,
 				A254E13F29BD0427001047FD /* UserCommandAPI.swift */,
+				ED02CAAA2A092DEC00E20F92 /* UserQueryAPI.swift */,
 				A254E14129BD0571001047FD /* ChatAPI.swift */,
 				ED74A07A29F4F8F200F44AA2 /* AppleAuthAPI.swift */,
 			);
@@ -2431,6 +2434,7 @@
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				ED72D8A629F699C500DA1251 /* HomeCategoryCVC.swift in Sources */,
 				A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */,
+				ED02CAAB2A092DEC00E20F92 /* UserQueryAPI.swift in Sources */,
 				ED15161529DCBED000227CC8 /* Endpoint.swift in Sources */,
 				EDF76FFF29F8F32300F33146 /* BannerFooter.swift in Sources */,
 				ED00BFA22A037B6C00379E89 /* WorksManager.swift in Sources */,
