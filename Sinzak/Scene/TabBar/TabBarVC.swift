@@ -33,8 +33,10 @@ final class TabBarVC: UITabBarController {
     }
     /// 탭 바 구성
     private func setTabBarController() {
+        
+        self.delegate = self
+        
         // 홈
-                
         let homeVM = DefaultHomeVM(
             selectedCategory,
             selectedAlign,
@@ -64,37 +66,41 @@ final class TabBarVC: UITabBarController {
                                          image: UIImage(named: "outsourcing"),
                                          selectedImage: UIImage(named: "outsourcing-selected"))
         
-        lazy var loginVC1: LoginVC = {
-            let vc = LoginVC(viewModel: DefaultLoginVM())
-            vc.configureNeedLoginLayout()
-            
-            return vc
-        }()
-        
-        lazy var loginVC2: LoginVC = {
-            let vc = LoginVC(viewModel: DefaultLoginVM())
-            vc.configureNeedLoginLayout()
-            
-            return vc
-        }()
-        
         // 채팅
-        let chatVC = UserInfoManager.isLoggedIn ?
-        UINavigationController(rootViewController: ChatListVC()) :
-        UINavigationController(rootViewController: loginVC1)
-
+        let chatVC = UINavigationController(rootViewController: ChatListVC())
         chatVC.tabBarItem = UITabBarItem(title: I18NStrings.Chat,
                                          image: UIImage(named: "chat"),
                                          selectedImage: UIImage(named: "chat-selected"))
         // 프로필
-        let profileVC = UserInfoManager.isLoggedIn ?
-        UINavigationController(rootViewController: MyProfileVC()) :
-        UINavigationController(rootViewController: loginVC2)
-        
+        let profileVC = UINavigationController(rootViewController: MyProfileVC())
         profileVC.tabBarItem = UITabBarItem(title: I18NStrings.Profile,
                                          image: UIImage(named: "profile"),
                                          selectedImage: UIImage(named: "profile-selected"))
         // 탭 구성
         setViewControllers([homeVC, marketVC, worksVC, chatVC, profileVC], animated: true)
+    }
+}
+
+extension TabBarVC: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
+        guard !UserInfoManager.isLoggedIn, let nav = viewController as? UINavigationController else { return true }
+        
+        if nav.viewControllers[0] is ChatListVC || nav.viewControllers[0] is MyProfileVC {
+            let loginVC: LoginVC = {
+                let vc = LoginVC(viewModel: DefaultLoginVM())
+                vc.configureNeedLoginLayout()
+                
+                return vc
+            }()
+            
+            let nav = UINavigationController(rootViewController: loginVC)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+            return false
+        }
+        
+        return true
     }
 }
