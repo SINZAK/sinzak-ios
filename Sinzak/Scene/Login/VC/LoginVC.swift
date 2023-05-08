@@ -23,7 +23,6 @@ final class LoginVC: SZVC {
     
     private let disposeBag = DisposeBag()
 
-    
     // MARK: - Lifecycle
     override func loadView() {
         view = mainView
@@ -47,6 +46,18 @@ final class LoginVC: SZVC {
     
     func configureNeedLoginLayout() {
         mainView.configureNeedLoginLayout()
+        
+        let dismissBarButton = UIBarButtonItem(
+            image: UIImage(named: "x-no-circle")?.withTintColor(
+                CustomColor.label,
+                renderingMode: .alwaysOriginal
+            ),
+            style: .plain,
+            target: self,
+            action: #selector(dismissTapped)
+        )
+        
+        navigationItem.leftBarButtonItem = dismissBarButton
     }
     
     override func configure() {
@@ -196,5 +207,10 @@ private extension LoginVC {
         }
         
         UserInfoManager.shared.logout(completion: {})
+    }
+    
+    @objc
+    func dismissTapped() {
+        dismiss(animated: true)
     }
 }
