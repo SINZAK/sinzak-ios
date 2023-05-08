@@ -176,6 +176,7 @@
 		ED00BFA22A037B6C00379E89 /* WorksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00BFA12A037B6C00379E89 /* WorksManager.swift */; };
 		ED00BFA52A03B0E800379E89 /* WorksSelectAlignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00BFA42A03B0E800379E89 /* WorksSelectAlignVC.swift */; };
 		ED00BFA72A03B23000379E89 /* WorksSelectAlignPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED00BFA62A03B23000379E89 /* WorksSelectAlignPC.swift */; };
+		ED02CAA62A09177E00E20F92 /* ProfileSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02CAA52A09177E00E20F92 /* ProfileSkeletonView.swift */; };
 		ED15160D29DCBE8F00227CC8 /* RxKakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ED15160C29DCBE8F00227CC8 /* RxKakaoSDKAuth */; };
 		ED15160F29DCBE8F00227CC8 /* RxKakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = ED15160E29DCBE8F00227CC8 /* RxKakaoSDKCommon */; };
 		ED15161129DCBE8F00227CC8 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = ED15161029DCBE8F00227CC8 /* RxKakaoSDKUser */; };
@@ -427,6 +428,7 @@
 		ED00BFA12A037B6C00379E89 /* WorksManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksManager.swift; sourceTree = "<group>"; };
 		ED00BFA42A03B0E800379E89 /* WorksSelectAlignVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksSelectAlignVC.swift; sourceTree = "<group>"; };
 		ED00BFA62A03B23000379E89 /* WorksSelectAlignPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksSelectAlignPC.swift; sourceTree = "<group>"; };
+		ED02CAA52A09177E00E20F92 /* ProfileSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSkeletonView.swift; sourceTree = "<group>"; };
 		ED06B4F329DB4A930016F646 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ED15161229DCBEBF00227CC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED15161429DCBED000227CC8 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 			isa = PBXGroup;
 			children = (
 				A20E4A4D29990064009C1340 /* MyProfileView.swift */,
+				ED02CAA52A09177E00E20F92 /* ProfileSkeletonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2319,6 +2322,7 @@
 				ED19B14029EC6DE100C951D1 /* UIScrollView+Extension.swift in Sources */,
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A216BD4A297FCBC1008964BC /* ActivityNotiVC.swift in Sources */,
+				ED02CAA62A09177E00E20F92 /* ProfileSkeletonView.swift in Sources */,
 				A23415B62927D776007DADE7 /* ViewController.swift in Sources */,
 				A216BD5F297FE02D008964BC /* ChatVC.swift in Sources */,
 				A257C36B297F99B100266E74 /* SeeMoreCVC.swift in Sources */,
