@@ -179,6 +179,7 @@
 		ED02CAA62A09177E00E20F92 /* ProfileSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02CAA52A09177E00E20F92 /* ProfileSkeletonView.swift */; };
 		ED02CAA92A092CA700E20F92 /* MyProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02CAA82A092CA700E20F92 /* MyProfileVM.swift */; };
 		ED02CAAB2A092DEC00E20F92 /* UserQueryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02CAAA2A092DEC00E20F92 /* UserQueryAPI.swift */; };
+		ED02CAAD2A09311800E20F92 /* UserQueryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED02CAAC2A09311800E20F92 /* UserQueryManager.swift */; };
 		ED15160D29DCBE8F00227CC8 /* RxKakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ED15160C29DCBE8F00227CC8 /* RxKakaoSDKAuth */; };
 		ED15160F29DCBE8F00227CC8 /* RxKakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = ED15160E29DCBE8F00227CC8 /* RxKakaoSDKCommon */; };
 		ED15161129DCBE8F00227CC8 /* RxKakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = ED15161029DCBE8F00227CC8 /* RxKakaoSDKUser */; };
@@ -433,6 +434,7 @@
 		ED02CAA52A09177E00E20F92 /* ProfileSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSkeletonView.swift; sourceTree = "<group>"; };
 		ED02CAA82A092CA700E20F92 /* MyProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileVM.swift; sourceTree = "<group>"; };
 		ED02CAAA2A092DEC00E20F92 /* UserQueryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQueryAPI.swift; sourceTree = "<group>"; };
+		ED02CAAC2A09311800E20F92 /* UserQueryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQueryManager.swift; sourceTree = "<group>"; };
 		ED06B4F329DB4A930016F646 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		ED15161229DCBEBF00227CC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED15161429DCBED000227CC8 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -1792,6 +1794,7 @@
 				A254E13929BCF897001047FD /* ProductManager.swift */,
 				ED74A07F29F4FABB00F44AA2 /* AppleAuthManager.swift */,
 				EDF508AE29FEECD000FDC2E2 /* UserCommandManager.swift */,
+				ED02CAAC2A09311800E20F92 /* UserQueryManager.swift */,
 				ED00BF952A01272300379E89 /* ManagerType.swift */,
 				ED00BFA12A037B6C00379E89 /* WorksManager.swift */,
 			);
@@ -2334,6 +2337,7 @@
 				A222F07F298382DF007806D0 /* CategoryType.swift in Sources */,
 				EDE5EC5D29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift in Sources */,
 				A2270651299BD10E000D5CF2 /* SearchVC.swift in Sources */,
+				ED02CAAD2A09311800E20F92 /* UserQueryManager.swift in Sources */,
 				ED19B14029EC6DE100C951D1 /* UIScrollView+Extension.swift in Sources */,
 				A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */,
 				A216BD4A297FCBC1008964BC /* ActivityNotiVC.swift in Sources */,

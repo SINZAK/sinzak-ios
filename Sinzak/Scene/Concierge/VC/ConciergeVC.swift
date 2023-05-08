@@ -54,7 +54,7 @@ final class ConciergeVC: UIViewController {
                 .subscribe(
                     with: self,
                     onSuccess: { owner, _ in
-                        AuthManager.shared.fetchMyProfile()
+                        UserQueryManager.shared.fetchMyProfile()
                             .observe(on: MainScheduler.asyncInstance)
                             .subscribe(
                                 onSuccess: { _ in

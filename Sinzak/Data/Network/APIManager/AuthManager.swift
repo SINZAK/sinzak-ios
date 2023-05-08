@@ -139,23 +139,6 @@ class AuthManager {
             .disposed(by: disposeBag)
     }
     
-    /// 프로필 정보 가져와 저장
-    func fetchMyProfile() -> Single<Bool> {
-        return provider.rx.request(.myProfile)
-            .filterSuccessfulStatusCodes()
-            .map(UserInfoResponseDTO.self)
-            .map({ responseDTO in
-                do {
-                    guard let response = try responseDTO.data?.toDomain() else { throw APIError.noContent }
-                    UserInfoManager.shared.saveUserInfo(with: response)
-                    return true
-                } catch {
-                    throw APIError.noContent
-                }
-            })
-            .retry(2)
-    }
-    
     /// 회원정보 추가, 편집
     /// - 자기소개, 이름, 사진
     func editUserInfo(_ userInfo: UserInfoEdit, completion: @escaping ((Bool) -> Void)) {
