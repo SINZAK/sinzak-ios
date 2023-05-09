@@ -47,8 +47,12 @@ final class LoginVC: SZVC {
     func configureNeedLoginLayout() {
         mainView.configureNeedLoginLayout()
         
+        configureDismissButton()
+    }
+    
+    func configureDismissButton() {
         let dismissBarButton = UIBarButtonItem(
-            image: UIImage(named: "x-no-circle")?.withTintColor(
+            image: UIImage(named: "dismiss")?.withTintColor(
                 CustomColor.label,
                 renderingMode: .alwaysOriginal
             ),
