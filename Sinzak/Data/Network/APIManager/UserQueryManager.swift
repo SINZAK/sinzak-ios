@@ -19,7 +19,7 @@ final class UserQueryManager: ManagerType {
     )
     
     /// 프로필 정보 가져와 저장
-    func fetchMyProfile() -> Single<Bool> {
+    func fetchMyProfile() -> Single<UserInfo> {
         return provider.rx.request(.myProfile)
             .filterSuccessfulStatusCodes()
             .map(BaseDTO<UserInfoDTO>.self)
@@ -28,7 +28,7 @@ final class UserQueryManager: ManagerType {
             .map { try $0.toDomain() }
             .map {
                 UserInfoManager.shared.saveUserInfo(with: $0)
-                return true
+                return $0
             }
             .retry(2)
         
