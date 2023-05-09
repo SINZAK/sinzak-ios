@@ -87,6 +87,7 @@ final class ProfileSkeletonView: SZView {
     
     override func setView() {
         isSkeletonable = true
+        isHidden = true
         
         addSubviews(
             profileImage,
