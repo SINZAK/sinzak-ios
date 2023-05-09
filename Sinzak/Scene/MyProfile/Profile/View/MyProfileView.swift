@@ -33,7 +33,7 @@ final class MyProfileView: SZView {
         $0.layer.cornerRadius = 20
         $0.clipsToBounds = true
         $0.image = UIImage(named: "chat-thumbnail")
-        $0.isSkeletonable = true
+        $0.backgroundColor = CustomColor.gray10
     }
     // 이름, 뱃지
     let nameLabel = UILabel().then {
@@ -154,30 +154,35 @@ final class MyProfileView: SZView {
         $0.textColor = CustomColor.label
         $0.text = I18NStrings.salesList
     }
-    let salesListImage01 = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "empty-face-image")
-        $0.layer.cornerRadius = 12
-        $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
-        $0.layer.shadowRadius = 8
-        $0.layer.shadowOffset = CGSize(width: 4, height: 2)
-    }
-    let salesListImage02 = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "empty-face-image")
-        $0.layer.cornerRadius = 12
-        $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
-        $0.layer.shadowRadius = 8
-        $0.layer.shadowOffset = CGSize(width: 4, height: 2)
-    }
+//    let salesListImage01 = UIImageView().then {
+//        $0.contentMode = .scaleAspectFit
+//        $0.image = UIImage(named: "empty-face-image")
+//        $0.layer.cornerRadius = 12
+//        $0.clipsToBounds = true
+//        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
+//        $0.layer.shadowRadius = 8
+//        $0.layer.shadowOffset = CGSize(width: 4, height: 2)
+//    }
+//    let salesListImage02 = UIImageView().then {
+//        $0.contentMode = .scaleAspectFit
+//        $0.image = UIImage(named: "empty-face-image")
+//        $0.layer.cornerRadius = 12
+//        $0.clipsToBounds = true
+//        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
+//        $0.layer.shadowRadius = 8
+//        $0.layer.shadowOffset = CGSize(width: 4, height: 2)
+//    }
     let salesListButton = UIButton().then {
         $0.setImage(
             UIImage(named: "right-chevron-big")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal),
             for: .normal
         )
     }
+    
+    let salesListSeperator = UIView().then {
+        $0.backgroundColor = CustomColor.gray60
+    }
+    
     // 5. 작업해요
     let workListView = UIView().then {
         $0.backgroundColor = .clear
@@ -187,33 +192,79 @@ final class MyProfileView: SZView {
         $0.textColor = CustomColor.label
         $0.text = I18NStrings.workList
     }
-    let workListImage01 = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "emptySquare")
-        $0.layer.cornerRadius = 12
-        $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
-        $0.layer.shadowRadius = 8
-        $0.layer.shadowOffset = CGSize(width: 0, height: 2)
-    }
-    let workListImage02 = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "emptySquare")
-        $0.layer.cornerRadius = 12
-        $0.clipsToBounds = true
-        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
-        $0.layer.shadowRadius = 8
-        $0.layer.shadowOffset = CGSize(width: 0, height: 2)
-    }
+//    let workListImage01 = UIImageView().then {
+//        $0.contentMode = .scaleAspectFit
+//        $0.image = UIImage(named: "emptySquare")
+//        $0.layer.cornerRadius = 12
+//        $0.clipsToBounds = true
+//        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
+//        $0.layer.shadowRadius = 8
+//        $0.layer.shadowOffset = CGSize(width: 0, height: 2)
+//    }
+//    let workListImage02 = UIImageView().then {
+//        $0.contentMode = .scaleAspectFit
+//        $0.image = UIImage(named: "emptySquare")
+//        $0.layer.cornerRadius = 12
+//        $0.clipsToBounds = true
+//        $0.layer.shadowColor = CustomColor.label.withAlphaComponent(0.25).cgColor
+//        $0.layer.shadowRadius = 8
+//        $0.layer.shadowOffset = CGSize(width: 0, height: 2)
+//    }
     let workListButton = UIButton().then {
         $0.setImage(
             UIImage(named: "right-chevron-big")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal),
             for: .normal
         )
     }
+    
+    let workListSeperator = UIView().then {
+        $0.backgroundColor = CustomColor.gray60
+    }
+    
+    let profileSkeletonView = ProfileSkeletonView()
+    
+    func configureProfile(with profile: Profile) {
+        
+        let url = URL(string: profile.imageURL)
+        self.profileImage.kf.setImage(with: url)
+        
+        nameLabel.text = profile.name
+        if !profile.certAuthor {
+            nameBadgeStack.removeArrangedSubview(badgeImage)
+            badgeImage.isHidden = true
+        }
+        
+        if profile.univ.isEmpty {
+            schoolVerifiedStack.isHidden = true
+            followerFollowingStack.snp.remakeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.top.equalTo(nameBadgeStack.snp.bottom).offset(12)
+            }
+        } else {
+            schoolNameLabel.text = profile.univ
+            
+            if profile.certUni {
+                verifiedLabel.text = " verified"
+                verifiedLabel.textColor = CustomColor.red50
+            } else {
+                verifiedLabel.text = " unverified"
+                verifiedLabel.textColor = CustomColor.gray60
+            }
+        }
+        
+        followerNumberLabel.text = profile.followerNumber
+        followingNumberLabel.text = profile.followingNumber
+        
+        introduceLabel.text = profile.introduction
+    }
+    
     // MARK: - Design Helpers
     override func setView() {
-        addSubview(scrollView)
+        isSkeletonable = true
+        addSubviews(
+            scrollView,
+            profileSkeletonView
+        )
         scrollView.addSubview(wholeStackView)
         wholeStackView.addArrangedSubviews(
             headView,
@@ -225,16 +276,19 @@ final class MyProfileView: SZView {
         // 작업해요
         workListView.addSubviews(
             workListLabel,
-            workListImage01,
-            workListImage02,
-            workListButton
+//            workListImage01,
+//            workListImage02,
+            workListButton,
+            workListButton,
+            workListSeperator
         )
         // 판매작품
         salesListView.addSubviews(
             salesListLabel,
-            salesListImage01,
-            salesListImage02,
-            salesListButton
+//            salesListImage01,
+//            salesListImage02,
+            salesListButton,
+            salesListSeperator
         )
         // 외주해요
         requestListView.addSubviews(
@@ -324,6 +378,7 @@ final class MyProfileView: SZView {
         headView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
         }
+        
         scrapListView.snp.makeConstraints { make in
             make.top.equalTo(headView.snp.bottom)
             make.leading.trailing.equalToSuperview()
@@ -343,6 +398,7 @@ final class MyProfileView: SZView {
             make.leading.trailing.equalToSuperview().inset(17)
             make.height.equalTo(0.5)
         }
+        
         requestListView.snp.makeConstraints { make in
             make.top.equalTo(scrapListView.snp.bottom)
             make.leading.trailing.equalToSuperview()
@@ -362,53 +418,73 @@ final class MyProfileView: SZView {
             make.leading.trailing.equalToSuperview().inset(17)
             make.height.equalTo(0.5)
         }
+        
         salesListView.snp.makeConstraints { make in
             make.top.equalTo(requestListView.snp.bottom)
             make.leading.trailing.equalToSuperview()
+            make.height.equalTo(63)
         }
         salesListLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(28)
             make.top.equalToSuperview().inset(24)
         }
-        salesListImage01.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(18)
-            make.top.equalTo(salesListLabel.snp.bottom).offset(10)
-            make.width.equalToSuperview().multipliedBy(0.4)
-            make.height.equalTo(salesListImage01.snp.width)
-            make.bottom.equalToSuperview().inset(24)
-        }
-        salesListImage02.snp.makeConstraints { make in
-            make.width.height.top.bottom.equalTo(salesListImage01)
-            make.leading.equalTo(salesListImage01.snp.trailing).offset(12.5)
-        }
+//        salesListImage01.snp.makeConstraints { make in
+//            make.leading.equalToSuperview().inset(18)
+//            make.top.equalTo(salesListLabel.snp.bottom).offset(10)
+//            make.width.equalToSuperview().multipliedBy(0.4)
+//            make.height.equalTo(salesListImage01.snp.width)
+//            make.bottom.equalToSuperview().inset(24)
+//        }
+//        salesListImage02.snp.makeConstraints { make in
+//            make.width.height.top.bottom.equalTo(salesListImage01)
+//            make.leading.equalTo(salesListImage01.snp.trailing).offset(12.5)
+//        }
         salesListButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
             make.width.height.equalTo(24)
-            make.centerY.equalTo(salesListImage02)
-            make.leading.equalTo(salesListImage02.snp.trailing).offset(8.5)
+            make.trailing.equalToSuperview().inset(26.5)
         }
+        salesListSeperator.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(17)
+            make.height.equalTo(0.5)
+        }
+        
         workListView.snp.makeConstraints { make in
             make.top.equalTo(salesListView.snp.bottom)
             make.leading.trailing.equalToSuperview()
+            make.height.equalTo(63)
         }
         workListLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
             make.leading.equalToSuperview().inset(28)
-            make.top.equalToSuperview().inset(6)
         }
-        workListImage01.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(18)
-            make.top.equalTo(workListLabel.snp.bottom).offset(10)
-            make.width.equalToSuperview().multipliedBy(0.4)
-            make.height.equalTo(workListImage01.snp.width)
-            make.bottom.equalToSuperview().inset(50)
-        }
-        workListImage02.snp.makeConstraints { make in
-            make.width.height.top.bottom.equalTo(workListImage01)
-            make.leading.equalTo(workListImage01.snp.trailing).offset(12.5)
-        }
+//        workListImage01.snp.makeConstraints { make in
+//            make.leading.equalToSuperview().inset(18)
+//            make.top.equalTo(workListLabel.snp.bottom).offset(10)
+//            make.width.equalToSuperview().multipliedBy(0.4)
+//            make.height.equalTo(workListImage01.snp.width)
+//            make.bottom.equalToSuperview().inset(50)
+//        }
+//        workListImage02.snp.makeConstraints { make in
+//            make.width.height.top.bottom.equalTo(workListImage01)
+//            make.leading.equalTo(workListImage01.snp.trailing).offset(12.5)
+//        }
         workListButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
             make.width.height.equalTo(24)
-            make.centerY.equalTo(workListImage02)
-            make.leading.equalTo(workListImage02.snp.trailing).offset(8.5)
+            make.trailing.equalToSuperview().inset(26.5)
+        }
+        workListSeperator.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(17)
+            make.height.equalTo(0.5)
+        }
+        
+        profileSkeletonView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
 }
