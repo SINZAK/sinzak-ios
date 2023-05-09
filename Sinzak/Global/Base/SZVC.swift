@@ -124,6 +124,7 @@ extension UIViewController {
             rightActionCompletion: { [weak self] in
                 let vm = DefaultLoginVM()
                 let vc = LoginVC(viewModel: vm)
+                vc.configureDismissButton()
                 
                 let nav = UINavigationController(rootViewController: vc)
                 nav.modalPresentationStyle = .fullScreen
