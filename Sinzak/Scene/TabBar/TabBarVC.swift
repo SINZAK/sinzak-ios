@@ -72,7 +72,7 @@ final class TabBarVC: UITabBarController {
                                          image: UIImage(named: "chat"),
                                          selectedImage: UIImage(named: "chat-selected"))
         // 프로필
-        let profileVC = UINavigationController(rootViewController: MyProfileVC())
+        let profileVC = UINavigationController(rootViewController: MyProfileVC(viewModel: DefaultMyProfileVM()))
         profileVC.tabBarItem = UITabBarItem(title: I18NStrings.Profile,
                                          image: UIImage(named: "profile"),
                                          selectedImage: UIImage(named: "profile-selected"))
