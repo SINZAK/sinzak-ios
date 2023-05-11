@@ -26,6 +26,7 @@ final class EditProfileView: SZView {
     // 프로필 사진
     let profileView = UIView()
     let profileImage = UIImageView().then {
+        $0.backgroundColor = CustomColor.gray10
         $0.contentMode = .scaleAspectFit
         $0.layer.cornerRadius = 20
         $0.clipsToBounds = true
@@ -40,48 +41,79 @@ final class EditProfileView: SZView {
     // 닉네임
     let nicknameView = UIView()
     private let nicknameLabel = UILabel().then {
+        $0.tintColor = CustomColor.red
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.nickname
     }
     let nicknameTextField = UITextField().then {
+        $0.tintColor = CustomColor.red
         $0.placeholder = I18NStrings.nickname
         $0.font = .body_R
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
+    let checkButton = DoubleCheckButton().then {
+        $0.setTitle("중복확인", for: .normal)
+        $0.setTitleColor(CustomColor.gray60, for: .normal)
+        $0.titleLabel?.font = .caption_B
+        $0.layer.borderColor = CustomColor.gray60.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 15
+    }
+    
+    let nameValidationLabel = UILabel().then {
+        $0.font = .caption_R
+        $0.textColor = CustomColor.purple
+        $0.text = "사용불가능한 이름입니다."
+    }
+    
     // 소개
     let introductionView = UIView()
     private let introductionLabel = UILabel().then {
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.introduction
     }
     let introductionTextView = UITextView().then {
+        $0.textAlignment = .center
+        $0.tintColor = CustomColor.red
+        $0.backgroundColor = CustomColor.background
         $0.font = .caption_R
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.isScrollEnabled = false
         $0.text = "자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다"
     }
+    
+    let textViewPlaceHolderLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = CustomColor.gray60
+        label.font = .body_R
+        label.text = "소개를 입력해 주세요."
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
     let introductionCountLabel = UILabel().then {
         $0.text = "0"
         $0.font = .buttonText_R
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     private let limitIntroductionLabel = UILabel().then {
         $0.text = "/100"
         $0.font = .buttonText_R
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     // 학교
     let schoolView = UIView()
     private let schoolLabel = UILabel().then {
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.school
     }
     let schoolNameLabel = UILabel().then {
         $0.font = .body_R
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = "홍익대학교"
     }
     let verifySchoolButton = UIButton().then {
@@ -93,13 +125,15 @@ final class EditProfileView: SZView {
     let genreView = UIView()
     private let genreLabel = UILabel().then {
         $0.font = .body_M
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = I18NStrings.genreOfInterest
     }
     let genreNameLabel = UILabel().then {
         $0.font = .body_R
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.text = "일반회화"
+        $0.numberOfLines = 0
+        $0.addInterlineSpacing(spacing: 8.0)
     }
     let changeGenreButton = UIButton().then {
         $0.titleLabel?.font = .body_M
@@ -112,6 +146,7 @@ final class EditProfileView: SZView {
         $0.setTitle(I18NStrings.applyCertifiedAuthor, for: .normal)
         $0.setTitleColor(CustomColor.purple, for: .normal)
         $0.titleLabel?.font = .caption_M
+        $0.isHidden = true
     }
     // 디바이더
     private let divider01 = UIView().then {
@@ -126,9 +161,33 @@ final class EditProfileView: SZView {
     private let divider04 = UIView().then {
         $0.backgroundColor = CustomColor.gray60
     }
+    
+    func configureProfile(with profile: Profile) {
+        let imageURL = URL(string: profile.imageURL)
+        profileImage.kf.setImage(with: imageURL)
+        
+        nicknameTextField.text = profile.name
+        
+        introductionTextView.text = profile.introduction
+        
+        schoolNameLabel.text = profile.univ
+        
+        verifySchoolButton.isEnabled = !profile.certUni
+        
+        let categoryLike: String = profile.categoryLike
+            .split(separator: ",")
+            .map { AllGenre(rawValue: String($0)) }
+            .map { $0?.text ?? "" }
+            .joined(separator: "\n")
+        
+        genreNameLabel.text = categoryLike
+        
+        applyAuthorButton.isEnabled = !profile.certAuthor
+    }
+    
     // MARK: - Design Helpers
     override func setView() {
-        addSubview (
+        addSubview(
             scrollView
         )
         scrollView.addSubview(stackView)
@@ -150,11 +209,14 @@ final class EditProfileView: SZView {
         )
         nicknameView.addSubviews(
             nicknameLabel,
-            nicknameTextField
+            nicknameTextField,
+            checkButton,
+            nameValidationLabel
         )
         introductionView.addSubviews(
             introductionLabel,
             introductionTextView,
+            textViewPlaceHolderLabel,
             introductionCountLabel,
             limitIntroductionLabel
         )
@@ -188,21 +250,39 @@ final class EditProfileView: SZView {
             make.width.equalTo(140)
             make.bottom.equalToSuperview().inset(5)
         }
+        
         nicknameView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(nameValidationLabel.snp.bottom).offset(20.0)
         }
         nicknameLabel.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview().inset(19)
+            make.leading.top.equalToSuperview().inset(20.0)
         }
+        nicknameLabel.setContentHuggingPriority(
+            .defaultHigh,
+            for: .horizontal
+        )
+        
         nicknameTextField.snp.makeConstraints { make in
             make.centerY.equalTo(nicknameLabel)
             make.leading.equalTo(nicknameLabel.snp.trailing).offset(30)
-            make.trailing.lessThanOrEqualToSuperview().inset(38)
+            make.trailing.equalTo(checkButton.snp.leading).offset(-8.0)
+        }
+        checkButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(24.0)
+            $0.centerY.equalTo(nicknameLabel)
+            $0.height.equalTo(30.0)
+            $0.width.equalTo(78.0)
+        }
+        nameValidationLabel.snp.makeConstraints {
+            $0.leading.equalTo(nicknameTextField)
+            $0.top.equalTo(nicknameTextField.snp.bottom).offset(12.0)
         }
         divider01.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(17)
             make.height.equalTo(0.5)
         }
+        
         introductionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
         }
@@ -213,6 +293,10 @@ final class EditProfileView: SZView {
             make.leading.trailing.equalToSuperview().inset(37.5)
             make.top.equalTo(introductionLabel.snp.bottom).offset(8)
             make.bottom.lessThanOrEqualTo(limitIntroductionLabel.snp.top).offset(-7)
+        }
+        textViewPlaceHolderLabel.snp.makeConstraints {
+            $0.centerY.leading.trailing.equalTo(introductionTextView)
+            
         }
         limitIntroductionLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(37.5)
@@ -251,15 +335,21 @@ final class EditProfileView: SZView {
         }
         genreView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(genreNameLabel.snp.bottom).offset(20.0)
         }
         genreLabel.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview().inset(19)
+            make.leading.top.equalToSuperview().inset(19)
         }
         genreNameLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(genreLabel)
+            make.top.equalTo(genreLabel)
             make.leading.equalTo(genreLabel.snp.trailing).offset(30)
             make.trailing.lessThanOrEqualTo(changeGenreButton.snp.leading).offset(-10)
         }
+        genreNameLabel.setContentCompressionResistancePriority(
+            .defaultLow,
+            for: .horizontal
+        )
+        
         changeGenreButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(24)
             make.width.equalTo(72)
