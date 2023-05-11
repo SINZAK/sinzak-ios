@@ -42,20 +42,9 @@ final class MyProfileVC: SZVC {
         
         viewModel.fetchProfile()
     }
-    // MARK: - Actions
-    @objc func settingButtonTapped(_ sender: UIBarButtonItem) {
-        let vc = SettingVC()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    @objc func profileEditButtonTapped(_ sender: UIButton) {
-        let vc = EditProfileVC()
-        navigationController?.pushViewController(vc, animated: true)
-    }
     // MARK: - Helpers
     override func configure() {
         view.isSkeletonable = true
-        
-        mainView.profileEditButton.addTarget(self, action: #selector(profileEditButtonTapped), for: .touchUpInside)
         
         bind()
     }
@@ -63,8 +52,8 @@ final class MyProfileVC: SZVC {
         super.setNavigationBar()
         let setting = UIBarButtonItem(image: UIImage(named: "setting"),
                                       style: .plain,
-                                      target: self,
-                                      action: #selector(settingButtonTapped))
+                                      target: nil,
+                                      action: nil)
         navigationItem.rightBarButtonItem = setting
     }
     
@@ -82,6 +71,31 @@ final class MyProfileVC: SZVC {
             })
             .disposed(by: disposeBag)
         
+        navigationItem.rightBarButtonItem?.rx.tap
+            .asDriver()
+            .drive(
+                with: self,
+                onNext: { owner, _ in
+                    let vc = SettingVC()
+                    owner
+                        .navigationController?
+                        .pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.profileEditButton.rx.tap
+            .asDriver()
+            .drive(
+                with: self,
+                onNext: { owner, _ in
+                    guard let profile = owner.userInfo?.profile else { return }
+                    let vc = EditProfileVC(profile: profile)
+                    owner
+                        .navigationController?
+                        .pushViewController(vc, animated: true)
+                }
+            )
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
