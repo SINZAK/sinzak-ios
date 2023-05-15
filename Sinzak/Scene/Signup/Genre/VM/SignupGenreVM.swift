@@ -55,7 +55,7 @@ final class DefaultSignupGenreVM: SignupGenreVM {
             .subscribe(
                 with: self,
                 onSuccess: { owner, _ in
-                    let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM())
+                    let vc = UniversityInfoVC(viewModel: DefaultUniversityInfoVM(), mode: .signUp)
                     owner.pushUniversityInfoView.accept(vc)
                     UserQueryManager.shared.fetchMyProfile()
                         .subscribe(
