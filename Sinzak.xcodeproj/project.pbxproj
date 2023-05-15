@@ -195,6 +195,9 @@
 		ED2A582B29F2F3C8002CE83E /* Reissue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582A29F2F3C8002CE83E /* Reissue.swift */; };
 		ED2A582D29F306F9002CE83E /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582C29F306F9002CE83E /* UserInfo.swift */; };
 		ED2A583029F30C3E002CE83E /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582F29F30C3E002CE83E /* UserInfoManager.swift */; };
+		ED35525E2A116AA000B364FC /* EditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35525D2A116AA000B364FC /* EditProfileVM.swift */; };
+		ED3552602A11F0A800B364FC /* VerifyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35525F2A11F0A800B364FC /* VerifyButton.swift */; };
+		ED3552622A12012600B364FC /* SZImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552612A12012600B364FC /* SZImage.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
@@ -451,6 +454,9 @@
 		ED2A582A29F2F3C8002CE83E /* Reissue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reissue.swift; sourceTree = "<group>"; };
 		ED2A582C29F306F9002CE83E /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		ED2A582F29F30C3E002CE83E /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
+		ED35525D2A116AA000B364FC /* EditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVM.swift; sourceTree = "<group>"; };
+		ED35525F2A11F0A800B364FC /* VerifyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyButton.swift; sourceTree = "<group>"; };
+		ED3552612A12012600B364FC /* SZImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZImage.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -1072,6 +1078,7 @@
 			children = (
 				A233891429B0673200688FD8 /* View */,
 				A233891329B0672B00688FD8 /* VC */,
+				ED35525C2A116A8300B364FC /* VM */,
 			);
 			path = EditProfile;
 			sourceTree = "<group>";
@@ -1088,6 +1095,7 @@
 			isa = PBXGroup;
 			children = (
 				A233890F29B066EC00688FD8 /* EditProfileView.swift */,
+				ED35525F2A11F0A800B364FC /* VerifyButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1426,6 +1434,7 @@
 				A2806128292F585E005AE0B3 /* setColor.swift */,
 				A20CBD5B294787C10012FF32 /* setFont.swift */,
 				EDE5EC5629D6EB3200BB211F /* Log.swift */,
+				ED3552612A12012600B364FC /* SZImage.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1868,6 +1877,14 @@
 				ED2A582F29F30C3E002CE83E /* UserInfoManager.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		ED35525C2A116A8300B364FC /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				ED35525D2A116AA000B364FC /* EditProfileVM.swift */,
+			);
+			path = VM;
 			sourceTree = "<group>";
 		};
 		ED47113229DF2EBD00708562 /* VM */ = {
@@ -2342,6 +2359,7 @@
 				ED7F92D129DB0F2A00C55FBF /* SNSLoginDTO.swift in Sources */,
 				EDF5089529FE505500FDC2E2 /* UIControl+Extension.swift in Sources */,
 				A2AA89D02967CDBB004A63C1 /* InterestedGenreHeader.swift in Sources */,
+				ED35525E2A116AA000B364FC /* EditProfileVM.swift in Sources */,
 				A280AB5129A7A5BB00C1729C /* WriteCategoryHeader.swift in Sources */,
 				A2DEC37329B6495000CF0794 /* Date+Extension.swift in Sources */,
 				ED02CAED2A0D0D9600E20F92 /* SelectProfileIconVC.swift in Sources */,
@@ -2385,6 +2403,7 @@
 				A226CC4B29ADF875000161E8 /* SendPriceOfferVC.swift in Sources */,
 				EDE5EC6029D70ABA00BB211F /* MarketProductsResponseDTO.swift in Sources */,
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
+				ED3552622A12012600B364FC /* SZImage.swift in Sources */,
 				A2420F8929A859AF007D8937 /* AddPhotosVC.swift in Sources */,
 				A226CC5529AE0FDD000161E8 /* ReceivePriceOfferVC.swift in Sources */,
 				A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */,
@@ -2481,6 +2500,7 @@
 				A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 				EDF5089B29FE7E5000FDC2E2 /* DoubleAlertSheetController.swift in Sources */,
+				ED3552602A11F0A800B364FC /* VerifyButton.swift in Sources */,
 				A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */,
 				A280AB5329A7A5E600C1729C /* WriteCategoryHeaderKind.swift in Sources */,
 				EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */,
