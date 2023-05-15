@@ -10,10 +10,16 @@ import RxSwift
 import RxKeyboard
 import RxDataSources
 
+enum UniversityInfoMode {
+    case signUp
+    case editProfile
+}
+
 final class UniversityInfoVC: SZVC {
     // MARK: - Properties
     private let mainView = UniversityInfoView()
-    var viewModel: UniversityInfoVM!
+    var viewModel: UniversityInfoVM
+    var mode: UniversityInfoMode
     
     private let disposeBag = DisposeBag()
        
@@ -26,9 +32,10 @@ final class UniversityInfoVC: SZVC {
     }
     
     // MARK: - Init
-    init(viewModel: UniversityInfoVM) {
-        super.init(nibName: nil, bundle: nil)
+    init(viewModel: UniversityInfoVM, mode: UniversityInfoMode) {
         self.viewModel = viewModel
+        self.mode = mode
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -53,8 +60,21 @@ final class UniversityInfoVC: SZVC {
     
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem = nil
+        
+        switch mode {
+        case .signUp:
+            navigationItem.hidesBackButton = true
+            navigationItem.leftBarButtonItem = nil
+
+        case .editProfile:
+            let dismissBarButton = UIBarButtonItem(
+                image: SZImage.Icon.dismiss,
+                style: .plain,
+                target: nil,
+                action: nil
+            )
+            navigationItem.leftBarButtonItem = dismissBarButton
+        }
     }
     
     // MARK: - Bind
@@ -104,7 +124,12 @@ final class UniversityInfoVC: SZVC {
         mainView.notStudentButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.viewModel.tapNotStudentButton()
+                switch owner.mode {
+                case .signUp:
+                    owner.viewModel.tapNotStudentButton()
+                case .editProfile:
+                    owner.dismiss(animated: true)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -133,6 +158,15 @@ final class UniversityInfoVC: SZVC {
                     self.view.layoutIfNeeded()
                 }
             })
+            .disposed(by: disposeBag)
+        
+        navigationItem.leftBarButtonItem?.rx.tap
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    owner.dismiss(animated: true)
+                }
+            )
             .disposed(by: disposeBag)
     }
     
