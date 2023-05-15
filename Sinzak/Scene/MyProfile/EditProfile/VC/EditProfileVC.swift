@@ -14,8 +14,9 @@ final class EditProfileVC: SZVC {
     
     // MARK: - Properties
     private let mainView = EditProfileView()
+    private let viewModel: EditProfileVM
     private let disposeBag = DisposeBag()
-    let profile: Profile
+    private let profile: Profile
     
     private lazy var updateImage: (UIImage?) -> Void = { [weak self] image in
         guard let self = self else { return }
@@ -23,9 +24,10 @@ final class EditProfileVC: SZVC {
         self.mainView.profileImage.image = image
     }
     
-    init(profile: Profile) {
+    init(profile: Profile, viewModel: EditProfileVM) {
         self.profile = profile
         self.mainView.configureProfile(with: profile)
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -71,8 +73,14 @@ final class EditProfileVC: SZVC {
     override func setNavigationBar() {
         super.setNavigationBar()
         
-        let finish = UIBarButtonItem(title: I18NStrings.finish, style: .plain, target: self, action: #selector(finishButtonTapped))
-        navigationItem.rightBarButtonItem = finish
+        let complete = UIBarButtonItem(title: I18NStrings.finish, style: .plain, target: self, action: #selector(finishButtonTapped))
+        let dismiss = UIBarButtonItem(
+            image: UIImage(named: "dismiss")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal),
+            style: .plain, target: nil, action: nil
+        )
+        
+        navigationItem.leftBarButtonItem = dismiss
+        navigationItem.rightBarButtonItem = complete
     }
     
     func bind() {
@@ -81,6 +89,14 @@ final class EditProfileVC: SZVC {
     }
     
     func bindInput() {
+        
+        navigationItem.leftBarButtonItem?.rx.tap
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    owner.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
         
         let scrollViewTapGesture = UITapGestureRecognizer()
         mainView.scrollView.addGestureRecognizer(scrollViewTapGesture)
@@ -129,10 +145,129 @@ final class EditProfileVC: SZVC {
                     )
             })
             .disposed(by: disposeBag)
+        
+        mainView.nicknameTextField.rx.text
+            .orEmpty
+            .subscribe(
+                with: self,
+                onNext: { owner, text in
+                    owner.viewModel.nickNameTextInput(text: text)
+                }
+            )
+            .disposed(by: disposeBag)
+        
+        mainView.checkButton.rx.tap
+            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    owner.viewModel.checkButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.introductionTextView.rx.text
+            .orEmpty
+            .subscribe(
+                with: self,
+                onNext: { owner, text in
+                    owner.viewModel.introductionTextInput(text: text)
+                }
+            )
+            .disposed(by: disposeBag)
+        
+        mainView.verifySchoolButton.rx.tap
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    let vm = DefaultUniversityInfoVM()
+                    let vc = UniversityInfoVC(viewModel: vm, mode: .editProfile)
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    owner.present(nav, animated: true)
+                }
+            )
+            .disposed(by: disposeBag)
+    
     }
     
-    func bindOutput() {
+    func  bindOutput() {
         
+        viewModel.checkButtonIsEnable
+            .skip(1)
+            .asDriver(onErrorJustReturn: false)
+            .drive(mainView.checkButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.doubleCheckResult
+            .asDriver()
+            .drive(with: self, onNext: { owner, result in
+                
+                switch result {
+                case .beforeCheck:
+                    break
+                    
+                case let .sucess(info, color):
+                    
+                    owner.mainView.nicknameView.snp.remakeConstraints { make in
+                        make.leading.trailing.equalToSuperview()
+                        make.bottom.equalTo(owner.mainView.nameValidationLabel.snp.bottom).offset(20.0)
+                    }
+                    owner.mainView.nameValidationLabel.isHidden = false
+                    
+                    owner.mainView.nameValidationLabel.text = info
+                    owner.mainView.nameValidationLabel.textColor = color
+                    
+                case let .fail(info, color):
+                    
+                    owner.mainView.nicknameView.snp.remakeConstraints { make in
+                        make.leading.trailing.equalToSuperview()
+                        make.bottom.equalTo(owner.mainView.nameValidationLabel.snp.bottom).offset(20.0)
+                        
+                    }
+                    owner.mainView.nameValidationLabel.isHidden = false
+                    
+                    let currentName = owner.profile.name
+                    let inputName = owner.mainView.nicknameTextField.text
+                    if currentName == inputName {
+                        owner.mainView.nameValidationLabel.text = "현재 사용 중인 닉네임입니다."
+                        owner.mainView.nameValidationLabel.textColor = CustomColor.gray80
+                        owner
+                            .viewModel
+                            .doubleCheckResult
+                            .accept(.beforeCheck)
+                        return
+                    }
+                    
+                    owner.mainView.nameValidationLabel.text = info
+                    owner.mainView.nameValidationLabel.textColor = color
+
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.introductionPlaceholderIsHidden
+            .asDriver(onErrorJustReturn: false)
+            .drive(mainView.textViewPlaceHolderLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        let introductionCount = viewModel.introductionCount
+            .asDriver(onErrorJustReturn: 0)
+        
+        introductionCount
+            .map { "\($0)" }
+            .drive(mainView.introductionCountLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        introductionCount
+            .drive(with: self, onNext: { owner, count in
+                if count > 100 {
+                    var trimmedText = owner.mainView.introductionTextView.text
+                    _ = trimmedText?.popLast()
+                    owner.mainView.introductionTextView.text = trimmedText
+                }
+            })
+            .disposed(by: disposeBag)
+            
     }
 }
 
