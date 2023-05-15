@@ -65,6 +65,7 @@ final class EditProfileView: SZView {
         $0.font = .caption_R
         $0.textColor = CustomColor.purple
         $0.text = "사용불가능한 이름입니다."
+        $0.isHidden = true
     }
     
     // 소개
@@ -75,7 +76,6 @@ final class EditProfileView: SZView {
         $0.text = I18NStrings.introduction
     }
     let introductionTextView = UITextView().then {
-        $0.textAlignment = .center
         $0.tintColor = CustomColor.red
         $0.backgroundColor = CustomColor.background
         $0.font = .caption_R
@@ -89,7 +89,6 @@ final class EditProfileView: SZView {
         label.textColor = CustomColor.gray60
         label.font = .body_R
         label.text = "소개를 입력해 주세요."
-        label.textAlignment = .center
         
         return label
     }()
@@ -116,7 +115,7 @@ final class EditProfileView: SZView {
         $0.textColor = CustomColor.label
         $0.text = "홍익대학교"
     }
-    let verifySchoolButton = UIButton().then {
+    let verifySchoolButton = VerifyButton().then {
         $0.titleLabel?.font = .body_M
         $0.setTitleColor(CustomColor.purple, for: .normal)
         $0.setTitle(I18NStrings.verify, for: .normal)
@@ -253,7 +252,8 @@ final class EditProfileView: SZView {
         
         nicknameView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(nameValidationLabel.snp.bottom).offset(20.0)
+            make.bottom.equalTo(nicknameTextField.snp.bottom).offset(20.0)
+//            make.bottom.equalTo(nameValidationLabel.snp.bottom).offset(20.0)
         }
         nicknameLabel.snp.makeConstraints { make in
             make.leading.top.equalToSuperview().inset(20.0)
@@ -295,8 +295,8 @@ final class EditProfileView: SZView {
             make.bottom.lessThanOrEqualTo(limitIntroductionLabel.snp.top).offset(-7)
         }
         textViewPlaceHolderLabel.snp.makeConstraints {
-            $0.centerY.leading.trailing.equalTo(introductionTextView)
-            
+            $0.centerY.trailing.equalTo(introductionTextView)
+            $0.leading.equalTo(introductionTextView).offset(4.0)
         }
         limitIntroductionLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(37.5)
