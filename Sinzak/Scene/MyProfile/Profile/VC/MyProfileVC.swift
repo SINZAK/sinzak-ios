@@ -89,10 +89,12 @@ final class MyProfileVC: SZVC {
                 with: self,
                 onNext: { owner, _ in
                     guard let profile = owner.userInfo?.profile else { return }
-                    let vc = EditProfileVC(profile: profile)
-                    owner
-                        .navigationController?
-                        .pushViewController(vc, animated: true)
+                    let vm = DefaultEditProfileVM()
+                    let vc = EditProfileVC(profile: profile, viewModel: vm)
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    
+                    owner.present(nav, animated: true)
                 }
             )
             .disposed(by: disposeBag)
