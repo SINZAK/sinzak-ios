@@ -35,4 +35,16 @@ class UserCommandManager: ManagerType {
             .map(filterError)
             .map { $0.success }
     }
+    
+    func updateCategoryLike(genreLikes: [AllGenre]) -> Single<Bool> {
+        let genreLikes: String = genreLikes
+            .map { $0.rawValue }
+            .joined(separator: ",")
+        
+        return provider.rx.request(.updateGenre(genres: genreLikes))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
+    }
 }
