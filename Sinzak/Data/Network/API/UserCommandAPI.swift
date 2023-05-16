@@ -26,6 +26,9 @@ enum UserCommandAPI {
     // 팔로우
     case follow(userId: Int)
     case unfollow(userId: Int)
+    
+    // 관심장르 업데이트
+    case updateGenre(genres: String)
 }
 
 extension UserCommandAPI: TargetType {
@@ -54,11 +57,16 @@ extension UserCommandAPI: TargetType {
             return "/users/follow"
         case .unfollow:
             return "/users/unfollow"
+        case .updateGenre(_):
+            return "/users/edit/category"
         }
     }
     var method: Moya.Method {
         switch self {
-        case .report(userId: _, reason: _), .follow(userId: _), .unfollow(userId: _):
+        case .report(_, _),
+                .follow(_),
+                .unfollow(_),
+                .updateGenre(_):
             return .post
         default:
             return .get
@@ -78,6 +86,15 @@ extension UserCommandAPI: TargetType {
                 "userId": userId
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+            
+        case let .updateGenre(genres):
+            let params: [String: Any] = [
+                "categoryLike": genres
+            ]
+            return .requestParameters(
+                parameters: params,
+                encoding: JSONEncoding.default
+            )
         default:
             return .requestPlain
         }
