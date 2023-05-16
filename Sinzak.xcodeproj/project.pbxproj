@@ -198,6 +198,8 @@
 		ED35525E2A116AA000B364FC /* EditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35525D2A116AA000B364FC /* EditProfileVM.swift */; };
 		ED3552602A11F0A800B364FC /* VerifyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35525F2A11F0A800B364FC /* VerifyButton.swift */; };
 		ED3552622A12012600B364FC /* SZImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552612A12012600B364FC /* SZImage.swift */; };
+		ED3552652A120ECA00B364FC /* StudentAuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552642A120ECA00B364FC /* StudentAuthVM.swift */; };
+		ED35526B2A136CA100B364FC /* CertifySchoolCardDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35526A2A136CA100B364FC /* CertifySchoolCardDTO.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
@@ -457,6 +459,8 @@
 		ED35525D2A116AA000B364FC /* EditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVM.swift; sourceTree = "<group>"; };
 		ED35525F2A11F0A800B364FC /* VerifyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyButton.swift; sourceTree = "<group>"; };
 		ED3552612A12012600B364FC /* SZImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZImage.swift; sourceTree = "<group>"; };
+		ED3552642A120ECA00B364FC /* StudentAuthVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAuthVM.swift; sourceTree = "<group>"; };
+		ED35526A2A136CA100B364FC /* CertifySchoolCardDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertifySchoolCardDTO.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -1692,6 +1696,7 @@
 			children = (
 				A2B38577295D88FE00E5EB7C /* View */,
 				A2B38578295D890300E5EB7C /* VC */,
+				ED3552632A120EA400B364FC /* VM */,
 			);
 			path = StudentAuth;
 			sourceTree = "<group>";
@@ -1887,6 +1892,15 @@
 			path = VM;
 			sourceTree = "<group>";
 		};
+		ED3552632A120EA400B364FC /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				ED3552642A120ECA00B364FC /* StudentAuthVM.swift */,
+			);
+			name = VM;
+			path = "프";
+			sourceTree = "<group>";
+		};
 		ED47113229DF2EBD00708562 /* VM */ = {
 			isa = PBXGroup;
 			children = (
@@ -1939,6 +1953,7 @@
 				EDF76FED29F7BB4C00F33146 /* LikeResponseDTO.swift */,
 				EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */,
 				EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */,
+				ED35526A2A136CA100B364FC /* CertifySchoolCardDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -2385,6 +2400,7 @@
 				A20E4A4E29990064009C1340 /* MyProfileView.swift in Sources */,
 				A280AB4A29A763BE00C1729C /* WriteCategoryVC.swift in Sources */,
 				ED72D8A829F69B5100DA1251 /* SchoolAuthViewModel.swift in Sources */,
+				ED3552652A120ECA00B364FC /* StudentAuthVM.swift in Sources */,
 				A222F07C29837AFF007806D0 /* CategoryTagCVC.swift in Sources */,
 				A222F07F298382DF007806D0 /* CategoryType.swift in Sources */,
 				EDE5EC5D29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift in Sources */,
@@ -2434,6 +2450,7 @@
 				A226537F297062A000605697 /* HomeHeader.swift in Sources */,
 				ED74A07B29F4F8F200F44AA2 /* AppleAuthAPI.swift in Sources */,
 				A254E14229BD0571001047FD /* ChatAPI.swift in Sources */,
+				ED35526B2A136CA100B364FC /* CertifySchoolCardDTO.swift in Sources */,
 				A2B38580295D895800E5EB7C /* StudentAuthVC.swift in Sources */,
 				ED00BF982A0266F300379E89 /* NothingView.swift in Sources */,
 				A2100F6A29865E8800C85ADF /* AlignOption.swift in Sources */,
