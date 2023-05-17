@@ -174,7 +174,7 @@
 "usageGuide" = "이용 안내";
 "etcSection" = "기타";
 // - 섹션 내용
-"linkedAccounts" = "연결된 계정 관리";
+"linkedAccounts" = "연결된 계정";
 "blockedUser" = "차단 사용자 관리";
 "appVersion" = "앱 버전";
 "ask" = "문의하기";
