@@ -98,6 +98,19 @@ final class MyProfileVC: SZVC {
                 }
             )
             .disposed(by: disposeBag)
+        
+        let tapScrapListView = UITapGestureRecognizer()
+        mainView.scrapListView.addGestureRecognizer(tapScrapListView)
+        tapScrapListView.rx.event
+            .bind(with: self, onNext: { owner, _ in
+                let vm = DefaultScrapListVM()
+                let vc = ScrapListVC(viewModel: vm)
+                owner.navigationController?.pushViewController(
+                    vc,
+                    animated: true
+                )
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
