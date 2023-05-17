@@ -20,4 +20,16 @@ final class DoubleCheckButton: UIButton {
             }
         }
     }
+    
+    init() {
+        super.init(frame: .zero)
+        
+        layer.borderWidth = 1.0
+        titleLabel?.font = .caption_B
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
