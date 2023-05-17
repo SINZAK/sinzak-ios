@@ -113,15 +113,15 @@ final class SignupNameVC: SZVC {
             .drive(onNext: { [weak self] result in
                 switch result {
                 case .beforeCheck:
-                    self?.mainView.nameValidationLabel.text = ""
+                    self?.mainView.nameValidationLabel.text = result.info
                     
-                case let .sucess(text, color):
-                    self?.mainView.nameValidationLabel.text = text
-                    self?.mainView.nameValidationLabel.textColor = color
+                case .success:
+                    self?.mainView.nameValidationLabel.text = result.info
+                    self?.mainView.nameValidationLabel.textColor = result.color
                     
-                case let .fail(text, color):
-                    self?.mainView.nameValidationLabel.text = text
-                    self?.mainView.nameValidationLabel.textColor = color
+                case .fail:
+                    self?.mainView.nameValidationLabel.text = result.info
+                    self?.mainView.nameValidationLabel.textColor = result.color
                 }
             })
             .disposed(by: disposeBag)
@@ -129,7 +129,7 @@ final class SignupNameVC: SZVC {
         doubleCheckResult
             .map { result in
                 switch result {
-                case .sucess(_, _):
+                case .success:
                     return true
                 default:
                     return false

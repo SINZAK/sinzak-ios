@@ -50,9 +50,9 @@ final class DefaultSignupNameVM: SignupNameVM {
             do {
                 let reuslt = try await AuthManager.shared.checkNickname(for: self.currentInputName.value)
                 if reuslt {
-                    doubleCheckResult.accept(.sucess("멋진 이름이네요!", CustomColor.red))
+                    doubleCheckResult.accept(.success)
                 } else {
-                    doubleCheckResult.accept(.fail("사용불가능한 이름입니다.", CustomColor.purple))
+                    doubleCheckResult.accept(.fail)
                 }
             } catch {
                 APIError.logError(error)
@@ -62,7 +62,7 @@ final class DefaultSignupNameVM: SignupNameVM {
     
     func tapNextButton() {
         onboardingUser.nickname = currentInputName.value
-        let vc = SignupGenreVC(viewModel: DefaultSignupGenreVM(onboardingUser: onboardingUser))
+        let vc = SignupGenreVC(viewModel: DefaultSignupGenreVM(onboardingUser: onboardingUser), mode: .signUp)
         pushSignupGenreVC.accept(vc)
     }
     
@@ -75,6 +75,22 @@ final class DefaultSignupNameVM: SignupNameVM {
 
 enum DoubleCheckResult {
     case beforeCheck
-    case sucess(String, UIColor?)
-    case fail(String, UIColor?)
+    case success
+    case fail
+    
+    var info: String {
+        switch self {
+        case .beforeCheck:      return ""
+        case .success:           return "멋진 이름이네요!"
+        case .fail:             return "사용불가능한 이름입니다."
+        }
+    }
+    
+    var color: UIColor {
+        switch self {
+        case .beforeCheck:      return CustomColor.label
+        case .success:           return CustomColor.red
+        case .fail:             return CustomColor.purple
+        }
+    }
 }
