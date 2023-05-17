@@ -29,7 +29,6 @@ final class SelectIconCVC: UICollectionViewCell {
         imageView.layer.borderColor = CustomColor.gray40.cgColor
         imageView.layer.cornerRadius = 30.0
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .systemGray2
         
         return imageView
     }()
