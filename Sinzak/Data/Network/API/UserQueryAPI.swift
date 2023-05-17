@@ -10,7 +10,11 @@ import Moya
 
 enum UserQueryAPI {
     
-    case myProfile // 내 프로필 확인
+    // 내 프로필 확인
+    case myProfile
+    
+    // 스크랩 목록
+    case wishList
     
 }
 
@@ -22,12 +26,14 @@ extension UserQueryAPI: TargetType {
     var path: String {
         switch self {
         case .myProfile:        return "/my-profile"
+        case .wishList:         return "/wish"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .myProfile:        return .get
+        case .wishList:         return .get
         }
     }
     
@@ -35,10 +41,12 @@ extension UserQueryAPI: TargetType {
         switch self {
         case .myProfile:
             return .requestPlain
+        case .wishList:
+            return .requestPlain
         }
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         let header = [
             "Content-type": "application/json"
         ]
