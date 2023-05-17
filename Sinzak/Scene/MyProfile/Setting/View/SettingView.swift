@@ -12,7 +12,7 @@ import Then
 final class SettingView: SZView {
     // MARK: - Properties
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
-        $0.backgroundColor = .clear
+        $0.backgroundColor = CustomColor.background
     }
     // MARK: - Design Helpers
     override func setView() {
