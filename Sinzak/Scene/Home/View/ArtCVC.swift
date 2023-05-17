@@ -115,7 +115,7 @@ final class ArtCVC: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Setter
-    func setData(_ data: Products, _ kind: ArtCellKind, _ needLoginAlert: PublishRelay<Bool>, _ currentTappedCell: BehaviorRelay<Int>) {
+    func setData(_ data: Products, _ kind: ArtCellKind, _ needLoginAlert: PublishRelay<Bool>, _ currentTappedCell: BehaviorRelay<Int>?) {
         self.products = data
         self.kind = kind
         self.needLoginAlert = needLoginAlert
@@ -175,6 +175,12 @@ final class ArtCVC: UICollectionViewCell {
         titleLabel.text = "dfdfdfdfdfhdd"
         priceLabel.text = "fdffd"
         authorLabel.text = "fdfddddd"
+    }
+    
+    func setScrapList() {
+        likeView.isHidden = true
+        middlePointLabel.isHidden = true
+        uploadTimeLabel.isHidden = true
     }
     
     // MARK: - Design Helpers
