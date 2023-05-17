@@ -209,6 +209,8 @@
 		ED3552862A14CF5200B364FC /* MyPostListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35527D2A14CE4100B364FC /* MyPostListVC.swift */; };
 		ED3552872A14CF5500B364FC /* MyPostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552812A14CE4200B364FC /* MyPostListView.swift */; };
 		ED3552892A14F46300B364FC /* MyPostListCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552882A14F46300B364FC /* MyPostListCVC.swift */; };
+		ED35528C2A15497900B364FC /* SignoutCheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35528B2A15497900B364FC /* SignoutCheckVC.swift */; };
+		ED35528F2A15574D00B364FC /* SignoutCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35528E2A15574D00B364FC /* SignoutCompleteVC.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
@@ -479,6 +481,8 @@
 		ED35527F2A14CE4200B364FC /* MyPostListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListVM.swift; sourceTree = "<group>"; };
 		ED3552812A14CE4200B364FC /* MyPostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListView.swift; sourceTree = "<group>"; };
 		ED3552882A14F46300B364FC /* MyPostListCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListCVC.swift; sourceTree = "<group>"; };
+		ED35528B2A15497900B364FC /* SignoutCheckVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignoutCheckVC.swift; path = ../../../../../../../Desktop/SignoutCheckVC.swift; sourceTree = "<group>"; };
+		ED35528E2A15574D00B364FC /* SignoutCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutCompleteVC.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -1127,6 +1131,8 @@
 		A233891529B088B600688FD8 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				ED35528D2A15571E00B364FC /* SignoutComplete */,
+				ED35528A2A15494E00B364FC /* SignoutCheck */,
 				EDF4501B29EDAE72001733C6 /* Model */,
 				A233891729B088C400688FD8 /* VC */,
 				A233891629B088BF00688FD8 /* View */,
@@ -1990,6 +1996,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		ED35528A2A15494E00B364FC /* SignoutCheck */ = {
+			isa = PBXGroup;
+			children = (
+				ED35528B2A15497900B364FC /* SignoutCheckVC.swift */,
+			);
+			path = SignoutCheck;
+			sourceTree = "<group>";
+		};
+		ED35528D2A15571E00B364FC /* SignoutComplete */ = {
+			isa = PBXGroup;
+			children = (
+				ED35528E2A15574D00B364FC /* SignoutCompleteVC.swift */,
+			);
+			path = SignoutComplete;
+			sourceTree = "<group>";
+		};
 		ED47113229DF2EBD00708562 /* VM */ = {
 			isa = PBXGroup;
 			children = (
@@ -2491,6 +2513,7 @@
 				ED74A08229F4FB7300F44AA2 /* AppleToken.swift in Sources */,
 				A2DEC35829B4441100CF0794 /* SNSLoginManager.swift in Sources */,
 				A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */,
+				ED35528F2A15574D00B364FC /* SignoutCompleteVC.swift in Sources */,
 				A20E4A4E29990064009C1340 /* MyProfileView.swift in Sources */,
 				A280AB4A29A763BE00C1729C /* WriteCategoryVC.swift in Sources */,
 				ED72D8A829F69B5100DA1251 /* SchoolAuthViewModel.swift in Sources */,
@@ -2573,6 +2596,7 @@
 				ED3552872A14CF5500B364FC /* MyPostListView.swift in Sources */,
 				A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */,
 				A2121ACE29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift in Sources */,
+				ED35528C2A15497900B364FC /* SignoutCheckVC.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
 				A2180DB329AA3C0700BBC74A /* ArtworkSizeVC.swift in Sources */,
 				ED3552892A14F46300B364FC /* MyPostListCVC.swift in Sources */,

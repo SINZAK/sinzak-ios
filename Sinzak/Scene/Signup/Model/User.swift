@@ -12,6 +12,14 @@ enum SNS: String {
     case kakao
     case naver
     case apple
+    
+    var text: String {
+        switch self {
+        case .kakao:    return "카카오"
+        case .naver:    return "네이버"
+        case .apple:    return "애플"
+        }
+    }
 }
 // MARK: - 회원가입 모델
 
