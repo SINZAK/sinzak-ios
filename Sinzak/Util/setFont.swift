@@ -28,6 +28,15 @@ extension UIFont {
     static var caption_R: UIFont { customFont(SpoqaHanSansStyle.regular.rawValue, size: 13) }
     // Button Title
     static var buttonText_R: UIFont { customFont(SpoqaHanSansStyle.medium.rawValue, size: 10) }
+    
+    // Signout Check
+    static var signoutTitle: UIFont {
+        customFont(SpoqaHanSansStyle.bold.rawValue, size: 25.0)
+    }
+    
+    static var signoutSubtitle: UIFont {
+        customFont(SpoqaHanSansStyle.medium.rawValue, size: 14.0)
+    }
 
     /// 커스텀 폰트를 설정하는 메서드
     private static func customFont(
