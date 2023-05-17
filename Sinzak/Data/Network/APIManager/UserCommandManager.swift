@@ -5,7 +5,7 @@
 //  Created by JongHoon on 2023/05/01.
 //
 
-import Foundation
+import UIKit
 import Moya
 import RxSwift
 
@@ -36,15 +36,36 @@ class UserCommandManager: ManagerType {
             .map { $0.success }
     }
     
-    func updateCategoryLike(genreLikes: [AllGenre]) -> Single<Bool> {
+    func editCategoryLike(genreLikes: [AllGenre]) -> Single<Bool> {
         let genreLikes: String = genreLikes
             .map { $0.rawValue }
             .joined(separator: ",")
         
-        return provider.rx.request(.updateGenre(genres: genreLikes))
+        return provider.rx.request(.editGenre(genres: genreLikes))
             .filterSuccessfulStatusCodes()
             .map(BaseDTO<String>.self)
             .map(filterError)
             .map { $0.success }
     }
+    
+    func editUserImage(image: UIImage, isIcon: Bool) -> Single<Bool> {
+        return provider.rx.request(.editUserImage(image: image, isIcon: isIcon))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<EditUserImageDTO>.self)
+            .map(filterError)
+            .map { $0.success }
+    }
+    
+    func editUserInfo(name: String, introduction: String) -> Single<Bool> {
+        let userInfoEdit = UserInfoEdit(
+            name: name,
+            introduction: introduction
+        )
+        return provider.rx.request(.editUserInfo(userInfo: userInfoEdit))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
+    }
+    
 }
