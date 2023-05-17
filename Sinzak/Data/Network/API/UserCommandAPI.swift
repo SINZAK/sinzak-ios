@@ -5,7 +5,7 @@
 //  Created by Doy Kim on 2023/03/01.
 //
 
-import Foundation
+import UIKit
 import Moya
 
 enum UserCommandAPI {
@@ -16,19 +16,24 @@ enum UserCommandAPI {
     case myWishlist
     case myWorklist
     case mySearchHistory
+    
+    // 사용자 정보 수정
+    case editUserImage(image: UIImage, isIcon: Bool)
+    case editUserInfo(userInfo: UserInfoEdit)
+    case editGenre(genres: String)
+    
     // 다른 사람 조회
     case otherProfile(userId: Int)
     case otherFollowing(userId: Int)
     case otherFollower(userId: Int)
         
-    case report(userId: Int, reason: String) // 신고
+    // 신고
+    case report(userId: Int, reason: String)
     
     // 팔로우
     case follow(userId: Int)
     case unfollow(userId: Int)
     
-    // 관심장르 업데이트
-    case updateGenre(genres: String)
 }
 
 extension UserCommandAPI: TargetType {
@@ -45,6 +50,10 @@ extension UserCommandAPI: TargetType {
             return "/users/work-employ"
         case .mySearchHistory:
             return "/users/history"
+        case .editUserImage:
+            return "/users/edit/image"
+        case .editUserInfo:
+            return "/users/edit"
         case .otherProfile(let userId):
             return "/users/\(userId)/profile"
         case .otherFollowing(let userId):
@@ -57,16 +66,18 @@ extension UserCommandAPI: TargetType {
             return "/users/follow"
         case .unfollow:
             return "/users/unfollow"
-        case .updateGenre(_):
+        case .editGenre(_):
             return "/users/edit/category"
         }
     }
     var method: Moya.Method {
         switch self {
-        case .report(_, _),
-                .follow(_),
-                .unfollow(_),
-                .updateGenre(_):
+        case .report,
+                .follow,
+                .unfollow,
+                .editGenre,
+                .editUserImage,
+                .editUserInfo:
             return .post
         default:
             return .get
@@ -81,13 +92,54 @@ extension UserCommandAPI: TargetType {
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
             
+        case let .editUserImage(image, isIcon):
+            
+            var formData: [MultipartFormData] = []
+            let imageName = String.uniqueFilename(withPrefix: "IMAGE")
+            var imageData: Data
+            
+            switch isIcon {
+            case true:
+                imageData = image.pngData() ?? Data()
+                formData.append(
+                    MultipartFormData(
+                        provider: .data(imageData),
+                        name: "multipartFile",
+                        fileName: "\(imageName).png",
+                        mimeType: "image/png"
+                    ))
+                return .uploadMultipart(formData)
+                
+            case false:
+                imageData = image.jpegData(compressionQuality: 0.6) ?? Data()
+                formData.append(
+                    MultipartFormData(
+                        provider: .data(imageData),
+                        name: "multipartFile",
+                        fileName: "\(imageName).jpeg",
+                        mimeType: "image/jpeg"
+                    ))
+                return .uploadMultipart(formData)
+            }
+            
+        case .editUserInfo(let userInfo):
+            do {
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(userInfo)
+                let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
+                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
+            } catch {
+                print("Error encoding userInfo: \(error)")
+                return .requestPlain
+            }
+
         case .follow(let userId), .unfollow(let userId):
             let params: [String: Any] = [
                 "userId": userId
             ]
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
             
-        case let .updateGenre(genres):
+        case let .editGenre(genres):
             let params: [String: Any] = [
                 "categoryLike": genres
             ]
