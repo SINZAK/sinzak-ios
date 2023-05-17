@@ -31,6 +31,25 @@ final class UserQueryManager: ManagerType {
                 return $0
             }
             .retry(2)
-        
+    }
+    
+    func fetchScrapList() -> Single<[Products]> {
+        return provider.rx.request(.wishList)
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<ScrapListDTO>.self)
+            .map(filterError)
+            .map { $0.data }
+            .map { data in
+
+                var products: [Products] = []
+                products.append(contentsOf: data?.productWishes.map {
+                    $0.toDomain() } ?? []
+                )
+                products.append(contentsOf: data?.workWishes.map {
+                    $0.toDomain() } ?? []
+                )
+
+                return products
+            }
     }
 }
