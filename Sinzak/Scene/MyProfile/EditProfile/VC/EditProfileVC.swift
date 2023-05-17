@@ -14,14 +14,15 @@ final class EditProfileVC: SZVC {
     
     // MARK: - Properties
     private let mainView = EditProfileView()
-    private let viewModel: EditProfileVM
+    private var viewModel: EditProfileVM
     private let disposeBag = DisposeBag()
     private let profile: Profile
     
-    private lazy var updateImage: (UIImage?) -> Void = { [weak self] image in
+    private lazy var updateImage: (UIImage?, Bool) -> Void = { [weak self] image, isIcon  in
         guard let self = self else { return }
         
         self.mainView.profileImage.image = image
+        self.viewModel.needUpdateImage = (true, image, isIcon)
     }
     
     init(profile: Profile, viewModel: EditProfileVM) {
@@ -51,7 +52,6 @@ final class EditProfileVC: SZVC {
         with event: UIEvent?
     ) {
         super.touchesBegan(touches, with: event)
-        Log.debug("tappppp!!!")
         view.endEditing(true)
     }
     
@@ -138,9 +138,11 @@ final class EditProfileVC: SZVC {
                                 UIImage(named: "profile-icon-10")
                             ]
                             
-                            owner.mainView.profileImage.image = profileIcons[
+                            let image = profileIcons[
                                 Int.random(in: 0..<profileIcons.count)
                             ]
+                            owner.mainView.profileImage.image = image
+                            owner.viewModel.needUpdateImage = (true, image, true)
                         }
                     )
             })
@@ -179,7 +181,9 @@ final class EditProfileVC: SZVC {
             .subscribe(
                 with: self,
                 onNext: { owner, _ in
-                    let vm = DefaultUniversityInfoVM()
+                    let vm = DefaultUniversityInfoVM(
+                        updateSchoolAuth: owner.viewModel.updateSchoolAuth
+                    )
                     let vc = UniversityInfoVC(viewModel: vm, mode: .editProfile)
                     let nav = UINavigationController(rootViewController: vc)
                     nav.modalPresentationStyle = .fullScreen
@@ -187,27 +191,53 @@ final class EditProfileVC: SZVC {
                 }
             )
             .disposed(by: disposeBag)
+        
+        mainView.changeGenreButton.rx.tap
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    let vm = DefaultSignupGenreVM(
+                        updateGenre: owner.viewModel.updateGenre
+                    )
+                    let vc = SignupGenreVC(viewModel: vm, mode: .editProfile)
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    owner.present(nav, animated: true)
+                    
+                })
+            .disposed(by: disposeBag)
     
+        navigationItem.rightBarButtonItem?.rx.tap
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    owner.showLoading()
+                    owner.viewModel.completeButtonTapped(currentName: owner.profile.name)
+                })
+            .disposed(by: disposeBag)
+        
     }
     
     func  bindOutput() {
         
         viewModel.checkButtonIsEnable
-            .skip(1)
             .asDriver(onErrorJustReturn: false)
+            .skip(1)
             .drive(mainView.checkButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         viewModel.doubleCheckResult
             .asDriver()
             .drive(with: self, onNext: { owner, result in
+                let info = result.info
+                let color = result.color
                 
                 switch result {
                 case .beforeCheck:
-                    break
+                    owner.mainView.nameValidationLabel.text = info
+                    owner.mainView.nameValidationLabel.textColor = color
                     
-                case let .sucess(info, color):
-                    
+                case .success:
                     owner.mainView.nicknameView.snp.remakeConstraints { make in
                         make.leading.trailing.equalToSuperview()
                         make.bottom.equalTo(owner.mainView.nameValidationLabel.snp.bottom).offset(20.0)
@@ -217,7 +247,7 @@ final class EditProfileVC: SZVC {
                     owner.mainView.nameValidationLabel.text = info
                     owner.mainView.nameValidationLabel.textColor = color
                     
-                case let .fail(info, color):
+                case .fail:
                     
                     owner.mainView.nicknameView.snp.remakeConstraints { make in
                         make.leading.trailing.equalToSuperview()
@@ -225,18 +255,6 @@ final class EditProfileVC: SZVC {
                         
                     }
                     owner.mainView.nameValidationLabel.isHidden = false
-                    
-                    let currentName = owner.profile.name
-                    let inputName = owner.mainView.nicknameTextField.text
-                    if currentName == inputName {
-                        owner.mainView.nameValidationLabel.text = "현재 사용 중인 닉네임입니다."
-                        owner.mainView.nameValidationLabel.textColor = CustomColor.gray80
-                        owner
-                            .viewModel
-                            .doubleCheckResult
-                            .accept(.beforeCheck)
-                        return
-                    }
                     
                     owner.mainView.nameValidationLabel.text = info
                     owner.mainView.nameValidationLabel.textColor = color
@@ -267,7 +285,38 @@ final class EditProfileVC: SZVC {
                 }
             })
             .disposed(by: disposeBag)
-            
+        
+        viewModel.updateSchoolAuth
+            .asSignal()
+            .emit(
+                with: self,
+                onNext: { owner, school in
+                    owner.mainView.schoolNameLabel.text = school
+                    owner.mainView.verifySchoolButton.isEnabled = false
+                })
+            .disposed(by: disposeBag)
+        
+        viewModel.updateGenre
+            .asSignal()
+            .emit(
+                with: self,
+                onNext: { owner, genres in
+                    let genres: String = genres
+                        .map { $0.text }
+                        .joined(separator: "\n")
+                    owner.mainView.genreNameLabel.text = genres
+                })
+            .disposed(by: disposeBag)
+        
+        viewModel.completeEditTasks
+            .asSignal()
+            .emit(
+                with: self,
+                onNext: { owner, _ in
+                    owner.hideLoading()
+                    owner.dismiss(animated: true)
+                })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -307,6 +356,7 @@ extension EditProfileVC: PHPickerViewControllerDelegate {
                 if let image = image as? UIImage {
                     DispatchQueue.main.async { [weak self] in
                         self?.mainView.profileImage.image = image
+                        self?.viewModel.needUpdateImage = (true, image, false)
                     }
                 }
             })
