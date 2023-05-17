@@ -48,20 +48,7 @@ enum ButtonSelected {
 
 final class StudentAuthView: SZView {
     // MARK: - Properties
-    
-    let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-//        scrollView.showsVerticalScrollIndicator = false
-        
-        return scrollView
-    }()
-    
-    let containerView: SZView = {
-        let view = SZView()
-        
-        return view
-    }()
-    
+
     let selectAuthTypeLabel = UILabel().then {
         $0.text = I18NStrings.verifyTypeSelect
         $0.textColor = CustomColor.label
@@ -106,14 +93,26 @@ final class StudentAuthView: SZView {
         $0.numberOfLines = 2
     }
     let webmailTextField = SZTextField(insets: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)).then {
+        $0.keyboardType = .emailAddress
+        $0.returnKeyType = .done
         $0.backgroundColor = CustomColor.gray10
         $0.clipsToBounds = true
-        $0.layer.cornerRadius = 30
+        $0.layer.cornerRadius = 22.0
         $0.font = .caption_B
         $0.textColor = CustomColor.label
         $0.placeholder = I18NStrings.pleaseEnterSchoolEmail
         $0.clearButtonMode = .whileEditing
     }
+    
+    let transmitMailButton: DoubleCheckButton = {
+        let button = DoubleCheckButton()
+        button.layer.cornerRadius = 15.0
+        button.setTitle("전송", for: .normal)
+        button.isEnabled = false
+        
+        return button
+    }()
+    
     let webmailValidationLabel = UILabel().then {
         $0.font = .caption_M
         $0.textColor = CustomColor.red
@@ -121,22 +120,42 @@ final class StudentAuthView: SZView {
     }
     let authCodeLabel = UILabel().then {
         $0.font = .caption_M
-        $0.textColor = CustomColor.label
+        $0.textColor = CustomColor.label.withAlphaComponent(0)
         $0.text = I18NStrings.authCode
+        $0.isHidden = true
+        $0.alpha = 0
     }
     let authCodeTextField = SZTextField(insets: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)).then {
+        $0.isSecureTextEntry = true
+        $0.keyboardType = .numberPad
         $0.backgroundColor = CustomColor.gray10
         $0.clipsToBounds = true
-        $0.layer.cornerRadius = 30
+        $0.layer.cornerRadius = 22.0
         $0.font = .caption_B
         $0.textColor = CustomColor.label
         $0.placeholder = I18NStrings.fourDigitPlease
         $0.clearButtonMode = .whileEditing
+        $0.isHidden = true
+        $0.alpha = 0
     }
+    
+    let confirmCodeButton: DoubleCheckButton = {
+        let button = DoubleCheckButton()
+        button.layer.cornerRadius = 15.0
+        button.setTitle("확인", for: .normal)
+        button.isEnabled = false
+        button.isHidden = true
+        button.alpha = 0
+        
+        return button
+    }()
+    
     let authCodeValidationLabel = UILabel().then {
         $0.font = .caption_M
         $0.textColor = CustomColor.red
         $0.text = ""
+        $0.isHidden = true
+        $0.alpha = 0
     }
     // - 학생증 인증
     let schoolCardView = SZView().then {
@@ -167,6 +186,16 @@ final class StudentAuthView: SZView {
         $0.layer.borderWidth = 2
         $0.isHidden = true
     }
+    
+    let uploadedImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 16.0
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
+    
     let selectedPhoto: UIImageView = UIImageView().then {
         $0.layer.cornerRadius = 24
         $0.clipsToBounds = true
@@ -184,12 +213,12 @@ final class StudentAuthView: SZView {
         $0.setImage(UIImage(named: "x-circle"), for: .normal)
     }
     // 하단 버튼
-    let buttonStack = UIStackView().then {
+    let webMailButtonStack = UIStackView().then {
         $0.spacing = 12
         $0.axis = .horizontal
         $0.distribution = .fillEqually
     }
-    let doNextButton = UIButton().then {
+    let webMailDoNextButton = UIButton().then {
         $0.setTitle(I18NStrings.doNextTime, for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.titleLabel?.font = .body_B
@@ -197,13 +226,37 @@ final class StudentAuthView: SZView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 33
     }
-    let finishButton = UIButton().then {
+    let webMailFinishButton = SchoolAuthButton().then {
         $0.setTitle(I18NStrings.finish, for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.red
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 33
+        $0.isEnabled = false
+    }
+    
+    let schoolCardButtonStack = UIStackView().then {
+        $0.spacing = 12
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+    }
+    let schoolCardDoNextButton = UIButton().then {
+        $0.setTitle(I18NStrings.doNextTime, for: .normal)
+        $0.setTitleColor(CustomColor.white, for: .normal)
+        $0.titleLabel?.font = .body_B
+        $0.backgroundColor = CustomColor.gray60
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 33
+    }
+    let schoolCardFinishButton = SchoolAuthButton().then {
+        $0.setTitle(I18NStrings.finish, for: .normal)
+        $0.setTitleColor(CustomColor.white, for: .normal)
+        $0.titleLabel?.font = .body_B
+        $0.backgroundColor = CustomColor.red
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 33
+        $0.isEnabled = false
     }
     // MARK: - Design Changer
     func changeButtonStatus(_ selected: SchoolAuthType ) {
@@ -226,17 +279,12 @@ final class StudentAuthView: SZView {
     }
     // MARK: - Design Helpers
     override func setView() {
+
         addSubviews(
-            scrollView
-        )
-        scrollView.addSubview(containerView)
-        
-        containerView.addSubviews(
             selectAuthTypeLabel,
             authButtonStack,
             schoolCardView,
-            webmailView,
-            buttonStack
+            webmailView
         )
         
         authButtonStack.addArrangedSubviews(
@@ -245,40 +293,38 @@ final class StudentAuthView: SZView {
         )
         webmailView.addSubviews(
             webmailDescription,
-            webmailTextField,
+            webmailTextField, transmitMailButton,
             webmailValidationLabel,
             authCodeLabel,
-            authCodeTextField,
-            authCodeValidationLabel
+            authCodeTextField, confirmCodeButton,
+            authCodeValidationLabel,
+            webMailButtonStack
         )
         schoolCardView.addSubviews(
             schoolCardDescription,
             photoUploadButton,
             uploadedPhotoView,
-            selectedPhoto
+            uploadedImageView,
+            selectedPhoto,
+            schoolCardButtonStack
         )
         uploadedPhotoView.addSubviews(
             photoNameLabel,
             cancelButton
         )
-        buttonStack.addArrangedSubviews(
-            doNextButton, finishButton
+        
+        webMailButtonStack.addArrangedSubviews(
+            webMailDoNextButton, webMailFinishButton
+        )
+        schoolCardButtonStack.addArrangedSubviews(
+            schoolCardDoNextButton, schoolCardFinishButton
         )
     }
     override func setLayout() {
-        scrollView.snp.makeConstraints {
-            $0.edges.equalTo(self.safeAreaLayoutGuide)
-        }
-        
-        containerView.snp.makeConstraints {
-            $0.edges.equalTo(scrollView.contentLayoutGuide)
-            $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(self.safeAreaLayoutGuide)
-        }
-        
+
         selectAuthTypeLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(40)
-            make.top.equalToSuperview()
+            make.top.equalTo(safeAreaLayoutGuide).offset(20.0)
         }
         authButtonStack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(31)
@@ -288,8 +334,8 @@ final class StudentAuthView: SZView {
     
         // MARK: - 메일 인증 뷰
         webmailView.snp.makeConstraints { make in
-            make.top.equalTo(authButtonStack.snp.bottom).offset(12)
-            make.bottom.equalTo(buttonStack.snp.top)
+            make.top.equalTo(authButtonStack.snp.bottom)
+            make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
         }
         webmailDescription.snp.makeConstraints { make in
@@ -297,31 +343,48 @@ final class StudentAuthView: SZView {
             make.top.equalToSuperview().inset(36.0)
         }
         webmailTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.equalToSuperview().inset(16)
+            make.trailing.equalTo(transmitMailButton.snp.leading).offset(-6.0)
             make.top.equalTo(webmailDescription.snp.bottom).offset(12)
-            make.height.equalTo(60)
+            make.height.equalTo(44.0)
         }
+        
+        transmitMailButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16.0)
+            $0.centerY.equalTo(webmailTextField)
+            $0.width.equalTo(64.0)
+            $0.height.equalTo(30.0)
+        }
+        
         webmailValidationLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(28)
-            make.top.equalTo(webmailTextField.snp.bottom).offset(4)
+            make.top.equalTo(webmailTextField.snp.bottom).offset(8.0)
         }
         authCodeLabel.snp.makeConstraints { make in
             make.leading.equalTo(webmailDescription)
-            make.top.equalTo(webmailValidationLabel.snp.bottom).offset(20)
+            make.top.equalTo(webmailValidationLabel.snp.bottom).offset(28.0)
         }
         authCodeTextField.snp.makeConstraints { make in
             make.leading.trailing.height.equalTo(webmailTextField)
             make.top.equalTo(authCodeLabel.snp.bottom).offset(4)
         }
+        
+        confirmCodeButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16.0)
+            $0.centerY.equalTo(authCodeTextField)
+            $0.width.equalTo(64.0)
+            $0.height.equalTo(30.0)
+        }
+        
         authCodeValidationLabel.snp.makeConstraints { make in
             make.leading.equalTo(webmailValidationLabel)
-            make.top.equalTo(authCodeTextField.snp.bottom).offset(4)
+            make.top.equalTo(authCodeTextField.snp.bottom).offset(8.0)
         }
         
         // 학생증 인증 뷰
         schoolCardView.snp.makeConstraints { make in
             make.top.equalTo(authButtonStack.snp.bottom)
-            make.bottom.equalTo(buttonStack.snp.top)
+            make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
         }
         schoolCardDescription.snp.makeConstraints { make in
@@ -337,6 +400,13 @@ final class StudentAuthView: SZView {
         uploadedPhotoView.snp.makeConstraints { make in
             make.edges.equalTo(photoUploadButton)
         }
+        
+        uploadedImageView.snp.makeConstraints {
+            $0.top.equalTo(uploadedPhotoView.snp.bottom).offset(16.0)
+            $0.leading.trailing.equalToSuperview().inset(16.0)
+            $0.height.equalTo(200.0)
+        }
+        
         cancelButton.snp.makeConstraints { make in
             make.width.height.equalTo(24)
             make.centerY.equalToSuperview()
@@ -354,7 +424,13 @@ final class StudentAuthView: SZView {
         }
         
         // 하단 버튼
-        buttonStack.snp.makeConstraints { make in
+        webMailButtonStack.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(24.0)
+            make.height.equalTo(65)
+        }
+        
+        schoolCardButtonStack.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(24.0)
             make.height.equalTo(65)
