@@ -13,7 +13,7 @@ import RxDataSources
 protocol UniversityInfoVMInput {
     func textFieldInput(_ text: String)
     func tapNotStudentButton()
-    func tapNextButton()
+    func tapNextButton(univName: String, mode: EditViewMode)
 }
 
 protocol UniversityInfoVMOutput {
@@ -32,12 +32,18 @@ protocol UniversityInfoVM: UniversityInfoVMInput, UniversityInfoVMOutput {}
 
 final class DefaultUniversityInfoVM: UniversityInfoVM {
     
+    // MARK: - Property
+    
     private let disposeBag = DisposeBag()
     
-    // MARK: - Property
+    var updateSchoolAuth: PublishRelay<String>?
     
     /// 전체 학교 리스트
     private let schoolList: [School] = SchoolList.loadJson()!.school
+    
+    init(updateSchoolAuth: PublishRelay<String>? = nil) {
+        self.updateSchoolAuth = updateSchoolAuth
+    }
     
     // MARK: - Input
     
@@ -68,11 +74,15 @@ final class DefaultUniversityInfoVM: UniversityInfoVM {
         presentWelcomeView.accept(vc)
     }
     
-    func tapNextButton() {
-        let vc = StudentAuthVC()
+    func tapNextButton(univName: String, mode: EditViewMode) {
+        let vm = DefaultStudentAuthVM(
+            univName: univName,
+            updateSchoolAuth: updateSchoolAuth
+        )
+        let vc = StudentAuthVC(viewModel: vm, mode: mode)
         pushStudentAuthView.accept(vc)
     }
-    
+
     // MARK: - Output
     
     var isHideCollectionView: BehaviorRelay<Bool> = .init(value: true)
