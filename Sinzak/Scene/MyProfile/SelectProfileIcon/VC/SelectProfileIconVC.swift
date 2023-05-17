@@ -15,13 +15,14 @@ final class SelectProfileIconVC: SZVC {
     
     private let mainView = SelectProfileIconView()
     private let disposeBag = DisposeBag()
-    private let updateImage: (UIImage?) -> Void
+    private let updateImage: (UIImage?, Bool) -> Void
+    private var isIcon: Bool = false
     
     override func loadView() {
         view = mainView
     }
     
-    init(updateImage: @escaping (UIImage?) -> Void) {
+    init(updateImage: @escaping (UIImage?, Bool) -> Void) {
         self.updateImage = updateImage
         
         super.init(nibName: nil, bundle: nil)
@@ -54,6 +55,8 @@ final class SelectProfileIconVC: SZVC {
         
         navigationItem.leftBarButtonItem = dissBarButtonItem
         navigationItem.rightBarButtonItem = completeBarButtonItem
+        
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     override func configure() {
@@ -86,6 +89,8 @@ final class SelectProfileIconVC: SZVC {
             .asDriver()
             .drive(with: self, onNext: { owner, image in
                 owner.mainView.selectedImageView.image = image
+                owner.isIcon = true
+                owner.navigationItem.rightBarButtonItem?.isEnabled = true
             })
             .disposed(by: disposeBag)
         
@@ -112,7 +117,7 @@ final class SelectProfileIconVC: SZVC {
                 with: self,
                 onNext: { owner, _ in
                     let image = owner.mainView.selectedImageView.image
-                    owner.updateImage(image)
+                    owner.updateImage(image, owner.isIcon)
                     owner.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
@@ -171,6 +176,8 @@ extension SelectProfileIconVC: PHPickerViewControllerDelegate {
                 if let image = image as? UIImage {
                     DispatchQueue.main.async { [weak self] in
                         self?.mainView.selectedImageView.image = image
+                        self?.isIcon = false
+                        self?.navigationItem.rightBarButtonItem?.isEnabled = true
                     }
                 }
             })
