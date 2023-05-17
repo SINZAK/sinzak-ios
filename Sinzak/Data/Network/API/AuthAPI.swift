@@ -12,9 +12,13 @@ enum AuthAPI {
     // 가입 및 사용자 프로필 수정
     case nicknameCheck(nickname: String)
     case join(joinInfo: Join)
-    case editUserImage(image: UIImage)
-    case editUserInfo(userInfo: UserInfoEdit)
-    case editCategoryLike(category: CategoryLikeEdit)
+    
+    // 대학 인증
+    case univMailCertify(univName: String, univEmail: String)
+    case univMailCodeCertify(code: Int, univName: String, univEmail: String)
+    case univSchoolCardCertify1(univ: String)
+    case univSchoolCardCertify2(id: Int, image: UIImage)
+    
     // 액세스토큰, FCM 토큰
     case fcmTokenUpdate(fcmInfo: FCMTokenUpdate) // fcm 토큰 업데이트
     case reissue // 액세스 토큰 갱신
@@ -40,12 +44,6 @@ extension AuthAPI: TargetType {
             return "/check/nickname"
         case .join:
             return "/join"
-        case .editUserImage:
-            return "/users/edit/image"
-        case .editUserInfo:
-            return "/users/edit"
-        case .editCategoryLike:
-            return "/users/edit/category"
         case .fcmTokenUpdate:
             return "/users/fcm"
         case .reissue:
@@ -60,8 +58,17 @@ extension AuthAPI: TargetType {
             return "/users/reportlist"
         case .resign:
             return "/users/resign"
+        case .univMailCertify:
+            return "/certify/mail/send"
+        case .univMailCodeCertify:
+            return "/certify/mail/receive"
+        case .univSchoolCardCertify1:
+            return "/certify/univ"
+        case let .univSchoolCardCertify2(id, _):
+            return "/certify/\(id)/univ"
         }
     }
+    
     var method: Moya.Method {
         switch self {
         default:
@@ -85,27 +92,7 @@ extension AuthAPI: TargetType {
                 print("Error encoding userInfo: \(error)")
                 return .requestPlain
             }
-        case .editUserImage(let image):
-            var formData: [MultipartFormData] = []
-            guard let imageData = image.jpegData(compressionQuality: 0.6) else { return .uploadMultipart(formData)}
-            let imageName = String.uniqueFilename(withPrefix: "IMAGE")
-            formData.append(MultipartFormData(provider: .data(imageData), name: imageName, fileName: "\(imageName).jpg", mimeType: "image/jpg"))
-            return .uploadMultipart(formData)
-        case .editUserInfo(let userInfo):
-            do {
-                let encoder = JSONEncoder()
-                let data = try encoder.encode(userInfo)
-                let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
-                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
-            } catch {
-                print("Error encoding userInfo: \(error)")
-                return .requestPlain
-            }
-        case .editCategoryLike(let category):
-            let params: [String: String] = [
-                "categoryLike": category.categoryLike
-            ]
-            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+        
         case .fcmTokenUpdate(let fcmInfo):
             do {
                 let encoder = JSONEncoder()
@@ -130,6 +117,56 @@ extension AuthAPI: TargetType {
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .deleteSearchHistory, .reportList, .resign:
             return .requestPlain
+            
+        case let .univMailCertify(univName, univEmail):
+            let params: [String: Any] = [
+                "univName": univName,
+                "univ_email": univEmail
+            ]
+            return .requestParameters(
+                parameters: params,
+                encoding: JSONEncoding.default
+            )
+        case let .univMailCodeCertify(code, univName, univEmail):
+            let params: [String: Any] = [
+                "code": code,
+                "univName": univName,
+                "univ_email": univEmail
+            ]
+            return .requestParameters(
+                parameters: params,
+                encoding: JSONEncoding.default
+            )
+        case let .univSchoolCardCertify1(univ):
+            let params: [String: Any] = [
+                "univ": univ
+            ]
+            return .requestParameters(
+                parameters: params,
+                encoding: JSONEncoding.default
+            )
+        case let .univSchoolCardCertify2(_, image):
+            var formData: [MultipartFormData] = []
+            guard let imageData = image
+                .jpegData(compressionQuality: 0.6) else {
+                return .uploadMultipart(formData)
+            }
+            Log.debug(imageData)
+            let imageName = String.uniqueFilename(withPrefix: "IMAGE")
+            formData.append(
+                MultipartFormData(
+                    provider: .data(imageData),
+                    name: "multipartFile",
+                    fileName: "\(imageName).jpeg",
+                    mimeType: "image/jpeg"
+                ))
+        
+            return .uploadMultipart(formData)
+            
+//            let imageData = MultipartFormData(provider: .data(image.jpegData(compressionQuality: 1.0)!), name: "image", fileName: "jpeg", mimeType: "image/jpeg")
+//                       return .uploadMultipart([imageData])
+            
+            
         }
     }
     var headers: [String: String]? {
@@ -141,14 +178,7 @@ extension AuthAPI: TargetType {
         switch self {
         case .nicknameCheck:
             return header
-            
-        case .editUserImage:
-            var header = [
-                "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>"
-            ]
-            header["Authorization"] = accessToken
-            return header
-            
+        
         default:
             if !accessToken.isEmpty {
                 var header = header
