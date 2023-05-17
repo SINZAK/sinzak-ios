@@ -8,12 +8,13 @@
 import Foundation
 import Moya
 import RxSwift
+import UIKit
 
-class AuthManager {
+final class AuthManager: ManagerType {
     // MARK: - Properties
     private init () {}
     static let shared = AuthManager()
-    private let provider = MoyaProvider<AuthAPI>(
+    let provider = MoyaProvider<AuthAPI>(
         callbackQueue: .global(),
         plugins: [MoyaLoggerPlugin.shared]
     )
@@ -139,44 +140,6 @@ class AuthManager {
             .disposed(by: disposeBag)
     }
     
-    /// 회원정보 추가, 편집
-    /// - 자기소개, 이름, 사진
-    func editUserInfo(_ userInfo: UserInfoEdit, completion: @escaping ((Bool) -> Void)) {
-        provider.request(.editUserInfo(userInfo: userInfo)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let result = try response.map(OnlySuccess.self)
-                    completion(result.success)
-                } catch {
-                    print("Error decoding JSON: \(error.localizedDescription)")
-                    completion(false)
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-                completion(false)
-            }
-        }
-    }
-    
-    /// 관심장르 편집
-    func editCategory(_ category: CategoryLikeEdit, completion: @escaping ((Bool)-> Void)) {
-        provider.request(.editCategoryLike(category: category)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let result = try response.map(OnlySuccess.self)
-                    completion(result.success)
-                } catch {
-                    print("Error decoding JSON: \(error.localizedDescription)")
-                    completion(false)
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-                completion(false)
-            }
-        }
-    }
     /// FCM 토큰 업데이트
     func updateFCMToken(_ token: FCMTokenUpdate, completion: @escaping ((Bool)-> Void)) {
         provider.request(.fcmTokenUpdate(fcmInfo: token), callbackQueue: .global()) { result in
@@ -194,5 +157,52 @@ class AuthManager {
                 completion(false)
             }
         }
+    }
+ 
+    
+    /// 학교 메일 인증
+    func certifyUnivMail(univName: String, univEmail: String) -> Single<Bool> {
+        return provider.rx.request(.univMailCertify(
+            univName: univName,
+            univEmail: univEmail
+        ))
+        .filterSuccessfulStatusCodes()
+        .map(BaseDTO<String>.self)
+        .map(filterError)
+        .map { $0.success }
+    }
+    
+    /// 학교 메일 인증코드 인증
+    func certifyUnivMailCode(code: Int, univName: String, univEmail: String) -> Single<Bool> {
+        return provider.rx.request(.univMailCodeCertify(
+            code: code,
+            univName: univName,
+            univEmail: univEmail
+        ))
+        .filterSuccessfulStatusCodes()
+        .map(BaseDTO<String>.self)
+        .map(filterError)
+        .map { $0.success }
+    }
+    
+    func certifySchoolCard1(univ: String) -> Single<Int> {
+        return provider.rx.request(.univSchoolCardCertify1(univ: univ))
+            .filterSuccessfulStatusCodes()
+            .map(CertifySchoolCardDTO.self)
+            .map { result -> Int in
+                if result.success == false {
+                    throw APIError.errorMessage(result.message ?? "")
+                }
+            
+                return result.id ?? -1
+            }
+    }
+    
+    func certifySchoolCard2(id: Int, image: UIImage) -> Single<Bool> {
+        return provider.rx.request(.univSchoolCardCertify2(id: id, image: image))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
     }
 }
