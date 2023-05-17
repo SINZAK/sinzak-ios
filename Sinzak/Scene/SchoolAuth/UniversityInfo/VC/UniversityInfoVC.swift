@@ -10,7 +10,7 @@ import RxSwift
 import RxKeyboard
 import RxDataSources
 
-enum UniversityInfoMode {
+enum EditViewMode {
     case signUp
     case editProfile
 }
@@ -19,7 +19,7 @@ final class UniversityInfoVC: SZVC {
     // MARK: - Properties
     private let mainView = UniversityInfoView()
     var viewModel: UniversityInfoVM
-    var mode: UniversityInfoMode
+    var mode: EditViewMode
     
     private let disposeBag = DisposeBag()
        
@@ -32,7 +32,7 @@ final class UniversityInfoVC: SZVC {
     }
     
     // MARK: - Init
-    init(viewModel: UniversityInfoVM, mode: UniversityInfoMode) {
+    init(viewModel: UniversityInfoVM, mode: EditViewMode) {
         self.viewModel = viewModel
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
@@ -136,7 +136,11 @@ final class UniversityInfoVC: SZVC {
         mainView.nextButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.viewModel.tapNextButton()
+                let univName = owner.mainView.searchTextField.text ?? ""
+                owner.viewModel.tapNextButton(
+                    univName: univName,
+                    mode: owner.mode
+                )
             })
             .disposed(by: disposeBag)
                     
