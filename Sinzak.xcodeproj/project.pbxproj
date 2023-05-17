@@ -201,6 +201,14 @@
 		ED3552652A120ECA00B364FC /* StudentAuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552642A120ECA00B364FC /* StudentAuthVM.swift */; };
 		ED35526B2A136CA100B364FC /* CertifySchoolCardDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35526A2A136CA100B364FC /* CertifySchoolCardDTO.swift */; };
 		ED35526D2A14919900B364FC /* EditUserImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35526C2A14919900B364FC /* EditUserImageDTO.swift */; };
+		ED3552732A14B4E600B364FC /* ScrapListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552722A14B4E600B364FC /* ScrapListView.swift */; };
+		ED3552752A14B63800B364FC /* ScrapListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552742A14B63800B364FC /* ScrapListVC.swift */; };
+		ED3552782A14B64F00B364FC /* ScrapListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552772A14B64F00B364FC /* ScrapListVM.swift */; };
+		ED35527A2A14BC3000B364FC /* ScrapListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552792A14BC3000B364FC /* ScrapListDTO.swift */; };
+		ED3552852A14CF4C00B364FC /* MyPostListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35527F2A14CE4200B364FC /* MyPostListVM.swift */; };
+		ED3552862A14CF5200B364FC /* MyPostListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35527D2A14CE4100B364FC /* MyPostListVC.swift */; };
+		ED3552872A14CF5500B364FC /* MyPostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552812A14CE4200B364FC /* MyPostListView.swift */; };
+		ED3552892A14F46300B364FC /* MyPostListCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552882A14F46300B364FC /* MyPostListCVC.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
@@ -463,6 +471,14 @@
 		ED3552642A120ECA00B364FC /* StudentAuthVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAuthVM.swift; sourceTree = "<group>"; };
 		ED35526A2A136CA100B364FC /* CertifySchoolCardDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertifySchoolCardDTO.swift; sourceTree = "<group>"; };
 		ED35526C2A14919900B364FC /* EditUserImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserImageDTO.swift; sourceTree = "<group>"; };
+		ED3552722A14B4E600B364FC /* ScrapListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapListView.swift; sourceTree = "<group>"; };
+		ED3552742A14B63800B364FC /* ScrapListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapListVC.swift; sourceTree = "<group>"; };
+		ED3552772A14B64F00B364FC /* ScrapListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapListVM.swift; sourceTree = "<group>"; };
+		ED3552792A14BC3000B364FC /* ScrapListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapListDTO.swift; sourceTree = "<group>"; };
+		ED35527D2A14CE4100B364FC /* MyPostListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListVC.swift; sourceTree = "<group>"; };
+		ED35527F2A14CE4200B364FC /* MyPostListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListVM.swift; sourceTree = "<group>"; };
+		ED3552812A14CE4200B364FC /* MyPostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListView.swift; sourceTree = "<group>"; };
+		ED3552882A14F46300B364FC /* MyPostListCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListCVC.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -642,6 +658,8 @@
 		A20E4A4C29990048009C1340 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
+				ED35527B2A14CE1700B364FC /* MyPostList */,
+				ED35526E2A14B44900B364FC /* ScrapList */,
 				ED02CAE52A0CFC1F00E20F92 /* SelectProfileIcon */,
 				A2DEC36829B5BD0D00CF0794 /* CertifiedAuthor */,
 				A233891529B088B600688FD8 /* Setting */,
@@ -1903,6 +1921,75 @@
 			path = "프";
 			sourceTree = "<group>";
 		};
+		ED35526E2A14B44900B364FC /* ScrapList */ = {
+			isa = PBXGroup;
+			children = (
+				ED35526F2A14B4C500B364FC /* View */,
+				ED3552702A14B4C900B364FC /* VC */,
+				ED3552712A14B4CE00B364FC /* VM */,
+			);
+			path = ScrapList;
+			sourceTree = "<group>";
+		};
+		ED35526F2A14B4C500B364FC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED3552722A14B4E600B364FC /* ScrapListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED3552702A14B4C900B364FC /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				ED3552742A14B63800B364FC /* ScrapListVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		ED3552712A14B4CE00B364FC /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				ED3552772A14B64F00B364FC /* ScrapListVM.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
+		ED35527B2A14CE1700B364FC /* MyPostList */ = {
+			isa = PBXGroup;
+			children = (
+				ED3552802A14CE4200B364FC /* View */,
+				ED35527C2A14CE4100B364FC /* VC */,
+				ED35527E2A14CE4100B364FC /* VM */,
+			);
+			path = MyPostList;
+			sourceTree = "<group>";
+		};
+		ED35527C2A14CE4100B364FC /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				ED35527D2A14CE4100B364FC /* MyPostListVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		ED35527E2A14CE4100B364FC /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				ED35527F2A14CE4200B364FC /* MyPostListVM.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
+		ED3552802A14CE4200B364FC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED3552812A14CE4200B364FC /* MyPostListView.swift */,
+				ED3552882A14F46300B364FC /* MyPostListCVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		ED47113229DF2EBD00708562 /* VM */ = {
 			isa = PBXGroup;
 			children = (
@@ -1957,6 +2044,7 @@
 				EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */,
 				ED35526A2A136CA100B364FC /* CertifySchoolCardDTO.swift */,
 				ED35526C2A14919900B364FC /* EditUserImageDTO.swift */,
+				ED3552792A14BC3000B364FC /* ScrapListDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -2323,6 +2411,7 @@
 			files = (
 				A2420F8B29A8BCE4007D8937 /* AddPhotoCVC.swift in Sources */,
 				A2DEC36E29B5BD4E00CF0794 /* CertifiedAuthorView.swift in Sources */,
+				ED3552862A14CF5200B364FC /* MyPostListVC.swift in Sources */,
 				A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */,
 				A2121AD029D075AE008F5406 /* UnivCertify.swift in Sources */,
 				EDF5089329FD8F8E00FDC2E2 /* PopUpAlertController.swift in Sources */,
@@ -2345,6 +2434,7 @@
 				A280AB3829A7222100C1729C /* SearchHistoryView.swift in Sources */,
 				EDEEFFB229F3A38600C828B9 /* ReissueDTO.swift in Sources */,
 				A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */,
+				ED3552782A14B64F00B364FC /* ScrapListVM.swift in Sources */,
 				A254E14029BD0427001047FD /* UserCommandAPI.swift in Sources */,
 				EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */,
 				A226CC5C29AE31F1000161E8 /* WelcomeView.swift in Sources */,
@@ -2424,8 +2514,10 @@
 				EDE5EC6029D70ABA00BB211F /* MarketProductsResponseDTO.swift in Sources */,
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
 				ED3552622A12012600B364FC /* SZImage.swift in Sources */,
+				ED3552732A14B4E600B364FC /* ScrapListView.swift in Sources */,
 				A2420F8929A859AF007D8937 /* AddPhotosVC.swift in Sources */,
 				A226CC5529AE0FDD000161E8 /* ReceivePriceOfferVC.swift in Sources */,
+				ED35527A2A14BC3000B364FC /* ScrapListDTO.swift in Sources */,
 				A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */,
 				A20E4A5229990091009C1340 /* MyProfileVC.swift in Sources */,
 				EDF76FFD29F8D6D800F33146 /* NSNotification-Name+Extension.swift in Sources */,
@@ -2442,6 +2534,7 @@
 				ED02CAA92A092CA700E20F92 /* MyProfileVM.swift in Sources */,
 				A254E14729BDA193001047FD /* WorkBuild.swift in Sources */,
 				EDF508AB29FECF6600FDC2E2 /* ReportView.swift in Sources */,
+				ED3552752A14B63800B364FC /* ScrapListVC.swift in Sources */,
 				A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */,
 				EDF508A229FEAF2300FDC2E2 /* ReportSelectView.swift in Sources */,
 				A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */,
@@ -2477,10 +2570,12 @@
 				A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */,
 				ED00BFA72A03B23000379E89 /* WorksSelectAlignPC.swift in Sources */,
 				A2DEC35F29B4638D00CF0794 /* SudentAuthView.swift in Sources */,
+				ED3552872A14CF5500B364FC /* MyPostListView.swift in Sources */,
 				A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */,
 				A2121ACE29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
 				A2180DB329AA3C0700BBC74A /* ArtworkSizeVC.swift in Sources */,
+				ED3552892A14F46300B364FC /* MyPostListCVC.swift in Sources */,
 				ED00BF9C2A02B43600379E89 /* WorksVC.swift in Sources */,
 				ED00BF9A2A02B39A00379E89 /* WorksView.swift in Sources */,
 				ED00BF962A01272300379E89 /* ManagerType.swift in Sources */,
@@ -2527,6 +2622,7 @@
 				EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */,
 				A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */,
 				ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */,
+				ED3552852A14CF4C00B364FC /* MyPostListVM.swift in Sources */,
 				A20E4A4B2998FA26009C1340 /* NotLoginedVC.swift in Sources */,
 				A254E13A29BCF897001047FD /* ProductManager.swift in Sources */,
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,
