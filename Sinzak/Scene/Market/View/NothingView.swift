@@ -21,7 +21,7 @@ final class NothingView: SZView {
         return imageView
     }()
     
-    private let label: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
         label.text = "검색 결과가 없어요"
         label.textColor = CustomColor.gray60
