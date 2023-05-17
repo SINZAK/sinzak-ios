@@ -15,7 +15,7 @@ struct WorkBuild: Codable {
     let price: Int
     let suggest: Bool
     
-    init(category: CategoryType, title: String, content: String, employment: Bool, price: Int, suggest: Bool) {
+    init(category: ProductsCategory, title: String, content: String, employment: Bool, price: Int, suggest: Bool) {
         self.category = category.rawValue
         self.title = title
         self.content = content

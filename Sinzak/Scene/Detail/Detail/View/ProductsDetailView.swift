@@ -514,7 +514,7 @@ final class ProductsDetailView: SZView {
         pageControl.currentPage = 0
         
         titleNameLabel.text = data.title
-        categoryLabel.text = CategoryType(rawValue: data.category)?.text
+        categoryLabel.text = ProductsCategory(rawValue: data.category)?.text
 
         self.isComplete = data.complete
         priceLabel.text = data.price.toMoenyFormat()

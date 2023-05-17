@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
-enum WriteCategorySection: Int, CaseIterable {
+enum WriteCategorySections: Int, CaseIterable {
     case genre = 0
     case category
 }
@@ -15,12 +18,35 @@ enum WriteCategorySection: Int, CaseIterable {
 final class WriteCategoryVC: SZVC {
     // MARK: - Properties
     private let mainView = WriteCategoryView()
+    private let viewModel: WriteCategoryVM
+    private let disposeBag = DisposeBag()
+    private let initialSelection: WriteCategory
+    
     // MARK: - Helpers
     override func loadView() {
         view = mainView
     }
+    
+    init(viewModel: WriteCategoryVM, initialSelection: WriteCategory) {
+        self.viewModel = viewModel
+        self.initialSelection = initialSelection
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.viewDidLoad(initialSelection: initialSelection)
+        
+        mainView.categoryCollectionView.selectItem(
+            at: [0, initialSelection.item],
+            animated: false,
+            scrollPosition: []
+        )
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,115 +54,159 @@ final class WriteCategoryVC: SZVC {
     }
     // MARK: - Actions
     @objc private func nextButtonTapped(_ sender: UIButton) {
-        let vc = AddPhotosVC()
-        navigationController?.pushViewController(vc, animated: false)
+        let vc = AddPhotosVC(viewModel: DefaultAddPhotosVM())
+        navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: - Helpers
     override func configure() {
-        mainView.collectionView.delegate = self
-        mainView.collectionView.dataSource = self
-        mainView.collectionView.register(WriteCategoryHeader.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: String(describing: WriteCategoryHeader.self))
-        mainView.collectionView.register(WriteCategoryCVC.self, forCellWithReuseIdentifier: String(describing: WriteCategoryCVC.self))
-        mainView.collectionView.register(WriteCategoryTagCVC.self, forCellWithReuseIdentifier: String(describing: WriteCategoryTagCVC.self))
-        mainView.collectionView.collectionViewLayout = setLayout()
         mainView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        
+        bind()
     }
     override func setNavigationBar() {
         super.setNavigationBar()
         navigationItem.title = I18NStrings.categorySelection
     }
 }
-extension WriteCategoryVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return WriteCategorySection.allCases.count
+
+// MARK: - Bind
+private extension WriteCategoryVC {
+    
+    func bind() {
+        bindInput()
+        bindOutput()
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == WriteCategorySection.genre.rawValue {
-            return WriteCategory.allCases.count
-        } else if section == WriteCategorySection.category.rawValue {
-            // 활성화된 버튼따라 숫자가 다름
-            return 5
-        } else {
-            return 0
-        }
+    
+    func bindInput() {
+        
+        mainView.categoryCollectionView.rx.modelSelected(WriteCategory.self)
+            .withUnretained(self)
+            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+            .subscribe(onNext: { owner, category in
+                owner.viewModel.categoryCellTapped(category)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.genreCollectionView.rx.itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, indexPath in
+                
+                let selectedCount = owner
+                    .viewModel
+                    .selectedGenres
+                    .value
+                    .count
+                
+                if selectedCount == 3 {
+                    owner
+                        .mainView
+                        .genreCollectionView
+                        .deselectItem(at: indexPath, animated: false)
+                    return
+                }
+                
+                let selectedItems = owner
+                    .mainView
+                    .genreCollectionView
+                    .indexPathsForSelectedItems ?? []
+                
+                owner.viewModel.genreCellTapped(selectedItems)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.genreCollectionView.rx.itemDeselected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                
+                let selectedItems = owner
+                    .mainView
+                    .genreCollectionView
+                    .indexPathsForSelectedItems ?? []
+                
+                owner.viewModel.genreCellTapped(selectedItems)
+            })
+            .disposed(by: disposeBag)
     }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == WriteCategorySection.genre.rawValue {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WriteCategoryCVC.self), for: indexPath) as? WriteCategoryCVC else { return UICollectionViewCell() }
-            cell.updateCell(kind: WriteCategory.allCases[indexPath.item])
-            return cell
-        } else if indexPath.section == WriteCategorySection.category.rawValue {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WriteCategoryTagCVC.self), for: indexPath) as? WriteCategoryTagCVC else { return UICollectionViewCell() }
-            cell.updateCell(kind: WorksCategory.allCases[indexPath.item])
-            return cell
-        } else {
-            return UICollectionViewCell()
-        }
-    }
-    // 헤더
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if [ WriteCategorySection.genre.rawValue, WriteCategorySection.category.rawValue].contains(indexPath.section) {
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: WriteCategoryHeader.self), for: indexPath) as? WriteCategoryHeader else { return UICollectionReusableView()}
-            header.update(kind: WriteCategoryHeaderKind.allCases[indexPath.section])
-            return header
-        } else {
-            return UICollectionReusableView()
-        }
+    
+    func bindOutput() {
+        
+        let writeCategoryDataSource = getWriteCategoryDataSource()
+        viewModel.writeCategorySections
+            .bind(to: mainView.categoryCollectionView.rx.items(dataSource: writeCategoryDataSource))
+            .disposed(by: disposeBag)
+        
+        let genreDataSource = getGenreDataSource()
+        viewModel.genreSections
+            .bind(to: mainView.genreCollectionView.rx.items(dataSource: genreDataSource))
+            .disposed(by: disposeBag)
+        
+        viewModel.selectedGenres
+            .map { !$0.isEmpty }
+            .asDriver(onErrorJustReturn: false)
+            .drive(mainView.nextButton.rx.isEnabled)
+            .disposed(by: disposeBag)
     }
 }
-// 컴포지셔널 레이아웃
-extension WriteCategoryVC {
-    /// 컴포지셔널 레이아웃 세팅
-    func setLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
-            // 카테고리 경우
-            if sectionNumber == WriteCategorySection.genre.rawValue {
-                let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(0.3),
-                    heightDimension: .fractionalWidth(0.3))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(200))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                group.interItemSpacing = .fixed(8)
-                let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.top = 20
-                section.contentInsets.leading = 16
-                section.contentInsets.trailing = 16
-                section.contentInsets.bottom = 40
-                section.interGroupSpacing = 0
-                // 헤더 설정
-                let headerItemSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(40))
-                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
-                section.boundarySupplementaryItems = [headerItem]
-                return section
-            } else { // 카테고리일 경우
-                let itemSize = NSCollectionLayoutSize(
-                    widthDimension: .estimated(70),
-                    heightDimension: .estimated(32))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                let groupSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(100))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                group.interItemSpacing = .fixed(6)
-                let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets.top = 15
-                section.contentInsets.leading = 16
-                section.contentInsets.trailing = 16
-                section.contentInsets.bottom = 15
-                section.interGroupSpacing = 10
-                // 헤더 설정
-                let headerItemSize = NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1.0),
-                    heightDimension: .estimated(40))
-                let headerItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: "header", alignment: .top)
-                section.boundarySupplementaryItems = [headerItem]
-                return section
-            }
-        }
+
+private extension WriteCategoryVC {
+    
+    func getWriteCategoryDataSource() -> RxCollectionViewSectionedReloadDataSource<WriteCategorySection> {
+        return RxCollectionViewSectionedReloadDataSource(
+            configureCell: { _, collectionView, indexPath, item in
+                
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: WriteCategoryCVC.identifier,
+                    for: indexPath
+                ) as? WriteCategoryCVC else { return UICollectionViewCell() }
+                
+                cell.updateCell(kind: item)
+                return cell
+            },
+            
+            configureSupplementaryView: { _, collectionView, kind, indexPath in
+                
+                guard let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: WriteCategoryHeader.identifier,
+                    for: indexPath
+                ) as? WriteCategoryHeader else { return UICollectionReusableView()}
+                
+                header.update(kind: WriteCategoryHeaderKind.selectGenre)
+                
+                return header
+            })
+    }
+    
+    func getGenreDataSource() -> RxCollectionViewSectionedReloadDataSource<GenreSection> {
+        return RxCollectionViewSectionedReloadDataSource(
+            configureCell: { _, collectionView, indexPath, item in
+                
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: InterestedGenreCVC.identifier,
+                    for: indexPath
+                ) as? InterestedGenreCVC else { return UICollectionViewCell() }
+                
+                switch item {
+                case .products(let productsCategory):
+                    cell.configurePostProductsCell(with: productsCategory)
+                case .works(let worksCategory):
+                    cell.configurePostWorksCell(with: worksCategory)
+                }
+                
+                return cell
+            },
+            
+            configureSupplementaryView: { _, collectionView, kind, indexPath in
+                
+                guard let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: WriteCategoryHeader.identifier,
+                    for: indexPath
+                ) as? WriteCategoryHeader else { return UICollectionReusableView()}
+                
+                header.update(kind: WriteCategoryHeaderKind.selectCategory)
+                
+                return header
+            })
     }
 }

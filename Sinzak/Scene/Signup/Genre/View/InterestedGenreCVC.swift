@@ -18,7 +18,11 @@ final class InterestedGenreCVC: UICollectionViewCell {
         }
     }
     
-    var genre: AllGenre?
+    /// 회원 가입, 전체 장르 선택할 때 사용
+    var allGenre: AllGenre?
+    
+    /// 글쓰기, 카테고리 선택할 때 사용
+    var genreString: String?
     
     let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
@@ -52,15 +56,25 @@ final class InterestedGenreCVC: UICollectionViewCell {
             textLabel.textColor = CustomColor.label
             baseView.backgroundColor = CustomColor.gray10
             imageView.image = UIImage(named: "checkmark-black")?.withTintColor(
-                CustomColor.label ?? .label,
+                CustomColor.label ,
                 renderingMode: .alwaysOriginal
             )
         }
     }
     
     func configureCell(with genre: AllGenre) {
-        self.genre = genre
+        self.allGenre = genre
         self.textLabel.text = genre.text
+    }
+    
+    func configurePostProductsCell(with genre: ProductsCategory) {
+        self.textLabel.text = genre.text
+        self.genreString = genre.rawValue
+    }
+    
+    func configurePostWorksCell(with genre: WorksCategory) {
+        self.textLabel.text = genre.text
+        self.genreString = genre.rawValue
     }
     
     private func setupUI() {

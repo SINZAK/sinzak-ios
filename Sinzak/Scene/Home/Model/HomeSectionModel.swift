@@ -16,7 +16,7 @@ enum HomeSection {
 enum HomeSectionItem {
     case bannerSectionItem(banner: Banner)
     case productSectionItem(product: Products)
-    case categoryItem(category: CategoryType)
+    case categoryItem(category: ProductsCategory)
 }
 
 extension HomeSection: SectionModelType {

@@ -14,26 +14,30 @@ final class ArtworkInfoView: SZView {
     private let titleLabel = UILabel().then {
         $0.font = .body_R
         $0.textColor = CustomColor.gray80
-        $0.text = " · " + I18NStrings.artworkTitle
+        $0.text = " ˙ " + I18NStrings.artworkTitle
     }
     let titleTextField = SZTextField().then {
         $0.backgroundColor = CustomColor.gray10
         $0.layer.cornerRadius = 30
         $0.font = .body_B
-        $0.textColor = CustomColor.black
-        $0.clearButtonMode = .whileEditing
+        $0.textColor = CustomColor.label
+//        $0.clearButtonMode = .whileEditing
     }
     private let priceLabel = UILabel().then {
         $0.font = .body_R
         $0.textColor = CustomColor.gray80
-        $0.text = " · " + I18NStrings.price
+        $0.text = " ˙ " + I18NStrings.price
     }
-    let priceTextField = SZTextField().then {
+    let priceTextField = SZTextField(insets: UIEdgeInsets(
+        top: 0, left: 0, bottom: 0, right: 0)
+    ).then {
         $0.backgroundColor = CustomColor.gray10
         $0.layer.cornerRadius = 22
         $0.font = .body_B
-        $0.textColor = CustomColor.black
-        $0.clearButtonMode = .whileEditing
+        $0.textColor = CustomColor.label
+//        $0.clearButtonMode = .whileEditing
+        $0.keyboardType = .numberPad
+        $0.textAlignment = .center
     }
     private let krwLabel = UILabel().then {
         $0.font = .body_B
@@ -41,15 +45,15 @@ final class ArtworkInfoView: SZView {
         $0.text = I18NStrings.krw
     }
     let priceOfferToggleButton = UIButton().then {
-        $0.tintColor = CustomColor.black
+        $0.tintColor = CustomColor.label
         $0.setImage(UIImage(named: "check-circle-pressed"), for: .normal)
         $0.setTitle(I18NStrings.getPriceOffer, for: .normal)
-        $0.setTitleColor(CustomColor.black, for: .normal)
+        $0.setTitleColor(CustomColor.label, for: .normal)
     }
     private let artworkDescriptionLabel = UILabel().then {
         $0.font = .body_R
         $0.textColor = CustomColor.gray80
-        $0.text = " · " + I18NStrings.artworkDescription
+        $0.text = " ˙ " + I18NStrings.artworkDescription
     }
     let artworkDescriptionTextView = UITextView().then {
         $0.text = I18NStrings.artworkDescriptionPlaceholder
@@ -58,7 +62,7 @@ final class ArtworkInfoView: SZView {
         $0.layer.cornerRadius = 30
         $0.tintColor = CustomColor.red
         $0.font = .body_R
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     let nextButton = UIButton().then {
         $0.setTitle(I18NStrings.next, for: .normal)
@@ -117,7 +121,7 @@ final class ArtworkInfoView: SZView {
         nextButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(8)
             make.height.equalTo(65)
-            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalToSuperview().inset(24.0)
         }
         artworkDescriptionTextView.snp.makeConstraints { make in
             make.top.equalTo(artworkDescriptionLabel.snp.bottom).offset(13)

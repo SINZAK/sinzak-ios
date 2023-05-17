@@ -162,7 +162,7 @@ final class HomeVC: SZVC {
                     owner.viewModel.tapProductsCell(products: products)
                 default:
                     
-                    let category: CategoryType = CategoryType.allCases[indexPath.item + 1]
+                    let category: ProductsCategory = ProductsCategory.allCases[indexPath.item + 1]
                     owner.viewModel.selectedCategory.accept([category])
                     owner.viewModel.selectedAlign.accept(.recommend)
                     owner.viewModel.isSaling.accept(false)

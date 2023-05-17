@@ -17,6 +17,12 @@ final class ArtworkInfoVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        view.endEditing(true)
+    }
+    
     // MARK: - Actions
     @objc func nextButtonTapped(_ sender: UIButton) {
         let vc = ArtworkSizeVC()

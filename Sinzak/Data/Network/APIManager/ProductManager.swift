@@ -22,7 +22,7 @@ class ProductsManager: ManagerType {
     /// 상품들 가져올때 사용
     func fetchProducts(
         align: AlignOption,
-        category: [CategoryType],
+        category: [ProductsCategory],
         page: Int,
         size: Int,
         sale: Bool,

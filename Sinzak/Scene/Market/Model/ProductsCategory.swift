@@ -9,7 +9,7 @@ import Foundation
 import RxDataSources
 import UIKit
 
-enum CategoryType: String, CaseIterable {
+enum ProductsCategory: String, CaseIterable {
     case all
     case painting
     case orient
@@ -45,7 +45,7 @@ enum CategoryType: String, CaseIterable {
 }
 
 struct Category {
-    let type: CategoryType
+    let type: ProductsCategory
     var text: String {
         return type.text
     }

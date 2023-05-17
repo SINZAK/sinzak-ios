@@ -108,7 +108,12 @@ final class DefaultWorksVM: WorksVM {
     }
     
     func writeButtonTapped() {
-        let vc = WriteCategoryVC()
+        let vm = DefaultWriteCategoryVM()
+        let initialSelection: WriteCategory = isEmployment ? .request : .work
+        let vc = WriteCategoryVC(
+            viewModel: vm,
+            initialSelection: initialSelection
+        )
         pushWriteCategoryVC.accept(vc)
     }
     
@@ -128,6 +133,7 @@ final class DefaultWorksVM: WorksVM {
             sale: isSaling.value,
             search: searchText.value
         )
+        .observe(on: SerialDispatchQueueScheduler(queue: .global(), internalSerialQueueName: "works"))
         .subscribe(
             with: self,
             onSuccess: { owner, products in

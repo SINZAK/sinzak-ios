@@ -196,7 +196,7 @@ private extension MarketVC {
                     
                 // 전체 선택시 나머지 deselect
                 if indexPath == [0, 0] {
-                    Array(1..<CategoryType.allCases.count)
+                    Array(1..<ProductsCategory.allCases.count)
                         .filter { owner.getCategoryCell(at: [0, $0]).isSelected }
                         .forEach { owner
                             .mainView
@@ -221,10 +221,10 @@ private extension MarketVC {
                         at: .centeredHorizontally,
                         animated: true
                     )
-                    let selectedCategory: [CategoryType] = indexPath == [0, 0] ?
+                    let selectedCategory: [ProductsCategory] = indexPath == [0, 0] ?
                     [] :
                     selectedIndexPathes.map {
-                        CategoryType.allCases[$0.item]
+                        ProductsCategory.allCases[$0.item]
                     }
                     Log.debug(selectedCategory)
                     owner.viewModel.selectedCategory.accept(selectedCategory)
@@ -252,8 +252,8 @@ private extension MarketVC {
                     owner.viewModel.refresh()
                 } else {
                     owner.mainView.categoryCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-                    let selectedCategory: [CategoryType] = selectedIndexPathes.map {
-                        CategoryType.allCases[$0.item]
+                    let selectedCategory: [ProductsCategory] = selectedIndexPathes.map {
+                        ProductsCategory.allCases[$0.item]
                     }
                     Log.debug(selectedCategory)
                     owner.viewModel.selectedCategory.accept(selectedCategory)
@@ -422,7 +422,7 @@ private extension MarketVC {
                 }
                 
                 if owner.marketMode == .watch {
-                    let idx: Int = CategoryType.allCases.firstIndex(of: categories[0]) ?? 0
+                    let idx: Int = ProductsCategory.allCases.firstIndex(of: categories[0]) ?? 0
                     owner.mainView.categoryCollectionView.selectItem(
                         at: [0, idx],
                         animated: true,
@@ -430,7 +430,7 @@ private extension MarketVC {
                     )
                 } else {
                     categories.forEach {
-                        let idx: Int = CategoryType.allCases.firstIndex(of: $0) ?? 0
+                        let idx: Int = ProductsCategory.allCases.firstIndex(of: $0) ?? 0
                         owner.mainView.categoryCollectionView.selectItem(
                             at: [0, idx],
                             animated: true,

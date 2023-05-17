@@ -17,7 +17,7 @@ protocol MarketVMInput {
     func refresh()
     func fetchNextPage()
     
-    var selectedCategory: BehaviorRelay<[CategoryType]> { get }
+    var selectedCategory: BehaviorRelay<[ProductsCategory]> { get }
     var searchText: BehaviorRelay<String> { get }
     
     var needLoginAlert: PublishRelay<Bool> { get }
@@ -48,7 +48,7 @@ final class DefaultMarketVM: MarketVM {
     // MARK: - Init
     
     init(
-        _ selectedCategory: BehaviorRelay<[CategoryType]>,
+        _ selectedCategory: BehaviorRelay<[ProductsCategory]>,
         _ selectedAlign: BehaviorRelay<AlignOption>,
         _ isSaling: BehaviorRelay<Bool>,
         _ needRefresh: BehaviorRelay<Bool>
@@ -74,7 +74,11 @@ final class DefaultMarketVM: MarketVM {
     }
     
     func writeButtonTapped() {
-        let vc = WriteCategoryVC()
+        let vm = DefaultWriteCategoryVM()
+        let vc = WriteCategoryVC(
+            viewModel: vm,
+            initialSelection: .sellingArtwork
+        )
         pushWriteCategoryVC.accept(vc)
     }
     
@@ -129,7 +133,7 @@ final class DefaultMarketVM: MarketVM {
     }
     
     var searchText: BehaviorRelay<String> = .init(value: "")
-    var selectedCategory: BehaviorRelay<[CategoryType]>
+    var selectedCategory: BehaviorRelay<[ProductsCategory]>
     
     var needLoginAlert: PublishRelay<Bool> = .init()
     
@@ -139,10 +143,10 @@ final class DefaultMarketVM: MarketVM {
     var presentSelectAlignVC: PublishRelay<SelectAlignVC> = PublishRelay<SelectAlignVC>()
     
     lazy var categorySections: BehaviorRelay<[CategoryDataSection]> = BehaviorRelay(value: [
-        CategoryDataSection(items: CategoryType.allCases
+        CategoryDataSection(items: ProductsCategory.allCases
             .map {
                 let selected = selectedCategory.value
-                let needSelect: CategoryType = selected.isEmpty ? .all : selected[0]
+                let needSelect: ProductsCategory = selected.isEmpty ? .all : selected[0]
                 
                 let category = $0 == needSelect ?
                 Category(type: $0, needSelect: true) :
@@ -168,7 +172,7 @@ final class DefaultMarketVM: MarketVM {
 private extension DefaultMarketVM {
     func fetchMarketProducts(
         align: AlignOption,
-        category: [CategoryType],
+        category: [ProductsCategory],
         page: Int,
         size: Int,
         sale: Bool,

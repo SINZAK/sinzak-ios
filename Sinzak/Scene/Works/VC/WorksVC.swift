@@ -155,7 +155,7 @@ private extension WorksVC {
                     
                 // 전체 선택시 나머지 deselect
                 if indexPath == [0, 0] {
-                    Array(1..<CategoryType.allCases.count)
+                    Array(1..<ProductsCategory.allCases.count)
                         .filter { owner.getCategoryCell(at: [0, $0]).isSelected }
                         .forEach { owner
                             .mainView

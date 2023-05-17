@@ -25,4 +25,12 @@ enum WriteCategory: CaseIterable {
         case .work: return "paintbucket"
         }
     }
+    
+    var item: Int {
+        switch self {
+        case .sellingArtwork:     return 0
+        case .request:     return 1
+        case .work:        return 2
+        }
+    }
 }

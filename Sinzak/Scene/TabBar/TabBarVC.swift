@@ -14,7 +14,7 @@ final class TabBarVC: UITabBarController {
     // MARK: - Property
     
     // 홈화면 & 마켓화면에서 공유
-    let selectedCategory: BehaviorRelay<[CategoryType]> = .init(value: [])
+    let selectedCategory: BehaviorRelay<[ProductsCategory]> = .init(value: [])
     let selectedAlign: BehaviorRelay<AlignOption> = .init(value: .recommend)
     let isSaling: BehaviorRelay<Bool> = .init(value: false)
     let needRefresh: BehaviorRelay<Bool> = .init(value: true)

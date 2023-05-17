@@ -17,7 +17,7 @@ protocol HomeVMInput {
     
     var bannerIndex: BehaviorRelay<Int> { get }
     
-    var selectedCategory: BehaviorRelay<[CategoryType]> { get }
+    var selectedCategory: BehaviorRelay<[ProductsCategory]> { get }
     var selectedAlign: BehaviorRelay<AlignOption> { get }
     var isSaling: BehaviorRelay<Bool> { get }
     var needRefresh: BehaviorRelay<Bool> { get }
@@ -47,7 +47,7 @@ final class DefaultHomeVM: HomeVM {
     let needRefresh: BehaviorRelay<Bool>
     
     init(
-        _ selectedCategory: BehaviorRelay<[CategoryType]>,
+        _ selectedCategory: BehaviorRelay<[ProductsCategory]>,
         _ selectedAlign: BehaviorRelay<AlignOption>,
         _ isSaling: BehaviorRelay<Bool>,
         _ needRefresh: BehaviorRelay<Bool>
@@ -74,7 +74,7 @@ final class DefaultHomeVM: HomeVM {
     
     var bannerIndex: BehaviorRelay<Int> = .init(value: 0)
     
-    var selectedCategory: BehaviorRelay<[CategoryType]>
+    var selectedCategory: BehaviorRelay<[ProductsCategory]>
     var selectedAlign: BehaviorRelay<AlignOption>
     var isSaling: BehaviorRelay<Bool>
     
@@ -91,7 +91,7 @@ final class DefaultHomeVM: HomeVM {
     
     var pushProductsDetailView: PublishRelay<ProductsDetailVC> = .init()
     
-    private lazy var categories = CategoryType.allCases[1..<7]
+    private lazy var categories = ProductsCategory.allCases[1..<7]
     private lazy var categorySectionItems: [HomeSectionItem] = categories.map { HomeSectionItem.categoryItem(category: $0) }
     private lazy var categorySections: [HomeSection] = [
         .categorySection(

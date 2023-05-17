@@ -21,7 +21,7 @@ enum WriteCategoryColor {
     var fontColor: UIColor {
         switch self {
         case .base:
-            return CustomColor.black
+            return CustomColor.label
         case .selected:
             return CustomColor.white
         }
@@ -29,6 +29,19 @@ enum WriteCategoryColor {
 }
 
 final class WriteCategoryCVC: UICollectionViewCell {
+    
+    override var isSelected: Bool {
+        willSet {
+            if newValue {
+                baseView.backgroundColor = CustomColor.red
+                label.textColor = CustomColor.white
+            } else {
+                baseView.backgroundColor = CustomColor.gray10
+                label.textColor = CustomColor.label
+            }
+        }
+    }
+    
     // MARK: - Properties
     private let baseView = UIView().then {
         $0.layer.cornerRadius = 25
@@ -39,7 +52,7 @@ final class WriteCategoryCVC: UICollectionViewCell {
     }
     private let label = UILabel().then {
         $0.font = .body_B
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
     }
     // MARK: - Init
     override init(frame: CGRect) {
@@ -71,7 +84,7 @@ final class WriteCategoryCVC: UICollectionViewCell {
     func setConstraints() {
         imageView.snp.makeConstraints { make in
             make.width.height.equalTo(40)
-            make.leading.trailing.equalToSuperview().inset(30)
+            make.centerX.equalToSuperview()
             make.top.equalToSuperview().inset(20)
         }
         label.snp.makeConstraints { make in

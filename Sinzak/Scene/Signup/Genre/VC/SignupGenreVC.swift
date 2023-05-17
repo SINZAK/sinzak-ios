@@ -72,7 +72,7 @@ final class SignupGenreVC: SZVC {
                     let selectedGenre: [AllGenre] = selectedIndexPath
                         .map { indexPath in
                             guard let cell = owner.mainView.collectionView.cellForItem(at: indexPath) as? InterestedGenreCVC else { return .label }
-                            return cell.genre ?? .label
+                            return cell.allGenre ?? .label
                         }
                     owner.viewModel.selectedGenre.accept(selectedGenre)
                     Log.debug(owner.viewModel.selectedGenre.value)
@@ -89,7 +89,7 @@ final class SignupGenreVC: SZVC {
                 let selectedGenre: [AllGenre] = selectedIndexPath
                     .map { indexPath in
                         guard let cell = owner.mainView.collectionView.cellForItem(at: indexPath) as? InterestedGenreCVC else { return .label }
-                        return cell.genre ?? .label
+                        return cell.allGenre ?? .label
                     }
                 owner.viewModel.selectedGenre.accept(selectedGenre)
                 Log.debug(owner.viewModel.selectedGenre.value)
