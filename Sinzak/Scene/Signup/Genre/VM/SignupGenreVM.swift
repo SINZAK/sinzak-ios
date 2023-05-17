@@ -11,14 +11,16 @@ import RxCocoa
 import RxDataSources
 
 protocol SignupGenreVMInput {
-    func tapInterestedGenreCell(genres: [String])
     func tapNextButton()
+    func tapUpdateGenreButton()
 }
 
 protocol SignupGenreVMOutput {
     var allGenreSections: BehaviorRelay<[AllGenreDataSection]> { get }
-    var selectedGenre: BehaviorRelay<[String]> { get }
+    var selectedGenre: BehaviorRelay<[AllGenre]> { get }
     var pushUniversityInfoView: PublishRelay<UniversityInfoVC> { get }
+    
+    var completeUpdateGenre: PublishRelay<Bool> { get }
 }
 
 protocol SignupGenreVM: SignupGenreVMInput, SignupGenreVMOutput {}
@@ -29,14 +31,18 @@ final class DefaultSignupGenreVM: SignupGenreVM {
     
     private var onboardingUser: OnboardingUser
     
-    init(onboardingUser: OnboardingUser) {
-        self.onboardingUser = onboardingUser
+    private var updateGenre: PublishRelay<[AllGenre]>?
+    
+    init(onboardingUser: OnboardingUser? = nil) {
+        self.onboardingUser = onboardingUser ?? OnboardingUser()
+    }
+    
+    convenience init(updateGenre: PublishRelay<[AllGenre]>) {
+        self.init()
+        self.updateGenre = updateGenre
     }
     
     // MARK: - Input
-    func tapInterestedGenreCell(genres: [String]) {
-        selectedGenre.accept(genres)
-    }
     
     func tapNextButton() {
         
@@ -46,7 +52,7 @@ final class DefaultSignupGenreVM: SignupGenreVM {
         )
 
         let join: Join = Join(
-            categoryLike: selectedGenre.value,
+            categoryLike: selectedGenre.value.map { $0.rawValue },
             nickname: onboardingUser.nickname ?? "",
             term: onboardingUser.term ?? false
         )
@@ -76,6 +82,22 @@ final class DefaultSignupGenreVM: SignupGenreVM {
             .disposed(by: disposeBag)
     }
     
+    func tapUpdateGenreButton() {
+        let genres = selectedGenre.value
+        UserCommandManager.shared.editCategoryLike(genreLikes: genres)
+            .subscribe(
+                with: self,
+                onSuccess: { owner, _ in
+                    owner.completeUpdateGenre.accept(true)
+                    owner.updateGenre?.accept(genres)
+                },
+                onFailure: { _, error in
+                    Log.error(error)
+                }
+            )
+            .disposed(by: disposeBag)
+    }
+    
     // MARK: - Output
     let allGenreSections: BehaviorRelay<[AllGenreDataSection]> = .init(value: [
 
@@ -89,6 +111,8 @@ final class DefaultSignupGenreVM: SignupGenreVM {
         )
     ])
     
-    var selectedGenre: BehaviorRelay<[String]> = .init(value: [])
+    var selectedGenre: BehaviorRelay<[AllGenre]> = .init(value: [])
     var pushUniversityInfoView: PublishRelay<UniversityInfoVC> = .init()
+    
+    var completeUpdateGenre: PublishRelay<Bool> = .init()
 }
