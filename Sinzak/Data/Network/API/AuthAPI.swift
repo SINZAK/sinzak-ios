@@ -162,11 +162,6 @@ extension AuthAPI: TargetType {
                 ))
         
             return .uploadMultipart(formData)
-            
-//            let imageData = MultipartFormData(provider: .data(image.jpegData(compressionQuality: 1.0)!), name: "image", fileName: "jpeg", mimeType: "image/jpeg")
-//                       return .uploadMultipart([imageData])
-            
-            
         }
     }
     var headers: [String: String]? {
