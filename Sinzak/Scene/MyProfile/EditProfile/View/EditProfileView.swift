@@ -59,6 +59,7 @@ final class EditProfileView: SZView {
         $0.layer.borderColor = CustomColor.gray60.cgColor
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 15
+        $0.isEnabled = false
     }
     
     let nameValidationLabel = UILabel().then {
@@ -168,6 +169,8 @@ final class EditProfileView: SZView {
         nicknameTextField.text = profile.name
         
         introductionTextView.text = profile.introduction
+        textViewPlaceHolderLabel.isHidden = !profile.introduction.isEmpty
+        introductionCountLabel.text = "\(profile.introduction.count)"
         
         schoolNameLabel.text = profile.univ
         
