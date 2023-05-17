@@ -23,11 +23,24 @@ enum Setting: CaseIterable {
     var content: [String] {
         switch self {
         case .personalSetting:
-            return [ I18NStrings.linkedAccounts, I18NStrings.blockedUser]
+            return [
+                I18NStrings.linkedAccounts
+//                I18NStrings.blockedUser
+            ]
         case .usageGuide:
-            return [I18NStrings.appVersion, I18NStrings.ask, I18NStrings.notice, I18NStrings.termsOfService, I18NStrings.privacyPolicy, I18NStrings.opensourceLicense]
+            return [
+                I18NStrings.appVersion,
+                I18NStrings.ask,
+                I18NStrings.notice,
+                I18NStrings.termsOfService,
+                I18NStrings.privacyPolicy,
+//                I18NStrings.opensourceLicense
+            ]
         case .etc:
-            return [I18NStrings.withdraw, I18NStrings.logout]
+            return [
+                I18NStrings.withdraw,
+                I18NStrings.logout
+            ]
         }
     }
 }
