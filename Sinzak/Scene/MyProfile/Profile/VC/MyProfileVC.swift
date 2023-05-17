@@ -111,6 +111,51 @@ final class MyProfileVC: SZVC {
                 )
             })
             .disposed(by: disposeBag)
+        
+        let tapRequestView = UITapGestureRecognizer()
+        mainView.requestListView.addGestureRecognizer(tapRequestView)
+        tapRequestView.rx.event
+            .bind(with: self, onNext: { owner, _ in
+                let vc = MyPostListVC(
+                    type: .request,
+                    products: owner.userInfo?.workEmploys ?? []
+                )
+                owner.navigationController?.pushViewController(
+                    vc,
+                    animated: true
+                )
+            })
+            .disposed(by: disposeBag)
+        
+        let tapSalesView = UITapGestureRecognizer()
+        mainView.salesListView.addGestureRecognizer(tapSalesView)
+        tapSalesView.rx.event
+            .bind(with: self, onNext: { owner, _ in
+                let vc = MyPostListVC(
+                    type: .purchase,
+                    products: owner.userInfo?.products ?? []
+                )
+                owner.navigationController?.pushViewController(
+                    vc,
+                    animated: true
+                )
+            })
+            .disposed(by: disposeBag)
+        
+        let tapWorkView = UITapGestureRecognizer()
+        mainView.workListView.addGestureRecognizer(tapWorkView)
+        tapWorkView.rx.event
+            .bind(with: self, onNext: { owner, _ in
+                let vc = MyPostListVC(
+                    type: .request,
+                    products: owner.userInfo?.works ?? []
+                )
+                owner.navigationController?.pushViewController(
+                    vc,
+                    animated: true
+                )
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
