@@ -12,13 +12,13 @@ import SnapKit
 
 final class SignupGenreView: SZView {
     // MARK: - Properties
-    private let titleLabel = UILabel().then {
+    let titleLabel = UILabel().then {
         $0.text = I18NStrings.pleaseSelectGenreOfInterest
         $0.font = .subtitle_B
         $0.textColor = CustomColor.label
         $0.numberOfLines = 0
     }
-    private let descriptionLabel = UILabel().then {
+    let descriptionLabel = UILabel().then {
         $0.text = I18NStrings.upToThreeCanBeSelected
         $0.font = .body_R
         $0.textColor = CustomColor.gray60
@@ -74,7 +74,7 @@ private extension SignupGenreView {
     func setLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .estimated(100),
-            heightDimension: .estimated(40)
+            heightDimension: .estimated(30)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 5, bottom: 5, trailing: 8)
@@ -88,7 +88,7 @@ private extension SignupGenreView {
         
         let section = NSCollectionLayoutSection(group: group)
          
-        section.interGroupSpacing = 8
+        section.interGroupSpacing = 16.0
         
         let headerItemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),

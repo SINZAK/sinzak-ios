@@ -12,6 +12,7 @@ import RxDataSources
 final class SignupGenreVC: SZVC {
     // MARK: - Properties
     let mainView = SignupGenreView()
+    let mode: EditViewMode
     var viewModel: SignupGenreVM
     
     private let disposeBag = DisposeBag()
@@ -22,12 +23,17 @@ final class SignupGenreVC: SZVC {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if mode == .editProfile {
+            configEditProfileMode()
+        }
     }
     
     // MARK: - Init
     
-    init(viewModel: SignupGenreVM) {
+    init(viewModel: SignupGenreVM, mode: EditViewMode) {
         self.viewModel = viewModel
+        self.mode = mode
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -63,10 +69,10 @@ final class SignupGenreVC: SZVC {
                 if selectedIndexPath.count == 4 {
                     owner.mainView.collectionView.deselectItem(at: indexPath, animated: false)
                 } else {
-                    let selectedGenre: [String] = selectedIndexPath
+                    let selectedGenre: [AllGenre] = selectedIndexPath
                         .map { indexPath in
-                            guard let cell = owner.mainView.collectionView.cellForItem(at: indexPath) as? InterestedGenreCVC else { return "" }
-                            return cell.genre?.rawValue ?? ""
+                            guard let cell = owner.mainView.collectionView.cellForItem(at: indexPath) as? InterestedGenreCVC else { return .label }
+                            return cell.genre ?? .label
                         }
                     owner.viewModel.selectedGenre.accept(selectedGenre)
                     Log.debug(owner.viewModel.selectedGenre.value)
@@ -80,10 +86,10 @@ final class SignupGenreVC: SZVC {
                 guard let selectedIndexPath = owner.mainView.collectionView.indexPathsForSelectedItems else {
                     return
                 }
-                let selectedGenre: [String] = selectedIndexPath
+                let selectedGenre: [AllGenre] = selectedIndexPath
                     .map { indexPath in
-                        guard let cell = owner.mainView.collectionView.cellForItem(at: indexPath) as? InterestedGenreCVC else { return "" }
-                        return cell.genre?.rawValue ?? ""
+                        guard let cell = owner.mainView.collectionView.cellForItem(at: indexPath) as? InterestedGenreCVC else { return .label }
+                        return cell.genre ?? .label
                     }
                 owner.viewModel.selectedGenre.accept(selectedGenre)
                 Log.debug(owner.viewModel.selectedGenre.value)
@@ -93,7 +99,13 @@ final class SignupGenreVC: SZVC {
         mainView.nextButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
-                owner.viewModel.tapNextButton()
+                switch owner.mode {
+                case .signUp:
+                    owner.viewModel.tapNextButton()
+                case .editProfile:
+                    owner.showLoading()
+                    owner.viewModel.tapUpdateGenreButton()
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -109,6 +121,14 @@ final class SignupGenreVC: SZVC {
             .withUnretained(self)
             .subscribe(onNext: { owner, vc in
                 owner.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.completeUpdateGenre
+            .asSignal()
+            .emit(with: self, onNext: { owner, _ in
+                owner.hideLoading()
+                owner.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
     }
@@ -137,5 +157,34 @@ private extension SignupGenreVC {
                 return header
             }
         )
+    }
+    
+    func configEditProfileMode() {
+        guard mode == .editProfile else { return }
+        
+        let dismissBarButton = UIBarButtonItem(
+            image: SZImage.Icon.dismiss,
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        navigationItem.leftBarButtonItem = dismissBarButton
+        navigationItem.leftBarButtonItem?.rx.tap
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    owner.dismiss(animated: true)
+                })
+            .disposed(by: disposeBag)
+        
+        navigationItem.title = "관심장르 변경"
+        
+        mainView.titleLabel.isHidden = true
+        mainView.descriptionLabel.snp.remakeConstraints {
+            $0.leading.equalToSuperview().inset(32.0)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(24.0)
+        }
+        
+        mainView.nextButton.setTitle("확인", for: .normal)
     }
 }
