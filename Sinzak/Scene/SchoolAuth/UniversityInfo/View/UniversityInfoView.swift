@@ -19,7 +19,7 @@ final class UniversityInfoView: SZView {
     
     let noAutoMakeLabel: UILabel = {
         let label = UILabel()
-        label.text = "자동 완성 목록에 없는 대학의 경우,\n확인 버튼을 눌러 다음으로 넘어가 주세요."
+        label.text = "자동 완성 목록에 없는 대학의 경우,\n다음 버튼을 눌러 다음으로 넘어가 주세요."
         label.textAlignment = .center
         label.numberOfLines = 2
         label.font = .caption_B
