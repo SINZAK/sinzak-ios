@@ -11,7 +11,19 @@ struct SZImage {
     
     enum Icon {
         static let dismiss = UIImage(named: "dismiss")?
-            .withTintColor(.label, renderingMode: .alwaysOriginal)
+            .withTintColor(
+                CustomColor.label,
+                renderingMode: .alwaysOriginal
+            )
     }
     
+    enum Image {
+        
+        /// tint color - CustomColor.gray60
+        static let nothing = UIImage(named: "nothing")?
+            .withTintColor(
+                CustomColor.gray60,
+                renderingMode: .alwaysOriginal
+            )
+    }
 }
