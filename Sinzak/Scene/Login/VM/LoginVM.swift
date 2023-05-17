@@ -81,7 +81,7 @@ final class DefaultLoginVM: LoginVM {
             .subscribe(
                 with: self,
                 onSuccess: { owner, snsLoginGrant in
-                    UserInfoManager.snsKind = SNS.naver.rawValue
+                    UserInfoManager.snsKind = SNS.naver.text
                     Log.debug("Access Token: \(snsLoginGrant.accessToken)")
                     Log.debug("Refresh Token: \(snsLoginGrant.refreshToken)")
                     if snsLoginGrant.joined {
@@ -106,7 +106,7 @@ final class DefaultLoginVM: LoginVM {
             .subscribe(
                 with: self,
                 onSuccess: { owner, snsLoginGrant in
-                    UserInfoManager.snsKind = SNS.apple.rawValue
+                    UserInfoManager.snsKind = SNS.apple.text
                     Log.debug("Access Token: \(snsLoginGrant.accessToken)")
                     Log.debug("Refresh Token: \(snsLoginGrant.refreshToken)")
                     SNSLoginManager.shared.getAppleClientSecret()
@@ -138,7 +138,7 @@ private extension DefaultLoginVM {
         if let token = oauthToken?.accessToken {
             Task {
                 do {
-                    UserInfoManager.snsKind = SNS.kakao.rawValue
+                    UserInfoManager.snsKind = SNS.kakao.text
                     let snsLoginGrant = try await SNSLoginManager.shared.doKakaoLogin(accessToken: token)
                     
                     Log.debug("Access Token: \(snsLoginGrant.accessToken)")
