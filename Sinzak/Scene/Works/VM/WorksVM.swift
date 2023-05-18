@@ -26,7 +26,7 @@ protocol WorksVMInput {
 }
 
 protocol WorksVMOutput {
-    var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
+    var presentWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
     var pushSerachVC: PublishRelay<MarketVC> { get }
     var presentSelectAlignVC: PublishRelay<SelectAlignVC> { get }
     
@@ -114,7 +114,7 @@ final class DefaultWorksVM: WorksVM {
             viewModel: vm,
             initialSelection: initialSelection
         )
-        pushWriteCategoryVC.accept(vc)
+        presentWriteCategoryVC.accept(vc)
     }
     
     func alignButtonTapped() {
@@ -162,7 +162,7 @@ final class DefaultWorksVM: WorksVM {
     var needLoginAlert: PublishRelay<Bool> = .init()
     
     // MARK: - Output
-    var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
+    var presentWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
     var pushSerachVC: PublishRelay<MarketVC> = PublishRelay()
     var presentSelectAlignVC: PublishRelay<SelectAlignVC> = PublishRelay<SelectAlignVC>()
     

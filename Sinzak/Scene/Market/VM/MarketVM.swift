@@ -24,7 +24,7 @@ protocol MarketVMInput {
 }
 
 protocol MarketVMOutput {
-    var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
+    var presentWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
     var pushSerachVC: PublishRelay<MarketVC> { get }
     var presentSelectAlignVC: PublishRelay<SelectAlignVC> { get }
     
@@ -79,7 +79,7 @@ final class DefaultMarketVM: MarketVM {
             viewModel: vm,
             initialSelection: .sellingArtwork
         )
-        pushWriteCategoryVC.accept(vc)
+        presentWriteCategoryVC.accept(vc)
     }
     
     func searchButtonTapped() {
@@ -138,7 +138,7 @@ final class DefaultMarketVM: MarketVM {
     var needLoginAlert: PublishRelay<Bool> = .init()
     
     // MARK: - Output
-    var pushWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
+    var presentWriteCategoryVC: PublishRelay<WriteCategoryVC> = PublishRelay()
     var pushSerachVC: PublishRelay<MarketVC> = PublishRelay()
     var presentSelectAlignVC: PublishRelay<SelectAlignVC> = PublishRelay<SelectAlignVC>()
     
