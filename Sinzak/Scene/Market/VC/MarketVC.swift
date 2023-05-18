@@ -296,10 +296,12 @@ private extension MarketVC {
     func bindOutput() {
     
         // MARK: - 화면이동
-        viewModel.pushWriteCategoryVC
+        viewModel.presentWriteCategoryVC
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] vc in
-                self?.navigationController?.pushViewController(vc, animated: true)
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                self?.present(nav, animated: true)
             })
             .disposed(by: disposeBag)
         
