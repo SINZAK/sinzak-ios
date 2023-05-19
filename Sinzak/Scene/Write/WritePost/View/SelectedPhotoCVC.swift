@@ -1,5 +1,5 @@
 //
-//  AddPhotoCVC.swift
+//  SelectedPhotoCVC.swift
 //  Sinzak
 //
 //  Created by Doy Kim on 2023/02/24.
@@ -8,11 +8,18 @@
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
-final class AddPhotoCVC: UICollectionViewCell {
+final class SelectedPhotoCVC: UICollectionViewCell {
     // MARK: - Properties
+    
+    var deleteImage: ((UIImage) -> Void)?
+    
+    // MARK: - UI
+    
     private let removePhotoButton = UIButton().then {
-        $0.addTarget(self, action: #selector(tap), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
         $0.setImage(UIImage(named: "exclude"), for: .normal)
         $0.imageView?.contentMode = .center
     }
@@ -20,18 +27,13 @@ final class AddPhotoCVC: UICollectionViewCell {
     private let imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.image = UIImage(named: "emptySquare")
+        $0.layer.borderColor = CustomColor.gray60.cgColor
+        $0.layer.borderWidth = 1.0
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
     }
-    
-    private let thumbnailMarkSquare = UIView().then {
-        $0.backgroundColor = .clear
-        $0.layer.cornerRadius = 12
-        $0.layer.borderColor = CustomColor.red50.cgColor
-        $0.layer.borderWidth = 2.0
-        $0.isHidden = true
-    }
-    let thumbnailLabel = UILabel().then {
+
+    private let thumbnailLabel = UILabel().then {
         $0.font = .caption_B
         $0.textColor = CustomColor.red50
         $0.text = I18NStrings.thumbnail
@@ -48,63 +50,61 @@ final class AddPhotoCVC: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configCell(with photo: Photo) {
-        imageView.image = photo.image
+    func configCellImage(with image: UIImage) {
+        imageView.image = image
     }
     
-    func showThumbnailMask() {
+    func configThumbnailCell() {
         thumbnailLabel.isHidden = false
-        thumbnailMarkSquare.isHidden = false
+        imageView.layer.borderColor = CustomColor.red50.cgColor
     }
     
+    func configNotThumbnailCell() {
+        thumbnailLabel.isHidden = true
+        imageView.layer.borderColor = CustomColor.gray60.cgColor
+    }
+
     override func prepareForReuse() {
         imageView.image = nil
         thumbnailLabel.isHidden = true
-        thumbnailMarkSquare.isHidden = true
+        imageView.layer.borderColor = CustomColor.gray60.cgColor
     }
     
     // MARK: - Helpers
     private func updateImage(_ image: UIImage) {
         imageView.image = image
+        thumbnailLabel.isHidden = true
+        imageView.layer.borderColor = CustomColor.gray60.cgColor
     }
     // MARK: - Design Helpers
     private func setupUI() {
         contentView.addSubviews(
             imageView,
-            thumbnailMarkSquare,
             thumbnailLabel,
             removePhotoButton
         )
     }
     private func setConstraints() {
         imageView.snp.makeConstraints { make in
-            make.width.height.equalTo(100)
-            make.centerX.centerY.equalTo(thumbnailMarkSquare)
-//            make.leading.equalToSuperview()
-//            make.centerY.equalToSuperview()
+            make.width.height.equalTo(72.0)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
+        
         removePhotoButton.snp.makeConstraints { make in
             make.width.height.equalTo(20.0)
             make.trailing.equalTo(imageView).offset(5)
             make.top.equalTo(imageView).offset(-5)
         }
-        thumbnailMarkSquare.snp.makeConstraints { make in
-            make.width.height.equalTo(109)
-            make.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
-//            make.centerX.centerY.equalTo(imageView)
-//            make.leading.equalToSuperview().inset(11.5)
-//            make.bottom.equalTo(collectionView).offset(4.5)
-        }
         
         thumbnailLabel.snp.makeConstraints { make in
-            make.leading.equalTo(thumbnailMarkSquare).offset(3)
-            make.bottom.equalTo(thumbnailMarkSquare.snp.top).offset(-3)
+            make.leading.equalToSuperview().inset(8.0)
+            make.bottom.equalTo(imageView.snp.top).offset(-2.0)
         }
     }
     
     @objc
-    func tap() {
-        Log.debug("tap!!!!!")
+    func deleteTapped() {
+        deleteImage?(imageView.image ?? UIImage())
     }
 }
