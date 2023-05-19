@@ -54,18 +54,40 @@ final class WriteCategoryVC: SZVC {
     }
     // MARK: - Actions
     @objc private func nextButtonTapped(_ sender: UIButton) {
-        let vc = AddPhotosVC(viewModel: DefaultAddPhotosVM())
+        let vc = WritePostVC(viewModel: DefaultAddPhotosVM())
         navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: - Helpers
     override func configure() {
-        mainView.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
         bind()
     }
     override func setNavigationBar() {
         super.setNavigationBar()
         navigationItem.title = I18NStrings.categorySelection
+        
+        let dismissBarButton = UIBarButtonItem(
+            image: SZImage.Icon.dismiss,
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        let nextBarButton = UIBarButtonItem(
+            title: "다음",
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        nextBarButton.setTitleTextAttributes(
+            [
+                .foregroundColor: CustomColor.alertTint2,
+                .font: UIFont.body_M
+            ],
+            for: .normal
+        )
+        
+        navigationItem.leftBarButtonItem = dismissBarButton
+        navigationItem.rightBarButtonItem = nextBarButton
     }
 }
 
@@ -126,6 +148,23 @@ private extension WriteCategoryVC {
                 owner.viewModel.genreCellTapped(selectedItems)
             })
             .disposed(by: disposeBag)
+        
+        navigationItem.leftBarButtonItem?.rx.tap
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    owner.dismiss(animated: true)
+                })
+            .disposed(by: disposeBag)
+        
+        navigationItem.rightBarButtonItem?.rx.tap
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    let vc = WritePostVC(viewModel: DefaultAddPhotosVM())
+                    owner.navigationController?.pushViewController(vc, animated: true)
+                })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
@@ -143,7 +182,7 @@ private extension WriteCategoryVC {
         viewModel.selectedGenres
             .map { !$0.isEmpty }
             .asDriver(onErrorJustReturn: false)
-            .drive(mainView.nextButton.rx.isEnabled)
+            .drive((navigationItem.rightBarButtonItem?.rx.isEnabled)!)
             .disposed(by: disposeBag)
     }
 }
