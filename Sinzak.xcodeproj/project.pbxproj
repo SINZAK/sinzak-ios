@@ -87,8 +87,8 @@
 		A23415BB2927D778007DADE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A23415BA2927D778007DADE7 /* Assets.xcassets */; };
 		A23415BE2927D778007DADE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A23415BC2927D778007DADE7 /* LaunchScreen.storyboard */; };
 		A23415C62927D7A9007DADE7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A23415C52927D7A9007DADE7 /* .gitignore */; };
-		A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8529A85998007D8937 /* AddPhotosView.swift */; };
-		A2420F8929A859AF007D8937 /* AddPhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8829A859AF007D8937 /* AddPhotosVC.swift */; };
+		A2420F8629A85998007D8937 /* WritePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8529A85998007D8937 /* WritePostView.swift */; };
+		A2420F8929A859AF007D8937 /* WritePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8829A859AF007D8937 /* WritePostVC.swift */; };
 		A2420F8B29A8BCE4007D8937 /* SelectedPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8A29A8BCE4007D8937 /* SelectedPhotoCVC.swift */; };
 		A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8D29A8FBA9007D8937 /* ArtworkInfoView.swift */; };
 		A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F9129A8FC62007D8937 /* ArtworkInfoVC.swift */; };
@@ -219,7 +219,7 @@
 		ED47114129E06CFF00708562 /* MarketSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47114029E06CFF00708562 /* MarketSkeletonView.swift */; };
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
 		ED5A43232A156EC400D89C3A /* WriteCategoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43222A156EC400D89C3A /* WriteCategoryVM.swift */; };
-		ED5A432A2A15701B00D89C3A /* AddPhotosVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43292A15701B00D89C3A /* AddPhotosVM.swift */; };
+		ED5A432A2A15701B00D89C3A /* WritePostVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43292A15701B00D89C3A /* WritePostVM.swift */; };
 		ED5A432D2A15FEF300D89C3A /* SelectPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A432C2A15FEF300D89C3A /* SelectPhotoCVC.swift */; };
 		ED72D8A629F699C500DA1251 /* HomeCategoryCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */; };
 		ED72D8A829F69B5100DA1251 /* SchoolAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */; };
@@ -365,8 +365,8 @@
 		A23415BA2927D778007DADE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A23415BD2927D778007DADE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A23415C52927D7A9007DADE7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		A2420F8529A85998007D8937 /* AddPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosView.swift; sourceTree = "<group>"; };
-		A2420F8829A859AF007D8937 /* AddPhotosVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosVC.swift; sourceTree = "<group>"; };
+		A2420F8529A85998007D8937 /* WritePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostView.swift; sourceTree = "<group>"; };
+		A2420F8829A859AF007D8937 /* WritePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostVC.swift; sourceTree = "<group>"; };
 		A2420F8A29A8BCE4007D8937 /* SelectedPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotoCVC.swift; sourceTree = "<group>"; };
 		A2420F8D29A8FBA9007D8937 /* ArtworkInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkInfoView.swift; sourceTree = "<group>"; };
 		A2420F9129A8FC62007D8937 /* ArtworkInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkInfoVC.swift; sourceTree = "<group>"; };
@@ -493,7 +493,7 @@
 		ED47113E29E03C6200708562 /* SignupNameVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameVM.swift; sourceTree = "<group>"; };
 		ED47114029E06CFF00708562 /* MarketSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSkeletonView.swift; sourceTree = "<group>"; };
 		ED5A43222A156EC400D89C3A /* WriteCategoryVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCategoryVM.swift; sourceTree = "<group>"; };
-		ED5A43292A15701B00D89C3A /* AddPhotosVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosVM.swift; sourceTree = "<group>"; };
+		ED5A43292A15701B00D89C3A /* WritePostVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostVM.swift; sourceTree = "<group>"; };
 		ED5A432C2A15FEF300D89C3A /* SelectPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoCVC.swift; sourceTree = "<group>"; };
 		ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryCVC.swift; sourceTree = "<group>"; };
 		ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolAuthViewModel.swift; sourceTree = "<group>"; };
@@ -1211,20 +1211,20 @@
 			path = Sinzak;
 			sourceTree = "<group>";
 		};
-		A2420F8329A8597D007D8937 /* AddPhotos */ = {
+		A2420F8329A8597D007D8937 /* WritePost */ = {
 			isa = PBXGroup;
 			children = (
 				A2420F8429A85985007D8937 /* View */,
 				A2420F8729A8599E007D8937 /* VC */,
 				ED5A43282A15700600D89C3A /* VM */,
 			);
-			path = AddPhotos;
+			path = WritePost;
 			sourceTree = "<group>";
 		};
 		A2420F8429A85985007D8937 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A2420F8529A85998007D8937 /* AddPhotosView.swift */,
+				A2420F8529A85998007D8937 /* WritePostView.swift */,
 				A2420F8A29A8BCE4007D8937 /* SelectedPhotoCVC.swift */,
 				ED5A432C2A15FEF300D89C3A /* SelectPhotoCVC.swift */,
 			);
@@ -1234,7 +1234,7 @@
 		A2420F8729A8599E007D8937 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				A2420F8829A859AF007D8937 /* AddPhotosVC.swift */,
+				A2420F8829A859AF007D8937 /* WritePostVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1503,7 +1503,7 @@
 				A2180DB029AA3BED00BBC74A /* ArtworkSize */,
 				A2180DA929AA38CB00BBC74A /* RequestContent */,
 				A2420F8C29A8FB85007D8937 /* ArtworkInfo */,
-				A2420F8329A8597D007D8937 /* AddPhotos */,
+				A2420F8329A8597D007D8937 /* WritePost */,
 				A280AB4629A7638200C1729C /* CategorySelect */,
 			);
 			path = Write;
@@ -2049,7 +2049,7 @@
 		ED5A43282A15700600D89C3A /* VM */ = {
 			isa = PBXGroup;
 			children = (
-				ED5A43292A15701B00D89C3A /* AddPhotosVM.swift */,
+				ED5A43292A15701B00D89C3A /* WritePostVM.swift */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -2563,7 +2563,7 @@
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
 				ED3552622A12012600B364FC /* SZImage.swift in Sources */,
 				ED3552732A14B4E600B364FC /* ScrapListView.swift in Sources */,
-				A2420F8929A859AF007D8937 /* AddPhotosVC.swift in Sources */,
+				A2420F8929A859AF007D8937 /* WritePostVC.swift in Sources */,
 				A226CC5529AE0FDD000161E8 /* ReceivePriceOfferVC.swift in Sources */,
 				ED35527A2A14BC3000B364FC /* ScrapListDTO.swift in Sources */,
 				A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */,
@@ -2649,10 +2649,10 @@
 				ED74A08029F4FABB00F44AA2 /* AppleAuthManager.swift in Sources */,
 				ED47113F29E03C6200708562 /* SignupNameVM.swift in Sources */,
 				EDF508A629FEB92300FDC2E2 /* ReportSelectVC.swift in Sources */,
-				A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */,
+				A2420F8629A85998007D8937 /* WritePostView.swift in Sources */,
 				A2B969E129ABA661006119B1 /* ProductsDetailView.swift in Sources */,
 				A216BD5C297FE020008964BC /* ChatView.swift in Sources */,
-				ED5A432A2A15701B00D89C3A /* AddPhotosVM.swift in Sources */,
+				ED5A432A2A15701B00D89C3A /* WritePostVM.swift in Sources */,
 				ED86969429D936A8001A1A9F /* SelectAlignVC.swift in Sources */,
 				EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */,
 				EDCA46F72A156A5D00EAFEAA /* Photo.swift in Sources */,
