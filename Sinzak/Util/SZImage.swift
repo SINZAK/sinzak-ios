@@ -10,7 +10,15 @@ import UIKit
 struct SZImage {
     
     enum Icon {
+        /// tint color: CustomColor.label
         static let dismiss = UIImage(named: "dismiss")?
+            .withTintColor(
+                CustomColor.label,
+                renderingMode: .alwaysOriginal
+            )
+        
+        /// tint color: CustomColor.label
+        static let camera = UIImage(named: "camera")?
             .withTintColor(
                 CustomColor.label,
                 renderingMode: .alwaysOriginal
@@ -19,7 +27,7 @@ struct SZImage {
     
     enum Image {
         
-        /// tint color - CustomColor.gray60
+        /// tint color: CustomColor.gray60
         static let nothing = UIImage(named: "nothing")?
             .withTintColor(
                 CustomColor.gray60,
