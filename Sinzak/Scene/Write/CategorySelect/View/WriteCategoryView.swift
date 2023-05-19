@@ -46,18 +46,11 @@ final class WriteCategoryView: SZView {
         return collectionView
     }()
     
-    let nextButton = SZButton().then {
-        $0.setTitle(I18NStrings.next, for: .normal)
-        $0.titleLabel?.font = .body_B
-        $0.layer.cornerRadius = 32
-        $0.backgroundColor = CustomColor.red
-    }
     // MARK: - Design Helpers
     override func setView() {
         addSubviews(
             categoryCollectionView,
-            genreCollectionView,
-            nextButton
+            genreCollectionView
         )
     }
     override func setLayout() {
@@ -73,13 +66,7 @@ final class WriteCategoryView: SZView {
         genreCollectionView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(categoryCollectionView.snp.bottom)
-            $0.bottom.equalTo(nextButton.snp.top)
-        }
-        
-        nextButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(8)
-            make.height.equalTo(64)
-            make.bottom.equalToSuperview().inset(24.0)
+            $0.bottom.equalToSuperview()
         }
     }
 }
