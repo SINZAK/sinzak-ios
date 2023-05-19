@@ -214,49 +214,6 @@ private extension SettingVC {
             })
         })
     }
-    
-    func signout() {
-        let snsKind = SNS(rawValue: UserInfoManager.snsKind ?? "")
-        switch snsKind {
-        case .kakao:
-            UserApi.shared.unlink { error in
-                if let error = error {
-                    Log.error(error)
-                } else {
-                    Log.debug("Kakao unlink() success.")
-                }
-            }
-            
-        case .naver:
-            NaverThirdPartyLoginConnection.getSharedInstance()?.requestDeleteToken()
-            
-        case .apple:
-            AppleAuthManager.shared.revokeAppleToken()
-            
-        case .none:
-            Log.error("SNS 회원 탈퇴 오류")
-        }
-    
-        AuthManager.shared.resign()
-            .observe(on: MainScheduler.instance)
-            .subscribe(
-                with: self,
-                onSuccess: { owner, _ in
-                    Log.debug("회원 탈퇴 성공")
-                    
-                    UserInfoManager.shared.logout(completion: {
-                        let vc = TabBarVC()
-                        vc.modalPresentationStyle = .fullScreen
-                        owner.present(vc, animated: true, completion: {
-                            owner.navigationController?.popToRootViewController(animated: false)                            
-                        })
-                    })
-                    
-                }, onFailure: { _, error in
-                    APIError.logError(error)
-                })
-            .disposed(by: disposeBag)
-    }
 }
 
 extension SettingVC: MFMailComposeViewControllerDelegate {
