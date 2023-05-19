@@ -89,7 +89,7 @@
 		A23415C62927D7A9007DADE7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A23415C52927D7A9007DADE7 /* .gitignore */; };
 		A2420F8629A85998007D8937 /* AddPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8529A85998007D8937 /* AddPhotosView.swift */; };
 		A2420F8929A859AF007D8937 /* AddPhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8829A859AF007D8937 /* AddPhotosVC.swift */; };
-		A2420F8B29A8BCE4007D8937 /* AddPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8A29A8BCE4007D8937 /* AddPhotoCVC.swift */; };
+		A2420F8B29A8BCE4007D8937 /* SelectedPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8A29A8BCE4007D8937 /* SelectedPhotoCVC.swift */; };
 		A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F8D29A8FBA9007D8937 /* ArtworkInfoView.swift */; };
 		A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2420F9129A8FC62007D8937 /* ArtworkInfoVC.swift */; };
 		A24E909E29B7246E006B3347 /* HomeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24E909D29B7246E006B3347 /* HomeSection.swift */; };
@@ -220,6 +220,7 @@
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
 		ED5A43232A156EC400D89C3A /* WriteCategoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43222A156EC400D89C3A /* WriteCategoryVM.swift */; };
 		ED5A432A2A15701B00D89C3A /* AddPhotosVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43292A15701B00D89C3A /* AddPhotosVM.swift */; };
+		ED5A432D2A15FEF300D89C3A /* SelectPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A432C2A15FEF300D89C3A /* SelectPhotoCVC.swift */; };
 		ED72D8A629F699C500DA1251 /* HomeCategoryCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */; };
 		ED72D8A829F69B5100DA1251 /* SchoolAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */; };
 		ED74A07329F4F27C00F44AA2 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ED74A07229F4F27C00F44AA2 /* Config.xcconfig */; };
@@ -366,7 +367,7 @@
 		A23415C52927D7A9007DADE7 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A2420F8529A85998007D8937 /* AddPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosView.swift; sourceTree = "<group>"; };
 		A2420F8829A859AF007D8937 /* AddPhotosVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosVC.swift; sourceTree = "<group>"; };
-		A2420F8A29A8BCE4007D8937 /* AddPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoCVC.swift; sourceTree = "<group>"; };
+		A2420F8A29A8BCE4007D8937 /* SelectedPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedPhotoCVC.swift; sourceTree = "<group>"; };
 		A2420F8D29A8FBA9007D8937 /* ArtworkInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkInfoView.swift; sourceTree = "<group>"; };
 		A2420F9129A8FC62007D8937 /* ArtworkInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkInfoVC.swift; sourceTree = "<group>"; };
 		A24E909D29B7246E006B3347 /* HomeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSection.swift; sourceTree = "<group>"; };
@@ -493,6 +494,7 @@
 		ED47114029E06CFF00708562 /* MarketSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSkeletonView.swift; sourceTree = "<group>"; };
 		ED5A43222A156EC400D89C3A /* WriteCategoryVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCategoryVM.swift; sourceTree = "<group>"; };
 		ED5A43292A15701B00D89C3A /* AddPhotosVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosVM.swift; sourceTree = "<group>"; };
+		ED5A432C2A15FEF300D89C3A /* SelectPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoCVC.swift; sourceTree = "<group>"; };
 		ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryCVC.swift; sourceTree = "<group>"; };
 		ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolAuthViewModel.swift; sourceTree = "<group>"; };
 		ED74A07229F4F27C00F44AA2 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -1223,7 +1225,8 @@
 			isa = PBXGroup;
 			children = (
 				A2420F8529A85998007D8937 /* AddPhotosView.swift */,
-				A2420F8A29A8BCE4007D8937 /* AddPhotoCVC.swift */,
+				A2420F8A29A8BCE4007D8937 /* SelectedPhotoCVC.swift */,
+				ED5A432C2A15FEF300D89C3A /* SelectPhotoCVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2453,7 +2456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2420F8B29A8BCE4007D8937 /* AddPhotoCVC.swift in Sources */,
+				A2420F8B29A8BCE4007D8937 /* SelectedPhotoCVC.swift in Sources */,
 				A2DEC36E29B5BD4E00CF0794 /* CertifiedAuthorView.swift in Sources */,
 				ED3552862A14CF5200B364FC /* MyPostListVC.swift in Sources */,
 				A226CC4D29ADF882000161E8 /* SendPriceOfferView.swift in Sources */,
@@ -2583,6 +2586,7 @@
 				ED3552752A14B63800B364FC /* ScrapListVC.swift in Sources */,
 				A216BD45297FB289008964BC /* NotificationCVC.swift in Sources */,
 				EDF508A229FEAF2300FDC2E2 /* ReportSelectView.swift in Sources */,
+				ED5A432D2A15FEF300D89C3A /* SelectPhotoCVC.swift in Sources */,
 				A2420F8E29A8FBA9007D8937 /* ArtworkInfoView.swift in Sources */,
 				ED2A582D29F306F9002CE83E /* UserInfo.swift in Sources */,
 				ED86969229D9359D001A1A9F /* UIView+Extension.swift in Sources */,
