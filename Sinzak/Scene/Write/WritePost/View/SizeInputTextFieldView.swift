@@ -41,7 +41,6 @@ final class SizeInputTextFieldView: SZView {
         textField.backgroundColor = CustomColor.gray10
         textField.clipsToBounds = true
         
-        
         return textField
     }()
     

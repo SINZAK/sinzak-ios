@@ -47,6 +47,22 @@ final class WritePostVC: SZVC {
     override func setNavigationBar() {
         super.setNavigationBar()
         navigationItem.title = "작품 정보"
+        
+        let completeBarButton = UIBarButtonItem(
+            title: "완료",
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        completeBarButton.setTitleTextAttributes(
+            [
+                .foregroundColor: CustomColor.alertTint2,
+                .font: UIFont.body_M
+            ],
+            for: .normal
+        )
+        
+        navigationItem.rightBarButtonItem = completeBarButton
     }
 }
 
@@ -171,6 +187,20 @@ private extension WritePostVC {
         bodyTextViewText
             .map { !$0.isEmpty }
             .bind(to: mainView.bodyPlaceholder.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        navigationItem.rightBarButtonItem?.rx.tap
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    if owner.mainView.titleTextView.text.isEmpty ||
+                        (owner.mainView.priceTextField.text ?? "").isEmpty ||
+                        owner.mainView.bodyTextView.text.isEmpty {
+                        
+                        owner.showSinglePopUpAlert(message: "제목, 가격, 내용은\n필수 입력 항목이에요.")
+                        return
+                    }
+                })
             .disposed(by: disposeBag)
     }
     
