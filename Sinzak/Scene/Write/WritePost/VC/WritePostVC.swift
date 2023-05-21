@@ -145,6 +145,33 @@ private extension WritePostVC {
             .disposed(by: disposeBag)
          */
         
+        let titleTextViewText = mainView.titleTextView.rx.text
+            .orEmpty
+            .share()
+        
+        titleTextViewText
+            .map { !$0.isEmpty }
+            .bind(to: mainView.titlePlaceholder.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        mainView.isPossibleSuggestButton.rx.tap
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    owner.mainView.isPossibleSuggestButton.isSelected.toggle()
+                    
+                    // view model에 전달
+                })
+            .disposed(by: disposeBag)
+            
+        let bodyTextViewText = mainView.bodyTextView.rx.text
+            .orEmpty
+            .share()
+        
+        bodyTextViewText
+            .map { !$0.isEmpty }
+            .bind(to: mainView.bodyPlaceholder.rx.isHidden)
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
