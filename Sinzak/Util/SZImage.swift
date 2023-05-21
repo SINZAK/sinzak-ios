@@ -10,15 +10,25 @@ import UIKit
 struct SZImage {
     
     enum Icon {
-        /// tint color: CustomColor.label
         static let dismiss = UIImage(named: "dismiss")?
             .withTintColor(
                 CustomColor.label,
                 renderingMode: .alwaysOriginal
             )
         
-        /// tint color: CustomColor.label
         static let camera = UIImage(named: "camera")?
+            .withTintColor(
+                CustomColor.label,
+                renderingMode: .alwaysOriginal
+            )
+        
+        static let checkCircleNotPressed = UIImage(named: "check-circle-default")?
+            .withTintColor(
+                CustomColor.label,
+                renderingMode: .alwaysOriginal
+            )
+        
+        static let checkCirclePressed = UIImage(named: "check-circle-pressed")?
             .withTintColor(
                 CustomColor.label,
                 renderingMode: .alwaysOriginal
