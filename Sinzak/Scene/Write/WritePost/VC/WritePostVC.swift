@@ -76,6 +76,14 @@ private extension WritePostVC {
     
     func bindInput() {
         
+        let touchContentView = UITapGestureRecognizer(target: nil, action: nil)
+        mainView.contentView.addGestureRecognizer(touchContentView)
+        touchContentView.rx.event
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
         mainView.collectionView.rx.itemSelected
             .asSignal()
             .emit(
