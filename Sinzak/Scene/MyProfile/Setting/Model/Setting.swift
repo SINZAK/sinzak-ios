@@ -33,7 +33,7 @@ enum Setting: CaseIterable {
                 I18NStrings.ask,
                 I18NStrings.notice,
                 I18NStrings.termsOfService,
-                I18NStrings.privacyPolicy,
+                I18NStrings.privacyPolicy
 //                I18NStrings.opensourceLicense
             ]
         case .etc:
