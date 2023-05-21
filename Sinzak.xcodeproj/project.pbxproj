@@ -221,6 +221,9 @@
 		ED5A43232A156EC400D89C3A /* WriteCategoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43222A156EC400D89C3A /* WriteCategoryVM.swift */; };
 		ED5A432A2A15701B00D89C3A /* WritePostVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43292A15701B00D89C3A /* WritePostVM.swift */; };
 		ED5A432D2A15FEF300D89C3A /* SelectPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A432C2A15FEF300D89C3A /* SelectPhotoCVC.swift */; };
+		ED5A432F2A19D64F00D89C3A /* SZNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A432E2A19D64F00D89C3A /* SZNumberTextField.swift */; };
+		ED5A43322A19D95D00D89C3A /* CircleCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43312A19D95D00D89C3A /* CircleCheckButton.swift */; };
+		ED5A43342A19FC7100D89C3A /* SizeInputTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43332A19FC7100D89C3A /* SizeInputTextFieldView.swift */; };
 		ED72D8A629F699C500DA1251 /* HomeCategoryCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */; };
 		ED72D8A829F69B5100DA1251 /* SchoolAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */; };
 		ED74A07329F4F27C00F44AA2 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ED74A07229F4F27C00F44AA2 /* Config.xcconfig */; };
@@ -495,6 +498,9 @@
 		ED5A43222A156EC400D89C3A /* WriteCategoryVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCategoryVM.swift; sourceTree = "<group>"; };
 		ED5A43292A15701B00D89C3A /* WritePostVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostVM.swift; sourceTree = "<group>"; };
 		ED5A432C2A15FEF300D89C3A /* SelectPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoCVC.swift; sourceTree = "<group>"; };
+		ED5A432E2A19D64F00D89C3A /* SZNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZNumberTextField.swift; sourceTree = "<group>"; };
+		ED5A43312A19D95D00D89C3A /* CircleCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCheckButton.swift; sourceTree = "<group>"; };
+		ED5A43332A19FC7100D89C3A /* SizeInputTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeInputTextFieldView.swift; sourceTree = "<group>"; };
 		ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryCVC.swift; sourceTree = "<group>"; };
 		ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolAuthViewModel.swift; sourceTree = "<group>"; };
 		ED74A07229F4F27C00F44AA2 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -1227,6 +1233,8 @@
 				A2420F8529A85998007D8937 /* WritePostView.swift */,
 				A2420F8A29A8BCE4007D8937 /* SelectedPhotoCVC.swift */,
 				ED5A432C2A15FEF300D89C3A /* SelectPhotoCVC.swift */,
+				ED5A43312A19D95D00D89C3A /* CircleCheckButton.swift */,
+				ED5A43332A19FC7100D89C3A /* SizeInputTextFieldView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1393,6 +1401,7 @@
 				A26F0AB02948C818001CB2AA /* SZView.swift */,
 				A26F0AB22948C843001CB2AA /* SZVC.swift */,
 				A2B38581295ED7AA00E5EB7C /* SZTextField.swift */,
+				ED5A432E2A19D64F00D89C3A /* SZNumberTextField.swift */,
 				ED47113B29E0363000708562 /* SZButton.swift */,
 			);
 			path = Base;
@@ -2538,6 +2547,7 @@
 				ED74A08229F4FB7300F44AA2 /* AppleToken.swift in Sources */,
 				A2DEC35829B4441100CF0794 /* SNSLoginManager.swift in Sources */,
 				A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */,
+				ED5A43322A19D95D00D89C3A /* CircleCheckButton.swift in Sources */,
 				ED35528F2A15574D00B364FC /* SignoutCompleteVC.swift in Sources */,
 				A20E4A4E29990064009C1340 /* MyProfileView.swift in Sources */,
 				A280AB4A29A763BE00C1729C /* WriteCategoryVC.swift in Sources */,
@@ -2653,6 +2663,7 @@
 				A2B969E129ABA661006119B1 /* ProductsDetailView.swift in Sources */,
 				A216BD5C297FE020008964BC /* ChatView.swift in Sources */,
 				ED5A432A2A15701B00D89C3A /* WritePostVM.swift in Sources */,
+				ED5A432F2A19D64F00D89C3A /* SZNumberTextField.swift in Sources */,
 				ED86969429D936A8001A1A9F /* SelectAlignVC.swift in Sources */,
 				EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */,
 				EDCA46F72A156A5D00EAFEAA /* Photo.swift in Sources */,
@@ -2666,6 +2677,7 @@
 				EDF76FFF29F8F32300F33146 /* BannerFooter.swift in Sources */,
 				ED00BFA22A037B6C00379E89 /* WorksManager.swift in Sources */,
 				A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */,
+				ED5A43342A19FC7100D89C3A /* SizeInputTextFieldView.swift in Sources */,
 				A23415B42927D776007DADE7 /* SceneDelegate.swift in Sources */,
 				EDF5089B29FE7E5000FDC2E2 /* DoubleAlertSheetController.swift in Sources */,
 				ED3552602A11F0A800B364FC /* VerifyButton.swift in Sources */,
