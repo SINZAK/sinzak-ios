@@ -303,3 +303,35 @@ private extension WritePostView {
         }
     }
 }
+
+// MARK: - Update Layout
+
+extension WritePostView {
+    
+    func remakeKeyboardShowLayout() {
+        contentView.snp.remakeConstraints { [weak self] in
+            let bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
+            $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.snp.width)
+            $0.bottom.equalTo(sizeStackView).offset(60.0 + sizeStackView.frame.height + bottom)
+            self?.sizeInputScrollLayout()
+        }
+    }
+    
+    func remakeKeyboardNotShowLayout() {
+        contentView.snp.remakeConstraints {
+            $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.snp.width)
+            $0.bottom.equalTo(sizeStackView).offset(60.0)
+        }
+    }
+    
+    func sizeInputScrollLayout() {
+        if widthSizeInputTextFieldView.inputTextField.isEditing ||
+            verticalSizeInputTextFieldView.inputTextField.isEditing ||
+            heightSizeInputTextFieldView.inputTextField.isEditing {
+                        
+            scrollView.scroll(to: .bottom, animated: true)
+        }
+    }
+}
