@@ -31,8 +31,8 @@ final class SizeInputTextFieldView: SZView {
         return label
     }()
     
-    let inputTextField: UITextField = {
-        let textField = UITextField()
+    let inputTextField: SZNumberTextField = {
+        let textField = SZNumberTextField(insets: .init(top: 0, left: 0, bottom: 0, right: 0))
         textField.textColor = CustomColor.label
         textField.tintColor = CustomColor.red
         textField.font = .subtitle_B
@@ -40,6 +40,7 @@ final class SizeInputTextFieldView: SZView {
         textField.layer.cornerRadius = 48.0 / 2
         textField.backgroundColor = CustomColor.gray10
         textField.clipsToBounds = true
+        textField.keyboardType = .numberPad
         
         return textField
     }()
