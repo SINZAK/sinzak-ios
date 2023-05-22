@@ -10,12 +10,14 @@ import PhotosUI
 import RxSwift
 import RxCocoa
 import RxDataSources
+import RxKeyboard
 
 final class WritePostVC: SZVC {
     // MARK: - Properties
     private let mainView = WritePostView()
     private let disposeBag = DisposeBag()
     private let viewModel: WritePostVM
+    private var keyboardHeight: CGFloat = 0.0
     
     init(viewModel: WritePostVM) {
         self.viewModel = viewModel
@@ -66,6 +68,8 @@ final class WritePostVC: SZVC {
     }
 }
 
+// MARK: - Bind
+
 private extension WritePostVC {
     
     func bind() {
@@ -76,13 +80,18 @@ private extension WritePostVC {
     
     func bindInput() {
         
-        let touchContentView = UITapGestureRecognizer(target: nil, action: nil)
-        mainView.contentView.addGestureRecognizer(touchContentView)
-        touchContentView.rx.event
-            .subscribe(with: self, onNext: { owner, _ in
-                owner.view.endEditing(true)
-            })
-            .disposed(by: disposeBag)
+        let tapContentViewGesture = UITapGestureRecognizer(target: self, action: #selector(endEditing))
+        mainView.contentView.addGestureRecognizer(tapContentViewGesture)
+        tapContentViewGesture.delegate = self
+        
+//        touchContentView.rx.event
+//            .subscribe(with: self, onNext: { owner, event in
+//                let point = event.location(in: owner.mainView)
+//
+//                Log.debug("end edit \(point)")
+//                owner.view.endEditing(true)
+//            })
+//            .disposed(by: disposeBag)
         
         mainView.collectionView.rx.itemSelected
             .asSignal()
@@ -170,11 +179,10 @@ private extension WritePostVC {
          */
         
         let titleTextViewText = mainView.titleTextView.rx.text
-            .orEmpty
             .share()
         
         titleTextViewText
-            .map { !$0.isEmpty }
+            .map { !($0 ?? "").isEmpty }
             .bind(to: mainView.titlePlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
         
@@ -197,6 +205,83 @@ private extension WritePostVC {
             .bind(to: mainView.bodyPlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
         
+        RxKeyboard.instance.visibleHeight
+            .drive(
+                with: self,
+                onNext: { owner, keyboardVisibleHeight in
+                    owner.keyboardHeight = keyboardVisibleHeight
+                        
+                    if keyboardVisibleHeight > 0 {
+                        owner.mainView.remakeKeyboardShowLayout()
+                    } else {
+                        owner.mainView.remakeKeyboardNotShowLayout()
+                    }
+                    
+                })
+            .disposed(by: disposeBag)
+        
+        let titleTextViewEditBegin = mainView.titleTextView.rx.didBeginEditing
+        let titleTextViewBounds = mainView.titleTextView.rx.observe(CGRect.self, #keyPath(UIView.bounds))
+        
+        Observable.combineLatest(titleTextViewEditBegin, titleTextViewBounds)
+            .bind(with: self, onNext: { owner, tuple in
+                
+                let bounds = tuple.1 ?? .zero
+                
+                let titleTextViewMinY = owner.mainView.titleTextView.frame.minY
+                let titleTextViewHeight = bounds.height
+                let titleTextViewMaxY = titleTextViewHeight + titleTextViewMinY
+                let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+                let navigationBarHeight = owner.navigationController?.navigationBar.frame.size.height ?? 0.0
+                
+                let textViewBottomToMaxY = owner.view.frame.height - statusBarHeight - navigationBarHeight - (titleTextViewMaxY - owner.mainView.scrollView.contentOffset.y)
+                
+                if owner.keyboardHeight > textViewBottomToMaxY {
+                    owner.mainView.scrollView.contentOffset = CGPoint(x: 0, y: owner.mainView.scrollView.contentOffset.y + (owner.keyboardHeight - textViewBottomToMaxY))
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        let bodyTextViewEditBegin = mainView.bodyTextView.rx.didBeginEditing
+        let bodyTextViewBounds = mainView.bodyTextView.rx.observe(CGRect.self, #keyPath(UIView.bounds))
+        
+        Observable.combineLatest(bodyTextViewEditBegin, bodyTextViewBounds)
+            .bind(with: self, onNext: { owner, tuple in
+                
+                let bounds = tuple.1 ?? .zero
+                
+                let bodyTextViewMinY = owner.mainView.bodyTextView.frame.minY
+                let bodyTextViewHeight = bounds.height
+                let bodyTextViewMaxY = bodyTextViewHeight + bodyTextViewMinY
+                let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+                let navigationBarHeight = owner.navigationController?.navigationBar.frame.size.height ?? 0.0
+                
+                let bodyViewBottomToMaxY = owner.view.frame.height - statusBarHeight - navigationBarHeight - (bodyTextViewMaxY - owner.mainView.scrollView.contentOffset.y)
+                
+                if owner.keyboardHeight > bodyViewBottomToMaxY {
+                    owner.mainView.scrollView.contentOffset = CGPoint(x: 0, y: owner.mainView.scrollView.contentOffset.y + (owner.keyboardHeight - bodyViewBottomToMaxY))
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.widthSizeInputTextFieldView.inputTextField.rx.controlEvent(.editingDidBegin)
+            .bind(with: self, onNext: { owner, _ in
+                owner.mainView.scrollView.scroll(to: .bottom, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.verticalSizeInputTextFieldView.inputTextField.rx.controlEvent(.editingDidBegin)
+            .bind(with: self, onNext: { owner, _ in
+                owner.mainView.scrollView.scroll(to: .bottom, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.heightSizeInputTextFieldView.inputTextField.rx.controlEvent(.editingDidBegin)
+            .bind(with: self, onNext: { owner, _ in
+                owner.mainView.scrollView.scroll(to: .bottom, animated: true)
+            })
+            .disposed(by: disposeBag)
+         
         navigationItem.rightBarButtonItem?.rx.tap
             .bind(
                 with: self,
@@ -250,6 +335,16 @@ private extension WritePostVC {
             .drive(mainView.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
+    }
+}
+
+// MARK: - Pricate Method
+
+private extension WritePostVC {
+    
+    @objc
+    func endEditing() {
+        view.endEditing(true)
     }
 }
 
@@ -326,5 +421,24 @@ private extension WritePostVC {
                     return cell
                 }
             })
+    }
+}
+
+// MARK: - Touch Gesture
+
+extension WritePostVC {
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldReceive touch: UITouch
+    ) -> Bool {
+        
+        var point = touch.location(in: mainView.contentView)
+        point = CGPoint(x: point.x, y: point.y * 1.25)
+
+        if mainView.collectionView.frame.contains(point) {
+            return false
+        } else {
+            return true
+        }
     }
 }
