@@ -139,9 +139,16 @@ private extension WorksVC {
     
     func bindInput() {
         mainView.writeButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.writeButtonTapped()
-            })
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    guard UserInfoManager.isLoggedIn else {
+                        owner.showNeedLogIn()
+                        return
+                    }
+                    
+                    owner.viewModel.writeButtonTapped()
+                })
             .disposed(by: disposeBag)
         
         mainView.worksCollectionView.refreshControl?.rx.controlEvent(.valueChanged)

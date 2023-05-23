@@ -152,9 +152,16 @@ private extension MarketVC {
     
     func bindInput() {
         mainView.writeButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.writeButtonTapped()
-            })
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    guard UserInfoManager.isLoggedIn else {
+                        owner.showNeedLogIn()
+                        return
+                    }
+                    
+                    owner.viewModel.writeButtonTapped()
+                })
             .disposed(by: disposeBag)
         
          searchBarButton.rx.tap
