@@ -137,6 +137,17 @@ private extension MarketVC {
                 owner.viewModel.productSections.accept(newSections)
             })
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.completePost)
+            .asSignal(onErrorRecover: { _ in .never() })
+            .emit(with: self, onNext: { owner, notification in
+                
+                guard let category = notification.object as? WriteCategory else { return }
+                guard category == .sellingArtwork else { return }
+                
+                owner.viewModel.needRefresh.accept(true)
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindInput() {
