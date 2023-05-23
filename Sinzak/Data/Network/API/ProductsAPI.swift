@@ -140,8 +140,9 @@ extension ProductsAPI: TargetType {
                     let name = String.uniqueFilename(withPrefix: "IMAGE")
                     formData.append(MultipartFormData(
                         provider: .data(imageData),
-                        name: name,
-                        fileName: "\(name).jpg"
+                        name: "multipartFile",
+                        fileName: "\(name).jpeg",
+                        mimeType: "image/jpeg"
                     ))
                 }
             }
