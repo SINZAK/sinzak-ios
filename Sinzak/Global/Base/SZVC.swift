@@ -68,11 +68,12 @@ class SZVC: UIViewController {
                     case .errorMessage(let message):
                         owner.showSinglePopUpAlert(message: message)
                     default:
-                        Log.error(apiError)
+                        owner.showSinglePopUpAlert(message: "알 수 없는 오류가 발생했습니다.")
                     }
                 } else {
-                    Log.error(error)
+                    owner.showSinglePopUpAlert(message: "알 수 없는 오류가 발생했습니다.")
                 }
+                Log.error(error)
             })
             .disposed(by: disposeBag)
     }
