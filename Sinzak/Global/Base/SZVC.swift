@@ -111,7 +111,7 @@ extension SZVC: UIGestureRecognizerDelegate {}
 
 extension SZVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        navigationController.interactivePopGestureRecognizer?.isEnabled = navigationController.viewControllers.count > 1
+        navigationController.interactivePopGestureRecognizer?.isEnabled = navigationController.viewControllers.count > 1 && !(self is UniversityInfoVC)
     }
 }
 
