@@ -119,6 +119,41 @@ final class LoginVC: SZVC {
                 self?.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
+        
+        viewModel.showLoading
+            .bind(with: self, onNext: { owner, isShow in
+                
+                if isShow == true {
+                    owner.showLoading()
+                } else {
+                    owner.hideLoading()
+                }
+                
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.errorHandler
+            .observe(on: MainScheduler.instance)
+            .bind(with: self, onNext: { owner, error in
+                owner.simpleErrorHandler.accept(error)
+                
+                UserApi.shared.logout {(error) in
+                    if let error = error {
+                        Log.error(error)
+                    } else {
+                        Log.debug("Kakao logout() success.")
+                    }
+                }
+                
+                owner.naverLoginInstance?.resetToken()
+                
+                AppleAuth
+                    .allCases
+                    .map { $0.rawValue }
+                    .forEach { KeychainWrapper.standard.removeObject(forKey: $0)}
+                
+            })
+            .disposed(by: disposeBag)
     }
 }
 /** 애플 로그인 관련 메서드 */
@@ -157,8 +192,7 @@ extension LoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerP
         controller: ASAuthorizationController,
         didCompleteWithError error: Error
     ) {
-        // Handle error.
-        showAlert(title: "ERROR\nApple ID 연동에 실패했습니다.", okText: I18NStrings.confirm, cancelNeeded: false, completionHandler: nil)
+        Log.error(error)
     }
 }
 
@@ -184,6 +218,8 @@ private extension LoginVC {
     
     /// 유저 정보 남아있는 경우 대비해서 비워주기
     func cleanUserInfo() {
+        
+        /*
         if let snsKind = UserInfoManager.snsKind {
             let snsKind = SNS(rawValue: snsKind)
             switch snsKind {
@@ -209,6 +245,22 @@ private extension LoginVC {
                 break
             }
         }
+         */
+        
+        UserApi.shared.logout {(error) in
+            if let error = error {
+                Log.error(error)
+            } else {
+                Log.debug("Kakao logout() success.")
+            }
+        }
+        
+        naverLoginInstance?.resetToken()
+        
+        AppleAuth
+            .allCases
+            .map { $0.rawValue }
+            .forEach { KeychainWrapper.standard.removeObject(forKey: $0)}
         
         UserInfoManager.shared.logout(completion: {})
     }
