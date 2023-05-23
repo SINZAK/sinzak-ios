@@ -55,6 +55,7 @@ final class DefaultWriteCategoryVM: WriteCategoryVM {
         writeCategorySections.accept([writeCategorySection])
         
         categoryCellTapped(initialSelection)
+        selectedCategory.accept(initialSelection)
     }
     
     func categoryCellTapped(_ category: WriteCategory) {
