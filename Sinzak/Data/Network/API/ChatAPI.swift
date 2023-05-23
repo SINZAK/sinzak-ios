@@ -60,7 +60,7 @@ extension ChatAPI: TargetType {
         case .chatRoomImageUpload(_, let images):
             var formData: [MultipartFormData] = []
             for image in images {
-                if let imageData = image.jpegData(compressionQuality: 0.6) {
+                if let imageData = image.jpegData(compressionQuality: 0.3) {
                     let name = String.uniqueFilename(withPrefix: "IMAGE")
                     formData.append(MultipartFormData(
                         provider: .data(imageData),
