@@ -52,11 +52,7 @@ final class WriteCategoryVC: SZVC {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
     }
-    // MARK: - Actions
-    @objc private func nextButtonTapped(_ sender: UIButton) {
-        let vc = WritePostVC(viewModel: DefaultAddPhotosVM())
-        navigationController?.pushViewController(vc, animated: true)
-    }
+    
     // MARK: - Helpers
     override func configure() {
         
@@ -161,7 +157,14 @@ private extension WriteCategoryVC {
             .bind(
                 with: self,
                 onNext: { owner, _ in
-                    let vc = WritePostVC(viewModel: DefaultAddPhotosVM())
+                    let vc = WritePostVC(
+                        viewModel: DefaultAddPhotosVM(
+                            selectedCategory: owner.viewModel.selectedCategory.value,
+                            selectedGenres: owner.viewModel.selectedGenres.value
+                        ),
+                        category: owner.viewModel.selectedCategory.value
+                    )
+                    
                     owner.navigationController?.pushViewController(vc, animated: true)
                 })
             .disposed(by: disposeBag)
