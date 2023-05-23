@@ -224,6 +224,7 @@
 		ED5A432F2A19D64F00D89C3A /* SZNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A432E2A19D64F00D89C3A /* SZNumberTextField.swift */; };
 		ED5A43322A19D95D00D89C3A /* CircleCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43312A19D95D00D89C3A /* CircleCheckButton.swift */; };
 		ED5A43342A19FC7100D89C3A /* SizeInputTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43332A19FC7100D89C3A /* SizeInputTextFieldView.swift */; };
+		ED5A43362A1BED0100D89C3A /* BuildPostResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43352A1BED0100D89C3A /* BuildPostResponseDTO.swift */; };
 		ED72D8A629F699C500DA1251 /* HomeCategoryCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */; };
 		ED72D8A829F69B5100DA1251 /* SchoolAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */; };
 		ED74A07329F4F27C00F44AA2 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ED74A07229F4F27C00F44AA2 /* Config.xcconfig */; };
@@ -501,6 +502,7 @@
 		ED5A432E2A19D64F00D89C3A /* SZNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZNumberTextField.swift; sourceTree = "<group>"; };
 		ED5A43312A19D95D00D89C3A /* CircleCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCheckButton.swift; sourceTree = "<group>"; };
 		ED5A43332A19FC7100D89C3A /* SizeInputTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeInputTextFieldView.swift; sourceTree = "<group>"; };
+		ED5A43352A1BED0100D89C3A /* BuildPostResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BuildPostResponseDTO.swift; path = ../../../../../../Desktop/BuildPostResponseDTO.swift; sourceTree = "<group>"; };
 		ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryCVC.swift; sourceTree = "<group>"; };
 		ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolAuthViewModel.swift; sourceTree = "<group>"; };
 		ED74A07229F4F27C00F44AA2 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -2101,6 +2103,7 @@
 				ED35526A2A136CA100B364FC /* CertifySchoolCardDTO.swift */,
 				ED35526C2A14919900B364FC /* EditUserImageDTO.swift */,
 				ED3552792A14BC3000B364FC /* ScrapListDTO.swift */,
+				ED5A43352A1BED0100D89C3A /* BuildPostResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -2496,6 +2499,7 @@
 				A226CC5C29AE31F1000161E8 /* WelcomeView.swift in Sources */,
 				EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */,
 				A216BD53297FD60E008964BC /* ChatListView.swift in Sources */,
+				ED5A43362A1BED0100D89C3A /* BuildPostResponseDTO.swift in Sources */,
 				A2B0F6112980233900EC5C78 /* MarketVC.swift in Sources */,
 				EDF5089929FE727F00FDC2E2 /* AlertPC.swift in Sources */,
 				A24E909E29B7246E006B3347 /* HomeSection.swift in Sources */,
