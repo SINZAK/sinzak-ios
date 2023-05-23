@@ -79,6 +79,7 @@ final class WritePostView: SZView {
         textField.layer.cornerRadius = 44.0 / 2
         textField.clipsToBounds = true
         textField.keyboardType = .numberPad
+        textField.font = .body_B
         textField.attributedPlaceholder = NSAttributedString(
             string: "가격",
             attributes: [
