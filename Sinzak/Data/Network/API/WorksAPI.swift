@@ -105,7 +105,7 @@ extension WorksAPI: TargetType {
                 let encoder = JSONEncoder()
                 let data = try encoder.encode(post)
                 let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
-                return .requestParameters(parameters: dictionary, encoding: URLEncoding.queryString)
+                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
             } catch {
                 print("Error encoding userInfo: \(error)")
                 return .requestPlain
@@ -128,12 +128,13 @@ extension WorksAPI: TargetType {
         case .imageUpload(_, let images):
             var formData: [MultipartFormData] = []
             for image in images {
-                if let imageData = image.jpegData(compressionQuality: 0.6) {
+                if let imageData = image.jpegData(compressionQuality: 0.3) {
                     let name = String.uniqueFilename(withPrefix: "IMAGE")
                     formData.append(MultipartFormData(
                         provider: .data(imageData),
-                        name: name,
-                        fileName: "\(name).jpg"
+                        name: "multipartFile",
+                        fileName: "\(name).jpeg",
+                        mimeType: "image/jpeg"
                     ))
                 }
             }
