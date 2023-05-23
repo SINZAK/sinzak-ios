@@ -5,7 +5,7 @@
 //  Created by JongHoon on 2023/05/04.
 //
 
-import Foundation
+import UIKit
 import Moya
 import RxSwift
 
@@ -60,6 +60,7 @@ final class WorksManager: ManagerType {
     
     func deleteWorks(id: Int) -> Single<Bool> {
         return provider.rx.request(.delete(id: id))
+            .filterSuccessfulStatusCodes()
             .map(BaseDTO<String>.self)
             .map(filterError)
             .map { $0.success }
@@ -75,6 +76,7 @@ final class WorksManager: ManagerType {
     
     func wishWorks(id: Int, mode: Bool) -> Single<Bool> {
         return provider.rx.request(.wish(id: id, mode: mode))
+            .filterSuccessfulStatusCodes()
             .map(BaseDTO<String>.self)
             .map(filterError)
             .map { $0.success }
@@ -82,6 +84,7 @@ final class WorksManager: ManagerType {
     
     func suggestPrice(id: Int, price: Int) -> Single<Bool> {
         return provider.rx.request(.priceSuggest(id: id, price: price))
+            .filterSuccessfulStatusCodes()
             .map(BaseDTO<String>.self)
             .map(filterError)
             .map { $0.success }
@@ -89,6 +92,33 @@ final class WorksManager: ManagerType {
     
     func completeWorks(id: Int) -> Single<Bool> {
         return provider.rx.request(.sell(postId: id))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
+    }
+    
+    func buildWorksPost(works: WorkBuild, images: [UIImage]) -> Single<Bool> {
+        return provider.rx.request(.build(post: works))
+            .filterSuccessfulStatusCodes()
+            .map(BuildPostResponseDTO.self)
+            .map { response in
+                guard response.success == true else {
+                    throw APIError.errorMessage(response.message ?? "")
+                }
+                
+                return response.id ?? -1
+            }
+            .flatMap { [weak self] id -> Single<Bool> in
+                guard let self = self else { return Observable.just(false).asSingle() }
+                
+                return self.worksImageUpload(id: id, images: images)
+            }
+    }
+    
+    private func worksImageUpload(id: Int, images: [UIImage]) -> Single<Bool> {
+        return provider.rx.request(.imageUpload(id: id, images: images))
+            .filterSuccessfulStatusCodes()
             .map(BaseDTO<String>.self)
             .map(filterError)
             .map { $0.success }
