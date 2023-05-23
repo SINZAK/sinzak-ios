@@ -30,6 +30,8 @@ final class WorksVC: SZVC {
     var worksCollectionViewBeginDragging: PublishRelay<Bool>?
 
     var isViewDidLoad: Bool = true
+    
+    var needRefresh: Bool = true
 
     // MARK: - Init
     init(viewModel: WorksVM, mode: WorksMode) {
@@ -61,7 +63,6 @@ final class WorksVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.refresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +70,11 @@ final class WorksVC: SZVC {
         tabBarController?.tabBar.isHidden = false
                 
         viewModel.updateAlign()
+        
+        if needRefresh == true {
+            viewModel.refresh()
+            needRefresh = false
+        }
     }
     
     // MARK: - Helpers
@@ -114,6 +120,19 @@ private extension WorksVC {
                 
                 let newSections = [MarketProductDataSection(items: newProducts)]
                 owner.viewModel.worksSections.accept(newSections)
+            })
+            .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.completePost)
+            .asSignal(onErrorRecover: { _ in .never() })
+            .emit(with: self, onNext: { owner, notification in
+                
+                guard let category = notification.object as? WriteCategory else { return }
+                
+                guard (category == .request && owner.viewModel.isEmployment) ||
+                        (category == .work && !owner.viewModel.isEmployment) else { return }
+                
+                owner.needRefresh = true
             })
             .disposed(by: disposeBag)
     }
