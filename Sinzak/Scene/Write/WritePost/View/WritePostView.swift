@@ -10,7 +10,12 @@ import SnapKit
 import Then
 
 final class WritePostView: SZView {
-    // MARK: - Properties
+    
+    // MARK: - Porperties
+    
+    let category: WriteCategory
+    
+    // MARK: - UI
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -142,12 +147,6 @@ final class WritePostView: SZView {
         return label
     }()
     
-    let inputSizeView: SZView = {
-        let view = SZView()
-        
-        return view
-    }()
-    
     let sizeTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "˙ " + "작품 사이즈 (선택)"
@@ -169,7 +168,17 @@ final class WritePostView: SZView {
                 
         return stackView
     }()
-
+    
+    init(category: WriteCategory) {
+        self.category = category
+        
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Design Helpers
     override func setView() {
         
@@ -181,16 +190,20 @@ final class WritePostView: SZView {
             collectionView,
             titleTextView, titlePlaceholder,
             priceTextField, priceUnitLabel, isPossibleSuggestButton,
-            bodyTextView, bodyPlaceholder,
-            sizeTitleLabel,
-            sizeStackView
+            bodyTextView, bodyPlaceholder
         )
         
-        sizeStackView.addArrangedSubviews(
-            widthSizeInputTextFieldView,
-            verticalSizeInputTextFieldView,
-            heightSizeInputTextFieldView
-        )
+        if category == .sellingArtwork {
+            contentView.addSubviews(
+                sizeTitleLabel,
+                sizeStackView
+            )
+            sizeStackView.addArrangedSubviews(
+                widthSizeInputTextFieldView,
+                verticalSizeInputTextFieldView,
+                heightSizeInputTextFieldView
+            )
+        }
         
         addSubviews(
             scrollView
@@ -202,18 +215,28 @@ final class WritePostView: SZView {
             $0.leading.trailing.top.bottom.equalTo(safeAreaLayoutGuide)
         }
         
-        contentView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
-            $0.width.equalTo(scrollView.snp.width)
-            $0.bottom.equalTo(sizeStackView).offset(60.0)
+        switch category {
+        case .sellingArtwork:
+            contentView.snp.makeConstraints {
+                $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
+                $0.width.equalTo(scrollView.snp.width)
+                $0.bottom.equalTo(sizeStackView).offset(60.0)
+            }
+            
+        case .work, .request:
+            contentView.snp.makeConstraints {
+                $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
+                $0.width.equalTo(scrollView.snp.width)
+                $0.bottom.equalTo(bodyTextView).offset(60.0)
+            }
         }
         
         collectionView.collectionViewLayout = setLayout()
     
-        collectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(contentView).offset(16.0)
-            make.height.equalTo(132.0)
+        collectionView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(contentView).offset(16.0)
+            $0.height.equalTo(132.0)
         }
         
         titleTextView.snp.makeConstraints {
@@ -254,23 +277,25 @@ final class WritePostView: SZView {
             $0.trailing.equalTo(bodyTextView).offset(-24.0)
         }
         
-        sizeTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(bodyTextView.snp.bottom).offset(24.0)
-            $0.leading.equalToSuperview().inset(16.0)
-        }
-        
-        sizeStackView.snp.makeConstraints {
-            $0.top.equalTo(sizeTitleLabel.snp.bottom).offset(12.0)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.lessThanOrEqualTo(16.0 + 12.0 * 3 + 48.0 * 3)
-        }
-        [
-            widthSizeInputTextFieldView,
-            verticalSizeInputTextFieldView,
-            heightSizeInputTextFieldView
-        ].forEach { view in
-            view.snp.makeConstraints {
-                $0.height.equalTo(48.0)
+        if category == .sellingArtwork {
+            sizeTitleLabel.snp.makeConstraints {
+                $0.top.equalTo(bodyTextView.snp.bottom).offset(24.0)
+                $0.leading.equalToSuperview().inset(16.0)
+            }
+            
+            sizeStackView.snp.makeConstraints {
+                $0.top.equalTo(sizeTitleLabel.snp.bottom).offset(12.0)
+                $0.leading.trailing.equalToSuperview()
+                $0.height.lessThanOrEqualTo(16.0 + 12.0 * 3 + 48.0 * 3)
+            }
+            [
+                widthSizeInputTextFieldView,
+                verticalSizeInputTextFieldView,
+                heightSizeInputTextFieldView
+            ].forEach { view in
+                view.snp.makeConstraints {
+                    $0.height.equalTo(48.0)
+                }
             }
         }
     }
@@ -309,20 +334,41 @@ private extension WritePostView {
 extension WritePostView {
     
     func remakeKeyboardShowLayout() {
-        contentView.snp.remakeConstraints { [weak self] in
-            let bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
-            $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
-            $0.width.equalTo(scrollView.snp.width)
-            $0.bottom.equalTo(sizeStackView).offset(60.0 + sizeStackView.frame.height + bottom)
-            self?.sizeInputScrollLayout()
+        Log.debug("current: \(category)")
+        switch category {
+        case .sellingArtwork:
+            contentView.snp.remakeConstraints {
+                let bottom = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0
+                $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
+                $0.width.equalTo(scrollView.snp.width)
+                $0.bottom.equalTo(sizeStackView).offset(60.0 + sizeStackView.frame.height + bottom)
+            }
+            sizeInputScrollLayout()
+        case .request, .work:
+            contentView.snp.remakeConstraints {
+                
+                let offset = UIScreen.main.bounds.height - bodyTextView.frame.maxY
+                $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
+                $0.width.equalTo(scrollView.snp.width)
+                $0.bottom.equalTo(bodyTextView).offset(offset + 60.0)
+            }
         }
     }
     
     func remakeKeyboardNotShowLayout() {
-        contentView.snp.remakeConstraints {
-            $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
-            $0.width.equalTo(scrollView.snp.width)
-            $0.bottom.equalTo(sizeStackView).offset(60.0)
+        switch category {
+        case .sellingArtwork:
+            contentView.snp.remakeConstraints {
+                $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
+                $0.width.equalTo(scrollView.snp.width)
+                $0.bottom.equalTo(sizeStackView).offset(60.0)
+            }
+        case .request, .work:
+            contentView.snp.remakeConstraints {
+                $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
+                $0.width.equalTo(scrollView.snp.width)
+                $0.bottom.equalTo(bodyTextView).offset(60.0)
+            }
         }
     }
     
