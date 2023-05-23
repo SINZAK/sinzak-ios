@@ -148,7 +148,7 @@ extension AuthAPI: TargetType {
         case let .univSchoolCardCertify2(_, image):
             var formData: [MultipartFormData] = []
             guard let imageData = image
-                .jpegData(compressionQuality: 0.6) else {
+                .jpegData(compressionQuality: 0.3) else {
                 return .uploadMultipart(formData)
             }
             Log.debug(imageData)
