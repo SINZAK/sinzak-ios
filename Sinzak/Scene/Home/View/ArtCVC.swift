@@ -109,7 +109,6 @@ final class ArtCVC: UICollectionViewCell {
         setConstraints()
         isSkeletonable = true
         contentView.isSkeletonable = true
-        bind()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -122,7 +121,7 @@ final class ArtCVC: UICollectionViewCell {
         
         let nothingImage = UIImage(named: "nothing")?.withTintColor(CustomColor.gray60, renderingMode: .alwaysOriginal)
         
-        if let thumbnail = data.thumbnail {
+        if let thumbnail = data.thumbnail, !thumbnail.isEmpty {
             let url = URL(string: thumbnail)
             imageView.kf.setImage(with: url)
         } else {
@@ -330,25 +329,5 @@ private extension ArtCVC {
                 Log.error(error)
             })
         .disposed(by: disposeBag)
-    }
-    
-    func bind() {
-        /*
-        NotificationCenter.default.rx.notification(.cellIsCompleteUpdate)
-            .distinctUntilChanged()
-            .asDriver(onErrorRecover: { _ in .never() })
-            .drive(with: self, onNext: { owner, notification in
-                guard let info = notification.userInfo else { return }
-                
-                let id = info["id"] as? Int ?? 0
-                let kind = info["kind"] as? ArtCellKind ?? .work
-                let isComplete = info["isComplete"] as? Bool ?? false
-                
-                if owner.products?.id == id, owner.kind == kind {
-                    owner.soldOutView.isHidden = !isComplete
-                }
-            })
-            .disposed(by: disposeBag)
-         */
     }
 }
