@@ -151,7 +151,7 @@ extension SettingVC: UICollectionViewDelegate {
             
         case [2, 1]:
             showPopUpAlert(
-                message: "정말 로그아웃 할까요?",
+                message: "정말 로그아웃할까요?",
                 rightActionTitle: "로그아웃",
                 rightActionCompletion: { [weak self] in
                     self?.showLoading()
