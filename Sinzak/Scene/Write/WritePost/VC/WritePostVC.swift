@@ -14,13 +14,16 @@ import RxKeyboard
 
 final class WritePostVC: SZVC {
     // MARK: - Properties
-    private let mainView = WritePostView()
+    private let mainView: WritePostView
+    private let category: WriteCategory
     private let disposeBag = DisposeBag()
     private let viewModel: WritePostVM
     private var keyboardHeight: CGFloat = 0.0
     
-    init(viewModel: WritePostVM) {
+    init(viewModel: WritePostVM, category: WriteCategory) {
         self.viewModel = viewModel
+        self.mainView = WritePostView(category: category)
+        self.category = category
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -83,15 +86,6 @@ private extension WritePostVC {
         let tapContentViewGesture = UITapGestureRecognizer(target: self, action: #selector(endEditing))
         mainView.contentView.addGestureRecognizer(tapContentViewGesture)
         tapContentViewGesture.delegate = self
-        
-//        touchContentView.rx.event
-//            .subscribe(with: self, onNext: { owner, event in
-//                let point = event.location(in: owner.mainView)
-//
-//                Log.debug("end edit \(point)")
-//                owner.view.endEditing(true)
-//            })
-//            .disposed(by: disposeBag)
         
         mainView.collectionView.rx.itemSelected
             .asSignal()
@@ -191,8 +185,6 @@ private extension WritePostVC {
                 with: self,
                 onNext: { owner, _ in
                     owner.mainView.isPossibleSuggestButton.isSelected.toggle()
-                    
-                    // view model에 전달
                 })
             .disposed(by: disposeBag)
             
@@ -210,7 +202,6 @@ private extension WritePostVC {
                 with: self,
                 onNext: { owner, keyboardVisibleHeight in
                     owner.keyboardHeight = keyboardVisibleHeight
-                        
                     if keyboardVisibleHeight > 0 {
                         owner.mainView.remakeKeyboardShowLayout()
                     } else {
@@ -358,7 +349,8 @@ extension WritePostVC: PHPickerViewControllerDelegate {
         
         let itemProviders = results.map(\.itemProvider)
         
-        Observable.zip(itemProviders.map { getImage(with: $0) })
+        Observable.combineLatest(itemProviders.map { getImage(with: $0) })
+            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .subscribe(
                 with: self,
                 onNext: { owner, images in
@@ -368,21 +360,26 @@ extension WritePostVC: PHPickerViewControllerDelegate {
             .disposed(by: disposeBag)
         
         func getImage(with item: NSItemProvider) -> Observable<UIImage> {
+            Log.debug("시작 - 1 - \(Thread.current)")
             return Observable<UIImage>.create { observer in
-                if item.canLoadObject(ofClass: UIImage.self) {
-                    item.loadObject(ofClass: UIImage.self, completionHandler: { image, error in
-                        if let error = error {
-                            Log.error(error)
-                            return
-                        }
-                        guard let image = image as? UIImage else {
-                            Log.error("이미지 타입 캐스팅 실패")
-                            return }
-                        observer.onNext(image)
-                    })
-                } else {
-                    Log.error("이미지 load 불가능")
-                }
+                Log.debug("시작 - 2 - \(Thread.current)")
+                    if item.canLoadObject(ofClass: UIImage.self) {
+                        item.loadObject(ofClass: UIImage.self, completionHandler: { image, error in
+                            if let error = error {
+                                Log.error(error)
+                                return
+                            }
+                            guard let image = image as? UIImage else {
+                                Log.error("이미지 타입 캐스팅 실패")
+                                return }
+                            observer.onNext(image)
+                            Log.debug("끝 - 2 - \(Thread.current)")
+                        })
+                    } else {
+                        Log.error("이미지 load 불가능 - \(Thread.current)")
+                    }
+                
+                Log.debug("끝 - 1 - \(Thread.current)")
                 return Disposables.create()
             }
         }
