@@ -26,6 +26,8 @@ protocol WorksVMInput {
 }
 
 protocol WorksVMOutput {
+    var isEmployment: Bool { get }
+    
     var presentWriteCategoryVC: PublishRelay<WriteCategoryVC> { get }
     var pushSerachVC: PublishRelay<MarketVC> { get }
     var presentSelectAlignVC: PublishRelay<SelectAlignVC> { get }
@@ -47,7 +49,7 @@ final class DefaultWorksVM: WorksVM {
      - 의뢰: true
      - 작업: false
      */
-    private let isEmployment: Bool
+    let isEmployment: Bool
     private let alignInfoRelay: BehaviorRelay<(isEmployment: Bool, align: AlignOption)>
     private let searchButtonTapped: BehaviorRelay<(isEmployment: Bool, text: String)>
     
