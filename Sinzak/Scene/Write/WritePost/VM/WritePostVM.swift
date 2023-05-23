@@ -28,7 +28,18 @@ protocol WritePostVM: WritePostVMInput, WritePostVMOutput {}
 
 final class DefaultAddPhotosVM: WritePostVM {
     
+    let selectedCategory: WriteCategory
+    let selectedGenres: [String]
+    
     private let disposeBag = DisposeBag()
+    
+    init(
+        selectedCategory: WriteCategory,
+        selectedGenres: [String]
+    ) {
+        self.selectedCategory = selectedCategory
+        self.selectedGenres = selectedGenres
+    }
     
     // MARK: - Input
     
