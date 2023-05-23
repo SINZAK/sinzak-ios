@@ -272,17 +272,74 @@ private extension WritePostVC {
                 owner.mainView.scrollView.scroll(to: .bottom, animated: true)
             })
             .disposed(by: disposeBag)
+        
+        navigationItem.leftBarButtonItem?.rx.tap
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    
+                    if  owner.viewModel.photoSections.value[0].items.count > 1 ||
+                        !owner.mainView.titleTextView.text.isEmpty ||
+                        !(owner.mainView.priceTextField.text ?? "").isEmpty ||
+                        !owner.mainView.bodyTextView.text.isEmpty ||
+                        !(owner.mainView.widthSizeInputTextFieldView.inputTextField.text ?? "").isEmpty ||
+                        !(owner.mainView.verticalSizeInputTextFieldView.inputTextField.text ?? "").isEmpty ||
+                        !(owner.mainView.heightSizeInputTextFieldView.inputTextField.text ?? "").isEmpty {
+                        
+                        owner.showPopUpAlert(
+                            message: "작성 중인 내용이 있습니다.\n글쓰기를 취소할까요?",
+                            rightActionTitle: "글쓰기 취소",
+                            rightActionCompletion: {
+                                owner.navigationController?.popViewController(animated: true)
+                            }
+                        )
+                        return
+                        
+                    } else {
+                        
+                        owner.navigationController?.popViewController(animated: true)
+                        return
+                    }
+                    
+            })
+            .disposed(by: disposeBag)
          
         navigationItem.rightBarButtonItem?.rx.tap
             .bind(
                 with: self,
                 onNext: { owner, _ in
-                    if owner.mainView.titleTextView.text.isEmpty ||
+                    
+                    if (owner.viewModel.photoSections.value[0].items.count == 1) ||
+                        owner.mainView.titleTextView.text.isEmpty ||
                         (owner.mainView.priceTextField.text ?? "").isEmpty ||
                         owner.mainView.bodyTextView.text.isEmpty {
                         
-                        owner.showSinglePopUpAlert(message: "제목, 가격, 내용은\n필수 입력 항목이에요.")
+                        owner.showSinglePopUpAlert(message: "사진, 제목, 가격, 내용은\n필수 입력 항목이에요.")
                         return
+                    }
+                    
+                    switch owner.category {
+                    case .sellingArtwork:
+                        
+                        owner.viewModel.postProductsComplete(
+                            title: owner.mainView.titleTextView.text,
+                            price: Int(owner.mainView.priceTextField.text ?? "-1") ?? -1,
+                            suggest: owner.mainView.isPossibleSuggestButton.isSelected,
+                            body: owner.mainView.bodyTextView.text,
+                            width: Int(owner.mainView.widthSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0,
+                            vertical: Int(owner.mainView.verticalSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0,
+                            heigth: Int(owner.mainView.heightSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
+                        )
+                        
+                    case .work, .request:
+                        
+                        owner.viewModel.postWorksComplete(
+                            title: owner.mainView.titleTextView.text,
+                            price: Int(owner.mainView.priceTextField.text ?? "-1") ?? -1,
+                            suggest: owner.mainView.isPossibleSuggestButton.isSelected,
+                            body: owner.mainView.bodyTextView.text
+                        )
+                        
                     }
                 })
             .disposed(by: disposeBag)
@@ -326,6 +383,12 @@ private extension WritePostVC {
             .drive(mainView.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
+        viewModel.needDismiss
+            .asSignal()
+            .emit(with: self, onNext: { owner, _ in
+                owner.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
