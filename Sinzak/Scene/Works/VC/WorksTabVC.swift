@@ -86,7 +86,8 @@ final class WorksTabVC: TabmanViewController {
         let bar = TMBar.ButtonBar()
         settingTabBar(for: bar)
         addBar(bar, dataSource: self, at: .top)
-                
+        
+        isScrollEnabled = false
     }
     /// 네비게이션 바 설정
     func setNavigationBar() {
@@ -146,7 +147,7 @@ extension WorksTabVC {
     func settingTabBar (for bar: TMBar.ButtonBar) {
         view.backgroundColor = CustomColor.background
                                 
-        bar.layout.transitionStyle = .progressive
+        bar.layout.transitionStyle = .none
         bar.layout.alignment = worksMode == .watch ? .leading : .centerDistributed
         bar.layout.contentInset = UIEdgeInsets(
             top: 0,
