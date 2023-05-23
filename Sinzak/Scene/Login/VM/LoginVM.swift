@@ -25,6 +25,9 @@ protocol LoginVMInput {
 protocol LoginVMOutput {
     var changeRootTabBar: PublishRelay<TabBarVC> { get }
     var pushSignUp: PublishRelay<AgreementVC> { get }
+    
+    var showLoading: PublishRelay<Bool> { get }
+    var errorHandler: PublishRelay<Error> { get }
 }
 
 protocol LoginVM: LoginVMInput, LoginVMOutput {}
@@ -40,35 +43,43 @@ final class DefaultLoginVM: LoginVM {
     
     // MARK: - Input
     func kakaoButtonTapped() {
+        showLoading.accept(true)
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.rx.loginWithKakaoTalk()
-                .subscribe(onNext: { [weak self] oauthToken in
-                    do {
-                        try self?.authWithKakao(oauthToken: oauthToken)
-                    } catch {
-                        self?.handleError(error)
-                    }
-                }, onError: { [weak self] error in
-                    self?.handleError(error)
-                })
+                .subscribe(
+                    with: self,
+                    onNext: { owner, oauthToken in
+                        do {
+                            try owner.authWithKakao(oauthToken: oauthToken)
+                        } catch {
+                            owner.errorHandler.accept(error)
+                        }
+                    },
+                    onError: { owner, error in
+                        owner.errorHandler.accept(error)
+                    })
                 .disposed(by: disposeBag)
     
         } else {
             UserApi.shared.rx.loginWithKakaoAccount()
-                .subscribe(onNext: { [weak self] oauthToken in
-                    do {
-                        try self?.authWithKakao(oauthToken: oauthToken)
-                    } catch {
-                        self?.handleError(error)
-                    }
-                }, onError: { [weak self] error in
-                    self?.handleError(error)
-                })
+                .subscribe(
+                    with: self,
+                    onNext: { owner, oauthToken in
+                        do {
+                            try owner.authWithKakao(oauthToken: oauthToken)
+                        } catch {
+                            owner.errorHandler.accept(error)
+                        }
+                    },
+                    onError: { owner, error in
+                        owner.errorHandler.accept(error)
+                    })
                 .disposed(by: disposeBag)
         }
     }
     
     func naverOauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
+        showLoading.accept(true)
         guard let accessToken = naverLoginInstance?.isValidAccessTokenExpireTimeNow() else { return }
         if !accessToken {
             return
@@ -81,6 +92,7 @@ final class DefaultLoginVM: LoginVM {
             .subscribe(
                 with: self,
                 onSuccess: { owner, snsLoginGrant in
+                    owner.showLoading.accept(false)
                     UserInfoManager.snsKind = SNS.naver.text
                     Log.debug("Access Token: \(snsLoginGrant.accessToken)")
                     Log.debug("Refresh Token: \(snsLoginGrant.refreshToken)")
@@ -95,17 +107,20 @@ final class DefaultLoginVM: LoginVM {
                             refreshToken: snsLoginGrant.refreshToken
                         )
                     }
-                }, onFailure: { _, error in
-                    Log.error(error)
+                }, onFailure: { owner, error in
+                    owner.errorHandler.accept(error)
+                    owner.showLoading.accept(false)
                 })
             .disposed(by: disposeBag)
     }
     
     func appleAuthorizationControl(token: String) {
+        showLoading.accept(true)
         SNSLoginManager.shared.doAppleLogin(idToken: token)
             .subscribe(
                 with: self,
                 onSuccess: { owner, snsLoginGrant in
+                    owner.showLoading.accept(false)
                     UserInfoManager.snsKind = SNS.apple.text
                     Log.debug("Access Token: \(snsLoginGrant.accessToken)")
                     Log.debug("Refresh Token: \(snsLoginGrant.refreshToken)")
@@ -121,8 +136,9 @@ final class DefaultLoginVM: LoginVM {
                             refreshToken: snsLoginGrant.refreshToken
                         )
                     }
-                }, onFailure: { _, error in
-                    Log.error(error)
+                }, onFailure: { owner, error in
+                    owner.showLoading.accept(false)
+                    owner.errorHandler.accept(error)
                 })
             .disposed(by: disposeBag)
     }
@@ -130,6 +146,8 @@ final class DefaultLoginVM: LoginVM {
     // MARK: - Output
     var changeRootTabBar: PublishRelay<TabBarVC> = .init()
     var pushSignUp: PublishRelay<AgreementVC> = .init()
+    var showLoading: PublishRelay<Bool> = .init()
+    var errorHandler: PublishRelay<Error> = .init()
 }
     
 private extension DefaultLoginVM {
@@ -155,10 +173,12 @@ private extension DefaultLoginVM {
                         )
                     }
                 } catch {
+                    self.errorHandler.accept(error)
                     throw error
                 }
             }
         }
+        showLoading.accept(false)
     }
     
     func goTabBar(accessToken: String, refreshToken: String) {
@@ -174,8 +194,8 @@ private extension DefaultLoginVM {
                     let vc = TabBarVC()
                     owner.changeRootTabBar.accept(vc)
                 },
-                onFailure: { _, error in
-                    Log.error(error)
+                onFailure: { owner, error in
+                    owner.errorHandler.accept(error)
                 })
             .disposed(by: disposeBag)
     }
@@ -188,15 +208,6 @@ private extension DefaultLoginVM {
             let vm = DefaultAgreementVM(onboardingUser: self.onboardingUser)
             let vc = AgreementVC(viewModel: vm)
             self.pushSignUp.accept(vc)
-        }
-    }
-    
-    func handleError(_ error: Error ) {
-        if error is APIError {
-            let apiError = error as! APIError
-            Log.error(apiError.info)
-        } else {
-            Log.debug(error)
         }
     }
 }
