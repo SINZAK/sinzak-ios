@@ -16,6 +16,7 @@ class SZTextField: UITextField {
         super.init(frame: .zero)
         self.tintColor = cursorColor
         self.backgroundColor = CustomColor.gray10
+        self.textColor = CustomColor.label
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
