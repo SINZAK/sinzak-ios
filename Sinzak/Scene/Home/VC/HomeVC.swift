@@ -227,10 +227,8 @@ final class HomeVC: SZVC {
     // MARK: - Actions
     @objc func didNotificitionButtonTapped(_ sender: UIBarButtonItem) {
         let vc = NotificationVC()
-//        navigationController?.pushViewController(vc, animated: true)
-//        let ds = self.viewModel.homeSectionModel.value
-        
-        self.viewModel.fetchData()
+        navigationController?.pushViewController(vc, animated: true)
+
     }
     
     // MARK: - Helpers
