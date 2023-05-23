@@ -5,7 +5,7 @@
 //  Created by Doy Kim on 2023/03/03.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import Moya
 
@@ -66,6 +66,7 @@ class ProductsManager: ManagerType {
     
     func wishProducts(id: Int, mode: Bool) -> Single<Bool> {
         return provider.rx.request(.wish(id: id, mode: mode))
+            .filterSuccessfulStatusCodes()
             .map(BaseDTO<String>.self)
             .map(filterError)
             .map { $0.success }
@@ -73,6 +74,7 @@ class ProductsManager: ManagerType {
     
     func deleteProducts(id: Int) -> Single<Bool> {
         return provider.rx.request(.delete(id: id))
+            .filterSuccessfulStatusCodes()
             .map(BaseDTO<String>.self)
             .map(filterError)
             .map { $0.success }
@@ -81,6 +83,7 @@ class ProductsManager: ManagerType {
     /// 거래 완료, 의뢰 완료 처리
     func completeProducts(id: Int) -> Single<Bool> {
         return provider.rx.request(.sell(postId: id))
+            .filterSuccessfulStatusCodes()
             .map(BaseDTO<String>.self)
             .map(filterError)
             .map { $0.success }
@@ -88,8 +91,36 @@ class ProductsManager: ManagerType {
     
     func suggestPrice(id: Int, price: Int) -> Single<Bool> {
         return provider.rx.request(.priceSuggest(id: id, price: price))
+            .filterSuccessfulStatusCodes()
             .map(BaseDTO<String>.self)
             .map(filterError)
             .map { $0.success }
     }
+    
+    func buildProductsPost(products: MarketBuild, images: [UIImage]) -> Single<Bool> {
+        return provider.rx.request(.build(post: products))
+            .filterSuccessfulStatusCodes()
+            .map(BuildPostResponseDTO.self)
+            .map { response in
+                guard response.success == true else {
+                    throw APIError.errorMessage(response.message ?? "")
+                }
+                
+                return response.id ?? -1
+            }
+            .flatMap { [weak self] id -> Single<Bool> in
+                guard let self = self else { return Observable.just(false).asSingle() }
+                
+                return self.productsImageUpload(id: id, images: images)
+            }
+    }
+    
+    private func productsImageUpload(id: Int, images: [UIImage]) -> Single<Bool> {
+        return provider.rx.request(.imageUpload(id: id, images: images))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
+    }
+    
 }
