@@ -11,6 +11,20 @@ import RxCocoa
 import RxDataSources
 import SkeletonView
 
+enum PostListType {
+    case request
+    case products
+    case works
+    
+    var title: String {
+        switch self {
+        case .request:      return "의뢰해요"
+        case .products:     return "판매 작품"
+        case .works:        return "작업해요"
+        }
+    }
+}
+
 final class MyPostListVC: SZVC {
     
     private let mainView = MyPostListView()
@@ -25,11 +39,16 @@ final class MyPostListVC: SZVC {
     }
     
     // MARK: - Init
-    init(type: DetailType, products: [Products]) {
+    init(
+        type: DetailType,
+        products: [Products],
+        postListType: PostListType
+    ) {
         self.type = type
         self.products = products
         
         super.init(nibName: nil, bundle: nil)
+        self.navigationItem.title = postListType.title
     }
     
     required init?(coder: NSCoder) {
@@ -53,13 +72,6 @@ final class MyPostListVC: SZVC {
 
         bind()
     }
-
-    override func setNavigationBar() {
-        super.setNavigationBar()
-        
-        navigationItem.title = "스크랩 목록"
-    }
-    
 }
 
 // MARK: - Bind

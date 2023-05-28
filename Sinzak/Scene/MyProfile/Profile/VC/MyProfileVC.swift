@@ -118,7 +118,8 @@ final class MyProfileVC: SZVC {
             .bind(with: self, onNext: { owner, _ in
                 let vc = MyPostListVC(
                     type: .request,
-                    products: owner.userInfo?.workEmploys ?? []
+                    products: owner.userInfo?.workEmploys ?? [],
+                    postListType: .request
                 )
                 owner.navigationController?.pushViewController(
                     vc,
@@ -133,7 +134,8 @@ final class MyProfileVC: SZVC {
             .bind(with: self, onNext: { owner, _ in
                 let vc = MyPostListVC(
                     type: .purchase,
-                    products: owner.userInfo?.products ?? []
+                    products: owner.userInfo?.products ?? [],
+                    postListType: .products
                 )
                 owner.navigationController?.pushViewController(
                     vc,
@@ -148,7 +150,8 @@ final class MyProfileVC: SZVC {
             .bind(with: self, onNext: { owner, _ in
                 let vc = MyPostListVC(
                     type: .request,
-                    products: owner.userInfo?.works ?? []
+                    products: owner.userInfo?.works ?? [],
+                    postListType: .works
                 )
                 owner.navigationController?.pushViewController(
                     vc,
