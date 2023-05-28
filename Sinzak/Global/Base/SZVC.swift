@@ -76,6 +76,20 @@ class SZVC: UIViewController {
                 Log.error(error)
             })
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.goLogin)
+            .asSignal(onErrorRecover: { _ in .never() })
+            .emit(with: self, onNext: { owner, _ in
+                let vm = DefaultLoginVM()
+                let vc = LoginVC(viewModel: vm)
+                
+                let nav = UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                
+                owner.present(nav, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
     }
     /// 네비게이션 바 설정.
     func setNavigationBar() {

@@ -83,7 +83,9 @@ private extension MoyaLoggerPlugin {
             let message = try JSONDecoder().decode(ShortMessageResult.self, from: response.data)
             if UserInfoManager.isLoggedIn && !message.success && message.message == "로그인이 필요한 작업입니다." {
                 Log.error("🚨reissue🚨")
-                AuthManager.shared.reissueForPlugin()
+//                AuthManager.shared.reissueForPlugin()
+                // TODO: refresh 토큰 사용하게 수정
+                NotificationCenter.default.post(name: .goLogin, object: nil)
             }
         } catch {
             return
