@@ -43,7 +43,6 @@ final class DefaultLoginVM: LoginVM {
     
     // MARK: - Input
     func kakaoButtonTapped() {
-        showLoading.accept(true)
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.rx.loginWithKakaoTalk()
                 .subscribe(
@@ -153,6 +152,7 @@ final class DefaultLoginVM: LoginVM {
 private extension DefaultLoginVM {
 
     func authWithKakao(oauthToken: OAuthToken?) throws {
+        showLoading.accept(true)
         if let token = oauthToken?.accessToken {
             Task {
                 do {
@@ -171,9 +171,11 @@ private extension DefaultLoginVM {
                             accessToken: snsLoginGrant.accessToken,
                             refreshToken: snsLoginGrant.refreshToken
                         )
+                        showLoading.accept(false)
                     }
                 } catch {
                     self.errorHandler.accept(error)
+                    showLoading.accept(true)
                     throw error
                 }
             }

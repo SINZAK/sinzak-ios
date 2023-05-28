@@ -135,7 +135,22 @@ final class LoginVC: SZVC {
         viewModel.errorHandler
             .observe(on: MainScheduler.instance)
             .bind(with: self, onNext: { owner, error in
-                owner.simpleErrorHandler.accept(error)
+                if error is APIError {
+                    let apiError = error as! APIError
+                    
+                    switch apiError {
+                    case .errorMessage(let message):
+                        owner.showSinglePopUpAlert(message: message)
+                    case .badStatus(code: _):
+                        owner.showSinglePopUpAlert(message: "알 수 없는 오류가 발생했습니다.")
+                    default:
+                        Log.error(error)
+                    }
+                } else {
+                    Log.error(error)
+                }
+                
+                self.hideLoading()
                 
                 UserApi.shared.logout {(error) in
                     if let error = error {
@@ -152,6 +167,7 @@ final class LoginVC: SZVC {
                     .map { $0.rawValue }
                     .forEach { KeychainWrapper.standard.removeObject(forKey: $0)}
                 
+                Log.error(error)
             })
             .disposed(by: disposeBag)
     }
@@ -218,34 +234,6 @@ private extension LoginVC {
     
     /// 유저 정보 남아있는 경우 대비해서 비워주기
     func cleanUserInfo() {
-        
-        /*
-        if let snsKind = UserInfoManager.snsKind {
-            let snsKind = SNS(rawValue: snsKind)
-            switch snsKind {
-            case .kakao:
-                UserApi.shared.logout {(error) in
-                    if let error = error {
-                        Log.error(error)
-                    } else {
-                        Log.debug("Kakao logout() success.")
-                    }
-                }
-                
-            case .naver:
-                naverLoginInstance?.resetToken()
-                
-            case .apple:
-                AppleAuth
-                    .allCases
-                    .map { $0.rawValue }
-                    .forEach { KeychainWrapper.standard.removeObject(forKey: $0)}
-                
-            case .none:
-                break
-            }
-        }
-         */
         
         UserApi.shared.logout {(error) in
             if let error = error {
