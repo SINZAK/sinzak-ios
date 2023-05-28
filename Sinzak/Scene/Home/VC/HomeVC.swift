@@ -239,14 +239,16 @@ final class HomeVC: SZVC {
             target: self,
             action: nil
         )
-        let notification = UIBarButtonItem(
-            image: UIImage(named: "notification")?.withTintColor(.label, renderingMode: .alwaysOriginal),
-            style: .plain,
-            target: self,
-            action: #selector(didNotificitionButtonTapped)
-        )
+
+        // 알림 보류
+//        let notification = UIBarButtonItem(
+//            image: UIImage(named: "notification")?.withTintColor(.label, renderingMode: .alwaysOriginal),
+//            style: .plain,
+//            target: self,
+//            action: #selector(didNotificitionButtonTapped)
+//        )
         navigationItem.leftBarButtonItem = logotype
-        navigationItem.rightBarButtonItem = notification
+//        navigationItem.rightBarButtonItem = notification
     }
     override func configure() {
         bind()

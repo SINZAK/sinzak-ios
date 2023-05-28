@@ -38,4 +38,3 @@ struct Message {
     }
 }
 // socketClient.sendJSONForDict(dict: message.nsDictionary, toDestination: "/pub/chat/message")
-
