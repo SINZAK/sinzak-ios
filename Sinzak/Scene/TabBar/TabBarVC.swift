@@ -67,7 +67,8 @@ final class TabBarVC: UITabBarController {
                                          selectedImage: UIImage(named: "outsourcing-selected"))
         
         // 채팅
-        let chatVC = UINavigationController(rootViewController: ChatListVC())
+        let vm = DefaultChatListVM()
+        let chatVC = UINavigationController(rootViewController: ChatListVC(viewModel: vm))
         chatVC.tabBarItem = UITabBarItem(title: I18NStrings.Chat,
                                          image: UIImage(named: "chat"),
                                          selectedImage: UIImage(named: "chat-selected"))
