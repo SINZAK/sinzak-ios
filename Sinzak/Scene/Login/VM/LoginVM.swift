@@ -194,6 +194,15 @@ private extension DefaultLoginVM {
                 with: self,
                 onSuccess: { owner, _ in
                     let vc = TabBarVC()
+                    UserCommandManager.shared.getFCMToken()
+                        .subscribe(
+                            onSuccess: { _ in
+                                Log.debug("Save FCM Token Success!")
+                            },
+                            onFailure: { error in
+                                Log.error(error)
+                            })
+                        .disposed(by: owner.disposeBag)
                     owner.changeRootTabBar.accept(vc)
                 },
                 onFailure: { owner, error in
