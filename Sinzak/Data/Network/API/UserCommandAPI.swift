@@ -34,6 +34,8 @@ enum UserCommandAPI {
     case follow(userId: Int)
     case unfollow(userId: Int)
     
+    // FCM
+    case saveFCM(userID: Int, fcmToken: String)
 }
 
 extension UserCommandAPI: TargetType {
@@ -68,6 +70,8 @@ extension UserCommandAPI: TargetType {
             return "/users/unfollow"
         case .editGenre(_):
             return "/users/edit/category"
+        case .saveFCM:
+            return "/users/fcm"
         }
     }
     var method: Moya.Method {
@@ -77,7 +81,8 @@ extension UserCommandAPI: TargetType {
                 .unfollow,
                 .editGenre,
                 .editUserImage,
-                .editUserInfo:
+                .editUserInfo,
+                .saveFCM:
             return .post
         default:
             return .get
@@ -147,6 +152,15 @@ extension UserCommandAPI: TargetType {
                 parameters: params,
                 encoding: JSONEncoding.default
             )
+        case let .saveFCM(userID, fcmToken):
+            let params: [String: Any] = [
+                "userId": userID,
+                "fcmToken": fcmToken
+            ]
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.queryString
+            )
         default:
             return .requestPlain
         }
@@ -155,9 +169,11 @@ extension UserCommandAPI: TargetType {
         let header = [
             "Content-type": "application/json"
         ]
-        let accessToken = KeychainItem.currentAccessToken
         switch self {
+        case .saveFCM:
+            return header
         default:
+            let accessToken = KeychainItem.currentAccessToken
             if !accessToken.isEmpty {
                 var header = header
                 header["Authorization"] = accessToken
