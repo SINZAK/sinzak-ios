@@ -238,6 +238,10 @@
 		ED86969029D9351A001A1A9F /* SelectAlignPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */; };
 		ED86969229D9359D001A1A9F /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86969129D9359D001A1A9F /* UIView+Extension.swift */; };
 		ED86969429D936A8001A1A9F /* SelectAlignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86969329D936A8001A1A9F /* SelectAlignVC.swift */; };
+		EDB7E4192A2328B20045E1AF /* ChatListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB7E4182A2328B20045E1AF /* ChatListVM.swift */; };
+		EDB7E41B2A23296D0045E1AF /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB7E41A2A23296D0045E1AF /* ChatManager.swift */; };
+		EDB7E41D2A232A730045E1AF /* ChatRoomDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB7E41C2A232A730045E1AF /* ChatRoomDTO.swift */; };
+		EDB7E4202A232B4F0045E1AF /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB7E41F2A232B4F0045E1AF /* ChatRoom.swift */; };
 		EDC5147129DBB48F0015C3B5 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC5147029DBB48F0015C3B5 /* LoginVM.swift */; };
 		EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8656129D5BADD00424FC1 /* MarketVM.swift */; };
 		EDCA46F72A156A5D00EAFEAA /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA46F62A156A5D00EAFEAA /* Photo.swift */; };
@@ -517,6 +521,10 @@
 		ED86968F29D9351A001A1A9F /* SelectAlignPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignPC.swift; sourceTree = "<group>"; };
 		ED86969129D9359D001A1A9F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		ED86969329D936A8001A1A9F /* SelectAlignVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignVC.swift; sourceTree = "<group>"; };
+		EDB7E4182A2328B20045E1AF /* ChatListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListVM.swift; sourceTree = "<group>"; };
+		EDB7E41A2A23296D0045E1AF /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
+		EDB7E41C2A232A730045E1AF /* ChatRoomDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomDTO.swift; sourceTree = "<group>"; };
+		EDB7E41F2A232B4F0045E1AF /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		EDC5147029DBB48F0015C3B5 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		EDC8656129D5BADD00424FC1 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		EDCA46F62A156A5D00EAFEAA /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -801,6 +809,7 @@
 		A216BD50297FD5EA008964BC /* ChatList */ = {
 			isa = PBXGroup;
 			children = (
+				EDB7E41E2A232B300045E1AF /* Model */,
 				A216BD51297FD601008964BC /* View */,
 				A216BD54297FD613008964BC /* VC */,
 			);
@@ -820,6 +829,7 @@
 			isa = PBXGroup;
 			children = (
 				A216BD55297FD61D008964BC /* ChatListVC.swift */,
+				EDB7E4182A2328B20045E1AF /* ChatListVM.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1864,6 +1874,7 @@
 				ED02CAAC2A09311800E20F92 /* UserQueryManager.swift */,
 				ED00BF952A01272300379E89 /* ManagerType.swift */,
 				ED00BFA12A037B6C00379E89 /* WorksManager.swift */,
+				EDB7E41A2A23296D0045E1AF /* ChatManager.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -2081,6 +2092,14 @@
 			path = VM;
 			sourceTree = "<group>";
 		};
+		EDB7E41E2A232B300045E1AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EDB7E41F2A232B4F0045E1AF /* ChatRoom.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		EDC8656029D5BAC600424FC1 /* VM */ = {
 			isa = PBXGroup;
 			children = (
@@ -2104,6 +2123,7 @@
 				ED35526C2A14919900B364FC /* EditUserImageDTO.swift */,
 				ED3552792A14BC3000B364FC /* ScrapListDTO.swift */,
 				ED5A43352A1BED0100D89C3A /* BuildPostResponseDTO.swift */,
+				EDB7E41C2A232A730045E1AF /* ChatRoomDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -2519,9 +2539,11 @@
 				A2B0F60E2980231A00EC5C78 /* MarketView.swift in Sources */,
 				A2DEC36C29B5BD4500CF0794 /* CertifiedAuthorVC.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
+				EDB7E41B2A23296D0045E1AF /* ChatManager.swift in Sources */,
 				EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */,
 				EDE5EC5B29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift in Sources */,
 				A2DEC37129B636C300CF0794 /* APIError.swift in Sources */,
+				EDB7E41D2A232A730045E1AF /* ChatRoomDTO.swift in Sources */,
 				A2F6EAE1298774FC00DE754F /* HomeVM.swift in Sources */,
 				ED19B0CB29EAE24500C951D1 /* SchoolAuthButton.swift in Sources */,
 				A227064E299BD0C5000D5CF2 /* SearchResultView.swift in Sources */,
@@ -2666,6 +2688,7 @@
 				A2420F8629A85998007D8937 /* WritePostView.swift in Sources */,
 				A2B969E129ABA661006119B1 /* ProductsDetailView.swift in Sources */,
 				A216BD5C297FE020008964BC /* ChatView.swift in Sources */,
+				EDB7E4202A232B4F0045E1AF /* ChatRoom.swift in Sources */,
 				ED5A432A2A15701B00D89C3A /* WritePostVM.swift in Sources */,
 				ED5A432F2A19D64F00D89C3A /* SZNumberTextField.swift in Sources */,
 				ED86969429D936A8001A1A9F /* SelectAlignVC.swift in Sources */,
@@ -2694,6 +2717,7 @@
 				A20E4A4B2998FA26009C1340 /* NotLoginedVC.swift in Sources */,
 				A254E13A29BCF897001047FD /* ProductManager.swift in Sources */,
 				A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */,
+				EDB7E4192A2328B20045E1AF /* ChatListVM.swift in Sources */,
 				A2DEC36429B4684100CF0794 /* School.swift in Sources */,
 				EDF5089029FD624600FDC2E2 /* ProductsDetailSkeletonView.swift in Sources */,
 				A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */,
