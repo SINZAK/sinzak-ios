@@ -72,7 +72,7 @@ extension ChatAPI: TargetType {
             return .uploadMultipart(formData)
         }
     }
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         let header = [
             "Content-type": "application/json",
         ]
