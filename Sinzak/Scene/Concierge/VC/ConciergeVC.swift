@@ -61,6 +61,7 @@ final class ConciergeVC: UIViewController {
                                     owner.nextVC.accept(TabBarVC())
                                 }, onFailure: { error in
                                     Log.error(error)
+                                    UserCommandManager.shared.saveFCM(userID: UserInfoManager.userID ?? -1, token: "")
                                     let root = LoginVC(viewModel: DefaultLoginVM())
                                     let vc = UINavigationController(rootViewController: root)
 //                                    let vc = TabBarVC()
@@ -69,6 +70,7 @@ final class ConciergeVC: UIViewController {
                             .disposed(by: owner.disposeBag)
                     },
                     onFailure: { owner, error in
+                        UserCommandManager.shared.saveFCM(userID: UserInfoManager.userID ?? -1, token: "")
                         let root = LoginVC(viewModel: DefaultLoginVM())
                         let vc = UINavigationController(rootViewController: root)
 //                        let vc = TabBarVC()
