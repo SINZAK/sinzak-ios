@@ -183,9 +183,9 @@ final class PopUpAlertController: UIViewController {
             $0.bottom.greaterThanOrEqualTo(containerStackView)
         }
         
-        containerStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(16.0)
+        containerStackView.snp.makeConstraints {            $0.top.equalToSuperview().inset(16.0)
             $0.bottom.equalToSuperview().inset(20.0)
+            $0.leading.trailing.equalToSuperview().inset(16.0)
             $0.centerX.equalToSuperview()
         }
     }
