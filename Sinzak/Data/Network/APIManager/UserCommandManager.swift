@@ -8,6 +8,7 @@
 import UIKit
 import Moya
 import RxSwift
+import FirebaseMessaging
 
 class UserCommandManager: ManagerType {
     private init () {}
@@ -68,4 +69,43 @@ class UserCommandManager: ManagerType {
             .map { $0.success }
     }
     
+    func getFCMToken() -> Single<Bool> {
+        return Observable<Bool>.create { observer in
+            Messaging.messaging().token { [weak self] token, error in
+                guard let self = self else { return }
+                
+                guard error == nil else {
+                    Log.error(error.debugDescription)
+                    observer.onError(APIError.unknown(nil))
+                    return
+                }
+                Log.debug("FCM Token: \(token ?? "")")
+                self.saveFCM(
+                    userID: UserInfoManager.userID ?? -1,
+                    token: token ?? ""
+                )
+                observer.onNext(true)
+            }
+                return Disposables.create()
+        }
+        .asSingle()
+    }
+    
+    func saveFCM(userID: Int, token: String) {
+        provider.rx.request(.saveFCM(
+            userID: userID,
+            fcmToken: token
+        ))
+        .filterSuccessfulStatusCodes()
+        .map(BaseDTO<String>.self)
+        .map(filterError)
+        .subscribe(
+            onSuccess: { _ in
+                Log.debug("Save FCM token success.")
+            },
+            onFailure: { error in
+                Log.error("Save FCM token fail. \(error)")
+            })
+        .disposed(by: disposeBag)
+    }
 }
