@@ -122,6 +122,11 @@ extension UserInfoManager {
     }
     
     func logout(completion: @escaping () -> Void) {
+        UserCommandManager.shared.saveFCM(
+            userID: UserInfoManager.userID ?? -1,
+            token: ""
+        )
+        
         UserManagerKey.allCases.forEach {
             UserDefaults.standard.removeObject(forKey: $0.rawValue)
         }
