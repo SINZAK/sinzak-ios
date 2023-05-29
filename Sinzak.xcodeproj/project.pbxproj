@@ -246,6 +246,8 @@
 		EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8656129D5BADD00424FC1 /* MarketVM.swift */; };
 		EDCA46F72A156A5D00EAFEAA /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA46F62A156A5D00EAFEAA /* Photo.swift */; };
 		EDD446DE29DF14F5005DD268 /* sinzak_splash_animation_dark.json in Resources */ = {isa = PBXBuildFile; fileRef = EDD446DD29DF14F5005DD268 /* sinzak_splash_animation_dark.json */; };
+		EDE25CA72A25139F00B216DB /* UICollectionReusableView+Extentsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE25CA62A25139E00B216DB /* UICollectionReusableView+Extentsion.swift */; };
+		EDE25CA92A25149F00B216DB /* NSNotification-Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE25CA82A25149F00B216DB /* NSNotification-Name+Extension.swift */; };
 		EDE5EC5329D669EC00BB211F /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = EDE5EC5229D669EC00BB211F /* Differentiator */; };
 		EDE5EC5529D669EC00BB211F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = EDE5EC5429D669EC00BB211F /* RxDataSources */; };
 		EDE5EC5729D6EB3200BB211F /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5629D6EB3200BB211F /* Log.swift */; };
@@ -277,7 +279,6 @@
 		EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */; };
 		EDF76FF329F7BE2900F33146 /* ProductsDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */; };
 		EDF76FFB29F7DFD900F33146 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */; };
-		EDF76FFD29F8D6D800F33146 /* NSNotification-Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */; };
 		EDF76FFF29F8F32300F33146 /* BannerFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76FFE29F8F32300F33146 /* BannerFooter.swift */; };
 		EDF7700129F93F9400F33146 /* SoldOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7700029F93F9400F33146 /* SoldOutView.swift */; };
 		EDF7700629FBC1D500F33146 /* ProductsDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7700529FBC1D500F33146 /* ProductsDetailVM.swift */; };
@@ -529,6 +530,8 @@
 		EDC8656129D5BADD00424FC1 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		EDCA46F62A156A5D00EAFEAA /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		EDD446DD29DF14F5005DD268 /* sinzak_splash_animation_dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sinzak_splash_animation_dark.json; sourceTree = "<group>"; };
+		EDE25CA62A25139E00B216DB /* UICollectionReusableView+Extentsion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Extentsion.swift"; sourceTree = "<group>"; };
+		EDE25CA82A25149F00B216DB /* NSNotification-Name+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNotification-Name+Extension.swift"; sourceTree = "<group>"; };
 		EDE5EC5629D6EB3200BB211F /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		EDE5EC5A29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extenstion.swift"; sourceTree = "<group>"; };
 		EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Extentsion.swift"; sourceTree = "<group>"; };
@@ -558,7 +561,6 @@
 		EDF76FF029F7BD3E00F33146 /* ProductsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetail.swift; sourceTree = "<group>"; };
 		EDF76FF229F7BE2900F33146 /* ProductsDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailDTO.swift; sourceTree = "<group>"; };
 		EDF76FFA29F7DFD900F33146 /* BaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
-		EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSNotification-Name+Extension.swift"; path = "../../../../NSNotification-Name+Extension.swift"; sourceTree = "<group>"; };
 		EDF76FFE29F8F32300F33146 /* BannerFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerFooter.swift; sourceTree = "<group>"; };
 		EDF7700029F93F9400F33146 /* SoldOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoldOutView.swift; sourceTree = "<group>"; };
 		EDF7700529FBC1D500F33146 /* ProductsDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsDetailVM.swift; sourceTree = "<group>"; };
@@ -641,8 +643,9 @@
 		A20CBD6E29478BB90012FF32 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EDE25CA82A25149F00B216DB /* NSNotification-Name+Extension.swift */,
+				EDE25CA62A25139E00B216DB /* UICollectionReusableView+Extentsion.swift */,
 				A2DEC37229B6495000CF0794 /* Date+Extension.swift */,
-				EDF76FFC29F8D6D800F33146 /* NSNotification-Name+Extension.swift */,
 				A20CBD6F29478BCF0012FF32 /* String+Extension.swift */,
 				EDF508B229FF8E2200FDC2E2 /* Int+Extension.swift */,
 				A2B385632959A8F000E5EB7C /* UIView+UIStackView+Extension.swift */,
@@ -2514,6 +2517,7 @@
 				EDEEFFB229F3A38600C828B9 /* ReissueDTO.swift in Sources */,
 				A216BD58297FD850008964BC /* ChatListCVC.swift in Sources */,
 				ED3552782A14B64F00B364FC /* ScrapListVM.swift in Sources */,
+				EDE25CA72A25139F00B216DB /* UICollectionReusableView+Extentsion.swift in Sources */,
 				A254E14029BD0427001047FD /* UserCommandAPI.swift in Sources */,
 				EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */,
 				A226CC5C29AE31F1000161E8 /* WelcomeView.swift in Sources */,
@@ -2604,7 +2608,6 @@
 				ED35527A2A14BC3000B364FC /* ScrapListDTO.swift in Sources */,
 				A29CE9D72997EBBE00EB89B4 /* KeychainItem.swift in Sources */,
 				A20E4A5229990091009C1340 /* MyProfileVC.swift in Sources */,
-				EDF76FFD29F8D6D800F33146 /* NSNotification-Name+Extension.swift in Sources */,
 				A254E15129BDFD84001047FD /* WebVC.swift in Sources */,
 				A2100F77298695A100C85ADF /* WorksCategory.swift in Sources */,
 				A2DEC35629B4417F00CF0794 /* SNSLoginAPI.swift in Sources */,
@@ -2684,6 +2687,7 @@
 				A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */,
 				ED74A08029F4FABB00F44AA2 /* AppleAuthManager.swift in Sources */,
 				ED47113F29E03C6200708562 /* SignupNameVM.swift in Sources */,
+				EDE25CA92A25149F00B216DB /* NSNotification-Name+Extension.swift in Sources */,
 				EDF508A629FEB92300FDC2E2 /* ReportSelectVC.swift in Sources */,
 				A2420F8629A85998007D8937 /* WritePostView.swift in Sources */,
 				A2B969E129ABA661006119B1 /* ProductsDetailView.swift in Sources */,
