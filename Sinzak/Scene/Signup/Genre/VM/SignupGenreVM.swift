@@ -66,6 +66,15 @@ final class DefaultSignupGenreVM: SignupGenreVM {
                     UserQueryManager.shared.fetchMyProfile()
                         .subscribe(
                             onSuccess: { _ in
+                                UserCommandManager.shared.getFCMToken()
+                                    .subscribe(
+                                        onSuccess: { _ in
+                                            Log.debug("Save FCM Token Success!")
+                                        },
+                                        onFailure: { error in
+                                            Log.error(error)
+                                        })
+                                    .disposed(by: owner.disposeBag)
                                 Log.debug("회원가입 성공, \(join)")
                                 Log.debug("Access Token - \(KeychainItem.currentAccessToken)")
                                 Log.debug("Refresh Token - \(KeychainItem.currentRefreshToken)")
