@@ -239,6 +239,7 @@ final class HomeVC: SZVC {
             target: self,
             action: nil
         )
+        logotype.isEnabled = false
 
         // 알림 보류
 //        let notification = UIBarButtonItem(
