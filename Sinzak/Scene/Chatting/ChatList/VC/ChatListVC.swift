@@ -132,6 +132,7 @@ extension ChatListVC {
     private func createLayout() -> UICollectionViewLayout {
         var config = UICollectionLayoutListConfiguration(appearance: .plain)
         config.separatorConfiguration.color = .clear
+        config.backgroundColor = CustomColor.background
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         return layout
     }
