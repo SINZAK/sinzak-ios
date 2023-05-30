@@ -17,7 +17,7 @@ final class OtherChatBubbleCVC: UICollectionViewCell {
     }
     let chatLabel = UILabel().then {
         $0.font = .body_R
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.textAlignment = .left
         $0.numberOfLines = 0
     }
@@ -37,25 +37,26 @@ final class OtherChatBubbleCVC: UICollectionViewCell {
     }
     // MARK: - UI
     func setupUI() {
+        bubbleBackgroundView.addSubview(chatLabel)
         contentView.addSubview(bubbleBackgroundView)
         contentView.addSubview(dateLabel)
-        contentView.addSubview(chatLabel)
     }
     func setConstraints() {
         chatLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(34)
-            make.trailing.lessThanOrEqualToSuperview().inset(72)
-            make.top.bottom.equalToSuperview().inset(18)
+            make.leading.equalToSuperview().inset(16.0)
+            make.top.bottom.equalToSuperview().inset(12.0)
+            make.width.lessThanOrEqualTo(frame.width * (2/3))
         }
+
         bubbleBackgroundView.snp.makeConstraints { make in
-            make.bottom.equalTo(chatLabel).offset(12)
-            make.trailing.equalTo(chatLabel).offset(18)
-            make.leading.equalTo(chatLabel).offset(-18)
-            make.top.equalTo(chatLabel).offset(-12)
+            make.leading.equalToSuperview().inset(16.0)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview().inset(2.0)
+            make.trailing.equalTo(chatLabel.snp.trailing).offset(16.0)
         }
         dateLabel.snp.makeConstraints { make in
             make.bottom.equalTo(bubbleBackgroundView)
-            make.leading.equalTo(bubbleBackgroundView.snp.trailing)
+            make.leading.equalTo(bubbleBackgroundView.snp.trailing).offset(4.0)
         }
     }
 }
