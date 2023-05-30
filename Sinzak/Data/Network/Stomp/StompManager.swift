@@ -11,11 +11,13 @@ import StompClientLib
 class StompManager {
     private init() {}
     static let shared: StompManager = StompManager()
+    
     private let url = URL(string: Endpoint.wsURL)
     var socketClient = StompClientLib()
     let header = [
         "Authorization": KeychainItem.currentAccessToken // 키체인에서 불러온 Auth 토큰
     ]
+    
     /// 소켓 연결
     func registerSocket() {
         socketClient.openSocketWithURLRequest(
@@ -23,6 +25,13 @@ class StompManager {
             delegate: self as StompClientLibDelegate,
             connectionHeaders: header
         )
+    }
+    
+    /// 소켓 연결 해제
+    func disconnect() {
+        if socketClient.isConnected() {
+            socketClient.disconnect()
+        }
     }
     
     func subscribe(roomId: String) {
@@ -48,11 +57,6 @@ class StompManager {
         )
     }
     
-    func disconnect() {
-        if socketClient.isConnected() {
-            socketClient.disconnect()
-        }
-    }
 }
 
 extension StompManager: StompClientLibDelegate {
@@ -60,7 +64,7 @@ extension StompManager: StompClientLibDelegate {
         client: StompClientLib!,
         didReceiveMessageWithJSONBody jsonBody: AnyObject?,
         akaStringBody stringBody: String?,
-        withHeader header: [String : String]?,
+        withHeader header: [String: String]?,
         withDestination destination: String
     ) {
         print("DESTINATION : \(destination)")
