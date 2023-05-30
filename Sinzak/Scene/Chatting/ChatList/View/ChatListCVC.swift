@@ -93,34 +93,34 @@ final class ChatListCVC: UICollectionViewCell {
     }
     
     // MARK: - Design Helpers
-    func setupUI() {
+    private func setupUI() {
         contentView.backgroundColor = .clear
         contentView.addSubviews(
-            chatThumbnail, nameBadgestack,chatCountBackground,
+            chatThumbnail, nameBadgestack, //chatCountBackground,
             schoolLabel, middlePoint, timeLabel,
             talkLabel
         )
         nameBadgestack.addArrangedSubviews(
-            nameLabel, verifiedBadge
+            nameLabel//, verifiedBadge
         )
-        chatCountBackground.addSubview(
-            chatCountLabel
-        )
+//        chatCountBackground.addSubview(
+//            chatCountLabel
+//        )
     }
-    func setConstraints() {
+    private func setConstraints() {
         chatThumbnail.snp.makeConstraints { make in
             make.width.height.equalTo(48)
-            make.top.bottom.leading.equalToSuperview().inset(17)
+            make.top.bottom.leading.equalToSuperview().inset(16)
             make.centerY.equalToSuperview()
         }
-        chatCountBackground.snp.makeConstraints { make in
-            make.width.height.equalTo(24)
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(20)
-        }
-        chatCountLabel.snp.makeConstraints { make in
-            make.centerY.centerX.equalToSuperview()
-        }
+//        chatCountBackground.snp.makeConstraints { make in
+//            make.width.height.equalTo(24)
+//            make.centerY.equalToSuperview()
+//            make.trailing.equalToSuperview().inset(20)
+//        }
+//        chatCountLabel.snp.makeConstraints { make in
+//            make.centerY.centerX.equalToSuperview()
+//        }
         nameBadgestack.snp.makeConstraints { make in
             make.leading.equalTo(chatThumbnail.snp.trailing).offset(15)
             make.top.equalTo(chatThumbnail)
@@ -128,10 +128,10 @@ final class ChatListCVC: UICollectionViewCell {
         nameLabel.snp.makeConstraints { make in
             make.leading.centerY.equalToSuperview()
         }
-        verifiedBadge.snp.makeConstraints { make in
-            make.width.height.equalTo(18)
-            make.centerY.equalToSuperview()
-        }
+//        verifiedBadge.snp.makeConstraints { make in
+//            make.width.height.equalTo(18)
+//            make.centerY.equalToSuperview()
+//        }
         schoolLabel.snp.makeConstraints { make in
             make.leading.equalTo(nameBadgestack.snp.trailing).offset(9)
             make.centerY.equalTo(nameBadgestack)
