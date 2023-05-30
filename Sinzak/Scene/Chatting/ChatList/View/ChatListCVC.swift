@@ -8,10 +8,12 @@
 import UIKit
 import SnapKit
 import Then
+import Kingfisher
 
 final class ChatListCVC: UICollectionViewCell {
     // MARK: - Properties
     let chatThumbnail = UIImageView().then {
+        $0.backgroundColor = CustomColor.gray10
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 16
         $0.image = UIImage(named: "chat-thumbnail")
@@ -70,6 +72,26 @@ final class ChatListCVC: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setCellInfo(chatRoom: ChatRoom) {
+        let url = URL(string: chatRoom.image)
+        chatThumbnail.kf.setImage(with: url)
+        
+        nameLabel.text = chatRoom.roomName
+        
+        schoolLabel.text = chatRoom.univ
+        if chatRoom.univ.isEmpty {
+            middlePoint.isHidden = true
+        }
+        
+        timeLabel.text = chatRoom
+            .latestMessageTime
+            .toDate()
+            .toRelativeString()
+        
+        talkLabel.text = chatRoom.latestMessage
+    }
+    
     // MARK: - Design Helpers
     func setupUI() {
         contentView.backgroundColor = .clear
