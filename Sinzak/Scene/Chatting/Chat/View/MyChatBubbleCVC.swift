@@ -37,26 +37,25 @@ final class MyChatBubbleCVC: UICollectionViewCell {
     }
     // MARK: - UI
     func setupUI() {
+        bubbleBackgroundView.addSubview(chatLabel)
         contentView.addSubview(bubbleBackgroundView)
         contentView.addSubview(dateLabel)
-        contentView.addSubview(chatLabel)
     }
     func setConstraints() {
         chatLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(34)
-            make.leading.equalTo(dateLabel.snp.trailing).offset(18)
-            make.top.bottom.equalToSuperview().inset(14)
+            make.trailing.equalToSuperview().inset(16.0)
+            make.top.bottom.equalToSuperview().inset(12.0)
+            make.width.lessThanOrEqualTo(frame.width * (2/3))
         }
         bubbleBackgroundView.snp.makeConstraints { make in
-            make.bottom.equalTo(chatLabel).offset(12)
-            make.trailing.equalTo(chatLabel).offset(18)
-            make.leading.equalTo(chatLabel).offset(-18)
-            make.top.equalTo(chatLabel).offset(-12)
+            make.trailing.equalToSuperview().inset(16.0)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview().inset(2.0)
+            make.leading.equalTo(chatLabel.snp.leading).offset(-16.0)
         }
         dateLabel.snp.makeConstraints { make in
             make.bottom.equalTo(bubbleBackgroundView)
-            make.trailing.equalTo(bubbleBackgroundView.snp.leading)
-            make.leading.lessThanOrEqualToSuperview().inset(72)
+            make.trailing.equalTo(bubbleBackgroundView.snp.leading).offset(-4.0)
         }
     }
 }
