@@ -16,7 +16,7 @@ final class ChatView: SZView {
     }
     // 상단 작품디테일쪽
     let artDetailView = UIView().then {
-        $0.backgroundColor = CustomColor.white
+        $0.backgroundColor = CustomColor.background
     }
     let artThumbnail = UIImageView().then {
         $0.clipsToBounds = true
@@ -26,17 +26,17 @@ final class ChatView: SZView {
     }
     let isDealingLabel = UILabel().then {
         $0.text = "거래중"
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.font = .caption_B
     }
     let artTitleLabel = UILabel().then {
         $0.text = "작품명"
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.font = .caption_R
     }
     let artPriceLabel = UILabel().then {
         $0.text = "33,000원"
-        $0.textColor = CustomColor.black
+        $0.textColor = CustomColor.label
         $0.font = .caption_R
     }
     let isNotNegotiableButton = UIButton().then {
@@ -54,7 +54,7 @@ final class ChatView: SZView {
     }
     // 하단 채팅레이블쪽
     let chatActionView = UIView().then {
-        $0.backgroundColor = CustomColor.white
+        $0.backgroundColor = CustomColor.background
     }
     let albumButton = UIButton().then {
         $0.setImage(UIImage(named: "album"), for: .normal)
@@ -62,9 +62,9 @@ final class ChatView: SZView {
     let chatTextField = SZTextField(insets: UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)).then {
         $0.backgroundColor = CustomColor.gray10
         $0.layer.cornerRadius = 21
-        $0.font = .body_B
-        $0.textColor = CustomColor.black
-        $0.clearButtonMode = .whileEditing
+        $0.font = .body_R
+        $0.textColor = CustomColor.label
+        $0.clearButtonMode = .never
         $0.placeholder = "메시지 보내기"
     }
     // MARK: - Design Helpers
@@ -112,12 +112,13 @@ final class ChatView: SZView {
             make.centerY.equalTo(artPriceLabel)
         }
         chatActionView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(83)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.height.equalTo(44.0)
         }
         albumButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(10)
-            make.top.equalToSuperview().inset(6)
+            make.centerY.equalToSuperview()
             make.width.height.equalTo(38)
         }
         chatTextField.snp.makeConstraints { make in
@@ -128,8 +129,36 @@ final class ChatView: SZView {
         }
         collectionView.snp.makeConstraints { make in
             make.trailing.leading.equalToSuperview()
-            make.top.equalTo(artDetailView.snp.bottom)
-            make.bottom.equalTo(chatActionView.snp.top)
+            make.top.equalTo(artDetailView.snp.bottom).offset(4.0)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-44.0)
         }
+    }
+}
+
+// MARK: - Remake Constraits
+
+extension ChatView {
+    
+    func setShowKeyboardLayout(height: CGFloat) {
+        chatActionView.snp.remakeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(height)
+            make.height.equalTo(44.0)
+        }
+        
+        collectionView.contentInset.bottom = height - safeAreaInsets.bottom
+        collectionView.verticalScrollIndicatorInsets.bottom = collectionView.contentInset.bottom
+        collectionView.contentOffset.y += height - safeAreaInsets.bottom
+    }
+    
+    func setHideKeyboardLayout() {
+        chatActionView.snp.remakeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.height.equalTo(44.0)
+        }
+        
+        collectionView.contentInset.bottom = 0
+        collectionView.verticalScrollIndicatorInsets.bottom = collectionView.contentInset.bottom
     }
 }
