@@ -20,12 +20,30 @@ final class ChatManager: ManagerType {
     )
     
     func fetchChatList() -> Single<[ChatRoom]> {
-        return provider.rx.request(.chatRoomList)
+        return provider.rx.request(.fetchChatRoomList)
             .filterSuccessfulStatusCodes()
             .map(BaseDTO<[ChatRoomDTO]>.self)
             .map(filterError)
             .map(getData)
             .map { $0.map { $0.toDomain() } }
+    }
+    
+    func fetchPostChatList(postID: Int, postType: String) -> Single<[ChatRoom]> {
+        return provider.rx.request(.fetchPostChatRoomList(postID: postID, postType: postType))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<[ChatRoomDTO]>.self)
+            .map(filterError)
+            .map(getData)
+            .map { $0.map { $0.toDomain() } }
+    }
+    
+    func creatChatRoom(postID: Int, postType: String) -> Single<String> {
+        return provider.rx.request(.chatCreate(postId: postID, postType: postType))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<CreateChatRoomDTO>.self)
+            .map(filterError)
+            .map(getData)
+            .map { $0.roomUuid }
     }
     
     func getChatRoomInfo(roomID: String) -> Single<ChatRoomInfo> {
