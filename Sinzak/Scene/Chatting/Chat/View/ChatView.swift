@@ -12,6 +12,8 @@ import Then
 final class ChatView: SZView {
     // MARK: - Properties
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
+        $0.register(MyImageCVC.self, forCellWithReuseIdentifier: MyImageCVC.identifier)
+        $0.register(OtherImageCVC.self, forCellWithReuseIdentifier: OtherImageCVC.identifier)
         $0.backgroundColor = .clear
     }
     // 상단 작품디테일쪽
@@ -22,32 +24,28 @@ final class ChatView: SZView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 12
         $0.contentMode = .scaleAspectFill
-        $0.image = UIImage(named: "art")
     }
     let isDealingLabel = UILabel().then {
-        $0.text = "거래중"
         $0.textColor = CustomColor.label
         $0.font = .caption_B
     }
     let artTitleLabel = UILabel().then {
-        $0.text = "작품명"
         $0.textColor = CustomColor.label
         $0.font = .caption_R
     }
     let artPriceLabel = UILabel().then {
-        $0.text = "33,000원"
         $0.textColor = CustomColor.label
         $0.font = .caption_R
     }
     let isNotNegotiableButton = UIButton().then {
-        $0.setTitle("가격제안불가", for: .normal)
         $0.setTitleColor(CustomColor.gray60, for: .normal)
         $0.titleLabel?.font = .caption_R
         $0.isUserInteractionEnabled = false
-        $0.isHidden = false
+    // TODO: 보류
+        $0.isHidden = true
     }
     let isNegotiableButton = UIButton().then {
-        $0.setTitle("가격제안하기", for: .normal)
+//        $0.setTitle("가격제안하기", for: .normal)
         $0.titleLabel?.font = .caption_M
         $0.isHidden = true
         $0.setTitleColor(CustomColor.purple, for: .normal)
@@ -114,7 +112,7 @@ final class ChatView: SZView {
         chatActionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide)
-            make.height.equalTo(44.0)
+            make.height.equalTo(50.0)
         }
         albumButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(10)
@@ -132,6 +130,20 @@ final class ChatView: SZView {
             make.top.equalTo(artDetailView.snp.bottom).offset(4.0)
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-44.0)
         }
+    }
+}
+
+extension ChatView {
+    
+    func setArtDetailInfo(info: ChatRoomInfo) {
+        let url = URL(string: info.thumbnail)
+        artThumbnail.kf.setImage(with: url)
+        isDealingLabel.text = info.complete ? "거래 완료" : "거래중"
+        artTitleLabel.text = info.postName
+        artPriceLabel.text = info.price.toMoenyFormat()
+        
+        // TODO: 보류
+        isNotNegotiableButton.isHidden = true
     }
 }
 
