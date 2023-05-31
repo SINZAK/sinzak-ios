@@ -59,7 +59,8 @@ final class ConciergeVC: UIViewController {
                             .subscribe(
                                 onSuccess: { _ in
                                     owner.nextVC.accept(TabBarVC())
-                                }, onFailure: { error in
+                                },
+                                onFailure: { error in
                                     Log.error(error)
                                     UserCommandManager.shared.saveFCM(userID: UserInfoManager.userID ?? -1, token: "")
                                     let root = LoginVC(viewModel: DefaultLoginVM())
