@@ -472,7 +472,6 @@ extension MarketVC: UICollectionViewDelegate {
         forItemAt indexPath: IndexPath
     ) {
         if indexPath.item == viewModel.productSections.value[0].items.count - 2 {
-            Log.debug("fetct")
             viewModel.fetchNextPage()
         }
     }
