@@ -280,7 +280,7 @@ final class DefaultChatVM: ChatVM {
     
     func leaveChatRoom() {
         sendMessage(
-            message: "\(roomInfo?.roomName ?? "")님이 나가셨습니다.",
+            message: "\(UserInfoManager.name ?? "")님이 나가셨습니다.",
             type: .leave
         )
         popView.accept(true)
