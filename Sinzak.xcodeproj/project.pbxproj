@@ -31,7 +31,6 @@
 		A210CD52292F4D6B00F86A08 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = A210CD51292F4D6B00F86A08 /* Then */; };
 		A2121ACE29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2121ACD29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift */; };
 		A2121AD029D075AE008F5406 /* UnivCertify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2121ACF29D075AE008F5406 /* UnivCertify.swift */; };
-		A2121AD329D081B7008F5406 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = A2121AD229D081B7008F5406 /* YPImagePicker */; };
 		A216BD37297FA384008964BC /* HomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD36297FA384008964BC /* HomeDetailView.swift */; };
 		A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3A297FA3B4008964BC /* HomeDetailVC.swift */; };
 		A216BD3D297FA426008964BC /* ArtFullWidthCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216BD3C297FA426008964BC /* ArtFullWidthCVC.swift */; };
@@ -265,6 +264,7 @@
 		EDF0228B2A2709F200CE029E /* OtherImageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0228A2A2709F200CE029E /* OtherImageCVC.swift */; };
 		EDF0228D2A271DA500CE029E /* URLDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0228C2A271DA500CE029E /* URLDTO.swift */; };
 		EDF0228F2A2784D200CE029E /* LeaveCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0228E2A2784D200CE029E /* LeaveCVC.swift */; };
+		EDF022912A27A72900CE029E /* CreateChatRoomDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF022902A27A72900CE029E /* CreateChatRoomDTO.swift */; };
 		EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501229ED388F001733C6 /* SignupGenreVM.swift */; };
 		EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */; };
 		EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501C29EDAE7C001733C6 /* Setting.swift */; };
@@ -556,6 +556,7 @@
 		EDF0228A2A2709F200CE029E /* OtherImageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherImageCVC.swift; sourceTree = "<group>"; };
 		EDF0228C2A271DA500CE029E /* URLDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDTO.swift; sourceTree = "<group>"; };
 		EDF0228E2A2784D200CE029E /* LeaveCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveCVC.swift; sourceTree = "<group>"; };
+		EDF022902A27A72900CE029E /* CreateChatRoomDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChatRoomDTO.swift; sourceTree = "<group>"; };
 		EDF4501229ED388F001733C6 /* SignupGenreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVM.swift; sourceTree = "<group>"; };
 		EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultMessageDTO.swift; sourceTree = "<group>"; };
 		EDF4501C29EDAE7C001733C6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
@@ -598,7 +599,6 @@
 				A210CD4F292F4D5300F86A08 /* SnapKit in Frameworks */,
 				A254E15429BE0413001047FD /* RxKeyboard in Frameworks */,
 				A216BD48297FB6B5008964BC /* Tabman in Frameworks */,
-				A2121AD329D081B7008F5406 /* YPImagePicker in Frameworks */,
 				ED15161129DCBE8F00227CC8 /* RxKakaoSDKUser in Frameworks */,
 				0961FB4629DCBDCB00B55EF3 /* KakaoSDKUser in Frameworks */,
 				ED00BF942A01244900379E89 /* JGProgressHUD in Frameworks */,
@@ -2153,6 +2153,7 @@
 				EDF0227C2A25E81B00CE029E /* ChatRoomInfoDTO.swift */,
 				EDF022812A25FFFA00CE029E /* ChatMessageDTO.swift */,
 				EDF0228C2A271DA500CE029E /* URLDTO.swift */,
+				EDF022902A27A72900CE029E /* CreateChatRoomDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -2307,7 +2308,6 @@
 				A29CE9E02998DD2800EB89B4 /* FirebaseMessaging */,
 				A226CC6529AF2D1D000161E8 /* RxMoya */,
 				A254E15329BE0413001047FD /* RxKeyboard */,
-				A2121AD229D081B7008F5406 /* YPImagePicker */,
 				EDE5EC5229D669EC00BB211F /* Differentiator */,
 				EDE5EC5429D669EC00BB211F /* RxDataSources */,
 				ED518CD429D7FD3F003342B9 /* SkeletonView */,
@@ -2381,7 +2381,6 @@
 				A29CE9DB2998DD2800EB89B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A226CC6429AF2D1D000161E8 /* XCRemoteSwiftPackageReference "Moya" */,
 				A254E15229BE0413001047FD /* XCRemoteSwiftPackageReference "RxKeyboard" */,
-				A2121AD129D081B7008F5406 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 				EDE5EC5129D669EB00BB211F /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				ED518CD329D7FD3F003342B9 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				0961FB4029DCBDCB00B55EF3 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
@@ -2586,6 +2585,7 @@
 				A2B0F60E2980231A00EC5C78 /* MarketView.swift in Sources */,
 				A2DEC36C29B5BD4500CF0794 /* CertifiedAuthorVC.swift in Sources */,
 				A2806129292F585E005AE0B3 /* setColor.swift in Sources */,
+				EDF022912A27A72900CE029E /* CreateChatRoomDTO.swift in Sources */,
 				EDB7E41B2A23296D0045E1AF /* ChatManager.swift in Sources */,
 				EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */,
 				EDE5EC5B29D6FB6D00BB211F /* UITableViewCell+Extenstion.swift in Sources */,
@@ -2978,6 +2978,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -3015,6 +3016,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -3139,14 +3141,6 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		A2121AD129D081B7008F5406 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Yummypets/YPImagePicker";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 5.2.0;
-			};
-		};
 		A216BD46297FB6B5008964BC /* XCRemoteSwiftPackageReference "Tabman" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uias/Tabman";
@@ -3255,11 +3249,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A210CD50292F4D6B00F86A08 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
-		};
-		A2121AD229D081B7008F5406 /* YPImagePicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A2121AD129D081B7008F5406 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
-			productName = YPImagePicker;
 		};
 		A216BD47297FB6B5008964BC /* Tabman */ = {
 			isa = XCSwiftPackageProductDependency;
