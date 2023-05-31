@@ -15,6 +15,7 @@ typealias ImageSection = SectionModel<Void, String>
 protocol ProductsDetailVMInput {
     func fetchProductsDetail(id: Int)
     var refresh: () -> Void { get }
+    func requestDeal(postID: Int, postType: String)
 }
 
 protocol ProductsDetailVMOutput {
@@ -22,6 +23,7 @@ protocol ProductsDetailVMOutput {
     var imageSections: PublishRelay<[ImageSection]> { get }
     
     var deletedPost: PublishRelay<String> { get }
+    var pushChatRoom: PublishRelay<ChatVC> { get }
 }
 
 protocol ProductsDetailVM: ProductsDetailVMInput, ProductsDetailVMOutput {}
@@ -80,12 +82,30 @@ final class DefaultProductsDetailVM: ProductsDetailVM {
             .disposed(by: disposeBag)
     }
     
+    func requestDeal(postID: Int, postType: String) {
+        
+        ChatManager.shared.creatChatRoom(postID: postID, postType: postType)
+            .subscribe(
+                with: self,
+                onSuccess: { owner, roomID in
+                    let vm = DefaultChatVM(roomID: roomID)
+                    let vc = ChatVC(viewModel: vm)
+                    owner.pushChatRoom.accept(vc)
+                },
+                onFailure: { _, error in
+                    Log.error(error)
+                })
+            .disposed(by: disposeBag)
+        
+    }
+    
     var refresh: () -> Void
 
     // MARK: - Output
     
     var fetchedData: PublishRelay<ProductsDetail> = .init()
     var imageSections: PublishRelay<[ImageSection]> = .init()
+    var pushChatRoom: PublishRelay<ChatVC> = .init()
     
     var deletedPost: PublishRelay<String> = .init()
 }
