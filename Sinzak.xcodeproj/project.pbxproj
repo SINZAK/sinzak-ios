@@ -264,6 +264,7 @@
 		EDF022892A2707FD00CE029E /* MyImageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF022882A2707FD00CE029E /* MyImageCVC.swift */; };
 		EDF0228B2A2709F200CE029E /* OtherImageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0228A2A2709F200CE029E /* OtherImageCVC.swift */; };
 		EDF0228D2A271DA500CE029E /* URLDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0228C2A271DA500CE029E /* URLDTO.swift */; };
+		EDF0228F2A2784D200CE029E /* LeaveCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0228E2A2784D200CE029E /* LeaveCVC.swift */; };
 		EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501229ED388F001733C6 /* SignupGenreVM.swift */; };
 		EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */; };
 		EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501C29EDAE7C001733C6 /* Setting.swift */; };
@@ -554,6 +555,7 @@
 		EDF022882A2707FD00CE029E /* MyImageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImageCVC.swift; sourceTree = "<group>"; };
 		EDF0228A2A2709F200CE029E /* OtherImageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherImageCVC.swift; sourceTree = "<group>"; };
 		EDF0228C2A271DA500CE029E /* URLDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDTO.swift; sourceTree = "<group>"; };
+		EDF0228E2A2784D200CE029E /* LeaveCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveCVC.swift; sourceTree = "<group>"; };
 		EDF4501229ED388F001733C6 /* SignupGenreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVM.swift; sourceTree = "<group>"; };
 		EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultMessageDTO.swift; sourceTree = "<group>"; };
 		EDF4501C29EDAE7C001733C6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
@@ -872,6 +874,7 @@
 				EDF022882A2707FD00CE029E /* MyImageCVC.swift */,
 				A2947A2B298017B100EE2A96 /* OtherChatBubbleCVC.swift */,
 				EDF0228A2A2709F200CE029E /* OtherImageCVC.swift */,
+				EDF0228E2A2784D200CE029E /* LeaveCVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2744,6 +2747,7 @@
 				EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */,
 				EDCA46F72A156A5D00EAFEAA /* Photo.swift in Sources */,
 				A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */,
+				EDF0228F2A2784D200CE029E /* LeaveCVC.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
 				EDF022892A2707FD00CE029E /* MyImageCVC.swift in Sources */,
 				ED72D8A629F699C500DA1251 /* HomeCategoryCVC.swift in Sources */,
