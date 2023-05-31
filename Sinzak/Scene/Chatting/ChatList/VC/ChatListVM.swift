@@ -14,6 +14,7 @@ typealias ChatRoomSectionModel = SectionModel<Void, ChatRoom>
 
 protocol ChatListVMInput {
     func fetchChatList()
+    func fetchPostChatList(postID: Int, type: String)
 }
 
 protocol ChatListVMOutput {
@@ -29,6 +30,20 @@ final class DefaultChatListVM: ChatListVM {
     // MARK: - Input
     func fetchChatList() {
         ChatManager.shared.fetchChatList()
+            .subscribe(
+                with: self,
+                onSuccess: { owner, chatRooms in
+                    let chatRoomSectionModel = ChatRoomSectionModel(
+                        model: Void(),
+                        items: chatRooms
+                    )
+                    owner.chatRoomSectionModel.accept([chatRoomSectionModel])
+                })
+            .disposed(by: disposeBag)
+    }
+    
+    func fetchPostChatList(postID: Int, type: String) {
+        ChatManager.shared.fetchPostChatList(postID: postID, postType: type)
             .subscribe(
                 with: self,
                 onSuccess: { owner, chatRooms in
