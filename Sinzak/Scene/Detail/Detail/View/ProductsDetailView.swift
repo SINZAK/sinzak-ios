@@ -555,6 +555,9 @@ final class ProductsDetailView: SZView {
         likeButton.setTitle("\(data.likesCnt)", for: .normal)
         
         self.isSuggest = data.suggest
+        
+        // TODO: 보류
+        priceOfferButton.isHidden = true
     }
     // MARK: - Design Helpers
     override func setView() {
