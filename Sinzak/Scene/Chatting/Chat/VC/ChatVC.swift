@@ -113,10 +113,33 @@ private extension ChatVC {
             .bind(
                 with: self,
                 onNext: { owner, _ in
-                
                     owner.showDoubleAlertSheet(
                         firstActionText: "신고하기",
-                        secondActionText: "채팅방 나가기"
+                        secondActionText: "채팅방 나가기",
+                        firstCompletion: {
+                            let id = UserInfoManager.userID == owner.viewModel.roomInfo?.postUserId ?
+                            owner.viewModel.roomInfo?.opponentUserId :
+                            owner.viewModel.roomInfo?.postUserId
+                            
+                            let vc = ReportSelectVC(
+                                userID: id ?? -1,
+                                userName: owner.viewModel.roomInfo?.roomName ?? ""
+                            )
+                            
+                            owner.navigationController?.pushViewController(
+                                vc,
+                                animated: true
+                            )
+                        },
+                        secondCompletion: {
+                            owner.showPopUpAlert(
+                                message: "정말 채팅방을 나갈까요?",
+                                rightActionTitle: "네, 나갈게요",
+                                rightActionCompletion: {
+                                    owner.viewModel.leaveChatRoom()
+                                }
+                            )
+                        }
                     )
                 })
             .disposed(by: disposeBag)
@@ -176,12 +199,34 @@ private extension ChatVC {
             owner.viewModel.isPossibleFecthPreviousMessage = true
         })
         .disposed(by: disposeBag)
+        
+        viewModel.popView
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    owner.navigationController?.popViewController(animated: true)
+                })
+            .disposed(by: disposeBag)
     }
 }
 
 private extension ChatVC {
     func getDataSource() -> RxCollectionViewSectionedReloadDataSource<MessageSectionModel> {
-        return RxCollectionViewSectionedReloadDataSource<MessageSectionModel>(configureCell: { _, collectionView, indexPath, item in
+        return RxCollectionViewSectionedReloadDataSource<MessageSectionModel>(configureCell: { [weak self] _, collectionView, indexPath, item in
+            guard let self = self else { return UICollectionViewCell() }
+            
+            if item.messageType == .leave {
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: LeaveCVC.identifier,
+                    for: indexPath
+                ) as! LeaveCVC
+                
+                cell.setLabel(name: self.viewModel.roomInfo?.roomName ?? "")
+                self.mainView.setLeaveMode()
+                    
+                return cell
+            }
+            
             if item.senderID == UserInfoManager.userID {
                 switch item.messageType {
                 case .text:
