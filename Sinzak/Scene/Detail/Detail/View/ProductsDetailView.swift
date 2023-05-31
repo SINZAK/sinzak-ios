@@ -558,6 +558,16 @@ final class ProductsDetailView: SZView {
         
         // TODO: 보류
         priceOfferButton.isHidden = true
+        
+        if data.author == "탈퇴한 회원" {
+            followButton.isHidden = true
+            likeButton.isEnabled = false
+            scrapButton.isEnabled = false
+            isCompleteButton.isEnabled = false
+            priceOfferButton.isEnabled = false
+            askDealButtton.isEnabled = false
+            askDealButtton.backgroundColor = CustomColor.gray40
+        }
     }
     // MARK: - Design Helpers
     override func setView() {
