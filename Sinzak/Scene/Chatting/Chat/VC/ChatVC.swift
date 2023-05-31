@@ -221,7 +221,7 @@ private extension ChatVC {
                     for: indexPath
                 ) as! LeaveCVC
                 
-                cell.setLabel(name: self.viewModel.roomInfo?.roomName ?? "")
+                cell.label.text = item.message
                 self.mainView.setLeaveMode()
                     
                 return cell
