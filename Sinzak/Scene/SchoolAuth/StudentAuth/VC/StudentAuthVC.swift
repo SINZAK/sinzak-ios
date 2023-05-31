@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import YPImagePicker
 import RxSwift
 import RxCocoa
 import RxKeyboard
