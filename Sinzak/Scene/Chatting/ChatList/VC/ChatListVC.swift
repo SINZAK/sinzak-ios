@@ -39,6 +39,7 @@ final class ChatListVC: SZVC {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
         
+        StompManager.shared.disconnect()
         viewModel.fetchChatList()
     }
     // MARK: - Helper
@@ -81,10 +82,9 @@ extension ChatListVC {
             .asSignal()
             .emit(
                 with: self,
-                onNext: { owner, _ in
-                    let vc = ChatVC()
-                    //        // vc에 대화정보 전달
-                    //        // 소켓통신 열기
+                onNext: { owner, chatRoom in
+                    let vm = DefaultChatVM(roomID: chatRoom.roomUUID)
+                    let vc = ChatVC(viewModel: vm)
                     owner.navigationController?.pushViewController(vc, animated: true)
                 })
             .disposed(by: disposeBag)
