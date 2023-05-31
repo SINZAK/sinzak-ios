@@ -12,7 +12,7 @@ import SnapKit
 
 final class AgreementView: SZView {
     // MARK: - Properties
-    private let titleLabel = UILabel().then {
+    let titleLabel = UILabel().then {
         $0.text = I18NStrings.consentToUseOfService
         $0.font = .subtitle_B
         $0.textColor = CustomColor.label
@@ -23,10 +23,11 @@ final class AgreementView: SZView {
         $0.setImage(UIImage(named: "check"), for: .normal)
     }
     
-    private let fullAgreeLabel = UILabel().then {
+    let fullAgreeLabel = UILabel().then {
         $0.text = I18NStrings.fullAgree
         $0.font = .body_B
         $0.textColor = CustomColor.label
+        $0.isUserInteractionEnabled = true
     }
     
     // 구분선
@@ -40,10 +41,11 @@ final class AgreementView: SZView {
         $0.setImage(UIImage(named: "check"), for: .normal)
     }
     
-    private let olderFourteenLabel = UILabel().then {
+    let olderFourteenLabel = UILabel().then {
         $0.text = I18NStrings.olderThanfourteenYears
         $0.font = .body_M
         $0.textColor = CustomColor.label
+        $0.isUserInteractionEnabled = true
     }
     
     // 이용약관
@@ -51,10 +53,11 @@ final class AgreementView: SZView {
         $0.setImage(UIImage(named: "check"), for: .normal)
     }
     
-    private let termsOfServiceLabel = UILabel().then {
+    let termsOfServiceLabel = UILabel().then {
         $0.text = I18NStrings.requiredTermsOfService
         $0.font = .body_M
         $0.textColor = CustomColor.label
+        $0.isUserInteractionEnabled = true
     }
     
     let termsOfServiceMoreButton = UIButton().then {
@@ -66,10 +69,11 @@ final class AgreementView: SZView {
         $0.setImage(UIImage(named: "check"), for: .normal)
     }
     
-    private let privacyPolicyLabel = UILabel().then {
+    let privacyPolicyLabel = UILabel().then {
         $0.text = I18NStrings.requiredPrivacyPolicy
         $0.font = .body_M
         $0.textColor = CustomColor.label
+        $0.isUserInteractionEnabled = true
     }
     
     let privacyPolicyMoreButton = UIButton().then {
@@ -81,10 +85,11 @@ final class AgreementView: SZView {
         $0.setImage(UIImage(named: "check"), for: .normal)
     }
     
-    private let marketingInfoLabel = UILabel().then {
+    let marketingInfoLabel = UILabel().then {
         $0.text = I18NStrings.optionalMarketingInformation
         $0.font = .body_M
         $0.textColor = CustomColor.label
+        $0.isUserInteractionEnabled = true
     }
     
     let marketingInfoMoreButton = UIButton().then {

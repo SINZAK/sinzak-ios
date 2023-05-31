@@ -73,8 +73,22 @@ final class AgreementVC: SZVC {
                 owner.viewModel.fullCheckbuttonTapped()
             })
             .disposed(by: disposeBag)
+        let fullAgreeLabelTap = UITapGestureRecognizer(target: nil, action: nil)
+        mainView.fullAgreeLabel.addGestureRecognizer(fullAgreeLabelTap)
+        fullAgreeLabelTap.rx.event
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.fullCheckbuttonTapped()
+            })
+            .disposed(by: disposeBag)
         
         mainView.olderFourteenCheckButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.olderFourteenCheckButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        let olderFourteenLabelTap = UITapGestureRecognizer(target: nil, action: nil)
+        mainView.olderFourteenLabel.addGestureRecognizer(olderFourteenLabelTap)
+        olderFourteenLabelTap.rx.event
             .subscribe(with: self, onNext: { owner, _ in
                 owner.viewModel.olderFourteenCheckButtonTapped()
             })
@@ -85,14 +99,35 @@ final class AgreementVC: SZVC {
                 owner.viewModel.termsOfServiceCheckButtonTapped()
             })
             .disposed(by: disposeBag)
+        let termsOfServiceLabelTap = UITapGestureRecognizer(target: nil, action: nil)
+        mainView.termsOfServiceLabel.addGestureRecognizer(termsOfServiceLabelTap)
+        termsOfServiceLabelTap.rx.event
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.termsOfServiceCheckButtonTapped()
+            })
+            .disposed(by: disposeBag)
         
         mainView.privacyPolicyCheckButton.rx.tap
             .subscribe(with: self, onNext: { owner, _ in
                 owner.viewModel.privacyPolicyCheckButtonTapped()
             })
             .disposed(by: disposeBag)
+        let privacyPolicyLabelTap = UITapGestureRecognizer(target: nil, action: nil)
+        mainView.privacyPolicyLabel.addGestureRecognizer(privacyPolicyLabelTap)
+        privacyPolicyLabelTap.rx.event
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.privacyPolicyCheckButtonTapped()
+            })
+            .disposed(by: disposeBag)
         
         mainView.marketingInfoCheckButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.viewModel.marketingInfoCheckButtonTapped()
+            })
+            .disposed(by: disposeBag)
+        let marketingInfoLabelTap = UITapGestureRecognizer(target: nil, action: nil)
+        mainView.marketingInfoLabel.addGestureRecognizer(marketingInfoLabelTap)
+        marketingInfoLabelTap.rx.event
             .subscribe(with: self, onNext: { owner, _ in
                 owner.viewModel.marketingInfoCheckButtonTapped()
             })
