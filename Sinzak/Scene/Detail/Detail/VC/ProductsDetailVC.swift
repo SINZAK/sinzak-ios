@@ -60,6 +60,8 @@ final class ProductsDetailVC: SZVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
+        
+        StompManager.shared.disconnect()
     }
     
     // MARK: - Init
@@ -81,13 +83,7 @@ final class ProductsDetailVC: SZVC {
     }
     override func setNavigationBar() {
         super.setNavigationBar()
-        let menu = UIBarButtonItem(
-            image: UIImage(named: "chatMenu"),
-            style: .plain,
-            target: nil,
-            action: nil
-        )
-        navigationItem.rightBarButtonItem = menu
+        
     }
     
     // MARK: - bind
@@ -119,14 +115,9 @@ final class ProductsDetailVC: SZVC {
                 }
                 
                 if owner.owner == .mine {
-                    owner.showDoubleAlertSheet(
-                        firstActionText: "수정하기",
-                        secondActionText: "삭제하기",
-                        firstCompletion: {
-                            // TODO: 수정 화면으로 이동
-                        },
-                        secondCompletion: {
-                            
+                    owner.showSingleAlertSheet(
+                        actionTitle: "삭제하기",
+                        completion: {
                             owner.showPopUpAlert(
                                 message: "정말 게시글을 삭제할까요?",
                                 rightActionTitle: "네, 삭제할게요",
@@ -137,7 +128,7 @@ final class ProductsDetailVC: SZVC {
                                     
                                     switch owner.type {
                                     case .purchase:
-                                        delete =                                     ProductsManager.shared.deleteProducts(id: owner.id)
+                                        delete = ProductsManager.shared.deleteProducts(id: owner.id)
                                     case .request:
                                         delete = WorksManager.shared.deleteWorks(id: owner.id)
                                     }
@@ -154,6 +145,42 @@ final class ProductsDetailVC: SZVC {
                                 })
                         }
                     )
+                    
+//                    owner.showDoubleAlertSheet(
+//                        firstActionText: "수정하기",
+//                        secondActionText: "삭제하기",
+//                        firstCompletion: {
+//                            // TODO: 수정 화면으로 이동
+//                        },
+//                        secondCompletion: {
+//
+//                            owner.showPopUpAlert(
+//                                message: "정말 게시글을 삭제할까요?",
+//                                rightActionTitle: "네, 삭제할게요",
+//                                rightActionCompletion: {
+//                                    owner.showLoading()
+//
+//                                    var delete: Single<Bool>
+//
+//                                    switch owner.type {
+//                                    case .purchase:
+//                                        delete =                                     ProductsManager.shared.deleteProducts(id: owner.id)
+//                                    case .request:
+//                                        delete = WorksManager.shared.deleteWorks(id: owner.id)
+//                                    }
+//
+//                                    delete
+//                                        .observe(on: MainScheduler.instance)
+//                                        .subscribe(onSuccess: { _ in
+//
+//                                            owner.navigationController?.popViewController(animated: true)
+//                                            owner.hideLoading()
+//                                            owner.viewModel.refresh()
+//                                        })
+//                                        .disposed(by: owner.disposeBag)
+//                                })
+//                        }
+//                    )
                 }
                 
                 if owner.owner == .other {
@@ -357,6 +384,21 @@ final class ProductsDetailVC: SZVC {
                     return
                 }
                 
+                let id = owner.id
+                let type: String = owner.type == .purchase ? "product" : "work"
+                
+                switch owner.mainView.products?.myPost {
+                case true:
+                    let vm = DefaultChatListVM()
+                    
+                    let vc = ChatListVC(viewModel: vm, chatListMode: .request(postID: id, type: type))
+                    
+                    owner.navigationController?.pushViewController(vc, animated: true)
+                case false:
+                    owner.viewModel.requestDeal(postID: id, postType: type)
+                default:
+                    break
+                }
             })
             .disposed(by: disposeBag)
         
@@ -393,6 +435,18 @@ final class ProductsDetailVC: SZVC {
                     owner.maxPrice.accept(data.price)
                     owner.view.hideSkeleton()
                     owner.mainView.skeletonView.isHidden = true
+                    
+                    if data.author == "탈퇴한 회원" {
+                        owner.navigationItem.rightBarButtonItem = nil
+                    } else {
+                        let menu = UIBarButtonItem(
+                            image: UIImage(named: "chatMenu"),
+                            style: .plain,
+                            target: nil,
+                            action: nil
+                        )
+                        owner.navigationItem.rightBarButtonItem = menu
+                    }
                 })
             .disposed(by: disposeBag)
         
@@ -411,6 +465,13 @@ final class ProductsDetailVC: SZVC {
                     owner.navigationController?.popViewController(animated: true)
                     owner.viewModel.refresh()
                 })
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.pushChatRoom
+            .asSignal()
+            .emit(with: self, onNext: { owner, vc in
+                owner.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
     }
