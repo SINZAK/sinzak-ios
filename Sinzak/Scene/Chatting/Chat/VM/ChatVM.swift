@@ -26,8 +26,7 @@ protocol ChatVMInput {
     
     func uploadImage(images: [UIImage])
     func sendTextMessage(message: String)
-    
-
+    func leaveChatRoom()
 }
 
 protocol ChatVMOutput {
@@ -39,6 +38,7 @@ protocol ChatVMOutput {
     var indexPathToScroll: PublishRelay<IndexPath> { get }
     
     var isPossibleFecthPreviousMessage: Bool { get set }
+    var popView: PublishRelay<Bool> { get }
 }
 
 protocol ChatVM: ChatVMInput, ChatVMOutput {}
@@ -278,12 +278,20 @@ final class DefaultChatVM: ChatVM {
             .disposed(by: disposeBag)
     }
     
+    func leaveChatRoom() {
+        sendMessage(
+            message: "\(roomInfo?.roomName ?? "")님이 나가셨습니다.",
+            type: .leave
+        )
+        popView.accept(true)
+    }
+    
     // MARK: - Output
     
     var artDetailInfo: PublishRelay<ChatRoomInfo> = .init()
     var messageSectionModels: BehaviorRelay<[MessageSectionModel]> = .init(value: [])
     var indexPathToScroll: PublishRelay<IndexPath> = .init()
-    
+    var popView: PublishRelay<Bool> = .init()
 }
 
 extension DefaultChatVM: StompClientLibDelegate {
