@@ -12,8 +12,12 @@ import Then
 final class ChatView: SZView {
     // MARK: - Properties
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
-        $0.register(MyImageCVC.self, forCellWithReuseIdentifier: MyImageCVC.identifier)
-        $0.register(OtherImageCVC.self, forCellWithReuseIdentifier: OtherImageCVC.identifier)
+        $0.register(MyImageCVC.self,
+                    forCellWithReuseIdentifier: MyImageCVC.identifier)
+        $0.register(OtherImageCVC.self,
+                    forCellWithReuseIdentifier: OtherImageCVC.identifier)
+        $0.register(LeaveCVC.self,
+                    forCellWithReuseIdentifier: LeaveCVC.identifier)
         $0.backgroundColor = .clear
     }
     // 상단 작품디테일쪽
@@ -144,6 +148,12 @@ extension ChatView {
         
         // TODO: 보류
         isNotNegotiableButton.isHidden = true
+    }
+    
+    func setLeaveMode() {
+        albumButton.isEnabled = false
+        chatTextField.isEnabled = false
+        chatTextField.placeholder = "메시지를 보낼 수 없습니다."
     }
 }
 
