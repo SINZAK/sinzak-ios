@@ -27,10 +27,6 @@ final class LeaveCVC: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setLabel(name: String) {
-        label.text = "\(name)님이 나가셨습니다."
-    }
-    
     private func setLayout() {
         backgroundColor = CustomColor.background
         
