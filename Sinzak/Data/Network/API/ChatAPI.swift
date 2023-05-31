@@ -10,11 +10,14 @@ import Moya
 
 enum ChatAPI {
     // 채팅방 조회
-    case chatRoomList // 챗룸 리스트
+    case fetchChatRoomList // 챗룸 리스트
+    case fetchPostChatRoomList(postID: Int, postType: String)
+    
     case chatRoom(uuid: String) // 특정 챗룸 정보 조회
     case chatRoomMessages(uuid: String, page: Int) // 메시지 조회
-    case allChatRoomForPost(postId: Int, postType: String)
     // 채팅방 생성, 이미지 업로드
+    
+    case checkChatRoom(postID: Int, postType: String)
     case chatCreate(postId: Int, postType: String)
     case chatRoomImageUpload(uuid: String, images: [UIImage])
 }
@@ -25,14 +28,16 @@ extension ChatAPI: TargetType {
     }
     var path: String {
         switch self {
-        case .chatRoomList:
+        case .fetchChatRoomList:
             return "/chat/rooms"
+        case .fetchPostChatRoomList:
+            return "/chat/rooms/post"
         case .chatRoom(let uuid):
             return "/chat/rooms/\(uuid)"
         case .chatRoomMessages(let uuid, _):
             return "/chat/rooms/\(uuid)/message"
-        case .allChatRoomForPost:
-            return "/chat/rooms/post"
+        case .checkChatRoom:
+            return "/chat/rooms/check"
         case .chatCreate:
             return "/chat/rooms/create"
         case .chatRoomImageUpload(let uuid, _):
@@ -49,8 +54,15 @@ extension ChatAPI: TargetType {
     }
     var task: Moya.Task {
         switch self {
-        case .chatRoomList, .chatRoom:
+        case .fetchChatRoomList, .chatRoom:
             return .requestPlain
+        case let .fetchPostChatRoomList(postID, postType):
+            let params: [String: Any] = [
+                "postId": postID,
+                "postType": postType
+            ]
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+            
         case let .chatRoomMessages(_, page):
             let params: [String: Any] = [
                 "page": page
@@ -59,13 +71,6 @@ extension ChatAPI: TargetType {
                 parameters: params,
                 encoding: URLEncoding.queryString
             )
-            
-        case .allChatRoomForPost(let postId, let postType), .chatCreate(let postId, let postType):
-            let params: [String: Any] = [
-                "postId": postId,
-                "postType": postType
-            ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         case .chatRoomImageUpload(_, let images):
             var formData: [MultipartFormData] = []
             for image in images {
@@ -80,7 +85,18 @@ extension ChatAPI: TargetType {
                 }
             }
             return .uploadMultipart(formData)
-        }
+        case .checkChatRoom(postID: let postID, postType: let postType):
+            let params: [String: Any] = [
+                "postId": postID,
+                "postType": postType
+            ]
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+        case .chatCreate(postId: let postId, postType: let postType):
+            let params: [String: Any] = [
+                "postId": postId,
+                "postType": postType
+            ]
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)        }
     }
     var headers: [String: String]? {
         let header = [
