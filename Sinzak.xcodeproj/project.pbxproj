@@ -256,6 +256,15 @@
 		EDE5EC6029D70ABA00BB211F /* MarketProductsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */; };
 		EDEEFFB229F3A38600C828B9 /* ReissueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEEFFB129F3A38600C828B9 /* ReissueDTO.swift */; };
 		EDEEFFB429F3A4AC00C828B9 /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEEFFB329F3A4AC00C828B9 /* UserInfoDTO.swift */; };
+		EDF0227B2A25E3E200CE029E /* ChatVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0227A2A25E3E200CE029E /* ChatVM.swift */; };
+		EDF0227D2A25E81B00CE029E /* ChatRoomInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0227C2A25E81B00CE029E /* ChatRoomInfoDTO.swift */; };
+		EDF022802A25EB1100CE029E /* ChatRoomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0227F2A25EB1100CE029E /* ChatRoomInfo.swift */; };
+		EDF022822A25FFFA00CE029E /* ChatMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF022812A25FFFA00CE029E /* ChatMessageDTO.swift */; };
+		EDF022852A26016600CE029E /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF022842A26016600CE029E /* ChatMessage.swift */; };
+		EDF022872A2671F700CE029E /* MessageSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF022862A2671F700CE029E /* MessageSend.swift */; };
+		EDF022892A2707FD00CE029E /* MyImageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF022882A2707FD00CE029E /* MyImageCVC.swift */; };
+		EDF0228B2A2709F200CE029E /* OtherImageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0228A2A2709F200CE029E /* OtherImageCVC.swift */; };
+		EDF0228D2A271DA500CE029E /* URLDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF0228C2A271DA500CE029E /* URLDTO.swift */; };
 		EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501229ED388F001733C6 /* SignupGenreVM.swift */; };
 		EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */; };
 		EDF4501D29EDAE7C001733C6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4501C29EDAE7C001733C6 /* Setting.swift */; };
@@ -538,6 +547,15 @@
 		EDE5EC5F29D70ABA00BB211F /* MarketProductsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketProductsResponseDTO.swift; sourceTree = "<group>"; };
 		EDEEFFB129F3A38600C828B9 /* ReissueDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReissueDTO.swift; sourceTree = "<group>"; };
 		EDEEFFB329F3A4AC00C828B9 /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
+		EDF0227A2A25E3E200CE029E /* ChatVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVM.swift; sourceTree = "<group>"; };
+		EDF0227C2A25E81B00CE029E /* ChatRoomInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomInfoDTO.swift; sourceTree = "<group>"; };
+		EDF0227F2A25EB1100CE029E /* ChatRoomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomInfo.swift; sourceTree = "<group>"; };
+		EDF022812A25FFFA00CE029E /* ChatMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageDTO.swift; sourceTree = "<group>"; };
+		EDF022842A26016600CE029E /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		EDF022862A2671F700CE029E /* MessageSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSend.swift; sourceTree = "<group>"; };
+		EDF022882A2707FD00CE029E /* MyImageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImageCVC.swift; sourceTree = "<group>"; };
+		EDF0228A2A2709F200CE029E /* OtherImageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherImageCVC.swift; sourceTree = "<group>"; };
+		EDF0228C2A271DA500CE029E /* URLDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDTO.swift; sourceTree = "<group>"; };
 		EDF4501229ED388F001733C6 /* SignupGenreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVM.swift; sourceTree = "<group>"; };
 		EDF4501929ED8DCF001733C6 /* ResultMessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultMessageDTO.swift; sourceTree = "<group>"; };
 		EDF4501C29EDAE7C001733C6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
@@ -840,8 +858,10 @@
 		A216BD59297FDF00008964BC /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				EDF022832A26015100CE029E /* Model */,
 				A216BD5A297FE011008964BC /* View */,
 				A216BD5D297FE023008964BC /* VC */,
+				EDF022792A25E3D200CE029E /* VM */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -851,7 +871,9 @@
 			children = (
 				A216BD5B297FE020008964BC /* ChatView.swift */,
 				A2947A29298017A200EE2A96 /* MyChatBubbleCVC.swift */,
+				EDF022882A2707FD00CE029E /* MyImageCVC.swift */,
 				A2947A2B298017B100EE2A96 /* OtherChatBubbleCVC.swift */,
+				EDF0228A2A2709F200CE029E /* OtherImageCVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2099,6 +2121,7 @@
 			isa = PBXGroup;
 			children = (
 				EDB7E41F2A232B4F0045E1AF /* ChatRoom.swift */,
+				EDF0227F2A25EB1100CE029E /* ChatRoomInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2127,8 +2150,28 @@
 				ED3552792A14BC3000B364FC /* ScrapListDTO.swift */,
 				ED5A43352A1BED0100D89C3A /* BuildPostResponseDTO.swift */,
 				EDB7E41C2A232A730045E1AF /* ChatRoomDTO.swift */,
+				EDF0227C2A25E81B00CE029E /* ChatRoomInfoDTO.swift */,
+				EDF022812A25FFFA00CE029E /* ChatMessageDTO.swift */,
+				EDF0228C2A271DA500CE029E /* URLDTO.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		EDF022792A25E3D200CE029E /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				EDF0227A2A25E3E200CE029E /* ChatVM.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
+		EDF022832A26015100CE029E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EDF022842A26016600CE029E /* ChatMessage.swift */,
+				EDF022862A2671F700CE029E /* MessageSend.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		EDF4501129ED3880001733C6 /* VM */ = {
@@ -2521,6 +2564,7 @@
 				A254E14029BD0427001047FD /* UserCommandAPI.swift in Sources */,
 				EDF4501329ED388F001733C6 /* SignupGenreVM.swift in Sources */,
 				A226CC5C29AE31F1000161E8 /* WelcomeView.swift in Sources */,
+				EDF0227D2A25E81B00CE029E /* ChatRoomInfoDTO.swift in Sources */,
 				EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */,
 				A216BD53297FD60E008964BC /* ChatListView.swift in Sources */,
 				ED5A43362A1BED0100D89C3A /* BuildPostResponseDTO.swift in Sources */,
@@ -2560,6 +2604,7 @@
 				ED02CAED2A0D0D9600E20F92 /* SelectProfileIconVC.swift in Sources */,
 				A2646BED299204B40004F4CE /* User.swift in Sources */,
 				A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */,
+				EDF0227B2A25E3E200CE029E /* ChatVM.swift in Sources */,
 				A233892629B37B1F00688FD8 /* Leave.swift in Sources */,
 				A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */,
 				EDF7700829FBDF3E00F33146 /* PhotoCVC.swift in Sources */,
@@ -2580,6 +2625,7 @@
 				ED5A43322A19D95D00D89C3A /* CircleCheckButton.swift in Sources */,
 				ED35528F2A15574D00B364FC /* SignoutCompleteVC.swift in Sources */,
 				A20E4A4E29990064009C1340 /* MyProfileView.swift in Sources */,
+				EDF022822A25FFFA00CE029E /* ChatMessageDTO.swift in Sources */,
 				A280AB4A29A763BE00C1729C /* WriteCategoryVC.swift in Sources */,
 				ED72D8A829F69B5100DA1251 /* SchoolAuthViewModel.swift in Sources */,
 				ED3552652A120ECA00B364FC /* StudentAuthVM.swift in Sources */,
@@ -2599,6 +2645,7 @@
 				A2AA89CE2967C33A004A63C1 /* InterestedGenreCVC.swift in Sources */,
 				ED75588029E546F700A15977 /* DoubleCheckButton.swift in Sources */,
 				A226CC4B29ADF875000161E8 /* SendPriceOfferVC.swift in Sources */,
+				EDF0228B2A2709F200CE029E /* OtherImageCVC.swift in Sources */,
 				EDE5EC6029D70ABA00BB211F /* MarketProductsResponseDTO.swift in Sources */,
 				A2B385602959A4BB00E5EB7C /* LoginView.swift in Sources */,
 				ED3552622A12012600B364FC /* SZImage.swift in Sources */,
@@ -2639,6 +2686,7 @@
 				ED35526B2A136CA100B364FC /* CertifySchoolCardDTO.swift in Sources */,
 				A2B38580295D895800E5EB7C /* StudentAuthVC.swift in Sources */,
 				ED00BF982A0266F300379E89 /* NothingView.swift in Sources */,
+				EDF022852A26016600CE029E /* ChatMessage.swift in Sources */,
 				A2100F6A29865E8800C85ADF /* AlignOption.swift in Sources */,
 				A226537D29705F8100605697 /* BannerCVC.swift in Sources */,
 				EDF76FFB29F7DFD900F33146 /* BaseDTO.swift in Sources */,
@@ -2656,6 +2704,7 @@
 				A216BD37297FA384008964BC /* HomeDetailView.swift in Sources */,
 				ED2A582929F2B93A002CE83E /* MoyaLoggerPlugin.swift in Sources */,
 				A2F6EADE298773EB00DE754F /* BannerModel.swift in Sources */,
+				EDF0228D2A271DA500CE029E /* URLDTO.swift in Sources */,
 				A216BD3B297FA3B4008964BC /* HomeDetailVC.swift in Sources */,
 				ED00BFA72A03B23000379E89 /* WorksSelectAlignPC.swift in Sources */,
 				A2DEC35F29B4638D00CF0794 /* SudentAuthView.swift in Sources */,
@@ -2700,11 +2749,14 @@
 				EDCA46F72A156A5D00EAFEAA /* Photo.swift in Sources */,
 				A2F6EAE5298776F300DE754F /* HomeManager.swift in Sources */,
 				A23415B22927D776007DADE7 /* AppDelegate.swift in Sources */,
+				EDF022892A2707FD00CE029E /* MyImageCVC.swift in Sources */,
 				ED72D8A629F699C500DA1251 /* HomeCategoryCVC.swift in Sources */,
 				A226CC4529ADAD88000161E8 /* UILabel+Extension.swift in Sources */,
 				ED02CAAB2A092DEC00E20F92 /* UserQueryAPI.swift in Sources */,
 				ED02CAE92A0CFC5900E20F92 /* SelectProfileIconView.swift in Sources */,
 				ED15161529DCBED000227CC8 /* Endpoint.swift in Sources */,
+				EDF022802A25EB1100CE029E /* ChatRoomInfo.swift in Sources */,
+				EDF022872A2671F700CE029E /* MessageSend.swift in Sources */,
 				EDF76FFF29F8F32300F33146 /* BannerFooter.swift in Sources */,
 				ED00BFA22A037B6C00379E89 /* WorksManager.swift in Sources */,
 				A226CC5829AE31C0000161E8 /* WelcomeVC.swift in Sources */,
