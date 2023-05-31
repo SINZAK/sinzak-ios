@@ -12,7 +12,7 @@ enum ChatAPI {
     // 채팅방 조회
     case chatRoomList // 챗룸 리스트
     case chatRoom(uuid: String) // 특정 챗룸 정보 조회
-    case chatRoomMessages(uuid: String) // 메시지 조회
+    case chatRoomMessages(uuid: String, page: Int) // 메시지 조회
     case allChatRoomForPost(postId: Int, postType: String)
     // 채팅방 생성, 이미지 업로드
     case chatCreate(postId: Int, postType: String)
@@ -29,7 +29,7 @@ extension ChatAPI: TargetType {
             return "/chat/rooms"
         case .chatRoom(let uuid):
             return "/chat/rooms/\(uuid)"
-        case .chatRoomMessages(let uuid):
+        case .chatRoomMessages(let uuid, _):
             return "/chat/rooms/\(uuid)/message"
         case .allChatRoomForPost:
             return "/chat/rooms/post"
@@ -49,8 +49,17 @@ extension ChatAPI: TargetType {
     }
     var task: Moya.Task {
         switch self {
-        case .chatRoomList, .chatRoom, .chatRoomMessages:
+        case .chatRoomList, .chatRoom:
             return .requestPlain
+        case let .chatRoomMessages(_, page):
+            let params: [String: Any] = [
+                "page": page
+            ]
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.queryString
+            )
+            
         case .allChatRoomForPost(let postId, let postType), .chatCreate(let postId, let postType):
             let params: [String: Any] = [
                 "postId": postId,
@@ -64,8 +73,9 @@ extension ChatAPI: TargetType {
                     let name = String.uniqueFilename(withPrefix: "IMAGE")
                     formData.append(MultipartFormData(
                         provider: .data(imageData),
-                        name: name,
-                        fileName: "\(name).jpg"
+                        name: "multipartFile",
+                        fileName: "\(name).jpeg",
+                        mimeType: "image/jpeg"
                     ))
                 }
             }
@@ -79,7 +89,7 @@ extension ChatAPI: TargetType {
         let accessToken = KeychainItem.currentAccessToken
         switch self {
         case .chatRoomImageUpload:
-            var header = ["Content-Type": "multipart/form-data; boundary=<calculated when request is sent>" ]
+            var header = [String: String]()
             header["Authorization"] = accessToken
             return header 
         default:
