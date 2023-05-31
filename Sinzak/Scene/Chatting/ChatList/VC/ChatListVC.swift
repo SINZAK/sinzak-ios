@@ -10,15 +10,24 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+enum ChatListMode {
+    case request(postID: Int, type: String)
+    case all
+}
+
 final class ChatListVC: SZVC {
     // MARK: - Properties
+    
+    let chatListMode: ChatListMode
+    
     let mainView = ChatListView()
     let viewModel: ChatListVM
     let disposeBag = DisposeBag()
     // MARK: - Init
     
-    init(viewModel: ChatListVM) {
+    init(viewModel: ChatListVM, chatListMode: ChatListMode) {
         self.viewModel = viewModel
+        self.chatListMode = chatListMode
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -37,28 +46,44 @@ final class ChatListVC: SZVC {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.tabBar.isHidden = false
         
+        switch chatListMode {
+        case .all:
+            tabBarController?.tabBar.isHidden = false
+            viewModel.fetchChatList()
+        case let .request(postID, type):
+            tabBarController?.tabBar.isHidden = true
+            viewModel.fetchPostChatList(postID: postID, type: type)
+        }
         StompManager.shared.disconnect()
-        viewModel.fetchChatList()
+        
     }
     // MARK: - Helper
     override func setNavigationBar() {
-        let leftTitle = UIBarButtonItem(
-            title: "채팅",
-            style: .plain,
-            target: nil,
-            action: nil
-        )
-        leftTitle.setTitleTextAttributes(
-            [
-                .font: UIFont.subtitle_B,
-                .foregroundColor: CustomColor.label
-            ],
-            for: .disabled
-        )
-        leftTitle.isEnabled = false
-        navigationItem.leftBarButtonItem = leftTitle
+        super.setNavigationBar()
+        
+        switch chatListMode {
+        case .all:
+            let leftTitle = UIBarButtonItem(
+                title: "채팅",
+                style: .plain,
+                target: nil,
+                action: nil
+            )
+            leftTitle.setTitleTextAttributes(
+                [
+                    .font: UIFont.subtitle_B,
+                    .foregroundColor: CustomColor.label
+                ],
+                for: .disabled
+            )
+            leftTitle.isEnabled = false
+            navigationItem.leftBarButtonItem = leftTitle
+            
+        case .request:
+            navigationItem.title = "문의 중인 채팅"
+        }
+        
     }
     override func configure() {
         mainView.collectionView.register(ChatListCVC.self, forCellWithReuseIdentifier: String(describing: ChatListCVC.self))
