@@ -9,77 +9,56 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxKeyboard
+import RxDataSources
+import PhotosUI
 
 final class ChatVC: SZVC {
     // MARK: - Properties
     
-    let disposeBag = DisposeBag()
-    
     let mainView = ChatView()
-    let dummyChat: [[String]] = [
-        [
-            "안녕하세요",
-            "판매중 맞으실까요?",
-            "앗, 안녕하세요!",
-            "넵 판매중 맞습니다 :)",
-            "직거래 괜찮으신가요?",
-            "직거래하기 너무 클까요?",
-            "네~ 사이즈 써 놓으신 거 보시면",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "네~ 사이즈 써 놓으신 거 보시면",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-        ],
-        [
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "네~ 사이즈 써 놓으신 거 보시면",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "네~ 사이즈 써 놓으신 거 보시면",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "네~ 사이즈 써 놓으신 거 보시면",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "네~ 사이즈 써 놓으신 거 보시면",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ",
-            "딱 그 크기인 캔버스 입니다ㅎㅎ네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면",
-            "네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면네~ 사이즈 써 놓으신 거 보시면",
-            "딱 그 크기인 캔버",
-            "딱 그 크기인 캔",
-            "딱 그 크기인g",
-            "네~ 사이즈",
-            "크기인",
-            "딱",
-            "딱그",
-        ]
-    ]
+    var viewModel: ChatVM
+    let disposeBag = DisposeBag()
+
     // MARK: - Init
+    
+    init(viewModel: ChatVM) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Lifecycle
+    
     override func loadView() {
         view = mainView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        viewModel.startSocketTimer()
+    
+        viewModel.getChatRoomInfo()
+        viewModel.fetchFirstPageMessage()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        viewModel.endTimer()
     }
    
     // MARK: - Helpers
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.title = "김신작" // 채팅 상대방 이름
         let chatMenu = UIBarButtonItem(
             image: UIImage(named: "chatMenu"),
             style: .plain,
@@ -88,12 +67,11 @@ final class ChatVC: SZVC {
         navigationItem.rightBarButtonItem = chatMenu
     }
     override func configure() {
-        mainView.collectionView.delegate = self
-        mainView.collectionView.dataSource = self
         mainView.collectionView.collectionViewLayout = configLayout()
         mainView.collectionView.register(MyChatBubbleCVC.self, forCellWithReuseIdentifier: String(describing: MyChatBubbleCVC.self))
         mainView.collectionView.register(OtherChatBubbleCVC.self, forCellWithReuseIdentifier: String(describing: OtherChatBubbleCVC.self))
         
+        mainView.chatTextField.delegate = self
         bind()
     }
 }
@@ -142,36 +120,125 @@ private extension ChatVC {
                     )
                 })
             .disposed(by: disposeBag)
+        
+        mainView.albumButton.rx.tap
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    owner.showPHPicker()
+                })
+            .disposed(by: disposeBag)
+        
+        mainView.collectionView.rx.willDisplayCell
+            .skip(1)
+            .subscribe(with: self, onNext: { owner, event in
+                if event.at == [0, 0] {
+                    owner.viewModel.fetchPreviousMessage()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     func bindOutput() {
-    
+        
+        viewModel.artDetailInfo
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(
+                with: self,
+                onNext: { owner, info in
+                    owner.navigationItem.title = info.roomName
+                    owner.mainView.setArtDetailInfo(info: info)
+            })
+            .disposed(by: disposeBag)
+        
+        let dataSource = getDataSource()
+        let messageSectionModels = viewModel.messageSectionModels
+            .asDriver()
+        
+        messageSectionModels
+            .drive(mainView.collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        Observable.zip(
+            messageSectionModels.asObservable(),
+            viewModel.indexPathToScroll.asObservable()
+        )
+        .observe(on: MainScheduler.asyncInstance)
+        .subscribe(with: self, onNext: { owner, zip in
+            let indexPath = zip.1
+            
+            owner.mainView.collectionView.scrollToItem(
+                at: indexPath,
+                at: .bottom,
+                animated: false
+            )
+            
+            owner.viewModel.isPossibleFecthPreviousMessage = true
+        })
+        .disposed(by: disposeBag)
     }
 }
 
-// 콜렉션 뷰 설정
-extension ChatVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return dummyChat.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyChat[section].count
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.item % 3 == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MyChatBubbleCVC.self), for: indexPath) as? MyChatBubbleCVC else { return UICollectionViewCell() }
-            cell.chatLabel.text = dummyChat[indexPath.section][indexPath.item]
-            cell.dateLabel.text = "오전 10:02"
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: OtherChatBubbleCVC.self), for: indexPath) as? OtherChatBubbleCVC else { return UICollectionViewCell() }
-            cell.chatLabel.text = dummyChat[indexPath.section][indexPath.item]
-            cell.dateLabel.text = "오전 10:02"
-            return cell
-        }
+private extension ChatVC {
+    func getDataSource() -> RxCollectionViewSectionedReloadDataSource<MessageSectionModel> {
+        return RxCollectionViewSectionedReloadDataSource<MessageSectionModel>(configureCell: { _, collectionView, indexPath, item in
+            if item.senderID == UserInfoManager.userID {
+                switch item.messageType {
+                case .text:
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: MyChatBubbleCVC.identifier,
+                        for: indexPath
+                    ) as! MyChatBubbleCVC
+                    
+                    cell.chatLabel.text = item.message
+                    
+                    return cell
+                    
+                case .image:
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: MyImageCVC.identifier,
+                        for: indexPath
+                    ) as! MyImageCVC
+                
+                    cell.setImage(url: item.message)
+                        
+                    return cell
+                    
+                default:
+                    return UICollectionViewCell()
+                }
+                
+            } else {
+                
+                switch item.messageType {
+                case .text:
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: OtherChatBubbleCVC.identifier,
+                        for: indexPath
+                    ) as! OtherChatBubbleCVC
+                    
+                    cell.chatLabel.text = item.message
+                    
+                    return cell
+                    
+                case .image:
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: OtherImageCVC.identifier,
+                        for: indexPath
+                    ) as! OtherImageCVC
+                
+                    cell.setImage(url: item.message)
+                        
+                    return cell
+                
+                default:
+                    return UICollectionViewCell()
+                }
+            }
+        })
     }
 }
+
 // 컴포지셔널 레이아웃
 extension ChatVC {
     /// 컴포지셔널 레이아웃 세팅
@@ -198,6 +265,85 @@ extension ChatVC {
             )
                         
             return section
+        }
+    }
+}
+
+extension ChatVC: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let message = mainView.chatTextField.text ?? ""
+        if message.isEmpty == true {
+            return false
+        }
+        
+        viewModel.sendTextMessage(message: message)
+        mainView.chatTextField.text = ""
+        return true
+    }
+     
+}
+
+private extension ChatVC {
+    func showPHPicker() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 3
+        configuration.filter = .images
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        picker.view.tintColor = CustomColor.red
+        picker.modalPresentationStyle = .fullScreen
+        
+        present(picker, animated: true)
+    }
+}
+
+extension ChatVC: PHPickerViewControllerDelegate {
+    func picker(
+        _ picker: PHPickerViewController,
+        didFinishPicking results: [PHPickerResult]
+    ) {
+        
+        picker.dismiss(animated: true)
+        if results.isEmpty { return }
+        
+        let itemProviders = results.map(\.itemProvider)
+        
+        Observable.combineLatest(itemProviders.map { getImage(with: $0) })
+            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+            .subscribe(
+                with: self,
+                onNext: { owner, images in
+                    owner.viewModel.uploadImage(images: images)
+                }
+            )
+            .disposed(by: disposeBag)
+        
+        func getImage(with item: NSItemProvider) -> Observable<UIImage> {
+            Log.debug("시작 - 1 - \(Thread.current)")
+            return Observable<UIImage>.create { observer in
+                Log.debug("시작 - 2 - \(Thread.current)")
+                    if item.canLoadObject(ofClass: UIImage.self) {
+                        item.loadObject(ofClass: UIImage.self, completionHandler: { image, error in
+                            if let error = error {
+                                Log.error(error)
+                                return
+                            }
+                            guard let image = image as? UIImage else {
+                                Log.error("이미지 타입 캐스팅 실패")
+                                return }
+                            observer.onNext(image)
+                            Log.debug("끝 - 2 - \(Thread.current)")
+                        })
+                    } else {
+                        Log.error("이미지 load 불가능 - \(Thread.current)")
+                    }
+                
+                Log.debug("끝 - 1 - \(Thread.current)")
+                return Disposables.create()
+            }
         }
     }
 }
