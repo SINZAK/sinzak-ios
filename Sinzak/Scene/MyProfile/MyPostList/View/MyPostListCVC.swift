@@ -11,7 +11,7 @@ final class MyPostListCVC: UICollectionViewCell {
      
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 12.0
         imageView.clipsToBounds = true
         
