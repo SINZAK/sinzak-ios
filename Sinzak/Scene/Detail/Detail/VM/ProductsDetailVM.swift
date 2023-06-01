@@ -24,6 +24,8 @@ protocol ProductsDetailVMOutput {
     
     var deletedPost: PublishRelay<String> { get }
     var pushChatRoom: PublishRelay<ChatVC> { get }
+    
+    var errorHandler: PublishRelay<Error> { get }
 }
 
 protocol ProductsDetailVM: ProductsDetailVMInput, ProductsDetailVMOutput {}
@@ -85,6 +87,7 @@ final class DefaultProductsDetailVM: ProductsDetailVM {
     func requestDeal(postID: Int, postType: String) {
         
         ChatManager.shared.creatChatRoom(postID: postID, postType: postType)
+            .observe(on: MainScheduler.asyncInstance)
             .subscribe(
                 with: self,
                 onSuccess: { owner, roomID in
@@ -92,8 +95,8 @@ final class DefaultProductsDetailVM: ProductsDetailVM {
                     let vc = ChatVC(viewModel: vm)
                     owner.pushChatRoom.accept(vc)
                 },
-                onFailure: { _, error in
-                    Log.error(error)
+                onFailure: { owner, error in
+                    owner.errorHandler.accept(error)
                 })
             .disposed(by: disposeBag)
         
@@ -108,4 +111,6 @@ final class DefaultProductsDetailVM: ProductsDetailVM {
     var pushChatRoom: PublishRelay<ChatVC> = .init()
     
     var deletedPost: PublishRelay<String> = .init()
+    
+    var errorHandler: PublishRelay<Error> = .init()
 }
