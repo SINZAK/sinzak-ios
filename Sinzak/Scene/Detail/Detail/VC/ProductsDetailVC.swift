@@ -442,6 +442,15 @@ final class ProductsDetailVC: SZVC {
                 owner.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
+        
+        viewModel.errorHandler
+            .asSignal()
+            .emit(
+                with: self,
+                onNext: { owner, error in
+                owner.simpleErrorHandler.accept(error)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
