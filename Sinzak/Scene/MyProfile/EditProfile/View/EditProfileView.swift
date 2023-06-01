@@ -86,7 +86,7 @@ final class EditProfileView: SZView {
     }
     
     let textViewPlaceHolderLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel() 
         label.textColor = CustomColor.gray60
         label.font = .body_R
         label.text = "소개를 입력해 주세요."

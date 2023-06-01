@@ -33,6 +33,8 @@ protocol EditProfileVMOutput {
     var updateGenre: PublishRelay<[AllGenre]> { get }
     
     var completeEditTasks: PublishRelay<Bool> { get }
+    
+    var errorHandler: PublishRelay<Error> { get }
 }
 
 protocol EditProfileVM: EditProfileVMInput, EditProfileVMOutput {}
@@ -48,6 +50,7 @@ final class DefaultEditProfileVM: EditProfileVM {
     
     func nickNameTextInput(text: String) {
         Log.debug(text)
+        if text == nickNameInput.value { return }
         nickNameInput.accept(text)
         doubleCheckResult.accept(.beforeCheck)
         checkButtonIsEnable.accept(text.isValidString(.nickname))
@@ -109,8 +112,8 @@ final class DefaultEditProfileVM: EditProfileVM {
                 onNext: { owner, _ in
                     owner.completeEditTasks.accept(true)
                 },
-                onError: { _, error in
-                    Log.debug(error)
+                onError: { owner, error in
+                    owner.errorHandler.accept(error)
                 })
             .disposed(by: disposeBag)
     }
@@ -130,4 +133,6 @@ final class DefaultEditProfileVM: EditProfileVM {
     var updateGenre: PublishRelay<[AllGenre]> = .init()
     
     var completeEditTasks: PublishRelay<Bool> = .init()
+    
+    var errorHandler: PublishRelay<Error> = .init()
 }
