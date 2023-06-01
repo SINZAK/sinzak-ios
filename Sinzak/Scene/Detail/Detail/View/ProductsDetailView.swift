@@ -501,6 +501,26 @@ final class ProductsDetailView: SZView {
         $0.titleLabel?.font = .caption_B
     }
     
+    let nilImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = SZImage.Image.nothing
+        imageView.backgroundColor = CustomColor.gray10
+        imageView.contentMode = .center
+        imageView.isHidden = true
+        
+        return imageView
+    }()
+    
+    let nilLabel: UILabel = {
+        let label = UILabel()
+        label.text = "삭제된 게시물입니다."
+        label.font = .subtitle_B
+        label.textColor = CustomColor.label
+        label.isHidden = true
+        
+        return label
+    }()
+    
     let skeletonView = ProductsDetailSkeletonView()
     
     // MARK: - Setter
@@ -567,7 +587,21 @@ final class ProductsDetailView: SZView {
             priceOfferButton.isHidden = true
             askDealButtton.isHidden = true
             bottomActionView.isHidden = true
+            pageControl.isHidden = true
+            titleStackView.isHidden = true
+            priceStackView.isHidden = true
+            authorView.isHidden = true
+            detailSizeView.isHidden = true
+            timeLabel.isHidden = true
+            nilLabel.isHidden = true
+            contentView.isHidden = true
+            authorView.isHidden = true
+            postStatusView.isHidden = true
+            categoryLabel.isHidden = true
             askDealButtton.backgroundColor = CustomColor.gray40
+            
+            nilImageView.isHidden = false
+            nilLabel.isHidden = false
         }
     }
     // MARK: - Design Helpers
@@ -577,6 +611,8 @@ final class ProductsDetailView: SZView {
             scrollView,
             pageControl,
             bottomActionView,
+            nilImageView,
+            nilLabel,
             skeletonView
         )
         bottomActionView.addSubviews(
@@ -819,6 +855,14 @@ final class ProductsDetailView: SZView {
         chatCountLabel.snp.makeConstraints { make in
             make.centerY.equalTo(chatIcon)
             make.leading.equalTo(chatIcon.snp.trailing)
+        }
+        
+        nilImageView.snp.makeConstraints {
+            $0.edges.equalTo(imagePagerCollectionView)
+        }
+        nilLabel.snp.makeConstraints {
+            $0.top.equalTo(nilImageView.snp.bottom).offset(20.0)
+            $0.leading.equalToSuperview().inset(24.0)
         }
         
         skeletonView.snp.makeConstraints {
