@@ -26,6 +26,7 @@ protocol StudentAuthVMOutput {
     var completeSchoolCardCertify: PublishRelay<Bool> { get }
         
     var errorHandler: PublishRelay<Error> { get }
+    var transmitUnivMailErrorHandler: PublishRelay<Error> { get }
 }
 
 protocol StudentAuthVM: StudentAuthVMInput, StudentAuthVMOutput {}
@@ -71,7 +72,7 @@ final class DefaultStudentAuthVM: StudentAuthVM {
                 owner.showAuthCodeView.accept(true)
             },
             onFailure: { owner, error in
-                owner.errorHandler.accept(error)
+                owner.transmitUnivMailErrorHandler.accept(error)
             }
         )
         .disposed(by: disposeBag)
@@ -130,6 +131,7 @@ final class DefaultStudentAuthVM: StudentAuthVM {
     var completeSchoolCardCertify: PublishRelay<Bool> = .init()
     
     var errorHandler: PublishRelay<Error> = .init()
+    var transmitUnivMailErrorHandler: PublishRelay<Error> = .init()
     
 }
 
