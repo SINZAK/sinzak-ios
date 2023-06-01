@@ -73,7 +73,7 @@ final class MyProfileView: SZView {
     private let followerLabel = UILabel().then {
         $0.font = .caption_M
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.follower
+        $0.text = "팔로워"
     }
     let followingNumberLabel = UILabel().then {
         $0.font = .body_B
@@ -83,7 +83,7 @@ final class MyProfileView: SZView {
     private let followingLabel = UILabel().then {
         $0.font = .caption_M
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.following
+        $0.text = "팔로잉"
     }
     let followerStack = UIStackView().then {
         $0.spacing = 5
@@ -107,7 +107,7 @@ final class MyProfileView: SZView {
     }
     // 프로필편집 버튼
     let profileEditButton = UIButton().then {
-        $0.setTitle(I18NStrings.editProfile, for: .normal)
+        $0.setTitle("프로필 편집", for: .normal)
         $0.setTitleColor(CustomColor.label, for: .normal)
         $0.titleLabel?.font = .body_M
         $0.layer.cornerRadius = 21
@@ -122,7 +122,7 @@ final class MyProfileView: SZView {
     private let scrapListLabel = UILabel().then {
         $0.font = .body_B
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.scrapList
+        $0.text = "스크랩 목록"
     }
     let scrapListButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron-big")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal), for: .normal)
@@ -137,7 +137,7 @@ final class MyProfileView: SZView {
     private let requestListLabel = UILabel().then {
         $0.font = .body_B
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.requestList
+        $0.text = "의뢰해요"
     }
     let requestListButton = UIButton().then {
         $0.setImage(UIImage(named: "right-chevron-big")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal), for: .normal)
@@ -152,7 +152,7 @@ final class MyProfileView: SZView {
     private let salesListLabel = UILabel().then {
         $0.font = .body_B
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.salesList
+        $0.text = "판매 작품"
     }
 //    let salesListImage01 = UIImageView().then {
 //        $0.contentMode = .scaleAspectFit
@@ -190,7 +190,7 @@ final class MyProfileView: SZView {
     private let workListLabel = UILabel().then {
         $0.font = .body_B
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.workList
+        $0.text = "작업해요"
     }
 //    let workListImage01 = UIImageView().then {
 //        $0.contentMode = .scaleAspectFit

@@ -60,7 +60,7 @@ final class WriteCategoryVC: SZVC {
     }
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.title = I18NStrings.categorySelection
+        navigationItem.title = "카테고리 선택"
         
         let dismissBarButton = UIBarButtonItem(
             image: SZImage.Icon.dismiss,

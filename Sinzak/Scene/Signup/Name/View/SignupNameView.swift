@@ -13,13 +13,13 @@ import SnapKit
 final class SignupNameView: SZView {
     // MARK: - Properties
     private let titleLabel = UILabel().then {
-        $0.text = I18NStrings.pleaseEnterName
+        $0.text = "신작에서 사용할\n이름을 입력해주세요."
         $0.font = .subtitle_B
         $0.textColor = CustomColor.label
         $0.numberOfLines = 0
     }
     private let descriptionLabel = UILabel().then {
-        $0.text = I18NStrings.nameValidationDescription
+        $0.text = "이름은 공백없이 12자 이하,\n기호는 - _ . 만 사용 가능합니다."
         $0.font = .body_R
         $0.textColor = CustomColor.gray60
         $0.numberOfLines = 0
@@ -45,7 +45,7 @@ final class SignupNameView: SZView {
     }
     // 다음 버튼
     let nextButton = SZButton().then {
-        $0.setTitle(I18NStrings.next, for: .normal)
+        $0.setTitle("다음", for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.gray10
         $0.layer.cornerRadius = 30

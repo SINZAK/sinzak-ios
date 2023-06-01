@@ -73,7 +73,7 @@ final class EditProfileVC: SZVC {
     override func setNavigationBar() {
         super.setNavigationBar()
         
-        let complete = UIBarButtonItem(title: I18NStrings.finish, style: .plain, target: self, action: #selector(finishButtonTapped))
+        let complete = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(finishButtonTapped))
         let dismiss = UIBarButtonItem(
             image: UIImage(named: "dismiss")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal),
             style: .plain, target: nil, action: nil

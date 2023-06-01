@@ -13,9 +13,9 @@ enum WriteCategory: CaseIterable {
     case work
     var text: String {
         switch self {
-        case .sellingArtwork: return I18NStrings.sellingArtwork
-        case .request: return I18NStrings.request
-        case .work: return I18NStrings.work
+        case .sellingArtwork: return "작품 판매"
+        case .request: return "의뢰해요"
+        case .work: return "작업해요"
         }
     }
     var image: String {

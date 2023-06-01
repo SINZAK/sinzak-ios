@@ -22,6 +22,6 @@ final class RequestContentVC: SZVC {
     }
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.title = I18NStrings.requestContent
+        navigationItem.title = "의뢰 내용"
     }
 }

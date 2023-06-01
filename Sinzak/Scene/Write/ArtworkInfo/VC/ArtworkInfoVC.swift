@@ -34,6 +34,6 @@ final class ArtworkInfoVC: SZVC {
     }
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.title = I18NStrings.artworkInfo
+        navigationItem.title = "작품 정보"
     }
 }

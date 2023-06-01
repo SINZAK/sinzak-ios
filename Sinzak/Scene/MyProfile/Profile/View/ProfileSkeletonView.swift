@@ -53,7 +53,7 @@ final class ProfileSkeletonView: SZView {
     }
     
     let profileEditButton = UIButton().then {
-        $0.setTitle(I18NStrings.editProfile, for: .normal)
+        $0.setTitle("프로필 편집", for: .normal)
         $0.setTitleColor(CustomColor.label, for: .normal)
         $0.titleLabel?.font = .body_M
         $0.layer.cornerRadius = 42.0 / 2

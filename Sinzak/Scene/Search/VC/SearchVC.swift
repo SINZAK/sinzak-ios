@@ -32,9 +32,7 @@ final class SearchVC: SZVC {
     // MARK: - Actions
     /// 쿼리를 모두 삭제
     @objc private func deleteAllQuery(_ sender: UIButton) {
-        self.showAlert(title: "모두 삭제하시겠습니까?", okText: "네, 삭제합니다.", cancelNeeded: true) { _ in
-            // 쿼리 삭제 구현 코드 필요
-        }
+        
     }
     // MARK: - Helpers
     override func configure() {
@@ -56,7 +54,7 @@ final class SearchVC: SZVC {
     override func setNavigationBar() {
         super.setNavigationBar()
         let searchBar = UISearchBar()
-        searchBar.placeholder = I18NStrings.workRequestSearchPlaceholder
+        searchBar.placeholder = "의뢰 및 작업 통합 검색"
         self.navigationItem.titleView = searchBar
     }
 }
@@ -127,9 +125,7 @@ extension SearchVC {
         config.trailingSwipeActionsConfigurationProvider = { [ unowned self ] indexPath in
             let delete = UIContextualAction(style: .normal, title: nil) { _, _, _ in
                 // 삭제하기
-                self.showAlert(title: "삭제하시겠습니까?", okText: "네, 삭제합니다.", cancelNeeded: true) { _ in
-                    // 쿼리 삭제 구현 코드 필요
-                }
+                
             }
             delete.image = UIImage(systemName: "trash.fill")
             delete.backgroundColor = .systemRed

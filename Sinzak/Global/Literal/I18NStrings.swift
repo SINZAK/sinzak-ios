@@ -7,6 +7,7 @@
 
 import Foundation
 
+/*
 struct I18NStrings {
     // - 공통
     static let confirm = "confirm".localized
@@ -198,3 +199,4 @@ struct I18NStrings {
     static let sectionRecommend = "sectionRecommend".localized
     static let sectionFollowing = "sectionFollowing".localized
 }
+*/

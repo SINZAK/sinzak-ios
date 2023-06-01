@@ -46,7 +46,7 @@ final class TabBarVC: UITabBarController {
         
         let homeVC = UINavigationController(rootViewController: HomeVC(viewModel: homeVM))
         
-        homeVC.tabBarItem = UITabBarItem(title: I18NStrings.Home,
+        homeVC.tabBarItem = UITabBarItem(title: "홈",
                                          image: UIImage(named: "home"),
                                          selectedImage: UIImage(named: "home-selected"))
         // 마켓
@@ -57,24 +57,24 @@ final class TabBarVC: UITabBarController {
             needRefresh
         )
         let marketVC = UINavigationController(rootViewController: MarketVC(viewModel: marketVM, mode: .watch))
-        marketVC.tabBarItem = UITabBarItem(title: I18NStrings.Market,
+        marketVC.tabBarItem = UITabBarItem(title: "마켓",
                                          image: UIImage(named: "market"),
                                          selectedImage: UIImage(named: "market-selected"))
         // 의뢰
         let worksVC = UINavigationController(rootViewController: WorksContainerVC(worksMode: .watch))
-        worksVC.tabBarItem = UITabBarItem(title: I18NStrings.Outsourcing,
+        worksVC.tabBarItem = UITabBarItem(title: "외주",
                                          image: UIImage(named: "outsourcing"),
                                          selectedImage: UIImage(named: "outsourcing-selected"))
         
         // 채팅
         let vm = DefaultChatListVM()
         let chatVC = UINavigationController(rootViewController: ChatListVC(viewModel: vm, chatListMode: .all))
-        chatVC.tabBarItem = UITabBarItem(title: I18NStrings.Chat,
+        chatVC.tabBarItem = UITabBarItem(title: "채팅",
                                          image: UIImage(named: "chat"),
                                          selectedImage: UIImage(named: "chat-selected"))
         // 프로필
         let profileVC = UINavigationController(rootViewController: MyProfileVC(viewModel: DefaultMyProfileVM()))
-        profileVC.tabBarItem = UITabBarItem(title: I18NStrings.Profile,
+        profileVC.tabBarItem = UITabBarItem(title: "프로필",
                                          image: UIImage(named: "profile"),
                                          selectedImage: UIImage(named: "profile-selected"))
         // 탭 구성

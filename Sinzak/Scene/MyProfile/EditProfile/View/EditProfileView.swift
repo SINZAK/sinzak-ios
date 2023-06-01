@@ -34,7 +34,7 @@ final class EditProfileView: SZView {
     }
     // 프로필 사진 변경
     let changeProfileImageButton = UIButton().then {
-        $0.setTitle(I18NStrings.changeProfilePhoto, for: .normal)
+        $0.setTitle("프로필 사진 바꾸기", for: .normal)
         $0.setTitleColor(CustomColor.purple, for: .normal)
         $0.titleLabel?.font = .caption_M
     }
@@ -44,11 +44,11 @@ final class EditProfileView: SZView {
         $0.tintColor = CustomColor.red
         $0.font = .body_M
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.nickname
+        $0.text = "닉네임"
     }
     let nicknameTextField = UITextField().then {
         $0.tintColor = CustomColor.red
-        $0.placeholder = I18NStrings.nickname
+        $0.placeholder = "닉네임"
         $0.font = .body_R
         $0.textColor = CustomColor.label
     }
@@ -74,7 +74,7 @@ final class EditProfileView: SZView {
     private let introductionLabel = UILabel().then {
         $0.font = .body_M
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.introduction
+        $0.text = "소개"
     }
     let introductionTextView = UITextView().then {
         $0.tintColor = CustomColor.red
@@ -109,7 +109,7 @@ final class EditProfileView: SZView {
     private let schoolLabel = UILabel().then {
         $0.font = .body_M
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.school
+        $0.text = "학교"
     }
     let schoolNameLabel = UILabel().then {
         $0.font = .body_R
@@ -119,14 +119,14 @@ final class EditProfileView: SZView {
     let verifySchoolButton = VerifyButton().then {
         $0.titleLabel?.font = .body_M
         $0.setTitleColor(CustomColor.purple, for: .normal)
-        $0.setTitle(I18NStrings.verify, for: .normal)
+        $0.setTitle("인증하기", for: .normal)
     }
     // 관심장르
     let genreView = UIView()
     private let genreLabel = UILabel().then {
         $0.font = .body_M
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.genreOfInterest
+        $0.text = "관심장르"
     }
     let genreNameLabel = UILabel().then {
         $0.font = .body_R
@@ -138,12 +138,12 @@ final class EditProfileView: SZView {
     let changeGenreButton = UIButton().then {
         $0.titleLabel?.font = .body_M
         $0.setTitleColor(CustomColor.purple, for: .normal)
-        $0.setTitle(I18NStrings.change, for: .normal)
+        $0.setTitle("변경하기", for: .normal)
     }
     // 인증작가 신청하기 버튼
     let applyAuthorView = UIView()
     let applyAuthorButton = UIButton().then {
-        $0.setTitle(I18NStrings.applyCertifiedAuthor, for: .normal)
+        $0.setTitle("인증작가 신청하기", for: .normal)
         $0.setTitleColor(CustomColor.purple, for: .normal)
         $0.titleLabel?.font = .caption_M
         $0.isHidden = true

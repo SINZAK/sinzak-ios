@@ -13,9 +13,9 @@ enum WriteCategoryHeaderKind: CaseIterable {
     var text: String {
         switch self {
         case .selectGenre:
-            return I18NStrings.pleaseSelectGenre
+            return "분야를 선택해주세요."
         case .selectCategory:
-            return I18NStrings.pleaseSelectCategoryUptoThree
+            return "카테고리를 선택해주세요. (최대 3개)"
         }
     }
 }

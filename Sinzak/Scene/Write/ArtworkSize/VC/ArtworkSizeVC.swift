@@ -22,6 +22,6 @@ final class ArtworkSizeVC: SZVC {
     }
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.title = I18NStrings.artworkSizeOptional
+        navigationItem.title = "작품 사이즈(선택)"
     }
 }
