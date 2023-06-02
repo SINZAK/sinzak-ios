@@ -14,11 +14,11 @@ enum HomeNotLoggedInType: Int, CaseIterable {
     var title: String {
         switch self {
         case .trading:
-            return I18NStrings.sectionTrading
+            return "지금 거래중"
         case .new:
-            return I18NStrings.sectionNew
+            return "최신 작품"
         case .hot:
-            return I18NStrings.sectionHot
+            return "신작에서 사랑받는 작품"
         }
     }
 }
@@ -30,11 +30,11 @@ enum HomeLoggedInType: Int, CaseIterable {
     var title: String {
         switch self {
         case .new:
-            return I18NStrings.sectionNew
+            return "최신 작품"
         case .recommend:
-            return "\(UserInfoManager.name ?? "") "+I18NStrings.sectionRecommend
+            return "\(UserInfoManager.name ?? "") "+"님을 위한 맞춤 거래"
         case .following:
-            return I18NStrings.sectionFollowing
+            return "내가 팔로잉하는 작가"
         }
     }
 }

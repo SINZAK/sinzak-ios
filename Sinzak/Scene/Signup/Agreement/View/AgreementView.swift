@@ -13,7 +13,7 @@ import SnapKit
 final class AgreementView: SZView {
     // MARK: - Properties
     let titleLabel = UILabel().then {
-        $0.text = I18NStrings.consentToUseOfService
+        $0.text = "서비스 이용 동의"
         $0.font = .subtitle_B
         $0.textColor = CustomColor.label
     }
@@ -24,7 +24,7 @@ final class AgreementView: SZView {
     }
     
     let fullAgreeLabel = UILabel().then {
-        $0.text = I18NStrings.fullAgree
+        $0.text = "약관 전체동의"
         $0.font = .body_B
         $0.textColor = CustomColor.label
         $0.isUserInteractionEnabled = true
@@ -42,7 +42,7 @@ final class AgreementView: SZView {
     }
     
     let olderFourteenLabel = UILabel().then {
-        $0.text = I18NStrings.olderThanfourteenYears
+        $0.text = "(필수) 만 14세 이상입니다."
         $0.font = .body_M
         $0.textColor = CustomColor.label
         $0.isUserInteractionEnabled = true
@@ -54,7 +54,7 @@ final class AgreementView: SZView {
     }
     
     let termsOfServiceLabel = UILabel().then {
-        $0.text = I18NStrings.requiredTermsOfService
+        $0.text = "(필수) 서비스 이용약관"
         $0.font = .body_M
         $0.textColor = CustomColor.label
         $0.isUserInteractionEnabled = true
@@ -70,7 +70,7 @@ final class AgreementView: SZView {
     }
     
     let privacyPolicyLabel = UILabel().then {
-        $0.text = I18NStrings.requiredPrivacyPolicy
+        $0.text = "(필수) 개인정보 처리방침"
         $0.font = .body_M
         $0.textColor = CustomColor.label
         $0.isUserInteractionEnabled = true
@@ -86,7 +86,7 @@ final class AgreementView: SZView {
     }
     
     let marketingInfoLabel = UILabel().then {
-        $0.text = I18NStrings.optionalMarketingInformation
+        $0.text = "(선택) 마케팅 정보 수신동의"
         $0.font = .body_M
         $0.textColor = CustomColor.label
         $0.isUserInteractionEnabled = true
@@ -98,7 +98,7 @@ final class AgreementView: SZView {
     
     // 확인 버튼
     let confirmButton = SZButton().then {
-        $0.setTitle(I18NStrings.confirm, for: .normal)
+        $0.setTitle("확인", for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.gray20
         $0.layer.cornerRadius = 30

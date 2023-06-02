@@ -17,10 +17,10 @@ final class SearchHistoryView: SZView {
     private let titleLabel = UILabel().then {
         $0.font = .caption_R
         $0.textColor = CustomColor.gray60
-        $0.text = I18NStrings.recentQuery
+        $0.text = "최근 검색어"
     }
     let removeAllButton = UIButton().then {
-        $0.setTitle(I18NStrings.removeAll, for: .normal)
+        $0.setTitle("전체 삭제", for: .normal)
         $0.setTitleColor(CustomColor.gray60, for: .normal)
         $0.titleLabel?.font = .caption_R
     }

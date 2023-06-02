@@ -17,12 +17,12 @@ final class ReceivePriceOfferView: SZView {
         $0.textColor = CustomColor.black
     }
     private let fromNimLabel = UILabel().then {
-        $0.text = I18NStrings.fromNim
+        $0.text = " 님께서"
         $0.font = .body_B
         $0.textColor = CustomColor.black
     }
     private let suggestedPriceOfferLael = UILabel().then {
-        $0.text = I18NStrings.suggestedPriceOffer
+        $0.text = "가격을 제안하셨어요."
         $0.font = .body_B
         $0.textColor = CustomColor.black
     }
@@ -37,7 +37,7 @@ final class ReceivePriceOfferView: SZView {
         $0.text = "50,000"
     }
     private let wonBiggerLabel = UILabel().then {
-        $0.text = I18NStrings.krw
+        $0.text = "원"
         $0.font = .subtitle_B
         $0.textColor = CustomColor.gray80
     }
@@ -47,7 +47,7 @@ final class ReceivePriceOfferView: SZView {
         $0.distribution = .fillEqually
     }
     let declineButton = UIButton().then {
-        $0.setTitle(I18NStrings.decline, for: .normal)
+        $0.setTitle("거절하기", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.backgroundColor = CustomColor.gray40
         $0.titleLabel?.font = .body_B
@@ -55,7 +55,7 @@ final class ReceivePriceOfferView: SZView {
         $0.layer.cornerRadius = 33
     }
     let acceptButton = UIButton().then {
-        $0.setTitle(I18NStrings.accept, for: .normal)
+        $0.setTitle("accept", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.backgroundColor = CustomColor.red
         $0.titleLabel?.font = .body_B

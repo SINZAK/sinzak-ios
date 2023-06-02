@@ -50,7 +50,7 @@ final class StudentAuthView: SZView {
     // MARK: - Properties
 
     let selectAuthTypeLabel = UILabel().then {
-        $0.text = I18NStrings.verifyTypeSelect
+        $0.text = "인증 방식 선택"
         $0.textColor = CustomColor.label
         $0.font = .caption_M
     }
@@ -61,7 +61,7 @@ final class StudentAuthView: SZView {
         $0.distribution = .fillEqually
     }
     let webmailButton = UIButton().then {
-        $0.setTitle(I18NStrings.schoolWebmailAuth, for: .normal)
+        $0.setTitle("학교 웹메일 인증", for: .normal)
         $0.setTitleColor(ButtonSelected.selected.foregroundColor, for: .normal)
         $0.tintColor = ButtonSelected.selected.foregroundColor
         $0.setImage(ButtonSelected.selected.image, for: .normal)
@@ -71,7 +71,7 @@ final class StudentAuthView: SZView {
         $0.titleLabel?.font = .caption_B
     }
     let schoolcardButton = UIButton().then {
-        $0.setTitle(I18NStrings.schoolCardAuth, for: .normal)
+        $0.setTitle("학생증 인증", for: .normal)
         $0.setTitleColor(ButtonSelected.not.foregroundColor, for: .normal)
         $0.tintColor = ButtonSelected.not.foregroundColor
         $0.setImage(ButtonSelected.not.image, for: .normal)
@@ -86,7 +86,7 @@ final class StudentAuthView: SZView {
     let webmailView = SZView()
     
     let webmailDescription = UILabel().then {
-        $0.text = I18NStrings.schoolEmailAuthDescription
+        $0.text = "이메일을 입력하면 인증 메일을 보내드립니다.\n이메일 수신 후 인증번호를 입력하면 인증이 완료됩니다."
         $0.font = .caption_R
         $0.textColor = CustomColor.label
         $0.addInterlineSpacing(spacing: 3)
@@ -100,7 +100,7 @@ final class StudentAuthView: SZView {
         $0.layer.cornerRadius = 22.0
         $0.font = .caption_B
         $0.textColor = CustomColor.label
-        $0.placeholder = I18NStrings.pleaseEnterSchoolEmail
+        $0.placeholder = "학교메일을 입력하세요."
         $0.clearButtonMode = .whileEditing
     }
     
@@ -121,7 +121,7 @@ final class StudentAuthView: SZView {
     let authCodeLabel = UILabel().then {
         $0.font = .caption_M
         $0.textColor = CustomColor.label.withAlphaComponent(0)
-        $0.text = I18NStrings.authCode
+        $0.text = "인증번호"
         $0.isHidden = true
         $0.alpha = 0
     }
@@ -133,7 +133,7 @@ final class StudentAuthView: SZView {
         $0.layer.cornerRadius = 22.0
         $0.font = .caption_B
         $0.textColor = CustomColor.label
-        $0.placeholder = I18NStrings.fourDigitPlease
+        $0.placeholder = "4자리 인증번호를 입력해주세요."
         $0.clearButtonMode = .whileEditing
         $0.isHidden = true
         $0.alpha = 0
@@ -162,14 +162,14 @@ final class StudentAuthView: SZView {
         $0.isHidden = true
     }
     let schoolCardDescription = UILabel().then {
-        $0.text = I18NStrings.schoolCardAuthDescription
+        $0.text = "모바일 학생증 캡쳐 화면 또는 실물 학생증 사진을\n업로드해주세요. 2~3일 내에 승인이 완료됩니다."
         $0.font = .caption_R
         $0.textColor = CustomColor.label
         $0.addInterlineSpacing(spacing: 3)
         $0.numberOfLines = 2
     }
     let photoUploadButton = UIButton().then {
-        $0.setTitle(" "+I18NStrings.uploadPhotos, for: .normal)
+        $0.setTitle(" "+"사진 업로드하기", for: .normal)
         $0.setTitleColor(CustomColor.purple, for: .normal)
         $0.setImage(UIImage(named: "camera"), for: .normal)
         $0.tintColor = CustomColor.purple
@@ -219,7 +219,7 @@ final class StudentAuthView: SZView {
         $0.distribution = .fillEqually
     }
     let webMailDoNextButton = UIButton().then {
-        $0.setTitle(I18NStrings.doNextTime, for: .normal)
+        $0.setTitle("다음에 하기", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.gray60
@@ -227,7 +227,7 @@ final class StudentAuthView: SZView {
         $0.layer.cornerRadius = 33
     }
     let webMailFinishButton = SchoolAuthButton().then {
-        $0.setTitle(I18NStrings.finish, for: .normal)
+        $0.setTitle("완료", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.red
@@ -242,7 +242,7 @@ final class StudentAuthView: SZView {
         $0.distribution = .fillEqually
     }
     let schoolCardDoNextButton = UIButton().then {
-        $0.setTitle(I18NStrings.doNextTime, for: .normal)
+        $0.setTitle("다음에 하기", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.gray60
@@ -250,7 +250,7 @@ final class StudentAuthView: SZView {
         $0.layer.cornerRadius = 33
     }
     let schoolCardFinishButton = SchoolAuthButton().then {
-        $0.setTitle(I18NStrings.finish, for: .normal)
+        $0.setTitle("완료", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.red

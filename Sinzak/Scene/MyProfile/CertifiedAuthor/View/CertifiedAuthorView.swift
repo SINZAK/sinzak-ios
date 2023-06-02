@@ -14,12 +14,12 @@ final class CertifiedAuthorView: SZView {
     private let sinzakAuthorLabel = UILabel().then {
         $0.font = .body_B
         $0.textColor = CustomColor.black
-        $0.text = I18NStrings.sinzakCertifiedAuthor
+        $0.text = "신작 인증 작가"
     }
     private let descriptionLabel01 = UILabel().then {
         $0.font = .caption_R
         $0.textColor = CustomColor.black
-        $0.text = I18NStrings.sinzakCertifiedAuthorDescription01
+        $0.text = "인증 작가가 되면 이름 옆에 인증작가 배지"
     }
     private let badgeImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
@@ -28,23 +28,23 @@ final class CertifiedAuthorView: SZView {
     private let descriptionLabel02 = UILabel().then {
         $0.font = .caption_R
         $0.textColor = CustomColor.black
-        $0.text = I18NStrings.sinzakCertifiedAuthorDescription02
+        $0.text = "가 붙고,"
     }
     private let descriptionLabel03 = UILabel().then {
         $0.font = .caption_R
         $0.textColor = CustomColor.black
-        $0.text = I18NStrings.sinzakCertifiedAuthorDescription03
+        $0.text = "신작 추천 작품에 선정될 가능성이 높아집니다."
     }
     // 1단계
     private let firstStepLabel = UILabel().then {
         $0.font = .body_B
         $0.textColor = CustomColor.black
-        $0.text = I18NStrings.firstStepSchoolAuth
+        $0.text = "1단계. 학교 인증"
     }
     private let schoolLabel = UILabel().then {
         $0.font = .body_M
         $0.textColor = CustomColor.black
-        $0.text = I18NStrings.school
+        $0.text = "학교"
         $0.setContentHuggingPriority(.init(rawValue: 999), for: .horizontal)
     }
     let schoolNameLabel = UILabel().then {
@@ -54,7 +54,7 @@ final class CertifiedAuthorView: SZView {
         $0.textAlignment = .center
     }
     let schoolAuthButton = UIButton().then {
-        $0.setTitle(I18NStrings.verify, for: .normal)
+        $0.setTitle("인증하기", for: .normal)
         $0.setTitleColor(CustomColor.purple, for: .normal)
         $0.titleLabel?.font = .body_M
     }
@@ -62,17 +62,17 @@ final class CertifiedAuthorView: SZView {
     private let secondStepLabel = UILabel().then {
         $0.font = .body_B
         $0.textColor = CustomColor.black
-        $0.text = I18NStrings.secondStepPortfolioLink
+        $0.text = "2단계. 포트폴리오 링크"
     }
     private let secondStepDescriptionLabel = UILabel().then {
         $0.font = .caption_R
         $0.textColor = CustomColor.black
-        $0.text = I18NStrings.secondStepPortfolioLinkDescription
+        $0.text = "개인 웹사이트, Behance, ArtStation, google drive 등\n링크 형식으로 포트폴리오를 첨부해주세요."
         $0.addInterlineSpacing(spacing: 3)
         $0.numberOfLines = 0
     }
     let portfolioLinkTextField = SZTextField(insets: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)).then {
-        $0.placeholder = I18NStrings.pleaseEnterLink
+        $0.placeholder = "링크를 입력하세요."
         $0.font = .caption_R
         $0.textColor = CustomColor.black
         $0.backgroundColor = CustomColor.gray10
@@ -82,7 +82,7 @@ final class CertifiedAuthorView: SZView {
     let applyButton = UIButton().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 33
-        $0.setTitle(I18NStrings.apply, for: .normal)
+        $0.setTitle("신청하기", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.backgroundColor = CustomColor.red
         $0.titleLabel?.font = .body_B

@@ -36,7 +36,7 @@ final class SelectedPhotoCVC: UICollectionViewCell {
     private let thumbnailLabel = UILabel().then {
         $0.font = .caption_B
         $0.textColor = CustomColor.red50
-        $0.text = I18NStrings.thumbnail
+        $0.text = "썸네일"
         $0.isHidden = true
     }
     

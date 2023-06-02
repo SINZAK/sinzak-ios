@@ -84,6 +84,13 @@ final class ProductsDetailVC: SZVC {
     override func setNavigationBar() {
         super.setNavigationBar()
         
+        let menu = UIBarButtonItem(
+            image: UIImage(named: "chatMenu"),
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        navigationItem.rightBarButtonItem = menu
     }
     
     // MARK: - bind
@@ -182,7 +189,7 @@ final class ProductsDetailVC: SZVC {
 //                        }
 //                    )
                 }
-                
+
                 if owner.owner == .other {
                     owner.showSingleAlertSheet(
                         actionTitle: "신고하기",
@@ -438,14 +445,11 @@ final class ProductsDetailVC: SZVC {
                     
                     if data.author == "탈퇴한 회원" {
                         owner.navigationItem.rightBarButtonItem = nil
-                    } else {
-                        let menu = UIBarButtonItem(
-                            image: UIImage(named: "chatMenu"),
-                            style: .plain,
-                            target: nil,
-                            action: nil
-                        )
-                        owner.navigationItem.rightBarButtonItem = menu
+                        owner.showSinglePopUpAlert(
+                            message: "탈퇴한 회원입니다.",
+                            actionCompletion: {
+                                owner.navigationController?.popViewController(animated: true)
+                        })
                     }
                 })
             .disposed(by: disposeBag)
@@ -472,6 +476,15 @@ final class ProductsDetailVC: SZVC {
             .asSignal()
             .emit(with: self, onNext: { owner, vc in
                 owner.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.errorHandler
+            .asSignal()
+            .emit(
+                with: self,
+                onNext: { owner, error in
+                owner.simpleErrorHandler.accept(error)
             })
             .disposed(by: disposeBag)
     }

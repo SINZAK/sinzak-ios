@@ -19,12 +19,12 @@ final class WelcomeView: SZView {
     private let welcomeLabel = UILabel().then {
         $0.font = .title_B
         $0.textColor = CustomColor.red
-        $0.text = I18NStrings.welcome
+        $0.text = "Welcome!"
     }
     private let welcomeDescriptionLabel = UILabel().then {
         $0.font = .body_M
         $0.textColor = CustomColor.gray80
-        $0.text = I18NStrings.welcomeDescription
+        $0.text = "신작에 가입이 완료되었습니다.\n이제 자유롭게 작품을 탐색하고 거래해보세요."
         $0.textAlignment = .center
     }
     private let imageView = UIImageView().then {
@@ -35,7 +35,7 @@ final class WelcomeView: SZView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 33
         $0.backgroundColor = CustomColor.red
-        $0.setTitle(I18NStrings.letsGoSeeArtworks, for: .normal)
+        $0.setTitle("작품 보러 가기", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.titleLabel?.font = .body_B
     }

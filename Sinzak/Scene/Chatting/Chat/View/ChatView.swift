@@ -161,7 +161,7 @@ extension ChatView {
 
 extension ChatView {
     
-    func setShowKeyboardLayout(height: CGFloat) {
+    func setShowKeyboardLayout(height: CGFloat, maxY: CGFloat) {
         chatActionView.snp.remakeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().inset(height)
@@ -170,7 +170,14 @@ extension ChatView {
         
         collectionView.contentInset.bottom = height - safeAreaInsets.bottom
         collectionView.verticalScrollIndicatorInsets.bottom = collectionView.contentInset.bottom
-        collectionView.contentOffset.y += height - safeAreaInsets.bottom
+        
+        let cellY = collectionView.frame.height - maxY + 44.0 + safeAreaInsets.bottom
+        
+        if cellY > height + 50.0 {
+            return
+        }
+        
+        collectionView.contentOffset.y += height - safeAreaInsets.bottom - max(collectionView.frame.height - maxY, 0)
     }
     
     func setHideKeyboardLayout() {

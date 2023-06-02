@@ -128,15 +128,16 @@ extension UserCommandAPI: TargetType {
             }
             
         case .editUserInfo(let userInfo):
-            do {
-                let encoder = JSONEncoder()
-                let data = try encoder.encode(userInfo)
-                let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
-                return .requestParameters(parameters: dictionary, encoding: JSONEncoding.default)
-            } catch {
-                print("Error encoding userInfo: \(error)")
-                return .requestPlain
+            
+            var param: [String: Any] = [
+                "introduction": userInfo.introduction
+            ]
+            
+            if UserInfoManager.name != userInfo.name {
+                param["name"] = userInfo.name
             }
+            
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
 
         case .follow(let userId), .unfollow(let userId):
             let params: [String: Any] = [

@@ -32,6 +32,6 @@ final class ReceivePriceOfferVC: SZVC {
     }
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.title = I18NStrings.priceOffer
+        navigationItem.title = "가격 제안"
     }
 }

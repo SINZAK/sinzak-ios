@@ -12,12 +12,12 @@ import Then
 final class SendPriceOfferView: SZView {
     // MARK: - Properties
     private let pleaseOfferLabel = UILabel().then {
-        $0.text = I18NStrings.pleaseOfferPriceMatchesMarket
+        $0.text = "시세에 맞는 가격을 제안해보세요."
         $0.font = .body_B
         $0.textColor = CustomColor.label
     }
     private let currentBestPriceLabel = UILabel().then {
-        $0.text = I18NStrings.currentBestPrice
+        $0.text = "현재 최고 금액"
         $0.font = .body_B
         $0.textColor = CustomColor.label
     }
@@ -27,7 +27,7 @@ final class SendPriceOfferView: SZView {
         $0.textColor = CustomColor.purple
     }
     private let wonLabel = UILabel().then {
-        $0.text = I18NStrings.krw
+        $0.text = "원"
         $0.font = .body_B
         $0.textColor = CustomColor.label
     }
@@ -41,7 +41,7 @@ final class SendPriceOfferView: SZView {
         $0.textColor = CustomColor.label
     }
     private let wonBiggerLabel = UILabel().then {
-        $0.text = I18NStrings.krw
+        $0.text = "원"
         $0.font = .subtitle_B
         $0.textColor = CustomColor.gray80
     }
@@ -59,7 +59,7 @@ final class SendPriceOfferView: SZView {
         $0.font = .caption_M
     }
     let suggestButton = SZButton().then {
-        $0.setTitle(I18NStrings.suggest, for: .normal)
+        $0.setTitle("제안하기", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.backgroundColor = CustomColor.red
         $0.titleLabel?.font = .body_B

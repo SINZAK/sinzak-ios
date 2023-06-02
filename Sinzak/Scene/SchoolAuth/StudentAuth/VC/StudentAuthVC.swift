@@ -72,142 +72,9 @@ final class StudentAuthVC: SZVC {
     }
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.title = I18NStrings.schoolAuth
+        navigationItem.title = "학교 인증"
     }
     func bind() {
-        /*
-        // 사진 업로드
-        mainView.photoUploadButton.rx
-            .tap
-            .withUnretained(self)
-            .bind { (vc, _) in
-                let picker = YPImagePicker()
-                picker.didFinishPicking { [unowned picker] items, _ in
-                    if let photo = items.singlePhoto {
-                        // 사진 첨부가 성공했을 경우
-                        vc.schoolcardImage = photo.image
-                        vc.mainView.photoUploadButton.isHidden = true
-                        vc.mainView.photoNameLabel.text = String.uniqueFilename(withPrefix: "IMG", fileExtension: "jpg")
-                        vc.mainView.uploadedPhotoView.isHidden = false
-                        vc.mainView.selectedPhoto.isHidden = false
-                        vc.mainView.selectedPhoto.image = photo.image
-                    }
-                    picker.dismiss(animated: true, completion: nil)
-                }
-                vc.present(picker, animated: true, completion: nil)
-            }
-            .disposed(by: viewModel.disposeBag)
-        // 사진 취소
-        mainView.cancelButton.rx
-            .tap
-            .withUnretained(self)
-            .bind { (vc, _) in
-                // 이미지 삭제할지 알람 띄우기
-                vc.showAlert(title: "이미지를 삭제하시겠습니까?", okText: "삭제", cancelNeeded: true) { _ in
-                    vc.mainView.photoUploadButton.isHidden = false
-                    vc.mainView.uploadedPhotoView.isHidden = true
-                    vc.mainView.selectedPhoto.isHidden = true
-                    // 사진 삭제
-                    vc.schoolcardImage = nil
-                }
-            }
-            .disposed(by: viewModel.disposeBag)
-        // 텍스트필드쪽
-        let mailValidation = mainView.webmailTextField.rx.text
-            .orEmpty
-            .map {
-              $0.isValidString(.email)
-            }
-            .share()
-        mailValidation
-            .withUnretained(self)
-            .bind { (vc, bool) in
-                let text: String = bool ? "엔터를 눌러 인증메일을 전송해주세요" : I18NStrings.enterYourEmailInCorrectFormat
-                let color: UIColor = bool  ? CustomColor.purple : CustomColor.red
-                vc.mainView.webmailValidationLabel.textColor = color
-                vc.mainView.webmailValidationLabel.text = text
-            }
-            .disposed(by: viewModel.disposeBag)
-        mainView.webmailTextField.rx
-            .controlEvent([.editingDidEndOnExit])
-            .withUnretained(self)
-            .bind { (vc, _) in
-                // 인증메일 전송
-                vc.mainView.webmailValidationLabel.text = "인증메일이 전송되었습니다."
-                vc.mainView.webmailTextField.isUserInteractionEnabled = false
-                vc.mainView.layoutIfNeeded()
-            }
-            .disposed(by: viewModel.disposeBag)
-        let authcodeValidation = mainView.authCodeTextField
-            .rx.text
-            .orEmpty
-            .map { $0.isValidString(.digit)}
-            .share()
-        authcodeValidation
-            .withUnretained(self)
-            .bind { (vc, bool) in
-                let text: String = bool ? "" :  I18NStrings.pleaseEnterAgain
-                let color: UIColor = bool  ? CustomColor.purple : CustomColor.red
-                vc.mainView.authCodeValidationLabel.textColor = color
-                vc.mainView.authCodeValidationLabel.text = text
-                vc.mainView.layoutIfNeeded()
-            }
-            .disposed(by: viewModel.disposeBag)
-        mainView.authCodeTextField.rx
-            .controlEvent([.editingDidEndOnExit])
-            .withUnretained(self)
-            .bind { (vc, _) in
-                // 인증코드 전송되고 맞았을 때
-                vc.mainView.authCodeValidationLabel.text = "인증완료"
-                vc.mainView.layoutIfNeeded()
-            }
-            .disposed(by: viewModel.disposeBag)
-         */
-
-        /*
-        RxKeyboard.instance.visibleHeight
-            .skip(1)
-            .drive(onNext: { [weak self] keyboardVisibleHeignt in
-                guard let self = self else { return }
-                Log.debug("keyboard: \(keyboardVisibleHeignt)")
-                if keyboardVisibleHeignt > 0 {
-
-//                    self.mainView.buttonStack.snp.updateConstraints {
-//                        $0.bottom.equalToSuperview().inset(keyboardVisibleHeignt + 16.0)
-//                    }
-//                    self.mainView.webmailView.snp.updateConstraints {
-//                        $0.bottom.equalTo(keyboardVisibleHeignt)
-//                    }
-                    let window = UIApplication.shared.windows.first
-                    let extra = window!.safeAreaInsets.bottom
-                    Log.debug("\(self.mainView.authCodeValidationLabel.frame.maxY + self.mainView.authButtonStack.frame.maxY > self.view.frame.height -  keyboardVisibleHeignt)")
-                    
-                    
-//                        self.mainView.selectAuthTypeLabel.snp.updateConstraints { make in
-//                            make.leading.equalToSuperview().inset(40)
-//                            make.top.equalTo(self.view.safeAreaLayoutGuide).inset(-32)
-//                        }
-//                        self.view.layoutIfNeeded()
-//                    self.mainView.scrollView.contentInset.bottom = 100
-//
-//                    self.mainView.scrollView.scroll(to: .bottom)
-//                    self.mainView.scrollView.
-
-                } else {
-//                    self.mainView.buttonStack.snp.updateConstraints {
-//                        $0.bottom.equalToSuperview().inset(24.0)
-//                    }
-//                    self.mainView.selectAuthTypeLabel.snp.updateConstraints { make in
-//                        make.leading.equalToSuperview().inset(40)
-//                        make.top.equalTo(self.view.safeAreaLayoutGuide).inset(20)
-//                    }
-//                    self.view.layoutIfNeeded()
-                    self.mainView.scrollView.contentInset.bottom = 0
-                }
-            })
-            .disposed(by: disposeBag)
-         */
-        
         bindInput()
         bindOutput()
     }
@@ -236,9 +103,11 @@ final class StudentAuthVC: SZVC {
             .disposed(by: disposeBag)
         
         mainView.transmitMailButton.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind(
                 with: self,
                 onNext: { owner, _ in
+                    owner.mainView.transmitMailButton.isEnabled = false
                     owner.viewModel.tranmitUnivMail()
                 }
             )
@@ -392,6 +261,15 @@ final class StudentAuthVC: SZVC {
                 with: self,
                 onNext: { owner, error in
                     owner.simpleErrorHandler.accept(error)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.transmitUnivMailErrorHandler
+            .subscribe(
+                with: self,
+                onNext: { owner, error in
+                    owner.simpleErrorHandler.accept(error)
+                    owner.mainView.transmitMailButton.isEnabled = true
             })
             .disposed(by: disposeBag)
         

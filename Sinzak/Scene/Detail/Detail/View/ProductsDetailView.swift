@@ -83,7 +83,7 @@ final class ProductsDetailView: SZView {
                 followButton.backgroundColor = CustomColor.red
                 followButton.setTitleColor(CustomColor.white, for: .normal)
             } else {
-                followButton.setTitle(I18NStrings.follow, for: .normal)
+                followButton.setTitle("팔로우", for: .normal)
                 followButton.backgroundColor = .clear
                 followButton.setTitleColor(CustomColor.red, for: .normal)
             }
@@ -258,7 +258,7 @@ final class ProductsDetailView: SZView {
     private let followerLabel = UILabel().then {
         $0.font = .caption_M
         $0.textColor = CustomColor.gray60
-        $0.text = "·" + I18NStrings.follower + " "
+        $0.text = "·" + "팔로워" + " "
     }
     let followerCountLabel = UILabel().then {
         $0.font = .caption_M
@@ -267,7 +267,7 @@ final class ProductsDetailView: SZView {
     }
     let followButton = UIButton().then {
         $0.titleLabel?.font = .caption_M
-        $0.setTitle(I18NStrings.follow, for: .normal)
+        $0.setTitle("팔로우", for: .normal)
         $0.setTitleColor(CustomColor.red, for: .normal)
         $0.layer.cornerRadius = 16
         $0.layer.borderWidth = 1.5
@@ -280,7 +280,7 @@ final class ProductsDetailView: SZView {
     let detailTitle = UILabel().then {
         $0.font = .body_M
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.detailSize
+        $0.text = "상세 사이즈"
     }
     
     let widthLabel: UILabel = {
@@ -472,7 +472,7 @@ final class ProductsDetailView: SZView {
     }
     let scrapButton = UIButton().then {
         var config = UIButton.Configuration.plain()
-        var titleAttr = AttributedString.init(I18NStrings.scrap) // 숫자
+        var titleAttr = AttributedString.init("찜하기") // 숫자
         titleAttr.font = .caption_B
         config.attributedTitle = titleAttr
         config.image = UIImage(named: "scrap2-blank")?.withTintColor(CustomColor.gray60, renderingMode: .alwaysOriginal)
@@ -489,17 +489,37 @@ final class ProductsDetailView: SZView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 24
         $0.setImage(UIImage(named: "chatbubble-blank"), for: .normal)
-        $0.setTitle(" " + I18NStrings.askDeal, for: .normal)
+        $0.setTitle(" " + "거래 문의하기", for: .normal)
         $0.titleLabel?.font = .body_B
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.tintColor = CustomColor.white
         $0.backgroundColor = CustomColor.red
     }
     let priceOfferButton = UIButton().then {
-        $0.setTitle(I18NStrings.sendPriceOffer, for: .normal)
+        $0.setTitle("가격 제안하기", for: .normal)
         $0.setTitleColor(CustomColor.purple, for: .normal)
         $0.titleLabel?.font = .caption_B
     }
+    
+    let nilImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = SZImage.Image.nothing
+        imageView.backgroundColor = CustomColor.gray10
+        imageView.contentMode = .center
+        imageView.isHidden = true
+        
+        return imageView
+    }()
+    
+    let nilLabel: UILabel = {
+        let label = UILabel()
+        label.text = "삭제된 게시물입니다."
+        label.font = .subtitle_B
+        label.textColor = CustomColor.label
+        label.isHidden = true
+        
+        return label
+    }()
     
     let skeletonView = ProductsDetailSkeletonView()
     
@@ -561,12 +581,27 @@ final class ProductsDetailView: SZView {
         
         if data.author == "탈퇴한 회원" {
             followButton.isHidden = true
-            likeButton.isEnabled = false
-            scrapButton.isEnabled = false
-            isCompleteButton.isEnabled = false
-            priceOfferButton.isEnabled = false
-            askDealButtton.isEnabled = false
+            likeButton.isHidden = true
+            scrapButton.isHidden = true
+            isCompleteButton.isEnabled = true
+            priceOfferButton.isHidden = true
+            askDealButtton.isHidden = true
+            bottomActionView.isHidden = true
+            pageControl.isHidden = true
+            titleStackView.isHidden = true
+            priceStackView.isHidden = true
+            authorView.isHidden = true
+            detailSizeView.isHidden = true
+            timeLabel.isHidden = true
+            nilLabel.isHidden = true
+            contentView.isHidden = true
+            authorView.isHidden = true
+            postStatusView.isHidden = true
+            categoryLabel.isHidden = true
             askDealButtton.backgroundColor = CustomColor.gray40
+            
+            nilImageView.isHidden = false
+            nilLabel.isHidden = false
         }
     }
     // MARK: - Design Helpers
@@ -576,6 +611,8 @@ final class ProductsDetailView: SZView {
             scrollView,
             pageControl,
             bottomActionView,
+            nilImageView,
+            nilLabel,
             skeletonView
         )
         bottomActionView.addSubviews(
@@ -818,6 +855,14 @@ final class ProductsDetailView: SZView {
         chatCountLabel.snp.makeConstraints { make in
             make.centerY.equalTo(chatIcon)
             make.leading.equalTo(chatIcon.snp.trailing)
+        }
+        
+        nilImageView.snp.makeConstraints {
+            $0.edges.equalTo(imagePagerCollectionView)
+        }
+        nilLabel.snp.makeConstraints {
+            $0.top.equalTo(nilImageView.snp.bottom).offset(20.0)
+            $0.leading.equalToSuperview().inset(24.0)
         }
         
         skeletonView.snp.makeConstraints {

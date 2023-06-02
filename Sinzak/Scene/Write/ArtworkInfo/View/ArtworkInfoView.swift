@@ -14,7 +14,7 @@ final class ArtworkInfoView: SZView {
     private let titleLabel = UILabel().then {
         $0.font = .body_R
         $0.textColor = CustomColor.gray80
-        $0.text = " ˙ " + I18NStrings.artworkTitle
+        $0.text = " ˙ " + "작품 제목"
     }
     let titleTextField = SZTextField().then {
         $0.backgroundColor = CustomColor.gray10
@@ -26,7 +26,7 @@ final class ArtworkInfoView: SZView {
     private let priceLabel = UILabel().then {
         $0.font = .body_R
         $0.textColor = CustomColor.gray80
-        $0.text = " ˙ " + I18NStrings.price
+        $0.text = " ˙ " + "가격"
     }
     let priceTextField = SZTextField(insets: UIEdgeInsets(
         top: 0, left: 0, bottom: 0, right: 0)
@@ -42,21 +42,21 @@ final class ArtworkInfoView: SZView {
     private let krwLabel = UILabel().then {
         $0.font = .body_B
         $0.textColor = CustomColor.gray80
-        $0.text = I18NStrings.krw
+        $0.text = "원"
     }
     let priceOfferToggleButton = UIButton().then {
         $0.tintColor = CustomColor.label
         $0.setImage(UIImage(named: "check-circle-pressed"), for: .normal)
-        $0.setTitle(I18NStrings.getPriceOffer, for: .normal)
+        $0.setTitle("가격제안 받기", for: .normal)
         $0.setTitleColor(CustomColor.label, for: .normal)
     }
     private let artworkDescriptionLabel = UILabel().then {
         $0.font = .body_R
         $0.textColor = CustomColor.gray80
-        $0.text = " ˙ " + I18NStrings.artworkDescription
+        $0.text = " ˙ " + "작품 설명"
     }
     let artworkDescriptionTextView = UITextView().then {
-        $0.text = I18NStrings.artworkDescriptionPlaceholder
+        $0.text = "작품 의도, 작업 기간, 재료, 거래 방법 등을 자유롭게 표현해보세요."
         $0.backgroundColor = CustomColor.gray10
         $0.contentInset = .init(top: 20, left: 35, bottom: 20, right: 22)
         $0.layer.cornerRadius = 30
@@ -65,7 +65,7 @@ final class ArtworkInfoView: SZView {
         $0.textColor = CustomColor.label
     }
     let nextButton = UIButton().then {
-        $0.setTitle(I18NStrings.next, for: .normal)
+        $0.setTitle("다음", for: .normal)
         $0.titleLabel?.font = .body_B
         $0.layer.cornerRadius = 33
         $0.backgroundColor = CustomColor.red

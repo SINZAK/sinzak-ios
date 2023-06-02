@@ -32,29 +32,29 @@ enum AllGenre: String {
     var text: String {
         switch self {
         case .painting:
-            return I18NStrings.painting
+            return "회화일반"
         case .orient:
-            return I18NStrings.orientalPainting
+            return "동양화"
         case .sculpture:
-            return I18NStrings.sculpture
+            return "조소"
         case .print:
-            return I18NStrings.print
+            return "판화"
         case .craft:
-            return I18NStrings.craft
+            return "공예"
         case .portrait:
-            return I18NStrings.portrait
+            return "초상화"
         case .illustration:
-            return I18NStrings.illust
+            return "일러스트"
         case .label:
-            return I18NStrings.packageLabel
+            return "패키지/라벨"
         case .editorial:
-            return I18NStrings.printDesign
+            return "인쇄물"
         case .poster:
-            return I18NStrings.posterBannerSign
+            return "포스터/배너/간판"
         case .logo:
-            return I18NStrings.logoBranding
+            return "로고/브랜딩"
         case .design:
-            return I18NStrings.appWebDesign
+            return "앱/웹 디자인"
         }
     }
 }
@@ -63,7 +63,7 @@ enum AllGenre: String {
 extension Genre {
     
     static let fineArtList: Genre = Genre(
-        type: I18NStrings.fineart,
+        type: "순수 예술",
         category: [
             .painting,
             .orient,
@@ -73,7 +73,7 @@ extension Genre {
         ])
     
     static let desingList: Genre = Genre(
-        type: I18NStrings.design,
+        type: "디자인",
         category: [
             .portrait,
             .illustration,

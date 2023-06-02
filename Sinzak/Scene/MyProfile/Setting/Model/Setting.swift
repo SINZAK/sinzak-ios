@@ -13,33 +13,33 @@ enum Setting: CaseIterable {
     var text: String {
         switch self {
         case .personalSetting:
-            return I18NStrings.personalSetting
+            return "개인 설정"
         case .usageGuide:
-            return I18NStrings.usageGuide
+            return "이용 안내"
         case .etc:
-            return I18NStrings.etcSection
+            return "기타"
         }
     }
     var content: [String] {
         switch self {
         case .personalSetting:
             return [
-                I18NStrings.linkedAccounts
+                "연결된 계정"
 //                I18NStrings.blockedUser
             ]
         case .usageGuide:
             return [
-                I18NStrings.appVersion,
-                I18NStrings.ask,
-                I18NStrings.notice,
-                I18NStrings.termsOfService,
-                I18NStrings.privacyPolicy
+                "앱 버전",
+                "문의하기",
+                "공지사항",
+                "서비스 이용약관",
+                "개인정보 처리방침"
 //                I18NStrings.opensourceLicense
             ]
         case .etc:
             return [
-                I18NStrings.withdraw,
-                I18NStrings.logout
+                "회원 탈퇴",
+                "로그아웃"
             ]
         }
     }

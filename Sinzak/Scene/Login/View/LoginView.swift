@@ -19,7 +19,7 @@ final class LoginView: SZView {
     private let logoLabel = UILabel().then {
         $0.font = .subtitle_B
         $0.textColor = CustomColor.label
-        $0.text = I18NStrings.logoText
+        $0.text = "신세대의 작품을 만나다"
     }
     
     private let needLoginLabel: UILabel = {
@@ -37,7 +37,7 @@ final class LoginView: SZView {
     private let startLabel = UILabel().then {
         $0.font = .caption_R
         $0.textColor = CustomColor.gray80
-        $0.text = I18NStrings.startWithSnsLogin
+        $0.text = "SNS계정으로 간편하게 시작하기"
     }
     private let stackView = UIStackView().then {
         $0.spacing = 16

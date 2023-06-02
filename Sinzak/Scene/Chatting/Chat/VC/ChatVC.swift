@@ -101,7 +101,18 @@ private extension ChatVC {
                 with: self,
                 onNext: { owner, keyboardHeight in
                     if keyboardHeight > 0 {
-                        owner.mainView.setShowKeyboardLayout(height: keyboardHeight)
+                        let value = owner.viewModel.messageSectionModels.value
+                        let indexPaht = IndexPath(
+                            item: (value.last?.items.count ?? 0) - 1,
+                            section: value.count - 1
+                        )
+                        let cell = owner.mainView.collectionView.cellForItem(at: indexPaht)
+
+                        let maxY = cell?.frame.maxY ?? 0
+                        owner.mainView.setShowKeyboardLayout(
+                            height: keyboardHeight,
+                            maxY: maxY
+                        )
                     } else {
                         owner.mainView.setHideKeyboardLayout()
                     }

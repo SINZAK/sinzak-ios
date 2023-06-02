@@ -73,7 +73,7 @@ final class EditProfileVC: SZVC {
     override func setNavigationBar() {
         super.setNavigationBar()
         
-        let complete = UIBarButtonItem(title: I18NStrings.finish, style: .plain, target: self, action: #selector(finishButtonTapped))
+        let complete = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(finishButtonTapped))
         let dismiss = UIBarButtonItem(
             image: UIImage(named: "dismiss")?.withTintColor(CustomColor.label, renderingMode: .alwaysOriginal),
             style: .plain, target: nil, action: nil
@@ -169,6 +169,7 @@ final class EditProfileVC: SZVC {
         
         mainView.introductionTextView.rx.text
             .orEmpty
+            .distinctUntilChanged()
             .subscribe(
                 with: self,
                 onNext: { owner, text in
@@ -208,6 +209,7 @@ final class EditProfileVC: SZVC {
             .disposed(by: disposeBag)
     
         navigationItem.rightBarButtonItem?.rx.tap
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind(
                 with: self,
                 onNext: { owner, _ in
@@ -316,6 +318,14 @@ final class EditProfileVC: SZVC {
                     owner.hideLoading()
                     owner.dismiss(animated: true)
                 })
+            .disposed(by: disposeBag)
+        
+        viewModel.errorHandler
+            .asSignal()
+            .emit(with: self, onNext: { owner, error in
+                owner.hideLoading()
+                owner.simpleErrorHandler.accept(error)
+            })
             .disposed(by: disposeBag)
     }
 }

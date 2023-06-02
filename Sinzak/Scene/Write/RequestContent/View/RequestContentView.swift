@@ -14,7 +14,7 @@ final class RequestContentView: SZView {
     private let titleLabel = UILabel().then {
         $0.font = .body_R
         $0.textColor = CustomColor.gray80
-        $0.text = " · " + I18NStrings.artworkTitle
+        $0.text = " · " + "작품 제목"
     }
     let titleTextField = SZTextField().then {
         $0.backgroundColor = CustomColor.gray10
@@ -26,10 +26,10 @@ final class RequestContentView: SZView {
     private let requestContentLabel = UILabel().then {
         $0.font = .body_R
         $0.textColor = CustomColor.gray80
-        $0.text = " · " + I18NStrings.requestContent
+        $0.text = " · " + "의뢰 내용"
     }
     let requestContentTextView = UITextView().then {
-        $0.text = I18NStrings.requestContentPlaceholder
+        $0.text = "원하는 의뢰의 형태, 분위기, 재료 등을 자유롭게 설명해주세요!"
         $0.backgroundColor = CustomColor.gray10
         $0.contentInset = .init(top: 20, left: 35, bottom: 20, right: 22)
         $0.layer.cornerRadius = 30
@@ -38,7 +38,7 @@ final class RequestContentView: SZView {
         $0.textColor = CustomColor.black
     }
     let nextButton = UIButton().then {
-        $0.setTitle(I18NStrings.next, for: .normal)
+        $0.setTitle("다음", for: .normal)
         $0.titleLabel?.font = .body_B
         $0.layer.cornerRadius = 33
         $0.backgroundColor = CustomColor.red

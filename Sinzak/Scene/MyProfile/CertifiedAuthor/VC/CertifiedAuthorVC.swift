@@ -33,6 +33,6 @@ final class CertifiedAuthorVC: SZVC {
     override func setNavigationBar() {
         super.setNavigationBar()
         
-        navigationItem.title = I18NStrings.certifiedAuthorApplication
+        navigationItem.title = "인증작가 신청"
     }
 }

@@ -14,22 +14,22 @@ final class ArtworkSizeView: SZView {
     private let titleLabel = UILabel().then {
         $0.font = .body_R
         $0.textColor = CustomColor.gray80
-        $0.text = " · " + I18NStrings.pleaseApproxSizeOfArtwork
+        $0.text = " · " + "대략의 작품 사이즈를 알려주세요."
     }
     private let widthLabel = UILabel().then {
         $0.font = .caption_B
         $0.textColor = CustomColor.gray80
-        $0.text = I18NStrings.width
+        $0.text = "가로"
     }
     private let heightLabel = UILabel().then {
         $0.font = .caption_B
         $0.textColor = CustomColor.gray80
-        $0.text = I18NStrings.height
+        $0.text = "세로"
     }
     private let depthLabel = UILabel().then {
         $0.font = .caption_B
         $0.textColor = CustomColor.gray80
-        $0.text = I18NStrings.depth
+        $0.text = "높이"
     }
     private let mLabel01 = UILabel().then {
         $0.font = .body_B
@@ -110,7 +110,7 @@ final class ArtworkSizeView: SZView {
         $0.textAlignment = .center
     }
     let finishButton = UIButton().then {
-        $0.setTitle(I18NStrings.finish, for: .normal)
+        $0.setTitle("완료", for: .normal)
         $0.titleLabel?.font = .body_B
         $0.layer.cornerRadius = 33
         $0.backgroundColor = CustomColor.red

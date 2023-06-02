@@ -12,7 +12,7 @@ import Then
 final class UniversityInfoView: SZView {
     // MARK: - Properties
     private let titleLabel = UILabel().then {
-        $0.text = I18NStrings.pleaseSelectUniversity
+        $0.text = "소속 대학교를 알려주세요."
         $0.font = .subtitle_B
         $0.textColor = CustomColor.label
     }
@@ -35,7 +35,7 @@ final class UniversityInfoView: SZView {
         $0.layer.cornerRadius = 19
         $0.font = .caption_B
         $0.textColor = CustomColor.label
-        $0.placeholder = I18NStrings.searchBySchoolName
+        $0.placeholder = "학교 이름을 검색하세요."
         $0.clearButtonMode = .whileEditing
     }
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
@@ -51,7 +51,7 @@ final class UniversityInfoView: SZView {
         $0.distribution = .fillEqually
     }
     let notStudentButton = UIButton().then {
-        $0.setTitle(I18NStrings.notStudent, for: .normal)
+        $0.setTitle("대학생이 아니에요", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.gray60
@@ -59,7 +59,7 @@ final class UniversityInfoView: SZView {
         $0.layer.cornerRadius = 33
     }
     let nextButton = SchoolAuthButton().then {
-        $0.setTitle(I18NStrings.next, for: .normal)
+        $0.setTitle("다음", for: .normal)
         $0.setTitleColor(CustomColor.white, for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.red

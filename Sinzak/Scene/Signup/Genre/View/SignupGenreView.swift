@@ -13,13 +13,13 @@ import SnapKit
 final class SignupGenreView: SZView {
     // MARK: - Properties
     let titleLabel = UILabel().then {
-        $0.text = I18NStrings.pleaseSelectGenreOfInterest
+        $0.text = "관심있는 장르를 선택해주세요."
         $0.font = .subtitle_B
         $0.textColor = CustomColor.label
         $0.numberOfLines = 0
     }
     let descriptionLabel = UILabel().then {
-        $0.text = I18NStrings.upToThreeCanBeSelected
+        $0.text = "최대 3개까지 선택 가능합니다."
         $0.font = .body_R
         $0.textColor = CustomColor.gray60
         $0.numberOfLines = 0
@@ -32,7 +32,7 @@ final class SignupGenreView: SZView {
     }
     // 다음 버튼
     let nextButton = SZButton().then {
-        $0.setTitle(I18NStrings.next, for: .normal)
+        $0.setTitle("다음", for: .normal)
         $0.titleLabel?.font = .body_B
         $0.backgroundColor = CustomColor.red
         $0.layer.cornerRadius = 30
