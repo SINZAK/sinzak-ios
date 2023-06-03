@@ -37,6 +37,11 @@ class HomeManager {
         return provider.rx.request(.banner)
             .map(BannerList.self)
             .map { $0.data }
+            .map { banners in
+                return banners.isEmpty ?
+                [Banner(id: -1, content: "", imageURL: "empty", href: "")] :
+                banners
+            }
             .retry(2)
     }
 }

@@ -29,6 +29,12 @@ final class BannerCVC: UICollectionViewCell {
     }
     // MARK: - SetData
     func setData(banner: Banner) {
+        
+        if banner.imageURL == "empty" {
+            imageView.image = UIImage(named: "banner1")
+            return
+        }
+        
         let url = URL(string: banner.imageURL)
         imageView.kf.setImage(with: url,
                               placeholder: UIImage(named: "banner"),
