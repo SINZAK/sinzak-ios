@@ -121,6 +121,17 @@ private extension WritePostVC {
             })
             .disposed(by: disposeBag)
         
+        mainView.showTermsButton.rx.tap
+            .asSignal()
+            .emit(
+                with: self,
+                onNext: { owner, _ in
+                    let vc = WebVC()
+                    vc.destinationURL = "https://sinzak.notion.site/bfd66407b0ca4d428a8214165627c191"
+                    owner.present(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
         /*
         let startDragGesture = UILongPressGestureRecognizer(target: nil, action: nil)
         mainView.collectionView.addGestureRecognizer(startDragGesture)
