@@ -60,11 +60,20 @@ final class WritePostView: SZView {
         
         return textView
     }()
-    let titlePlaceholder: UILabel = {
+    lazy var titlePlaceholder: UILabel = { [weak self] in
+        guard let self = self else { return UILabel() }
         let label = UILabel()
         label.textColor = CustomColor.gray60
         label.font = .body_R
-        label.text = "작품 제목"
+        
+        switch self.category {
+        case .sellingArtwork:
+            label.text = "작품 제목"
+        case .request:
+            label.text = "의뢰 제목"
+        case .work:
+            label.text = "포트폴리오 제목"
+        }
         
         return label
     }()
@@ -137,13 +146,22 @@ final class WritePostView: SZView {
         
         return textView
     }()
-    let bodyPlaceholder: UILabel = {
+    lazy var bodyPlaceholder: UILabel = { [weak self] in
+        guard let self = self else { return UILabel() }
+        
         let label = UILabel()
         label.textColor = CustomColor.gray60
         label.font = .body_R
-        label.text = "작품 의도, 작업 기간, 재료, 거래 방법 등을 자유롭게 표현해보세요."
+        switch self.category {
+        case .sellingArtwork:
+            label.text = "작품 의도, 작업 기간, 재료, 거래 방법 등을 자유롭게 표현해 보세요."
+        case .request:
+            label.text = "원하는 작업의 형태, 분위기, 재료, 작업 기간 등을 설명해 보세요."
+        case .work:
+            label.text = "가능한 작업의 형태, 이력 등을 소개해 보세요. 상세히 소개할수록 의뢰받을 확률이 올라가요!"
+        }
         label.numberOfLines = 0
-        label.addInterlineSpacing()
+        label.addInterlineSpacing(spacing: 8)
         
         return label
     }()
