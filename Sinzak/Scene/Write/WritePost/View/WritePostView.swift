@@ -148,6 +148,33 @@ final class WritePostView: SZView {
         return label
     }()
     
+    private let warningLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = CustomColor.gray40
+        label.font = .buttonText_R
+        label.text = "부적절하거나 불쾌감을 줄 수 있는 컨텐츠는 제재를 받을 수 있습니다.\n자세한 제재 내용은 서비스 이용 약관을 참고해주세요."
+        label.numberOfLines = 2
+        label.addInterlineSpacing()
+        
+        return label
+    }()
+    
+    let showTermsButton: UIButton = {
+        let button = UIButton()
+        let text = "서비스 이용 약관 보러 가기"
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttributes(
+            [
+                .underlineStyle: 1.0,
+                .foregroundColor: CustomColor.purple50,
+                .font: UIFont.buttonText_R
+            ],
+            range: .init(location: 0, length: text.count))
+        button.setAttributedTitle(attributedString, for: .normal)
+        
+        return button
+    }()
+    
     let sizeTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "˙ " + "작품 사이즈 (선택)"
@@ -191,7 +218,8 @@ final class WritePostView: SZView {
             collectionView,
             titleTextView, titlePlaceholder,
             priceTextField, priceUnitLabel, isPossibleSuggestButton,
-            bodyTextView, bodyPlaceholder
+            bodyTextView, bodyPlaceholder,
+            warningLabel, showTermsButton
         )
         
         if category == .sellingArtwork {
@@ -278,9 +306,20 @@ final class WritePostView: SZView {
             $0.trailing.equalTo(bodyTextView).offset(-24.0)
         }
         
+        warningLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(24.0)
+            $0.top.equalTo(bodyTextView.snp.bottom).offset(12.0)
+        }
+        
+        showTermsButton.snp.makeConstraints {
+            $0.leading.equalTo(warningLabel)
+            $0.top.equalTo(warningLabel.snp.bottom).offset(2.0)
+            $0.height.equalTo(11.0)
+        }
+        
         if category == .sellingArtwork {
             sizeTitleLabel.snp.makeConstraints {
-                $0.top.equalTo(bodyTextView.snp.bottom).offset(24.0)
+                $0.top.equalTo(showTermsButton.snp.bottom).offset(24.0)
                 $0.leading.equalToSuperview().inset(16.0)
             }
             
