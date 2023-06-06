@@ -51,7 +51,14 @@ final class WritePostVC: SZVC {
     }
     override func setNavigationBar() {
         super.setNavigationBar()
-        navigationItem.title = "작품 정보"
+        switch category {
+        case .sellingArtwork:
+            navigationItem.title = "작품 정보"
+        case .request:
+            navigationItem.title = "의뢰 정보"
+        case .work:
+            navigationItem.title = "작업해요"
+        }
         
         let completeBarButton = UIBarButtonItem(
             title: "완료",
