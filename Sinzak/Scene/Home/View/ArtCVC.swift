@@ -49,6 +49,7 @@ final class ArtCVC: UICollectionViewCell {
         $0.textColor = CustomColor.label
         $0.font = .body_M
         $0.text = "Flower Garden"
+        $0.numberOfLines = 2
         $0.isSkeletonable = true
     }
     private let labelStack = UIStackView().then {
