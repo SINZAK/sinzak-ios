@@ -189,6 +189,8 @@
 		ED2A582B29F2F3C8002CE83E /* Reissue.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582A29F2F3C8002CE83E /* Reissue.swift */; };
 		ED2A582D29F306F9002CE83E /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582C29F306F9002CE83E /* UserInfo.swift */; };
 		ED2A583029F30C3E002CE83E /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2A582F29F30C3E002CE83E /* UserInfoManager.swift */; };
+		ED34C3B72A2F293000985626 /* BuildPostResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34C3B62A2F293000985626 /* BuildPostResponseDTO.swift */; };
+		ED34C3B92A2F2A7900985626 /* SignoutCheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34C3B82A2F2A7900985626 /* SignoutCheckVC.swift */; };
 		ED35525E2A116AA000B364FC /* EditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35525D2A116AA000B364FC /* EditProfileVM.swift */; };
 		ED3552602A11F0A800B364FC /* VerifyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35525F2A11F0A800B364FC /* VerifyButton.swift */; };
 		ED3552622A12012600B364FC /* SZImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552612A12012600B364FC /* SZImage.swift */; };
@@ -203,7 +205,6 @@
 		ED3552862A14CF5200B364FC /* MyPostListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35527D2A14CE4100B364FC /* MyPostListVC.swift */; };
 		ED3552872A14CF5500B364FC /* MyPostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552812A14CE4200B364FC /* MyPostListView.swift */; };
 		ED3552892A14F46300B364FC /* MyPostListCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552882A14F46300B364FC /* MyPostListCVC.swift */; };
-		ED35528C2A15497900B364FC /* SignoutCheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35528B2A15497900B364FC /* SignoutCheckVC.swift */; };
 		ED35528F2A15574D00B364FC /* SignoutCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35528E2A15574D00B364FC /* SignoutCompleteVC.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
@@ -219,7 +220,6 @@
 		ED5A432F2A19D64F00D89C3A /* SZNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A432E2A19D64F00D89C3A /* SZNumberTextField.swift */; };
 		ED5A43322A19D95D00D89C3A /* CircleCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43312A19D95D00D89C3A /* CircleCheckButton.swift */; };
 		ED5A43342A19FC7100D89C3A /* SizeInputTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43332A19FC7100D89C3A /* SizeInputTextFieldView.swift */; };
-		ED5A43362A1BED0100D89C3A /* BuildPostResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43352A1BED0100D89C3A /* BuildPostResponseDTO.swift */; };
 		ED5A43382A1DDDE700D89C3A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED5A43372A1DDDE700D89C3A /* GoogleService-Info.plist */; };
 		ED72D8A629F699C500DA1251 /* HomeCategoryCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */; };
 		ED72D8A829F69B5100DA1251 /* SchoolAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */; };
@@ -481,6 +481,8 @@
 		ED2A582A29F2F3C8002CE83E /* Reissue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reissue.swift; sourceTree = "<group>"; };
 		ED2A582C29F306F9002CE83E /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		ED2A582F29F30C3E002CE83E /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
+		ED34C3B62A2F293000985626 /* BuildPostResponseDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildPostResponseDTO.swift; sourceTree = "<group>"; };
+		ED34C3B82A2F2A7900985626 /* SignoutCheckVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignoutCheckVC.swift; sourceTree = "<group>"; };
 		ED35525D2A116AA000B364FC /* EditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVM.swift; sourceTree = "<group>"; };
 		ED35525F2A11F0A800B364FC /* VerifyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyButton.swift; sourceTree = "<group>"; };
 		ED3552612A12012600B364FC /* SZImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZImage.swift; sourceTree = "<group>"; };
@@ -495,7 +497,6 @@
 		ED35527F2A14CE4200B364FC /* MyPostListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListVM.swift; sourceTree = "<group>"; };
 		ED3552812A14CE4200B364FC /* MyPostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListView.swift; sourceTree = "<group>"; };
 		ED3552882A14F46300B364FC /* MyPostListCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListCVC.swift; sourceTree = "<group>"; };
-		ED35528B2A15497900B364FC /* SignoutCheckVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignoutCheckVC.swift; path = ../../../../../../../Desktop/SignoutCheckVC.swift; sourceTree = "<group>"; };
 		ED35528E2A15574D00B364FC /* SignoutCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutCompleteVC.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
@@ -510,7 +511,6 @@
 		ED5A432E2A19D64F00D89C3A /* SZNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZNumberTextField.swift; sourceTree = "<group>"; };
 		ED5A43312A19D95D00D89C3A /* CircleCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCheckButton.swift; sourceTree = "<group>"; };
 		ED5A43332A19FC7100D89C3A /* SizeInputTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeInputTextFieldView.swift; sourceTree = "<group>"; };
-		ED5A43352A1BED0100D89C3A /* BuildPostResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BuildPostResponseDTO.swift; path = ../../../../../../Desktop/BuildPostResponseDTO.swift; sourceTree = "<group>"; };
 		ED5A43372A1DDDE700D89C3A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryCVC.swift; sourceTree = "<group>"; };
 		ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolAuthViewModel.swift; sourceTree = "<group>"; };
@@ -2025,7 +2025,7 @@
 		ED35528A2A15494E00B364FC /* SignoutCheck */ = {
 			isa = PBXGroup;
 			children = (
-				ED35528B2A15497900B364FC /* SignoutCheckVC.swift */,
+				ED34C3B82A2F2A7900985626 /* SignoutCheckVC.swift */,
 			);
 			path = SignoutCheck;
 			sourceTree = "<group>";
@@ -2118,7 +2118,7 @@
 				ED35526A2A136CA100B364FC /* CertifySchoolCardDTO.swift */,
 				ED35526C2A14919900B364FC /* EditUserImageDTO.swift */,
 				ED3552792A14BC3000B364FC /* ScrapListDTO.swift */,
-				ED5A43352A1BED0100D89C3A /* BuildPostResponseDTO.swift */,
+				ED34C3B62A2F293000985626 /* BuildPostResponseDTO.swift */,
 				EDB7E41C2A232A730045E1AF /* ChatRoomDTO.swift */,
 				EDF0227C2A25E81B00CE029E /* ChatRoomInfoDTO.swift */,
 				EDF022812A25FFFA00CE029E /* ChatMessageDTO.swift */,
@@ -2535,7 +2535,6 @@
 				EDF0227D2A25E81B00CE029E /* ChatRoomInfoDTO.swift in Sources */,
 				EDF4501A29ED8DCF001733C6 /* ResultMessageDTO.swift in Sources */,
 				A216BD53297FD60E008964BC /* ChatListView.swift in Sources */,
-				ED5A43362A1BED0100D89C3A /* BuildPostResponseDTO.swift in Sources */,
 				A2B0F6112980233900EC5C78 /* MarketVC.swift in Sources */,
 				EDF5089929FE727F00FDC2E2 /* AlertPC.swift in Sources */,
 				A24E909E29B7246E006B3347 /* HomeSection.swift in Sources */,
@@ -2569,6 +2568,7 @@
 				ED35525E2A116AA000B364FC /* EditProfileVM.swift in Sources */,
 				A280AB5129A7A5BB00C1729C /* WriteCategoryHeader.swift in Sources */,
 				A2DEC37329B6495000CF0794 /* Date+Extension.swift in Sources */,
+				ED34C3B72A2F293000985626 /* BuildPostResponseDTO.swift in Sources */,
 				ED02CAED2A0D0D9600E20F92 /* SelectProfileIconVC.swift in Sources */,
 				A2646BED299204B40004F4CE /* User.swift in Sources */,
 				A233891229B066F700688FD8 /* EditProfileVC.swift in Sources */,
@@ -2586,6 +2586,7 @@
 				EDF76FF329F7BE2900F33146 /* ProductsDetailDTO.swift in Sources */,
 				A216BD56297FD61D008964BC /* ChatListVC.swift in Sources */,
 				A216BD4C297FCBD1008964BC /* FollowNotiVC.swift in Sources */,
+				ED34C3B92A2F2A7900985626 /* SignoutCheckVC.swift in Sources */,
 				A2AA89CB2967B13C004A63C1 /* Genre.swift in Sources */,
 				ED74A08229F4FB7300F44AA2 /* AppleToken.swift in Sources */,
 				A2DEC35829B4441100CF0794 /* SNSLoginManager.swift in Sources */,
@@ -2679,7 +2680,6 @@
 				ED3552872A14CF5500B364FC /* MyPostListView.swift in Sources */,
 				A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */,
 				A2121ACE29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift in Sources */,
-				ED35528C2A15497900B364FC /* SignoutCheckVC.swift in Sources */,
 				A2B385622959A4C500E5EB7C /* LoginVC.swift in Sources */,
 				A2180DB329AA3C0700BBC74A /* ArtworkSizeVC.swift in Sources */,
 				ED3552892A14F46300B364FC /* MyPostListCVC.swift in Sources */,
