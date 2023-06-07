@@ -382,7 +382,6 @@ final class ProductsDetailVC: SZVC {
                 })
             .disposed(by: disposeBag)
         
-        // TODO: 채팅 연결
         mainView.askDealButtton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
