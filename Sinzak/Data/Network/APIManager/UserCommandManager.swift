@@ -19,8 +19,12 @@ class UserCommandManager: ManagerType {
     )
     let disposeBag = DisposeBag()
     
-    func report(userId: Int, reason: String) -> Single<Response> {
+    func report(userId: Int, reason: String) -> Single<Bool> {
         return provider.rx.request(.report(userId: userId, reason: reason))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<String>.self)
+            .map(filterError)
+            .map { $0.success }
     }
     
     func follow(userId: Int) -> Single<Bool> {
