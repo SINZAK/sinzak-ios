@@ -81,6 +81,11 @@ final class ReportVC: SZVC {
         mainView.reportButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { owner, _ in
+                owner.showSinglePopUpAlert(message: "신고 완료", actionCompletion: {
+                    owner.navigationController?.popToRootViewController(animated: true)
+                })
+                // TODO: 신고 API 연결 필요
+                /*
                 let reason = owner.type + "," + owner.mainView.textView.text
                 UserCommandManager.shared.report(userId: owner.userID, reason: reason)
                     .observe(on: MainScheduler.instance)
@@ -95,6 +100,7 @@ final class ReportVC: SZVC {
                             owner.navigationController?.popToRootViewController(animated: true)
                         })
                     .disposed(by: owner.disposeBag)
+                 */
             })
             .disposed(by: disposeBag)
     }
