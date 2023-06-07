@@ -39,10 +39,7 @@ final class ChatVC: SZVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        viewModel.startSocketTimer()
-    
-        viewModel.getChatRoomInfo()
-        viewModel.fetchFirstPageMessage()
+        viewModel.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,19 +118,42 @@ private extension ChatVC {
             .disposed(by: disposeBag)
         
         navigationItem.rightBarButtonItem?.rx.tap
-            .bind(
+            .asSignal()
+            .emit(
                 with: self,
                 onNext: { owner, _ in
-                    owner.showDoubleAlertSheet(
-                        firstActionText: "신고하기",
-                        secondActionText: "채팅방 나가기",
+                    owner.showTripleAlertSheet(
+                        firstActionText: "차단하기",
+                        secondActionText: "신고하기",
+                        thirdActionText: "채팅방 나가기",
                         firstCompletion: {
-                            let id = UserInfoManager.userID == owner.viewModel.roomInfo?.postUserId ?
-                            owner.viewModel.roomInfo?.opponentUserId :
-                            owner.viewModel.roomInfo?.postUserId
+                            owner.showPopUpAlert(
+                                message: "차단 시 서로의 게시글을 확인하거나 채팅을 할 수 없어요. 차단할까요?",
+                                rightActionTitle: "차단하기",
+                                rightActionCompletion: {
+                                    let id = owner.viewModel.artDetailInfo.value.opponentUserId
+                                    UserCommandManager.shared.report(userId: id, reason: "차단")
+                                        .observe(on: MainScheduler.asyncInstance)
+                                        .subscribe(
+                                            onSuccess: { _ in
+                                                owner.showSinglePopUpAlert(message: "차단 되었습니다.", actionCompletion: {
+                                                    owner.navigationController?.popToRootViewController(animated: true)
+                                                })
+                                                owner.viewModel.leaveChatRoom()
+                                                owner.mainView.setLeaveLayout()
+                                            },
+                                            onFailure: { error in
+                                                owner.simpleErrorHandler.accept(error)
+                                            })
+                                        .disposed(by: owner.disposeBag)
+                                }
+                            )
+                        },
+                        secondCompletion: {
+                            let id = owner.viewModel.artDetailInfo.value.opponentUserId
                             
                             let vc = ReportSelectVC(
-                                userID: id ?? -1,
+                                userID: id,
                                 userName: owner.viewModel.roomInfo?.roomName ?? ""
                             )
                             
@@ -142,7 +162,7 @@ private extension ChatVC {
                                 animated: true
                             )
                         },
-                        secondCompletion: {
+                        thirdCompletion: {
                             owner.showPopUpAlert(
                                 message: "정말 채팅방을 나갈까요?",
                                 rightActionTitle: "네, 나갈게요",
@@ -154,7 +174,7 @@ private extension ChatVC {
                     )
                 })
             .disposed(by: disposeBag)
-        
+
         mainView.albumButton.rx.tap
             .bind(
                 with: self,
@@ -218,6 +238,16 @@ private extension ChatVC {
                     owner.navigationController?.popViewController(animated: true)
                 })
             .disposed(by: disposeBag)
+        
+        viewModel.errorHandler
+            .asSignal()
+            .emit(
+                with: self,
+                onNext: { owner, error in
+                    owner.mainView.setLeaveLayout()
+                    owner.simpleErrorHandler.accept(error)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -233,7 +263,7 @@ private extension ChatVC {
                 ) as! LeaveCVC
                 
                 cell.label.text = item.message
-                self.mainView.setLeaveMode()
+                self.mainView.setLeaveLayout()
                     
                 return cell
             }
