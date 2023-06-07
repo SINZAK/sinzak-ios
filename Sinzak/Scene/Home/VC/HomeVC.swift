@@ -212,12 +212,16 @@ final class HomeVC: SZVC {
         
         viewModel.homeSectionModel
             .observe(on: MainScheduler.instance)
-            .do(afterNext: { [weak self] _ in
-                guard let self = self else { return }
-
-                self.mainView.homeCollectionView.collectionViewLayout = self.setLayout()
-            })
             .bind(to: mainView.homeCollectionView.rx.items(dataSource: getHomeDataSource()))
+            .disposed(by: disposeBag)
+        
+        viewModel.homeSectionModel
+            .observe(on: MainScheduler.instance)
+            .map { $0.count }
+            .distinctUntilChanged()
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.mainView.homeCollectionView.collectionViewLayout = owner.setLayout()
+            })
             .disposed(by: disposeBag)
         
         viewModel.pushProductsDetailView
