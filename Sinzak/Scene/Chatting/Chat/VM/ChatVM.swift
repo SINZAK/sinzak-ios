@@ -15,7 +15,7 @@ import StompClientLib
 typealias MessageSectionModel = SectionModel<Void, ChatMessage>
 
 protocol ChatVMInput {
-    func getChatRoomInfo()
+    func viewDidLoad()
     
     func fetchFirstPageMessage()
     func fetchPreviousMessage()
@@ -33,12 +33,14 @@ protocol ChatVMOutput {
     var roomID: String { get }
     var roomInfo: ChatRoomInfo? { get }
     
-    var artDetailInfo: PublishRelay<ChatRoomInfo> { get }
+    var artDetailInfo: BehaviorRelay<ChatRoomInfo> { get }
     var messageSectionModels: BehaviorRelay<[MessageSectionModel]> { get }
     var indexPathToScroll: PublishRelay<IndexPath> { get }
     
     var isPossibleFecthPreviousMessage: Bool { get set }
     var popView: PublishRelay<Bool> { get }
+    
+    var errorHandler: PublishRelay<Error> { get }
 }
 
 protocol ChatVM: ChatVMInput, ChatVMOutput {}
@@ -124,13 +126,31 @@ final class DefaultChatVM: ChatVM {
         }
     }
     
-    func getChatRoomInfo() {
+    func viewDidLoad() {
         ChatManager.shared.getChatRoomInfo(roomID: roomID)
             .subscribe(
                 with: self,
                 onSuccess: { owner, info in
-                    owner.roomInfo = info
-                    owner.artDetailInfo.accept(info)
+                    let type = info.postType == "PRODUCT" ? "product" : "work"
+                    ChatManager.shared.creatChatRoom(postID: info.postId ?? -1, postType: type)
+                        .subscribe(
+                            with: self,
+                            onSuccess: { owner, _ in
+                                owner.roomInfo = info
+                                owner.artDetailInfo.accept(info)
+                                owner.startSocketTimer()
+                                owner.fetchFirstPageMessage()
+                            },
+                            onFailure: { owner, error in
+                                owner.errorHandler.accept(error)
+                                owner.roomInfo = info
+                                owner.artDetailInfo.accept(info)
+                                owner.fetchFirstPageMessage()
+                            })
+                        .disposed(by: owner.disposeBag)
+                },
+                onFailure: { owner, error in
+                    owner.errorHandler.accept(error)
                 })
             .disposed(by: disposeBag)
     }
@@ -288,10 +308,21 @@ final class DefaultChatVM: ChatVM {
     
     // MARK: - Output
     
-    var artDetailInfo: PublishRelay<ChatRoomInfo> = .init()
+    var artDetailInfo: BehaviorRelay<ChatRoomInfo> = .init(value: ChatRoomInfo(
+        roomName: "",
+        postName: "",
+        price: 0,
+        thumbnail: "",
+        complete: false,
+        suggest: false,
+        postUserId: -1,
+        postType: "",
+        opponentUserId: -1
+    ))
     var messageSectionModels: BehaviorRelay<[MessageSectionModel]> = .init(value: [])
     var indexPathToScroll: PublishRelay<IndexPath> = .init()
     var popView: PublishRelay<Bool> = .init()
+    var errorHandler: PublishRelay<Error> = .init()
 }
 
 extension DefaultChatVM: StompClientLibDelegate {
