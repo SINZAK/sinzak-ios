@@ -150,7 +150,7 @@ extension ChatView {
         isNotNegotiableButton.isHidden = true
     }
     
-    func setLeaveMode() {
+    func setLeaveLayout() {
         albumButton.isEnabled = false
         chatTextField.isEnabled = false
         chatTextField.placeholder = "메시지를 보낼 수 없습니다."
