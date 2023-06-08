@@ -1,6 +1,6 @@
-# sinzak-ios
+# Sinzak iOS 
 
-
+Available on [App Store](https://apps.apple.com/kr/app/%EC%8B%A0%EC%9E%91/id6449455462?l=en)
 
 ```
 ├── 📂 App
