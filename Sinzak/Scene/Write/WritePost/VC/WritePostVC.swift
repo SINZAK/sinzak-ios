@@ -511,14 +511,11 @@ extension WritePostVC {
         _ gestureRecognizer: UIGestureRecognizer,
         shouldReceive touch: UITouch
     ) -> Bool {
-        
-        var point = touch.location(in: mainView.contentView)
-        point = CGPoint(x: point.x, y: point.y * 1.25)
 
-        if mainView.collectionView.frame.contains(point) {
-            return false
-        } else {
-            return true
-        }
+        var point = touch.location(in: mainView.collectionView)
+        point = CGPoint(x: point.x, y: point.y)
+
+        guard mainView.collectionView.frame.contains(point) else { return true }
+        return false
     }
 }
