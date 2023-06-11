@@ -111,7 +111,7 @@ private extension WritePostVC {
                         
                         let vc = PHPickerViewController(configuration: config)
                         vc.view.tintColor = CustomColor.red
-                        vc.delegate = self
+                        vc.delegate = owner
                         vc.modalPresentationStyle = .fullScreen
                         
                         owner.present(vc, animated: true)
