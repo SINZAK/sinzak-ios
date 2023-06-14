@@ -19,6 +19,7 @@ final class WritePostVC: SZVC {
     private let disposeBag = DisposeBag()
     private let viewModel: WritePostVM
     private var keyboardHeight: CGFloat = 0.0
+    private var tapGestureRecognizer: UITapGestureRecognizer?
     
     init(viewModel: WritePostVM, category: WriteCategory) {
         self.viewModel = viewModel
@@ -89,11 +90,6 @@ private extension WritePostVC {
     }
     
     func bindInput() {
-        
-        let tapContentViewGesture = UITapGestureRecognizer(target: self, action: #selector(endEditing))
-        mainView.contentView.addGestureRecognizer(tapContentViewGesture)
-        tapContentViewGesture.delegate = self
-        
         mainView.collectionView.rx.itemSelected
             .asSignal()
             .emit(
@@ -111,7 +107,7 @@ private extension WritePostVC {
                         
                         let vc = PHPickerViewController(configuration: config)
                         vc.view.tintColor = CustomColor.red
-                        vc.delegate = self
+                        vc.delegate = owner
                         vc.modalPresentationStyle = .fullScreen
                         
                         owner.present(vc, animated: true)
@@ -222,8 +218,14 @@ private extension WritePostVC {
                     owner.keyboardHeight = keyboardVisibleHeight
                     if keyboardVisibleHeight > 0 {
                         owner.mainView.remakeKeyboardShowLayout()
+                        let tapGestureRecognizer = UITapGestureRecognizer(target: owner, action: #selector(owner.endEditing))
+                        owner.mainView.contentView.addGestureRecognizer(tapGestureRecognizer)
+                        tapGestureRecognizer.delegate = self
+                        self.tapGestureRecognizer = tapGestureRecognizer
                     } else {
                         owner.mainView.remakeKeyboardNotShowLayout()
+                        guard let tapGestureRecognizer = owner.tapGestureRecognizer else { return }
+                        owner.mainView.contentView.removeGestureRecognizer(tapGestureRecognizer)
                     }
                     
                 })
@@ -509,14 +511,11 @@ extension WritePostVC {
         _ gestureRecognizer: UIGestureRecognizer,
         shouldReceive touch: UITouch
     ) -> Bool {
-        
-        var point = touch.location(in: mainView.contentView)
-        point = CGPoint(x: point.x, y: point.y * 1.25)
 
-        if mainView.collectionView.frame.contains(point) {
-            return false
-        } else {
-            return true
-        }
+        var point = touch.location(in: mainView.collectionView)
+        point = CGPoint(x: point.x, y: point.y)
+
+        guard mainView.collectionView.frame.contains(point) else { return true }
+        return false
     }
 }

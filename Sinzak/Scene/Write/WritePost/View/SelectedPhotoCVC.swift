@@ -8,8 +8,6 @@
 import UIKit
 import SnapKit
 import Then
-import RxSwift
-import RxCocoa
 
 final class SelectedPhotoCVC: UICollectionViewCell {
     // MARK: - Properties
@@ -18,7 +16,7 @@ final class SelectedPhotoCVC: UICollectionViewCell {
     
     // MARK: - UI
     
-    private let removePhotoButton = UIButton().then {
+    private lazy var removePhotoButton = UIButton().then {
         $0.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
         $0.setImage(UIImage(named: "exclude"), for: .normal)
         $0.imageView?.contentMode = .center
