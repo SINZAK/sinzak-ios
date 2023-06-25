@@ -341,14 +341,36 @@ private extension WritePostVC {
                     switch owner.category {
                     case .sellingArtwork:
                         
+                        let price = Int(owner.mainView.priceTextField.text ?? "-1") ?? -1
+                        let width = Int(owner.mainView.widthSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
+                        let vertical = Int(owner.mainView.verticalSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
+                        let height = Int(owner.mainView.heightSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
+                        
+                        guard price < 2100000000 else {
+                            owner.simpleErrorHandler.accept(APIError.errorMessage("가격을 2,100,000,000 보다 작게 입력해 주세요."))
+                            return
+                        }
+                        guard width < 2100000000 else {
+                            owner.simpleErrorHandler.accept(APIError.errorMessage("가로를 2,100,000,000 보다 작게 입력해 주세요."))
+                            return
+                        }
+                        guard vertical < 2100000000 else {
+                            owner.simpleErrorHandler.accept(APIError.errorMessage("세로를 2,100,000,000 보다 작게 입력해 주세요."))
+                            return
+                        }
+                        guard height < 2100000000 else {
+                            owner.simpleErrorHandler.accept(APIError.errorMessage("높이를 2,100,000,000 보다 작게 입력해 주세요."))
+                            return
+                        }
+                        
                         owner.viewModel.postProductsComplete(
                             title: owner.mainView.titleTextView.text,
-                            price: Int(owner.mainView.priceTextField.text ?? "-1") ?? -1,
+                            price: price,
                             suggest: owner.mainView.isPossibleSuggestButton.isSelected,
                             body: owner.mainView.bodyTextView.text,
-                            width: Int(owner.mainView.widthSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0,
-                            vertical: Int(owner.mainView.verticalSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0,
-                            heigth: Int(owner.mainView.heightSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
+                            width: width,
+                            vertical: vertical,
+                            heigth: height
                         )
                         
                     case .work, .request:
