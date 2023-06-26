@@ -194,6 +194,57 @@ private extension WritePostVC {
             .bind(to: mainView.titlePlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
         
+        mainView.priceTextField.rx.text
+            .orEmpty
+            .asDriver()
+            .drive(with: self, onNext: { owner, text in
+                if text.count > 9 {
+                    var text = text
+                    text.removeLast()
+                    owner.mainView.priceTextField.text = text
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.widthSizeInputTextFieldView
+            .inputTextField.rx.text
+            .orEmpty
+            .asDriver()
+            .drive(with: self, onNext: { owner, text in
+                if text.count > 9 {
+                    var text = text
+                    text.removeLast()
+                    owner.mainView.widthSizeInputTextFieldView.inputTextField.text = text
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.verticalSizeInputTextFieldView
+            .inputTextField.rx.text
+            .orEmpty
+            .asDriver()
+            .drive(with: self, onNext: { owner, text in
+                if text.count > 9 {
+                    var text = text
+                    text.removeLast()
+                    owner.mainView.verticalSizeInputTextFieldView.inputTextField.text = text
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.heightSizeInputTextFieldView
+            .inputTextField.rx.text
+            .orEmpty
+            .asDriver()
+            .drive(with: self, onNext: { owner, text in
+                if text.count > 9 {
+                    var text = text
+                    text.removeLast()
+                    owner.mainView.heightSizeInputTextFieldView.inputTextField.text = text
+                }
+            })
+            .disposed(by: disposeBag)
+        
         mainView.isPossibleSuggestButton.rx.tap
             .bind(
                 with: self,
@@ -341,14 +392,19 @@ private extension WritePostVC {
                     switch owner.category {
                     case .sellingArtwork:
                         
+                        let price = Int(owner.mainView.priceTextField.text ?? "-1") ?? -1
+                        let width = Int(owner.mainView.widthSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
+                        let vertical = Int(owner.mainView.verticalSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
+                        let height = Int(owner.mainView.heightSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
+                        
                         owner.viewModel.postProductsComplete(
                             title: owner.mainView.titleTextView.text,
-                            price: Int(owner.mainView.priceTextField.text ?? "-1") ?? -1,
+                            price: price,
                             suggest: owner.mainView.isPossibleSuggestButton.isSelected,
                             body: owner.mainView.bodyTextView.text,
-                            width: Int(owner.mainView.widthSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0,
-                            vertical: Int(owner.mainView.verticalSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0,
-                            heigth: Int(owner.mainView.heightSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
+                            width: width,
+                            vertical: vertical,
+                            heigth: height
                         )
                         
                     case .work, .request:
