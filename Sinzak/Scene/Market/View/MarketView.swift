@@ -159,7 +159,7 @@ extension MarketView {
             )
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(264)
+                heightDimension: .estimated((UIScreen.main.bounds.width-48)/2 + 88.0)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets.leading = 8
