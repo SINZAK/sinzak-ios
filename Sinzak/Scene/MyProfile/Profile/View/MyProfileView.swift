@@ -344,7 +344,7 @@ final class MyProfileView: SZView {
             make.top.equalToSuperview().inset(23)
         }
         nameBadgeStack.snp.makeConstraints { make in
-            make.centerX.equalToSuperview().offset(0)
+            make.centerX.equalToSuperview()
             make.top.equalTo(profileImage.snp.bottom).offset(12)
         }
         badgeImage.snp.makeConstraints { make in
