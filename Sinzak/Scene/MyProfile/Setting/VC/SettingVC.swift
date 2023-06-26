@@ -58,7 +58,8 @@ extension SettingVC {
                     content.secondaryText = UserInfoManager.snsKind ?? ""
                 }
                 if itemIdentifier == "앱 버전" {
-                    content.secondaryText = "1.0.0"
+                    let version: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.0.0"
+                    content.secondaryText = version
                 }
                 
                 cell.contentConfiguration = content
