@@ -40,6 +40,7 @@ protocol WritePostVMOutput {
     var photoSections: BehaviorRelay<[PhotoSection]> { get }
     
     var needDismiss: PublishRelay<Bool> { get }
+    var hideLoadingRelay: PublishRelay<Bool> { get }
     
 }
 
@@ -108,8 +109,9 @@ final class DefaultAddPhotosVM: WritePostVM {
             onSuccess: { owner, _ in
                 owner.compltePost()
             },
-            onFailure: { _, error in
+            onFailure: { owner, error in
                 Log.error(error)
+                owner.hideLoadingRelay.accept(true)
             })
         .disposed(by: disposeBag)
     }
@@ -136,8 +138,9 @@ final class DefaultAddPhotosVM: WritePostVM {
                 onSuccess: { owner, _ in
                     owner.compltePost()
                 },
-                onFailure: { _, error in
+                onFailure: { owner, error in
                     Log.error(error)
+                    owner.hideLoadingRelay.accept(true)
                 })
             .disposed(by: disposeBag)
         
@@ -150,11 +153,13 @@ final class DefaultAddPhotosVM: WritePostVM {
     )
     
     var needDismiss: PublishRelay<Bool> = .init()
+    var hideLoadingRelay: PublishRelay<Bool> = .init()
 }
 
 private extension DefaultAddPhotosVM {
     
     func compltePost() {
+        hideLoadingRelay.accept(true)
         NotificationCenter.default.post(name: .completePost, object: selectedCategory)
         needDismiss.accept(true)
     }

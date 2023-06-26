@@ -376,10 +376,10 @@ private extension WritePostVC {
             .disposed(by: disposeBag)
          
         navigationItem.rightBarButtonItem?.rx.tap
+            .throttle(.milliseconds(1000), latest: false, scheduler: ConcurrentDispatchQueueScheduler(queue: .global()))
             .bind(
                 with: self,
                 onNext: { owner, _ in
-                    
                     if (owner.viewModel.photoSections.value[0].items.count == 1) ||
                         owner.mainView.titleTextView.text.isEmpty ||
                         (owner.mainView.priceTextField.text ?? "").isEmpty ||
@@ -388,7 +388,8 @@ private extension WritePostVC {
                         owner.showSinglePopUpAlert(message: "사진, 제목, 가격, 내용은\n필수 입력 항목이에요.")
                         return
                     }
-                    
+                    owner.showLoading()
+                    owner.navigationItem.rightBarButtonItem?.isEnabled = false
                     switch owner.category {
                     case .sellingArtwork:
                         
@@ -463,6 +464,14 @@ private extension WritePostVC {
             .asSignal()
             .emit(with: self, onNext: { owner, _ in
                 owner.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.hideLoadingRelay
+            .asSignal()
+            .emit(with: self, onNext: { owner, _ in
+                owner.hideLoading()
+                owner.navigationItem.rightBarButtonItem?.isEnabled = true
             })
             .disposed(by: disposeBag)
     }
