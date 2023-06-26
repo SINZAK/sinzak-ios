@@ -18,7 +18,10 @@ final class MarketSkeletonView: SZView {
         let width = UIScreen.main.bounds.width
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.estimatedItemSize = CGSize(width: (width - 48.0) / 2, height: 264)
+        layout.estimatedItemSize = CGSize(
+            width: (width - 48.0) / 2,
+            height: (width - 48.0) / 2 + 88.0
+        )
         layout.sectionInset = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0, right: 16.0)
         
         return layout
