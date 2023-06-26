@@ -489,6 +489,14 @@ extension WritePostVC: PHPickerViewControllerDelegate {
         let itemProviders = results.map(\.itemProvider)
         
         Observable.combineLatest(itemProviders.map { getImage(with: $0) })
+            .do(
+                onNext: { [weak self] _ in
+                    self?.showLoading()
+                },
+                afterNext: { [weak self] _ in
+                    self?.hideLoading()
+                }
+            )
             .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .subscribe(
                 with: self,
