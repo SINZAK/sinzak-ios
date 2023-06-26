@@ -194,6 +194,57 @@ private extension WritePostVC {
             .bind(to: mainView.titlePlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
         
+        mainView.priceTextField.rx.text
+            .orEmpty
+            .asDriver()
+            .drive(with: self, onNext: { owner, text in
+                if text.count > 9 {
+                    var text = text
+                    text.removeLast()
+                    owner.mainView.priceTextField.text = text
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.widthSizeInputTextFieldView
+            .inputTextField.rx.text
+            .orEmpty
+            .asDriver()
+            .drive(with: self, onNext: { owner, text in
+                if text.count > 9 {
+                    var text = text
+                    text.removeLast()
+                    owner.mainView.widthSizeInputTextFieldView.inputTextField.text = text
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.verticalSizeInputTextFieldView
+            .inputTextField.rx.text
+            .orEmpty
+            .asDriver()
+            .drive(with: self, onNext: { owner, text in
+                if text.count > 9 {
+                    var text = text
+                    text.removeLast()
+                    owner.mainView.verticalSizeInputTextFieldView.inputTextField.text = text
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        mainView.heightSizeInputTextFieldView
+            .inputTextField.rx.text
+            .orEmpty
+            .asDriver()
+            .drive(with: self, onNext: { owner, text in
+                if text.count > 9 {
+                    var text = text
+                    text.removeLast()
+                    owner.mainView.heightSizeInputTextFieldView.inputTextField.text = text
+                }
+            })
+            .disposed(by: disposeBag)
+        
         mainView.isPossibleSuggestButton.rx.tap
             .bind(
                 with: self,
@@ -345,23 +396,6 @@ private extension WritePostVC {
                         let width = Int(owner.mainView.widthSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
                         let vertical = Int(owner.mainView.verticalSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
                         let height = Int(owner.mainView.heightSizeInputTextFieldView.inputTextField.text ?? "0") ?? 0
-                        
-                        guard price < 2100000000 else {
-                            owner.simpleErrorHandler.accept(APIError.errorMessage("가격을 2,100,000,000 보다 작게 입력해 주세요."))
-                            return
-                        }
-                        guard width < 2100000000 else {
-                            owner.simpleErrorHandler.accept(APIError.errorMessage("가로를 2,100,000,000 보다 작게 입력해 주세요."))
-                            return
-                        }
-                        guard vertical < 2100000000 else {
-                            owner.simpleErrorHandler.accept(APIError.errorMessage("세로를 2,100,000,000 보다 작게 입력해 주세요."))
-                            return
-                        }
-                        guard height < 2100000000 else {
-                            owner.simpleErrorHandler.accept(APIError.errorMessage("높이를 2,100,000,000 보다 작게 입력해 주세요."))
-                            return
-                        }
                         
                         owner.viewModel.postProductsComplete(
                             title: owner.mainView.titleTextView.text,
