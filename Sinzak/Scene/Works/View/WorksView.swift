@@ -129,9 +129,12 @@ extension WorksView {
                 widthDimension: .fractionalWidth(0.5),
                 heightDimension: .fractionalHeight(1.0)
             )
+            let insets = 16.0 * 3
+            let heightOfImageView = (UIScreen.main.bounds.width - insets) / 2
+            let heightOfLabels = 88.0
             let groupSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated((UIScreen.main.bounds.width-48)/2 + 88.0)
+                heightDimension: .estimated(heightOfImageView + heightOfLabels)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets.leading = 8
