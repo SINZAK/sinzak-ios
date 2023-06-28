@@ -98,7 +98,8 @@ final class DefaultAddPhotosVM: WritePostVM {
             price: price
         )
         
-        let images: [UIImage] = photoSections.value[0].items
+        var images: [UIImage] = photoSections.value[0].items
+        images.removeFirst()
         
         ProductsManager.shared.buildProductsPost(
             products: marketBuild,
@@ -131,7 +132,9 @@ final class DefaultAddPhotosVM: WritePostVM {
             suggest: suggest
         )
         
-        let images: [UIImage] = photoSections.value[0].items
+        var images: [UIImage] = photoSections.value[0].items
+        images.removeFirst()
+        
         WorksManager.shared.buildWorksPost(works: worksBuild, images: images)
             .subscribe(
                 with: self,

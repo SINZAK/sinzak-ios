@@ -241,6 +241,7 @@
 		EDC5147129DBB48F0015C3B5 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC5147029DBB48F0015C3B5 /* LoginVM.swift */; };
 		EDC8656229D5BADD00424FC1 /* MarketVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8656129D5BADD00424FC1 /* MarketVM.swift */; };
 		EDCA46F72A156A5D00EAFEAA /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA46F62A156A5D00EAFEAA /* Photo.swift */; };
+		EDD363342A49571E008C42C7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD363332A49571E008C42C7 /* UIImage+Extension.swift */; };
 		EDD446DE29DF14F5005DD268 /* sinzak_splash_animation_dark.json in Resources */ = {isa = PBXBuildFile; fileRef = EDD446DD29DF14F5005DD268 /* sinzak_splash_animation_dark.json */; };
 		EDE25CA72A25139F00B216DB /* UICollectionReusableView+Extentsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE25CA62A25139E00B216DB /* UICollectionReusableView+Extentsion.swift */; };
 		EDE25CA92A25149F00B216DB /* NSNotification-Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE25CA82A25149F00B216DB /* NSNotification-Name+Extension.swift */; };
@@ -532,6 +533,7 @@
 		EDC5147029DBB48F0015C3B5 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		EDC8656129D5BADD00424FC1 /* MarketVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketVM.swift; sourceTree = "<group>"; };
 		EDCA46F62A156A5D00EAFEAA /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		EDD363332A49571E008C42C7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		EDD446DD29DF14F5005DD268 /* sinzak_splash_animation_dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sinzak_splash_animation_dark.json; sourceTree = "<group>"; };
 		EDE25CA62A25139E00B216DB /* UICollectionReusableView+Extentsion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+Extentsion.swift"; sourceTree = "<group>"; };
 		EDE25CA82A25149F00B216DB /* NSNotification-Name+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNotification-Name+Extension.swift"; sourceTree = "<group>"; };
@@ -668,6 +670,7 @@
 				EDE5EC5C29D6FBAA00BB211F /* UICollectionReusableView+Extentsion.swift */,
 				ED86969129D9359D001A1A9F /* UIView+Extension.swift */,
 				ED19B13F29EC6DE100C951D1 /* UIScrollView+Extension.swift */,
+				EDD363332A49571E008C42C7 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2733,6 +2736,7 @@
 				ED3552602A11F0A800B364FC /* VerifyButton.swift in Sources */,
 				A226CC5229AE0FC8000161E8 /* ReceivePriceOfferView.swift in Sources */,
 				A280AB5329A7A5E600C1729C /* WriteCategoryHeaderKind.swift in Sources */,
+				EDD363342A49571E008C42C7 /* UIImage+Extension.swift in Sources */,
 				EDF76FF129F7BD3E00F33146 /* ProductsDetail.swift in Sources */,
 				A2DEC35B29B44E2E00CF0794 /* SNSLogin.swift in Sources */,
 				ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */,
