@@ -33,7 +33,7 @@ protocol AgreementVMOutput {
     var isPrivacyPolicyCheckButtonChecked: BehaviorRelay<Bool> { get }
     var isMarketingInfoCheckButtonChecked: BehaviorRelay<Bool> { get }
     
-    var pushNameVC: PublishRelay<SignupNameVC> { get }
+    var pushNameVC: PublishRelay<ValidateNameVC> { get }
 }
 
 protocol AgreementVM: AgreementVMInput, AgreementVMOutput {}
@@ -101,8 +101,8 @@ final class DefaultAgreementVM: AgreementVM {
     
     func confirmButtonTapped() {
         onboardingUser.term = isMarketingInfoCheckButtonChecked.value
-        let vm = DefaultSignupNameVM(onboardingUser: onboardingUser)
-        let vc = SignupNameVC(viewModel: vm)
+        let vm = DefaultValidateNameVM(onboardingUser: onboardingUser)
+        let vc = ValidateNameVC(validateNameViewControllerType: .signup, viewModel: vm)
         pushNameVC.accept(vc)
     }
     
@@ -116,5 +116,5 @@ final class DefaultAgreementVM: AgreementVM {
     var isPrivacyPolicyCheckButtonChecked: BehaviorRelay<Bool> = .init(value: false)
     var isMarketingInfoCheckButtonChecked: BehaviorRelay<Bool> = .init(value: false)
     
-    var pushNameVC: PublishRelay<SignupNameVC> = .init()
+    var pushNameVC: PublishRelay<ValidateNameVC> = .init()
 }

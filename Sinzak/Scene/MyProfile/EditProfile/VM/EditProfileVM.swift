@@ -10,8 +10,6 @@ import RxSwift
 import RxCocoa
 
 protocol EditProfileVMInput {
-    func nickNameTextInput(text: String)
-    func checkButtonTapped()
     func completeButtonTapped(currentName: String)
     
     func introductionTextInput(text: String)
@@ -20,11 +18,8 @@ protocol EditProfileVMInput {
 }
 
 protocol EditProfileVMOutput {
-    var nickNameInput: BehaviorRelay<String> { get }
+    var changedNickname: PublishRelay<String> { get }
     var introductionInput: BehaviorRelay<String> { get }
-    
-    var checkButtonIsEnable: BehaviorRelay<Bool> { get }
-    var doubleCheckResult: BehaviorRelay<DoubleCheckResult> { get }
     
     var introductionPlaceholderIsHidden: PublishRelay<Bool> { get }
     var introductionCount: PublishRelay<Int> { get }
@@ -47,36 +42,11 @@ final class DefaultEditProfileVM: EditProfileVM {
     var needUpdateImage: (need: Bool, image: UIImage?, isIcon: Bool?) = (false, nil, nil)
     
     // MARK: - Input
-    
-    func nickNameTextInput(text: String) {
-        Log.debug(text)
-        if text == nickNameInput.value { return }
-        nickNameInput.accept(text)
-        doubleCheckResult.accept(.beforeCheck)
-        checkButtonIsEnable.accept(text.isValidString(.nickname))
-        nickNameIsChecked = false
-    }
-    
+        
     func introductionTextInput(text: String) {
         introductionInput.accept(text)
         introductionPlaceholderIsHidden.accept(!text.isEmpty)
         introductionCount.accept(text.count)
-    }
-    
-    func checkButtonTapped() {
-        Task {
-            do {
-                let reuslt = try await AuthManager.shared.checkNickname(for: self.nickNameInput.value)
-                if reuslt {
-                    doubleCheckResult.accept(.success)
-                    nickNameIsChecked = true
-                } else {
-                    doubleCheckResult.accept(.fail)
-                }
-            } catch {
-                APIError.logError(error)
-            }
-        }
     }
     
     func completeButtonTapped(currentName: String) {
@@ -93,19 +63,6 @@ final class DefaultEditProfileVM: EditProfileVM {
             )
         }
         
-        Log.debug(nickNameIsChecked)
-        Log.debug(nickNameInput.value)
-        Log.debug(currentName)
-        
-        let name = nickNameIsChecked ? nickNameInput.value : currentName
-        tasks.append(
-            UserCommandManager.shared.editUserInfo(
-                name: name,
-                introduction: introductionInput.value
-            )
-            .asObservable()
-        )
-        
         Observable.zip(tasks)
             .subscribe(
                 with: self,
@@ -120,11 +77,8 @@ final class DefaultEditProfileVM: EditProfileVM {
     
     // MARK: - Output
     
-    var nickNameInput: BehaviorRelay<String> = .init(value: "")
+    var changedNickname: PublishRelay<String> = .init()
     var introductionInput: BehaviorRelay<String> = .init(value: "")
-    
-    var checkButtonIsEnable: BehaviorRelay<Bool> = .init(value: false)
-    var doubleCheckResult: BehaviorRelay<DoubleCheckResult> = .init(value: .beforeCheck)
     
     var introductionPlaceholderIsHidden: PublishRelay<Bool> = .init()
     var introductionCount: PublishRelay<Int> = .init()

@@ -46,28 +46,37 @@ final class EditProfileView: SZView {
         $0.textColor = CustomColor.label
         $0.text = "닉네임"
     }
-    let nicknameTextField = UITextField().then {
-        $0.tintColor = CustomColor.red
-        $0.placeholder = "닉네임"
-        $0.font = .body_R
-        $0.textColor = CustomColor.label
-    }
-    let checkButton = DoubleCheckButton().then {
-        $0.setTitle("중복확인", for: .normal)
-        $0.setTitleColor(CustomColor.gray60, for: .normal)
-        $0.titleLabel?.font = .caption_B
-        $0.layer.borderColor = CustomColor.gray60.cgColor
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 15
-        $0.isEnabled = false
-    }
     
-    let nameValidationLabel = UILabel().then {
-        $0.font = .caption_R
-        $0.textColor = CustomColor.purple
-        $0.text = "사용불가능한 이름입니다."
-        $0.isHidden = true
-    }
+    let currentNickNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = CustomColor.label
+        label.font = .body_R
+        label.text = "current nick"
+        
+        return label
+    }()
+//    let nicknameTextField = UITextField().then {
+//        $0.tintColor = CustomColor.red
+//        $0.placeholder = "닉네임"
+//        $0.font = .body_R
+//        $0.textColor = CustomColor.label
+//    }
+//    let checkButton = DoubleCheckButton().then {
+//        $0.setTitle("중복확인", for: .normal)
+//        $0.setTitleColor(CustomColor.gray60, for: .normal)
+//        $0.titleLabel?.font = .caption_B
+//        $0.layer.borderColor = CustomColor.gray60.cgColor
+//        $0.layer.borderWidth = 1
+//        $0.layer.cornerRadius = 15
+//        $0.isEnabled = false
+//    }
+//
+//    let nameValidationLabel = UILabel().then {
+//        $0.font = .caption_R
+//        $0.textColor = CustomColor.purple
+//        $0.text = "사용불가능한 이름입니다."
+//        $0.isHidden = true
+//    }
     
     // 소개
     let introductionView = UIView()
@@ -166,7 +175,7 @@ final class EditProfileView: SZView {
         let imageURL = URL(string: profile.imageURL)
         profileImage.kf.setImage(with: imageURL)
         
-        nicknameTextField.text = profile.name
+        currentNickNameLabel.text = profile.name
         
         introductionTextView.text = profile.introduction
         textViewPlaceHolderLabel.isHidden = !profile.introduction.isEmpty
@@ -211,9 +220,7 @@ final class EditProfileView: SZView {
         )
         nicknameView.addSubviews(
             nicknameLabel,
-            nicknameTextField,
-            checkButton,
-            nameValidationLabel
+            currentNickNameLabel
         )
         introductionView.addSubviews(
             introductionLabel,
@@ -255,8 +262,7 @@ final class EditProfileView: SZView {
         
         nicknameView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(nicknameTextField.snp.bottom).offset(20.0)
-//            make.bottom.equalTo(nameValidationLabel.snp.bottom).offset(20.0)
+            make.bottom.equalTo(currentNickNameLabel.snp.bottom).offset(20.0)
         }
         nicknameLabel.snp.makeConstraints { make in
             make.leading.top.equalToSuperview().inset(20.0)
@@ -265,22 +271,11 @@ final class EditProfileView: SZView {
             .defaultHigh,
             for: .horizontal
         )
-        
-        nicknameTextField.snp.makeConstraints { make in
+        currentNickNameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(nicknameLabel)
             make.leading.equalTo(nicknameLabel.snp.trailing).offset(30)
-            make.trailing.equalTo(checkButton.snp.leading).offset(-8.0)
         }
-        checkButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(24.0)
-            $0.centerY.equalTo(nicknameLabel)
-            $0.height.equalTo(30.0)
-            $0.width.equalTo(78.0)
-        }
-        nameValidationLabel.snp.makeConstraints {
-            $0.leading.equalTo(nicknameTextField)
-            $0.top.equalTo(nicknameTextField.snp.bottom).offset(12.0)
-        }
+        
         divider01.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(17)
             make.height.equalTo(0.5)

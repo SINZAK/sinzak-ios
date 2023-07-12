@@ -148,23 +148,26 @@ final class EditProfileVC: SZVC {
             })
             .disposed(by: disposeBag)
         
-        mainView.nicknameTextField.rx.text
-            .orEmpty
-            .subscribe(
-                with: self,
-                onNext: { owner, text in
-                    owner.viewModel.nickNameTextInput(text: text)
-                }
-            )
-            .disposed(by: disposeBag)
+        let tapGestureOfNicknameView = UITapGestureRecognizer()
+        mainView.nicknameView.addGestureRecognizer(tapGestureOfNicknameView)
         
-        mainView.checkButton.rx.tap
-            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
-            .subscribe(
+        tapGestureOfNicknameView.rx.event
+            .asSignal()
+            .emit(
                 with: self,
                 onNext: { owner, _ in
-                    owner.viewModel.checkButtonTapped()
-            })
+                    let vc = ValidateNameVC(
+                        validateNameViewControllerType: .editProfile,
+                        viewModel: DefaultValidateNameVM(
+                            introduction: owner.profile.introduction,
+                            changedNickname: owner.viewModel.changedNickname
+                        )
+                    )
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    owner.present(nav, animated: true)
+                }
+            )
             .disposed(by: disposeBag)
         
         mainView.introductionTextView.rx.text
@@ -222,52 +225,14 @@ final class EditProfileVC: SZVC {
     
     func  bindOutput() {
         
-        viewModel.checkButtonIsEnable
-            .asDriver(onErrorJustReturn: false)
-            .skip(1)
-            .drive(mainView.checkButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-        
-        viewModel.doubleCheckResult
-            .asDriver()
-            .drive(with: self, onNext: { owner, result in
-                let info = result.info
-                let color = result.color
-                
-                switch result {
-                case .beforeCheck:
-                    owner.mainView.nameValidationLabel.text = info
-                    owner.mainView.nameValidationLabel.textColor = color
-                    
-                case .success:
-                    owner.mainView.nicknameView.snp.remakeConstraints { make in
-                        make.leading.trailing.equalToSuperview()
-                        make.bottom.equalTo(owner.mainView.nameValidationLabel.snp.bottom).offset(20.0)
-                    }
-                    owner.mainView.nameValidationLabel.isHidden = false
-                    
-                    owner.mainView.nameValidationLabel.text = info
-                    owner.mainView.nameValidationLabel.textColor = color
-                    
-                case .fail:
-                    
-                    owner.mainView.nicknameView.snp.remakeConstraints { make in
-                        make.leading.trailing.equalToSuperview()
-                        make.bottom.equalTo(owner.mainView.nameValidationLabel.snp.bottom).offset(20.0)
-                        
-                    }
-                    owner.mainView.nameValidationLabel.isHidden = false
-                    
-                    owner.mainView.nameValidationLabel.text = info
-                    owner.mainView.nameValidationLabel.textColor = color
-
-                }
-            })
-            .disposed(by: disposeBag)
-        
         viewModel.introductionPlaceholderIsHidden
             .asDriver(onErrorJustReturn: false)
             .drive(mainView.textViewPlaceHolderLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.changedNickname
+            .asSignal()
+            .emit(to: mainView.currentNickNameLabel.rx.text)
             .disposed(by: disposeBag)
         
         let introductionCount = viewModel.introductionCount

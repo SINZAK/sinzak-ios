@@ -136,7 +136,7 @@
 		A2B3856C295D888800E5EB7C /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3856B295D888800E5EB7C /* AgreementView.swift */; };
 		A2B3856E295D889400E5EB7C /* AgreementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3856D295D889400E5EB7C /* AgreementVC.swift */; };
 		A2B38570295D88B600E5EB7C /* SignupNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B3856F295D88B600E5EB7C /* SignupNameView.swift */; };
-		A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38571295D88C000E5EB7C /* SignupNameVC.swift */; };
+		A2B38572295D88C000E5EB7C /* ValidateNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38571295D88C000E5EB7C /* ValidateNameVC.swift */; };
 		A2B38574295D88D400E5EB7C /* SignupGenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38573295D88D400E5EB7C /* SignupGenreView.swift */; };
 		A2B38576295D88DC00E5EB7C /* SignupGenreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38575295D88DC00E5EB7C /* SignupGenreVC.swift */; };
 		A2B3857A295D893300E5EB7C /* UniversityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B38579295D893300E5EB7C /* UniversityInfoView.swift */; };
@@ -211,7 +211,7 @@
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
 		ED47113829E01B3700708562 /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113729E01B3700708562 /* CheckButton.swift */; };
 		ED47113C29E0363000708562 /* SZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113B29E0363000708562 /* SZButton.swift */; };
-		ED47113F29E03C6200708562 /* SignupNameVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113E29E03C6200708562 /* SignupNameVM.swift */; };
+		ED47113F29E03C6200708562 /* ValidateNameVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113E29E03C6200708562 /* ValidateNameVM.swift */; };
 		ED47114129E06CFF00708562 /* MarketSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47114029E06CFF00708562 /* MarketSkeletonView.swift */; };
 		ED518CD529D7FD3F003342B9 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ED518CD429D7FD3F003342B9 /* SkeletonView */; };
 		ED5A43232A156EC400D89C3A /* WriteCategoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43222A156EC400D89C3A /* WriteCategoryVM.swift */; };
@@ -431,7 +431,7 @@
 		A2B3856B295D888800E5EB7C /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
 		A2B3856D295D889400E5EB7C /* AgreementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVC.swift; sourceTree = "<group>"; };
 		A2B3856F295D88B600E5EB7C /* SignupNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameView.swift; sourceTree = "<group>"; };
-		A2B38571295D88C000E5EB7C /* SignupNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameVC.swift; sourceTree = "<group>"; };
+		A2B38571295D88C000E5EB7C /* ValidateNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateNameVC.swift; sourceTree = "<group>"; };
 		A2B38573295D88D400E5EB7C /* SignupGenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreView.swift; sourceTree = "<group>"; };
 		A2B38575295D88DC00E5EB7C /* SignupGenreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupGenreVC.swift; sourceTree = "<group>"; };
 		A2B38579295D893300E5EB7C /* UniversityInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoView.swift; sourceTree = "<group>"; };
@@ -506,7 +506,7 @@
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		ED47113729E01B3700708562 /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		ED47113B29E0363000708562 /* SZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SZButton.swift; sourceTree = "<group>"; };
-		ED47113E29E03C6200708562 /* SignupNameVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameVM.swift; sourceTree = "<group>"; };
+		ED47113E29E03C6200708562 /* ValidateNameVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateNameVM.swift; sourceTree = "<group>"; };
 		ED47114029E06CFF00708562 /* MarketSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketSkeletonView.swift; sourceTree = "<group>"; };
 		ED5A43222A156EC400D89C3A /* WriteCategoryVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCategoryVM.swift; sourceTree = "<group>"; };
 		ED5A43292A15701B00D89C3A /* WritePostVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostVM.swift; sourceTree = "<group>"; };
@@ -1368,7 +1368,7 @@
 		A254E15A29BE08E1001047FD /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				A2B38571295D88C000E5EB7C /* SignupNameVC.swift */,
+				A2B38571295D88C000E5EB7C /* ValidateNameVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2054,7 +2054,7 @@
 		ED47113D29E03C4700708562 /* VM */ = {
 			isa = PBXGroup;
 			children = (
-				ED47113E29E03C6200708562 /* SignupNameVM.swift */,
+				ED47113E29E03C6200708562 /* ValidateNameVM.swift */,
 			);
 			name = VM;
 			path = "프";
@@ -2712,7 +2712,7 @@
 				A233891029B066EC00688FD8 /* EditProfileView.swift in Sources */,
 				A2420F9229A8FC62007D8937 /* ArtworkInfoVC.swift in Sources */,
 				ED74A08029F4FABB00F44AA2 /* AppleAuthManager.swift in Sources */,
-				ED47113F29E03C6200708562 /* SignupNameVM.swift in Sources */,
+				ED47113F29E03C6200708562 /* ValidateNameVM.swift in Sources */,
 				EDE25CA92A25149F00B216DB /* NSNotification-Name+Extension.swift in Sources */,
 				EDF508A629FEB92300FDC2E2 /* ReportSelectVC.swift in Sources */,
 				A2420F8629A85998007D8937 /* WritePostView.swift in Sources */,
@@ -2754,7 +2754,7 @@
 				EDB7E4192A2328B20045E1AF /* ChatListVM.swift in Sources */,
 				A2DEC36429B4684100CF0794 /* School.swift in Sources */,
 				EDF5089029FD624600FDC2E2 /* ProductsDetailSkeletonView.swift in Sources */,
-				A2B38572295D88C000E5EB7C /* SignupNameVC.swift in Sources */,
+				A2B38572295D88C000E5EB7C /* ValidateNameVC.swift in Sources */,
 				EDF76FEC29F7994D00F33146 /* LikeView.swift in Sources */,
 				A280AB4D29A79E8A00C1729C /* WriteCategory.swift in Sources */,
 			);
