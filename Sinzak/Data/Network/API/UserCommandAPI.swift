@@ -116,7 +116,7 @@ extension UserCommandAPI: TargetType {
                 return .uploadMultipart(formData)
                 
             case false:
-                imageData = image.jpegData(compressionQuality: 0.3) ?? Data()
+                imageData = image.compressImageData() ?? Data()
                 formData.append(
                     MultipartFormData(
                         provider: .data(imageData),
