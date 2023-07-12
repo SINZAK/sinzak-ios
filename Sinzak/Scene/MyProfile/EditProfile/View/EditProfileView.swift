@@ -44,7 +44,7 @@ final class EditProfileView: SZView {
         $0.tintColor = CustomColor.red
         $0.font = .body_M
         $0.textColor = CustomColor.label
-        $0.text = "닉네임"
+        $0.text = "이름"
     }
     
     let currentNickNameLabel: UILabel = {
@@ -55,28 +55,6 @@ final class EditProfileView: SZView {
         
         return label
     }()
-//    let nicknameTextField = UITextField().then {
-//        $0.tintColor = CustomColor.red
-//        $0.placeholder = "닉네임"
-//        $0.font = .body_R
-//        $0.textColor = CustomColor.label
-//    }
-//    let checkButton = DoubleCheckButton().then {
-//        $0.setTitle("중복확인", for: .normal)
-//        $0.setTitleColor(CustomColor.gray60, for: .normal)
-//        $0.titleLabel?.font = .caption_B
-//        $0.layer.borderColor = CustomColor.gray60.cgColor
-//        $0.layer.borderWidth = 1
-//        $0.layer.cornerRadius = 15
-//        $0.isEnabled = false
-//    }
-//
-//    let nameValidationLabel = UILabel().then {
-//        $0.font = .caption_R
-//        $0.textColor = CustomColor.purple
-//        $0.text = "사용불가능한 이름입니다."
-//        $0.isHidden = true
-//    }
     
     // 소개
     let introductionView = UIView()
@@ -85,34 +63,17 @@ final class EditProfileView: SZView {
         $0.textColor = CustomColor.label
         $0.text = "소개"
     }
-    let introductionTextView = UITextView().then {
-        $0.tintColor = CustomColor.red
-        $0.backgroundColor = CustomColor.background
-        $0.font = .caption_R
-        $0.textColor = CustomColor.label
-        $0.isScrollEnabled = false
-        $0.text = "자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다자유롭게 작업합니다"
-    }
     
-    let textViewPlaceHolderLabel: UILabel = {
-        let label = UILabel() 
-        label.textColor = CustomColor.gray60
+    let currentIntroductionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = CustomColor.label
         label.font = .body_R
-        label.text = "소개를 입력해 주세요."
+        label.text = ""
+        label.numberOfLines = 0
         
         return label
     }()
     
-    let introductionCountLabel = UILabel().then {
-        $0.text = "0"
-        $0.font = .buttonText_R
-        $0.textColor = CustomColor.label
-    }
-    private let limitIntroductionLabel = UILabel().then {
-        $0.text = "/100"
-        $0.font = .buttonText_R
-        $0.textColor = CustomColor.label
-    }
     // 학교
     let schoolView = UIView()
     private let schoolLabel = UILabel().then {
@@ -177,9 +138,12 @@ final class EditProfileView: SZView {
         
         currentNickNameLabel.text = profile.name
         
-        introductionTextView.text = profile.introduction
-        textViewPlaceHolderLabel.isHidden = !profile.introduction.isEmpty
-        introductionCountLabel.text = "\(profile.introduction.count)"
+        if profile.introduction.isEmpty {
+            currentIntroductionLabel.text = "소개를 입력하세요."
+            currentIntroductionLabel.textColor = CustomColor.gray60
+        } else {
+            currentIntroductionLabel.text = profile.introduction
+        }
         
         schoolNameLabel.text = profile.univ
         
@@ -224,10 +188,7 @@ final class EditProfileView: SZView {
         )
         introductionView.addSubviews(
             introductionLabel,
-            introductionTextView,
-            textViewPlaceHolderLabel,
-            introductionCountLabel,
-            limitIntroductionLabel
+            currentIntroductionLabel
         )
         schoolView.addSubviews(
             schoolLabel, schoolNameLabel, verifySchoolButton
@@ -273,7 +234,7 @@ final class EditProfileView: SZView {
         )
         currentNickNameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(nicknameLabel)
-            make.leading.equalTo(nicknameLabel.snp.trailing).offset(30)
+            make.leading.equalTo(nicknameLabel.snp.trailing).offset(16.0)
         }
         
         divider01.snp.makeConstraints { make in
@@ -283,10 +244,13 @@ final class EditProfileView: SZView {
         
         introductionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
+            make.top.equalTo(introductionLabel).offset(-20.0)
+            make.bottom.equalTo(currentIntroductionLabel).offset(20.0)
         }
         introductionLabel.snp.makeConstraints { make in
             make.leading.top.equalToSuperview().inset(19)
         }
+        /*
         introductionTextView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(37.5)
             make.top.equalTo(introductionLabel.snp.bottom).offset(8)
@@ -305,6 +269,14 @@ final class EditProfileView: SZView {
             make.trailing.equalTo(limitIntroductionLabel.snp.leading)
             make.centerY.equalTo(limitIntroductionLabel)
         }
+         */
+        
+        currentIntroductionLabel.snp.makeConstraints {
+            $0.top.equalTo(introductionLabel)
+            $0.leading.equalTo(introductionLabel.snp.trailing).offset(16.0)
+            $0.trailing.equalToSuperview().inset(28.0)
+        }
+        
         divider02.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(17)
             make.height.equalTo(0.5)

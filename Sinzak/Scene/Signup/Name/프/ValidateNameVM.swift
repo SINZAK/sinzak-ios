@@ -83,7 +83,7 @@ final class DefaultValidateNameVM: ValidateNameVM {
     func editNickname(nickname: String) {
         UserCommandManager.shared.editUserInfo(
             name: nickname,
-            introduction: ""
+            introduction: introduction ?? ""
         )
         .subscribe(
             with: self,

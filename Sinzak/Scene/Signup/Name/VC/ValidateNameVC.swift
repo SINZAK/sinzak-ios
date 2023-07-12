@@ -18,7 +18,7 @@ final class ValidateNameVC: SZVC {
     }
     
     // MARK: - Properties
-    let mainView = SignupNameView()
+    let mainView = ValidateNameView()
     var viewModel: ValidateNameVM
     
     private let disposeBag = DisposeBag()
@@ -132,7 +132,11 @@ final class ValidateNameVC: SZVC {
             .disposed(by: disposeBag)
         
         navigationItem.leftBarButtonItem?.rx.tap
-            .asSignal()
+            .throttle(
+                .milliseconds(500),
+                scheduler: ConcurrentMainScheduler.instance
+            )
+            .asSignal(onErrorJustReturn: Void())
             .emit(
                 with: self,
                 onNext: { owner, _ in

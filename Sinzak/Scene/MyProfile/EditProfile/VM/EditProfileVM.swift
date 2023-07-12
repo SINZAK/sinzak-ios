@@ -12,17 +12,12 @@ import RxCocoa
 protocol EditProfileVMInput {
     func completeButtonTapped(currentName: String)
     
-    func introductionTextInput(text: String)
-    
     var needUpdateImage: (need: Bool, image: UIImage?, isIcon: Bool?) { get set }
 }
 
 protocol EditProfileVMOutput {
     var changedNickname: PublishRelay<String> { get }
-    var introductionInput: BehaviorRelay<String> { get }
-    
-    var introductionPlaceholderIsHidden: PublishRelay<Bool> { get }
-    var introductionCount: PublishRelay<Int> { get }
+    var changedIntroduction: PublishRelay<String> { get }
     
     var updateSchoolAuth: PublishRelay<String> { get }
     var updateGenre: PublishRelay<[AllGenre]> { get }
@@ -42,43 +37,34 @@ final class DefaultEditProfileVM: EditProfileVM {
     var needUpdateImage: (need: Bool, image: UIImage?, isIcon: Bool?) = (false, nil, nil)
     
     // MARK: - Input
-        
-    func introductionTextInput(text: String) {
-        introductionInput.accept(text)
-        introductionPlaceholderIsHidden.accept(!text.isEmpty)
-        introductionCount.accept(text.count)
-    }
     
     func completeButtonTapped(currentName: String) {
         
-        var tasks: [Observable<Bool>] = []
-        
         if needUpdateImage.need {
-            tasks.append(
-                UserCommandManager.shared.editUserImage(
-                    image: needUpdateImage.image ?? UIImage(),
-                    isIcon: needUpdateImage.isIcon ?? false
-                )
-                .asObservable()
+            UserCommandManager.shared.editUserImage(
+                image: needUpdateImage.image ?? UIImage(),
+                isIcon: needUpdateImage.isIcon ?? false
             )
-        }
-        
-        Observable.zip(tasks)
             .subscribe(
                 with: self,
-                onNext: { owner, _ in
+                onSuccess: { owner, _ in
                     owner.completeEditTasks.accept(true)
                 },
-                onError: { owner, error in
+                onFailure: { owner, error in
+                    Log.error(error)
                     owner.errorHandler.accept(error)
-                })
+                }
+            )
             .disposed(by: disposeBag)
+        } else {
+            completeEditTasks.accept(true)
+        }
     }
     
     // MARK: - Output
     
     var changedNickname: PublishRelay<String> = .init()
-    var introductionInput: BehaviorRelay<String> = .init(value: "")
+    var changedIntroduction: PublishRelay<String> = .init()
     
     var introductionPlaceholderIsHidden: PublishRelay<Bool> = .init()
     var introductionCount: PublishRelay<Int> = .init()
