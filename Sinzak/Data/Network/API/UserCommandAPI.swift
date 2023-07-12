@@ -130,12 +130,9 @@ extension UserCommandAPI: TargetType {
         case .editUserInfo(let userInfo):
             
             var param: [String: Any] = [
-                "introduction": userInfo.introduction
+                "introduction": userInfo.introduction,
+                "name": userInfo.name
             ]
-            
-            if UserInfoManager.name != userInfo.name {
-                param["name"] = userInfo.name
-            }
             
             return .requestParameters(parameters: param, encoding: JSONEncoding.default)
 
