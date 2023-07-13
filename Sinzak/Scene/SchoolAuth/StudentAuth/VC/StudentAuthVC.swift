@@ -265,7 +265,8 @@ final class StudentAuthVC: SZVC {
             .disposed(by: disposeBag)
         
         viewModel.transmitUnivMailErrorHandler
-            .subscribe(
+            .asSignal()
+            .emit(
                 with: self,
                 onNext: { owner, error in
                     owner.simpleErrorHandler.accept(error)
