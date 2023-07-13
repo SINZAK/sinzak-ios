@@ -210,13 +210,12 @@ private extension ProductsAPI {
         }// for
         
         compressImageGroup.wait()
-        compressImageGroup.notify(queue: .global(), execute: {
-            for i in 0..<images.count {
-                if let data = formDataDict[i] {
-                    formData.append(data)
-                }
+        
+        for i in 0..<images.count {
+            if let data = formDataDict[i] {
+                formData.append(data)
             }
-        })
+        }
         
         return formData
     }
