@@ -182,7 +182,8 @@ final class EditProfileView: SZView {
             .map { $0?.text ?? "" }
             .joined(separator: "\n")
         
-        genreNameLabel.text = categoryLike
+        // empty인 경우 " " 넣어줘 label 크기 유지해 separator 위치 조정
+        genreNameLabel.text = categoryLike.isEmpty ? " " : categoryLike
         
         applyAuthorButton.isEnabled = !profile.certAuthor
     }
