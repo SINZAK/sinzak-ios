@@ -501,19 +501,15 @@ extension WritePostVC: PHPickerViewControllerDelegate {
         Observable.zip(itemProviders.map {
             getImage(with: $0).subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
         })
-        .do(
-            afterNext: { [weak self] _ in
-                self?.hideLoading()
-            },
-            onError: { [weak self] error in
-                self?.simpleErrorHandler.accept(error)
-                self?.hideLoading()
-            }
-        )
         .subscribe(
             with: self,
             onNext: { owner, images in
                 owner.viewModel.photoSelected(images: images)
+                owner.hideLoading()
+            },
+            onError: { owner, error in
+                owner.simpleErrorHandler.accept(error)
+                owner.hideLoading()
             }
         )
         .disposed(by: disposeBag)
