@@ -182,10 +182,9 @@ final class EditProfileView: SZView {
             .map { $0?.text ?? "" }
             .joined(separator: "\n")
         
-        // empty인 경우 " " 넣어줘 label 크기 유지해 separator 위치 조정
-        genreNameLabel.text = categoryLike.isEmpty ? " " : categoryLike
-        
-        applyAuthorButton.isEnabled = !profile.certAuthor
+        genreNameLabel.text = categoryLike
+                
+        applyAuthorButton.isEnabled = !profile.certAuthor 
     }
     
     // MARK: - Design Helpers
@@ -338,8 +337,11 @@ final class EditProfileView: SZView {
             make.height.equalTo(0.5)
         }
         genreView.snp.makeConstraints { make in
+            let minHeight = 16.0 + 19.0 + 19.0
+            
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(genreNameLabel.snp.bottom).offset(20.0)
+            make.height.greaterThanOrEqualTo(minHeight)
         }
         genreLabel.snp.makeConstraints { make in
             make.leading.top.equalToSuperview().inset(19)
@@ -347,13 +349,8 @@ final class EditProfileView: SZView {
         genreNameLabel.snp.makeConstraints { make in
             make.top.equalTo(genreLabel)
             make.leading.equalTo(genreLabel.snp.trailing).offset(30)
-            make.trailing.lessThanOrEqualTo(changeGenreButton.snp.leading).offset(-10)
+            make.trailing.equalTo(changeGenreButton.snp.leading).offset(-10)
         }
-        genreNameLabel.setContentCompressionResistancePriority(
-            .defaultLow,
-            for: .horizontal
-        )
-        
         changeGenreButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(24)
             make.width.equalTo(72)

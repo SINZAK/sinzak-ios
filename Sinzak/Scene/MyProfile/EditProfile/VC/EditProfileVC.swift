@@ -307,8 +307,7 @@ final class EditProfileVC: SZVC {
                         .map { $0.text }
                         .joined(separator: "\n")
                     
-                    // empty인 경우 " " 넣어줘 label 크기 유지해 separator 위치 조정
-                    owner.mainView.genreNameLabel.text = genres.isEmpty ? " " : genres
+                    owner.mainView.genreNameLabel.text = genres
                 })
             .disposed(by: disposeBag)
         
