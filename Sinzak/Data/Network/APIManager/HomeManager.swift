@@ -9,7 +9,7 @@ import Moya
 import Foundation
 import RxSwift
 
-class HomeManager {
+class HomeManager: ManagerType {
     private init () {}
     static let shared = HomeManager()
     let provider = MoyaProvider<HomeAPI>(
@@ -20,16 +20,20 @@ class HomeManager {
     func getHomeProductLoggedIn() -> Single<HomeLoggedInProducts> {
         return provider.rx.request(.homeLogined)
             .filterSuccessfulStatusCodes()
-            .map(HomeLoggedInProductsResponse.self)
-            .map { $0.data }
+            .map(BaseDTO<HomeLoggedInProductsDTO>.self)
+            .map(filterError)
+            .map(getData)
+            .map { $0.toDomain() }
             .retry(2)
     }
 
     func getHomeProductNotLoggedIn() -> Single<HomeNotLoggedInProducts> {
         return provider.rx.request(.homeNotLogined)
             .filterSuccessfulStatusCodes()
-            .map(HomeNotLoggedInProductsResponse.self)
-            .map { $0.data }
+            .map(BaseDTO<HomeNotLoggedInProductsDTO>.self)
+            .map(filterError)
+            .map(getData)
+            .map { $0.toDomain() }
             .retry(2)
     }
     
