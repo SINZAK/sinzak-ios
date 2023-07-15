@@ -1,5 +1,5 @@
 //
-//  SignupNameVC.swift
+//  ValidateNameVC.swift
 //  Sinzak
 //
 //  Created by Doy Kim on 2022/12/29.
@@ -10,14 +10,39 @@ import RxSwift
 import RxCocoa
 import RxKeyboard
 
-final class SignupNameVC: SZVC {
+final class ValidateNameVC: SZVC {
+    
+    enum ValidateNameType {
+        case signup
+        case editProfile
+    }
+    
     // MARK: - Properties
-    let mainView = SignupNameView()
-    var viewModel: SignupNameVM
+    let mainView = ValidateNameView()
+    var viewModel: ValidateNameVM
     
     private let disposeBag = DisposeBag()
     
+    let validateNameViewControllerType: ValidateNameType
+    
     // MARK: - Lifecycle
+    
+    override func setNavigationBar() {
+        super.setNavigationBar()
+        
+        if validateNameViewControllerType == .editProfile {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                image: SZImage.Icon.dismiss,
+                style: .plain,
+                target: nil,
+                action: nil
+            )
+            
+            navigationItem.title = "이름"
+            mainView.nextButton.setTitle("완료", for: .normal)
+        }
+    }
+    
     override func loadView() {
         view = mainView
     }
@@ -33,7 +58,11 @@ final class SignupNameVC: SZVC {
     
     // MARK: - Init
     
-    init(viewModel: SignupNameVM) {
+    init(
+        validateNameViewControllerType: ValidateNameType,
+        viewModel: ValidateNameVM
+    ) {
+        self.validateNameViewControllerType = validateNameViewControllerType
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -94,8 +123,26 @@ final class SignupNameVC: SZVC {
         mainView.nextButton.rx.tap
             .withUnretained(self)
             .subscribe { owner, _ in
-                owner.viewModel.tapNextButton()
+                
+                switch owner.validateNameViewControllerType {
+                case .signup:           owner.viewModel.tapNextButton()
+                case .editProfile:      owner.viewModel.editNickname(nickname: owner.mainView.nameTextField.text ?? "")
+                }
             }
+            .disposed(by: disposeBag)
+        
+        navigationItem.leftBarButtonItem?.rx.tap
+            .throttle(
+                .milliseconds(500),
+                scheduler: ConcurrentMainScheduler.instance
+            )
+            .asSignal(onErrorJustReturn: Void())
+            .emit(
+                with: self,
+                onNext: { owner, _ in
+                    owner.dismiss(animated: true)
+                }
+            )
             .disposed(by: disposeBag)
     }
     
@@ -145,6 +192,16 @@ final class SignupNameVC: SZVC {
             .bind(onNext: { owner, vc in
                 owner.navigationController?.pushViewController(vc, animated: true)
             })
+            .disposed(by: disposeBag)
+        
+        viewModel.dismissView
+            .asSignal()
+            .emit(
+                with: self,
+                onNext: { owner, _ in
+                    owner.dismiss(animated: true)
+                }
+            )
             .disposed(by: disposeBag)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SignupNameVM.swift
+//  ValidateNameVM.swift
 //  Sinzak
 //
 //  Created by JongHoon on 2023/04/07.
@@ -10,29 +10,43 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-protocol SignupNameVMInput {
+protocol ValidateNameVMInput {
     func nameTextFieldInput(name: String)
     func tapCheckButton()
     func tapNextButton()
+    func editNickname(nickname: String)
 }
 
-protocol SignupNameVMOutput {
+protocol ValidateNameVMOutput {
     var isValidCheckButton: BehaviorRelay<Bool> { get }
     var currentInputName: BehaviorRelay<String> { get }
     var doubleCheckResult: BehaviorRelay<DoubleCheckResult> { get }
     var pushSignupGenreVC: PublishRelay<SignupGenreVC> { get }
+    var dismissView: PublishRelay<Bool> { get }
+    
+    var changedNickname: PublishRelay<String>? { get }
 }
 
-protocol SignupNameVM: SignupNameVMInput, SignupNameVMOutput {}
+protocol ValidateNameVM: ValidateNameVMInput, ValidateNameVMOutput {}
 
-final class DefaultSignupNameVM: SignupNameVM {
+final class DefaultValidateNameVM: ValidateNameVM {
     
     private let disposeBag = DisposeBag()
     
-    private var onboardingUser: OnboardingUser
+    private var onboardingUser: OnboardingUser?
+    
+    private var introduction: String?
     
     init(onboardingUser: OnboardingUser) {
         self.onboardingUser = onboardingUser
+    }
+    
+    init(
+        introduction: String,
+        changedNickname: PublishRelay<String>
+    ) {
+        self.introduction = introduction
+        self.changedNickname = changedNickname
     }
     
     // MARK: - Input
@@ -61,9 +75,27 @@ final class DefaultSignupNameVM: SignupNameVM {
     }
     
     func tapNextButton() {
-        onboardingUser.nickname = currentInputName.value
+        onboardingUser?.nickname = currentInputName.value
         let vc = SignupGenreVC(viewModel: DefaultSignupGenreVM(onboardingUser: onboardingUser), mode: .signUp)
         pushSignupGenreVC.accept(vc)
+    }
+    
+    func editNickname(nickname: String) {
+        UserCommandManager.shared.editUserInfo(
+            name: nickname,
+            introduction: introduction ?? ""
+        )
+        .subscribe(
+            with: self,
+            onSuccess: { owner, _ in
+                owner.changedNickname?.accept(nickname)
+                owner.dismissView.accept(true)
+            },
+            onFailure: { _, error in
+                Log.debug(error)
+            }
+        )
+        .disposed(by: disposeBag)
     }
     
     // MARK: - Output
@@ -71,6 +103,8 @@ final class DefaultSignupNameVM: SignupNameVM {
     var currentInputName: BehaviorRelay<String> = .init(value: "")
     var doubleCheckResult: BehaviorRelay<DoubleCheckResult> = .init(value: .beforeCheck)
     var pushSignupGenreVC: PublishRelay<SignupGenreVC> = .init()
+    var dismissView: PublishRelay<Bool> = .init()
+    var changedNickname: PublishRelay<String>?
 }
 
 enum DoubleCheckResult {

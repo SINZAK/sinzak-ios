@@ -16,7 +16,7 @@ final class EditProfileVC: SZVC {
     private let mainView = EditProfileView()
     private var viewModel: EditProfileVM
     private let disposeBag = DisposeBag()
-    private let profile: Profile
+    private var profile: Profile
     
     private lazy var updateImage: (UIImage?, Bool) -> Void = { [weak self] image, isIcon  in
         guard let self = self else { return }
@@ -94,8 +94,19 @@ final class EditProfileVC: SZVC {
             .subscribe(
                 with: self,
                 onNext: { owner, _ in
-                    owner.dismiss(animated: true)
-            })
+                    
+                    if owner.viewModel.needUpdateImage.need == true {
+                        owner.showPopUpAlert(
+                            message: "화면을 나가면 이미지 변경사항은 저장되지 않습니다. 나가시겠습니까?",
+                            rightActionTitle: "나가기",
+                            rightActionCompletion: {
+                                owner.dismiss(animated: true)
+                            }
+                        )
+                    } else {
+                        owner.dismiss(animated: true)
+                    }
+                })
             .disposed(by: disposeBag)
         
         let scrollViewTapGesture = UITapGestureRecognizer()
@@ -148,32 +159,43 @@ final class EditProfileVC: SZVC {
             })
             .disposed(by: disposeBag)
         
-        mainView.nicknameTextField.rx.text
-            .orEmpty
-            .subscribe(
+        let tapGestureOfNicknameView = UITapGestureRecognizer()
+        mainView.nicknameView.addGestureRecognizer(tapGestureOfNicknameView)
+        tapGestureOfNicknameView.rx.event
+            .asSignal()
+            .emit(
                 with: self,
-                onNext: { owner, text in
-                    owner.viewModel.nickNameTextInput(text: text)
+                onNext: { owner, _ in
+                    let vc = ValidateNameVC(
+                        validateNameViewControllerType: .editProfile,
+                        viewModel: DefaultValidateNameVM(
+                            introduction: owner.profile.introduction,
+                            changedNickname: owner.viewModel.changedNicknameRelay
+                        )
+                    )
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    owner.present(nav, animated: true)
                 }
             )
             .disposed(by: disposeBag)
         
-        mainView.checkButton.rx.tap
-            .observe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
-            .subscribe(
+        let tapGestureOfIntroductionView = UITapGestureRecognizer()
+        mainView.introductionView.addGestureRecognizer(tapGestureOfIntroductionView)
+        tapGestureOfIntroductionView.rx.event
+            .asSignal()
+            .emit(
                 with: self,
                 onNext: { owner, _ in
-                    owner.viewModel.checkButtonTapped()
-            })
-            .disposed(by: disposeBag)
-        
-        mainView.introductionTextView.rx.text
-            .orEmpty
-            .distinctUntilChanged()
-            .subscribe(
-                with: self,
-                onNext: { owner, text in
-                    owner.viewModel.introductionTextInput(text: text)
+                    let vc = EditIntroductionVC(
+                        name: owner.profile.name,
+                        introduction: owner.profile.introduction,
+                        changedIntroduction: owner.viewModel.changedIntroductionRelay
+                    )
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    
+                    owner.present(nav, animated: true)
                 }
             )
             .disposed(by: disposeBag)
@@ -183,7 +205,7 @@ final class EditProfileVC: SZVC {
                 with: self,
                 onNext: { owner, _ in
                     let vm = DefaultUniversityInfoVM(
-                        updateSchoolAuth: owner.viewModel.updateSchoolAuth
+                        updateSchoolAuth: owner.viewModel.updateSchoolAuthRelay
                     )
                     let vc = UniversityInfoVC(viewModel: vm, mode: .editProfile)
                     let nav = UINavigationController(rootViewController: vc)
@@ -198,7 +220,7 @@ final class EditProfileVC: SZVC {
                 with: self,
                 onNext: { owner, _ in
                     let vm = DefaultSignupGenreVM(
-                        updateGenre: owner.viewModel.updateGenre
+                        updateGenre: owner.viewModel.updateGenreRelay
                     )
                     let vc = SignupGenreVC(viewModel: vm, mode: .editProfile)
                     let nav = UINavigationController(rootViewController: vc)
@@ -222,73 +244,32 @@ final class EditProfileVC: SZVC {
     
     func  bindOutput() {
         
-        viewModel.checkButtonIsEnable
-            .asDriver(onErrorJustReturn: false)
-            .skip(1)
-            .drive(mainView.checkButton.rx.isEnabled)
+        viewModel.changedNicknameRelay
+            .asSignal()
+            .do(onNext: { [weak self] name in
+                self?.profile.name = name
+            })
+            .emit(to: mainView.currentNickNameLabel.rx.text)
             .disposed(by: disposeBag)
-        
-        viewModel.doubleCheckResult
-            .asDriver()
-            .drive(with: self, onNext: { owner, result in
-                let info = result.info
-                let color = result.color
                 
-                switch result {
-                case .beforeCheck:
-                    owner.mainView.nameValidationLabel.text = info
-                    owner.mainView.nameValidationLabel.textColor = color
-                    
-                case .success:
-                    owner.mainView.nicknameView.snp.remakeConstraints { make in
-                        make.leading.trailing.equalToSuperview()
-                        make.bottom.equalTo(owner.mainView.nameValidationLabel.snp.bottom).offset(20.0)
+        viewModel.changedIntroductionRelay
+            .asSignal()
+            .emit(
+                with: self,
+                onNext: { owner, introduction in
+                    if introduction.isEmpty {
+                        owner.mainView.currentIntroductionLabel.textColor = CustomColor.gray60
+                        owner.mainView.currentIntroductionLabel.text = "소개를 입력하세요."
+                    } else {
+                        owner.mainView.currentIntroductionLabel.textColor = CustomColor.label
+                        owner.mainView.currentIntroductionLabel.text = introduction
                     }
-                    owner.mainView.nameValidationLabel.isHidden = false
-                    
-                    owner.mainView.nameValidationLabel.text = info
-                    owner.mainView.nameValidationLabel.textColor = color
-                    
-                case .fail:
-                    
-                    owner.mainView.nicknameView.snp.remakeConstraints { make in
-                        make.leading.trailing.equalToSuperview()
-                        make.bottom.equalTo(owner.mainView.nameValidationLabel.snp.bottom).offset(20.0)
-                        
-                    }
-                    owner.mainView.nameValidationLabel.isHidden = false
-                    
-                    owner.mainView.nameValidationLabel.text = info
-                    owner.mainView.nameValidationLabel.textColor = color
-
+                    owner.profile.introduction = introduction
                 }
-            })
+            )
             .disposed(by: disposeBag)
         
-        viewModel.introductionPlaceholderIsHidden
-            .asDriver(onErrorJustReturn: false)
-            .drive(mainView.textViewPlaceHolderLabel.rx.isHidden)
-            .disposed(by: disposeBag)
-        
-        let introductionCount = viewModel.introductionCount
-            .asDriver(onErrorJustReturn: 0)
-        
-        introductionCount
-            .map { "\($0)" }
-            .drive(mainView.introductionCountLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        introductionCount
-            .drive(with: self, onNext: { owner, count in
-                if count > 100 {
-                    var trimmedText = owner.mainView.introductionTextView.text
-                    _ = trimmedText?.popLast()
-                    owner.mainView.introductionTextView.text = trimmedText
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.updateSchoolAuth
+        viewModel.updateSchoolAuthRelay
             .asSignal()
             .emit(
                 with: self,
@@ -298,7 +279,7 @@ final class EditProfileVC: SZVC {
                 })
             .disposed(by: disposeBag)
         
-        viewModel.updateGenre
+        viewModel.updateGenreRelay
             .asSignal()
             .emit(
                 with: self,
@@ -311,7 +292,7 @@ final class EditProfileVC: SZVC {
                 })
             .disposed(by: disposeBag)
         
-        viewModel.completeEditTasks
+        viewModel.completeEditTasksRelay
             .asSignal()
             .emit(
                 with: self,
@@ -321,7 +302,7 @@ final class EditProfileVC: SZVC {
                 })
             .disposed(by: disposeBag)
         
-        viewModel.errorHandler
+        viewModel.errorHandlerRelay
             .asSignal()
             .emit(with: self, onNext: { owner, error in
                 owner.hideLoading()
