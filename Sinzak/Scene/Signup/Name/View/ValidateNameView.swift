@@ -1,5 +1,5 @@
 //
-//  SignupNameView.swift
+//  ValidateNameView.swift
 //  Sinzak
 //
 //  Created by Doy Kim on 2022/12/29.
@@ -10,7 +10,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class SignupNameView: SZView {
+final class ValidateNameView: SZView {
     // MARK: - Properties
     private let titleLabel = UILabel().then {
         $0.text = "신작에서 사용할\n이름을 입력해주세요."

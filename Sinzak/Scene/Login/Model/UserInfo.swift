@@ -36,8 +36,8 @@ struct UserInfo: Codable {
 struct Profile: Codable {
     let userID: Int
     let myProfile: Bool
-    let name: String
-    let introduction: String
+    var name: String
+    var introduction: String
     let portFolioURL: String
     let followingNumber: String
     let followerNumber: String
