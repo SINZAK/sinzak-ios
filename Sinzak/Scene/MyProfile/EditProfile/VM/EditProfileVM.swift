@@ -16,15 +16,15 @@ protocol EditProfileVMInput {
 }
 
 protocol EditProfileVMOutput {
-    var changedNickname: PublishRelay<String> { get }
-    var changedIntroduction: PublishRelay<String> { get }
+    var changedNicknameRelay: PublishRelay<String> { get }
+    var changedIntroductionRelay: PublishRelay<String> { get }
     
-    var updateSchoolAuth: PublishRelay<String> { get }
-    var updateGenre: PublishRelay<[AllGenre]> { get }
+    var updateSchoolAuthRelay: PublishRelay<String> { get }
+    var updateGenreRelay: PublishRelay<[AllGenre]> { get }
     
-    var completeEditTasks: PublishRelay<Bool> { get }
+    var completeEditTasksRelay: PublishRelay<Bool> { get }
     
-    var errorHandler: PublishRelay<Error> { get }
+    var errorHandlerRelay: PublishRelay<Error> { get }
 }
 
 protocol EditProfileVM: EditProfileVMInput, EditProfileVMOutput {}
@@ -48,31 +48,31 @@ final class DefaultEditProfileVM: EditProfileVM {
             .subscribe(
                 with: self,
                 onSuccess: { owner, _ in
-                    owner.completeEditTasks.accept(true)
+                    owner.completeEditTasksRelay.accept(true)
                 },
                 onFailure: { owner, error in
                     Log.error(error)
-                    owner.errorHandler.accept(error)
+                    owner.errorHandlerRelay.accept(error)
                 }
             )
             .disposed(by: disposeBag)
         } else {
-            completeEditTasks.accept(true)
+            completeEditTasksRelay.accept(true)
         }
     }
     
     // MARK: - Output
     
-    var changedNickname: PublishRelay<String> = .init()
-    var changedIntroduction: PublishRelay<String> = .init()
+    var changedNicknameRelay: PublishRelay<String> = .init()
+    var changedIntroductionRelay: PublishRelay<String> = .init()
     
     var introductionPlaceholderIsHidden: PublishRelay<Bool> = .init()
     var introductionCount: PublishRelay<Int> = .init()
         
-    var updateSchoolAuth: PublishRelay<String> = .init()
-    var updateGenre: PublishRelay<[AllGenre]> = .init()
+    var updateSchoolAuthRelay: PublishRelay<String> = .init()
+    var updateGenreRelay: PublishRelay<[AllGenre]> = .init()
     
-    var completeEditTasks: PublishRelay<Bool> = .init()
+    var completeEditTasksRelay: PublishRelay<Bool> = .init()
     
-    var errorHandler: PublishRelay<Error> = .init()
+    var errorHandlerRelay: PublishRelay<Error> = .init()
 }

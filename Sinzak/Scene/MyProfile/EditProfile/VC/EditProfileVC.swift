@@ -170,7 +170,7 @@ final class EditProfileVC: SZVC {
                         validateNameViewControllerType: .editProfile,
                         viewModel: DefaultValidateNameVM(
                             introduction: owner.profile.introduction,
-                            changedNickname: owner.viewModel.changedNickname
+                            changedNickname: owner.viewModel.changedNicknameRelay
                         )
                     )
                     let nav = UINavigationController(rootViewController: vc)
@@ -190,7 +190,7 @@ final class EditProfileVC: SZVC {
                     let vc = EditIntroductionVC(
                         name: owner.profile.name,
                         introduction: owner.profile.introduction,
-                        changedIntroduction: owner.viewModel.changedIntroduction
+                        changedIntroduction: owner.viewModel.changedIntroductionRelay
                     )
                     let nav = UINavigationController(rootViewController: vc)
                     nav.modalPresentationStyle = .fullScreen
@@ -205,7 +205,7 @@ final class EditProfileVC: SZVC {
                 with: self,
                 onNext: { owner, _ in
                     let vm = DefaultUniversityInfoVM(
-                        updateSchoolAuth: owner.viewModel.updateSchoolAuth
+                        updateSchoolAuth: owner.viewModel.updateSchoolAuthRelay
                     )
                     let vc = UniversityInfoVC(viewModel: vm, mode: .editProfile)
                     let nav = UINavigationController(rootViewController: vc)
@@ -220,7 +220,7 @@ final class EditProfileVC: SZVC {
                 with: self,
                 onNext: { owner, _ in
                     let vm = DefaultSignupGenreVM(
-                        updateGenre: owner.viewModel.updateGenre
+                        updateGenre: owner.viewModel.updateGenreRelay
                     )
                     let vc = SignupGenreVC(viewModel: vm, mode: .editProfile)
                     let nav = UINavigationController(rootViewController: vc)
@@ -244,7 +244,7 @@ final class EditProfileVC: SZVC {
     
     func  bindOutput() {
         
-        viewModel.changedNickname
+        viewModel.changedNicknameRelay
             .asSignal()
             .do(onNext: { [weak self] name in
                 self?.profile.name = name
@@ -252,7 +252,7 @@ final class EditProfileVC: SZVC {
             .emit(to: mainView.currentNickNameLabel.rx.text)
             .disposed(by: disposeBag)
                 
-        viewModel.changedIntroduction
+        viewModel.changedIntroductionRelay
             .asSignal()
             .emit(
                 with: self,
@@ -269,7 +269,7 @@ final class EditProfileVC: SZVC {
             )
             .disposed(by: disposeBag)
         
-        viewModel.updateSchoolAuth
+        viewModel.updateSchoolAuthRelay
             .asSignal()
             .emit(
                 with: self,
@@ -279,7 +279,7 @@ final class EditProfileVC: SZVC {
                 })
             .disposed(by: disposeBag)
         
-        viewModel.updateGenre
+        viewModel.updateGenreRelay
             .asSignal()
             .emit(
                 with: self,
@@ -292,7 +292,7 @@ final class EditProfileVC: SZVC {
                 })
             .disposed(by: disposeBag)
         
-        viewModel.completeEditTasks
+        viewModel.completeEditTasksRelay
             .asSignal()
             .emit(
                 with: self,
@@ -302,7 +302,7 @@ final class EditProfileVC: SZVC {
                 })
             .disposed(by: disposeBag)
         
-        viewModel.errorHandler
+        viewModel.errorHandlerRelay
             .asSignal()
             .emit(with: self, onNext: { owner, error in
                 owner.hideLoading()
