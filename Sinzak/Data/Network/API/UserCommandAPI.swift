@@ -116,7 +116,7 @@ extension UserCommandAPI: TargetType {
                 return .uploadMultipart(formData)
                 
             case false:
-                imageData = image.jpegData(compressionQuality: 0.3) ?? Data()
+                imageData = image.compressImageData() ?? Data()
                 formData.append(
                     MultipartFormData(
                         provider: .data(imageData),
@@ -130,12 +130,9 @@ extension UserCommandAPI: TargetType {
         case .editUserInfo(let userInfo):
             
             var param: [String: Any] = [
-                "introduction": userInfo.introduction
+                "introduction": userInfo.introduction,
+                "name": userInfo.name
             ]
-            
-            if UserInfoManager.name != userInfo.name {
-                param["name"] = userInfo.name
-            }
             
             return .requestParameters(parameters: param, encoding: JSONEncoding.default)
 
