@@ -134,18 +134,9 @@ extension ProductsAPI: TargetType {
             ]
             return .requestParameters(parameters: param, encoding: JSONEncoding.default)
         case .imageUpload(_, let images):
-            var formData: [MultipartFormData] = []
-            for image in images {
-                if let imageData = image.compressImageData() {
-                    let name = String.uniqueFilename(withPrefix: "IMAGE")
-                    formData.append(MultipartFormData(
-                        provider: .data(imageData),
-                        name: "multipartFile",
-                        fileName: "\(name).jpeg",
-                        mimeType: "image/jpeg"
-                    ))
-                }
-            }
+            
+            let formData = convertImageToFormData(images: images)
+            
             return .uploadMultipart(formData)
         case .like(let id, let mode), .wish(let id, let mode):
             let param: [String: Any] = [
@@ -188,5 +179,44 @@ extension ProductsAPI: TargetType {
             }
             return header
         }
+    }
+}
+
+private extension ProductsAPI {
+    
+    func convertImageToFormData(images: [UIImage]) -> [MultipartFormData] {
+        
+        var formDataDict: [Int: MultipartFormData] = [:]
+        var formData: [MultipartFormData] = []
+        
+        let compressImageGroup = DispatchGroup()
+        
+        for (i, image) in images.enumerated() {
+            DispatchQueue.global().async(group: compressImageGroup) {
+                
+                compressImageGroup.enter()
+                if let imageData = image.compressImageData() {
+                    let name = String.uniqueFilename(withPrefix: "IMAGE")
+                    
+                    formDataDict[i] = MultipartFormData(
+                        provider: .data(imageData),
+                        name: "multipartFile",
+                        fileName: "\(name).jpeg",
+                        mimeType: "image/jpeg"
+                    )
+                }
+                compressImageGroup.leave()
+            } // DispatchQueue
+        }// for
+        
+        compressImageGroup.wait()
+        
+        for i in 0..<images.count {
+            if let data = formDataDict[i] {
+                formData.append(data)
+            }
+        }
+        
+        return formData
     }
 }

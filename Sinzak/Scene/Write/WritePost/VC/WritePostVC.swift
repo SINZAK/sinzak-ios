@@ -495,25 +495,24 @@ extension WritePostVC: PHPickerViewControllerDelegate {
     ) {
         picker.dismiss(animated: true)
         
+        if results.isEmpty == false { showLoading() }
         let itemProviders = results.map(\.itemProvider)
         
-        Observable.combineLatest(itemProviders.map { getImage(with: $0) })
-            .do(
-                onNext: { [weak self] _ in
-                    self?.showLoading()
-                },
-                afterNext: { [weak self] _ in
-                    self?.hideLoading()
-                }
-            )
-            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
-            .subscribe(
-                with: self,
-                onNext: { owner, images in
-                    owner.viewModel.photoSelected(images: images)
-                }
-            )
-            .disposed(by: disposeBag)
+        Observable.zip(itemProviders.map {
+            getImage(with: $0).subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+        })
+        .subscribe(
+            with: self,
+            onNext: { owner, images in
+                owner.viewModel.photoSelected(images: images)
+                owner.hideLoading()
+            },
+            onError: { owner, error in
+                owner.simpleErrorHandler.accept(error)
+                owner.hideLoading()
+            }
+        )
+        .disposed(by: disposeBag)
         
         func getImage(with item: NSItemProvider) -> Observable<UIImage> {
             Log.debug("시작 - 1 - \(Thread.current)")
