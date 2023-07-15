@@ -306,6 +306,7 @@ final class EditProfileVC: SZVC {
                     let genres: String = genres
                         .map { $0.text }
                         .joined(separator: "\n")
+                    
                     owner.mainView.genreNameLabel.text = genres
                 })
             .disposed(by: disposeBag)
