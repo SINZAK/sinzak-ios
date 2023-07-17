@@ -221,9 +221,9 @@
 		ED5A43322A19D95D00D89C3A /* CircleCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43312A19D95D00D89C3A /* CircleCheckButton.swift */; };
 		ED5A43342A19FC7100D89C3A /* SizeInputTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5A43332A19FC7100D89C3A /* SizeInputTextFieldView.swift */; };
 		ED5A43382A1DDDE700D89C3A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED5A43372A1DDDE700D89C3A /* GoogleService-Info.plist */; };
-		ED6E8B2D2A5F02CB00CAC5B6 /* EditIntroductionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6E8B2C2A5F02CB00CAC5B6 /* EditIntroductionVC.swift */; };
 		ED6E8B272A5EB9B500CAC5B6 /* HomeLoggedInProductsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6E8B262A5EB9B500CAC5B6 /* HomeLoggedInProductsDTO.swift */; };
 		ED6E8B292A5EBDC000CAC5B6 /* HomeNotLoggedInProductsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6E8B282A5EBDC000CAC5B6 /* HomeNotLoggedInProductsDTO.swift */; };
+		ED6E8B2D2A5F02CB00CAC5B6 /* EditIntroductionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6E8B2C2A5F02CB00CAC5B6 /* EditIntroductionVC.swift */; };
 		ED72D8A629F699C500DA1251 /* HomeCategoryCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */; };
 		ED72D8A829F69B5100DA1251 /* SchoolAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */; };
 		ED74A07329F4F27C00F44AA2 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = ED74A07229F4F27C00F44AA2 /* Config.xcconfig */; };
@@ -516,9 +516,9 @@
 		ED5A43312A19D95D00D89C3A /* CircleCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCheckButton.swift; sourceTree = "<group>"; };
 		ED5A43332A19FC7100D89C3A /* SizeInputTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeInputTextFieldView.swift; sourceTree = "<group>"; };
 		ED5A43372A1DDDE700D89C3A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		ED6E8B2C2A5F02CB00CAC5B6 /* EditIntroductionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIntroductionVC.swift; sourceTree = "<group>"; };
 		ED6E8B262A5EB9B500CAC5B6 /* HomeLoggedInProductsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLoggedInProductsDTO.swift; sourceTree = "<group>"; };
 		ED6E8B282A5EBDC000CAC5B6 /* HomeNotLoggedInProductsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNotLoggedInProductsDTO.swift; sourceTree = "<group>"; };
+		ED6E8B2C2A5F02CB00CAC5B6 /* EditIntroductionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIntroductionVC.swift; sourceTree = "<group>"; };
 		ED72D8A529F699C500DA1251 /* HomeCategoryCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryCVC.swift; sourceTree = "<group>"; };
 		ED72D8A729F69B5100DA1251 /* SchoolAuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolAuthViewModel.swift; sourceTree = "<group>"; };
 		ED74A07229F4F27C00F44AA2 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -2984,7 +2984,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.sinzak.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3022,7 +3022,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.sinzak.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
