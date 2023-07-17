@@ -135,6 +135,7 @@ final class LoginVC: SZVC {
         viewModel.errorHandler
             .observe(on: MainScheduler.instance)
             .bind(with: self, onNext: { owner, error in
+                Log.error(error)
                 if error is APIError {
                     let apiError = error as! APIError
                     
@@ -144,15 +145,15 @@ final class LoginVC: SZVC {
                     case .badStatus(code: _):
                         owner.showSinglePopUpAlert(message: "알 수 없는 오류가 발생했습니다.")
                     default:
-                        Log.error(error)
+                        break
                     }
                 } else {
-                    Log.error(error)
+                    owner.showSinglePopUpAlert(message: "알 수 없는 오류가 발생했습니다.")
                 }
                 
                 self.hideLoading()
                 
-                UserApi.shared.logout {(error) in
+                UserApi.shared.logout { (error) in
                     if let error = error {
                         Log.error(error)
                     } else {

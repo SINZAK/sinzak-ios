@@ -3132,7 +3132,7 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 7.5.0;
+				minimumVersion = 7.6.0;
 			};
 		};
 		A254E15229BE0413001047FD /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
