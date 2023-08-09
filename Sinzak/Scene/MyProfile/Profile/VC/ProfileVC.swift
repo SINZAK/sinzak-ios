@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import SkeletonView
 
-final class MyProfileVC: SZVC {
+final class ProfileVC: SZVC {
     // MARK: - Properties
     let viewModel: MyProfileVM
     let mainView = MyProfileView()

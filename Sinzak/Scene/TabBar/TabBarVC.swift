@@ -73,7 +73,7 @@ final class TabBarVC: UITabBarController {
                                          image: UIImage(named: "chat"),
                                          selectedImage: UIImage(named: "chat-selected"))
         // 프로필
-        let profileVC = UINavigationController(rootViewController: MyProfileVC(viewModel: DefaultMyProfileVM()))
+        let profileVC = UINavigationController(rootViewController: ProfileVC(viewModel: DefaultMyProfileVM()))
         profileVC.tabBarItem = UITabBarItem(title: "프로필",
                                          image: UIImage(named: "profile"),
                                          selectedImage: UIImage(named: "profile-selected"))
@@ -88,7 +88,7 @@ extension TabBarVC: UITabBarControllerDelegate {
         
         guard !UserInfoManager.isLoggedIn, let nav = viewController as? UINavigationController else { return true }
         
-        if nav.viewControllers[0] is ChatListVC || nav.viewControllers[0] is MyProfileVC {
+        if nav.viewControllers[0] is ChatListVC || nav.viewControllers[0] is ProfileVC {
             let loginVC: LoginVC = {
                 let vc = LoginVC(viewModel: DefaultLoginVM())
                 vc.configureNeedLoginLayout()
