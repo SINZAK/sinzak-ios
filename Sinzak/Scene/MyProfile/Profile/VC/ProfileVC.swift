@@ -10,14 +10,24 @@ import RxSwift
 import RxCocoa
 import SkeletonView
 
+enum ProfileType {
+    case mine
+    case others
+}
+
 final class ProfileVC: SZVC {
     // MARK: - Properties
+    let profileType: ProfileType
     let viewModel: MyProfileVM
     let mainView = MyProfileView()
     let disposeBag = DisposeBag()
     var userInfo: UserInfo?
     
-    init(viewModel: MyProfileVM) {
+    init(
+        profileType: ProfileType,
+        viewModel: MyProfileVM
+    ) {
+        self.profileType = profileType
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
