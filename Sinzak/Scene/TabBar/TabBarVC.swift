@@ -75,11 +75,11 @@ final class TabBarVC: UITabBarController {
         // 프로필
         let profileVC = UINavigationController(rootViewController: ProfileVC(
             profileType: .mine,
-            viewModel: DefaultMyProfileVM()
+            viewModel: DefaultProfileVM()
         ))
         profileVC.tabBarItem = UITabBarItem(title: "프로필",
-                                         image: UIImage(named: "profile"),
-                                         selectedImage: UIImage(named: "profile-selected"))
+                                            image: UIImage(named: "profile"),
+                                            selectedImage: UIImage(named:"profile-selected"))
         // 탭 구성
         setViewControllers([homeVC, marketVC, worksVC, chatVC, profileVC], animated: true)
     }

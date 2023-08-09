@@ -1,5 +1,5 @@
 //
-//  MyProfileVC.swift
+//  ProfileVC.swift
 //  Sinzak
 //
 //  Created by Doy Kim on 2023/02/12.
@@ -18,14 +18,14 @@ enum ProfileType {
 final class ProfileVC: SZVC {
     // MARK: - Properties
     let profileType: ProfileType
-    let viewModel: MyProfileVM
+    let viewModel: ProfileVM
     let mainView = MyProfileView()
     let disposeBag = DisposeBag()
     var userInfo: UserInfo?
     
     init(
         profileType: ProfileType,
-        viewModel: MyProfileVM
+        viewModel: ProfileVM
     ) {
         self.profileType = profileType
         self.viewModel = viewModel
@@ -49,8 +49,11 @@ final class ProfileVC: SZVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
-        
-        viewModel.fetchProfile()
+            
+        switch profileType {
+        case .mine:     viewModel.fetchProfile()
+        case .others:   break // viewModel
+        }
     }
     // MARK: - Helpers
     override func configure() {
