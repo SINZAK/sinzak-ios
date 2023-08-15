@@ -21,11 +21,6 @@ enum UserCommandAPI {
     case editUserImage(image: UIImage, isIcon: Bool)
     case editUserInfo(userInfo: UserInfoEdit)
     case editGenre(genres: String)
-    
-    // 다른 사람 조회
-    case otherProfile(userId: Int)
-    case otherFollowing(userId: Int)
-    case otherFollower(userId: Int)
         
     // 신고
     case report(userId: Int, reason: String)
@@ -56,12 +51,6 @@ extension UserCommandAPI: TargetType {
             return "/users/edit/image"
         case .editUserInfo:
             return "/users/edit"
-        case .otherProfile(let userId):
-            return "/users/\(userId)/profile"
-        case .otherFollowing(let userId):
-            return "/users/\(userId)/followings"
-        case .otherFollower(let userId):
-            return "/users/\(userId)/followers"
         case .report(userId: _, reason: _):
             return "/users/report"
         case .follow:

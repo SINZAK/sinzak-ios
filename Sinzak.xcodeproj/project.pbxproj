@@ -19,7 +19,7 @@
 		A20CBD6629478B4A0012FF32 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD6829478B4A0012FF32 /* InfoPlist.strings */; };
 		A20CBD6A29478B540012FF32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A20CBD6C29478B540012FF32 /* Localizable.strings */; };
 		A20CBD7029478BCF0012FF32 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20CBD6F29478BCF0012FF32 /* String+Extension.swift */; };
-		A20E4A4E29990064009C1340 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20E4A4D29990064009C1340 /* MyProfileView.swift */; };
+		A20E4A4E29990064009C1340 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20E4A4D29990064009C1340 /* ProfileView.swift */; };
 		A20E4A5229990091009C1340 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20E4A5129990091009C1340 /* ProfileVC.swift */; };
 		A2100F6A29865E8800C85ADF /* AlignOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2100F6929865E8800C85ADF /* AlignOption.swift */; };
 		A2100F742986939A00C85ADF /* WorksTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2100F732986939A00C85ADF /* WorksTabVC.swift */; };
@@ -206,6 +206,7 @@
 		ED3552872A14CF5500B364FC /* MyPostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552812A14CE4200B364FC /* MyPostListView.swift */; };
 		ED3552892A14F46300B364FC /* MyPostListCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3552882A14F46300B364FC /* MyPostListCVC.swift */; };
 		ED35528F2A15574D00B364FC /* SignoutCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED35528E2A15574D00B364FC /* SignoutCompleteVC.swift */; };
+		ED3684482A84C78E0095F428 /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3684472A84C78E0095F428 /* FollowButton.swift */; };
 		ED4510A329D943BB00A983D5 /* SelectAlignTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */; };
 		ED47113429DF2EE400708562 /* AgreementVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47113329DF2EE400708562 /* AgreementVM.swift */; };
 		ED47113629DF3A3B00708562 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED47113529DF3A3B00708562 /* WebKit.framework */; };
@@ -322,7 +323,7 @@
 		A20CBD6B29478B540012FF32 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A20CBD6D29478B560012FF32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A20CBD6F29478BCF0012FF32 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		A20E4A4D29990064009C1340 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
+		A20E4A4D29990064009C1340 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A20E4A5129990091009C1340 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		A2100F6929865E8800C85ADF /* AlignOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignOption.swift; sourceTree = "<group>"; };
 		A2100F732986939A00C85ADF /* WorksTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorksTabVC.swift; sourceTree = "<group>"; };
@@ -502,6 +503,7 @@
 		ED3552812A14CE4200B364FC /* MyPostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListView.swift; sourceTree = "<group>"; };
 		ED3552882A14F46300B364FC /* MyPostListCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListCVC.swift; sourceTree = "<group>"; };
 		ED35528E2A15574D00B364FC /* SignoutCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutCompleteVC.swift; sourceTree = "<group>"; };
+		ED3684472A84C78E0095F428 /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		ED4510A229D943BB00A983D5 /* SelectAlignTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAlignTVC.swift; sourceTree = "<group>"; };
 		ED47113329DF2EE400708562 /* AgreementVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementVM.swift; sourceTree = "<group>"; };
 		ED47113529DF3A3B00708562 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -698,7 +700,7 @@
 		A20E4A4F29990071009C1340 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A20E4A4D29990064009C1340 /* MyProfileView.swift */,
+				A20E4A4D29990064009C1340 /* ProfileView.swift */,
 				ED02CAA52A09177E00E20F92 /* ProfileSkeletonView.swift */,
 			);
 			path = View;
@@ -1419,6 +1421,7 @@
 				A2B38581295ED7AA00E5EB7C /* SZTextField.swift */,
 				ED5A432E2A19D64F00D89C3A /* SZNumberTextField.swift */,
 				ED47113B29E0363000708562 /* SZButton.swift */,
+				ED3684472A84C78E0095F428 /* FollowButton.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2619,7 +2622,7 @@
 				A216BD41297FAFCA008964BC /* NotificationVC.swift in Sources */,
 				ED5A43322A19D95D00D89C3A /* CircleCheckButton.swift in Sources */,
 				ED35528F2A15574D00B364FC /* SignoutCompleteVC.swift in Sources */,
-				A20E4A4E29990064009C1340 /* MyProfileView.swift in Sources */,
+				A20E4A4E29990064009C1340 /* ProfileView.swift in Sources */,
 				EDF022822A25FFFA00CE029E /* ChatMessageDTO.swift in Sources */,
 				A280AB4A29A763BE00C1729C /* WriteCategoryVC.swift in Sources */,
 				ED72D8A829F69B5100DA1251 /* SchoolAuthViewModel.swift in Sources */,
@@ -2705,6 +2708,7 @@
 				ED00BFA72A03B23000379E89 /* WorksSelectAlignPC.swift in Sources */,
 				ED6E8B272A5EB9B500CAC5B6 /* HomeLoggedInProductsDTO.swift in Sources */,
 				A2DEC35F29B4638D00CF0794 /* SudentAuthView.swift in Sources */,
+				ED3684482A84C78E0095F428 /* FollowButton.swift in Sources */,
 				ED3552872A14CF5500B364FC /* MyPostListView.swift in Sources */,
 				A2947A2C298017B100EE2A96 /* OtherChatBubbleCVC.swift in Sources */,
 				A2121ACE29D06BEC008F5406 /* UniversityAutoCompletionCVC.swift in Sources */,

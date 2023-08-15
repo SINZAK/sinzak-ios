@@ -12,23 +12,27 @@ import SkeletonView
 
 enum ProfileType {
     case mine
-    case others
+    case others(userID: Int)
 }
 
 final class ProfileVC: SZVC {
     // MARK: - Properties
     let profileType: ProfileType
     let viewModel: ProfileVM
-    let mainView = MyProfileView()
+    let mainView: ProfileView
     let disposeBag = DisposeBag()
+    var needSettingBarButton: Bool
     var userInfo: UserInfo?
     
     init(
         profileType: ProfileType,
-        viewModel: ProfileVM
+        viewModel: ProfileVM,
+        needSettingBarButton: Bool
     ) {
         self.profileType = profileType
+        self.mainView = ProfileView(profileType: profileType)
         self.viewModel = viewModel
+        self.needSettingBarButton = needSettingBarButton
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,14 +49,17 @@ final class ProfileVC: SZVC {
         
         mainView.profileSkeletonView.isHidden = false
         view.showAnimatedSkeleton()
+        
+        if case let .others(userID) = profileType {
+            viewModel.fetchOthersProfile(userID: userID)
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
             
-        switch profileType {
-        case .mine:     viewModel.fetchProfile()
-        case .others:   break // viewModel
+        if case .mine = profileType {
+            viewModel.fetchMyProfile()
         }
     }
     // MARK: - Helpers
@@ -63,11 +70,14 @@ final class ProfileVC: SZVC {
     }
     override func setNavigationBar() {
         super.setNavigationBar()
-        let setting = UIBarButtonItem(image: UIImage(named: "setting"),
-                                      style: .plain,
-                                      target: nil,
-                                      action: nil)
-        navigationItem.rightBarButtonItem = setting
+        
+        if needSettingBarButton {
+            let setting = UIBarButtonItem(image: UIImage(named: "setting"),
+                                          style: .plain,
+                                          target: nil,
+                                          action: nil)
+            navigationItem.rightBarButtonItem = setting
+        }
     }
     
     func bind() {
@@ -82,6 +92,16 @@ final class ProfileVC: SZVC {
             .subscribe(onNext: { owner, _ in
                 owner.mainView.scrollView.refreshControl?.endRefreshing()
             })
+            .disposed(by: disposeBag)
+        
+        navigationItem.leftBarButtonItem?.rx.tap
+            .asSignal()
+            .emit(
+                with: self,
+                onNext: { owner, _ in
+                    owner.dismiss(animated: true)
+                }
+            )
             .disposed(by: disposeBag)
         
         navigationItem.rightBarButtonItem?.rx.tap
@@ -108,6 +128,19 @@ final class ProfileVC: SZVC {
                     nav.modalPresentationStyle = .fullScreen
                     
                     owner.present(nav, animated: true)
+                }
+            )
+            .disposed(by: disposeBag)
+        
+        mainView.followButton.rx.tap
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    guard case .others = owner.profileType else { return }
+                    
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+                    let isFollowing = owner.mainView.followButton.isFollowing
+                    owner.viewModel.followButtonTapped(isFollowing: isFollowing)
                 }
             )
             .disposed(by: disposeBag)
@@ -176,7 +209,7 @@ final class ProfileVC: SZVC {
     
     func bindOutput() {
         
-        viewModel.userInfo
+        viewModel.userInfoRelay
             .asDriver(onErrorRecover: { _ in .never() })
             .drive(
                 with: self,
@@ -190,6 +223,14 @@ final class ProfileVC: SZVC {
                         owner.mainView.profileSkeletonView.isHidden = true
                     }
                 })
+            .disposed(by: disposeBag)
+        
+        viewModel.isFollowRelay.asSignal()
+            .emit(to: mainView.followButton.rx.isFollowing)
+            .disposed(by: disposeBag)
+        
+        viewModel.followingCountRelay.asDriver()
+            .drive(mainView.followerNumberLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }

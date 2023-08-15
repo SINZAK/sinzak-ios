@@ -93,6 +93,10 @@ final class ProductsDetailVC: SZVC {
         navigationItem.rightBarButtonItem = menu
     }
     
+    func disableAuthorImageViewInteraction() {
+        mainView.authorImageView.isUserInteractionEnabled = false
+    }
+    
     // MARK: - bind
     
     func bind() {
@@ -238,6 +242,38 @@ final class ProductsDetailVC: SZVC {
                         })
                     }
                 })
+            .disposed(by: disposeBag)
+        
+        let authorImageViewTapGesture = UITapGestureRecognizer()
+        mainView.authorImageView.addGestureRecognizer(authorImageViewTapGesture)
+        authorImageViewTapGesture.rx.event
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    guard let userID = owner.mainView.products?.userID else { return }
+                    
+                    if userID == UserInfoManager.userID {
+                        let profileVM = DefaultProfileVM()
+                        let profileVC = ProfileVC(
+                            profileType: .mine,
+                            viewModel: profileVM,
+                            needSettingBarButton: false
+                        )
+                        
+                        owner.navigationController?.pushViewController(profileVC, animated: true)
+                    } else {
+                        let profileVM = DefaultProfileVM()
+                        let profileVC = ProfileVC(
+                            profileType: .others(userID: userID),
+                            viewModel: profileVM,
+                            needSettingBarButton: false
+                        )
+                        
+                        owner.navigationController?.pushViewController(profileVC, animated: true)
+                    }
+                    
+                }
+            )
             .disposed(by: disposeBag)
         
         mainView.followButton.rx.tap

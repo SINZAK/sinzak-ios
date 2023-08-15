@@ -13,6 +13,8 @@ enum UserQueryAPI {
     // 내 프로필 확인
     case myProfile
     
+    case othersProfile(userID: Int)
+    
     // 스크랩 목록
     case wishList
     
@@ -25,14 +27,16 @@ extension UserQueryAPI: TargetType {
     
     var path: String {
         switch self {
-        case .myProfile:        return "/my-profile"
-        case .wishList:         return "/wish"
+        case .myProfile:                    return "/my-profile"
+        case let .othersProfile(userID):    return "\(userID)/profile"
+        case .wishList:                     return "/wish"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .myProfile:        return .get
+        case .othersProfile:    return .get
         case .wishList:         return .get
         }
     }
@@ -40,6 +44,8 @@ extension UserQueryAPI: TargetType {
     var task: Moya.Task {
         switch self {
         case .myProfile:
+            return .requestPlain
+        case .othersProfile:
             return .requestPlain
         case .wishList:
             return .requestPlain

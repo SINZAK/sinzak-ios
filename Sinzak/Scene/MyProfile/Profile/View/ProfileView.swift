@@ -1,5 +1,5 @@
 //
-//  MyProfileView.swift
+//  ProfileView.swift
 //  Sinzak
 //
 //  Created by Doy Kim on 2023/02/12.
@@ -10,8 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
-final class MyProfileView: SZView {
+final class ProfileView: SZView {
     // MARK: - Properties
+    
+    let profileType: ProfileType
+    
+    // MARK: - UI
+    
     // 스크롤 뷰
     let scrollView = UIScrollView().then {
         $0.isScrollEnabled = true
@@ -115,6 +120,11 @@ final class MyProfileView: SZView {
         $0.layer.borderColor = CustomColor.label.cgColor
         $0.layer.borderWidth = 1
     }
+    let followButton: FollowButton = {
+        let button = FollowButton()
+        
+        return button
+    }()
     // 2. 스크랩목록
     let scrapListView = UIView().then {
         $0.backgroundColor = .clear
@@ -223,7 +233,21 @@ final class MyProfileView: SZView {
     
     let profileSkeletonView = ProfileSkeletonView()
     
+    init(profileType: ProfileType) {
+        self.profileType = profileType
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func configureProfile(with profile: Profile) {
+        
+        if case .others = profileType {
+            scrapListView.isHidden = true
+            requestListView.isHidden = true
+        }
         
         let url = URL(string: profile.imageURL)
         self.profileImage.kf.setImage(with: url)
@@ -252,7 +276,6 @@ final class MyProfileView: SZView {
             }
         }
         
-        followerNumberLabel.text = profile.followerNumber
         followingNumberLabel.text = profile.followingNumber
         
         introduceLabel.text = profile.introduction
@@ -308,9 +331,13 @@ final class MyProfileView: SZView {
             nameBadgeStack,
             schoolVerifiedStack,
             followerFollowingStack,
-            introduceLabel,
-            profileEditButton
+            introduceLabel
         )
+        switch profileType {
+        case .mine:     headView.addSubview(profileEditButton)
+        case .others:   headView.addSubview(followButton)
+        }
+        
         nameBadgeStack.addArrangedSubviews(
             nameLabel, badgeImage
         )
@@ -368,12 +395,23 @@ final class MyProfileView: SZView {
             make.top.equalTo(followerFollowingStack.snp.bottom).offset(24)
             make.leading.trailing.lessThanOrEqualToSuperview().inset(37.5)
         }
-        profileEditButton.snp.makeConstraints { make in
-            make.width.equalTo(204)
-            make.height.equalTo(42)
-            make.centerX.equalToSuperview()
-            make.top.equalTo(introduceLabel.snp.bottom).offset(20)
-            make.bottom.equalToSuperview().inset(20)
+        switch profileType {
+        case .mine:
+            profileEditButton.snp.makeConstraints { make in
+                make.width.equalTo(204)
+                make.height.equalTo(42)
+                make.centerX.equalToSuperview()
+                make.top.equalTo(introduceLabel.snp.bottom).offset(20)
+                make.bottom.equalToSuperview().inset(20)
+            }
+        case .others:
+            followButton.snp.makeConstraints {
+                $0.width.equalTo(136.0)
+                $0.height.equalTo(42.0)
+                $0.centerX.equalToSuperview()
+                $0.top.equalTo(introduceLabel.snp.bottom).offset(20)
+                $0.bottom.equalToSuperview().inset(20)
+            }
         }
         headView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()

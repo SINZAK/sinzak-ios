@@ -97,6 +97,7 @@ private extension MyPostListVC {
                     type: type,
                     viewModel: vm
                 )
+                vc.disableAuthorImageViewInteraction()
                 owner.navigationController?.pushViewController(
                     vc,
                     animated: true

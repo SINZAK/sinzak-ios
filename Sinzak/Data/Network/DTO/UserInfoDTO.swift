@@ -7,16 +7,6 @@
 
 import Foundation
 
-struct UserInfoResponseDTO: Codable {
-    let data: UserInfoDTO?
-    let success: Bool?
-
-    enum CodingKeys: String, CodingKey {
-        case data
-        case success
-    }
-}
-
 // MARK: - DataClass
 struct UserInfoDTO: Codable {
     let profile: ProfileDTO?

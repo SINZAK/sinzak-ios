@@ -74,12 +74,14 @@ final class TabBarVC: UITabBarController {
                                          selectedImage: UIImage(named: "chat-selected"))
         // 프로필
         let profileVC = UINavigationController(rootViewController: ProfileVC(
+            // TODO: 복구 필요 mine 으로
             profileType: .mine,
-            viewModel: DefaultProfileVM()
+            viewModel: DefaultProfileVM(),
+            needSettingBarButton: true
         ))
         profileVC.tabBarItem = UITabBarItem(title: "프로필",
                                             image: UIImage(named: "profile"),
-                                            selectedImage: UIImage(named:"profile-selected"))
+                                            selectedImage: UIImage(named: "profile-selected"))
         // 탭 구성
         setViewControllers([homeVC, marketVC, worksVC, chatVC, profileVC], animated: true)
     }

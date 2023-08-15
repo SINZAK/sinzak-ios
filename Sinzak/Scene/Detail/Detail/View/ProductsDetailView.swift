@@ -240,6 +240,7 @@ final class ProductsDetailView: SZView {
         $0.layer.cornerRadius = 12
         $0.image = UIImage(named: "chat-thumbnail")
         $0.backgroundColor = .lightGray
+        $0.isUserInteractionEnabled = true
     }
     let authorNameLabel = UILabel().then {
         $0.font = .body_R

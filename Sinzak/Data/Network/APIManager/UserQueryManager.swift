@@ -33,6 +33,15 @@ final class UserQueryManager: ManagerType {
             .retry(2)
     }
     
+    func fetchOthersProfile(userID: Int) -> Single<UserInfo> {
+        return provider.rx.request(.othersProfile(userID: userID))
+            .filterSuccessfulStatusCodes()
+            .map(BaseDTO<UserInfoDTO>.self)
+            .map(filterError)
+            .map(getData)
+            .map { try $0.toDomain() }
+    }
+    
     func fetchScrapList() -> Single<[Products]> {
         return provider.rx.request(.wishList)
             .filterSuccessfulStatusCodes()
